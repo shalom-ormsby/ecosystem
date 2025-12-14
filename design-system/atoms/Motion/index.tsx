@@ -4,7 +4,6 @@ import { motion, HTMLMotionProps } from 'framer-motion';
 import React from 'react';
 
 interface FadeInProps extends HTMLMotionProps<'div'> {
-  children: React.ReactNode;
   delay?: number;
   duration?: number;
 }
