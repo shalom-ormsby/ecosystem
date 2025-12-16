@@ -1,5 +1,5 @@
 {
-    "name": "@shalom/design-system",
+    "name": "@ecosystem/design-system",
     "version": "0.1.0",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -7,6 +7,8 @@
         ".": "./src/index.ts",
         "./tokens": "./tokens/index.ts",
         "./atoms": "./atoms/index.ts",
+        "./hooks": "./hooks/index.ts",
+        "./features": "./features/customizer/index.ts",
         "./features/customizer": "./features/customizer/index.ts"
     },
     "scripts": {

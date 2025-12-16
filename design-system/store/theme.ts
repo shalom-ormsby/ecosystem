@@ -44,7 +44,7 @@ export const useThemeStore = create<ThemeState>()(
       },
     }),
     {
-      name: 'theme-storage',
+      name: 'ecosystem-theme',
       // Only persist theme and mode
       partialize: (state) => ({
         theme: state.theme,

@@ -47,7 +47,7 @@ function getThemeVars(theme: ThemeName, mode: ColorMode): Record<string, string>
   const fonts = fontFamilies[theme] as any;
 
   return {
-    // Colors
+    // Colors - Base
     '--color-background': colors?.background || '#ffffff',
     '--color-background-secondary': colors?.backgroundSecondary || colors?.background || '#fafafa',
     '--color-foreground': colors?.foreground || '#0a0a0a',
@@ -59,6 +59,18 @@ function getThemeVars(theme: ThemeName, mode: ColorMode): Record<string, string>
     '--color-info': colors?.info || colors?.accent || '#0070f3',
     '--color-glass': colors?.glass || 'rgba(255, 255, 255, 0.7)',
     '--color-glass-border': colors?.glassBorder || 'rgba(0, 0, 0, 0.1)',
+
+    // Semantic color aliases (matching README examples)
+    '--color-text-primary': colors?.foreground || '#0a0a0a',
+    '--color-text-secondary': colors?.foregroundSecondary || '#525252',
+    '--color-text-muted': colors?.foregroundTertiary || '#a3a3a3',
+    '--color-surface': colors?.backgroundSecondary || colors?.background || '#fafafa',
+    '--color-border': colors?.border || colors?.glassBorder || 'rgba(0, 0, 0, 0.1)',
+    '--color-focus': colors?.accent || colors?.primary || '#0070f3',
+
+    // Interactive states
+    '--color-hover': colors?.hover || colors?.backgroundSecondary || '#fafafa',
+    '--color-active': colors?.active || colors?.backgroundTertiary || '#f0f0f0',
 
     // Effects - Blur
     '--effect-blur-sm': effects?.blur?.sm || 'blur(4px)',

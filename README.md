@@ -19,5 +19,6 @@ An open and evolving ecosystem that’s transparent by design. Includes a design
 
 ## Documentation
 - [MCP Server Setup Guide](docs/mcp-setup.md) - Configure MCP servers (Figma, etc.) for AI coding assistants (Claude Code, Gemini, etc.)
+- [AGENTS.md](AGENTS.md) - Guidance for AI agents (in human-readable language).
 
 Built with Next.js 15, TypeScript, Tailwind CSS, and Framer Motion.

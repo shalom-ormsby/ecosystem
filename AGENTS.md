@@ -74,6 +74,15 @@ Ask yourself:
 
 If you're uncertain about placement, **ask before creating**.
 
+### Disambiguating READMEs
+
+Multiple README.md files exist at different levels:
+- `/README.md` — Ecosystem overview (for GitHub visitors)
+- `/apps/<app>/README.md` — App-specific setup and context
+- `/design-system/README.md` — Design system usage guide
+
+Always reference by full path.
+
 ---
 
 ## Changelog Maintenance

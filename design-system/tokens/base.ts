@@ -117,6 +117,72 @@ export const baseTokens = {
     popover: '1060',
     tooltip: '1070',
   },
+
+  /**
+   * Focus ring configuration
+   */
+  focus: {
+    width: '2px',
+    offset: '2px',
+    style: 'solid',
+  },
 } as const;
 
 export type BaseTokens = typeof baseTokens;
+
+/**
+ * Semantic spacing aliases
+ * Provides human-readable names matching the README documentation
+ */
+export const spacing = {
+  xs: baseTokens.spacing['1'],    // 4px  — Tight internal padding
+  sm: baseTokens.spacing['2'],    // 8px  — Default gap
+  md: baseTokens.spacing['4'],    // 16px — Section padding
+  lg: baseTokens.spacing['6'],    // 24px — Card padding
+  xl: baseTokens.spacing['8'],    // 32px — Section margins
+  '2xl': baseTokens.spacing['12'], // 48px — Page sections
+  '3xl': baseTokens.spacing['16'], // 64px — Major divisions
+} as const;
+
+/**
+ * Semantic typography aliases
+ */
+export const typography = {
+  fonts: {
+    sans: 'var(--font-body)',
+    serif: 'var(--font-heading)',
+    mono: 'var(--font-mono)',
+  },
+  sizes: {
+    xs: baseTokens.fontSize.xs,       // 12px — Fine print
+    sm: baseTokens.fontSize.sm,       // 14px — Secondary text
+    base: baseTokens.fontSize.base,   // 16px — Body text
+    lg: baseTokens.fontSize.lg,       // 18px — Lead paragraphs
+    xl: baseTokens.fontSize.xl,       // 20px — Section headers
+    '2xl': baseTokens.fontSize['2xl'], // 24px — Page headers
+    '3xl': baseTokens.fontSize['3xl'], // 30px — Hero text
+  },
+  weights: {
+    normal: baseTokens.fontWeight.normal,     // 400
+    medium: baseTokens.fontWeight.medium,     // 500
+    semibold: baseTokens.fontWeight.semibold, // 600
+    bold: baseTokens.fontWeight.bold,         // 700
+  },
+  leading: {
+    tight: baseTokens.lineHeight.tight,     // 1.25 — Headings
+    normal: baseTokens.lineHeight.normal,   // 1.5  — Body
+    relaxed: baseTokens.lineHeight.relaxed, // 1.625 — Spacious reading
+  },
+} as const;
+
+/**
+ * Motion configuration
+ */
+export const motion = {
+  duration: baseTokens.duration,
+  easing: {
+    default: baseTokens.ease.out,      // Most transitions
+    spring: 'cubic-bezier(0.16, 1, 0.3, 1)', // Playful interactions
+    linear: baseTokens.ease.linear,    // Progress indicators
+  },
+} as const;
