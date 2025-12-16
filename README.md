@@ -2,7 +2,7 @@
 
 > **Building digital experiences that make people feel seen, capable, and empowered.**
 
-A monorepo of human-centered products unified by a shared design philosophy. This isn't just code—it's a demonstration that software can be **transparent**, **emotionally resonant**, **user-controlled**, and **generous** by design.
+A monorepo of human-centered products unified by a shared design philosophy. This open source creative ecosystem demonstrates that software can be **transparent**, **emotionally resonant**, **user-controlled**, and **generous** by design.
 
 **Status:** Active Development
 **License:** MIT
