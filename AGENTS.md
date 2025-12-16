@@ -54,47 +54,13 @@ shalom-ecosystem/
 
 ## Current Implementation State
 
-**Last updated:** 2025-12-16
+**Do not rely on static lists here.** The codebase is the source of truth.
 
-This section helps you understand what exists vs what needs building.
-
-### Design System Status
-
-✅ **Fully Implemented:**
-- Three themes (Studio, Sage, Volt) with light/dark modes
-- Design tokens (spacing, typography, motion, colors as CSS variables)
-- ThemeProvider with automatic CSS variable application
-- State management (Zustand + localStorage persistence)
-- Core atoms: Button, Card, Motion components (FadeIn, StaggerContainer, StaggerItem)
-- Custom hooks: `useMotionPreference`, `useTheme`
-- Customizer feature (motion slider, theme selector, mode toggle)
-- Motion system that respects `prefers-reduced-motion`
-- Accessibility: keyboard navigation, focus states, WCAG AA color contrast
-
-🚧 **In Development:**
-- X-Ray Mode (feature exists in Customizer controls but UI overlay not built)
-
-📋 **Planned (Not Yet Built):**
-- AI Notes component (for documenting AI collaboration in UI)
-- Molecules (FormField, SearchBar, etc.)
-- Patterns (PageLayout, Modal, NavigationMenu)
-- Additional atoms (Text, Icon, Input)
-- Storybook documentation
-- Testing suite (unit, visual regression, a11y tests)
-- Token JSON export for native platforms
-
-### Apps Status
-
-| App | Status | Port | Notes |
-|-----|--------|------|-------|
-| **portfolio** | ✅ Active development | 3000 | Proof of philosophy. Uses design system with Customizer as hero feature. |
-| **sage-stocks** | 📋 Scaffold only | TBD | AI-powered investment intelligence. Not yet functional. |
-| **creative-powerup** | 📋 Scaffold only | TBD | Community platform. Not yet functional. |
-| **sageos** | 📋 Planned | TBD | Personal operating system. Future. |
-
-### Known Issues
-
-- None currently documented. Check git issues or ask if you suspect something is broken.
+**To verify current state:**
+1. **Check active apps:** `ls apps/`
+2. **Check design system output:** `ls design-system/dist`
+3. **Check recent changes:** `git log -5 --oneline`
+4. **Check defined tokens:** Read `design-system/tokens/src/index.ts` (or similar path)
 
 ---
 
@@ -311,28 +277,23 @@ Example:
 
 ## Before You Write Code
 
-### 1. Read the Philosophy
+### 1. Internalize the Philosophy
 
-Open **[DESIGN-PHILOSOPHY.md](DESIGN-PHILOSOPHY.md)** and internalize the four principles:
-- **Transparent by Design** — Show the receipts
-- **Emotionally Resonant** — Touch hearts, not just solve problems
-- **User Control & Freedom** — The user controls their experience
-- **Generous by Design** — Open source, teachable, accessible
+Open **[DESIGN-PHILOSOPHY.md](DESIGN-PHILOSOPHY.md)** and internalize the four principles: **Transparent**, **Emotionally Resonant**, **User Control**, **Generous**. This is relevant to everything you build.
 
-### 2. Ask the Decision Questions
+### 2. Operational Rules for "Delight"
 
-Before implementing anything:
-1. Does this embody one of the four principles?
-2. Does this serve the human, or the system?
-3. Would this make someone feel more capable, or more confused?
-4. Can I explain *why* this matters, not just *what* it does?
-5. Am I showing my work, or hiding it?
+Instead of asking abstract questions, follow these heuristics to achieve the "Emotionally Resonant" and "Lovable" goals:
+
+- **Always animate state changes:** Use `framer-motion` for mounting/unmounting and layout shifts.
+- **Respect Motion Preferences:** Always wrap animations in `useReducedMotion` or equivalent checks.
+- **Micro-interactions:** Add hover, focus, and active states to all interactive elements, even if not explicitly requested.
+- **Error Gracefully:** Never show raw error stacks to users. Design friendly, helpful error states.
 
 ### 3. When Principles Conflict
 
 Sometimes User Control (many options) tensions against Emotional Resonance (simplicity). The tiebreaker is always:
 - What would **delight** the human?
-- What would **create joy**?
 - What would **expand their degrees of freedom**?
 
 The answer that best serves the human wins.
@@ -1221,150 +1182,17 @@ Examples:
 
 ---
 
-## Testing
+## Testing Standards (Future)
 
-### Current Status
+*Note: Testing is not yet fully configured. When adding tests in the future, follow these standards:*
 
-**Testing is not yet configured** in this ecosystem. When you need to add tests (which you should for critical components), follow this guidance.
-
-### Setting Up Testing (When Needed)
-
-**Recommended stack:**
-- **Vitest** — Fast, Vite-powered test runner with Jest-compatible API
-- **@testing-library/react** — User-centric testing utilities
-- **@testing-library/user-event** — Realistic user interactions
-- **jest-axe** — Automated accessibility testing
-
-**Setup steps:**
-1. Add dependencies to the package that needs tests (design-system or specific app)
-2. Create `vitest.config.ts` in package root
-3. Add `test` script to package.json: `"test": "vitest"`
-4. Create `__tests__` folder or co-locate tests as `ComponentName.test.tsx`
-
-### Test File Locations
-
-| What you're testing | Where tests go |
-|---------------------|----------------|
-| Design system component | `design-system/atoms/Button/Button.test.tsx` or `design-system/atoms/Button/__tests__/Button.test.tsx` |
-| Design system hook | `design-system/hooks/useTheme.test.ts` |
-| App component | `apps/<app>/components/Header/Header.test.tsx` |
-| Utility function | Co-located: `utils/formatDate.test.ts` |
-
-### Testing Philosophy
-
-**Test behavior, not implementation.** Ask: "What should this do for the user?"
-
-**Priority order:**
-1. **Accessibility** — Can all users interact with this?
-2. **User-facing behavior** — Does clicking/typing/navigating do the right thing?
-3. **Edge cases** — Does it handle errors, empty states, extremes?
-4. **Performance** — (only when measurable impact exists)
-
-### Test Structure
-
-```typescript
-// ComponentName.test.tsx
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { Button } from './Button'
-
-describe('Button', () => {
-  describe('when clicked', () => {
-    it('should call onClick handler', async () => {
-      const handleClick = vi.fn()
-      const user = userEvent.setup()
-
-      render(<Button onClick={handleClick}>Click me</Button>)
-
-      await user.click(screen.getByRole('button', { name: 'Click me' }))
-
-      expect(handleClick).toHaveBeenCalledOnce()
-    })
-  })
-
-  describe('accessibility', () => {
-    it('should have no violations', async () => {
-      const { container } = render(<Button>Accessible</Button>)
-      const results = await axe(container)
-      expect(results).toHaveNoViolations()
-    })
-  })
-})
-```
-
-### Accessibility Testing
-
-**Required for every component.** Use `jest-axe`:
-
-```typescript
-import { axe, toHaveNoViolations } from 'jest-axe'
-
-expect.extend(toHaveNoViolations)
-
-it('should have no accessibility violations', async () => {
-  const { container } = render(<Component />)
-  const results = await axe(container)
-  expect(results).toHaveNoViolations()
-})
-```
-
-### Running Tests
-
-```bash
-# When tests are configured:
-
-# Run all tests in a package
-pnpm test --filter @ecosystem/design-system
-
-# Run tests in watch mode
-pnpm test --filter @ecosystem/design-system -- --watch
-
-# Run tests with coverage
-pnpm test --filter @ecosystem/design-system -- --coverage
-
-# Run specific test file
-pnpm test --filter @ecosystem/design-system -- Button.test.tsx
-```
-
-### What to Test
-
-✅ **Do test:**
-- User interactions (clicks, typing, navigation)
-- Conditional rendering based on props/state
-- Accessibility (keyboard navigation, screen readers, focus management)
-- Error states and edge cases
-- Integration between components
-
-❌ **Don't test:**
-- Implementation details (internal state, private methods)
-- Third-party library behavior (trust Framer Motion, Zustand, etc.)
-- Styling/visual appearance (use visual regression testing for this)
-- TypeScript types (the compiler handles this)
-
-### Adding Tests to CI/CD
-
-When tests are set up, add to turbo.json:
-
-```json
-{
-  "tasks": {
-    "test": {
-      "dependsOn": ["^build"],
-      "outputs": ["coverage/**"]
-    }
-  }
-}
-```
-
-And to root package.json:
-
-```json
-{
-  "scripts": {
-    "test": "turbo run test"
-  }
-}
-```
+- **Stack:** Vitest, @testing-library/react, user-event, jest-axe.
+- **Location:** Co-locate tests with components (e.g., `Button.test.tsx`).
+- **Priority:**
+  1. **Accessibility** (no violations via `jest-axe`)
+  2. **User Behavior** (clicks, flows)
+  3. **Edge Cases**
+- **Philosophy:** Test behavior, not implementation details.
 
 ---
 
