@@ -20,26 +20,26 @@ Everything in this ecosystem serves this North Star. The following principles sh
 
 Each principle is a pathway to lovability. They work together, and when they tension against each other, the tiebreaker is always: **what serves the human?** Specifically: what would delight them, create joy, and/or expand their degrees of freedom? [When in doubt, ask.]
 
-### 1. Transparent by Design
-**Show the receipts.** Not just the polished result, but the messy middle. The AI collaboration. The decision rationale. The constraints that shaped the outcome. The questions, uncertainties, doubts... and the reasoning behind the tie-breaking logic.
-
-**Why:** Transparency builds trust. Trust opens a path to the heart.
-
-**In practice:** When you build something, leave traces. Inspectable AI Notes on pages. Comments in code explaining *why*, not just *what*. Design decisions documented. Make the invisible visible when desired and bring the background context to the foreground.
-
-### 2. Emotionally Resonant
-**Touch hearts, not just solve problems.** Every interaction should feel like it was made by someone who cares (because it was).
+### 1. Emotionally Resonant
+**Touch hearts (don't just solve problems).** Every interaction should feel like it was made by someone who genuinely cares (because caring is a fundamental requirement).
 
 **Why:** Usability gets you to "doesn't frustrate." Emotional resonance gets you to "I want to tell someone about this."
 
 **In practice:** Sweat the details. Smooth transitions. Thoughtful microcopy. Designs that feel warm, not clinical. If something works but feels cold, it's not done.
 
-### 3. User Control & Freedom
+### 2. User Control & Freedom
 **The user is the controller of their own experience.** Not just a consumer. Not just a viewer. The person in full control, able to tune the experience to their personal preferences.
 
 **Why:** Human-centered design means supporting human *agency*. From portfolio Customizers to Sage Stocks' transparent analysis, users should always understand *why* and have *choice*.
 
 **In practice:** Motion controls. Theme preferences. Typography options. Transparent analysis reasoning. Nothing forced. Everything explained. Accessibility isn't accommodation; it's first-class design.
+
+### 3. Transparent by Design
+**Show the receipts.** Not just the polished result. Also the messy middle. The AI collaboration. The decision rationale. The constraints that shaped the outcome. The questions, uncertainties, doubts (and the reasoning behind the tie-breaking logic).
+
+**Why:** Transparency builds trust. Trust opens a path to the heart.
+
+**In practice:** When you build something, leave traces. Inspectable AI Notes on pages. Comments in code explaining *why*, not just *what*. Design decisions documented. Make the invisible visible when desired and bring the background context to the foreground.
 
 ### 4. Generous by Design
 **Open source. Teachable. Accessible to all.** The code is part of the offering. Knowledge should flow freely.
