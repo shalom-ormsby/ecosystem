@@ -8,9 +8,9 @@ This ecosystem demonstrates human-centered design through *experience*, not mere
 
 ## The North Star
 
-**Lovable by Design** — Create products and experiences that go beyond meeting usability standards to touch hearts.
+**Lovable by Design**. Create products and experiences that go beyond meeting usability standards to touch hearts.
 
-This isn't a tagline. It's a commitment to creating experiences that make people feel *seen*, *empowered*, and *capable*. Whether someone is viewing Shalom's portfolio, analyzing stocks with Sage Stocks, or building with Creative Powerup, they should feel that they're interacting with a system that understands their needs and supports them in delightful ways.
+This is a sincere commitment to creating experiences that make people feel *seen*, *empowered*, and *capable*. Whether someone is viewing Shalom's portfolio, analyzing stocks with Sage Stocks, or building with Creative Powerup, they should feel that they're interacting with a system that understands their needs and supports them in delightful ways.
 
 Everything in this ecosystem serves this North Star. The principles below are *how* we get there.
 
