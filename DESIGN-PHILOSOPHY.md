@@ -10,18 +10,18 @@ This ecosystem demonstrates human-centered design through *experience*, not mere
 
 **Lovable by Design**. Create products and experiences that go beyond meeting usability standards to touch hearts.
 
-This is a sincere commitment to creating experiences that make people feel *seen*, *capable*, and *empowered*. Whether someone is viewing Shalom's portfolio, analyzing stocks with Sage Stocks, or building with Creative Powerup, they should feel that they're interacting with a system that understands their needs and supports them in delightful ways.
+This is an authentic devotion to creating experiences that make people feel *seen*, *capable*, and *empowered*. Whether a person is viewing Shalom's portfolio, building with Creative Powerup, or using a product designed in alignment with this guidance, they should feel that they're interacting with a system that understands them and provides precisely the support they need.
 
-Everything in this ecosystem serves this North Star. The principles below are *how* we get there.
+Everything in this ecosystem serves this North Star. The following principles show *how* we get there.
 
 ---
 
 ## Four Principles (How to Think, Not What to Build)
 
-Each principle is a pathway to lovability. They work together, and when they tension against each other, the tiebreaker is always: **what serves the human?** Specifically: what would delight them, create joy, or expand their degrees of freedom?
+Each principle is a pathway to lovability. They work together, and when they tension against each other, the tiebreaker is always: **what serves the human?** Specifically: what would delight them, create joy, and/or expand their degrees of freedom? [When in doubt, ask.]
 
 ### 1. Transparent by Design
-**Show the receipts.** Not just the polished result, but the messy middle. The AI collaboration. The decision rationale. The constraints that shaped the outcome.
+**Show the receipts.** Not just the polished result, but the messy middle. The AI collaboration. The decision rationale. The constraints that shaped the outcome. The questions, uncertainties, doubts... and the reasoning behind the tie-breaking logic.
 
 **Why:** Transparency builds trust. Trust opens a path to the heart.
 
