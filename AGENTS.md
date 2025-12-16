@@ -29,6 +29,53 @@ shalom-ecosystem/
 
 ---
 
+## File Organization Rules
+
+**AI agents: Read this carefully.** Disorganized file placement is one of the fastest ways to erode a codebase. Follow these rules strictly.
+
+### Where New Files Go
+
+| If you're creating... | Put it in... |
+|----------------------|--------------|
+| Shared component (used by 2+ apps) | `design-system/` at appropriate atomic level |
+| App-specific component | `apps/<app>/components/` |
+| Shared utility function | `packages/utils/` |
+| App-specific utility | `apps/<app>/lib/` or `apps/<app>/utils/` |
+| Design tokens | `design-system/tokens/` |
+| Documentation | `docs/` (only if it serves multiple apps) |
+| App-specific docs | `apps/<app>/README.md` or `apps/<app>/docs/` |
+
+### Design System Atomic Levels
+
+Place components at the correct level:
+
+- **atoms/** — Primitives with no dependencies on other components (Button, Input, Icon, Text)
+- **molecules/** — Compositions of atoms (Card, FormField, SearchBar)
+- **patterns/** — Reusable layout and interaction patterns (PageLayout, Modal, NavigationMenu)
+- **features/** — Complex, philosophy-embodying features (Customizer, X-Ray Mode, AI Notes)
+
+**When uncertain:** Start at the lowest level that makes sense. It's easier to promote a component up than to demote it down.
+
+### Do Not Create
+
+- Root-level markdown files (unless explicitly requested)
+- `README.md` files in every folder
+- Duplicate documentation
+- One-off utility files—consolidate into existing modules
+- Config files without discussion
+
+### Before Adding Any File
+
+Ask yourself:
+1. Does this file already exist somewhere? (Search first)
+2. Is this the right location per the table above?
+3. Could this be added to an existing file instead?
+4. Will this file be maintained, or will it rot?
+
+If you're uncertain about placement, **ask before creating**.
+
+---
+
 ## Before You Write Code
 
 ### 1. Read the Philosophy
