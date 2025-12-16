@@ -1,6 +1,6 @@
 # AGENTS.md
 
-> **For AI coding agents working on this ecosystem. Read `DESIGN-PHILOSOPHY.md` first—it's the North Star. This file tells you how to build in alignment with it.**
+> **For AI coding agents working on this ecosystem. Read [DESIGN-PHILOSOPHY.md](DESIGN-PHILOSOPHY.md) first—it's the North Star. This file tells you how to build in alignment with it.**
 
 ---
 
@@ -29,6 +29,75 @@ shalom-ecosystem/
 
 ---
 
+## If This Is Your First Time
+
+**Do these 5 things before writing any code:**
+
+1. **Read DESIGN-PHILOSOPHY.md** (5 min) - This is the North Star. Everything flows from the four principles.
+2. **Verify your setup works:**
+   ```bash
+   pnpm install
+   pnpm build
+   pnpm dev --filter portfolio
+   ```
+   Portfolio should run on **http://localhost:3000** (or next available port).
+3. **Check current work context:**
+   ```bash
+   git status          # See what's modified
+   git log -5 --oneline # Recent commits
+   cat CHANGELOG.md | head -30  # Recent changes
+   ```
+4. **Understand what's done vs planned** - Read the "Current Implementation State" section below.
+5. **Ask yourself:** "Do I understand the current state and the philosophy?" If no, **ask the human before proceeding.**
+
+---
+
+## Current Implementation State
+
+**Last updated:** 2025-12-16
+
+This section helps you understand what exists vs what needs building.
+
+### Design System Status
+
+✅ **Fully Implemented:**
+- Three themes (Studio, Sage, Volt) with light/dark modes
+- Design tokens (spacing, typography, motion, colors as CSS variables)
+- ThemeProvider with automatic CSS variable application
+- State management (Zustand + localStorage persistence)
+- Core atoms: Button, Card, Motion components (FadeIn, StaggerContainer, StaggerItem)
+- Custom hooks: `useMotionPreference`, `useTheme`
+- Customizer feature (motion slider, theme selector, mode toggle)
+- Motion system that respects `prefers-reduced-motion`
+- Accessibility: keyboard navigation, focus states, WCAG AA color contrast
+
+🚧 **In Development:**
+- X-Ray Mode (feature exists in Customizer controls but UI overlay not built)
+
+📋 **Planned (Not Yet Built):**
+- AI Notes component (for documenting AI collaboration in UI)
+- Molecules (FormField, SearchBar, etc.)
+- Patterns (PageLayout, Modal, NavigationMenu)
+- Additional atoms (Text, Icon, Input)
+- Storybook documentation
+- Testing suite (unit, visual regression, a11y tests)
+- Token JSON export for native platforms
+
+### Apps Status
+
+| App | Status | Port | Notes |
+|-----|--------|------|-------|
+| **portfolio** | ✅ Active development | 3000 | Proof of philosophy. Uses design system with Customizer as hero feature. |
+| **sage-stocks** | 📋 Scaffold only | TBD | AI-powered investment intelligence. Not yet functional. |
+| **creative-powerup** | 📋 Scaffold only | TBD | Community platform. Not yet functional. |
+| **sageos** | 📋 Planned | TBD | Personal operating system. Future. |
+
+### Known Issues
+
+- None currently documented. Check git issues or ask if you suspect something is broken.
+
+---
+
 ## File Organization Rules
 
 **AI agents: Read this carefully.** Disorganized file placement is one of the fastest ways to erode a codebase. Follow these rules strictly.
@@ -39,11 +108,22 @@ shalom-ecosystem/
 |----------------------|--------------|
 | Shared component (used by 2+ apps) | `design-system/` at appropriate atomic level |
 | App-specific component | `apps/<app>/components/` |
+| Shared custom hook | `design-system/hooks/` |
+| App-specific hook | `apps/<app>/hooks/` |
+| Global state store (design system) | `design-system/store/` |
+| Feature-specific state | `design-system/features/<feature>/store.ts` |
+| App-specific state | `apps/<app>/store/` or `apps/<app>/lib/store/` |
+| React provider (design system) | `design-system/providers/` |
+| App-specific provider | `apps/<app>/providers/` or `apps/<app>/components/providers/` |
 | Shared utility function | `packages/utils/` |
 | App-specific utility | `apps/<app>/lib/` or `apps/<app>/utils/` |
 | Design tokens | `design-system/tokens/` |
+| Shared TypeScript types | `design-system/types/` or within component folder as `ComponentName.types.ts` |
+| App-specific types | `apps/<app>/types/` or co-located with components |
+| Component-specific styles | Co-located with component (if not using Tailwind exclusively) |
 | Documentation | `docs/` (only if it serves multiple apps) |
 | App-specific docs | `apps/<app>/README.md` or `apps/<app>/docs/` |
+| Config files | Root or `packages/config/` (discuss first) |
 
 ### Design System Atomic Levels
 
@@ -73,6 +153,73 @@ Ask yourself:
 4. Will this file be maintained, or will it rot?
 
 If you're uncertain about placement, **ask before creating**.
+
+### File Placement Decision Tree
+
+Use this flowchart when uncertain about where a file should go:
+
+```
+START: What are you creating?
+│
+├─ UI Component?
+│  ├─ YES → Will it be used by 2+ apps?
+│  │       ├─ YES → design-system/
+│  │       │       └─ Which level?
+│  │       │           ├─ No dependencies on other components → atoms/
+│  │       │           ├─ Combines atoms → molecules/
+│  │       │           ├─ Layout/interaction pattern → patterns/
+│  │       │           └─ Philosophy-embodying feature → features/
+│  │       └─ NO → apps/<app>/components/
+│  │
+├─ React Hook?
+│  ├─ Used by design system components → design-system/hooks/
+│  └─ App-specific → apps/<app>/hooks/
+│
+├─ State Store?
+│  ├─ Global (design system) → design-system/store/
+│  ├─ Feature-specific → design-system/features/<feature>/store.ts
+│  └─ App-specific → apps/<app>/store/
+│
+├─ React Provider?
+│  ├─ Design system provider → design-system/providers/
+│  └─ App-specific → apps/<app>/providers/
+│
+├─ Utility Function?
+│  ├─ Shared across apps → packages/utils/
+│  └─ App-specific → apps/<app>/lib/ or apps/<app>/utils/
+│
+├─ Design Token?
+│  └─ Always → design-system/tokens/
+│
+├─ TypeScript Types?
+│  ├─ Component-specific → ComponentName.types.ts (co-located)
+│  ├─ Shared across design system → design-system/types/
+│  └─ App-specific shared types → apps/<app>/types/
+│
+├─ Documentation?
+│  ├─ Multi-app documentation → docs/
+│  ├─ App-specific → apps/<app>/README.md or apps/<app>/docs/
+│  └─ Design system docs → design-system/README.md
+│
+├─ Config File?
+│  ├─ Affects entire monorepo → Root (e.g., turbo.json, .mcp.json)
+│  ├─ Shared config → packages/config/
+│  └─ App-specific → apps/<app>/ (e.g., next.config.js)
+│
+└─ Test File?
+   └─ Co-locate with what it tests → ComponentName.test.tsx
+```
+
+**Quick examples:**
+
+| "I'm creating..." | Where it goes |
+|-------------------|---------------|
+| A SearchBar that portfolio and sage-stocks will use | `design-system/molecules/SearchBar/` |
+| A hook to track scroll position in portfolio | `apps/portfolio/hooks/useScrollPosition.ts` |
+| A theme store for the design system | `design-system/store/theme.ts` |
+| Types for the Button component | `design-system/atoms/Button/Button.types.ts` |
+| A utility to format currency in sage-stocks | `apps/sage-stocks/lib/formatCurrency.ts` |
+| Documentation about deployment | `docs/deployment.md` |
 
 ### Disambiguating READMEs
 
@@ -133,13 +280,40 @@ Every significant change to the ecosystem must be documented in `CHANGELOG.md` a
 - Internal refactors with no behavior change
 - Work-in-progress commits (log when complete)
 
+### Changelog Entry Template
+
+**Copy-paste this template when adding a changelog entry:**
+
+```markdown
+## YYYY-MM-DDTHH:MM:SSZ
+
+- Added/Updated/Fixed/Removed [specific thing]
+  - Additional context or details if needed
+  - Breaking changes clearly marked
+
+Example:
+## 2025-12-16T14:32:00Z
+
+- Added CustomizerPanel component to design system
+  - Includes motion intensity slider, theme selector, and mode toggle
+  - Persists preferences to localStorage
+- Updated Button component with new focus states
+  - Now meets WCAG AA contrast requirements
+- Fixed Card hover effect not respecting reduced motion preference
+```
+
+**After adding your entry:**
+1. Update the "Last updated" timestamp at the top of CHANGELOG.md
+2. Ensure your entry is in reverse chronological order (newest first)
+3. Use ISO 8601 format for timestamps: `YYYY-MM-DDTHH:MM:SSZ` (UTC)
+
 ---
 
 ## Before You Write Code
 
 ### 1. Read the Philosophy
 
-Open `DESIGN-PHILOSOPHY.md` and internalize the four principles:
+Open **[DESIGN-PHILOSOPHY.md](DESIGN-PHILOSOPHY.md)** and internalize the four principles:
 - **Transparent by Design** — Show the receipts
 - **Emotionally Resonant** — Touch hearts, not just solve problems
 - **User Control & Freedom** — The user controls their experience
@@ -169,26 +343,100 @@ The answer that best serves the human wins.
 
 ### Prerequisites
 
-- Node.js 20+
-- pnpm 8+ (not npm or yarn)
-- Git
+- **Node.js 20+** (LTS recommended)
+- **pnpm 8.15.0+** (not npm or yarn - install with `npm install -g pnpm`)
+- **Git**
+- **Terminal/Shell** with bash/zsh support
 
-### Setup
+### Initial Setup
 
 ```bash
 # Clone the repo
 git clone https://github.com/shalom-ormsby/ecosystem.git
 cd ecosystem
 
-# Install dependencies
+# Install dependencies (this will install for all workspaces)
 pnpm install
 
-# Start development (all apps)
+# Build all packages (required before running apps)
+pnpm build
+```
+
+### Verify Setup Works
+
+After installation, verify everything is working:
+
+```bash
+# 1. Check pnpm version
+pnpm --version  # Should be 8.15.0 or higher
+
+# 2. Verify design-system built successfully
+ls design-system/dist  # Should show index.js, index.d.ts, etc.
+
+# 3. Start portfolio app
+pnpm dev --filter portfolio
+```
+
+**Expected result:** Portfolio should start successfully and show:
+```
+ready - started server on 0.0.0.0:3000, url: http://localhost:3000
+```
+
+Open **http://localhost:3000** in your browser. You should see the portfolio with the Customizer button in the bottom-right corner.
+
+### Development Ports
+
+| App | Default Port | URL |
+|-----|--------------|-----|
+| portfolio | 3000 | http://localhost:3000 |
+| sage-stocks | TBD (not functional yet) | - |
+| creative-powerup | TBD (not functional yet) | - |
+
+If port 3000 is taken, Next.js will automatically use the next available port (3001, 3002, etc.) and display it in the terminal.
+
+### Environment Variables
+
+**Currently:** No environment variables are required for local development.
+
+**When adding external services:**
+- Create `.env.local` in the app directory (e.g., `apps/portfolio/.env.local`)
+- Never commit `.env.local` files (already in `.gitignore`)
+- Document required variables in app-specific README
+
+### Common Setup Issues
+
+**"Cannot find module '@ecosystem/design-system'"**
+```bash
+# Solution: Build the design system first
+pnpm build --filter @ecosystem/design-system
+```
+
+**pnpm install fails**
+```bash
+# Clear cache and retry
+pnpm store prune
+rm -rf node_modules
+pnpm install
+```
+
+**Port already in use**
+```bash
+# Find process using port 3000
+lsof -i :3000
+# Kill it or let Next.js use a different port
+```
+
+### Starting Development
+
+```bash
+# Start all apps (if you have multiple functional apps)
 pnpm dev
 
-# Start specific app
+# Start specific app (recommended)
 pnpm dev --filter portfolio
-pnpm dev --filter sage-stocks
+
+# Start with turbo cache clearing (if seeing stale builds)
+rm -rf .turbo && pnpm dev --filter portfolio
 ```
 
 ### Key Commands
@@ -223,30 +471,233 @@ This monorepo uses Turborepo for orchestration. The `turbo.json` at root defines
 
 ---
 
+## Build and Deployment
+
+### Build Process
+
+**Build outputs:**
+- **Design System:** `design-system/dist/` (ESM + CJS via tsup)
+- **Next.js Apps:** `apps/<app>/.next/` (production-optimized bundles)
+
+### Building Locally
+
+```bash
+# Build everything (design system + all apps)
+pnpm build
+
+# Build only design system
+pnpm build --filter @ecosystem/design-system
+
+# Build specific app
+pnpm build --filter portfolio
+
+# Build with cache cleared (if seeing issues)
+rm -rf .turbo design-system/dist apps/*/. next
+pnpm build
+```
+
+### Build Order
+
+Turborepo automatically handles dependency order:
+1. **Design system builds first** (other packages depend on it)
+2. **Apps build in parallel** after design system completes
+
+This is configured in `turbo.json`:
+```json
+{
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],  // ^ means dependencies first
+      "outputs": [".next/**", "dist/**"]
+    }
+  }
+}
+```
+
+### Deployment
+
+#### Portfolio (Production)
+
+**Platform:** Vercel (optimized for Next.js)
+
+**Automatic deployment:**
+- **main branch** → Production (https://[your-domain].vercel.app)
+- **Pull requests** → Preview deployments
+
+**Manual deployment:**
+```bash
+# Install Vercel CLI (if not installed)
+npm i -g vercel
+
+# Deploy to preview
+vercel
+
+# Deploy to production
+vercel --prod
+```
+
+**Environment variables:**
+- Set in Vercel dashboard → Project Settings → Environment Variables
+- Prefix with `NEXT_PUBLIC_` for client-side access
+- Currently: No environment variables needed for portfolio
+
+#### Design System (npm Publishing)
+
+**Status:** Not yet published to npm (prepared for future publishing)
+
+**When ready to publish:**
+1. Update version in `design-system/package.json`
+2. Build: `pnpm build --filter @ecosystem/design-system`
+3. Publish: `cd design-system && npm publish`
+4. Update CHANGELOG.md with version and changes
+
+**Package name:** `@ecosystem/design-system` (or update before publishing)
+
+#### Other Apps
+
+**sage-stocks, creative-powerup:** Not yet deployed (scaffolds only)
+
+### Pre-Deployment Checklist
+
+Before deploying any app:
+
+- [ ] Run `pnpm build` locally — ensure it succeeds
+- [ ] Check TypeScript: `pnpm typecheck`
+- [ ] Run linter: `pnpm lint`
+- [ ] Test critical user flows manually
+- [ ] Verify environment variables are set (if any)
+- [ ] Check that Customizer works (verify motion slider, theme switching)
+- [ ] Test on mobile viewport
+- [ ] Verify accessibility (keyboard navigation, screen reader basics)
+
+### Build Troubleshooting
+
+**"Module not found" errors during build:**
+```bash
+# Design system not built
+pnpm build --filter @ecosystem/design-system
+
+# Stale node_modules
+rm -rf node_modules apps/*/node_modules design-system/node_modules
+pnpm install
+```
+
+**"Out of memory" during build:**
+```bash
+# Increase Node memory
+export NODE_OPTIONS="--max-old-space-size=4096"
+pnpm build
+```
+
+**Turbo cache causing issues:**
+```bash
+# Clear turbo cache
+rm -rf .turbo
+pnpm build
+```
+
+### CI/CD Pipeline
+
+**Status:** Not yet configured
+
+**Recommended setup (GitHub Actions):**
+```yaml
+# .github/workflows/ci.yml
+name: CI
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8.15.0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm build
+      - run: pnpm lint
+      # When tests are added:
+      # - run: pnpm test
+```
+
+### Performance Monitoring
+
+**Post-deployment:** Monitor Core Web Vitals via:
+- Vercel Analytics (automatic for Vercel deployments)
+- Lighthouse CI (can be added to GitHub Actions)
+- Manual Lighthouse audits in Chrome DevTools
+
+**Target metrics:**
+- LCP (Largest Contentful Paint): < 2.5s
+- FID (First Input Delay): < 100ms
+- CLS (Cumulative Layout Shift): < 0.1
+
+---
+
 ## Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| Framework | Next.js 15 (App Router) |
-| Language | TypeScript (strict mode) |
-| Styling | Tailwind CSS |
-| Animation | Framer Motion |
-| Package Manager | pnpm |
-| Monorepo | Turborepo |
-| Deployment | Vercel |
+### Core Technologies
+
+| Layer | Technology | Version | Notes |
+|-------|------------|---------|-------|
+| **Framework** | Next.js (App Router) | 16.0.10 | Server components, streaming |
+| **React** | React | 18.3.1 (design-system)<br>19.2.1 (portfolio) | Using latest features |
+| **Language** | TypeScript | 5.x | Strict mode enabled |
+| **Styling** | Tailwind CSS | 3.x | Via CSS variables from design system |
+| **Animation** | Framer Motion | 12.23.26 | Respects motion preferences |
+| **State Management** | Zustand | 5.0.9 | With localStorage persistence |
+| **Package Manager** | pnpm | 8.15.0 | Workspace support required |
+| **Monorepo** | Turborepo | latest | Task orchestration, caching |
+| **Build Tool** | tsup | 8.5.1 | For design-system package |
+| **Deployment** | Vercel | - | Next.js optimized platform |
+
+### Data & Content
+
+| Purpose | Technology | Status |
+|---------|------------|--------|
+| **Content** | MDX | ✅ Configured in portfolio |
+| **Data Fetching** | React Server Components + fetch | ✅ Next.js 15 native patterns |
+| **Forms** | TBD | 📋 Not yet standardized |
+| **Validation** | TBD | 📋 Consider Zod when needed |
+| **Database** | TBD | 📋 Not yet needed |
+
+### Testing & Quality
+
+| Purpose | Technology | Status |
+|---------|------------|--------|
+| **Unit Testing** | Not configured | 📋 Consider Vitest when needed |
+| **E2E Testing** | Not configured | 📋 Consider Playwright when needed |
+| **Visual Testing** | Not configured | 📋 Future with Storybook |
+| **Accessibility Testing** | Manual | 📋 Consider jest-axe when unit tests added |
+| **Linting** | ESLint | ✅ Configured (eslint-config-next) |
+| **Type Checking** | TypeScript | ✅ Strict mode |
+
+### Development Tools
+
+- **Hot Reload:** Next.js Fast Refresh + Turbopack (Next.js 16)
+- **CSS Processing:** PostCSS + Autoprefixer
+- **Import Aliases:** TypeScript paths (configured per app)
+- **MCP Servers:** Figma (for design token sync)
 
 ### TypeScript Conventions
 
-- Strict mode enabled
+- **Strict mode enabled** across all packages
 - Prefer `interface` over `type` for object shapes
 - Use explicit return types on exported functions
-- Avoid `any`—use `unknown` and narrow
+- Avoid `any`—use `unknown` and narrow with type guards
+- Component props should be defined as interfaces (e.g., `ButtonProps`)
 
 ### Tailwind Conventions
 
-- Use design tokens from `design-system/tokens/`
-- Prefer semantic class names via `@apply` in component styles
-- Motion utilities respect `prefers-reduced-motion`
+- Use design tokens from `design-system/tokens/` (imported as CSS variables)
+- Prefer semantic class names via `@apply` in component styles when patterns repeat
+- All motion utilities must respect `prefers-reduced-motion`
+- Use Tailwind's arbitrary values sparingly—add to tokens if used repeatedly
 
 ---
 
@@ -254,58 +705,290 @@ This monorepo uses Turborepo for orchestration. The `turbo.json` at root defines
 
 The design system is the **heart** of this ecosystem. Every app imports from it.
 
-### Importing Components
+### Package Structure
+
+The design system is published as `@ecosystem/design-system` and consumed via workspace references:
+
+```json
+// In your app's package.json
+{
+  "dependencies": {
+    "@ecosystem/design-system": "workspace:*"
+  }
+}
+```
+
+### Importing Components and Hooks
+
+The package supports both main and scoped exports for tree-shaking:
 
 ```typescript
-// From any app
-import { Button } from '@ecosystem/design-system/atoms'
-import { Card } from '@ecosystem/design-system/molecules'
-import { Customizer } from '@ecosystem/design-system/features'
+// Main export (most common - imports from design-system/src/index.ts)
+import { Button, Card, useTheme, CustomizerPanel } from '@ecosystem/design-system'
+
+// Scoped exports (for specific imports)
+import { Button, Card } from '@ecosystem/design-system/atoms'
+import { useMotionPreference, useTheme } from '@ecosystem/design-system/hooks'
+import { CustomizerPanel } from '@ecosystem/design-system/features'
+import { spacing, typography } from '@ecosystem/design-system/tokens'
+import { ThemeProvider } from '@ecosystem/design-system/providers'
 ```
+
+**When to use which:**
+- Use main export for most cases: `import { Button } from '@ecosystem/design-system'`
+- Use scoped exports when you want explicit paths or better IDE autocomplete
 
 ### Design Tokens
 
 Tokens are the single source of truth for visual properties:
 
 ```typescript
-// design-system/tokens/colors.ts
-export const colors = {
-  primary: { ... },
-  neutral: { ... },
-  semantic: { ... }
+import { spacing, typography } from '@ecosystem/design-system/tokens'
+
+// Spacing scale
+spacing.xs    // 4px
+spacing.sm    // 8px
+spacing.md    // 16px
+spacing.lg    // 24px
+spacing.xl    // 32px
+// ... see design-system/README.md for complete token documentation
+
+// Typography
+typography.fonts.sans      // Theme-specific sans-serif
+typography.fonts.serif     // Theme-specific serif (Sage theme)
+typography.fonts.mono      // Theme-specific monospace
+typography.sizes.base      // 16px
+typography.weights.semibold // 600
+// ... see design-system/README.md for complete typography scale
+```
+
+**Colors are CSS variables** applied by ThemeProvider:
+
+```typescript
+// Use in your components
+const styles = {
+  backgroundColor: 'var(--color-background)',
+  color: 'var(--color-text-primary)',
+  borderColor: 'var(--color-border)',
 }
-
-// design-system/tokens/spacing.ts
-export const spacing = { ... }
-
-// design-system/tokens/typography.ts
-export const typography = { ... }
+// See design-system/README.md for complete list of CSS variables
 ```
 
 ### Flagship Features
 
-Three features embody the philosophy and should be used across all apps:
+Three features embody the philosophy. Here's their current status:
 
-1. **Customizer** — User control made tangible
-   - Motion slider (0-100, respects `prefers-reduced-motion`)
-   - Theme toggle (light/dark/system)
-   - Typography options
-   
-2. **X-Ray Mode** — Transparency made interactive
-   - Reveals design tokens in use
-   - Shows component boundaries
-   - Displays AI collaboration notes
+1. **Customizer** — User control made tangible ✅ **IMPLEMENTED**
+   - Location: `design-system/features/customizer/`
+   - Import: `import { CustomizerPanel } from '@ecosystem/design-system'`
+   - Features:
+     - Motion intensity slider (0-10 scale, respects `prefers-reduced-motion`)
+     - Theme selector (Studio, Sage, Volt)
+     - Color mode toggle (light/dark)
+     - X-Ray Mode toggle (control exists but UI overlay not built)
+   - Persists to localStorage
+   - **Usage:** Add `<CustomizerPanel />` to your app layout
 
-3. **AI Notes** — Collaboration made visible
-   - Documents AI involvement in building features
-   - Shows decision rationale
-   - "Shows the receipts"
+2. **X-Ray Mode** — Transparency made interactive 🚧 **IN DEVELOPMENT**
+   - Toggle control exists in Customizer
+   - UI overlay component not yet built
+   - **Planned features:**
+     - Reveal design tokens in use
+     - Show component boundaries
+     - Display AI collaboration notes
+   - **When building:** Create as `design-system/features/xray/XRayOverlay.tsx`
+
+3. **AI Notes** — Collaboration made visible 📋 **PLANNED**
+   - Component not yet built
+   - **Planned features:**
+     - Document AI involvement in building features
+     - Show decision rationale
+     - "Shows the receipts"
+   - **When building:** Create as `design-system/features/ai-notes/AINote.tsx`
+   - **Implementation suggestion:** Inline component that appears in context, triggered by X-Ray Mode
+
+---
+
+## State Management
+
+The ecosystem uses **Zustand** for client-side state management with localStorage persistence.
+
+### When to Use Zustand
+
+**Use Zustand for:**
+- User preferences (theme, motion settings, UI state)
+- Feature flags and toggles
+- Client-side state that needs to persist across page reloads
+- Complex state shared across many components
+
+**Don't use Zustand for:**
+- Server data (use React Server Components + fetch)
+- Form state (use React state or a form library)
+- Simple component state (use `useState`)
+- State only used by one component
+
+### Existing Stores
+
+| Store | Location | Purpose | Persists? |
+|-------|----------|---------|-----------|
+| **Theme Store** | `design-system/store/theme.ts` | Current theme name and color mode | ✅ Yes (localStorage) |
+| **Customizer Store** | `design-system/features/customizer/store.ts` | Motion intensity, x-ray mode, system preferences | ✅ Yes (localStorage) |
+
+### Using Existing Stores
+
+```typescript
+// Theme store
+import { useTheme } from '@ecosystem/design-system/hooks'
+
+function ThemeSelector() {
+  const { theme, mode, setTheme, setMode, toggleMode } = useTheme()
+
+  return (
+    <button onClick={() => setTheme('sage')}>
+      Switch to Sage theme
+    </button>
+  )
+}
+
+// Customizer store
+import { useMotionPreference } from '@ecosystem/design-system/hooks'
+
+function AnimatedComponent() {
+  const { scale, shouldAnimate } = useMotionPreference()
+
+  // scale: 0-10 (user's preference)
+  // shouldAnimate: boolean (false if scale=0 or prefers-reduced-motion)
+
+  return shouldAnimate ? <WithAnimation /> : <WithoutAnimation />
+}
+```
+
+### Creating a New Store
+
+**Design System Store** (for shared state across all apps):
+
+```typescript
+// design-system/store/myFeature.ts
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
+
+interface MyFeatureState {
+  enabled: boolean
+  setEnabled: (enabled: boolean) => void
+}
+
+export const useMyFeature = create<MyFeatureState>()(
+  persist(
+    (set) => ({
+      enabled: false,
+      setEnabled: (enabled) => set({ enabled }),
+    }),
+    {
+      name: 'my-feature-storage', // localStorage key
+    }
+  )
+)
+```
+
+**App-Specific Store** (for state only used in one app):
+
+```typescript
+// apps/portfolio/store/navigation.ts
+import { create } from 'zustand'
+
+interface NavigationState {
+  isMenuOpen: boolean
+  toggleMenu: () => void
+}
+
+export const useNavigation = create<NavigationState>((set) => ({
+  isMenuOpen: false,
+  toggleMenu: () => set((state) => ({ isMenuOpen: !state.isMenuOpen })),
+}))
+```
+
+### Store Organization Rules
+
+1. **Global stores** → `design-system/store/`
+2. **Feature stores** → Co-locate with feature: `design-system/features/<feature>/store.ts`
+3. **App stores** → `apps/<app>/store/` or `apps/<app>/lib/store/`
+
+### Persistence Patterns
+
+**With localStorage (user preferences):**
+```typescript
+export const useMyStore = create<MyState>()(
+  persist(
+    (set) => ({ /* state */ }),
+    {
+      name: 'my-store-key',
+      // Optional: only persist specific fields
+      partialize: (state) => ({
+        setting: state.setting
+      }),
+    }
+  )
+)
+```
+
+**Without persistence (transient UI state):**
+```typescript
+export const useMyStore = create<MyState>((set) => ({
+  // Just the store, no persist middleware
+}))
+```
+
+### Best Practices
+
+✅ **Do:**
+- Keep stores focused (one concern per store)
+- Export a custom hook, not the store directly
+- Use TypeScript interfaces for state shape
+- Persist only what needs to survive reloads
+- Document what each store does (comment at top of file)
+
+❌ **Don't:**
+- Put server data in Zustand (it will go stale)
+- Create stores for one-component state
+- Store sensitive data in localStorage
+- Persist computed/derived state
+
+### Debugging Stores
+
+```typescript
+// Add this to see state changes in console (dev only)
+import { useEffect } from 'react'
+import { useMyStore } from './store'
+
+function DebugStore() {
+  const state = useMyStore()
+
+  useEffect(() => {
+    console.log('Store state changed:', state)
+  }, [state])
+
+  return null
+}
+```
+
+Or use [Zustand DevTools](https://github.com/pmndrs/zustand#redux-devtools):
+
+```typescript
+import { devtools } from 'zustand/middleware'
+
+export const useMyStore = create<MyState>()(
+  devtools(
+    persist(/* ... */),
+    { name: 'MyStore' }
+  )
+)
+```
 
 ---
 
 ## Accessibility Requirements
 
-**These are non-negotiable.** From `DESIGN-PHILOSOPHY.md`:
+**These are non-negotiable.** From **[DESIGN-PHILOSOPHY.md](DESIGN-PHILOSOPHY.md)**:
 
 > Accessibility is not optional. Motion = 0 must work perfectly. High contrast modes must be first-class. Users who need accommodations get excellent experiences, not degraded ones.
 
@@ -394,20 +1077,103 @@ setOpacity(0)
 
 ## MCP Server Integration
 
-This ecosystem supports AI coding assistants via Model Context Protocol. See `docs/mcp-setup.md` for full configuration.
+**Model Context Protocol (MCP)** lets AI coding assistants access external tools and data sources. This ecosystem uses MCP to connect design files, documentation, and other resources.
 
-### Available MCP Servers
+### What is MCP?
 
-The `.mcp.json` at repo root configures:
-- **Figma MCP** — Access to design files and tokens
-- **Additional servers** — See `docs/mcp-setup.md` for current list
+MCP is a protocol that allows AI assistants (like Claude) to:
+- Access external APIs and services
+- Read design files (Figma, Sketch)
+- Query databases or documentation
+- Use specialized tools beyond basic file operations
+
+Think of it as "plugins for AI assistants."
+
+### Configured MCP Servers
+
+**Current configuration** (`.mcp.json` at repo root):
+
+```json
+{
+  "mcpServers": {
+    "figma": {
+      "type": "http",
+      "url": "https://mcp.figma.com/mcp"
+    }
+  }
+}
+```
+
+**Figma MCP** provides:
+- Access to design files and prototypes
+- Design token values (colors, spacing, typography)
+- Component specs and measurements
+- Design system documentation from Figma
+
+### When to Use MCP Tools
+
+**Use Figma MCP when:**
+- Implementing a new component from a design
+- Verifying design token values match Figma
+- Checking spacing, colors, or typography specs
+- Syncing design system changes from Figma
+
+**Example workflow:**
+1. User says: "Implement the Hero component from Figma"
+2. Agent uses Figma MCP to fetch component specs
+3. Agent implements component using exact values from design
+4. Agent verifies colors/spacing match tokens
 
 ### For AI Agents
 
 When working with this codebase:
-1. Check if relevant MCP servers are available
-2. Use Figma MCP to reference design specs when implementing UI
-3. Document any AI collaboration in component comments or AI Notes
+
+1. **Check if MCP tools are available** — Some environments may not have MCP configured
+2. **Use Figma MCP when implementing UI** — Reference design specs to ensure accuracy
+3. **Document AI collaboration** — Add comments or AI Notes when you use MCP data to inform decisions
+4. **Verify before using** — MCP data is a reference, not ground truth. Always verify critical values.
+
+### Adding New MCP Servers
+
+To add a new MCP server (with human approval):
+
+1. Update `.mcp.json`:
+```json
+{
+  "mcpServers": {
+    "figma": { /* existing */ },
+    "newServer": {
+      "type": "http",
+      "url": "https://example.com/mcp"
+    }
+  }
+}
+```
+
+2. Document in `docs/mcp-setup.md` (create if doesn't exist):
+   - What the server provides
+   - How to use it
+   - Any required authentication or setup
+
+3. Add to this section in AGENTS.md
+
+### Troubleshooting MCP
+
+**MCP server not responding:**
+- Check internet connection
+- Verify server URL in `.mcp.json`
+- Check if service requires authentication
+
+**Can't access Figma designs:**
+- Ensure Figma file is shared correctly
+- Verify Figma MCP server is running
+- Check file permissions
+
+### Related Documentation
+
+- **Full MCP setup guide:** `docs/mcp-setup.md` (if it exists)
+- **MCP Protocol spec:** https://modelcontextprotocol.io
+- **Figma MCP docs:** Check Figma's MCP documentation
 
 ---
 
@@ -457,19 +1223,70 @@ Examples:
 
 ## Testing
 
-### Philosophy
+### Current Status
 
-Test behavior, not implementation. Ask: "What should this do for the user?"
+**Testing is not yet configured** in this ecosystem. When you need to add tests (which you should for critical components), follow this guidance.
 
-### Structure
+### Setting Up Testing (When Needed)
+
+**Recommended stack:**
+- **Vitest** — Fast, Vite-powered test runner with Jest-compatible API
+- **@testing-library/react** — User-centric testing utilities
+- **@testing-library/user-event** — Realistic user interactions
+- **jest-axe** — Automated accessibility testing
+
+**Setup steps:**
+1. Add dependencies to the package that needs tests (design-system or specific app)
+2. Create `vitest.config.ts` in package root
+3. Add `test` script to package.json: `"test": "vitest"`
+4. Create `__tests__` folder or co-locate tests as `ComponentName.test.tsx`
+
+### Test File Locations
+
+| What you're testing | Where tests go |
+|---------------------|----------------|
+| Design system component | `design-system/atoms/Button/Button.test.tsx` or `design-system/atoms/Button/__tests__/Button.test.tsx` |
+| Design system hook | `design-system/hooks/useTheme.test.ts` |
+| App component | `apps/<app>/components/Header/Header.test.tsx` |
+| Utility function | Co-located: `utils/formatDate.test.ts` |
+
+### Testing Philosophy
+
+**Test behavior, not implementation.** Ask: "What should this do for the user?"
+
+**Priority order:**
+1. **Accessibility** — Can all users interact with this?
+2. **User-facing behavior** — Does clicking/typing/navigating do the right thing?
+3. **Edge cases** — Does it handle errors, empty states, extremes?
+4. **Performance** — (only when measurable impact exists)
+
+### Test Structure
 
 ```typescript
-describe('ComponentName', () => {
-  describe('when [condition]', () => {
-    it('should [expected behavior]', () => {
-      // Arrange
-      // Act
-      // Assert
+// ComponentName.test.tsx
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { Button } from './Button'
+
+describe('Button', () => {
+  describe('when clicked', () => {
+    it('should call onClick handler', async () => {
+      const handleClick = vi.fn()
+      const user = userEvent.setup()
+
+      render(<Button onClick={handleClick}>Click me</Button>)
+
+      await user.click(screen.getByRole('button', { name: 'Click me' }))
+
+      expect(handleClick).toHaveBeenCalledOnce()
+    })
+  })
+
+  describe('accessibility', () => {
+    it('should have no violations', async () => {
+      const { container } = render(<Button>Accessible</Button>)
+      const results = await axe(container)
+      expect(results).toHaveNoViolations()
     })
   })
 })
@@ -477,7 +1294,7 @@ describe('ComponentName', () => {
 
 ### Accessibility Testing
 
-Use `jest-axe` for automated accessibility checks:
+**Required for every component.** Use `jest-axe`:
 
 ```typescript
 import { axe, toHaveNoViolations } from 'jest-axe'
@@ -489,6 +1306,64 @@ it('should have no accessibility violations', async () => {
   const results = await axe(container)
   expect(results).toHaveNoViolations()
 })
+```
+
+### Running Tests
+
+```bash
+# When tests are configured:
+
+# Run all tests in a package
+pnpm test --filter @ecosystem/design-system
+
+# Run tests in watch mode
+pnpm test --filter @ecosystem/design-system -- --watch
+
+# Run tests with coverage
+pnpm test --filter @ecosystem/design-system -- --coverage
+
+# Run specific test file
+pnpm test --filter @ecosystem/design-system -- Button.test.tsx
+```
+
+### What to Test
+
+✅ **Do test:**
+- User interactions (clicks, typing, navigation)
+- Conditional rendering based on props/state
+- Accessibility (keyboard navigation, screen readers, focus management)
+- Error states and edge cases
+- Integration between components
+
+❌ **Don't test:**
+- Implementation details (internal state, private methods)
+- Third-party library behavior (trust Framer Motion, Zustand, etc.)
+- Styling/visual appearance (use visual regression testing for this)
+- TypeScript types (the compiler handles this)
+
+### Adding Tests to CI/CD
+
+When tests are set up, add to turbo.json:
+
+```json
+{
+  "tasks": {
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": ["coverage/**"]
+    }
+  }
+}
+```
+
+And to root package.json:
+
+```json
+{
+  "scripts": {
+    "test": "turbo run test"
+  }
+}
 ```
 
 ---
@@ -514,9 +1389,146 @@ it('should have no accessibility violations', async () => {
 
 ---
 
+## Breaking Changes Protocol
+
+Breaking changes to the design system affect all apps. Follow this protocol strictly.
+
+### What Counts as Breaking
+
+**Breaking changes include:**
+- Removing or renaming exported components, hooks, or utilities
+- Changing component prop interfaces (removing props, changing types)
+- Changing token values in ways that break existing usage
+- Removing or renaming design tokens
+- Changing store interfaces or state shape
+- Modifying CSS variable names
+- Changing the behavior of existing features in non-backwards-compatible ways
+
+**Not breaking:**
+- Adding new optional props
+- Adding new components, hooks, or tokens
+- Fixing bugs that restore intended behavior
+- Internal refactoring with same public API
+- Adding new CSS variables
+- Deprecating with backwards compatibility
+
+### Before Making a Breaking Change
+
+**1. Check if it's truly necessary**
+   - Can you add the new API alongside the old one?
+   - Can you use a deprecation period?
+   - Is there a backwards-compatible alternative?
+
+**2. Discuss with the human (Shalom) first**
+   - Explain what you want to change and why
+   - Propose migration path for existing code
+   - Get explicit approval before proceeding
+
+**3. Search for usage across the ecosystem**
+```bash
+# Find all usages of the thing you're about to break
+cd /Users/shalomormsby/Developer/work/ecosystem
+grep -r "oldComponentName" apps/
+grep -r "oldPropName" apps/
+```
+
+### Making a Breaking Change
+
+**Step 1: Version bump**
+- Update `design-system/package.json` version:
+  - Major bump (1.0.0 → 2.0.0) for breaking changes
+  - Minor bump (1.0.0 → 1.1.0) for new features
+  - Patch bump (1.0.0 → 1.0.1) for bug fixes
+
+**Step 2: Update CHANGELOG.md**
+```markdown
+## [2.0.0] - 2025-12-16
+
+### BREAKING CHANGES
+- **Button component:** Removed `variant="outline"` prop. Use `variant="secondary"` instead.
+  - Migration: Find and replace `variant="outline"` with `variant="secondary"`
+
+- **Theme tokens:** Renamed `spacing.giant` to `spacing['4xl']`
+  - Migration: Update imports and usage
+
+### Migration Guide
+[Provide step-by-step migration instructions]
+```
+
+**Step 3: Update all consuming apps**
+- Fix all apps in the ecosystem to use new API
+- Test each app builds and runs
+- Commit all changes together (atomic change)
+
+**Step 4: Create migration guide**
+- Add to `design-system/MIGRATION.md` (create if doesn't exist)
+- Include code examples (before/after)
+- Document every breaking change
+
+**Step 5: Communicate**
+- If published to npm: release notes, blog post, or email
+- Internal: update team via appropriate channel
+
+### Deprecation (Preferred Alternative)
+
+**Instead of breaking immediately, deprecate first:**
+
+```typescript
+/**
+ * @deprecated Use `newComponent` instead. Will be removed in v3.0.0
+ * @see {@link newComponent}
+ */
+export function OldComponent(props: OldProps) {
+  console.warn('OldComponent is deprecated. Use newComponent instead.')
+  return <NewComponent {...props} />
+}
+```
+
+**Deprecation period:** At least one minor version before removal.
+
+Example timeline:
+- v1.5.0: Add new API, deprecate old API (both work)
+- v1.6.0, v1.7.0: Both APIs still work, warnings remain
+- v2.0.0: Remove deprecated API (breaking change)
+
+### Versioning Strategy
+
+**Design system follows semantic versioning:**
+
+- **Major (x.0.0):** Breaking changes
+- **Minor (1.x.0):** New features, deprecations (backwards compatible)
+- **Patch (1.0.x):** Bug fixes, internal improvements
+
+**When to publish a new version:**
+- After any significant feature addition
+- Before making a breaking change (so apps can lock to old version if needed)
+- When accumulated bug fixes warrant it
+
+**Not yet published to npm?** Still follow versioning in package.json for internal tracking.
+
+### Emergency Breaking Changes
+
+**If you must break immediately (security issue, critical bug):**
+
+1. **Document the urgency** in commit message and CHANGELOG
+2. **Fix all consuming apps immediately** (don't leave broken)
+3. **Add regression test** to prevent it happening again
+4. **Post-mortem:** Why did this happen? How do we prevent it?
+
+### Reviewing Breaking Changes
+
+**Before merging a PR with breaking changes:**
+- [ ] Version bumped appropriately
+- [ ] CHANGELOG.md updated with BREAKING CHANGES section
+- [ ] All apps in monorepo updated and tested
+- [ ] Migration guide provided
+- [ ] Discussed with and approved by Shalom
+
+---
+
 ## AI Collaboration Guidelines
 
-You're a partner in a creative process, not a code generator. From `DESIGN-PHILOSOPHY.md`:
+You're a partner in a creative process, not a code generator. From **[DESIGN-PHILOSOPHY.md](DESIGN-PHILOSOPHY.md)**:
 
 ### Do
 
@@ -537,7 +1549,7 @@ You're a partner in a creative process, not a code generator. From `DESIGN-PHILO
 
 ### When Uncertain
 
-Refer to the decision framework in `DESIGN-PHILOSOPHY.md`:
+Refer to the decision framework in **[DESIGN-PHILOSOPHY.md](DESIGN-PHILOSOPHY.md)**:
 
 1. **Functional** — It must work
 2. **Honest** — It must be true to what it claims
@@ -583,14 +1595,40 @@ pnpm build
 
 ## Related Files
 
-- `DESIGN-PHILOSOPHY.md` — **Read this first.** The North Star.
-- `README.md` — Project overview for humans
-- `docs/mcp-setup.md` — MCP server configuration
-- `apps/[app]/README.md` — App-specific documentation
-- `design-system/README.md` — Design system usage guide
-- `.mcp.json` — MCP server configuration
-- `turbo.json` — Turborepo task configuration
-- `pnpm-workspace.yaml` — Workspace package definitions
+### Essential Reading
+
+- **[DESIGN-PHILOSOPHY.md](DESIGN-PHILOSOPHY.md)** — **Read this first.** The North Star. Contains the four principles that guide all decisions.
+- **[design-system/README.md](design-system/README.md)** — Design system architecture, components, usage guide. Reference this for import paths and component APIs.
+- **[CHANGELOG.md](CHANGELOG.md)** — Project history. Check here to see what's been done recently before starting work.
+
+### Configuration Files
+
+- **[.mcp.json](.mcp.json)** — MCP server configuration (Figma integration)
+- **[turbo.json](turbo.json)** — Turborepo task pipeline (build, dev, lint)
+- **[pnpm-workspace.yaml](pnpm-workspace.yaml)** — Workspace package definitions
+- **[package.json](package.json)** — Root package with monorepo scripts
+
+### App Documentation
+
+- **[apps/portfolio/README.md](apps/portfolio/README.md)** — Portfolio app setup and context
+- **[apps/sage-stocks/README.md](apps/sage-stocks/README.md)** — Sage Stocks app (if exists)
+- **[apps/creative-powerup/README.md](apps/creative-powerup/README.md)** — Creative Powerup app (if exists)
+
+### Additional Documentation
+
+- **[docs/mcp-setup.md](docs/mcp-setup.md)** — MCP server setup guide (if it exists)
+- **[README.md](README.md)** — Project overview for GitHub visitors
+
+### Quick Reference Links
+
+**Within this file:**
+- [Current Implementation State](#current-implementation-state) — See what exists vs what's planned
+- [File Organization Rules](#file-organization-rules) — Where to put new files
+- [Design System Usage](#design-system-usage) — How to import and use components
+- [State Management](#state-management) — Zustand stores and patterns
+- [Testing](#testing) — How to set up and write tests
+- [Build and Deployment](#build-and-deployment) — Building and deploying apps
+- [Breaking Changes Protocol](#breaking-changes-protocol) — How to handle breaking changes
 
 ---
 
