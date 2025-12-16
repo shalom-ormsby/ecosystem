@@ -1,8 +1,8 @@
 # Design Philosophy
 
-> **"Philosophy is only meaningful when embodied. This design philosophy exists to actively guide what and how we build."**
+> **"Philosophy is only meaningful when embodied. This document aims to encode human-centered principles into every creative decision we make."**
 
-This ecosystem exists to prove a principle: that human-centered design is demonstrated through experience, not description. Whether you're a human collaborator or an AI agent working on these projects, your challenge is to help make this proof real.
+This ecosystem demonstrates human-centered design through *experience*, not mere description. Whether you're a human collaborator or an AI agent working on these projects, your challenge is the same: help build products that are genuinely lovable by design. 
 
 ---
 
