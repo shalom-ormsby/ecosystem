@@ -22,7 +22,8 @@ const themeTokens = {
 // Font family map (CSS variables defined in layout)
 const fontFamilies = {
   studio: {
-    sans: 'var(--font-studio-sans)',
+    heading: 'var(--font-studio-heading)',
+    body: 'var(--font-studio-body)',
     mono: 'var(--font-studio-mono)',
   },
   sage: {
@@ -71,8 +72,8 @@ function getThemeVars(theme: ThemeName, mode: ColorMode): Record<string, string>
     '--effect-shadow-lg': effects?.shadow?.lg || effects?.shadow?.md || effects?.shadow?.sm || '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
 
     // Typography - Font Families
-    '--font-heading': theme === 'sage' && fonts?.serif ? fonts.serif : fonts?.sans || 'var(--font-studio-sans)',
-    '--font-body': fonts?.sans || 'var(--font-studio-sans)',
+    '--font-heading': fonts?.heading || (theme === 'sage' && fonts?.serif ? fonts.serif : fonts?.sans) || 'var(--font-studio-heading)',
+    '--font-body': fonts?.body || fonts?.sans || 'var(--font-studio-body)',
     '--font-mono': fonts?.mono || 'var(--font-studio-mono)',
 
     // Motion - These are accessed programmatically via tokens

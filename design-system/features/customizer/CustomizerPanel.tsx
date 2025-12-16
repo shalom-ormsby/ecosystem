@@ -100,14 +100,14 @@ export const CustomizerPanel = () => {
                     <div className="text-xs opacity-60 space-y-1">
                         <div>
                             <span className="font-heading">Heading:</span> {
-                                theme === 'studio' ? 'Inter' :
+                                theme === 'studio' ? 'Outfit' :
                                 theme === 'sage' ? 'Lora' :
                                 'Space Grotesk'
                             }
                         </div>
                         <div>
                             <span className="font-body">Body:</span> {
-                                theme === 'studio' ? 'Inter' :
+                                theme === 'studio' ? 'Manrope' :
                                 theme === 'sage' ? 'Instrument Sans' :
                                 'Space Grotesk'
                             }

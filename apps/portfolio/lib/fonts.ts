@@ -8,17 +8,25 @@
  * 3. The theme system will automatically use the new font
  */
 
-import { Inter, Space_Grotesk, Lora, JetBrains_Mono, Fira_Code, Instrument_Sans } from 'next/font/google';
+import { Outfit, Manrope, Space_Grotesk, Lora, JetBrains_Mono, Fira_Code, Instrument_Sans } from 'next/font/google';
 
 /**
- * Studio Theme Fonts (Professional, balanced)
- * Using Geist would require local font files, using Inter as fallback for now
+ * Studio Theme Fonts (Professional, modern, geometric)
+ * Outfit: Geometric sans with personality for headings
+ * Manrope: Rounded, friendly, professional for body text
  */
-export const studioSans = Inter({
+export const studioHeading = Outfit({
   subsets: ['latin'],
-  variable: '--font-studio-sans',
+  variable: '--font-studio-heading',
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700'],
+});
+
+export const studioBody = Manrope({
+  subsets: ['latin'],
+  variable: '--font-studio-body',
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
 });
 
 export const studioMono = JetBrains_Mono({
@@ -75,7 +83,8 @@ export const voltMono = Fira_Code({
  * These are applied to the root HTML element
  */
 export const allFontVariables = [
-  studioSans.variable,
+  studioHeading.variable,
+  studioBody.variable,
   studioMono.variable,
   sageSans.variable,
   sageSerif.variable,
@@ -90,7 +99,8 @@ export const allFontVariables = [
  */
 export const fontVariablesByTheme = {
   studio: {
-    sans: '--font-studio-sans',
+    heading: '--font-studio-heading',
+    body: '--font-studio-body',
     mono: '--font-studio-mono',
   },
   sage: {
