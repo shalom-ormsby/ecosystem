@@ -1,6 +1,6 @@
 # Design Philosophy
 
-> **Philosophy is only truly meaningful when embodied**.** 
+> **Philosophy is only truly meaningful when embodied**. 
 
 This ecosystem demonstrates human-centered design through *experience*, not mere description. Every component, token, and interaction encodes a principle. Every choice—from motion curves to color semantics to the Customizer itself—serves one question:
 
