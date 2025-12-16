@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { CustomizerPanel } from '@shalom/design-system/features/customizer';
+import { ThemeProvider } from '@shalom/design-system';
+import { allFontVariables } from '../lib/fonts';
 import './globals.css';
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
   title: 'Shalom Ormsby | Product Design Leader',
@@ -16,10 +15,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} font-sans bg-background text-foreground antialiased`}>
-        {children}
-        <CustomizerPanel />
+    <html lang="en" className={allFontVariables} suppressHydrationWarning>
+      <body className="font-sans bg-background text-foreground antialiased" suppressHydrationWarning>
+        <ThemeProvider>
+          {children}
+          <CustomizerPanel />
+        </ThemeProvider>
       </body>
     </html>
   );

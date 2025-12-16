@@ -9,9 +9,9 @@ export const Button = ({ variant = 'primary', size = 'md', children, className =
     const baseStyles = "inline-flex items-center justify-center rounded-full font-medium transition-all duration-200 active:scale-95";
 
     const variants = {
-        primary: "bg-primary text-primary-foreground hover:opacity-90 shadow-lg shadow-primary/20",
-        secondary: "bg-neutral-100 text-neutral-900 hover:bg-neutral-200",
-        ghost: "text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100"
+        primary: "bg-[var(--color-primary)] text-white hover:opacity-90 shadow-lg",
+        secondary: "bg-[var(--color-background-secondary)] text-[var(--color-foreground)] hover:opacity-80",
+        ghost: "text-[var(--color-foreground)] opacity-60 hover:opacity-100 hover:bg-[var(--color-background-secondary)]"
     };
 
     const sizes = {

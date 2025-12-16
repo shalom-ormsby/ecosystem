@@ -9,32 +9,39 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                background: "#ffffff",
-                foreground: "#0a0a0a",
+                // Theme-aware colors that respond to CSS variables
+                background: "var(--color-background)",
+                foreground: "var(--color-foreground)",
+
+                // Neutral scale - derived from foreground for light/dark mode
                 neutral: {
-                    50: "#fafafa",
-                    100: "#f5f5f5",
-                    200: "#e5e5e5",
-                    300: "#d4d4d4",
-                    400: "#a3a3a3",
-                    500: "#737373",
-                    600: "#525252",
-                    700: "#404040",
-                    800: "#262626",
-                    900: "#171717",
-                    950: "#0a0a0a"
+                    50: "var(--color-background-secondary)",
+                    100: "var(--color-background-secondary)",
+                    200: "color-mix(in srgb, var(--color-foreground) 10%, var(--color-background) 90%)",
+                    300: "color-mix(in srgb, var(--color-foreground) 20%, var(--color-background) 80%)",
+                    400: "color-mix(in srgb, var(--color-foreground) 35%, var(--color-background) 65%)",
+                    500: "color-mix(in srgb, var(--color-foreground) 50%, var(--color-background) 50%)",
+                    600: "color-mix(in srgb, var(--color-foreground) 65%, var(--color-background) 35%)",
+                    700: "color-mix(in srgb, var(--color-foreground) 75%, var(--color-background) 25%)",
+                    800: "color-mix(in srgb, var(--color-foreground) 85%, var(--color-background) 15%)",
+                    900: "color-mix(in srgb, var(--color-foreground) 92%, var(--color-background) 8%)",
+                    950: "var(--color-foreground)"
                 },
+
                 primary: {
-                    DEFAULT: "#0099ff",
-                    foreground: "#ffffff"
+                    DEFAULT: "var(--color-primary)",
+                    foreground: "var(--color-background)"
                 },
+
                 accent: {
-                    DEFAULT: "#f5f5f5",
-                    foreground: "#171717"
+                    DEFAULT: "var(--color-accent)",
+                    foreground: "var(--color-background)"
                 }
             },
             fontFamily: {
-                sans: ['var(--font-inter)', 'sans-serif'],
+                sans: ['var(--font-body)', 'sans-serif'],
+                heading: ['var(--font-heading)', 'sans-serif'],
+                mono: ['var(--font-mono)', 'monospace'],
             },
         },
     },

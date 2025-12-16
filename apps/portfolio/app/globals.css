@@ -2,25 +2,127 @@
 @tailwind components;
 @tailwind utilities;
 
+/**
+ * Theme CSS Variables
+ * Dynamically set by ThemeProvider based on active theme/mode
+ */
 :root {
-  --foreground: #0a0a0a;
-  --background: #ffffff;
+  /* Default Studio theme colors (overridden by ThemeProvider) */
+  --color-background: #ffffff;
+  --color-background-secondary: #fafafa;
+  --color-foreground: #0a0a0a;
+  --color-primary: #0a0a0a;
+  --color-accent: #0070f3;
+
+  /* Effects */
+  --effect-blur-sm: blur(4px);
+  --effect-blur-md: blur(8px);
+  --effect-blur-lg: blur(16px);
+  --effect-blur-xl: blur(24px);
+
+  --effect-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --effect-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --effect-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+  /* Typography */
+  --font-heading: var(--font-studio-sans);
+  --font-body: var(--font-studio-sans);
+  --font-mono: var(--font-studio-mono);
+
+  /* Motion */
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Legacy variables for backwards compatibility */
+  --foreground: var(--color-foreground);
+  --background: var(--color-background);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground: #ededed;
-    --background: #0a0a0a;
-  }
+/**
+ * Theme Transitions
+ * Smooth fade between themes (300-400ms)
+ */
+:root.theme-transitioning {
+  transition: background-color 300ms var(--ease-default),
+              color 300ms var(--ease-default);
+}
+
+:root.theme-transitioning * {
+  transition: background-color 300ms var(--ease-default),
+              color 300ms var(--ease-default),
+              border-color 300ms var(--ease-default);
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--color-foreground);
+  background: var(--color-background);
+  font-family: var(--font-body);
+}
+
+/**
+ * Automatic Heading Typography
+ * All headings use the theme's heading font
+ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/**
+ * Theme-Specific Typography Attributes
+ * Set via data-theme attribute on html element
+ */
+
+/* Studio: Clean, tight spacing, medium weight */
+[data-theme="studio"] h1,
+[data-theme="studio"] h2,
+[data-theme="studio"] h3 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Sage: Elegant serif headings, relaxed spacing */
+[data-theme="sage"] h1,
+[data-theme="sage"] h2,
+[data-theme="sage"] h3 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+[data-theme="sage"] body,
+[data-theme="sage"] p {
+  letter-spacing: 0.01em;
+}
+
+/* Volt: Bold, tight spacing, high contrast */
+[data-theme="volt"] h1,
+[data-theme="volt"] h2,
+[data-theme="volt"] h3 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: none;
+}
+
+[data-theme="volt"] body,
+[data-theme="volt"] p {
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Font family utilities */
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
   }
 }
