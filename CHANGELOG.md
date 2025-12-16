@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - 2025-12-15
+**Last updated:** 2025-12-16T14:32:00Z
+
+## 2025-12-16T14:32:00Z
+
+- Added AGENTS.md with comprehensive guidance for AI collaborators
+- Updated DESIGN-PHILOSOPHY.md to elevate "Lovable by Design" as North Star and provide practical guidance for how to encode human-centered principles into every creative decision we make.
+
+## 2025-12-15
 
 ### Fixed - Comprehensive Theme System Audit & Completion (Latest)
 

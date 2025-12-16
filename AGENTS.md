@@ -76,6 +76,56 @@ If you're uncertain about placement, **ask before creating**.
 
 ---
 
+## Changelog Maintenance
+
+Every significant change to the ecosystem must be documented in `CHANGELOG.md` at the repo root.
+
+### Format
+```markdown
+# Changelog
+
+**Last updated:** 2025-12-16T14:32:00Z
+
+---
+
+## 2025-12-16T14:32:00Z
+
+- Added AGENTS.md with comprehensive guidance for AI collaborators
+- Updated DESIGN-PHILOSOPHY.md to elevate "Lovable by Design" as North Star
+
+## 2025-12-15T09:15:00Z
+
+- Initial monorepo structure
+- Added portfolio app scaffold
+- Created design-system package with token foundation
+```
+
+### Rules
+
+1. **Reverse-chronological order** — Newest entries at the top, immediately below the master timestamp
+2. **Master timestamp** — Update `Last updated:` at the very top whenever you add an entry
+3. **ISO 8601 timestamps** — Use `YYYY-MM-DDTHH:MM:SSZ` format (UTC)
+4. **One entry per work session** — Group related changes under a single timestamp
+5. **Be specific** — "Updated design system" is useless. "Added motion preference persistence to Customizer" is useful.
+
+### What Counts as Significant
+
+- New components or features
+- Breaking changes to APIs or interfaces
+- New documentation files
+- Architectural decisions
+- Dependency updates that affect behavior
+- Bug fixes that change user-facing behavior
+
+### What Doesn't Need an Entry
+
+- Typo fixes
+- Code formatting
+- Internal refactors with no behavior change
+- Work-in-progress commits (log when complete)
+
+---
+
 ## Before You Write Code
 
 ### 1. Read the Philosophy
