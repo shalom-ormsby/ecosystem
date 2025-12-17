@@ -2,7 +2,168 @@
 
 All notable changes to this project will be documented in this file.
 
-**Last updated:** 2025-12-16T14:32:00Z
+**Last updated:** 2025-12-17
+
+## 2025-12-17
+
+### Added - Creative Sandbox Gallery Application
+
+#### New Application: creative-powerup
+- **Full-featured gallery application** for code experiments and creative projects
+- **Simple, clean architecture**: `app/` directory structure where URL = folder structure (no `src/` complexity)
+- **Category-based organization**: Games, Visualizations, Animations, Tools
+- **Central experiment registry** (`lib/experiments.ts`) for easy content management
+- **Beginner-friendly contribution guide** at `/contribute` with step-by-step GitHub workflow
+
+#### Core Features
+- **Homepage gallery** displaying all experiments with cards and metadata
+- **Category pages** with filtered views and empty states
+- **Experiment cards** showing thumbnails, descriptions, authors, and tags
+- **Navigation system** with category links and "+ Create" CTA
+- **Full design system integration** with ThemeProvider and CustomizerPanel
+
+#### File Structure
+```
+apps/creative-powerup/
+├── app/
+│   ├── layout.tsx              # Root layout with nav + ThemeProvider
+│   ├── page.tsx                # Homepage gallery
+│   ├── globals.css             # Theme CSS variables
+│   ├── contribute/page.tsx     # Contribution guide
+│   ├── games/page.tsx          # Games category
+│   ├── visualizations/
+│   │   ├── page.tsx            # Visualizations category
+│   │   ├── fibonacci/page.tsx  # Migrated experiment
+│   │   └── hexgrid/page.tsx    # Migrated experiment
+│   ├── animations/page.tsx     # Animations category
+│   └── tools/
+│       ├── page.tsx            # Tools category
+│       └── mayan-calendar/     # Migrated experiment
+├── components/
+│   ├── ExperimentCard.tsx      # Reusable card component
+│   └── CategoryPage.tsx        # Reusable category view
+└── lib/
+    ├── types.ts                # TypeScript interfaces
+    ├── experiments.ts          # Central registry
+    └── fonts.ts                # Font configuration
+```
+
+### Fixed - Styling System & Architecture
+
+#### Critical Tailwind Configuration Fix
+**Problem**: Tailwind wasn't processing any files - content paths pointed to non-existent `./src/` directories after restructure.
+
+**Impact**: Zero styling applied - cards, grids, typography all broken.
+
+**Solution**: Updated `tailwind.config.ts` content paths:
+```typescript
+content: [
+  "./app/**/*.{js,ts,jsx,tsx,mdx}",       // Was: "./src/app/**/*"
+  "./components/**/*.{js,ts,jsx,tsx,mdx}", // Was: "./src/components/**/*"
+  "./lib/**/*.{js,ts,jsx,tsx,mdx}",
+  "../../design-system/**/*.{js,ts,jsx,tsx,mdx}",
+]
+```
+
+Added proper color variable mapping:
+```typescript
+colors: {
+  background: "var(--color-background)",
+  "background-secondary": "var(--color-background-secondary)",
+  foreground: "var(--color-foreground)",
+  primary: "var(--color-primary)",
+  accent: "var(--color-accent)",
+}
+```
+
+#### CSS Variables System Completion
+Added missing design system CSS variables to `globals.css`:
+- **Color variables**: `--color-glass-border`, `--color-background-secondary`
+- **Effect variables**: `--effect-blur-*`, `--effect-shadow-*`
+- **Typography variables**: `--font-heading`, `--font-body`, `--font-mono`
+- **Motion variables**: `--ease-default`, `--ease-spring`
+- **Theme transition styles**: `.theme-transitioning` class for smooth theme changes
+
+### Fixed - Centralized Font Architecture (Critical)
+
+#### The Problem: Duplicate Font Configurations
+**Initial approach** (WRONG):
+- Each app defined its own font loading in `lib/fonts.ts`
+- Font variable names were inconsistent across apps
+- ThemeProvider expected specific variable names but apps used different ones
+- Result: **Font switching in Customizer didn't work**
+
+#### The Solution: Configuration vs Implementation Pattern
+**Architectural principle**: Design-system defines WHAT, apps define HOW.
+
+**Design-System Layer** (Configuration - Framework Agnostic):
+- Created `design-system/fonts/index.ts` exporting font configurations:
+  ```typescript
+  export interface FontConfig {
+    family: string;      // "Inter"
+    variable: string;    // "--font-studio-heading"
+    weight: string[];    // ["400", "500", "600", "700"]
+    subsets?: string[];
+    display?: string;
+  }
+  ```
+- Defines canonical variable names ThemeProvider expects
+- No framework dependencies (Next.js, etc.)
+- Single source of truth for font specifications
+
+**App Layer** (Implementation - Framework Specific):
+- Apps load fonts with `next/font/google` using config specifications
+- Both `creative-powerup` and `portfolio` use identical variable names
+- Example:
+  ```typescript
+  export const studioHeading = Inter({
+    variable: '--font-studio-heading',  // From design-system config
+    weight: ['400', '500', '600', '700'],
+  });
+  ```
+
+#### Why This Architecture Matters
+**Before**:
+- ❌ Duplication across apps
+- ❌ Inconsistent variable names
+- ❌ Font switching broken
+- ❌ Design-system tied to Next.js
+
+**After**:
+- ✅ Single source of truth in design-system
+- ✅ Consistent variable names guaranteed
+- ✅ Font switching works automatically via ThemeProvider
+- ✅ Framework-agnostic design-system (can support Vue, Svelte, etc.)
+- ✅ Apps remain framework-specific (Next.js font optimization)
+
+#### Implementation Details
+1. **ThemeProvider** (`design-system/providers/ThemeProvider.tsx`) sets font CSS variables dynamically:
+   ```typescript
+   '--font-heading': fonts?.heading || 'var(--font-studio-heading)',
+   '--font-body': fonts?.body || 'var(--font-studio-body)',
+   '--font-mono': fonts?.mono || 'var(--font-studio-mono)',
+   ```
+
+2. **Font maps** defined for each theme:
+   - Studio: `--font-studio-heading`, `--font-studio-body`, `--font-studio-mono`
+   - Sage: `--font-sage-sans`, `--font-sage-serif`, `--font-sage-mono`
+   - Volt: `--font-volt-sans`, `--font-volt-mono`
+
+3. **Apps load all fonts** upfront, ThemeProvider switches which ones are active
+
+### Results
+- ✅ Creative Sandbox builds successfully
+- ✅ All styling applied correctly (Tailwind + CSS variables)
+- ✅ Font switching works with theme changes
+- ✅ Zero duplication in font configuration
+- ✅ Design-system remains framework-agnostic
+- ✅ Both portfolio and creative-powerup use identical font system
+
+### Technical Debt Resolved
+- Removed incorrect `design-system/fonts/nextjs.ts` (attempted to load Next.js fonts in library)
+- Removed duplicate font configs with wrong variable names
+- Fixed TypeScript path aliases in `tsconfig.json` (`"@/*": ["./*"]` instead of `"./src/*"`)
+- Updated both apps to React 19 for consistency
 
 ## 2025-12-16T14:32:00Z
 

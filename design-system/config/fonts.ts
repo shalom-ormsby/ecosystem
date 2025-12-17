@@ -8,66 +8,26 @@
  * 3. Update the corresponding CSS variable name in tokens if needed
  */
 
-import { Inter } from 'next/font/google';
-import localFont from 'next/font/local';
+import { Inter, Instrument_Sans, Lora, JetBrains_Mono, Space_Grotesk, Fira_Code } from 'next/font/google';
 
 /**
  * Studio Theme Fonts
  * Professional, balanced aesthetic
+ * Using Inter as a clean, professional sans-serif
  */
 export const studioFonts = {
-  sans: localFont({
-    src: [
-      {
-        path: '../../../public/fonts/geist/Geist-Light.woff2',
-        weight: '300',
-        style: 'normal',
-      },
-      {
-        path: '../../../public/fonts/geist/Geist-Regular.woff2',
-        weight: '400',
-        style: 'normal',
-      },
-      {
-        path: '../../../public/fonts/geist/Geist-Medium.woff2',
-        weight: '500',
-        style: 'normal',
-      },
-      {
-        path: '../../../public/fonts/geist/Geist-SemiBold.woff2',
-        weight: '600',
-        style: 'normal',
-      },
-      {
-        path: '../../../public/fonts/geist/Geist-Bold.woff2',
-        weight: '700',
-        style: 'normal',
-      },
-    ],
+  sans: Inter({
+    subsets: ['latin'],
     variable: '--font-geist-sans',
     display: 'swap',
+    weight: ['300', '400', '500', '600', '700'],
   }),
 
-  mono: localFont({
-    src: [
-      {
-        path: '../../../public/fonts/geist/GeistMono-Regular.woff2',
-        weight: '400',
-        style: 'normal',
-      },
-      {
-        path: '../../../public/fonts/geist/GeistMono-Medium.woff2',
-        weight: '500',
-        style: 'normal',
-      },
-      {
-        path: '../../../public/fonts/geist/GeistMono-SemiBold.woff2',
-        weight: '600',
-        style: 'normal',
-      },
-    ],
+  mono: JetBrains_Mono({
+    subsets: ['latin'],
     variable: '--font-geist-mono',
     display: 'swap',
+    weight: ['400', '500', '600'],
   }),
 };
 
@@ -76,27 +36,22 @@ export const studioFonts = {
  * Calm, organic, feminine/yin aesthetic
  */
 export const sageFonts = {
-  sans: Inter({
+  sans: Instrument_Sans({
     subsets: ['latin'],
     variable: '--font-instrument-sans',
     display: 'swap',
-    // TODO: Replace with actual Instrument Sans when available
-    // This is a placeholder using Inter until Instrument Sans is added
   }),
 
-  serif: Inter({
+  serif: Lora({
     subsets: ['latin'],
     variable: '--font-lora',
     display: 'swap',
-    // TODO: Replace with actual Lora when available
-    // This is a placeholder using Inter
   }),
 
-  mono: Inter({
+  mono: JetBrains_Mono({
     subsets: ['latin'],
     variable: '--font-jetbrains-mono',
     display: 'swap',
-    // TODO: Replace with actual JetBrains Mono when available
   }),
 };
 
@@ -105,19 +60,16 @@ export const sageFonts = {
  * Bold, electric, masculine/yang aesthetic
  */
 export const voltFonts = {
-  sans: Inter({
+  sans: Space_Grotesk({
     subsets: ['latin'],
     variable: '--font-space-grotesk',
     display: 'swap',
-    // TODO: Replace with actual Space Grotesk when available
-    // This is a placeholder using Inter
   }),
 
-  mono: Inter({
+  mono: Fira_Code({
     subsets: ['latin'],
     variable: '--font-fira-code',
     display: 'swap',
-    // TODO: Replace with actual Fira Code when available
   }),
 };
 

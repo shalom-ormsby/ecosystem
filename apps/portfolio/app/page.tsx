@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Button, Card } from '@shalom/design-system/atoms';
+import { Button, Card } from '@ecosystem/design-system/atoms';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/motion';
 
 export default function Home() {

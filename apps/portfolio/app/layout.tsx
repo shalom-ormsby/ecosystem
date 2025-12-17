@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { CustomizerPanel } from '@shalom/design-system/features/customizer';
-import { ThemeProvider } from '@shalom/design-system';
+import { CustomizerPanel } from '@ecosystem/design-system/features/customizer';
+import { ThemeProvider } from '@ecosystem/design-system';
 import { allFontVariables } from '../lib/fonts';
 import './globals.css';
 

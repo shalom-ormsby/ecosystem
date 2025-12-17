@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Button } from '@shalom/design-system/atoms';
+import { Button } from '@ecosystem/design-system/atoms';
 
 export default function NotFound() {
     return (

@@ -947,6 +947,271 @@ export const useMyStore = create<MyState>()(
 
 ---
 
+## Dependency Management Strategy
+
+**Proper dependency management reduces maintenance burden and prevents version conflicts across the monorepo.**
+
+### Package Types and Dependency Rules
+
+#### Shared Libraries (design-system, packages/*)
+
+**Rule:** Use `peerDependencies` with version ranges for packages that consuming apps will also depend on (React, framer-motion, etc.)
+
+```json
+{
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",        // Support multiple major versions
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "framer-motion": "^11.0.0 || ^12.0.0"
+  },
+  "devDependencies": {
+    "react": "^18.3.1",        // For local development and testing
+    "react-dom": "^18.3.1",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "zustand": "^5.0.9"        // Runtime dependencies not provided by consumer
+  }
+}
+```
+
+**Why:**
+- **peerDependencies** let consuming apps choose their version within the supported range
+- **devDependencies** provide development/testing environment for the library
+- **dependencies** are for packages the library needs that consumers don't provide
+
+#### Applications (apps/*)
+
+**Rule:** Use `^` semver ranges for automatic updates within major versions
+
+```json
+{
+  "dependencies": {
+    "react": "^19.2.1",                      // Gets 19.x updates, not 20.x
+    "next": "^16.0.10",                      // Gets 16.x updates, not 17.x
+    "@ecosystem/design-system": "workspace:^" // Always use workspace protocol
+  }
+}
+```
+
+**Why:**
+- `^` allows minor and patch updates automatically (security fixes, bug fixes)
+- Blocks major version updates (which may contain breaking changes)
+- Reduces manual maintenance while staying safe
+
+### Semver Quick Reference
+
+| Pattern | Meaning | Example | Updates To |
+|---------|---------|---------|------------|
+| `19.2.1` | Exact version | `19.2.1` | Never (frozen) |
+| `^19.2.1` | Compatible with | `19.2.1` | `19.2.2`, `19.3.0`, `19.99.0` (not `20.0.0`) |
+| `~19.2.1` | Approximately | `19.2.1` | `19.2.2`, `19.2.9` (not `19.3.0`) |
+| `^18.0.0 \|\| ^19.0.0` | Either range | `18.x` or `19.x` | Any `18.x` or `19.x` |
+
+**Prefer `^` for apps, use exact versions only when you have a specific reason to pin.**
+
+### Why This Matters
+
+**Without ranges (❌ Bad):**
+```json
+{
+  "dependencies": {
+    "react": "19.2.1"  // Frozen at exactly 19.2.1
+  }
+}
+```
+- Security patches require manual updates
+- Bug fixes require manual updates
+- High maintenance burden across all apps
+
+**With ranges (✅ Good):**
+```json
+{
+  "dependencies": {
+    "react": "^19.2.1"  // Auto-updates within 19.x
+  }
+}
+```
+- Security patches applied automatically via `pnpm install`
+- Bug fixes applied automatically
+- Stays on same major version (no breaking changes)
+- Low maintenance burden
+
+### Avoiding Version Conflicts
+
+**Problem:** Portfolio uses React 19, design-system locked to React 18
+```json
+// ❌ This creates conflicts
+// design-system/package.json
+{
+  "dependencies": {
+    "react": "18.3.1"  // Locked to 18
+  }
+}
+
+// apps/portfolio/package.json
+{
+  "dependencies": {
+    "react": "19.2.1"  // Wants 19
+  }
+}
+```
+
+**Solution:** Design-system uses flexible peerDependencies
+```json
+// ✅ This allows both versions
+// design-system/package.json
+{
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"  // Supports both 18 and 19
+  }
+}
+```
+
+Now:
+- Portfolio can use React 19.2.1
+- Creative-powerup can use React 18.3.1
+- Design-system works with both
+- No conflicts, no forced upgrades
+
+### When Adding New Packages
+
+#### Adding a Shared Library
+
+**Ask:** "Will this be consumed by multiple apps?"
+
+If **YES**:
+1. Use `peerDependencies` for peer packages (React, etc.)
+2. Use version ranges: `"^18.0.0 || ^19.0.0"`
+3. Add same packages to `devDependencies` for development
+4. Only put true runtime dependencies in `dependencies`
+
+**Example:** Adding a new design-system feature that uses React:
+```json
+{
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"  // Consumer provides this
+  },
+  "devDependencies": {
+    "react": "^18.3.1"  // For local development
+  }
+}
+```
+
+#### Adding an App Dependency
+
+1. **Always use `^` ranges** for automatic updates:
+   ```json
+   {
+     "dependencies": {
+       "some-package": "^2.1.0"  // Not "2.1.0"
+     }
+   }
+   ```
+
+2. **Use workspace protocol** for internal packages:
+   ```json
+   {
+     "dependencies": {
+       "@ecosystem/design-system": "workspace:^"
+     }
+   }
+   ```
+
+3. **Check peerDependency compatibility:**
+   - If design-system requires React 18+, app must satisfy that
+   - Run `pnpm install` to see peer dependency warnings
+
+### Updating Dependencies
+
+#### Updating Shared Libraries
+
+When updating a shared library's supported versions:
+
+1. **Check breaking changes** in the dependency's changelog
+2. **Update peerDependencies range** if compatible:
+   ```json
+   {
+     "peerDependencies": {
+       "react": "^18.0.0 || ^19.0.0 || ^20.0.0"  // Add new version
+     }
+   }
+   ```
+3. **Test with all supported versions:**
+   ```bash
+   # Test with React 18
+   pnpm install --filter design-system react@^18.3.1
+   pnpm test --filter design-system
+
+   # Test with React 19
+   pnpm install --filter design-system react@^19.2.1
+   pnpm test --filter design-system
+   ```
+4. **Update CHANGELOG.md** noting new version support
+5. **Bump design-system version** (minor bump for new support)
+
+#### Updating App Dependencies
+
+```bash
+# Update all dependencies to latest within ranges
+pnpm update
+
+# Update specific package to latest
+pnpm update react --filter portfolio
+
+# Update to specific version
+pnpm add react@^19.2.1 --filter portfolio
+```
+
+### Checking for Outdated Dependencies
+
+```bash
+# See what updates are available
+pnpm outdated
+
+# Update interactively
+pnpm update -i
+```
+
+### When to Use Exact Versions
+
+**Rarely, but valid reasons:**
+- Deployment lockfile (pnpm-lock.yaml handles this automatically)
+- Known breaking bug in next version
+- Waiting for ecosystem to catch up (e.g., types not updated yet)
+
+**Document why:**
+```json
+{
+  "dependencies": {
+    "problematic-package": "2.1.0"  // TODO: Pinned due to bug in 2.2.0 (issue #123)
+  }
+}
+```
+
+### Best Practices Summary
+
+✅ **Do:**
+- Use `^` ranges for app dependencies
+- Use flexible peerDependencies for shared libraries
+- Use workspace protocol for internal packages
+- Update regularly with `pnpm update`
+- Test after dependency updates
+
+❌ **Don't:**
+- Use exact versions without good reason
+- Lock shared libraries to specific peer versions
+- Ignore peerDependency warnings
+- Mix dependency and peerDependency for same package
+- Forget to update lockfile after manual package.json changes
+
+### Related Sections
+
+- See **[Breaking Changes Protocol](#breaking-changes-protocol)** for handling major version bumps
+- See **[Tech Stack](#tech-stack)** for current versions across the ecosystem
+
+---
+
 ## Accessibility Requirements
 
 **These are non-negotiable.** From **[DESIGN-PHILOSOPHY.md](DESIGN-PHILOSOPHY.md)**:

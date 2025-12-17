@@ -64,9 +64,9 @@ let keys = {}, diveTimer = 0;
 let sounds = {};
 function initSounds() {
   sounds = {
-    shoot: new Audio('sounds/shoot.wav'),
-    playerExplode: new Audio('sounds/player-explode.wav'),
-    enemyDive: new Audio('sounds/enemy-dive.wav')
+    shoot: new Audio('/sounds/shoot.wav'),
+    playerExplode: new Audio('/sounds/player-explode.wav'),
+    enemyDive: new Audio('/sounds/enemy-dive.wav')
   };
   document.removeEventListener('keydown', onFirstInput);
 }
