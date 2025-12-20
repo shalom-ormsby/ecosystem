@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "cd ../.. && pnpm turbo build --filter=portfolio",
+    "build": "next build",
+    "postinstall": "cd ../.. && pnpm turbo build --filter=@ecosystem/design-system",
     "start": "next start",
     "lint": "eslint"
   },
