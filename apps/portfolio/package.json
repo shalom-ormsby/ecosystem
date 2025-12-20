@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postinstall": "cd ../.. && pnpm turbo build --filter=@ecosystem/design-system",
     "start": "next start",
     "lint": "eslint"
   },
