@@ -1,4 +1,0 @@
-{
-  "buildCommand": "cd ../.. && pnpm turbo build --filter=portfolio",
-  "installCommand": "cd ../.. && pnpm install"
-}
