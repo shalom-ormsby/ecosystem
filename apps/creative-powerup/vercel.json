@@ -1,4 +1,0 @@
-{
-  "buildCommand": "cd ../.. && pnpm turbo build --filter=creative-powerup",
-  "installCommand": "cd ../.. && pnpm install"
-}
