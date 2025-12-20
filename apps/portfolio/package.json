@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "cd ../.. && pnpm turbo build --filter=portfolio && cd apps/portfolio",
+    "build": "cd ../.. && pnpm turbo build --filter=portfolio",
     "start": "next start",
     "lint": "eslint"
   },
