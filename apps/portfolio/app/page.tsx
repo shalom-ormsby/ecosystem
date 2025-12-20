@@ -65,7 +65,7 @@ export default function Home() {
               </h2>
               <nav className="space-y-3">
                 <a
-                  href="https://creative-powerup.vercel.app"
+                  href="https://ecosystem-creative-powerup.vercel.app/"
                   className="block text-foreground hover:text-primary transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
