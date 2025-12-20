@@ -1,122 +1,164 @@
 'use client';
 
 import Link from 'next/link';
-import { Button, Card } from '@ecosystem/design-system/atoms';
-import { FadeIn, StaggerContainer, StaggerItem } from '@/components/motion';
+import { Card } from '@ecosystem/design-system/atoms';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-        <div className="max-w-5xl mx-auto text-center">
-          <FadeIn delay={0.1}>
-            <h1 className="text-6xl md:text-8xl font-bold tracking-tight text-foreground mb-8">
+    <main className="min-h-screen bg-background flex flex-col">
+      <div className="flex-grow">
+        {/* Hero Section */}
+        <section className="pt-20 md:pt-32 pb-16 px-6">
+          <div className="max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-2">
               Shalom Ormsby
-              <span className="block text-4xl md:text-5xl text-foreground opacity-60 mt-4 font-medium">Product Design Leader</span>
             </h1>
-          </FadeIn>
-
-          <FadeIn delay={0.3}>
-            <p className="text-xl md:text-2xl text-foreground opacity-70 max-w-2xl mx-auto mb-12 leading-relaxed">
-              I help teams shape bold, human-centered products from strategy through delivery.
+            <p className="text-xl md:text-2xl text-foreground opacity-70 mb-8">
+              Product Designer & Creative Technologist
             </p>
-          </FadeIn>
 
-          <FadeIn delay={0.4}>
-            <p className="text-lg text-foreground opacity-60 mb-12">
-              This portfolio isn't a static gallery of artifacts. It's an interactive, customizable, open source experience that demonstrates how I think, design, and build.
+            <p className="text-lg text-foreground opacity-80 leading-relaxed mb-4">
+              Philosophy is only meaningful when embodied. This ecosystem demonstrates
+              human-centered design through architecture and experience, not mere description.
             </p>
-            <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-              <p className="text-foreground font-medium">Where would you like to begin?</p>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+            <Link
+              href="https://github.com/shalom-ormsby/ecosystem/blob/main/DESIGN-PHILOSOPHY.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline inline-flex items-center gap-1"
+            >
+              → Read the full philosophy
+            </Link>
+          </div>
+        </section>
 
-      {/* Focus Areas */}
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <StaggerItem>
-              <Card className="h-full flex flex-col justify-between p-8 hover:border-primary/50 group">
-                <div>
-                  <div className="text-4xl mb-6">🧭</div>
-                  <h3 className="text-2xl font-bold text-foreground mb-3">Product Strategy & Vision</h3>
-                  <p className="text-foreground opacity-70 mb-6">How I define the right problems and align design with real opportunities.</p>
-                </div>
-                <Link href="/strategy" className="text-primary font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
-                  Explore Product Strategy →
+        {/* Navigation Sections */}
+        <section className="pb-20 px-6">
+          <div className="max-w-3xl mx-auto space-y-8">
+            {/* Work */}
+            <Card className="p-8">
+              <h2 className="text-2xl font-bold text-foreground mb-6 pb-3 border-b border-foreground/10">
+                Work
+              </h2>
+              <nav className="space-y-3">
+                <Link
+                  href="/case-studies"
+                  className="block text-foreground hover:text-primary transition-colors"
+                >
+                  → Portfolio (Case Studies)
                 </Link>
-              </Card>
-            </StaggerItem>
+                <a
+                  href="/resume.pdf"
+                  className="block text-foreground hover:text-primary transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  → Resume (PDF)
+                </a>
+              </nav>
+            </Card>
 
-            <StaggerItem>
-              <Card className="h-full flex flex-col justify-between p-8 hover:border-primary/50 group">
-                <div>
-                  <div className="text-4xl mb-6">✍️</div>
-                  <h3 className="text-2xl font-bold text-foreground mb-3">Experience Design</h3>
-                  <p className="text-foreground opacity-70 mb-6">How I craft and validate solutions that serve people and products.</p>
-                </div>
-                <Link href="/design" className="text-primary font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
-                  Explore Experience Design →
+            {/* Play */}
+            <Card className="p-8">
+              <h2 className="text-2xl font-bold text-foreground mb-6 pb-3 border-b border-foreground/10">
+                Play
+              </h2>
+              <nav className="space-y-3">
+                <a
+                  href="https://creative-powerup.vercel.app"
+                  className="block text-foreground hover:text-primary transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  → Creative Sandbox
+                </a>
+                <a
+                  href="https://loveistheway.substack.com"
+                  className="block text-foreground hover:text-primary transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  → Love Is the Way (Substack)
+                </a>
+                <Link
+                  href="/poetry"
+                  className="block text-foreground hover:text-primary transition-colors"
+                >
+                  → Poetry
                 </Link>
-              </Card>
-            </StaggerItem>
-
-            <StaggerItem>
-              <Card className="h-full flex flex-col justify-between p-8 hover:border-primary/50 group">
-                <div>
-                  <div className="text-4xl mb-6">🚀</div>
-                  <h3 className="text-2xl font-bold text-foreground mb-3">Product Delivery</h3>
-                  <p className="text-foreground opacity-70 mb-6">How I ship, scale, and sustain high-quality design in the real world.</p>
-                </div>
-                <Link href="/delivery" className="text-primary font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
-                  Explore Product Delivery →
+                <Link
+                  href="/art-in-space"
+                  className="block text-foreground hover:text-primary transition-colors"
+                >
+                  → Art in Space
                 </Link>
-              </Card>
-            </StaggerItem>
-          </StaggerContainer>
+              </nav>
+            </Card>
+
+            {/* Tools */}
+            <Card className="p-8">
+              <h2 className="text-2xl font-bold text-foreground mb-6 pb-3 border-b border-foreground/10">
+                Tools
+              </h2>
+              <nav className="space-y-3">
+                <Link
+                  href="/design-system"
+                  className="block text-foreground hover:text-primary transition-colors"
+                >
+                  → Design System
+                </Link>
+                <Link
+                  href="/sage-stocks"
+                  className="block text-foreground hover:text-primary transition-colors"
+                >
+                  → Sage Stocks
+                </Link>
+                <Link
+                  href="/sageos"
+                  className="block text-foreground hover:text-primary transition-colors"
+                >
+                  → SageOS
+                </Link>
+              </nav>
+            </Card>
+          </div>
+        </section>
+      </div>
+
+      {/* Footer */}
+      <footer className="border-t border-foreground/10 py-8 px-6 mt-auto">
+        <div className="max-w-3xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <p className="text-foreground opacity-60 text-sm">
+              © {new Date().getFullYear()} Shalom Ormsby
+            </p>
+            <nav className="flex gap-6">
+              <a
+                href="mailto:shalom@shalomormsby.com"
+                className="text-foreground hover:text-primary transition-colors text-sm"
+              >
+                Email
+              </a>
+              <a
+                href="https://github.com/shalom-ormsby"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground hover:text-primary transition-colors text-sm"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/shalomormsby"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground hover:text-primary transition-colors text-sm"
+              >
+                LinkedIn
+              </a>
+            </nav>
+          </div>
         </div>
-      </section>
-
-      {/* Ecosystem Features */}
-      <section className="py-20 px-6 bg-background-secondary border-t border-[var(--color-glass-border)]">
-        <div className="max-w-5xl mx-auto">
-          <FadeIn>
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-foreground mb-4">Built with "Transparent by Design"</h2>
-              <p className="text-xl text-foreground opacity-70">This portfolio proves its philosophy through the experience itself.</p>
-            </div>
-          </FadeIn>
-
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <StaggerItem>
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold text-foreground">Customizer</h3>
-                <p className="text-foreground opacity-70">Control your own experience. Adjust motion (0–10), choose your theme, and reveal the code beneath.</p>
-                <p className="text-sm text-foreground opacity-50 italic">Demonstrating: User Control & Freedom</p>
-              </div>
-            </StaggerItem>
-
-            <StaggerItem>
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold text-foreground">X-Ray Mode <span className="text-xs bg-background-secondary px-2 py-1 rounded text-foreground opacity-60 ml-2">Coming Soon</span></h3>
-                <p className="text-foreground opacity-70">See the design system tokens, component structure, and AI collaboration notes in real time.</p>
-                <p className="text-sm text-foreground opacity-50 italic">Demonstrating: Design × Engineering transparency</p>
-              </div>
-            </StaggerItem>
-
-            <StaggerItem>
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold text-foreground">Open Source</h3>
-                <p className="text-foreground opacity-70">The entire codebase is MIT licensed. Learn from it, fork it, build with it.</p>
-                <p className="text-sm text-foreground opacity-50 italic">Demonstrating: Teaching at scale</p>
-              </div>
-            </StaggerItem>
-          </StaggerContainer>
-        </div>
-      </section>
+      </footer>
     </main>
   );
 }
