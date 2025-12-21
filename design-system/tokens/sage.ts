@@ -30,6 +30,10 @@ export const sageTokens = {
       error: '#c17a5f',
       info: '#8b9dc3',
 
+      // Link hover states - Muted sage green
+      linkHover: '#7a9b7f',
+      linkHoverForeground: '#faf8f5',
+
       // Soft glass effects
       glass: 'rgba(250, 248, 245, 0.85)',
       glassBorder: 'rgba(122, 155, 127, 0.15)',
@@ -75,6 +79,10 @@ export const sageTokens = {
       warning: '#e5c59a',
       error: '#e5a78a',
       info: '#a8b5d5',
+
+      // Link hover states - Brighter sage for dark mode
+      linkHover: '#a8c5ad',
+      linkHoverForeground: '#1a1614',
 
       // Dark glass effects
       glass: 'rgba(26, 22, 20, 0.85)',

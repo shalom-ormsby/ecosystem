@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
-import { Card } from '@ecosystem/design-system/atoms';
+import NextLink from 'next/link';
+import { Card, Link } from '@ecosystem/design-system/atoms';
 
 export default function Home() {
   return (
@@ -25,7 +25,6 @@ export default function Home() {
               href="https://github.com/shalom-ormsby/ecosystem/blob/main/DESIGN-PHILOSOPHY.md"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary hover:underline inline-flex items-center gap-1"
             >
               → Read the full philosophy
             </Link>
@@ -36,89 +35,89 @@ export default function Home() {
         <section className="pb-20 px-6">
           <div className="max-w-3xl mx-auto space-y-8">
             {/* Work */}
-            <Card className="p-8">
+            <Card hoverEffect={false} className="p-8">
               <h2 className="text-2xl font-bold text-foreground mb-6 pb-3 border-b border-foreground/10">
                 Work
               </h2>
               <nav className="space-y-3">
-                <Link
+                <NextLink
                   href="/case-studies"
-                  className="block text-foreground hover:text-primary transition-colors"
+                  className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
                 >
                   → Portfolio (Case Studies)
-                </Link>
-                <a
+                </NextLink>
+                <Link
                   href="/resume.pdf"
-                  className="block text-foreground hover:text-primary transition-colors"
+                  className="block"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   → Resume (PDF)
-                </a>
+                </Link>
               </nav>
             </Card>
 
             {/* Play */}
-            <Card className="p-8">
+            <Card hoverEffect={false} className="p-8">
               <h2 className="text-2xl font-bold text-foreground mb-6 pb-3 border-b border-foreground/10">
                 Play
               </h2>
               <nav className="space-y-3">
-                <a
+                <Link
                   href="https://ecosystem-creative-powerup.vercel.app/"
-                  className="block text-foreground hover:text-primary transition-colors"
+                  className="block"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   → Creative Sandbox
-                </a>
-                <a
+                </Link>
+                <Link
                   href="https://shalomormsby.substack.com/"
-                  className="block text-foreground hover:text-primary transition-colors"
+                  className="block"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   → Love Is the Way
-                </a>
-                <Link
+                </Link>
+                <NextLink
                   href="/poetry"
-                  className="block text-foreground hover:text-primary transition-colors"
+                  className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
                 >
                   → Poetry
-                </Link>
-                <Link
+                </NextLink>
+                <NextLink
                   href="/art-in-space"
-                  className="block text-foreground hover:text-primary transition-colors"
+                  className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
                 >
                   → Art in Space
-                </Link>
+                </NextLink>
               </nav>
             </Card>
 
             {/* Tools */}
-            <Card className="p-8">
+            <Card hoverEffect={false} className="p-8">
               <h2 className="text-2xl font-bold text-foreground mb-6 pb-3 border-b border-foreground/10">
                 Tools
               </h2>
               <nav className="space-y-3">
-                <Link
+                <NextLink
                   href="/design-system"
-                  className="block text-foreground hover:text-primary transition-colors"
+                  className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
                 >
                   → Design System
-                </Link>
-                <Link
+                </NextLink>
+                <NextLink
                   href="/sage-stocks"
-                  className="block text-foreground hover:text-primary transition-colors"
+                  className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
                 >
                   → Sage Stocks
-                </Link>
-                <Link
+                </NextLink>
+                <NextLink
                   href="/sageos"
-                  className="block text-foreground hover:text-primary transition-colors"
+                  className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
                 >
                   → SageOS
-                </Link>
+                </NextLink>
               </nav>
             </Card>
           </div>

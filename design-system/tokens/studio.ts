@@ -35,6 +35,10 @@ export const studioTokens = {
       hover: '#fafafa',
       active: '#f0f0f0',
 
+      // Link hover states
+      linkHover: '#0a0a0a',
+      linkHoverForeground: '#ffffff',
+
       // Semantic
       success: '#00a86b',
       successForeground: '#ffffff',
@@ -100,6 +104,10 @@ export const studioTokens = {
       // States
       hover: '#1a1a1a',
       active: '#262626',
+
+      // Link hover states
+      linkHover: '#ffffff',
+      linkHoverForeground: '#0a0a0a',
 
       // Semantic
       success: '#10b981',

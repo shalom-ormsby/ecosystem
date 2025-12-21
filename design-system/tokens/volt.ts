@@ -30,6 +30,10 @@ export const voltTokens = {
       error: '#ff3366',
       info: '#0066ff',
 
+      // Link hover states - Electric blue with high contrast
+      linkHover: '#0066ff',
+      linkHoverForeground: '#ffffff',
+
       // Crisp glass effects
       glass: 'rgba(255, 255, 255, 0.8)',
       glassBorder: 'rgba(0, 102, 255, 0.2)',
@@ -75,6 +79,10 @@ export const voltTokens = {
       warning: '#ffcc00',
       error: '#ff0066',
       info: '#0099ff',
+
+      // Link hover states - Neon cyan (high luma)
+      linkHover: '#00ffff',
+      linkHoverForeground: '#000000',
 
       // Dark glass with glow
       glass: 'rgba(0, 0, 0, 0.8)',
