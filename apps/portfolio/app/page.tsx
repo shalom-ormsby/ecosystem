@@ -25,7 +25,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              → Read the design philosophy
+              → Read my design philosophy
             </Link>
           </div>
         </section>
