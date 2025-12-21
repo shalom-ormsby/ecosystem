@@ -18,8 +18,7 @@ export default function Home() {
             </p>
 
             <p className="text-lg text-foreground opacity-80 leading-relaxed mb-4">
-              Philosophy is only meaningful when embodied. This ecosystem demonstrates
-              human-centered design through architecture and experience, not mere description.
+              Philosophy is meaningful when embodied.
             </p>
             <Link
               href="https://github.com/shalom-ormsby/ecosystem/blob/main/DESIGN-PHILOSOPHY.md"
