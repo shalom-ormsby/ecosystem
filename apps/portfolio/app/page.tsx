@@ -100,16 +100,16 @@ export default function Home() {
               </h2>
               <nav className="space-y-3">
                 <NextLink
+                  href="/studio"
+                  className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
+                >
+                  → Sage Design Studio
+                </NextLink>
+                <NextLink
                   href="/cosmograph"
                   className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
                 >
                   → Cosmograph (Explore Everything)
-                </NextLink>
-                <NextLink
-                  href="/design-system"
-                  className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
-                >
-                  → Design System
                 </NextLink>
                 <NextLink
                   href="/sage-stocks"
