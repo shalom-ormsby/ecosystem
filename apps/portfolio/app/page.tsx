@@ -99,12 +99,14 @@ export default function Home() {
                 Tools
               </h2>
               <nav className="space-y-3">
-                <NextLink
-                  href="/studio"
-                  className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
+                <Link
+                  href="https://studio.shalomormsby.com"
+                  className="block"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   → Sage Design Studio
-                </NextLink>
+                </Link>
                 <NextLink
                   href="/cosmograph"
                   className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
