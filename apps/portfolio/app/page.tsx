@@ -101,8 +101,6 @@ export default function Home() {
               <nav className="space-y-3">
                 <a
                   href="https://studio.shalomormsby.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
                 >
                   → Sage Design Studio
