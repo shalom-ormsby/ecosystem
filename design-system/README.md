@@ -344,6 +344,48 @@ Features:
 - Automatic shadows from theme tokens
 - Ref forwarding support
 
+#### Header
+
+```typescript
+import { Header } from '@ecosystem/design-system'
+
+<Header
+  logo={<a href="/"><img src="/logo.svg" alt="Brand" /></a>}
+  navLinks={[
+    { label: 'Features', href: '#features' },
+    { label: 'Pricing', href: '#pricing' },
+    { label: 'About', href: '#about' },
+  ]}
+  actions={
+    <>
+      <a href="#signin">Sign In</a>
+      <Button variant="primary">Get Started</Button>
+    </>
+  }
+  glassOnScroll={true}
+/>
+
+// Props
+logo?: React.ReactNode                // Brand/logo element
+navLinks?: NavLink[]                  // Array of { label, href }
+actions?: React.ReactNode             // Right-side content (CTA, auth buttons)
+glassOnScroll?: boolean              // Apply glass effect on scroll (default: true)
+scrollThreshold?: number             // Scroll px before glass effect (default: 10)
+sticky?: boolean                     // Fixed position header (default: true)
+// + all standard header HTML attributes
+```
+
+Features:
+- Sticky header with glass morphism on scroll
+- Responsive mobile menu with hamburger toggle
+- Respects motion preferences (animations disabled when shouldAnimate is false)
+- Theme-aware colors using CSS variables
+- Full keyboard navigation and ARIA labels
+- Mobile menu locks body scroll when open
+- Staggered animations for mobile menu items
+- Focus-visible styles on all interactive elements
+- Ref forwarding support
+
 #### Motion Components
 
 ```typescript

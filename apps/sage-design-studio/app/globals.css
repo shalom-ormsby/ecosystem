@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth scrolling for section navigation */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Code block styling */
+pre {
+  @apply rounded-lg overflow-x-auto;
+}
+
+code {
+  @apply font-mono text-sm;
+}
