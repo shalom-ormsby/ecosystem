@@ -4,25 +4,23 @@ import createMDX from '@next/mdx';
 const nextConfig = {
     pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
     transpilePackages: ['@ecosystem/design-system'],
-    async rewrites() {
-        // Only enable studio proxy in development for now
-        // In production, sage-design-studio will be deployed separately
-        // Set STUDIO_URL in Vercel environment variables when ready
-        if (process.env.NODE_ENV === 'development' || process.env.STUDIO_URL) {
-            const studioUrl = process.env.STUDIO_URL || 'http://localhost:3001';
-            return [
-                {
-                    source: '/studio',
-                    destination: `${studioUrl}/`,
-                },
-                {
-                    source: '/studio/:path*',
-                    destination: `${studioUrl}/:path*`,
-                },
-            ];
-        }
-        // In production without STUDIO_URL, return empty array (no rewrites)
-        return [];
+    async redirects() {
+        // Redirect /studio to Sage Design Studio
+        // In development, use localhost; in production, use deployed URL
+        const studioUrl = process.env.STUDIO_URL || 'http://localhost:3001';
+
+        return [
+            {
+                source: '/studio',
+                destination: studioUrl,
+                permanent: false,
+            },
+            {
+                source: '/studio/:path*',
+                destination: `${studioUrl}/:path*`,
+                permanent: false,
+            },
+        ];
     },
 };
 
