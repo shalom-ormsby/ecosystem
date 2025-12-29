@@ -22,7 +22,11 @@ export function ComponentPlayground({ componentName, config }: ComponentPlaygrou
   // Generate code snippet
   const generateCodeSnippet = () => {
     const propsStr = Object.entries(props)
-      .filter(([key, value]) => value !== config.props[key].default)
+      .filter(([key, value]) => {
+        // Skip props not in config or with default values
+        if (!config.props[key]) return false;
+        return value !== config.props[key].default;
+      })
       .map(([key, value]) => {
         if (typeof value === 'boolean') return `${key}={${value}}`;
         if (typeof value === 'string') return `${key}="${value}"`;

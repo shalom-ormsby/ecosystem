@@ -58,13 +58,13 @@ export const componentRegistry: Record<string, ComponentConfig> = {
     examples: [
       {
         label: 'With Hover',
-        props: { hoverEffect: true, className: 'p-6' },
-        children: 'Card with hover effects enabled',
+        props: { hoverEffect: true },
+        children: 'Card content with hover effect',
       },
       {
         label: 'Without Hover',
-        props: { hoverEffect: false, className: 'p-6' },
-        children: 'Card with hover effects disabled',
+        props: { hoverEffect: false },
+        children: 'Card content without hover',
       },
     ],
   },
