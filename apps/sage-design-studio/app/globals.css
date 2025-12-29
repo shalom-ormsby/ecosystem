@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  /* Documentation Typography Hierarchy */
+
+  /* Body text: Nunito - warm, friendly, readable */
+  body {
+    font-family: var(--font-nunito), system-ui, sans-serif;
+  }
+
+  /* Headings: Nunito Sans - professional, clean, less rounded */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-nunito-sans), system-ui, sans-serif;
+  }
+
+  /* Strong text also uses Nunito Sans for emphasis */
+  strong {
+    font-family: var(--font-nunito-sans), system-ui, sans-serif;
+  }
+}
+
 /* Smooth scrolling for section navigation */
 html {
   scroll-behavior: smooth;

@@ -12,11 +12,14 @@ import { Button } from '@ecosystem/design-system';
  * - Centered alignment for hero content
  * - Consistent vertical rhythm
  *
- * Font Note: Uses Nunito as the documentation font (loaded in layout.tsx).
- * This follows design system documentation best practices by using a separate
- * font for documentation UI vs. component examples, creating clear visual
- * separation and improved readability. This font is NOT part of the design
- * system itself and is NOT controlled by the theme customizer.
+ * Typography Note: Uses documentation font hierarchy (loaded in layout.tsx):
+ * - Nunito Sans: Headings (h1, h2, etc.) - Professional, clean, less rounded
+ * - Nunito: Body text - Warm, friendly, highly readable
+ *
+ * This follows design system documentation best practices by using separate
+ * fonts for documentation UI vs. component examples, creating clear visual
+ * separation. These fonts are NOT part of the design system itself and are
+ * NOT controlled by the theme customizer.
  */
 export function StudioHero() {
   return (
