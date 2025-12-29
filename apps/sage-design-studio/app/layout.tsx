@@ -1,28 +1,26 @@
 import type { Metadata } from 'next';
-import { Nunito, Nunito_Sans } from 'next/font/google';
+import { Nunito, Nunito_Sans, Outfit, Manrope, Lora, Instrument_Sans, Space_Grotesk, Fira_Code } from 'next/font/google';
 import { ThemeProvider } from '@ecosystem/design-system';
 import './globals.css';
 
 /**
- * Documentation Fonts
+ * Font Loading Strategy
  *
- * Design System Documentation Best Practice:
- * Using separate fonts for documentation creates clear visual separation
- * between the documentation UI (meta-level) and the design system components
- * being showcased (examples). This is the approach used by major design systems
- * like Material Design, Atlassian Design System, and Shopify Polaris.
+ * This app loads TWO sets of fonts:
+ * 1. Documentation fonts (Nunito/Nunito Sans) - For the docs UI itself
+ * 2. Design system theme fonts - For showing actual theme examples
  *
- * Typography Hierarchy:
- * - Nunito Sans: Headings (h1-h6) - Professional, clean, less rounded
- * - Nunito: Body text - Warm, friendly, highly readable
+ * Documentation Fonts (applied to body):
+ * - Nunito Sans: Headings (h1-h6)
+ * - Nunito: Body text
  *
- * Benefits:
- * - Clear distinction between docs chrome and component examples
- * - Documentation optimized for readability
- * - Professional headings with friendly body text
- * - Component examples stand out visually
- * - Easier to document typography tokens without confusion
+ * Design System Theme Fonts (CSS variables for examples):
+ * - Studio: Outfit (heading) + Manrope (body)
+ * - Sage: Lora (heading) + Instrument Sans (body)
+ * - Volt: Space Grotesk (unified)
  */
+
+// Documentation Fonts
 const nunitoSans = Nunito_Sans({
   subsets: ['latin'],
   variable: '--font-nunito-sans',
@@ -37,6 +35,52 @@ const nunito = Nunito({
   weight: ['300', '400', '600', '700'],
 });
 
+// Studio Theme Fonts
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-studio-heading',
+  display: 'swap',
+  weight: ['300', '400', '600', '700', '800'],
+});
+
+const manrope = Manrope({
+  subsets: ['latin'],
+  variable: '--font-studio-body',
+  display: 'swap',
+  weight: ['300', '400', '600', '700', '800'],
+});
+
+// Sage Theme Fonts
+const lora = Lora({
+  subsets: ['latin'],
+  variable: '--font-sage-heading',
+  display: 'swap',
+  weight: ['400', '600', '700'],
+});
+
+const instrumentSans = Instrument_Sans({
+  subsets: ['latin'],
+  variable: '--font-sage-body',
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+});
+
+// Volt Theme Fonts
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-volt-heading',
+  display: 'swap',
+  weight: ['300', '400', '600', '700'],
+});
+
+// Monospace (all themes)
+const firaCode = Fira_Code({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+});
+
 export const metadata: Metadata = {
   title: 'Sage Design Studio',
   description: 'The heart of the ecosystem. Explore the design system, brand guidelines, and resources that power the entire ecosystem.',
@@ -49,7 +93,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${nunito.variable} ${nunitoSans.variable}`}>
+      <body className={`
+        ${nunito.variable} ${nunitoSans.variable}
+        ${outfit.variable} ${manrope.variable}
+        ${lora.variable} ${instrumentSans.variable}
+        ${spaceGrotesk.variable} ${firaCode.variable}
+      `}>
         <ThemeProvider>
           {children}
         </ThemeProvider>

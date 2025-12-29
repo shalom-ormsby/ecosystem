@@ -24,8 +24,8 @@ export function TokensSection() {
   ];
 
   return (
-    <div className="space-y-8">
-      <div>
+    <div>
+      <div className="mb-8">
         <h2 className="text-3xl font-bold mb-2 text-[var(--color-text-primary)]">
           Design Tokens
         </h2>
@@ -34,26 +34,15 @@ export function TokensSection() {
         </p>
       </div>
 
-      {/* Tertiary Navigation for Token Tabs */}
-      <div className="flex items-center gap-4 flex-wrap">
-        <TertiaryNav
-          items={availableTabs}
-          activeId={activeTab}
-          onItemChange={(id) => setActiveTab(id as TokenTab)}
-        />
-        {/* Coming Soon Pills */}
-        {comingSoonTabs.map((tab) => (
-          <div
-            key={tab.id}
-            className="px-4 py-2 rounded-lg text-sm font-medium bg-[var(--color-surface)] text-[var(--color-text-muted)] opacity-50 cursor-not-allowed border border-[var(--color-border)]"
-          >
-            {tab.label} (Coming Soon)
-          </div>
-        ))}
-      </div>
+      {/* Sticky Tertiary Navigation for Token Tabs */}
+      <TertiaryNav
+        items={availableTabs}
+        activeId={activeTab}
+        onItemChange={(id) => setActiveTab(id as TokenTab)}
+      />
 
-      {/* Tab Content */}
-      <div>
+      {/* Tab Content with spacing for sticky nav */}
+      <div className="mt-8">
         {activeTab === 'colors' && <ColorsTab />}
         {activeTab === 'typography' && <TypographyTab />}
         {activeTab === 'spacing' && <SpacingTab />}

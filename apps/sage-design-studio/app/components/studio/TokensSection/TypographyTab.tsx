@@ -4,6 +4,25 @@ import { useState } from 'react';
 import { Card } from '@ecosystem/design-system';
 import { typographySystem } from '@ecosystem/design-system';
 
+// Font CSS variable mapping for each theme
+const themeFontVars = {
+  studio: {
+    heading: 'var(--font-studio-heading)',
+    body: 'var(--font-studio-body)',
+    mono: 'var(--font-mono)',
+  },
+  sage: {
+    heading: 'var(--font-sage-heading)',
+    body: 'var(--font-sage-body)',
+    mono: 'var(--font-mono)',
+  },
+  volt: {
+    heading: 'var(--font-volt-heading)',
+    body: 'var(--font-volt-heading)', // Volt uses same font for both
+    mono: 'var(--font-mono)',
+  },
+};
+
 export function TypographyTab() {
   const [selectedTheme, setSelectedTheme] = useState<'studio' | 'sage' | 'volt'>('studio');
 
@@ -14,6 +33,7 @@ export function TypographyTab() {
   ];
 
   const currentThemeFonts = typographySystem.families[selectedTheme];
+  const currentFontVars = themeFontVars[selectedTheme];
 
   return (
     <div className="space-y-8">
@@ -36,11 +56,53 @@ export function TypographyTab() {
         </div>
       </Card>
 
+      {/* Theme Comparison - MOVED TO TOP */}
+      <div>
+        <h3 className="text-xl font-semibold mb-4 text-[var(--color-text-primary)]">
+          All Themes at a Glance
+        </h3>
+        <Card className="p-6">
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-sm">
+              <thead>
+                <tr className="border-b border-[var(--color-border)]">
+                  <th className="text-left py-3 px-4 text-[var(--color-text-primary)]">Theme</th>
+                  <th className="text-left py-3 px-4 text-[var(--color-text-primary)]">Heading</th>
+                  <th className="text-left py-3 px-4 text-[var(--color-text-primary)]">Body</th>
+                  <th className="text-left py-3 px-4 text-[var(--color-text-primary)]">Personality</th>
+                </tr>
+              </thead>
+              <tbody className="text-[var(--color-text-secondary)]">
+                {themes.map((theme) => {
+                  const fonts = typographySystem.families[theme.id];
+                  return (
+                    <tr key={theme.id} className="border-b border-[var(--color-border)] last:border-0">
+                      <td className="py-3 px-4">
+                        <div className="flex items-center gap-2">
+                          <span>{theme.emoji}</span>
+                          <strong className="text-[var(--color-text-primary)]">{theme.label}</strong>
+                        </div>
+                      </td>
+                      <td className="py-3 px-4 font-semibold">{fonts.heading}</td>
+                      <td className="py-3 px-4">{fonts.body}</td>
+                      <td className="py-3 px-4 text-xs">{fonts.description}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </Card>
+      </div>
+
       {/* Theme Selector */}
       <div>
         <h3 className="text-xl font-semibold mb-4 text-[var(--color-text-primary)]">
-          Font Families by Theme
+          Explore Theme Fonts
         </h3>
+        <p className="text-sm text-[var(--color-text-secondary)] mb-4">
+          Select a theme to see its actual fonts in action. All examples below will display using the theme's real typography.
+        </p>
         <div className="grid grid-cols-3 gap-2 mb-6">
           {themes.map((theme) => (
             <button
@@ -77,7 +139,10 @@ export function TypographyTab() {
             <Card className="p-6">
               <div className="mb-4">
                 <p className="text-sm text-[var(--color-text-secondary)] mb-1">Heading Font</p>
-                <p className="text-3xl font-bold text-[var(--color-text-primary)]">
+                <p
+                  className="text-3xl font-bold text-[var(--color-text-primary)]"
+                  style={{ fontFamily: currentFontVars.heading }}
+                >
                   {currentThemeFonts.heading}
                 </p>
               </div>
@@ -98,7 +163,10 @@ export function TypographyTab() {
             <Card className="p-6">
               <div className="mb-4">
                 <p className="text-sm text-[var(--color-text-secondary)] mb-1">Body Font</p>
-                <p className="text-3xl font-medium text-[var(--color-text-primary)]">
+                <p
+                  className="text-3xl font-medium text-[var(--color-text-primary)]"
+                  style={{ fontFamily: currentFontVars.body }}
+                >
                   {currentThemeFonts.body}
                 </p>
               </div>
@@ -115,34 +183,14 @@ export function TypographyTab() {
               </div>
             </Card>
 
-            {/* Serif Font (if applicable) */}
-            {'serif' in currentThemeFonts && currentThemeFonts.serif && (
-              <Card className="p-6">
-                <div className="mb-4">
-                  <p className="text-sm text-[var(--color-text-secondary)] mb-1">Serif Font</p>
-                  <p className="text-3xl font-serif text-[var(--color-text-primary)]">
-                    {currentThemeFonts.serif}
-                  </p>
-                </div>
-                <div className="space-y-2">
-                  <p className="text-xs text-[var(--color-text-muted)]">
-                    <strong className="text-[var(--color-text-primary)]">Usage:</strong>{' '}
-                    {currentThemeFonts.usage.serif || 'Long-form reading, elegant emphasis'}
-                  </p>
-                  <p className="text-xs font-mono text-[var(--color-text-muted)]">
-                    CSS Variable: <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">
-                      --font-{selectedTheme}-serif
-                    </code>
-                  </p>
-                </div>
-              </Card>
-            )}
-
             {/* Monospace Font */}
             <Card className="p-6">
               <div className="mb-4">
                 <p className="text-sm text-[var(--color-text-secondary)] mb-1">Monospace Font</p>
-                <p className="text-3xl font-mono text-[var(--color-text-primary)]">
+                <p
+                  className="text-3xl text-[var(--color-text-primary)]"
+                  style={{ fontFamily: currentFontVars.mono }}
+                >
                   {currentThemeFonts.mono}
                 </p>
               </div>
@@ -153,7 +201,7 @@ export function TypographyTab() {
                 </p>
                 <p className="text-xs font-mono text-[var(--color-text-muted)]">
                   CSS Variable: <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">
-                    --font-{selectedTheme}-mono
+                    --font-mono
                   </code>
                 </p>
               </div>
@@ -162,53 +210,15 @@ export function TypographyTab() {
         </Card>
       </div>
 
-      {/* All Themes Comparison */}
+      {/* Type Scale - USING ACTUAL THEME FONTS */}
       <div>
         <h3 className="text-xl font-semibold mb-4 text-[var(--color-text-primary)]">
-          Theme Comparison
-        </h3>
-        <Card className="p-6">
-          <div className="overflow-x-auto">
-            <table className="min-w-full text-sm">
-              <thead>
-                <tr className="border-b border-[var(--color-border)]">
-                  <th className="text-left py-3 px-4 text-[var(--color-text-primary)]">Theme</th>
-                  <th className="text-left py-3 px-4 text-[var(--color-text-primary)]">Heading</th>
-                  <th className="text-left py-3 px-4 text-[var(--color-text-primary)]">Body</th>
-                  <th className="text-left py-3 px-4 text-[var(--color-text-primary)]">Personality</th>
-                </tr>
-              </thead>
-              <tbody className="text-[var(--color-text-secondary)]">
-                {themes.map((theme) => {
-                  const fonts = typographySystem.families[theme.id];
-                  return (
-                    <tr key={theme.id} className="border-b border-[var(--color-border)] last:border-0">
-                      <td className="py-3 px-4">
-                        <div className="flex items-center gap-2">
-                          <span>{theme.emoji}</span>
-                          <strong className="text-[var(--color-text-primary)]">{theme.label}</strong>
-                        </div>
-                      </td>
-                      <td className="py-3 px-4 font-semibold">{fonts.heading}</td>
-                      <td className="py-3 px-4">{fonts.body}</td>
-                      <td className="py-3 px-4 text-xs">{fonts.description}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </Card>
-      </div>
-
-      {/* Type Scale */}
-      <div>
-        <h3 className="text-xl font-semibold mb-4 text-[var(--color-text-primary)]">
-          Type Scale
+          Type Scale ({themes.find(t => t.id === selectedTheme)?.label} Theme)
         </h3>
         <Card className="p-6">
           <p className="text-sm text-[var(--color-text-secondary)] mb-6">
-            Universal scale used across all themes. Includes responsive sizing for mobile and desktop.
+            Universal scale shown with <strong>{currentThemeFonts.body}</strong> (this theme's body font).
+            Includes responsive sizing for mobile and desktop.
           </p>
           <div className="space-y-4">
             {Object.entries(typographySystem.sizes).slice(0, 7).map(([name, size]) => (
@@ -216,7 +226,10 @@ export function TypographyTab() {
                 <div className="mb-2">
                   <p
                     className="text-[var(--color-text-primary)]"
-                    style={{ fontSize: size.base }}
+                    style={{
+                      fontSize: size.base,
+                      fontFamily: currentFontVars.body,
+                    }}
                   >
                     The quick brown fox jumps over the lazy dog
                   </p>
@@ -238,21 +251,25 @@ export function TypographyTab() {
         </Card>
       </div>
 
-      {/* Font Weights */}
+      {/* Font Weights - USING ACTUAL THEME FONTS */}
       <div>
         <h3 className="text-xl font-semibold mb-4 text-[var(--color-text-primary)]">
-          Font Weights
+          Font Weights ({themes.find(t => t.id === selectedTheme)?.label} Theme)
         </h3>
         <Card className="p-6">
           <p className="text-sm text-[var(--color-text-secondary)] mb-6">
-            Standard weight scale. Not all fonts support all weights—check font-specific availability.
+            Standard weight scale shown with <strong>{currentThemeFonts.heading}</strong> (this theme's heading font).
+            Not all fonts support all weights.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {Object.entries(typographySystem.weights).map(([name, value]) => (
               <div key={name} className="flex items-center justify-between p-3 bg-[var(--color-background)] rounded">
                 <p
                   className="text-lg text-[var(--color-text-primary)]"
-                  style={{ fontWeight: value }}
+                  style={{
+                    fontWeight: value,
+                    fontFamily: currentFontVars.heading,
+                  }}
                 >
                   {name.charAt(0).toUpperCase() + name.slice(1)}
                 </p>
@@ -266,14 +283,14 @@ export function TypographyTab() {
         </Card>
       </div>
 
-      {/* Line Heights */}
+      {/* Line Heights - USING ACTUAL THEME FONTS */}
       <div>
         <h3 className="text-xl font-semibold mb-4 text-[var(--color-text-primary)]">
-          Line Heights
+          Line Heights ({themes.find(t => t.id === selectedTheme)?.label} Theme)
         </h3>
         <Card className="p-6">
           <p className="text-sm text-[var(--color-text-secondary)] mb-6">
-            Unitless values for better scalability. Tighter for headings, relaxed for body text.
+            Unitless values for better scalability. Examples shown with <strong>{currentThemeFonts.body}</strong>.
           </p>
           <div className="space-y-4">
             {Object.entries(typographySystem.lineHeights).map(([name, value]) => (
@@ -286,7 +303,10 @@ export function TypographyTab() {
                 </div>
                 <p
                   className="text-[var(--color-text-secondary)] text-sm"
-                  style={{ lineHeight: value }}
+                  style={{
+                    lineHeight: value,
+                    fontFamily: currentFontVars.body,
+                  }}
                 >
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
                 </p>
@@ -296,21 +316,24 @@ export function TypographyTab() {
         </Card>
       </div>
 
-      {/* Letter Spacing */}
+      {/* Letter Spacing - USING ACTUAL THEME FONTS */}
       <div>
         <h3 className="text-xl font-semibold mb-4 text-[var(--color-text-primary)]">
-          Letter Spacing
+          Letter Spacing ({themes.find(t => t.id === selectedTheme)?.label} Theme)
         </h3>
         <Card className="p-6">
           <p className="text-sm text-[var(--color-text-secondary)] mb-6">
-            In ems for scalability. Negative for headings, positive for small caps and all-caps.
+            In ems for scalability. Examples shown with <strong>{currentThemeFonts.heading}</strong> in all caps.
           </p>
           <div className="space-y-3">
             {Object.entries(typographySystem.letterSpacing).map(([name, value]) => (
               <div key={name} className="flex items-center justify-between p-3 bg-[var(--color-background)] rounded">
                 <p
                   className="text-lg text-[var(--color-text-primary)]"
-                  style={{ letterSpacing: value }}
+                  style={{
+                    letterSpacing: value,
+                    fontFamily: currentFontVars.heading,
+                  }}
                 >
                   LETTER SPACING EXAMPLE
                 </p>
@@ -324,47 +347,55 @@ export function TypographyTab() {
         </Card>
       </div>
 
-      {/* Type Presets */}
+      {/* Type Presets - USING ACTUAL THEME FONTS */}
       <div>
         <h3 className="text-xl font-semibold mb-4 text-[var(--color-text-primary)]">
-          Type Presets
+          Type Presets ({themes.find(t => t.id === selectedTheme)?.label} Theme)
         </h3>
         <Card className="p-6">
           <p className="text-sm text-[var(--color-text-secondary)] mb-6">
-            Ready-to-use combinations of size, weight, line height, and letter spacing for common use cases.
+            Ready-to-use combinations shown with <strong>{currentThemeFonts.heading}</strong> for headings
+            and <strong>{currentThemeFonts.body}</strong> for body text.
           </p>
           <div className="space-y-6">
-            {Object.entries(typographySystem.presets).slice(0, 8).map(([name, preset]) => (
-              <div key={name} className="border-b border-[var(--color-border)] pb-6 last:border-0">
-                <div className="mb-3">
-                  <p
-                    className="text-[var(--color-text-primary)]"
-                    style={{
-                      fontSize: preset.size.base,
-                      fontWeight: preset.weight,
-                      lineHeight: preset.lineHeight,
-                      letterSpacing: preset.letterSpacing,
-                    }}
-                  >
-                    The quick brown fox jumps over the lazy dog
-                  </p>
+            {Object.entries(typographySystem.presets).slice(0, 8).map(([name, preset]) => {
+              // Use heading font for heading presets, body font for body presets
+              const isHeadingPreset = name.includes('heading') || name.includes('display');
+              const fontFamily = isHeadingPreset ? currentFontVars.heading : currentFontVars.body;
+
+              return (
+                <div key={name} className="border-b border-[var(--color-border)] pb-6 last:border-0">
+                  <div className="mb-3">
+                    <p
+                      className="text-[var(--color-text-primary)]"
+                      style={{
+                        fontSize: preset.size.base,
+                        fontWeight: preset.weight,
+                        lineHeight: preset.lineHeight,
+                        letterSpacing: preset.letterSpacing,
+                        fontFamily: fontFamily,
+                      }}
+                    >
+                      The quick brown fox jumps over the lazy dog
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-6 text-xs">
+                    <div>
+                      <code className="font-mono text-[var(--color-primary)] px-2 py-1 bg-[var(--color-surface)] rounded">
+                        {name}
+                      </code>
+                    </div>
+                    <div className="flex-1 text-[var(--color-text-muted)]">
+                      {preset.description}
+                    </div>
+                    <div className="text-right text-[var(--color-text-muted)]">
+                      <div>Size: {preset.size.base}</div>
+                      <div>Weight: {preset.weight}</div>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-start gap-6 text-xs">
-                  <div>
-                    <code className="font-mono text-[var(--color-primary)] px-2 py-1 bg-[var(--color-surface)] rounded">
-                      {name}
-                    </code>
-                  </div>
-                  <div className="flex-1 text-[var(--color-text-muted)]">
-                    {preset.description}
-                  </div>
-                  <div className="text-right text-[var(--color-text-muted)]">
-                    <div>Size: {preset.size.base}</div>
-                    <div>Weight: {preset.weight}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </Card>
       </div>
