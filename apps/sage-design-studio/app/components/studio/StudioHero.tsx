@@ -12,11 +12,11 @@ import { Button } from '@ecosystem/design-system';
  * - Centered alignment for hero content
  * - Consistent vertical rhythm
  *
- * Font Note: Currently using Tailwind's default system font stack:
- * - Safari/macOS: -apple-system, SF Pro
- * - Other systems: system-ui, sans-serif
- * These fonts are NOT controlled by the theme customizer as they're
- * not defined in the design system's CSS variables.
+ * Font Note: Uses Nunito as the documentation font (loaded in layout.tsx).
+ * This follows design system documentation best practices by using a separate
+ * font for documentation UI vs. component examples, creating clear visual
+ * separation and improved readability. This font is NOT part of the design
+ * system itself and is NOT controlled by the theme customizer.
  */
 export function StudioHero() {
   return (
