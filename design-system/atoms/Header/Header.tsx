@@ -116,17 +116,17 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                     className={`${baseStyles} ${positionStyles} ${transitionStyles} ${backgroundStyles} ${className}`}
                 >
                     <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="flex items-center justify-between h-16 lg:h-20">
+                        <div className="flex items-center justify-between h-16 lg:h-20 relative">
                             {/* Logo */}
                             {logo && (
-                                <div className="flex-shrink-0">
+                                <div className="flex-shrink-0 z-10">
                                     {logo}
                                 </div>
                             )}
 
-                            {/* Desktop Navigation */}
+                            {/* Desktop Navigation - Centered */}
                             {navLinks.length > 0 && (
-                                <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+                                <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2" aria-label="Main navigation">
                                     {navLinks.map((link) => {
                                         const hasDropdown = link.children && link.children.length > 0;
                                         const isOpen = openDropdown === link.label;
@@ -154,7 +154,7 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                                                             ${
                                                                 link.active
                                                                     ? 'text-[var(--color-text-primary)] font-medium after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[var(--color-primary)] after:rounded-full'
-                                                                    : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+                                                                    : 'text-[var(--color-text-secondary)] hover:text-[var(--color-primary)]'
                                                             }
                                                         `}
                                                         aria-expanded={isOpen}
@@ -176,10 +176,10 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                                                         </svg>
                                                     </button>
                                                     {/* Invisible bridge to prevent dropdown from closing */}
-                                                    {isOpen && <div className="absolute top-full left-0 right-0 h-2" />}
+                                                    {isOpen && <div className="absolute top-full left-1/2 -translate-x-1/2 w-[200px] h-2" />}
                                                     {isOpen && (
                                                         <div className={`
-                                                            absolute top-full left-0 mt-2 min-w-[200px] z-50
+                                                            absolute top-full left-1/2 -translate-x-1/2 mt-2 min-w-[200px] z-50
                                                             bg-[var(--color-surface)] border border-[var(--color-border)]
                                                             rounded-lg shadow-lg py-2
                                                             ${shouldAnimate ? 'animate-fade-in' : ''}
@@ -226,7 +226,7 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                                                     ${
                                                         link.active
                                                             ? 'text-[var(--color-text-primary)] font-medium after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[var(--color-primary)] after:rounded-full'
-                                                            : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+                                                            : 'text-[var(--color-text-secondary)] hover:text-[var(--color-primary)]'
                                                     }
                                                 `}
                                             >
@@ -239,7 +239,7 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
 
                             {/* Desktop Actions */}
                             {actions && (
-                                <div className="hidden lg:flex items-center gap-4">
+                                <div className="hidden lg:flex items-center gap-4 z-10">
                                     {actions}
                                 </div>
                             )}
