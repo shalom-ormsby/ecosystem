@@ -6,6 +6,7 @@ export * from './base';
 export * from './studio';
 export * from './sage';
 export * from './volt';
+export * from './typography';
 
 /**
  * Theme names
