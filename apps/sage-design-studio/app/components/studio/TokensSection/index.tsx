@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ColorsTab } from './ColorsTab';
 import { TypographyTab } from './TypographyTab';
+import { SpacingTab } from './SpacingTab';
 
 type TokenTab = 'colors' | 'typography' | 'spacing' | 'motion';
 
@@ -12,7 +13,7 @@ export function TokensSection() {
   const tabs: { id: TokenTab; label: string; available: boolean }[] = [
     { id: 'colors', label: 'Colors', available: true },
     { id: 'typography', label: 'Typography', available: true },
-    { id: 'spacing', label: 'Spacing', available: false },
+    { id: 'spacing', label: 'Spacing', available: true },
     { id: 'motion', label: 'Motion', available: false },
   ];
 
@@ -55,7 +56,7 @@ export function TokensSection() {
       <div>
         {activeTab === 'colors' && <ColorsTab />}
         {activeTab === 'typography' && <TypographyTab />}
-        {activeTab === 'spacing' && <div>Coming Soon</div>}
+        {activeTab === 'spacing' && <SpacingTab />}
         {activeTab === 'motion' && <div>Coming Soon</div>}
       </div>
     </div>
