@@ -1,8 +1,6 @@
 'use client';
 
-import { Card, Button } from '@ecosystem/design-system';
-// Import Header directly from the file since it's not exported from the main index
-import { Header } from '../../../../design-system/atoms/Header/Header';
+import { Card, Button, Header } from '@ecosystem/design-system';
 
 export function OrganismsSection() {
   return (
