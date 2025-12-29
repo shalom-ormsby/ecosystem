@@ -1,4 +1,4 @@
-import { Button, Card } from '@ecosystem/design-system';
+import { Button, Card, Link } from '@ecosystem/design-system';
 
 export interface PropConfig {
   type: 'select' | 'boolean' | 'text';
@@ -65,6 +65,50 @@ export const componentRegistry: Record<string, ComponentConfig> = {
         label: 'Without Hover',
         props: { hoverEffect: false },
         children: 'Card content without hover',
+      },
+    ],
+  },
+
+  Link: {
+    component: Link,
+    description: 'Theme-aware link component with multiple style variants. Supports standalone and inline text link styles with accessible focus states.',
+    props: {
+      variant: {
+        type: 'select',
+        options: ['default', 'inline'] as const,
+        default: 'default',
+        description: 'Visual style variant: default for standalone links with background hover, inline for underlined text links',
+      },
+      hoverEffect: {
+        type: 'boolean',
+        default: true,
+        description: 'Enable hover effect (only applies to default variant)',
+      },
+    },
+    examples: [
+      {
+        label: 'Default',
+        props: { variant: 'default', href: '#' },
+        children: 'Default Link',
+      },
+      {
+        label: 'Default No Hover',
+        props: { variant: 'default', hoverEffect: false, href: '#' },
+        children: 'No Hover Effect',
+      },
+      {
+        label: 'Inline',
+        props: { variant: 'inline', href: '#' },
+        children: 'Inline Link',
+      },
+      {
+        label: 'Inline in Text',
+        props: { variant: 'inline', href: '#' },
+        children: (
+          <span className="text-[var(--color-text-secondary)]">
+            This is some text with an <Link variant="inline" href="#">inline link</Link> embedded in it.
+          </span>
+        ),
       },
     ],
   },
