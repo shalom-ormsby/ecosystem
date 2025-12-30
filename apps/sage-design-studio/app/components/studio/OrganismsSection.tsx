@@ -305,6 +305,27 @@ const sections = [
           </Card>
         </div>
 
+        {/* Live Example */}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
+            Live Example
+          </h4>
+          <Card className="p-0 overflow-hidden bg-[var(--color-background)]">
+            <TertiaryNav
+              items={[
+                { id: 'button', label: 'Button' },
+                { id: 'card', label: 'Card' },
+                { id: 'link', label: 'Link' },
+                { id: 'input', label: 'Input' },
+                { id: 'select', label: 'Select' },
+                { id: 'checkbox', label: 'Checkbox' },
+              ]}
+              activeId="card"
+              onItemChange={() => {}}
+            />
+          </Card>
+        </div>
+
         {/* Code Example */}
         <div>
           <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
