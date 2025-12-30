@@ -156,6 +156,28 @@ export function MotionTab() {
         </Card>
       </div>
 
+      {/* Variable Weight Motion */}
+      <div>
+        <h3 className="text-xl font-semibold mb-4 text-[var(--color-text-primary)]">
+          Variable Weight Motion
+        </h3>
+        <Card className="p-6">
+          <p className="text-sm text-[var(--color-text-secondary)] mb-6">
+            For variable fonts (like Clash Display), use the <code>VariableWeightText</code> behavior to create a "breathing" effect that animates font weight.
+            This animation automatically centers the text to ensure symmetrical expansion and contraction, preventing layout shifts.
+          </p>
+          <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-x-auto">
+            <pre className="text-sm font-mono text-[var(--color-text-primary)]">
+              {`import { VariableWeightText } from '@ecosystem/design-system';
+
+<VariableWeightText minWeight={200} maxWeight={700}>
+  Variable Font Text
+</VariableWeightText>`}
+            </pre>
+          </div>
+        </Card>
+      </div>
+
       {/* Interactive Playground */}
       <div>
         <h3 className="text-xl font-semibold mb-4 text-[var(--color-text-primary)]">
@@ -245,7 +267,7 @@ export function MotionTab() {
             </p>
             <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-x-auto">
               <pre className="text-sm font-mono text-[var(--color-text-primary)]">
-{`/* Using CSS custom properties */
+                {`/* Using CSS custom properties */
 .button {
   transition: all var(--duration-normal) var(--ease-default);
 }
@@ -297,7 +319,7 @@ export function MotionTab() {
               </div>
               <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-x-auto">
                 <pre className="text-sm font-mono text-[var(--color-text-primary)]">
-{`import { motion } from 'framer-motion';
+                  {`import { motion } from 'framer-motion';
 
 // Basic animation
 <motion.div
@@ -366,7 +388,7 @@ export function MotionTab() {
               </div>
               <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-x-auto">
                 <pre className="text-sm font-mono text-[var(--color-text-primary)]">
-{`import { gsap } from 'gsap';
+                  {`import { gsap } from 'gsap';
 
 // Basic animation
 gsap.to('.element', {
@@ -403,7 +425,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
         </p>
         <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-x-auto">
           <pre className="text-sm font-mono text-[var(--color-text-primary)]">
-{`/* CSS approach */
+            {`/* CSS approach */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

@@ -413,7 +413,7 @@ motion.easing.spring       // Custom spring — Playful interactions
 motion.easing.linear       // linear — Progress indicators
 ```
 
-### Variable Weight Motion
+#### Variable Weight Motion
 
 For variable fonts (like Clash Display), use the `VariableWeightText` behavior to create a "breathing" effect that animates font weight. This animation automatically centers the text to ensure symmetrical expansion and contraction, preventing layout shifts.
 
