@@ -86,11 +86,11 @@ export function OrganismsSection() {
           <Card className="p-0 overflow-hidden bg-[var(--color-background)]">
             <Header
               logo={
-                <a href="/" className="font-semibold text-lg" style={{ fontFamily: 'Instrument Sans, system-ui, sans-serif' }}>
+                <a href="/" className="font-semibold text-lg font-[var(--font-sage-body)]">
                   Brand
                 </a>
               }
-              fontFamily="Instrument Sans, system-ui, sans-serif"
+              fontFamily="var(--font-sage-body)"
               navLinks={[
                 { label: 'Features', href: '/features' },
                 {
