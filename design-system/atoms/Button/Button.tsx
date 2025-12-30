@@ -1,7 +1,19 @@
 import React from 'react';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    /**
+     * Button content
+     */
+    children: React.ReactNode;
+    /**
+     * Visual variant of the button
+     * @default 'primary'
+     */
     variant?: 'primary' | 'secondary' | 'ghost';
+    /**
+     * Size of the button
+     * @default 'md'
+     */
     size?: 'sm' | 'md' | 'lg';
     /**
      * Show loading spinner and disable button

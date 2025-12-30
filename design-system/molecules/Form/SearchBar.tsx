@@ -31,6 +31,9 @@ export interface SearchBarProps extends Omit<TextFieldProps, 'variant'> {
  * A specialized text field for search functionality with built-in
  * search icon, optional clear button, and debounced onChange.
  *
+ * **Note:** SearchBar always uses the `outlined` variant and does not
+ * accept a variant prop. This ensures consistent search field styling.
+ *
  * Features:
  * - Search icon on the left
  * - Optional clear button (X) on the right

@@ -9,3 +9,9 @@ export type { TertiaryNavProps, TertiaryNavItem } from './TertiaryNav/TertiaryNa
 
 export { Footer } from './Footer/Footer';
 export type { FooterProps, FooterSection, FooterLink } from './Footer/Footer';
+
+export { ToastProvider, useToast } from './Toast';
+export type { Toast, ToastType, ToastProviderProps } from './Toast';
+
+export { Modal } from './Modal';
+export type { ModalProps } from './Modal';
