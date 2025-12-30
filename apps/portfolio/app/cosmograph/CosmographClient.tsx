@@ -15,7 +15,7 @@ export function CosmographClient({ nodes }: CosmographClientProps) {
     <main className="min-h-screen bg-background flex flex-col">
       <Header
         logo={
-          <NextLink href="/" className="font-semibold text-lg text-foreground">
+          <NextLink href="/" className="font-bold text-lg text-foreground">
             Shalom Ormsby
           </NextLink>
         }

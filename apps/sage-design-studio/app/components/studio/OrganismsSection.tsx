@@ -63,6 +63,45 @@ export function OrganismsSection() {
           </Card>
         </div>
 
+        {/* Live Example */}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
+            Live Example
+          </h4>
+          <Card className="p-0 overflow-hidden bg-[var(--color-background)]">
+            <Header
+              logo={
+                <a href="/" className="font-semibold text-lg">
+                  Brand
+                </a>
+              }
+              navLinks={[
+                { label: 'Features', href: '/features' },
+                {
+                  label: 'Products',
+                  active: true,
+                  children: [
+                    { label: 'Product A', href: '/products/a' },
+                    { label: 'Product B', href: '/products/b', active: true },
+                    { label: 'Product C', href: '/products/c' },
+                  ]
+                },
+                { label: 'About', href: '/about' },
+              ]}
+              actions={
+                <>
+                  <a href="/signin">Sign In</a>
+                  <Button variant="primary" size="sm">
+                    Get Started
+                  </Button>
+                </>
+              }
+              glassOnScroll={false}
+              sticky={false}
+            />
+          </Card>
+        </div>
+
         {/* Code Example */}
         <div>
           <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
@@ -158,6 +197,25 @@ export function OrganismsSection() {
                 </p>
               </div>
             </div>
+          </Card>
+        </div>
+
+        {/* Live Example */}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
+            Live Example
+          </h4>
+          <Card className="p-0 overflow-hidden bg-[var(--color-background)]">
+            <SecondaryNav
+              items={[
+                { id: 'overview', label: 'Overview' },
+                { id: 'details', label: 'Details' },
+                { id: 'settings', label: 'Settings' },
+                { id: 'advanced', label: 'Advanced' },
+              ]}
+              activeId="details"
+              onItemChange={() => {}}
+            />
           </Card>
         </div>
 

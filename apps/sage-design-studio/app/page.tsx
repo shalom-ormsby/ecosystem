@@ -23,7 +23,7 @@ export default function StudioPage() {
     <main className="min-h-screen bg-[var(--color-background)]">
       <Header
         logo={
-          <a href="https://www.shalomormsby.com" className="font-semibold text-lg text-[var(--color-text-primary)]">
+          <a href="https://www.shalomormsby.com" className="font-bold text-lg text-[var(--color-text-primary)]">
             Shalom Ormsby
           </a>
         }
