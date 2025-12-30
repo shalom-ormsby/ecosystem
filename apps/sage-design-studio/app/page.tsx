@@ -11,10 +11,11 @@ import { TokensSection } from './components/studio/TokensSection';
 import { ComponentsSection } from './components/studio/ComponentsSection';
 import { MoleculesSection } from './components/studio/MoleculesSection';
 import { OrganismsSection } from './components/studio/OrganismsSection';
+import { HooksSection } from './components/studio/HooksSection';
 import { TemplatesSection } from './components/studio/TemplatesSection';
 import { ecosystemNavigation } from '../lib/navigation';
 
-type Section = 'overview' | 'tokens' | 'atoms' | 'molecules' | 'organisms' | 'templates';
+type Section = 'overview' | 'tokens' | 'atoms' | 'molecules' | 'organisms' | 'hooks' | 'templates';
 
 export default function StudioPage() {
   const [activeSection, setActiveSection] = useState<Section>('overview');
@@ -38,6 +39,7 @@ export default function StudioPage() {
         {activeSection === 'atoms' && <ComponentsSection />}
         {activeSection === 'molecules' && <MoleculesSection />}
         {activeSection === 'organisms' && <OrganismsSection />}
+        {activeSection === 'hooks' && <HooksSection />}
         {activeSection === 'templates' && <TemplatesSection />}
       </div>
 

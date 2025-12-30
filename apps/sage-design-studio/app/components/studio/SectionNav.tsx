@@ -1,6 +1,6 @@
 import { SecondaryNav, type SecondaryNavItem } from '@ecosystem/design-system';
 
-type Section = 'overview' | 'tokens' | 'atoms' | 'molecules' | 'organisms' | 'templates';
+type Section = 'overview' | 'tokens' | 'atoms' | 'molecules' | 'organisms' | 'hooks' | 'templates';
 
 interface SectionNavProps {
   activeSection: Section;
@@ -13,6 +13,7 @@ const sections: SecondaryNavItem[] = [
   { id: 'atoms', label: 'Atoms' },
   { id: 'molecules', label: 'Molecules' },
   { id: 'organisms', label: 'Organisms' },
+  { id: 'hooks', label: 'Hooks' },
   { id: 'templates', label: 'Templates' },
 ];
 

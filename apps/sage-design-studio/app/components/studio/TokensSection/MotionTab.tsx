@@ -466,21 +466,192 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
   }
 }
 
-// Framer Motion approach
-const prefersReducedMotion = window.matchMedia(
-  '(prefers-reduced-motion: reduce)'
-).matches;
+// React Hook approach (recommended)
+import { useMotionPreference } from '@ecosystem/design-system';
 
-<motion.div
-  initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: prefersReducedMotion ? 0 : 0.3 }}
->
-  Content
-</motion.div>`}
+function MyComponent() {
+  const { shouldAnimate } = useMotionPreference();
+
+  return (
+    <motion.div
+      initial={shouldAnimate ? { opacity: 0, y: 20 } : false}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: shouldAnimate ? 0.3 : 0 }}
+    >
+      Content
+    </motion.div>
+  );
+}`}
                     </pre>
                 </div>
             </Card>
+
+            {/* Animation Presets */}
+            <div>
+                <h3 className="text-xl font-semibold mb-4 text-[var(--color-text-primary)]">
+                    Framer Motion Integration
+                </h3>
+                <p className="text-sm text-[var(--color-text-secondary)] mb-6">
+                    Pre-built animation variants and presets for Framer Motion. Import from{' '}
+                    <code className="px-1 py-0.5 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">
+                        @ecosystem/design-system/utils
+                    </code>
+                </p>
+
+                {/* Animation Variants Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    {/* Fade Variants */}
+                    <Card className="p-6">
+                        <h4 className="font-medium text-[var(--color-text-primary)] mb-3">Fade Variants</h4>
+                        <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                            Simple opacity transitions
+                        </p>
+                        <div className="bg-[var(--color-surface)] p-3 rounded text-xs font-mono overflow-x-auto">
+                            <pre className="text-[var(--color-text-secondary)]">{`import { fadeVariants } from '@ecosystem/design-system/utils';
+
+<motion.div
+  initial="hidden"
+  animate="visible"
+  variants={fadeVariants}
+>
+  Content
+</motion.div>`}</pre>
+                        </div>
+                    </Card>
+
+                    {/* Slide Variants */}
+                    <Card className="p-6">
+                        <h4 className="font-medium text-[var(--color-text-primary)] mb-3">Slide Variants</h4>
+                        <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                            Slide in from: Left, Right, Top, Bottom
+                        </p>
+                        <div className="bg-[var(--color-surface)] p-3 rounded text-xs font-mono overflow-x-auto">
+                            <pre className="text-[var(--color-text-secondary)]">{`import { slideVariants } from '@ecosystem/design-system/utils';
+
+<motion.div
+  initial="hidden"
+  animate="visible"
+  variants={slideVariants.fromBottom}
+>
+  Content
+</motion.div>`}</pre>
+                        </div>
+                    </Card>
+
+                    {/* Scale Variants */}
+                    <Card className="p-6">
+                        <h4 className="font-medium text-[var(--color-text-primary)] mb-3">Scale Variants</h4>
+                        <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                            Default, Grow, Pop effects
+                        </p>
+                        <div className="bg-[var(--color-surface)] p-3 rounded text-xs font-mono overflow-x-auto">
+                            <pre className="text-[var(--color-text-secondary)]">{`import { scaleVariants } from '@ecosystem/design-system/utils';
+
+<motion.div
+  initial="hidden"
+  animate="visible"
+  variants={scaleVariants.pop}
+>
+  Content
+</motion.div>`}</pre>
+                        </div>
+                    </Card>
+
+                    {/* Modal Variants */}
+                    <Card className="p-6">
+                        <h4 className="font-medium text-[var(--color-text-primary)] mb-3">Modal Variants</h4>
+                        <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                            Overlay + Content animations
+                        </p>
+                        <div className="bg-[var(--color-surface)] p-3 rounded text-xs font-mono overflow-x-auto">
+                            <pre className="text-[var(--color-text-secondary)]">{`import { modalVariants } from '@ecosystem/design-system/utils';
+
+<motion.div variants={modalVariants.overlay}>
+  <motion.div variants={modalVariants.content}>
+    Modal content
+  </motion.div>
+</motion.div>`}</pre>
+                        </div>
+                    </Card>
+                </div>
+
+                {/* Complete Presets */}
+                <Card className="p-6">
+                    <h4 className="font-medium text-[var(--color-text-primary)] mb-3">Complete Presets</h4>
+                    <p className="text-sm text-[var(--color-text-secondary)] mb-4">
+                        Ready-to-use animation configurations with variants + transitions included:
+                    </p>
+                    <div className="space-y-4">
+                        <div className="bg-[var(--color-surface)] p-4 rounded">
+                            <p className="text-sm font-medium text-[var(--color-text-primary)] mb-2">
+                                Available Presets
+                            </p>
+                            <div className="grid grid-cols-2 gap-2 text-sm">
+                                <div className="flex items-center gap-2">
+                                    <code className="text-[var(--color-primary)] font-mono">presets.fade</code>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <code className="text-[var(--color-primary)] font-mono">presets.slideUp</code>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <code className="text-[var(--color-primary)] font-mono">presets.scale</code>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <code className="text-[var(--color-primary)] font-mono">presets.modal</code>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <code className="text-[var(--color-primary)] font-mono">presets.list</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="bg-[var(--color-surface)] p-4 rounded text-sm font-mono overflow-x-auto">
+                            <pre className="text-[var(--color-text-secondary)]">{`import { presets } from '@ecosystem/design-system/utils';
+
+// Simple fade animation
+<motion.div {...presets.fade}>
+  Fades in
+</motion.div>
+
+// Slide up animation
+<motion.div {...presets.slideUp}>
+  Slides up from bottom
+</motion.div>
+
+// Staggered list animation
+<motion.ul {...presets.list.container}>
+  {items.map(item => (
+    <motion.li key={item.id} {...presets.list.item}>
+      {item.name}
+    </motion.li>
+  ))}
+</motion.ul>`}</pre>
+                        </div>
+                    </div>
+                </Card>
+
+                {/* Custom Animation Helper */}
+                <Card className="p-6 mt-6">
+                    <h4 className="font-medium text-[var(--color-text-primary)] mb-3">Create Custom Animations</h4>
+                    <p className="text-sm text-[var(--color-text-secondary)] mb-4">
+                        Use the <code className="px-1 py-0.5 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">createAnimation</code> helper to build custom variants:
+                    </p>
+                    <div className="bg-[var(--color-surface)] p-4 rounded text-sm font-mono overflow-x-auto">
+                        <pre className="text-[var(--color-text-secondary)]">{`import { createAnimation, transitions, easings } from '@ecosystem/design-system/utils';
+
+const customAnimation = createAnimation(
+  {
+    hidden: { opacity: 0, scale: 0.8, rotate: -10 },
+    visible: { opacity: 1, scale: 1, rotate: 0 },
+  },
+  transitions.bounce
+);
+
+<motion.div {...customAnimation}>
+  Custom bouncy fade-in with rotation
+</motion.div>`}</pre>
+                    </div>
+                </Card>
+            </div>
         </div>
     );
 }
