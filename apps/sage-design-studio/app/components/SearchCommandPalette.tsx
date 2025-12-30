@@ -127,7 +127,7 @@ export function SearchCommandPalette({ onNavigate, isOpen, onClose }: SearchComm
               placeholder="Search components, hooks, utilities..."
               className="flex-1 bg-transparent border-none outline-none text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)]"
             />
-            <kbd className="px-2 py-1 text-xs font-mono bg-[var(--color-surface)] border border-[var(--color-border)] rounded">
+            <kbd className="px-2 py-1 text-xs font-mono text-[var(--color-text-primary)] bg-[var(--color-surface)] border border-[var(--color-border)] rounded">
               ESC
             </kbd>
           </div>
@@ -212,25 +212,25 @@ export function SearchCommandPalette({ onNavigate, isOpen, onClose }: SearchComm
               <p className="mb-4">Quick access to all components and documentation</p>
               <div className="grid grid-cols-2 gap-3 text-sm text-left max-w-md mx-auto">
                 <div className="flex items-center gap-2">
-                  <kbd className="px-2 py-1 font-mono bg-[var(--color-surface)] border border-[var(--color-border)] rounded text-xs">
+                  <kbd className="px-2 py-1 font-mono text-[var(--color-text-primary)] bg-[var(--color-surface)] border border-[var(--color-border)] rounded text-xs">
                     ↑↓
                   </kbd>
                   <span>Navigate</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <kbd className="px-2 py-1 font-mono bg-[var(--color-surface)] border border-[var(--color-border)] rounded text-xs">
+                  <kbd className="px-2 py-1 font-mono text-[var(--color-text-primary)] bg-[var(--color-surface)] border border-[var(--color-border)] rounded text-xs">
                     ↵
                   </kbd>
                   <span>Select</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <kbd className="px-2 py-1 font-mono bg-[var(--color-surface)] border border-[var(--color-border)] rounded text-xs">
+                  <kbd className="px-2 py-1 font-mono text-[var(--color-text-primary)] bg-[var(--color-surface)] border border-[var(--color-border)] rounded text-xs">
                     ESC
                   </kbd>
                   <span>Close</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <kbd className="px-2 py-1 font-mono bg-[var(--color-surface)] border border-[var(--color-border)] rounded text-xs">
+                  <kbd className="px-2 py-1 font-mono text-[var(--color-text-primary)] bg-[var(--color-surface)] border border-[var(--color-border)] rounded text-xs">
                     ⌘K
                   </kbd>
                   <span>Toggle</span>

@@ -112,7 +112,7 @@ export default function StudioPage() {
           {/* Mobile Menu Button - Floating */}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="lg:hidden fixed top-4 left-4 z-30 p-2 bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-lg transition-colors shadow-lg"
+            className="lg:hidden fixed top-4 left-4 z-30 p-2 text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-lg transition-colors shadow-lg"
             aria-label="Toggle sidebar"
           >
             <svg
