@@ -82,13 +82,14 @@ export const CustomizerPanel = () => {
                                 className={`
                                     px-3 py-2.5 rounded-lg text-sm font-medium transition-all flex flex-col items-center gap-1 border
                                     ${theme === t.id
-                                        ? 'bg-primary text-white shadow-md border-primary'
+                                        ? 'shadow-md'
                                         : 'bg-background-secondary text-foreground opacity-60 hover:opacity-100 border-[var(--color-glass-border)]'
                                     }
                                 `}
                                 style={theme === t.id ? {
                                     backgroundColor: 'var(--color-primary)',
-                                    color: 'var(--color-background)'
+                                    color: 'var(--color-primary-foreground)',
+                                    borderColor: 'var(--color-primary)'
                                 } : {}}
                             >
                                 <span className="text-base">{t.emoji}</span>
@@ -129,13 +130,14 @@ export const CustomizerPanel = () => {
                                 className={`
                                     px-3 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 border
                                     ${mode === m.id
-                                        ? 'bg-primary text-white shadow-md border-primary'
+                                        ? 'shadow-md'
                                         : 'bg-background-secondary text-foreground opacity-60 hover:opacity-100 border-[var(--color-glass-border)]'
                                     }
                                 `}
                                 style={mode === m.id ? {
                                     backgroundColor: 'var(--color-primary)',
-                                    color: 'var(--color-background)'
+                                    color: 'var(--color-primary-foreground)',
+                                    borderColor: 'var(--color-primary)'
                                 } : {}}
                             >
                                 <span>{m.emoji}</span>
@@ -148,17 +150,11 @@ export const CustomizerPanel = () => {
                 {/* X-Ray Mode Toggle */}
                 <button
                     onClick={toggleXray}
-                    className={`
-                        w-full p-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2 border
-                        ${xrayMode
-                            ? 'bg-accent text-white shadow-md border-accent'
-                            : 'bg-foreground text-background hover:opacity-90 border-foreground'
-                        }
-                    `}
+                    className="w-full p-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2 border shadow-md"
                     style={xrayMode ? {
                         backgroundColor: 'var(--color-accent)',
                         borderColor: 'var(--color-accent)',
-                        color: 'var(--color-background)'
+                        color: 'var(--color-accent-foreground)'
                     } : {
                         backgroundColor: 'var(--color-foreground)',
                         borderColor: 'var(--color-foreground)',

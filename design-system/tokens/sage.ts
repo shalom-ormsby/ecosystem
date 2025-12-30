@@ -15,20 +15,42 @@ export const sageTokens = {
       // Warm neutrals for text
       foreground: '#2d2823',
       foregroundSecondary: '#5a524a',
+      foregroundTertiary: '#8a7f72',
 
       // Muted sage green as primary
       primary: '#7a9b7f',
+      primaryForeground: '#faf8f5',
       primaryHover: '#6a8b6f',
+
+      // Secondary - warm stone
+      secondary: '#ede8e0',
+      secondaryForeground: '#2d2823',
 
       // Warm terracotta accent
       accent: '#c17a5f',
+      accentForeground: '#faf8f5',
       accentHover: '#b16a4f',
 
       // Semantic colors with muted, organic tones
-      success: '#7a9b7f',
+      success: '#6b8e6f',
+      successForeground: '#faf8f5',
+
       warning: '#d4a574',
+      warningForeground: '#2d2823',
+
       error: '#c17a5f',
+      errorForeground: '#faf8f5',
+
       info: '#8b9dc3',
+      infoForeground: '#faf8f5',
+
+      // Borders - warm subtle
+      border: '#e0d8cf',
+      borderSubtle: '#ede8e0',
+
+      // States
+      hover: '#f5f1eb',
+      active: '#ede8e0',
 
       // Link hover states - Muted sage green
       linkHover: '#7a9b7f',
@@ -65,20 +87,42 @@ export const sageTokens = {
       // Warm light text
       foreground: '#f5f1eb',
       foregroundSecondary: '#c7bfb5',
+      foregroundTertiary: '#8a7f72',
 
       // Brighter sage for dark mode
       primary: '#a8c5ad',
+      primaryForeground: '#1a1614',
       primaryHover: '#b8d5bd',
+
+      // Secondary - lighter warm stone
+      secondary: '#2f2b28',
+      secondaryForeground: '#f5f1eb',
 
       // Warm peachy accent for dark
       accent: '#e5a78a',
+      accentForeground: '#1a1614',
       accentHover: '#f5b79a',
 
       // Semantic colors adjusted for dark
-      success: '#a8c5ad',
+      success: '#95b89a',
+      successForeground: '#1a1614',
+
       warning: '#e5c59a',
+      warningForeground: '#1a1614',
+
       error: '#e5a78a',
+      errorForeground: '#1a1614',
+
       info: '#a8b5d5',
+      infoForeground: '#1a1614',
+
+      // Borders
+      border: '#3a3530',
+      borderSubtle: '#2f2b28',
+
+      // States
+      hover: '#252220',
+      active: '#2f2b28',
 
       // Link hover states - Brighter sage for dark mode
       linkHover: '#a8c5ad',

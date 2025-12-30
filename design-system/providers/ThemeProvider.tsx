@@ -50,6 +50,7 @@ function getThemeVars(theme: ThemeName, mode: ColorMode): Record<string, string>
     // Colors - Base
     '--color-background': colors?.background || '#ffffff',
     '--color-background-secondary': colors?.backgroundSecondary || colors?.background || '#fafafa',
+    '--color-background-tertiary': colors?.backgroundTertiary || colors?.backgroundSecondary || colors?.background || '#f5f5f5',
     '--color-foreground': colors?.foreground || '#0a0a0a',
     '--color-primary': colors?.primary || '#0a0a0a',
     '--color-primary-foreground': colors?.primaryForeground || '#ffffff',

@@ -15,20 +15,42 @@ export const voltTokens = {
       // Sharp contrast text
       foreground: '#0a0a0a',
       foregroundSecondary: '#4a4a4a',
+      foregroundTertiary: '#8a8a8a',
 
       // Electric blue primary (WCAG AA compliant)
       primary: '#0066ff',
+      primaryForeground: '#ffffff',
       primaryHover: '#0052cc',
+
+      // Secondary - cool gray
+      secondary: '#f0f2f5',
+      secondaryForeground: '#0a0a0a',
 
       // Vibrant cyan accent
       accent: '#00d9ff',
+      accentForeground: '#0a0a0a',
       accentHover: '#00c3e6',
 
       // Bold semantic colors
       success: '#00cc66',
+      successForeground: '#ffffff',
+
       warning: '#ffaa00',
+      warningForeground: '#0a0a0a',
+
       error: '#ff3366',
-      info: '#0066ff',
+      errorForeground: '#ffffff',
+
+      info: '#3399ff',
+      infoForeground: '#ffffff',
+
+      // Borders
+      border: '#e0e4ea',
+      borderSubtle: '#f0f2f5',
+
+      // States
+      hover: '#f8f9fb',
+      active: '#f0f2f5',
 
       // Link hover states - Electric blue with high contrast
       linkHover: '#0066ff',
@@ -65,20 +87,42 @@ export const voltTokens = {
       // Bright white text
       foreground: '#ffffff',
       foregroundSecondary: '#b3b3b3',
+      foregroundTertiary: '#666666',
 
       // Neon blue primary
       primary: '#0099ff',
+      primaryForeground: '#000000',
       primaryHover: '#00aaff',
+
+      // Secondary - dark gray
+      secondary: '#141414',
+      secondaryForeground: '#ffffff',
 
       // Neon cyan accent
       accent: '#00ffff',
+      accentForeground: '#000000',
       accentHover: '#33ffff',
 
       // Neon semantic colors
       success: '#00ff99',
+      successForeground: '#000000',
+
       warning: '#ffcc00',
+      warningForeground: '#000000',
+
       error: '#ff0066',
-      info: '#0099ff',
+      errorForeground: '#ffffff',
+
+      info: '#66ccff',
+      infoForeground: '#000000',
+
+      // Borders
+      border: '#1a1a1a',
+      borderSubtle: '#141414',
+
+      // States
+      hover: '#0a0a0a',
+      active: '#141414',
 
       // Link hover states - Neon cyan (high luma)
       linkHover: '#00ffff',
