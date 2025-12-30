@@ -29,7 +29,19 @@ design-system/
 ├── atoms/               # Primitives — no internal dependencies
 │   ├── Button/         # Button component with variants
 │   ├── Card/           # Card container component
+│   ├── Link/           # Link component
 │   ├── Motion/         # Animation components (FadeIn, Stagger)
+│   ├── Icon/           # Icon components (GitHubIcon)
+│   ├── Input/          # Form inputs (TextField, TextArea, Checkbox, Radio, Select, Switch)
+│   └── index.ts
+├── molecules/           # Composed components — built from atoms
+│   ├── Form/           # Form patterns (FormField, SearchBar, RadioGroup, CheckboxGroup)
+│   └── index.ts
+├── organisms/           # Complex compositions — functional sections
+│   ├── Header/         # Primary navigation (sticky header)
+│   ├── SecondaryNav/   # 1st stacking row navigation
+│   ├── TertiaryNav/    # 2nd stacking row navigation
+│   ├── Footer/         # Swiss grid footer
 │   └── index.ts
 ├── hooks/               # Custom React hooks
 │   ├── useMotionPreference.ts  # Motion settings + prefers-reduced-motion
@@ -56,6 +68,10 @@ design-system/
 **Tokens as the foundation** means design decisions live in code, not in someone's head or a Figma file that drifts out of sync. Change a token, change everywhere.
 
 **Atoms first** enforces discipline: build from primitives up. This prevents the "custom one-off for every situation" entropy that kills design systems.
+
+**Molecules reduce boilerplate** by composing atoms into common patterns (FormField, SearchBar, RadioGroup). This makes developers more productive while maintaining consistency.
+
+**Organisms manage layout** and compose molecules/atoms into complete interface sections (Header, Footer, Navigation). They handle state and coordinate multiple components.
 
 **Hooks for behavior** separates stateful logic from UI, making it reusable across components and enabling custom implementations.
 
@@ -551,6 +567,446 @@ All motion components:
 - Skip animations when user has `prefers-reduced-motion`
 - Use theme-specific easing curves and durations
 
+#### Input Components
+
+Form input primitives for capturing user data. All components are theme-aware, fully accessible, and support error states.
+
+##### TextField
+
+```typescript
+import { TextField } from '@ecosystem/design-system'
+
+<TextField
+  label="Email"
+  type="email"
+  placeholder="you@example.com"
+  required
+  error={!!errors.email}
+  helperText="We'll never share your email"
+  variant="outlined"
+  size="md"
+/>
+
+// Props
+variant?: 'outlined' | 'filled'  // Default: 'outlined'
+size?: 'sm' | 'md' | 'lg'        // Default: 'md'
+error?: boolean                  // Error state
+helperText?: string              // Helper text below input
+label?: string                   // Input label
+required?: boolean               // Required indicator
+// + all standard input HTML attributes
+```
+
+Features:
+- Two visual variants (outlined, filled)
+- Three size options
+- Error state with red border
+- Optional label and helper text
+- Theme-aware colors using CSS variables
+- Full keyboard accessibility
+- Ref forwarding support
+
+##### TextArea
+
+```typescript
+import { TextArea } from '@ecosystem/design-system'
+
+<TextArea
+  label="Description"
+  rows={4}
+  placeholder="Enter description..."
+  resize="vertical"
+  variant="outlined"
+/>
+
+// Props
+variant?: 'outlined' | 'filled'
+error?: boolean
+helperText?: string
+label?: string
+required?: boolean
+resize?: 'none' | 'vertical' | 'horizontal' | 'both'  // Default: 'vertical'
+rows?: number  // Default: 4
+// + all standard textarea HTML attributes
+```
+
+##### Checkbox
+
+```typescript
+import { Checkbox } from '@ecosystem/design-system'
+
+<Checkbox
+  label="I agree to the terms"
+  checked={agreed}
+  onChange={(e) => setAgreed(e.target.checked)}
+  size="md"
+/>
+
+// Props
+label?: React.ReactNode
+size?: 'sm' | 'md' | 'lg'
+error?: boolean
+helperText?: string
+// + all standard input[type="checkbox"] HTML attributes
+```
+
+##### Radio
+
+```typescript
+import { Radio } from '@ecosystem/design-system'
+
+<Radio
+  name="plan"
+  value="pro"
+  label="Pro Plan"
+  checked={plan === 'pro'}
+  onChange={() => setPlan('pro')}
+/>
+
+// Props
+label?: React.ReactNode
+size?: 'sm' | 'md' | 'lg'
+error?: boolean
+helperText?: string
+// + all standard input[type="radio"] HTML attributes
+```
+
+Note: Radio buttons should be grouped using the same `name` prop, or use the `RadioGroup` molecule for easier management.
+
+##### Select
+
+```typescript
+import { Select } from '@ecosystem/design-system'
+
+<Select
+  label="Country"
+  placeholder="Select country"
+  options={[
+    { value: 'us', label: 'United States' },
+    { value: 'uk', label: 'United Kingdom' },
+    { value: 'ca', label: 'Canada' },
+  ]}
+  variant="outlined"
+  size="md"
+/>
+
+// Or with children
+<Select label="Country">
+  <option value="us">United States</option>
+  <option value="uk">United Kingdom</option>
+  <option value="ca">Canada</option>
+</Select>
+
+// Props
+variant?: 'outlined' | 'filled'
+size?: 'sm' | 'md' | 'lg'
+error?: boolean
+helperText?: string
+label?: string
+required?: boolean
+options?: SelectOption[]  // { value, label, disabled? }[]
+placeholder?: string
+// + all standard select HTML attributes
+```
+
+##### Switch
+
+```typescript
+import { Switch } from '@ecosystem/design-system'
+
+<Switch
+  label="Enable notifications"
+  checked={enabled}
+  onChange={(e) => setEnabled(e.target.checked)}
+  size="md"
+  labelLeft={false}
+/>
+
+// Props
+label?: React.ReactNode
+size?: 'sm' | 'md' | 'lg'
+helperText?: string
+labelLeft?: boolean  // Label on left side (default: false)
+// + all standard input[type="checkbox"] HTML attributes
+```
+
+Features:
+- Smooth toggle animation
+- Label can appear left or right
+- Theme-aware colors
+- `role="switch"` for screen readers
+
+---
+
+### Molecules
+
+Composed components built from atoms that provide common UI patterns with reduced boilerplate.
+
+#### FormField
+
+The most impactful molecule - wraps any input component with consistent label, error, and helper text layout.
+
+```typescript
+import { FormField, TextField } from '@ecosystem/design-system'
+
+<FormField
+  label="Email"
+  required
+  error={errors.email}
+  helperText="We'll never share your email"
+  htmlFor="email-input"
+>
+  <TextField
+    id="email-input"
+    type="email"
+    placeholder="you@example.com"
+  />
+</FormField>
+
+// Props
+label?: string
+required?: boolean
+error?: string  // Error message (presence indicates error state)
+helperText?: string  // Helper text when no error
+children: React.ReactNode  // The input component
+htmlFor?: string  // Connects label to input
+className?: string
+```
+
+**Benefits:**
+- Reduces boilerplate by ~5 lines per field
+- Consistent label/error/helper layout
+- Automatic `role="alert"` for errors
+- Works with any input component
+
+**Before:**
+```typescript
+<div>
+  <label htmlFor="email">
+    Email <span className="text-red-500">*</span>
+  </label>
+  <TextField id="email" error={!!errors.email} />
+  {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+</div>
+```
+
+**After:**
+```typescript
+<FormField label="Email" required error={errors.email} htmlFor="email">
+  <TextField id="email" />
+</FormField>
+```
+
+#### SearchBar
+
+A specialized text field for search functionality with search icon, clear button, and debounced callbacks.
+
+```typescript
+import { SearchBar } from '@ecosystem/design-system'
+
+<SearchBar
+  placeholder="Search products..."
+  onSearch={(query) => fetchProducts(query)}
+  debounceMs={500}
+  size="lg"
+/>
+
+// Props
+onSearch?: (value: string) => void  // Debounced callback
+debounceMs?: number  // Default: 300
+showClearButton?: boolean  // Default: true
+onClear?: () => void
+// + all TextField props
+```
+
+Features:
+- Built-in search icon (left)
+- Optional clear button (X on right)
+- Debounced `onSearch` callback (reduces API calls)
+- Keyboard shortcut (Escape to clear)
+- Controlled and uncontrolled modes
+
+#### RadioGroup
+
+Manages a group of radio buttons with consistent layout and error handling.
+
+```typescript
+import { RadioGroup } from '@ecosystem/design-system'
+
+<RadioGroup
+  name="subscription"
+  label="Choose your plan"
+  value={plan}
+  onChange={setPlan}
+  required
+  error={errors.plan}
+  direction="vertical"
+  options={[
+    {
+      value: 'free',
+      label: 'Free Plan',
+      helperText: '$0/month - Perfect for trying out'
+    },
+    {
+      value: 'pro',
+      label: 'Pro Plan',
+      helperText: '$10/month - All features included'
+    },
+    {
+      value: 'enterprise',
+      label: 'Enterprise',
+      helperText: 'Contact us for pricing',
+      disabled: true
+    },
+  ]}
+/>
+
+// Props
+name: string  // Required for grouping
+options: RadioOption[]  // { value, label, disabled?, helperText? }[]
+value?: string
+onChange?: (value: string) => void
+label?: string
+required?: boolean
+error?: string
+helperText?: string
+size?: 'sm' | 'md' | 'lg'
+direction?: 'vertical' | 'horizontal'
+className?: string
+```
+
+Features:
+- Proper `<fieldset>` and `<legend>` for accessibility
+- Individual radio helper text
+- Vertical or horizontal layout
+- Group-level error handling
+- Full keyboard navigation
+
+#### CheckboxGroup
+
+Manages a group of checkboxes for multiple selections.
+
+```typescript
+import { CheckboxGroup } from '@ecosystem/design-system'
+
+<CheckboxGroup
+  name="interests"
+  label="Select your interests"
+  value={selectedInterests}
+  onChange={setSelectedInterests}
+  direction="horizontal"
+  options={[
+    { value: 'design', label: 'Design', helperText: 'UI/UX design' },
+    { value: 'dev', label: 'Development', helperText: 'Frontend & backend' },
+    { value: 'marketing', label: 'Marketing', helperText: 'Growth & content' },
+  ]}
+/>
+
+// Props
+name: string
+options: CheckboxOption[]  // { value, label, disabled?, helperText? }[]
+value?: string[]  // Array of selected values
+onChange?: (values: string[]) => void
+label?: string
+required?: boolean  // At least one must be selected
+error?: string
+helperText?: string
+size?: 'sm' | 'md' | 'lg'
+direction?: 'vertical' | 'horizontal'
+className?: string
+```
+
+---
+
+### Form Validation Patterns
+
+#### With React Hook Form
+
+The design system components work seamlessly with [react-hook-form](https://react-hook-form.com/):
+
+```typescript
+import { useForm } from 'react-hook-form'
+import { FormField, TextField, Select, CheckboxGroup } from '@ecosystem/design-system'
+
+function SignupForm() {
+  const { register, handleSubmit, formState: { errors }, watch } = useForm()
+
+  const onSubmit = (data) => {
+    console.log(data)
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <FormField
+        label="Email"
+        required
+        error={errors.email?.message}
+        htmlFor="email"
+      >
+        <TextField
+          id="email"
+          type="email"
+          {...register('email', {
+            required: 'Email is required',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: 'Invalid email address'
+            }
+          })}
+        />
+      </FormField>
+
+      <FormField
+        label="Country"
+        required
+        error={errors.country?.message}
+        htmlFor="country"
+      >
+        <Select
+          id="country"
+          placeholder="Select country"
+          options={countries}
+          {...register('country', { required: 'Country is required' })}
+        />
+      </FormField>
+
+      <CheckboxGroup
+        name="interests"
+        label="Interests"
+        value={watch('interests') || []}
+        onChange={(values) => setValue('interests', values)}
+        options={interestOptions}
+        error={errors.interests?.message}
+      />
+
+      <Button type="submit" variant="primary" size="lg">
+        Sign Up
+      </Button>
+    </form>
+  )
+}
+```
+
+#### Error Handling Best Practices
+
+1. **Show errors on blur, not on change** - Less disruptive to the user
+2. **Clear errors on input** - Immediate feedback when user starts fixing
+3. **Use FormField for consistent layout** - Reduces boilerplate
+4. **Provide helpful error messages** - Tell users how to fix the issue
+5. **Use native validation when possible** - `required`, `min`, `max`, `pattern`
+
+```typescript
+// Good error messages
+"Email is required"
+"Password must be at least 8 characters"
+"Please select a valid country"
+
+// Bad error messages
+"Invalid input"
+"Error"
+"Field cannot be empty"
+```
+
 ---
 
 ## Hooks
@@ -603,11 +1059,13 @@ Theme changes trigger smooth CSS variable transitions managed by the ThemeProvid
 
 ```typescript
 // Main export (everything)
-import { Button, Card, useTheme } from '@ecosystem/design-system'
+import { Button, TextField, FormField, useTheme } from '@ecosystem/design-system'
 
 // Scoped exports
 import { spacing, typography } from '@ecosystem/design-system/tokens'
-import { Button, Card } from '@ecosystem/design-system/atoms'
+import { Button, Card, TextField, Checkbox } from '@ecosystem/design-system/atoms'
+import { FormField, SearchBar, RadioGroup } from '@ecosystem/design-system/molecules'
+import { Header, Footer } from '@ecosystem/design-system/organisms'
 import { useMotionPreference, useTheme } from '@ecosystem/design-system/hooks'
 import { CustomizerPanel } from '@ecosystem/design-system/features'
 ```
@@ -676,17 +1134,24 @@ Both stores persist to localStorage and survive page reloads.
 
 ## Roadmap
 
+### Recently Completed ✅
+
+- **Input Atoms** - TextField, TextArea, Checkbox, Radio, Select, Switch
+- **Form Molecules** - FormField, SearchBar, RadioGroup, CheckboxGroup
+- **Complete Color System** - All themes now have foreground variants for proper light/dark mode support
+- **Comprehensive Documentation** - Full examples and validation patterns
+
 ### Coming Soon
 
 - **XRayMode Component** - Visual overlay showing design tokens, component boundaries, and accessibility info
 - **AINote Component** - Document AI collaboration directly in the UI
-- **Molecules** - Composed components (FormField, SearchBar, etc.)
-- **Patterns** - Layout components (PageLayout, Modal, Navigation)
-- **Additional Atoms** - Text, Icon, Input components
-- **Compound Components** - Card.Header, Card.Body, Card.Footer
+- **Additional Patterns** - Layout components (PageLayout, Modal, Dropdown, Tooltip)
+- **Compound Components** - Card.Header, Card.Body, Card.Footer for complex layouts
+- **Additional Atoms** - Text (typography component), Badge, Avatar, Spinner
 - **Token JSON Export** - For use in native platforms (iOS, Android)
 - **Storybook** - Interactive component documentation
 - **Testing Suite** - Unit, visual regression, and a11y tests
+- **Form Builder** - Visual form builder using the molecule components
 
 ---
 
