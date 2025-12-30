@@ -5,7 +5,7 @@ import { TertiaryNav } from '@ecosystem/design-system';
 import { ColorsTab } from './ColorsTab';
 import { TypographyTab } from './TypographyTab';
 import { SpacingTab } from './SpacingTab';
-import { MotionTab } from './MotionTab';
+import { MotionTab } from '@ecosystem/design-system';
 
 type TokenTab = 'colors' | 'typography' | 'spacing' | 'motion';
 
