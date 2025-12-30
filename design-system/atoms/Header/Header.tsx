@@ -55,8 +55,10 @@ export interface HeaderProps {
      */
     navLinkSize?: 'text-xs' | 'text-sm' | 'text-base' | 'text-lg';
     /**
-     * Font family for logo and navigation
-     * @default 'var(--font-sage-body)' (Instrument Sans)
+     * Font family for navigation links
+     * Uses CSS variable --font-header-nav by default
+     * Logo font is controlled by the logo ReactNode itself or --font-header-logo
+     * @default 'var(--font-header-nav)'
      */
     fontFamily?: string;
     /**
@@ -75,7 +77,7 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
             scrollThreshold = 10,
             sticky = true,
             navLinkSize = 'text-sm',
-            fontFamily = 'var(--font-sage-body)',
+            fontFamily = 'var(--font-header-nav)',
             className = '',
         },
         ref
@@ -131,7 +133,7 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                         <div className="flex items-center justify-between h-16 lg:h-20 relative">
                             {/* Logo */}
                             {logo && (
-                                <div className="flex-shrink-0 z-10" style={{ fontFamily }}>
+                                <div className="flex-shrink-0 z-10">
                                     {logo}
                                 </div>
                             )}

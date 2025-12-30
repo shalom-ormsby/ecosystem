@@ -9,7 +9,7 @@ export default function Home() {
     <main className="min-h-screen bg-background flex flex-col">
       <Header
         logo={
-          <NextLink href="/" className="font-bold text-lg text-foreground">
+          <NextLink href="/" className="font-bold text-lg text-foreground" style={{ fontFamily: 'var(--font-header-logo)' }}>
             Shalom Ormsby
           </NextLink>
         }

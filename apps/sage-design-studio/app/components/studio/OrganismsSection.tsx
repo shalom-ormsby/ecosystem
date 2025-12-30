@@ -59,6 +59,21 @@ export function OrganismsSection() {
                   <li>Theme-aware colors using CSS custom properties</li>
                 </ul>
               </div>
+              <div className="text-sm text-[var(--color-text-secondary)]">
+                <strong>Typography Customization:</strong>
+                <ul className="list-disc list-inside mt-2 space-y-1">
+                  <li><code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">--font-header-logo</code> - Controls logo/brand font</li>
+                  <li><code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">--font-header-nav</code> - Controls navigation link font</li>
+                  <li>Define these CSS variables in your globals.css for ecosystem-wide control</li>
+                  <li>Logo font applied via inline styles on the logo ReactNode</li>
+                  <li>Nav font automatically applied by the Header component</li>
+                </ul>
+              </div>
+              <div className="mt-4 p-3 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
+                <p className="text-xs text-[var(--color-text-muted)]">
+                  <strong>Single Source of Truth:</strong> Typography is controlled by CSS variables, not props. Change <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">--font-header-logo</code> and <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">--font-header-nav</code> in globals.css to update all Header instances across your ecosystem.
+                </p>
+              </div>
             </div>
           </Card>
         </div>

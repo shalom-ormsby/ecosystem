@@ -25,9 +25,13 @@
   --effect-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 
   /* Typography */
-  --font-heading: var(--font-studio-sans);
-  --font-body: var(--font-studio-sans);
+  --font-heading: var(--font-studio-heading);
+  --font-body: var(--font-studio-body);
   --font-mono: var(--font-studio-mono);
+
+  /* Header Component Typography (independent of themes) */
+  --font-header-logo: var(--font-sage-sans);
+  --font-header-nav: var(--font-sage-sans);
 
   /* Motion */
   --ease-default: cubic-bezier(0.4, 0, 0.2, 1);

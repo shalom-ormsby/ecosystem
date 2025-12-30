@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Header Component Typography (independent of themes) */
+  --font-header-logo: var(--font-sage-body);
+  --font-header-nav: var(--font-sage-body);
+}
+
 @layer base {
   /* Documentation Typography Hierarchy */
 
