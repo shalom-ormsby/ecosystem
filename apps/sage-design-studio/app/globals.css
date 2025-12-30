@@ -10,14 +10,14 @@
     font-family: var(--font-nunito), system-ui, sans-serif;
   }
 
-  /* Headings: Nunito Sans - professional, clean, less rounded */
+  /* Headings: Instrument Sans - elegant, modern, versatile */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-nunito-sans), system-ui, sans-serif;
+    font-family: var(--font-sage-body), system-ui, sans-serif;
   }
 
-  /* Strong text also uses Nunito Sans for emphasis */
+  /* Strong text also uses Instrument Sans for emphasis */
   strong {
-    font-family: var(--font-nunito-sans), system-ui, sans-serif;
+    font-family: var(--font-sage-body), system-ui, sans-serif;
   }
 }
 

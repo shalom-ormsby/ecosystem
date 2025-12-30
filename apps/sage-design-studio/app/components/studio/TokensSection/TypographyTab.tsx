@@ -37,63 +37,55 @@ export function TypographyTab() {
 
   return (
     <div className="space-y-8">
-      {/* Introduction */}
+      {/* Typography System Overview */}
       <Card className="p-6 bg-[var(--color-surface)]">
         <h3 className="text-xl font-semibold mb-4 text-[var(--color-text-primary)]">
           Typography System
         </h3>
-        <p className="text-[var(--color-text-secondary)] mb-4">
+        <p className="text-[var(--color-text-secondary)] mb-6">
           Our typography system provides a complete set of font families, sizes, weights, and presets.
           Each theme has its own carefully chosen font pairing that reflects its unique personality.
         </p>
-        <div className="mt-4 p-4 bg-[var(--color-background)] rounded border border-[var(--color-border)]">
-          <p className="text-sm text-[var(--color-text-muted)]">
-            <strong className="text-[var(--color-text-primary)]">Design Philosophy:</strong>{' '}
-            Typography creates personality and establishes hierarchy. Each theme's fonts were chosen to
-            embody its values—professional clarity for Studio, elegant thoughtfulness for Sage, and
-            bold energy for Volt.
-          </p>
+
+        {/* All Themes at a Glance */}
+        <div>
+          <h4 className="text-lg font-semibold mb-4 text-[var(--color-text-primary)]">
+            All Themes at a Glance
+          </h4>
+          <div className="p-6 bg-[var(--color-background)] rounded border border-[var(--color-border)]">
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-sm">
+                <thead>
+                  <tr className="border-b border-[var(--color-border)]">
+                    <th className="text-left py-3 px-4 text-[var(--color-text-primary)]">Theme</th>
+                    <th className="text-left py-3 px-4 text-[var(--color-text-primary)]">Heading</th>
+                    <th className="text-left py-3 px-4 text-[var(--color-text-primary)]">Body</th>
+                    <th className="text-left py-3 px-4 text-[var(--color-text-primary)]">Personality</th>
+                  </tr>
+                </thead>
+                <tbody className="text-[var(--color-text-secondary)]">
+                  {themes.map((theme) => {
+                    const fonts = typographySystem.families[theme.id];
+                    return (
+                      <tr key={theme.id} className="border-b border-[var(--color-border)] last:border-0">
+                        <td className="py-3 px-4">
+                          <div className="flex items-center gap-2">
+                            <span>{theme.emoji}</span>
+                            <strong className="text-[var(--color-text-primary)]">{theme.label}</strong>
+                          </div>
+                        </td>
+                        <td className="py-3 px-4 font-semibold">{fonts.heading}</td>
+                        <td className="py-3 px-4">{fonts.body}</td>
+                        <td className="py-3 px-4 text-xs">{fonts.description}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </Card>
-
-      {/* Theme Comparison - MOVED TO TOP */}
-      <div>
-        <h3 className="text-xl font-semibold mb-4 text-[var(--color-text-primary)]">
-          All Themes at a Glance
-        </h3>
-        <Card className="p-6">
-          <div className="overflow-x-auto">
-            <table className="min-w-full text-sm">
-              <thead>
-                <tr className="border-b border-[var(--color-border)]">
-                  <th className="text-left py-3 px-4 text-[var(--color-text-primary)]">Theme</th>
-                  <th className="text-left py-3 px-4 text-[var(--color-text-primary)]">Heading</th>
-                  <th className="text-left py-3 px-4 text-[var(--color-text-primary)]">Body</th>
-                  <th className="text-left py-3 px-4 text-[var(--color-text-primary)]">Personality</th>
-                </tr>
-              </thead>
-              <tbody className="text-[var(--color-text-secondary)]">
-                {themes.map((theme) => {
-                  const fonts = typographySystem.families[theme.id];
-                  return (
-                    <tr key={theme.id} className="border-b border-[var(--color-border)] last:border-0">
-                      <td className="py-3 px-4">
-                        <div className="flex items-center gap-2">
-                          <span>{theme.emoji}</span>
-                          <strong className="text-[var(--color-text-primary)]">{theme.label}</strong>
-                        </div>
-                      </td>
-                      <td className="py-3 px-4 font-semibold">{fonts.heading}</td>
-                      <td className="py-3 px-4">{fonts.body}</td>
-                      <td className="py-3 px-4 text-xs">{fonts.description}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </Card>
-      </div>
 
       {/* Theme Selector */}
       <div>
@@ -151,8 +143,11 @@ export function TypographyTab() {
                   <strong className="text-[var(--color-text-primary)]">Usage:</strong>{' '}
                   {currentThemeFonts.usage.heading}
                 </p>
-                <p className="text-xs font-mono text-[var(--color-text-muted)]">
-                  CSS Variable: <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">
+                <p className="text-xs text-[var(--color-text-muted)]">
+                  CSS Variable: <code
+                    className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]"
+                    style={{ fontFamily: currentFontVars.mono }}
+                  >
                     --font-{selectedTheme}-heading
                   </code>
                 </p>
@@ -175,8 +170,11 @@ export function TypographyTab() {
                   <strong className="text-[var(--color-text-primary)]">Usage:</strong>{' '}
                   {currentThemeFonts.usage.body}
                 </p>
-                <p className="text-xs font-mono text-[var(--color-text-muted)]">
-                  CSS Variable: <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">
+                <p className="text-xs text-[var(--color-text-muted)]">
+                  CSS Variable: <code
+                    className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]"
+                    style={{ fontFamily: currentFontVars.mono }}
+                  >
                     --font-{selectedTheme}-body
                   </code>
                 </p>
@@ -199,8 +197,11 @@ export function TypographyTab() {
                   <strong className="text-[var(--color-text-primary)]">Usage:</strong>{' '}
                   {currentThemeFonts.usage.mono}
                 </p>
-                <p className="text-xs font-mono text-[var(--color-text-muted)]">
-                  CSS Variable: <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">
+                <p className="text-xs text-[var(--color-text-muted)]">
+                  CSS Variable: <code
+                    className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]"
+                    style={{ fontFamily: currentFontVars.mono }}
+                  >
                     --font-mono
                   </code>
                 </p>

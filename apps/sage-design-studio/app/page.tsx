@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import NextLink from 'next/link';
-import { CustomizerPanel, Header } from '@ecosystem/design-system';
+import { Header } from '@ecosystem/design-system';
+import { ModeSwitcher } from './components/ModeSwitcher';
 import { StudioHero } from './components/studio/StudioHero';
 import { SectionNav } from './components/studio/SectionNav';
 import { OverviewSection } from './components/studio/OverviewSection';
@@ -40,7 +41,7 @@ export default function StudioPage() {
         {activeSection === 'templates' && <TemplatesSection />}
       </div>
 
-      <CustomizerPanel />
+      <ModeSwitcher />
     </main>
   );
 }

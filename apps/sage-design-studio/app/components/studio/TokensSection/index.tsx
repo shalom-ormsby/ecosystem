@@ -5,6 +5,7 @@ import { TertiaryNav } from '@ecosystem/design-system';
 import { ColorsTab } from './ColorsTab';
 import { TypographyTab } from './TypographyTab';
 import { SpacingTab } from './SpacingTab';
+import { MotionTab } from './MotionTab';
 
 type TokenTab = 'colors' | 'typography' | 'spacing' | 'motion';
 
@@ -16,10 +17,6 @@ export function TokensSection() {
     { id: 'colors', label: 'Colors' },
     { id: 'typography', label: 'Typography' },
     { id: 'spacing', label: 'Spacing' },
-  ];
-
-  // Coming soon tabs (shown separately)
-  const comingSoonTabs = [
     { id: 'motion', label: 'Motion' },
   ];
 
@@ -46,7 +43,7 @@ export function TokensSection() {
         {activeTab === 'colors' && <ColorsTab />}
         {activeTab === 'typography' && <TypographyTab />}
         {activeTab === 'spacing' && <SpacingTab />}
-        {activeTab === 'motion' && <div>Coming Soon</div>}
+        {activeTab === 'motion' && <MotionTab />}
       </div>
     </div>
   );
