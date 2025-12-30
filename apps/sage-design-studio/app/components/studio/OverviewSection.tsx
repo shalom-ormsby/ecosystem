@@ -3,211 +3,243 @@
 import { Card } from '@ecosystem/design-system';
 
 export function OverviewSection() {
-  const features = [
-    {
-      title: 'Design Tokens',
-      description: 'Single source of truth for colors, typography, spacing, and motion across all three themes.',
-      icon: '🎨',
-    },
-    {
-      title: 'Customizer',
-      description: 'User Control & Freedom embodied. Switch themes, adjust motion intensity, and personalize your experience.',
-      icon: '⚙️',
-    },
-    {
-      title: 'Motion System',
-      description: 'Respects user preferences and system settings. Zero animations when disabled—accessibility first.',
-      icon: '✨',
-    },
-    {
-      title: 'Open Source',
-      description: 'Fully transparent and open. Explore the code, learn from the patterns, and use in your projects.',
-      icon: '🌍',
-    },
-  ];
-
-  const themes = [
-    {
-      name: 'Studio',
-      personality: 'Professional, balanced, modern',
-      fonts: 'Geist Sans, Geist Mono',
-    },
-    {
-      name: 'Sage',
-      personality: 'Calm, organic, thoughtful',
-      fonts: 'Lora (serif), Instrument Sans',
-    },
-    {
-      name: 'Volt',
-      personality: 'Bold, electric, energetic',
-      fonts: 'Space Grotesk',
-    },
-  ];
-
   return (
-    <div className="space-y-16">
+    <div className="space-y-12">
       {/* Title */}
       <div className="border-b border-[var(--color-border)] pb-6">
         <h1 className="text-4xl font-bold mb-2 text-[var(--color-text-primary)]">
-          Sage Design System Overview
+          Sage Design System
         </h1>
         <p className="text-sm text-[var(--color-text-muted)]">Version 0.1.0</p>
       </div>
 
-      {/* Philosophy */}
+      {/* Quick Orientation */}
       <section>
-        <h2 className="text-3xl font-bold mb-6 text-[var(--color-text-primary)]">
-          Philosophy
-        </h2>
-        <Card className="p-8">
-          <p className="text-lg text-[var(--color-text-primary)] leading-relaxed mb-4">
-            Most design systems optimize for consistency and efficiency. Those matter here too.
-            But they're not the point.
-          </p>
-          <p className="text-lg text-[var(--color-text-primary)] leading-relaxed">
-            This design system exists to encode <strong>human-centered principles</strong> into
-            reusable building blocks—so that every app in the ecosystem inherits not just visual
-            consistency, but <em>philosophical</em> consistency. When you use these components,
-            you're not just shipping pixels. You're shipping values.
-          </p>
-        </Card>
+        <p className="text-lg text-[var(--color-text-primary)] leading-relaxed">
+          A React component library with three distinct themes, built on design tokens and human-centered principles.
+          Designed for AI agents and humans to easily consume, understand, and extend.
+          All components respect motion preferences and follow atomic design architecture.
+        </p>
       </section>
 
-      {/* Atomic Design */}
+      {/* Essential Links */}
       <section>
-        <h2 className="text-3xl font-bold mb-6 text-[var(--color-text-primary)]">
-          Atomic Design Hierarchy
+        <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
+          Essential Documentation
         </h2>
-        <Card className="p-8">
-          <p className="text-lg text-[var(--color-text-secondary)] mb-6">
-            This design system follows atomic design principles to create a clear, scalable component architecture.
-          </p>
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="border-b border-[var(--color-border)]">
-                  <th className="text-left py-3 px-4 text-[var(--color-text-primary)] font-semibold">Category</th>
-                  <th className="text-left py-3 px-4 text-[var(--color-text-primary)] font-semibold">Logic for Inclusion</th>
-                  <th className="text-left py-3 px-4 text-[var(--color-text-primary)] font-semibold">Examples</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-[var(--color-border)]">
-                  <td className="py-3 px-4 font-medium text-[var(--color-text-primary)]">Tokens</td>
-                  <td className="py-3 px-4 text-[var(--color-text-secondary)]">
-                    <strong>Subatomic Variables:</strong> Raw, reusable values that define the visual language. Not functional on their own, but consumed by all higher layers to ensure consistency.
-                  </td>
-                  <td className="py-3 px-4 text-[var(--color-text-secondary)]">
-                    Colors, Typography scales, Spacing units, Border radii, Shadow values
-                  </td>
-                </tr>
-                <tr className="border-b border-[var(--color-border)]">
-                  <td className="py-3 px-4 font-medium text-[var(--color-text-primary)]">Atoms</td>
-                  <td className="py-3 px-4 text-[var(--color-text-secondary)]">
-                    <strong>Elemental Independence:</strong> Smallest functional UI elements that consume tokens to define their appearance. Cannot be broken down further without losing core function.
-                  </td>
-                  <td className="py-3 px-4 text-[var(--color-text-secondary)]">
-                    Buttons, Input fields, Labels, Icons, Checkboxes
-                  </td>
-                </tr>
-                <tr className="border-b border-[var(--color-border)]">
-                  <td className="py-3 px-4 font-medium text-[var(--color-text-primary)]">Molecules</td>
-                  <td className="py-3 px-4 text-[var(--color-text-secondary)]">
-                    <strong>Functional Bonding:</strong> Simple groups of atoms bonded together to perform a single, specific task. Often highly reusable and context-agnostic.
-                  </td>
-                  <td className="py-3 px-4 text-[var(--color-text-secondary)]">
-                    Search Bar (Label + Input + Button), Form Field (Label + Input)
-                  </td>
-                </tr>
-                <tr className="border-b border-[var(--color-border)]">
-                  <td className="py-3 px-4 font-medium text-[var(--color-text-primary)]">Organisms</td>
-                  <td className="py-3 px-4 text-[var(--color-text-secondary)]">
-                    <strong>Distinct Sections:</strong> Complex compositions of molecules and/or atoms that form a discrete, functional section of an interface. Often manage state or layout for children.
-                  </td>
-                  <td className="py-3 px-4 text-[var(--color-text-secondary)]">
-                    Header, Footer, Product Grid, Navigation Sidebar
-                  </td>
-                </tr>
-                <tr className="border-b border-[var(--color-border)]">
-                  <td className="py-3 px-4 font-medium text-[var(--color-text-primary)]">Templates</td>
-                  <td className="py-3 px-4 text-[var(--color-text-secondary)]">
-                    <strong>Content Structure:</strong> Layouts that define how organisms and components fit together without specific content. They act as the "blueprint" or wireframe for a page.
-                  </td>
-                  <td className="py-3 px-4 text-[var(--color-text-secondary)]">
-                    Homepage layout, Dashboard skeleton, Product detail layout
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="mt-6 p-4 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)]">
-            <p className="text-sm text-[var(--color-text-secondary)]">
-              <strong>Pro-tip for 2025:</strong> If you are debating if something is a molecule or an organism,
-              use the "Layout Test." If the component's primary job is to arrange other independent components
-              (like a grid or header), it is likely an <strong>Organism</strong>. If it is a self-contained unit
-              with a singular purpose (like a search bar), it is a <strong>Molecule</strong>.
-            </p>
+        <Card className="p-6">
+          <div className="space-y-3">
+            <a
+              href="https://github.com/shalomormsby/ecosystem/blob/main/DESIGN-PHILOSOPHY.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-[var(--color-primary)] hover:underline"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              <span className="font-medium">Design Philosophy</span>
+              <span className="text-sm text-[var(--color-text-muted)]">— Core principles and decision-making framework</span>
+            </a>
+            <a
+              href="https://github.com/shalomormsby/ecosystem"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-[var(--color-primary)] hover:underline"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              <span className="font-medium">GitHub Repository</span>
+              <span className="text-sm text-[var(--color-text-muted)]">— Source code, issues, and contribution guide</span>
+            </a>
           </div>
         </Card>
       </section>
 
-      {/* Three Themes */}
+      {/* Quick Start */}
       <section>
-        <h2 className="text-3xl font-bold mb-6 text-[var(--color-text-primary)]">
-          Three Themes, Infinite Expressions
+        <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
+          Quick Start
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {themes.map((theme) => (
-            <Card key={theme.name} className="p-6">
-              <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">
-                {theme.name}
-              </h3>
-              <p className="text-[var(--color-text-secondary)] mb-3">
-                {theme.personality}
-              </p>
-              <p className="text-sm text-[var(--color-text-muted)]">
-                Fonts: {theme.fonts}
-              </p>
-            </Card>
-          ))}
+
+        <div className="space-y-4">
+          <Card className="p-6">
+            <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">Installation</h3>
+            <pre className="bg-[var(--color-surface)] p-4 rounded-md overflow-x-auto border border-[var(--color-border)]">
+              <code className="text-sm text-[var(--color-text-primary)]">pnpm add @ecosystem/design-system</code>
+            </pre>
+          </Card>
+
+          <Card className="p-6">
+            <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">Basic Usage</h3>
+            <pre className="bg-[var(--color-surface)] p-4 rounded-md overflow-x-auto border border-[var(--color-border)]">
+              <code className="text-sm text-[var(--color-text-primary)]">{`import { Button, Card } from '@ecosystem/design-system';
+
+export function MyComponent() {
+  return (
+    <Card>
+      <Button variant="primary">Click me</Button>
+    </Card>
+  );
+}`}</code>
+            </pre>
+          </Card>
+
+          <Card className="p-6">
+            <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">Theme Switching</h3>
+            <pre className="bg-[var(--color-surface)] p-4 rounded-md overflow-x-auto border border-[var(--color-border)]">
+              <code className="text-sm text-[var(--color-text-primary)]">{`import { useTheme } from '@ecosystem/design-system';
+
+export function ThemeSwitcher() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <button onClick={() => setTheme('sage')}>
+      Switch to Sage theme
+    </button>
+  );
+}`}</code>
+            </pre>
+          </Card>
         </div>
       </section>
 
-      {/* Key Features */}
+      {/* File Structure */}
       <section>
-        <h2 className="text-3xl font-bold mb-6 text-[var(--color-text-primary)]">
-          Key Features
+        <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
+          File Structure Reference
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {features.map((feature) => (
-            <Card key={feature.title} className="p-6">
-              <div className="text-4xl mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">
-                {feature.title}
-              </h3>
-              <p className="text-[var(--color-text-secondary)]">
-                {feature.description}
-              </p>
-            </Card>
-          ))}
-        </div>
+        <Card className="p-6">
+          <div className="space-y-2 font-mono text-sm">
+            <div className="flex items-start gap-3">
+              <span className="text-[var(--color-text-muted)] flex-shrink-0">Design Tokens:</span>
+              <code className="text-[var(--color-text-primary)]">packages/design-system/src/tokens/</code>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-[var(--color-text-muted)] flex-shrink-0">Components:</span>
+              <code className="text-[var(--color-text-primary)]">packages/design-system/src/components/</code>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-[var(--color-text-muted)] flex-shrink-0">Hooks:</span>
+              <code className="text-[var(--color-text-primary)]">packages/design-system/src/hooks/</code>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-[var(--color-text-muted)] flex-shrink-0">Build Config:</span>
+              <code className="text-[var(--color-text-primary)]">packages/design-system/tsup.config.ts</code>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-[var(--color-text-muted)] flex-shrink-0">Studio App:</span>
+              <code className="text-[var(--color-text-primary)]">apps/sage-design-studio/</code>
+            </div>
+          </div>
+        </Card>
       </section>
 
-      {/* Tech Stack */}
+      {/* Architecture Overview */}
       <section>
-        <h2 className="text-3xl font-bold mb-6 text-[var(--color-text-primary)]">
-          Tech Stack
+        <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
+          Architecture Overview
         </h2>
-        <Card className="p-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            {['React 18', 'TypeScript', 'Framer Motion', 'Zustand', 'Tailwind CSS', 'tsup'].map((tech) => (
-              <div key={tech} className="text-center">
-                <p className="text-lg font-medium text-[var(--color-text-primary)]">
-                  {tech}
-                </p>
+        <Card className="p-6">
+          <p className="text-[var(--color-text-primary)] mb-4">
+            This design system follows <strong>atomic design principles</strong> with a clear hierarchy:
+          </p>
+          <div className="space-y-3 pl-4 border-l-2 border-[var(--color-border)]">
+            <div>
+              <span className="font-semibold text-[var(--color-text-primary)]">Tokens</span>
+              <span className="text-[var(--color-text-secondary)]"> — Raw values (colors, spacing, typography, motion)</span>
+            </div>
+            <div>
+              <span className="font-semibold text-[var(--color-text-primary)]">Atoms</span>
+              <span className="text-[var(--color-text-secondary)]"> — Smallest functional elements (Button, Input, Badge)</span>
+            </div>
+            <div>
+              <span className="font-semibold text-[var(--color-text-primary)]">Molecules</span>
+              <span className="text-[var(--color-text-secondary)]"> — Simple combinations with single purpose (TextField, SearchBar)</span>
+            </div>
+            <div>
+              <span className="font-semibold text-[var(--color-text-primary)]">Organisms</span>
+              <span className="text-[var(--color-text-secondary)]"> — Complex sections managing layout/state (Header, Footer, Modal)</span>
+            </div>
+            <div>
+              <span className="font-semibold text-[var(--color-text-primary)]">Templates</span>
+              <span className="text-[var(--color-text-secondary)]"> — Page layouts and structural blueprints</span>
+            </div>
+          </div>
+          <p className="text-sm text-[var(--color-text-secondary)] mt-4 italic">
+            Built with React 18, TypeScript, Framer Motion, Zustand, Tailwind CSS, and bundled with tsup.
+          </p>
+        </Card>
+      </section>
+
+      {/* Theme System */}
+      <section>
+        <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
+          Theme System
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Card className="p-4">
+            <h3 className="font-semibold mb-1 text-[var(--color-text-primary)]">Studio</h3>
+            <p className="text-sm text-[var(--color-text-secondary)] mb-2">Professional, balanced, modern</p>
+            <p className="text-xs text-[var(--color-text-muted)]">Geist Sans, Geist Mono</p>
+          </Card>
+          <Card className="p-4">
+            <h3 className="font-semibold mb-1 text-[var(--color-text-primary)]">Sage</h3>
+            <p className="text-sm text-[var(--color-text-secondary)] mb-2">Calm, organic, thoughtful</p>
+            <p className="text-xs text-[var(--color-text-muted)]">Lora, Instrument Sans</p>
+          </Card>
+          <Card className="p-4">
+            <h3 className="font-semibold mb-1 text-[var(--color-text-primary)]">Volt</h3>
+            <p className="text-sm text-[var(--color-text-secondary)] mb-2">Bold, electric, energetic</p>
+            <p className="text-xs text-[var(--color-text-muted)]">Space Grotesk</p>
+          </Card>
+        </div>
+        <Card className="p-6 mt-4">
+          <p className="text-sm text-[var(--color-text-primary)]">
+            All components automatically adapt to the active theme using CSS custom properties.
+            Themes share the same component API but express different visual personalities through tokens.
+            Switch themes at runtime with <code className="px-2 py-0.5 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">setTheme()</code>.
+          </p>
+        </Card>
+      </section>
+
+      {/* Key Principles */}
+      <section>
+        <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
+          Key Principles
+        </h2>
+        <Card className="p-6">
+          <ul className="space-y-3">
+            <li className="flex items-start gap-3">
+              <span className="text-[var(--color-primary)] flex-shrink-0 mt-1">→</span>
+              <div>
+                <strong className="text-[var(--color-text-primary)]">Accessibility first:</strong>
+                <span className="text-[var(--color-text-secondary)]"> All components respect <code className="text-xs px-1.5 py-0.5 bg-[var(--color-surface)] rounded">prefers-reduced-motion</code> and follow semantic HTML patterns</span>
               </div>
-            ))}
-          </div>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[var(--color-primary)] flex-shrink-0 mt-1">→</span>
+              <div>
+                <strong className="text-[var(--color-text-primary)]">Single source of truth:</strong>
+                <span className="text-[var(--color-text-secondary)]"> Design tokens cascade through all themes, ensuring consistency</span>
+              </div>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[var(--color-primary)] flex-shrink-0 mt-1">→</span>
+              <div>
+                <strong className="text-[var(--color-text-primary)]">Developer experience:</strong>
+                <span className="text-[var(--color-text-secondary)]"> Full TypeScript support, clear prop interfaces, and comprehensive examples</span>
+              </div>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[var(--color-primary)] flex-shrink-0 mt-1">→</span>
+              <div>
+                <strong className="text-[var(--color-text-primary)]">Human-centered design:</strong>
+                <span className="text-[var(--color-text-secondary)]"> Every component encodes thoughtful defaults and respects user agency</span>
+              </div>
+            </li>
+          </ul>
         </Card>
       </section>
     </div>
