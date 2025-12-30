@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useCallback } from 'react';
 import type { FieldValidation, FormErrors } from '../utils/validation';
 import { validateField, validateForm } from '../utils/validation';

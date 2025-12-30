@@ -5,7 +5,23 @@
  * Works with Framer Motion and respects user motion preferences.
  */
 
-import type { Variants, Transition } from 'framer-motion';
+// Type definitions (compatible with Framer Motion)
+export type Variant = {
+  [key: string]: any;
+};
+
+export type Variants = {
+  [key: string]: Variant;
+};
+
+export type Transition = {
+  duration?: number;
+  ease?: readonly number[] | number[] | string;
+  type?: 'spring' | 'tween' | 'inertia';
+  damping?: number;
+  stiffness?: number;
+  [key: string]: any;
+};
 
 /**
  * Animation Duration Presets

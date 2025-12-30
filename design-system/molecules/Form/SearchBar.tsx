@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useCallback, useEffect } from 'react';
 import { TextField, type TextFieldProps } from '../../atoms/Input/TextField';
 
