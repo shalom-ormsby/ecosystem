@@ -65,6 +65,14 @@ const instrumentSans = Instrument_Sans({
   weight: ['400', '500', '600', '700'],
 });
 
+// Instrument Sans also as --font-sage-sans for consistency with portfolio
+const instrumentSansSans = Instrument_Sans({
+  subsets: ['latin'],
+  variable: '--font-sage-sans',
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+});
+
 // Volt Theme Fonts
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -95,7 +103,7 @@ export default function RootLayout({
     <html lang="en" className={`
       ${nunito.variable} ${nunitoSans.variable}
       ${outfit.variable} ${manrope.variable}
-      ${lora.variable} ${instrumentSans.variable}
+      ${lora.variable} ${instrumentSans.variable} ${instrumentSansSans.variable}
       ${spaceGrotesk.variable} ${firaCode.variable}
     `}>
       <body>
