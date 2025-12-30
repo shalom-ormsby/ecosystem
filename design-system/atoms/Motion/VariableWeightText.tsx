@@ -83,8 +83,11 @@ export const VariableWeightText = ({
                 style={{
                     fontFamily,
                     fontWeight: maxWeight,
+                    fontVariationSettings: `'wght' ${maxWeight}`,
                     textAlign: 'center',
                     width: '100%',
+                    WebkitFontSmoothing: 'antialiased',
+                    MozOsxFontSmoothing: 'grayscale',
                     ...style,
                 }}
                 {...props as any}
@@ -96,18 +99,27 @@ export const VariableWeightText = ({
 
     return (
         <motion.div
-            initial={{ fontWeight: minWeight }}
-            animate={{ fontWeight: maxWeight }}
+            initial={{
+                fontWeight: minWeight,
+                fontVariationSettings: `'wght' ${minWeight}`
+            }}
+            animate={{
+                fontWeight: maxWeight,
+                fontVariationSettings: `'wght' ${maxWeight}`
+            }}
             transition={{
                 duration: scaledDuration,
                 repeat: Infinity,
                 repeatType: "reverse",
-                ease: "easeInOut"
+                ease: [0.45, 0, 0.55, 1], // Custom cubic-bezier for ultra-smooth motion
             }}
             style={{
                 fontFamily,
                 textAlign: 'center',
                 width: '100%',
+                willChange: 'font-variation-settings', // GPU acceleration hint
+                WebkitFontSmoothing: 'antialiased',
+                MozOsxFontSmoothing: 'grayscale',
                 ...style,
             }}
             className={className}

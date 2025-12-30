@@ -87,10 +87,22 @@ export function MotionTab() {
                     Variable Weight Motion
                 </h3>
                 <Card className="p-6">
-                    <p className="text-sm text-[var(--color-text-secondary)] mb-6">
-                        For variable fonts (like <strong>Clash Display</strong>), use the <code className="px-2 py-1 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">VariableWeightText</code> component to create a "breathing" effect that animates font weight.
-                        This animation automatically centers the text to ensure symmetrical expansion and contraction, preventing layout shifts.
+                    <p className="text-sm text-[var(--color-text-secondary)] mb-4">
+                        For variable fonts (like <strong>Clash Display</strong>), use the <code className="px-2 py-1 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">VariableWeightText</code> component to create a silky-smooth "breathing" effect that animates font weight.
+                        This animation uses <code className="px-2 py-1 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">font-variation-settings</code> for true variable font interpolation.
                     </p>
+                    <div className="mb-6 p-4 bg-[var(--color-background)] rounded border border-[var(--color-border)]">
+                        <p className="text-xs text-[var(--color-text-muted)] mb-2">
+                            <strong>Performance Optimizations:</strong>
+                        </p>
+                        <ul className="text-xs text-[var(--color-text-muted)] space-y-1">
+                            <li>✓ Uses true variable font (continuous weight axis from 200-700)</li>
+                            <li>✓ GPU-accelerated with <code className="px-1 py-0.5 bg-[var(--color-surface)] rounded">will-change</code></li>
+                            <li>✓ Custom easing curve <code className="px-1 py-0.5 bg-[var(--color-surface)] rounded">[0.45, 0, 0.55, 1]</code> for ultra-smooth motion</li>
+                            <li>✓ Font smoothing (antialiased) for crisp rendering</li>
+                            <li>✓ Centered to prevent layout shifts during weight changes</li>
+                        </ul>
+                    </div>
 
                     {/* Live Demo */}
                     <div className="mb-6 p-8 bg-[var(--color-background)] rounded-lg border border-[var(--color-border)]">
