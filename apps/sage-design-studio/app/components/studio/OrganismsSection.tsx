@@ -86,7 +86,7 @@ export function OrganismsSection() {
           <Card className="p-0 overflow-hidden bg-[var(--color-background)]">
             <Header
               logo={
-                <a href="/" className="font-semibold text-lg font-[var(--font-sage-body)]">
+                <a href="/" className="font-semibold text-lg" style={{ fontFamily: 'var(--font-sage-body)' }}>
                   Brand
                 </a>
               }
