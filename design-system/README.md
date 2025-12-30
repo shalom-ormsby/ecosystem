@@ -262,19 +262,64 @@ const styles = {
 
 // Available semantic color variables:
 --color-background          // Page background
+--color-background-secondary // Secondary background
+--color-foreground          // Main foreground color
 --color-surface             // Card/container background
 --color-text-primary        // Main text
 --color-text-secondary      // Supporting text
 --color-text-muted          // De-emphasized text
 --color-border              // Default borders
 --color-focus               // Focus rings
+
+// Primary colors with foreground variants
 --color-primary             // Primary brand color
+--color-primary-foreground  // Text on primary background
+--color-secondary           // Secondary color
+--color-secondary-foreground // Text on secondary background
 --color-accent              // Accent color
+--color-accent-foreground   // Text on accent background
+
+// State colors with foreground variants
 --color-success             // Success state
+--color-success-foreground  // Text on success background
 --color-warning             // Warning state
+--color-warning-foreground  // Text on warning background
 --color-error               // Error state
+--color-error-foreground    // Text on error background
 --color-info                // Info state
+--color-info-foreground     // Text on info background
+
+// Glass/effects
+--color-glass               // Glassmorphism background
+--color-glass-border        // Glassmorphism border
+
+// Interactive states
+--color-hover               // Hover state background
+--color-active              // Active state background
+--color-link-hover          // Link hover state
+--color-link-hover-foreground // Link hover text color
 ```
+
+**CRITICAL: Always Use Foreground Variants**
+
+When using colored backgrounds, ALWAYS use the corresponding foreground color variable:
+
+```typescript
+// ✅ CORRECT - Adapts to both light and dark modes
+<button className="bg-[var(--color-primary)] text-[var(--color-primary-foreground)]">
+  Click Me
+</button>
+
+// ❌ WRONG - Hardcoded white breaks in dark mode
+<button className="bg-[var(--color-primary)] text-white">
+  Click Me
+</button>
+```
+
+**Why This Matters:**
+- Light mode: `--color-primary` might be dark (#0a0a0a), so `--color-primary-foreground` is light (#ffffff)
+- Dark mode: `--color-primary` might be light (#f5f5f5), so `--color-primary-foreground` is dark (#0a0a0a)
+- Hardcoded colors like `text-white` or `text-black` will break in one mode or the other
 
 ### Motion
 
