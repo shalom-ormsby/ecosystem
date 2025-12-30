@@ -58,68 +58,6 @@ export function OrganismsSection() {
                   <li>Theme-aware colors using CSS custom properties</li>
                 </ul>
               </div>
-              <div className="mt-4 p-3 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
-                <p className="text-xs text-[var(--color-text-muted)]">
-                  <strong>Note:</strong> In the preview below, "Products" has a dropdown menu with nested items. Hover over it (desktop) or tap it (mobile) to see the dropdown. "Product B" has <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">active: true</code> to demonstrate nested active states.
-                </p>
-              </div>
-            </div>
-          </Card>
-        </div>
-
-        {/* Live Preview */}
-        <div>
-          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
-            Live Preview
-          </h4>
-          <Card className="p-0 overflow-hidden">
-            <div className="relative bg-[var(--color-background)] min-h-[400px]">
-              <Header
-                sticky={false}
-                glassOnScroll={false}
-                logo={
-                  <a href="#" className="font-semibold text-lg text-[var(--color-text-primary)]">
-                    Brand
-                  </a>
-                }
-                navLinks={[
-                  { label: 'Features', href: '#features' },
-                  {
-                    label: 'Products',
-                    active: true,
-                    children: [
-                      { label: 'Product A', href: '#product-a' },
-                      { label: 'Product B', href: '#product-b', active: true },
-                      { label: 'Product C', href: '#product-c' },
-                    ]
-                  },
-                  { label: 'About', href: '#about' },
-                  { label: 'Contact', href: '#contact' },
-                ]}
-                actions={
-                  <>
-                    <a
-                      href="#signin"
-                      className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
-                    >
-                      Sign In
-                    </a>
-                    <Button variant="primary" size="sm">
-                      Get Started
-                    </Button>
-                  </>
-                }
-              />
-              <div className="pt-20 px-8 pb-8">
-                <div className="max-w-3xl mx-auto text-center">
-                  <h1 className="text-3xl font-bold mb-4 text-[var(--color-text-primary)]">
-                    Header Preview
-                  </h1>
-                  <p className="text-[var(--color-text-secondary)]">
-                    This is a demo of the Header component. On mobile devices, click the hamburger menu to see the full-screen navigation overlay.
-                  </p>
-                </div>
-              </div>
             </div>
           </Card>
         </div>
@@ -197,16 +135,6 @@ export function OrganismsSection() {
                 </p>
               </div>
             </div>
-          </Card>
-        </div>
-
-        {/* Live Preview */}
-        <div>
-          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
-            Live Preview
-          </h4>
-          <Card className="p-0 overflow-hidden">
-            <SecondaryNavDemo />
           </Card>
         </div>
 
@@ -333,16 +261,6 @@ const components = [
           </Card>
         </div>
 
-        {/* Live Preview */}
-        <div>
-          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
-            Live Preview - Triple Stack
-          </h4>
-          <Card className="p-0 overflow-hidden">
-            <TripleStackDemo />
-          </Card>
-        </div>
-
         {/* Code Example */}
         <div>
           <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
@@ -363,126 +281,6 @@ const components = [
           </Card>
         </div>
       </section>
-    </div>
-  );
-}
-
-// Demo component for SecondaryNav
-function SecondaryNavDemo() {
-  const [activeSection, setActiveSection] = useState('overview');
-
-  const sections = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'features', label: 'Features' },
-    { id: 'pricing', label: 'Pricing' },
-    { id: 'docs', label: 'Documentation' },
-    { id: 'api', label: 'API Reference' },
-  ];
-
-  return (
-    <div className="relative bg-[var(--color-background)] min-h-[300px]">
-      <div className="sticky top-0">
-        <SecondaryNav
-          items={sections}
-          activeId={activeSection}
-          onItemChange={setActiveSection}
-        />
-      </div>
-      <div className="p-8">
-        <h1 className="text-3xl font-bold text-[var(--color-text-primary)] mb-4">
-          {sections.find(s => s.id === activeSection)?.label}
-        </h1>
-        <p className="text-[var(--color-text-secondary)]">
-          This is the content for the {sections.find(s => s.id === activeSection)?.label} section.
-          In a real application, this would show different content based on the active tab.
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// Demo component for Triple Stack Pattern
-function TripleStackDemo() {
-  const [activeSection, setActiveSection] = useState('overview');
-  const [activeComponent, setActiveComponent] = useState('Header');
-
-  const sections = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'components', label: 'Components' },
-    { id: 'examples', label: 'Examples' },
-  ];
-
-  const components = [
-    { id: 'Header', label: 'Header' },
-    { id: 'SecondaryNav', label: 'SecondaryNav' },
-    { id: 'TertiaryNav', label: 'TertiaryNav' },
-  ];
-
-  return (
-    <div className="relative bg-[var(--color-background)] min-h-[600px]">
-      {/* Header (sticky at top) */}
-      <div className="sticky top-0 z-50">
-        <Header
-          sticky={false}
-          glassOnScroll={false}
-          logo={
-            <span className="font-semibold text-lg text-[var(--color-text-primary)]">
-              Triple Stack Demo
-            </span>
-          }
-          navLinks={[
-            { label: 'Home', href: '#home' },
-            { label: 'About', href: '#about' },
-          ]}
-          actions={
-            <Button variant="primary" size="sm">
-              Action
-            </Button>
-          }
-        />
-      </div>
-
-      {/* SecondaryNav (sticky below header) */}
-      <div className="sticky top-16 lg:top-20 z-40">
-        <SecondaryNav
-          items={sections}
-          activeId={activeSection}
-          onItemChange={setActiveSection}
-        />
-      </div>
-
-      {/* TertiaryNav (sticky below secondary nav) */}
-      <div className="sticky top-32 lg:top-36 z-30">
-        <TertiaryNav
-          items={components}
-          activeId={activeComponent}
-          onItemChange={setActiveComponent}
-        />
-      </div>
-
-      {/* Content - Add top padding to account for sticky navigation stack */}
-      <div className="pt-48 lg:pt-52 px-8 pb-8 space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold text-[var(--color-text-primary)] mb-4">
-            {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)} - {activeComponent}
-          </h1>
-          <p className="text-[var(--color-text-secondary)] mb-4">
-            This demo shows all three navigation levels stacking together. Try scrolling down to see how they stick at their respective positions.
-          </p>
-        </div>
-
-        {/* Spacer content to enable scrolling */}
-        {[...Array(8)].map((_, i) => (
-          <Card key={i} className="p-6">
-            <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-2">
-              Content Block {i + 1}
-            </h3>
-            <p className="text-[var(--color-text-secondary)]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scroll to see how the triple-stack navigation remains fixed at the top as you navigate through content.
-            </p>
-          </Card>
-        ))}
-      </div>
     </div>
   );
 }
