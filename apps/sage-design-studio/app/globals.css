@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* Header Component Typography (independent of themes) */
-  --font-header-logo: var(--font-sage-body);
-  --font-header-nav: var(--font-sage-body);
-}
-
 @layer base {
+  /* Header Component Typography (independent of themes) */
+  :root {
+    --font-header-logo: var(--font-sage-body);
+    --font-header-nav: var(--font-sage-body);
+  }
+
   /* Documentation Typography Hierarchy */
 
   /* Body text: Nunito - warm, friendly, readable */
