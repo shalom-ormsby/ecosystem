@@ -5,13 +5,15 @@ import { navigationTree, type NavigationItem } from '../lib/navigation-tree';
 
 interface NavigationSidebarProps {
   activeSection: string;
-  onNavigate: (section: string) => void;
+  activeItemId?: string;
+  onNavigate: (section: string, itemId?: string) => void;
   isOpen?: boolean;
   onToggle?: () => void;
 }
 
 export function NavigationSidebar({
   activeSection,
+  activeItemId,
   onNavigate,
   isOpen = true,
   onToggle,
@@ -60,7 +62,7 @@ export function NavigationSidebar({
   const renderItem = (item: NavigationItem, depth: number = 0) => {
     const hasChildren = item.children && item.children.length > 0;
     const isExpanded = expandedItems.has(item.id);
-    const isActive = item.section === activeSection;
+    const isActive = item.id === activeItemId;
     const indentStyle = { paddingLeft: `${depth * 16}px` };
 
     return (
@@ -71,7 +73,7 @@ export function NavigationSidebar({
               toggleExpanded(item.id);
             }
             if (item.section) {
-              onNavigate(item.section);
+              onNavigate(item.section, item.id);
             }
           }}
           className={`w-full flex items-center gap-2 px-3 py-2 text-sm transition-colors ${

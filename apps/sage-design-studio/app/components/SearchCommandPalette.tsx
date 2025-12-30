@@ -119,7 +119,7 @@ export function SearchCommandPalette({ onNavigate }: SearchCommandPaletteProps) 
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/50 z-50 backdrop-blur-sm"
+        className="fixed inset-0 bg-black/50 z-[100] backdrop-blur-sm"
         onClick={() => {
           setIsOpen(false);
           setQuery('');
@@ -128,7 +128,7 @@ export function SearchCommandPalette({ onNavigate }: SearchCommandPaletteProps) 
       />
 
       {/* Command Palette */}
-      <div className="fixed top-[20vh] left-1/2 -translate-x-1/2 w-full max-w-2xl z-50 px-4">
+      <div className="fixed top-[20vh] left-1/2 -translate-x-1/2 w-full max-w-2xl z-[101] px-4">
         <Card className="overflow-hidden shadow-2xl">
           {/* Search Input */}
           <div className="flex items-center gap-3 p-4 border-b border-[var(--color-border)]">

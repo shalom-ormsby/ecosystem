@@ -21,7 +21,7 @@ export const navigationTree: NavigationItem[] = [
   },
   {
     id: 'foundations',
-    label: 'Foundations',
+    label: 'Design Tokens',
     icon: '🎨',
     children: [
       {

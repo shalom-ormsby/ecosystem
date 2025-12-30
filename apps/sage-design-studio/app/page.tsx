@@ -17,27 +17,43 @@ type Section = 'overview' | 'tokens' | 'atoms' | 'molecules' | 'organisms' | 'ho
 
 export default function StudioPage() {
   const [activeSection, setActiveSection] = useState<Section>('overview');
+  const [activeItemId, setActiveItemId] = useState<string>('overview');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Handle navigation from search results
   const handleSearchNavigate = (path: string) => {
-    // Parse path to determine section (e.g., 'atoms-button' -> 'atoms')
+    // Parse path to determine section and item (e.g., 'atoms-button' -> section='atoms', item='button')
     if (path === 'overview') {
       setActiveSection('overview');
+      setActiveItemId('overview');
     } else if (path.startsWith('tokens')) {
       setActiveSection('tokens');
+      // Extract specific token item (e.g., 'tokens-colors' -> 'colors')
+      const itemId = path.replace('tokens-', '');
+      setActiveItemId(itemId);
     } else if (path.startsWith('atoms')) {
       setActiveSection('atoms');
+      const itemId = path.replace('atoms-', '');
+      setActiveItemId(itemId);
     } else if (path.startsWith('molecules')) {
       setActiveSection('molecules');
+      const itemId = path.replace('molecules-', '');
+      setActiveItemId(itemId);
     } else if (path.startsWith('organisms')) {
       setActiveSection('organisms');
+      const itemId = path.replace('organisms-', '');
+      setActiveItemId(itemId);
     } else if (path.startsWith('hooks')) {
       setActiveSection('hooks');
+      const itemId = path.replace('hooks-', '');
+      setActiveItemId(itemId);
     } else if (path.startsWith('templates')) {
       setActiveSection('templates');
+      setActiveItemId('templates-overview');
     } else if (path.startsWith('utilities')) {
       setActiveSection('hooks'); // Utilities shown in Hooks section for now
+      const itemId = path.replace('utilities-', '');
+      setActiveItemId(itemId);
     }
 
     // Scroll to top after navigation
@@ -50,8 +66,10 @@ export default function StudioPage() {
       <div className="flex flex-1">
         <NavigationSidebar
           activeSection={activeSection}
-          onNavigate={(section) => {
+          activeItemId={activeItemId}
+          onNavigate={(section, itemId) => {
             setActiveSection(section as Section);
+            setActiveItemId(itemId || section);
             setSidebarOpen(false); // Close sidebar on mobile after navigation
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
