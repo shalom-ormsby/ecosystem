@@ -110,7 +110,7 @@ export function MotionTab() {
                             minWeight={200}
                             maxWeight={700}
                             duration={2}
-                            className="text-4xl"
+                            className="text-4xl text-[var(--color-text-primary)]"
                         >
                             Clash Display
                         </VariableWeightText>
