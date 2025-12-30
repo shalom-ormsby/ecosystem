@@ -152,6 +152,46 @@ Each theme includes:
 - Custom motion personalities (Studio: smooth, Sage: flowing, Volt: snappy)
 - Semantic color tokens that adapt to the theme
 
+#### Visual Theme Comparison
+
+**Studio Theme** — Professional & Modern
+- **Primary:** Blue (#0066ff light, #0099ff dark) — Trustworthy, professional
+- **Accent:** Purple (#7c3aed) — Creative, sophisticated
+- **Background:** Cool grays (#fafafa → #0a0a0a) — Clean, neutral canvas
+- **Feel:** Corporate without being cold, modern without being trendy
+
+**Sage Theme** — Calm & Organic
+- **Primary:** Earthy green (#6b8e6f light, #95b89a dark) — Natural, grounded
+- **Accent:** Terra cotta (#c77b5a light, #d89a7f dark) — Warm, welcoming
+- **Background:** Warm beiges (#faf8f5 → #1a1614) — Cozy, paper-like
+- **Feel:** Like a thoughtful journal, not a cold database
+
+**Volt Theme** — Bold & Electric
+- **Primary:** Electric blue (#0066ff light, #0099ff dark) — Energy, innovation
+- **Accent:** Cyan (#00d9ff light, #00ffff dark) — Vibrant, electric
+- **Background:** True grays (#ffffff → #000000) — High contrast, bold
+- **Feel:** Startup energy, tech-forward, unapologetically digital
+
+<details>
+<summary><strong>Full Color Specifications</strong></summary>
+
+| Color Token | Studio Light | Studio Dark | Sage Light | Sage Dark | Volt Light | Volt Dark |
+|-------------|--------------|-------------|------------|-----------|------------|-----------|
+| **Primary** | #0066ff | #0099ff | #6b8e6f | #95b89a | #0066ff | #0099ff |
+| **Accent** | #7c3aed | #7c3aed | #c77b5a | #d89a7f | #00d9ff | #00ffff |
+| **Background** | #fafafa | #0a0a0a | #faf8f5 | #1a1614 | #ffffff | #000000 |
+| **Surface** | #ffffff | #141414 | #ffffff | #2d2823 | #ffffff | #0a0a0a |
+| **Text Primary** | #0a0a0a | #fafafa | #2d2823 | #f5f1eb | #0a0a0a | #ffffff |
+| **Border** | #e5e5e5 | #1a1a1a | #e0d8cf | #3a3530 | #e0e4ea | #1a1a1a |
+
+**Design Notes:**
+- Studio uses cool tones for a professional feel
+- Sage uses warm, earthy tones that feel analog and tactile
+- Volt uses pure digital colors with maximum contrast
+- All themes maintain WCAG AA contrast ratios for accessibility
+
+</details>
+
 ### Motion That Respects Users
 
 The motion system is built on respect for user preferences:
@@ -915,6 +955,43 @@ size?: 'sm' | 'md' | 'lg'
 direction?: 'vertical' | 'horizontal'
 className?: string
 ```
+
+#### ThemeToggle
+
+A molecule for toggling between light and dark modes with smooth icon transitions.
+
+```typescript
+import { ThemeToggle } from '@ecosystem/design-system'
+
+// Simple icon-only toggle
+<ThemeToggle />
+
+// With label
+<ThemeToggle showLabel />
+
+// Large size with label
+<ThemeToggle size="lg" showLabel />
+
+// Props
+size?: 'sm' | 'md' | 'lg'  // Default: 'md'
+showLabel?: boolean  // Show "Light"/"Dark" label. Default: false
+className?: string
+```
+
+Features:
+- Automatic mode detection from theme context
+- Smooth icon transition between sun (light) and moon (dark)
+- Three size variants (sm: 16px, md: 20px, lg: 24px)
+- Optional text label showing current mode
+- Full keyboard accessibility
+- ARIA labels for screen readers
+- Theme-aware colors using token system
+
+**Visual Behavior:**
+- Light mode: Shows sun icon
+- Dark mode: Shows moon icon
+- Hover: Subtle background highlight
+- Focus: Ring outline for keyboard navigation
 
 ---
 
