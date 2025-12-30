@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TertiaryNav } from '@ecosystem/design-system';
 import { ColorsTab } from './ColorsTab';
 import { TypographyTab } from './TypographyTab';
@@ -9,8 +9,19 @@ import { MotionTab } from './MotionTab';
 
 type TokenTab = 'colors' | 'typography' | 'spacing' | 'motion';
 
-export function TokensSection() {
+interface TokensSectionProps {
+  activeItemId?: string;
+}
+
+export function TokensSection({ activeItemId }: TokensSectionProps) {
   const [activeTab, setActiveTab] = useState<TokenTab>('colors');
+
+  // Update active tab when activeItemId changes
+  useEffect(() => {
+    if (activeItemId && ['colors', 'typography', 'spacing', 'motion'].includes(activeItemId)) {
+      setActiveTab(activeItemId as TokenTab);
+    }
+  }, [activeItemId]);
 
   // Available tabs for TertiaryNav
   const availableTabs = [

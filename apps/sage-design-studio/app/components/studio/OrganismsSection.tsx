@@ -1,9 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, Button, Header, SecondaryNav, TertiaryNav, Footer, Modal, ToastProvider, useToast } from '@ecosystem/design-system';
 
 type OrganismType = 'PrimaryNav' | 'FirstStack' | 'SecondStack' | 'Footer' | 'Toast' | 'Modal';
+
+interface OrganismsSectionProps {
+  activeItemId?: string;
+}
 
 function ToastDemo() {
   const { toast } = useToast();
@@ -86,8 +90,24 @@ function ModalDemo() {
   );
 }
 
-export function OrganismsSection() {
+export function OrganismsSection({ activeItemId }: OrganismsSectionProps) {
   const [selectedOrganism, setSelectedOrganism] = useState<OrganismType>('PrimaryNav');
+
+  // Update selected organism when activeItemId changes
+  useEffect(() => {
+    if (activeItemId) {
+      // Map kebab-case ids to PascalCase names
+      // e.g., 'primary-nav' -> 'PrimaryNav', 'first-stack' -> 'FirstStack'
+      const organismName = activeItemId
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join('') as OrganismType;
+
+      if (['PrimaryNav', 'FirstStack', 'SecondStack', 'Footer', 'Toast', 'Modal'].includes(organismName)) {
+        setSelectedOrganism(organismName);
+      }
+    }
+  }, [activeItemId]);
 
   const organisms = [
     { id: 'PrimaryNav', label: 'Primary Nav' },
@@ -116,7 +136,7 @@ export function OrganismsSection() {
       <TertiaryNav
         items={organisms}
         activeId={selectedOrganism}
-        onItemChange={(id) => setSelectedOrganism(id as 'PrimaryNav' | 'FirstStack' | 'SecondStack' | 'Footer')}
+        onItemChange={(id) => setSelectedOrganism(id as OrganismType)}
       />
 
       {/* Primary Nav Component */}

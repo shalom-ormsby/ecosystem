@@ -111,11 +111,11 @@ export default function StudioPage() {
           <div className="flex-1 flex">
             <div className="flex-1 px-4 sm:px-6 lg:px-8 py-8 max-w-7xl">
               {activeSection === 'overview' && <OverviewSection />}
-              {activeSection === 'tokens' && <TokensSection />}
-              {activeSection === 'atoms' && <ComponentsSection />}
-              {activeSection === 'molecules' && <MoleculesSection />}
-              {activeSection === 'organisms' && <OrganismsSection />}
-              {activeSection === 'hooks' && <HooksSection />}
+              {activeSection === 'tokens' && <TokensSection activeItemId={activeItemId} />}
+              {activeSection === 'atoms' && <ComponentsSection activeItemId={activeItemId} />}
+              {activeSection === 'molecules' && <MoleculesSection activeItemId={activeItemId} />}
+              {activeSection === 'organisms' && <OrganismsSection activeItemId={activeItemId} />}
+              {activeSection === 'hooks' && <HooksSection activeItemId={activeItemId} />}
               {activeSection === 'templates' && <TemplatesSection />}
             </div>
 

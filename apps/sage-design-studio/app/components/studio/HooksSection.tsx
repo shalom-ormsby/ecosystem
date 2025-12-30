@@ -1,11 +1,33 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, Button, TextField, TertiaryNav, Badge } from '@ecosystem/design-system';
 import { useForm, useTheme, useToast } from '@ecosystem/design-system';
 
-export function HooksSection() {
+interface HooksSectionProps {
+  activeItemId?: string;
+}
+
+export function HooksSection({ activeItemId }: HooksSectionProps) {
   const [activeHook, setActiveHook] = useState<string>('useForm');
+
+  // Update active hook when activeItemId changes
+  useEffect(() => {
+    if (activeItemId) {
+      // Map kebab-case ids to camelCase names
+      // e.g., 'use-form' -> 'useForm', 'use-motion-preference' -> 'useMotionPreference'
+      const hookName = activeItemId
+        .split('-')
+        .map((word, index) =>
+          index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)
+        )
+        .join('');
+
+      if (['useForm', 'useTheme', 'useToast', 'useMotionPreference'].includes(hookName)) {
+        setActiveHook(hookName);
+      }
+    }
+  }, [activeItemId]);
 
   const hooks = [
     { id: 'useForm', label: 'useForm' },

@@ -1,12 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TertiaryNav } from '@ecosystem/design-system';
 import { ComponentPlayground } from './ComponentPlayground';
 import { componentRegistry } from '../../lib/component-registry';
 
-export function ComponentsSection() {
+interface ComponentsSectionProps {
+  activeItemId?: string;
+}
+
+export function ComponentsSection({ activeItemId }: ComponentsSectionProps) {
   const [selectedComponent, setSelectedComponent] = useState<string>('Button');
+
+  // Update selected component when activeItemId changes
+  useEffect(() => {
+    if (activeItemId) {
+      // Convert lowercase id to PascalCase component name (e.g., 'button' -> 'Button')
+      const componentName = activeItemId.charAt(0).toUpperCase() + activeItemId.slice(1);
+      if (componentRegistry[componentName]) {
+        setSelectedComponent(componentName);
+      }
+    }
+  }, [activeItemId]);
 
   const components = Object.keys(componentRegistry);
   const componentItems = components.map(name => ({ id: name, label: name }));

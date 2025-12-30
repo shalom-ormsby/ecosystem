@@ -1,12 +1,30 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, TertiaryNav } from '@ecosystem/design-system';
 import { moleculeRegistry } from '../lib/molecule-registry';
 
-export function MoleculesSection() {
+interface MoleculesSectionProps {
+  activeItemId?: string;
+}
+
+export function MoleculesSection({ activeItemId }: MoleculesSectionProps) {
   const moleculeKeys = Object.keys(moleculeRegistry);
   const [selectedMolecule, setSelectedMolecule] = useState<string>(moleculeKeys[0]);
+
+  // Update selected molecule when activeItemId changes
+  useEffect(() => {
+    if (activeItemId) {
+      // Map kebab-case ids to PascalCase names (e.g., 'form-field' -> 'FormField')
+      const moleculeName = activeItemId
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join('');
+      if (moleculeRegistry[moleculeName]) {
+        setSelectedMolecule(moleculeName);
+      }
+    }
+  }, [activeItemId]);
 
   const molecules = moleculeKeys.map((key) => ({
     id: key,
