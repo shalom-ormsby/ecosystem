@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ModeSwitcher } from './components/ModeSwitcher';
 import { NavigationSidebar } from './components/NavigationSidebar';
+import { SearchCommandPalette } from './components/SearchCommandPalette';
 import { TableOfContents } from './components/TableOfContents';
 import { OverviewSection } from './components/studio/OverviewSection';
 import { TokensSection } from './components/studio/TokensSection';
@@ -18,6 +19,20 @@ export default function StudioPage() {
   const [activeSection, setActiveSection] = useState<Section>('overview');
   const [activeItemId, setActiveItemId] = useState<string>('overview');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  // Open/close search with Cmd+K or Ctrl+K
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Handle navigation from search results
   const handleSearchNavigate = (path: string) => {
@@ -72,7 +87,7 @@ export default function StudioPage() {
             setSidebarOpen(false); // Close sidebar on mobile after navigation
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          onSearchNavigate={handleSearchNavigate}
+          onSearchOpen={() => setSearchOpen(true)}
           isOpen={sidebarOpen}
           onToggle={() => setSidebarOpen(!sidebarOpen)}
         />
@@ -119,6 +134,13 @@ export default function StudioPage() {
       </div>
 
       <ModeSwitcher />
+
+      {/* Search Modal - Rendered at page level */}
+      <SearchCommandPalette
+        isOpen={searchOpen}
+        onClose={() => setSearchOpen(false)}
+        onNavigate={handleSearchNavigate}
+      />
     </div>
   );
 }

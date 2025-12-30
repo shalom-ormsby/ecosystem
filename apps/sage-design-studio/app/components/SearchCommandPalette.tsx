@@ -6,26 +6,22 @@ import { searchContent, getResultTypeIcon, type SearchResult } from '../lib/sear
 
 interface SearchCommandPaletteProps {
   onNavigate: (path: string) => void;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-export function SearchCommandPalette({ onNavigate }: SearchCommandPaletteProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export function SearchCommandPalette({ onNavigate, isOpen, onClose }: SearchCommandPaletteProps) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
-  // Open/close with Cmd+K or Ctrl+K
+  // Close with Escape
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        setIsOpen((prev) => !prev);
-      }
-
       if (e.key === 'Escape' && isOpen) {
-        setIsOpen(false);
+        onClose();
         setQuery('');
         setResults([]);
       }
@@ -33,7 +29,7 @@ export function SearchCommandPalette({ onNavigate }: SearchCommandPaletteProps) 
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   // Focus input when opened
   useEffect(() => {
@@ -73,7 +69,7 @@ export function SearchCommandPalette({ onNavigate }: SearchCommandPaletteProps) 
 
   const handleSelect = (result: SearchResult) => {
     onNavigate(result.path);
-    setIsOpen(false);
+    onClose();
     setQuery('');
     setResults([]);
   };
@@ -89,30 +85,7 @@ export function SearchCommandPalette({ onNavigate }: SearchCommandPaletteProps) 
   }, [selectedIndex]);
 
   if (!isOpen) {
-    return (
-      <button
-        onClick={() => setIsOpen(true)}
-        className="w-full flex items-center gap-2 px-3 py-2 text-xs bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
-      >
-        <svg
-          className="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
-        </svg>
-        <span className="flex-1 text-left">Search</span>
-        <kbd className="px-2 py-0.5 text-xs font-mono bg-[var(--color-background)] border border-[var(--color-border)] rounded">
-          ⌘K
-        </kbd>
-      </button>
-    );
+    return null;
   }
 
   return (
@@ -121,7 +94,7 @@ export function SearchCommandPalette({ onNavigate }: SearchCommandPaletteProps) 
       <div
         className="fixed inset-0 bg-black/50 z-[100] backdrop-blur-sm"
         onClick={() => {
-          setIsOpen(false);
+          onClose();
           setQuery('');
           setResults([]);
         }}
