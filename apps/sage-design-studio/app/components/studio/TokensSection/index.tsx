@@ -6,8 +6,9 @@ import { ColorsTab } from './ColorsTab';
 import { TypographyTab } from './TypographyTab';
 import { SpacingTab } from './SpacingTab';
 import { MotionTab } from './MotionTab';
+import { SyntaxTab } from './SyntaxTab';
 
-type TokenTab = 'colors' | 'typography' | 'spacing' | 'motion';
+type TokenTab = 'colors' | 'typography' | 'spacing' | 'syntax' | 'motion';
 
 interface TokensSectionProps {
   activeItemId?: string;
@@ -18,7 +19,7 @@ export function TokensSection({ activeItemId }: TokensSectionProps) {
 
   // Update active tab when activeItemId changes
   useEffect(() => {
-    if (activeItemId && ['colors', 'typography', 'spacing', 'motion'].includes(activeItemId)) {
+    if (activeItemId && ['colors', 'typography', 'spacing', 'syntax', 'motion'].includes(activeItemId)) {
       setActiveTab(activeItemId as TokenTab);
     }
   }, [activeItemId]);
@@ -28,6 +29,7 @@ export function TokensSection({ activeItemId }: TokensSectionProps) {
     { id: 'colors', label: 'Colors' },
     { id: 'typography', label: 'Typography' },
     { id: 'spacing', label: 'Spacing' },
+    { id: 'syntax', label: 'Syntax' },
     { id: 'motion', label: 'Motion' },
   ];
 
@@ -56,6 +58,7 @@ export function TokensSection({ activeItemId }: TokensSectionProps) {
         {activeTab === 'colors' && <ColorsTab />}
         {activeTab === 'typography' && <TypographyTab />}
         {activeTab === 'spacing' && <SpacingTab />}
+        {activeTab === 'syntax' && <SyntaxTab />}
         {activeTab === 'motion' && <MotionTab />}
       </div>
     </div>

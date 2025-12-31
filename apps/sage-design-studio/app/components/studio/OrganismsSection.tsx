@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, Button, Header, SecondaryNav, TertiaryNav, Footer, Modal, ToastProvider, useToast } from '@ecosystem/design-system';
+import { Card, Button, Header, SecondaryNav, TertiaryNav, Footer, Modal, ToastProvider, useToast, CollapsibleCodeBlock } from '@ecosystem/design-system';
+import type { SyntaxToken } from '@ecosystem/design-system';
 
-type OrganismType = 'PrimaryNav' | 'FirstStack' | 'SecondStack' | 'Footer' | 'Toast' | 'Modal';
+type OrganismType = 'PrimaryNav' | 'FirstStack' | 'SecondStack' | 'Footer' | 'Toast' | 'Modal' | 'CollapsibleCodeBlock';
 
 interface OrganismsSectionProps {
   activeItemId?: string;
@@ -103,7 +104,7 @@ export function OrganismsSection({ activeItemId }: OrganismsSectionProps) {
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join('') as OrganismType;
 
-      if (['PrimaryNav', 'FirstStack', 'SecondStack', 'Footer', 'Toast', 'Modal'].includes(organismName)) {
+      if (['PrimaryNav', 'FirstStack', 'SecondStack', 'Footer', 'Toast', 'Modal', 'CollapsibleCodeBlock'].includes(organismName)) {
         setSelectedOrganism(organismName);
       }
     }
@@ -116,6 +117,7 @@ export function OrganismsSection({ activeItemId }: OrganismsSectionProps) {
     { id: 'Footer', label: 'Footer' },
     { id: 'Toast', label: 'Toast' },
     { id: 'Modal', label: 'Modal' },
+    { id: 'CollapsibleCodeBlock', label: 'Code Block' },
   ];
 
   return (
@@ -847,6 +849,275 @@ function MyComponent() {
         </div>
         </section>
         )}
+
+      {/* CollapsibleCodeBlock Component */}
+      {selectedOrganism === 'CollapsibleCodeBlock' && (
+        <section className="space-y-6">
+        <div>
+          <h3 className="text-2xl font-semibold mb-2 text-[var(--color-text-primary)]">
+            CollapsibleCodeBlock
+          </h3>
+          <Card className="p-6">
+            <p className="text-[var(--color-text-primary)] mb-4">
+              A reusable code block component with syntax highlighting, smooth expand/collapse animations, and copy functionality. Perfect for documentation and code examples.
+            </p>
+            <div className="space-y-4">
+              <div className="text-sm text-[var(--color-text-secondary)]">
+                <strong>Key Features:</strong>
+                <ul className="list-disc list-inside mt-2 space-y-1">
+                  <li>Smooth spring animation with cubic-bezier easing</li>
+                  <li>Theme-aware syntax highlighting (light/dark mode)</li>
+                  <li>Copy to clipboard functionality</li>
+                  <li>Preview mode showing first 3 lines when collapsed</li>
+                  <li>Gradient overlay for collapsed state</li>
+                  <li>Supports both string and tokenized code input</li>
+                  <li>Respects motion preferences</li>
+                  <li>Fully accessible with ARIA attributes</li>
+                </ul>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* Live Example */}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
+            Live Example
+          </h4>
+          <Card className="p-6">
+            <CollapsibleCodeBlock
+              id="live-example"
+              title="TypeScript Component Example"
+              code={[
+                { text: 'import', type: 'keyword' },
+                { text: ' { ', type: 'plain' },
+                { text: 'useState', type: 'className' },
+                { text: ' } ', type: 'plain' },
+                { text: 'from', type: 'keyword' },
+                { text: ' ', type: 'plain' },
+                { text: "'react'", type: 'string' },
+                { text: ';', type: 'punctuation' },
+                { text: '\n\n', type: 'plain' },
+                { text: 'interface', type: 'keyword' },
+                { text: ' ', type: 'plain' },
+                { text: 'ButtonProps', type: 'className' },
+                { text: ' {', type: 'punctuation' },
+                { text: '\n  ', type: 'plain' },
+                { text: 'variant', type: 'property' },
+                { text: '?: ', type: 'punctuation' },
+                { text: "'primary'", type: 'string' },
+                { text: ' | ', type: 'operator' },
+                { text: "'secondary'", type: 'string' },
+                { text: ';', type: 'punctuation' },
+                { text: '\n  ', type: 'plain' },
+                { text: 'onClick', type: 'property' },
+                { text: '?: () => ', type: 'punctuation' },
+                { text: 'void', type: 'keyword' },
+                { text: ';', type: 'punctuation' },
+                { text: '\n}', type: 'punctuation' },
+                { text: '\n\n', type: 'plain' },
+                { text: 'export', type: 'keyword' },
+                { text: ' ', type: 'plain' },
+                { text: 'function', type: 'keyword' },
+                { text: ' ', type: 'plain' },
+                { text: 'Button', type: 'function' },
+                { text: '(', type: 'punctuation' },
+                { text: '{ ', type: 'punctuation' },
+                { text: 'variant', type: 'variable' },
+                { text: ', ', type: 'punctuation' },
+                { text: 'onClick', type: 'variable' },
+                { text: ' }', type: 'punctuation' },
+                { text: ': ', type: 'punctuation' },
+                { text: 'ButtonProps', type: 'className' },
+                { text: ') {', type: 'punctuation' },
+                { text: '\n  ', type: 'plain' },
+                { text: 'const', type: 'keyword' },
+                { text: ' [', type: 'punctuation' },
+                { text: 'isActive', type: 'variable' },
+                { text: ', ', type: 'punctuation' },
+                { text: 'setIsActive', type: 'variable' },
+                { text: '] = ', type: 'punctuation' },
+                { text: 'useState', type: 'function' },
+                { text: '(', type: 'punctuation' },
+                { text: 'false', type: 'boolean' },
+                { text: ');', type: 'punctuation' },
+                { text: '\n  ', type: 'plain' },
+                { text: 'return', type: 'keyword' },
+                { text: ' <', type: 'tag' },
+                { text: 'button', type: 'tag' },
+                { text: ' ', type: 'plain' },
+                { text: 'onClick', type: 'attribute' },
+                { text: '={', type: 'punctuation' },
+                { text: 'onClick', type: 'variable' },
+                { text: '}>', type: 'tag' },
+                { text: 'Click', type: 'plain' },
+                { text: '</button>', type: 'tag' },
+                { text: ';', type: 'punctuation' },
+                { text: '\n}', type: 'punctuation' },
+              ]}
+              showCopy={true}
+            />
+          </Card>
+        </div>
+
+        {/* String Input Example */}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
+            String Input Example
+          </h4>
+          <Card className="p-6">
+            <CollapsibleCodeBlock
+              id="string-example"
+              title="CSS Example (String Input)"
+              code={`.button {
+  padding: 12px 24px;
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}`}
+              showCopy={true}
+            />
+          </Card>
+        </div>
+
+        {/* Code Example */}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
+            Usage Example
+          </h4>
+          <Card className="p-6 bg-[var(--color-surface)]">
+            <pre className="text-sm text-[var(--color-text-secondary)] overflow-x-auto">
+              <code>{`import { CollapsibleCodeBlock } from '@ecosystem/design-system';
+import type { SyntaxToken } from '@ecosystem/design-system';
+
+// With tokenized syntax highlighting
+const codeTokens: SyntaxToken[] = [
+  { text: 'const', type: 'keyword' },
+  { text: ' example ', type: 'plain' },
+  { text: '=', type: 'operator' },
+  { text: ' "Hello"', type: 'string' },
+];
+
+<CollapsibleCodeBlock
+  id="my-code"
+  title="Example Code"
+  code={codeTokens}
+  showCopy={true}
+/>
+
+// With plain string
+<CollapsibleCodeBlock
+  id="simple-code"
+  code="const example = 'Hello World';"
+  showCopy={true}
+  defaultCollapsed={false}
+/>`}</code>
+            </pre>
+          </Card>
+        </div>
+
+        {/* Props Reference */}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
+            Props Reference
+          </h4>
+          <Card className="p-6">
+            <div className="space-y-4">
+              <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
+                <code className="text-sm font-mono text-[var(--color-primary)]">id: string</code>
+                <p className="text-sm text-[var(--color-text-secondary)] mt-2">
+                  Required. Unique identifier for the code block (used for animation control).
+                </p>
+              </div>
+              <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
+                <code className="text-sm font-mono text-[var(--color-primary)]">code: string | SyntaxToken[]</code>
+                <p className="text-sm text-[var(--color-text-secondary)] mt-2">
+                  Required. The code to display - can be a plain string or array of syntax tokens for highlighting.
+                </p>
+              </div>
+              <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
+                <code className="text-sm font-mono text-[var(--color-primary)]">title?: string</code>
+                <p className="text-sm text-[var(--color-text-secondary)] mt-2">
+                  Optional. Title/label displayed above the code block.
+                </p>
+              </div>
+              <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
+                <code className="text-sm font-mono text-[var(--color-primary)]">showCopy?: boolean</code>
+                <p className="text-sm text-[var(--color-text-secondary)] mt-2">
+                  Optional. Show/hide the copy button. Default: true.
+                </p>
+              </div>
+              <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
+                <code className="text-sm font-mono text-[var(--color-primary)]">defaultCollapsed?: boolean</code>
+                <p className="text-sm text-[var(--color-text-secondary)] mt-2">
+                  Optional. Initial collapsed state. Default: true.
+                </p>
+              </div>
+              <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
+                <code className="text-sm font-mono text-[var(--color-primary)]">language?: string</code>
+                <p className="text-sm text-[var(--color-text-secondary)] mt-2">
+                  Optional. Language identifier (e.g., 'typescript', 'css', 'html').
+                </p>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* SyntaxToken Types */}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
+            SyntaxToken Types
+          </h4>
+          <Card className="p-6">
+            <p className="text-sm text-[var(--color-text-secondary)] mb-4">
+              Available token types for syntax highlighting:
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+              {['comment', 'keyword', 'function', 'string', 'number', 'boolean', 'operator', 'property', 'className', 'tag', 'attribute', 'variable', 'punctuation', 'plain'].map((type) => (
+                <code key={type} className="text-xs px-2 py-1 bg-[var(--color-surface)] rounded border border-[var(--color-border)] text-[var(--color-primary)]">
+                  {type}
+                </code>
+              ))}
+            </div>
+          </Card>
+        </div>
+
+        {/* Animation Details */}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
+            Animation Details
+          </h4>
+          <Card className="p-6">
+            <p className="text-[var(--color-text-primary)] mb-4">
+              The CollapsibleCodeBlock uses a smooth spring animation that respects user motion preferences.
+            </p>
+            <div className="space-y-4">
+              <div className="text-sm text-[var(--color-text-secondary)]">
+                <strong>Animation Properties:</strong>
+                <ul className="list-disc list-inside mt-2 space-y-1">
+                  <li><strong>Duration:</strong> 500ms</li>
+                  <li><strong>Easing:</strong> cubic-bezier(0.34, 1.56, 0.64, 1) - Spring bounce</li>
+                  <li><strong>Property:</strong> max-height transition</li>
+                  <li><strong>Preview Height:</strong> 6.6rem (3 lines of code)</li>
+                  <li><strong>Gradient Overlay:</strong> 1.5rem (h-6) from bottom</li>
+                </ul>
+              </div>
+              <div className="mt-4 p-3 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
+                <p className="text-xs text-[var(--color-text-muted)]">
+                  <strong>Accessibility:</strong> The animation respects <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">prefers-reduced-motion</code> by skipping animations when users have this preference enabled.
+                </p>
+              </div>
+            </div>
+          </Card>
+        </div>
+        </section>
+      )}
       </div>
     </div>
   );

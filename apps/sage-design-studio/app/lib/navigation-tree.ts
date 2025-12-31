@@ -60,6 +60,11 @@ export const navigationTree: NavigationItem[] = [
         section: 'tokens',
       },
       {
+        id: 'syntax',
+        label: 'Syntax',
+        section: 'tokens',
+      },
+      {
         id: 'motion',
         label: 'Motion',
         children: [
@@ -271,6 +276,17 @@ export const navigationTree: NavigationItem[] = [
               {
                 id: 'footer',
                 label: 'Footer',
+                section: 'organisms',
+              },
+            ],
+          },
+          {
+            id: 'code',
+            label: 'Code',
+            children: [
+              {
+                id: 'collapsible-code-block',
+                label: 'CollapsibleCodeBlock',
                 section: 'organisms',
               },
             ],
