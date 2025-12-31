@@ -16,13 +16,7 @@ import { MoleculesSection } from './components/studio/MoleculesSection';
 import { OrganismsSection } from './components/studio/OrganismsSection';
 import { HooksSection } from './components/studio/HooksSection';
 import { TemplatesSection } from './components/studio/TemplatesSection';
-import { MotionFoundationsSection } from './components/studio/MotionFoundationsSection';
-import { TextEffectsSection } from './components/studio/TextEffectsSection';
-import { ScrollSection } from './components/studio/ScrollSection';
-import { LoadingSection } from './components/studio/LoadingSection';
-import { InteractiveSection } from './components/studio/InteractiveSection';
-import { TransitionsSection } from './components/studio/TransitionsSection';
-import { CursorEffectsSection } from './components/studio/CursorEffectsSection';
+import { MotionSections } from './components/studio/MotionSections';
 
 type Section =
   | 'overview'
@@ -36,13 +30,7 @@ type Section =
   | 'organisms'
   | 'hooks'
   | 'templates'
-  | 'motion-foundations'
-  | 'text-effects'
-  | 'scroll'
-  | 'loading'
-  | 'interactive'
-  | 'transitions'
-  | 'cursor-effects';
+  | 'motion';
 
 export default function StudioPage() {
   const [activeSection, setActiveSection] = useState<Section>('overview');
@@ -97,27 +85,9 @@ export default function StudioPage() {
       setActiveSection('hooks'); // Utilities shown in Hooks section for now
       const itemId = path.replace('utilities-', '');
       setActiveItemId(itemId);
-    } else if (path === 'motion-foundations') {
-      setActiveSection('motion-foundations');
-      setActiveItemId('motion-foundations');
-    } else if (path === 'text-effects') {
-      setActiveSection('text-effects');
-      setActiveItemId('text-effects');
-    } else if (path === 'scroll') {
-      setActiveSection('scroll');
-      setActiveItemId('scroll');
-    } else if (path === 'loading') {
-      setActiveSection('loading');
-      setActiveItemId('loading');
-    } else if (path === 'interactive') {
-      setActiveSection('interactive');
-      setActiveItemId('interactive');
-    } else if (path === 'transitions') {
-      setActiveSection('transitions');
-      setActiveItemId('transitions');
-    } else if (path === 'cursor-effects') {
-      setActiveSection('cursor-effects');
-      setActiveItemId('cursor-effects');
+    } else if (path.startsWith('motion-') || ['text-effects', 'scroll', 'loading', 'interactive', 'transitions', 'cursor-effects'].includes(path)) {
+      setActiveSection('motion');
+      setActiveItemId(path);
     }
 
     // Scroll to top after navigation
@@ -179,13 +149,7 @@ export default function StudioPage() {
               {activeSection === 'organisms' && <OrganismsSection activeItemId={activeItemId} />}
               {activeSection === 'hooks' && <HooksSection activeItemId={activeItemId} />}
               {activeSection === 'templates' && <TemplatesSection />}
-              {activeSection === 'motion-foundations' && <MotionFoundationsSection />}
-              {activeSection === 'text-effects' && <TextEffectsSection />}
-              {activeSection === 'scroll' && <ScrollSection />}
-              {activeSection === 'loading' && <LoadingSection />}
-              {activeSection === 'interactive' && <InteractiveSection />}
-              {activeSection === 'transitions' && <TransitionsSection />}
-              {activeSection === 'cursor-effects' && <CursorEffectsSection />}
+              {activeSection === 'motion' && <MotionSections activeItemId={activeItemId} />}
             </div>
 
             {/* Table of Contents */}
