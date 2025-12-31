@@ -15,3 +15,6 @@ export type { Toast, ToastType, ToastProviderProps } from './Toast';
 
 export { Modal } from './Modal';
 export type { ModalProps } from './Modal';
+
+export { CollapsibleCodeBlock } from './CollapsibleCodeBlock';
+export type { CollapsibleCodeBlockProps, SyntaxToken } from './CollapsibleCodeBlock';

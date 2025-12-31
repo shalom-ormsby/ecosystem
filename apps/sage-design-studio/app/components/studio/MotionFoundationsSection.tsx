@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, Button } from '@ecosystem/design-system';
+import { Card, Button, CollapsibleCodeBlock } from '@ecosystem/design-system';
+import type { SyntaxToken } from '@ecosystem/design-system';
 import { baseTokens, motion } from '@ecosystem/design-system/tokens';
 
 /**
@@ -338,7 +339,7 @@ function MyComponent() {
         </div>
 
         {/* Code Preview (visible when closed) */}
-        <div id="accessibility-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4" style={{ maxHeight: '6.6rem' }}>
+        <div id="accessibility-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4" style={{ height: '6.6rem' }}>
           <div className="relative">
             <pre className="text-sm font-mono">
               <code>
@@ -550,7 +551,7 @@ function MyComponent() {
             </div>
 
             {/* Code Preview (visible when closed) */}
-            <div id="css-tailwind-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4" style={{ maxHeight: '6.6rem' }}>
+            <div id="css-tailwind-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4" style={{ height: '6.6rem' }}>
               <div className="relative">
                 <pre className="text-sm font-mono">
                   <code>
@@ -730,7 +731,7 @@ function MyComponent() {
               </div>
 
               {/* Code Preview (visible when closed) */}
-              <div id="framer-motion-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4" style={{ maxHeight: '6.6rem' }}>
+              <div id="framer-motion-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4" style={{ height: '6.6rem' }}>
                 <div className="relative">
                   <pre className="text-sm font-mono">
                     <code>
@@ -989,7 +990,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
               </div>
 
               {/* Code Preview (visible when closed) */}
-              <div id="gsap-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4" style={{ maxHeight: '6.6rem' }}>
+              <div id="gsap-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4" style={{ height: '6.6rem' }}>
                 <div className="relative">
                   <pre className="text-sm font-mono">
                     <code>
@@ -1345,6 +1346,77 @@ const customAnimation = createAnimation(
   Custom bouncy fade-in with rotation
 </motion.div>`}</pre>
           </div>
+        </Card>
+
+        {/* CollapsibleCodeBlock Example */}
+        <Card className="p-6 mt-8">
+          <h3 className="font-medium text-[var(--color-text-primary)] mb-3">CollapsibleCodeBlock Organism</h3>
+          <p className="text-sm text-[var(--color-text-secondary)] mb-4">
+            Use the new <code className="px-1 py-0.5 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">CollapsibleCodeBlock</code> organism for reusable, syntax-highlighted code blocks with smooth animations:
+          </p>
+
+          <CollapsibleCodeBlock
+            id="example-usage"
+            title="Example Usage"
+            code={[
+              { text: 'import', type: 'keyword' },
+              { text: ' { ', type: 'plain' },
+              { text: 'CollapsibleCodeBlock', type: 'className' },
+              { text: ' } ', type: 'plain' },
+              { text: 'from', type: 'keyword' },
+              { text: ' ', type: 'plain' },
+              { text: "'@ecosystem/design-system'", type: 'string' },
+              { text: ';', type: 'punctuation' },
+              { text: '\n\n', type: 'plain' },
+              { text: 'const', type: 'keyword' },
+              { text: ' codeTokens ', type: 'plain' },
+              { text: '=', type: 'operator' },
+              { text: ' [', type: 'punctuation' },
+              { text: '\n  ', type: 'plain' },
+              { text: '{ ', type: 'punctuation' },
+              { text: 'text', type: 'property' },
+              { text: ': ', type: 'punctuation' },
+              { text: '"const"', type: 'string' },
+              { text: ', ', type: 'punctuation' },
+              { text: 'type', type: 'property' },
+              { text: ': ', type: 'punctuation' },
+              { text: '"keyword"', type: 'string' },
+              { text: ' }', type: 'punctuation' },
+              { text: ',', type: 'punctuation' },
+              { text: '\n  ', type: 'plain' },
+              { text: '{ ', type: 'punctuation' },
+              { text: 'text', type: 'property' },
+              { text: ': ', type: 'punctuation' },
+              { text: '" example "', type: 'string' },
+              { text: ', ', type: 'punctuation' },
+              { text: 'type', type: 'property' },
+              { text: ': ', type: 'punctuation' },
+              { text: '"plain"', type: 'string' },
+              { text: ' }', type: 'punctuation' },
+              { text: '\n];', type: 'punctuation' },
+              { text: '\n\n', type: 'plain' },
+              { text: '<', type: 'tag' },
+              { text: 'CollapsibleCodeBlock', type: 'className' },
+              { text: '\n  ', type: 'plain' },
+              { text: 'id', type: 'attribute' },
+              { text: '=', type: 'operator' },
+              { text: '"my-code"', type: 'string' },
+              { text: '\n  ', type: 'plain' },
+              { text: 'code', type: 'attribute' },
+              { text: '=', type: 'operator' },
+              { text: '{', type: 'punctuation' },
+              { text: 'codeTokens', type: 'variable' },
+              { text: '}', type: 'punctuation' },
+              { text: '\n  ', type: 'plain' },
+              { text: 'showCopy', type: 'attribute' },
+              { text: '=', type: 'operator' },
+              { text: '{', type: 'punctuation' },
+              { text: 'true', type: 'boolean' },
+              { text: '}', type: 'punctuation' },
+              { text: '\n/>', type: 'tag' },
+            ]}
+            language="typescript"
+          />
         </Card>
       </div>
     </div>

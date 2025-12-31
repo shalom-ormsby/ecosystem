@@ -10,6 +10,7 @@ import { useThemeStore } from '../store/theme';
 import { studioTokens } from '../tokens/studio';
 import { sageTokens } from '../tokens/sage';
 import { voltTokens } from '../tokens/volt';
+import { syntaxColors } from '../tokens/syntax';
 import type { ThemeName, ColorMode } from '../store/theme';
 
 // Theme token map
@@ -103,6 +104,22 @@ function getThemeVars(theme: ThemeName, mode: ColorMode): Record<string, string>
     // but we can set defaults for CSS animations
     '--ease-default': tokens?.motion?.ease?.default || 'cubic-bezier(0.4, 0, 0.2, 1)',
     '--ease-spring': tokens?.motion?.ease?.spring || tokens?.motion?.ease?.default || 'cubic-bezier(0.16, 1, 0.3, 1)',
+
+    // Syntax Highlighting - Based on VS Code Dark+ theme
+    '--syntax-comment': mode === 'light' ? syntaxColors.light.comment : syntaxColors.dark.comment,
+    '--syntax-keyword': mode === 'light' ? syntaxColors.light.keyword : syntaxColors.dark.keyword,
+    '--syntax-function': mode === 'light' ? syntaxColors.light.function : syntaxColors.dark.function,
+    '--syntax-string': mode === 'light' ? syntaxColors.light.string : syntaxColors.dark.string,
+    '--syntax-number': mode === 'light' ? syntaxColors.light.number : syntaxColors.dark.number,
+    '--syntax-boolean': mode === 'light' ? syntaxColors.light.boolean : syntaxColors.dark.boolean,
+    '--syntax-operator': mode === 'light' ? syntaxColors.light.operator : syntaxColors.dark.operator,
+    '--syntax-property': mode === 'light' ? syntaxColors.light.property : syntaxColors.dark.property,
+    '--syntax-className': mode === 'light' ? syntaxColors.light.className : syntaxColors.dark.className,
+    '--syntax-tag': mode === 'light' ? syntaxColors.light.tag : syntaxColors.dark.tag,
+    '--syntax-attribute': mode === 'light' ? syntaxColors.light.attribute : syntaxColors.dark.attribute,
+    '--syntax-variable': mode === 'light' ? syntaxColors.light.variable : syntaxColors.dark.variable,
+    '--syntax-punctuation': mode === 'light' ? syntaxColors.light.punctuation : syntaxColors.dark.punctuation,
+    '--syntax-plain': mode === 'light' ? syntaxColors.light.plain : syntaxColors.dark.plain,
   };
 }
 
