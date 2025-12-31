@@ -269,18 +269,23 @@ export function MotionFoundationsSection() {
               if (preview && code && icon) {
                 const isHidden = code.classList.contains('hidden');
                 if (isHidden) {
-                  // Opening: start at preview height, expand to full
+                  // Opening: fade out preview, expand to full
+                  preview.style.opacity = '0';
                   code.classList.remove('hidden');
-                  code.style.maxHeight = '5.5rem'; // Match preview height
+                  code.style.maxHeight = '6.6rem'; // Match preview height (3 lines)
                   code.offsetHeight; // Force reflow
                   code.style.maxHeight = code.scrollHeight + 'px';
-                  preview.classList.add('hidden');
+                  setTimeout(() => preview.classList.add('hidden'), 500);
                 } else {
-                  // Closing: collapse to preview height, then swap
-                  code.style.maxHeight = '5.5rem';
+                  // Closing: collapse to preview height, fade in preview
+                  code.style.maxHeight = '6.6rem';
+                  preview.classList.remove('hidden');
+                  preview.style.opacity = '0';
+                  setTimeout(() => {
+                    preview.style.opacity = '1';
+                  }, 50);
                   setTimeout(() => {
                     code.classList.add('hidden');
-                    preview.classList.remove('hidden');
                   }, 500);
                 }
                 icon.classList.toggle('rotate-90');
@@ -338,7 +343,7 @@ function MyComponent() {
         </div>
 
         {/* Code Preview (visible when closed) */}
-        <div id="accessibility-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4" style={{ maxHeight: '5.5rem' }}>
+        <div id="accessibility-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4 transition-opacity duration-500" style={{ maxHeight: '6.6rem', opacity: 1 }}>
           <div className="relative">
             <pre className="text-sm font-mono">
               <code>
@@ -350,7 +355,7 @@ function MyComponent() {
                 <span className="text-[#0550ae] dark:text-[#9CDCFE]">prefers-reduced-motion</span>
               </code>
             </pre>
-            <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[var(--color-background)] to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-[var(--color-background)] to-transparent pointer-events-none" />
           </div>
         </div>
 
@@ -496,18 +501,23 @@ function MyComponent() {
                   if (preview && code && icon) {
                     const isHidden = code.classList.contains('hidden');
                     if (isHidden) {
-                      // Opening: start at preview height, expand to full
+                      // Opening: fade out preview, expand to full
+                      preview.style.opacity = '0';
                       code.classList.remove('hidden');
-                      code.style.maxHeight = '5.5rem'; // Match preview height
+                      code.style.maxHeight = '6.6rem'; // Match preview height (3 lines)
                       code.offsetHeight; // Force reflow
                       code.style.maxHeight = code.scrollHeight + 'px';
-                      preview.classList.add('hidden');
+                      setTimeout(() => preview.classList.add('hidden'), 500);
                     } else {
-                      // Closing: collapse to preview height, then swap
-                      code.style.maxHeight = '5.5rem';
+                      // Closing: collapse to preview height, fade in preview
+                      code.style.maxHeight = '6.6rem';
+                      preview.classList.remove('hidden');
+                      preview.style.opacity = '0';
+                      setTimeout(() => {
+                        preview.style.opacity = '1';
+                      }, 50);
                       setTimeout(() => {
                         code.classList.add('hidden');
-                        preview.classList.remove('hidden');
                       }, 500);
                     }
                     icon.classList.toggle('rotate-90');
@@ -550,7 +560,7 @@ function MyComponent() {
             </div>
 
             {/* Code Preview (visible when closed) */}
-            <div id="css-tailwind-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4" style={{ maxHeight: '5.5rem' }}>
+            <div id="css-tailwind-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4 transition-opacity duration-500" style={{ maxHeight: '6.6rem', opacity: 1 }}>
               <div className="relative">
                 <pre className="text-sm font-mono">
                   <code>
@@ -563,7 +573,7 @@ function MyComponent() {
                     <span className="text-[#0550ae] dark:text-[#9CDCFE]">transition</span>
                   </code>
                 </pre>
-                <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[var(--color-background)] to-transparent pointer-events-none" />
+                <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-[var(--color-background)] to-transparent pointer-events-none" />
               </div>
             </div>
 
@@ -660,18 +670,23 @@ function MyComponent() {
                     if (preview && code && icon) {
                       const isHidden = code.classList.contains('hidden');
                       if (isHidden) {
-                        // Opening: start at preview height, expand to full
+                        // Opening: fade out preview, expand to full
+                        preview.style.opacity = '0';
                         code.classList.remove('hidden');
-                        code.style.maxHeight = '5.5rem'; // Match preview height
+                        code.style.maxHeight = '6.6rem'; // Match preview height (3 lines)
                         code.offsetHeight; // Force reflow
                         code.style.maxHeight = code.scrollHeight + 'px';
-                        preview.classList.add('hidden');
+                        setTimeout(() => preview.classList.add('hidden'), 500);
                       } else {
-                        // Closing: collapse to preview height, then swap
-                        code.style.maxHeight = '5.5rem';
+                        // Closing: collapse to preview height, fade in preview
+                        code.style.maxHeight = '6.6rem';
+                        preview.classList.remove('hidden');
+                        preview.style.opacity = '0';
+                        setTimeout(() => {
+                          preview.style.opacity = '1';
+                        }, 50);
                         setTimeout(() => {
                           code.classList.add('hidden');
-                          preview.classList.remove('hidden');
                         }, 500);
                       }
                       icon.classList.toggle('rotate-90');
@@ -730,7 +745,7 @@ function MyComponent() {
               </div>
 
               {/* Code Preview (visible when closed) */}
-              <div id="framer-motion-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4" style={{ maxHeight: '5.5rem' }}>
+              <div id="framer-motion-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4 transition-opacity duration-500" style={{ maxHeight: '6.6rem', opacity: 1 }}>
                 <div className="relative">
                   <pre className="text-sm font-mono">
                     <code>
@@ -741,7 +756,7 @@ function MyComponent() {
                       <span className="text-[#8250df] dark:text-[#C586C0]">from</span>
                     </code>
                   </pre>
-                  <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[var(--color-background)] to-transparent pointer-events-none" />
+                  <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-[var(--color-background)] to-transparent pointer-events-none" />
                 </div>
               </div>
 
@@ -925,18 +940,23 @@ function MyComponent() {
                     if (preview && code && icon) {
                       const isHidden = code.classList.contains('hidden');
                       if (isHidden) {
-                        // Opening: start at preview height, expand to full
+                        // Opening: fade out preview, expand to full
+                        preview.style.opacity = '0';
                         code.classList.remove('hidden');
-                        code.style.maxHeight = '5.5rem'; // Match preview height
+                        code.style.maxHeight = '6.6rem'; // Match preview height (3 lines)
                         code.offsetHeight; // Force reflow
                         code.style.maxHeight = code.scrollHeight + 'px';
-                        preview.classList.add('hidden');
+                        setTimeout(() => preview.classList.add('hidden'), 500);
                       } else {
-                        // Closing: collapse to preview height, then swap
-                        code.style.maxHeight = '5.5rem';
+                        // Closing: collapse to preview height, fade in preview
+                        code.style.maxHeight = '6.6rem';
+                        preview.classList.remove('hidden');
+                        preview.style.opacity = '0';
+                        setTimeout(() => {
+                          preview.style.opacity = '1';
+                        }, 50);
                         setTimeout(() => {
                           code.classList.add('hidden');
-                          preview.classList.remove('hidden');
                         }, 500);
                       }
                       icon.classList.toggle('rotate-90');
@@ -989,7 +1009,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
               </div>
 
               {/* Code Preview (visible when closed) */}
-              <div id="gsap-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4" style={{ maxHeight: '5.5rem' }}>
+              <div id="gsap-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4 transition-opacity duration-500" style={{ maxHeight: '6.6rem', opacity: 1 }}>
                 <div className="relative">
                   <pre className="text-sm font-mono">
                     <code>
@@ -1000,7 +1020,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
                       <span className="text-[#8250df] dark:text-[#C586C0]">from</span>
                     </code>
                   </pre>
-                  <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[var(--color-background)] to-transparent pointer-events-none" />
+                  <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-[var(--color-background)] to-transparent pointer-events-none" />
                 </div>
               </div>
 
