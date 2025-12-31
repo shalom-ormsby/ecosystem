@@ -271,6 +271,9 @@ export function MotionFoundationsSection() {
                 if (isHidden) {
                   preview.classList.add('hidden');
                   code.classList.remove('hidden');
+                  code.style.maxHeight = '0px';
+                  // Force reflow to ensure 0px state is painted before animating
+                  code.offsetHeight;
                   code.style.maxHeight = code.scrollHeight + 'px';
                 } else {
                   preview.classList.remove('hidden');
@@ -494,6 +497,9 @@ function MyComponent() {
                     if (isHidden) {
                       preview.classList.add('hidden');
                       code.classList.remove('hidden');
+                      code.style.maxHeight = '0px';
+                      // Force reflow to ensure 0px state is painted before animating
+                      code.offsetHeight;
                       code.style.maxHeight = code.scrollHeight + 'px';
                     } else {
                       preview.classList.remove('hidden');
@@ -654,6 +660,9 @@ function MyComponent() {
                       if (isHidden) {
                         preview.classList.add('hidden');
                         code.classList.remove('hidden');
+                        code.style.maxHeight = '0px';
+                        // Force reflow to ensure 0px state is painted before animating
+                        code.offsetHeight;
                         code.style.maxHeight = code.scrollHeight + 'px';
                       } else {
                         preview.classList.remove('hidden');
@@ -915,6 +924,9 @@ function MyComponent() {
                       if (isHidden) {
                         preview.classList.add('hidden');
                         code.classList.remove('hidden');
+                        code.style.maxHeight = '0px';
+                        // Force reflow to ensure 0px state is painted before animating
+                        code.offsetHeight;
                         code.style.maxHeight = code.scrollHeight + 'px';
                       } else {
                         preview.classList.remove('hidden');
