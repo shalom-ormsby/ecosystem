@@ -269,23 +269,18 @@ export function MotionFoundationsSection() {
               if (preview && code && icon) {
                 const isHidden = code.classList.contains('hidden');
                 if (isHidden) {
-                  // Opening: fade out preview, expand to full
-                  preview.style.opacity = '0';
+                  // Opening: start at preview height, expand to full
+                  preview.classList.add('hidden');
                   code.classList.remove('hidden');
                   code.style.maxHeight = '6.6rem'; // Match preview height (3 lines)
                   code.offsetHeight; // Force reflow
                   code.style.maxHeight = code.scrollHeight + 'px';
-                  setTimeout(() => preview.classList.add('hidden'), 500);
                 } else {
-                  // Closing: collapse to preview height, fade in preview
+                  // Closing: collapse to preview height, then swap
                   code.style.maxHeight = '6.6rem';
-                  preview.classList.remove('hidden');
-                  preview.style.opacity = '0';
-                  setTimeout(() => {
-                    preview.style.opacity = '1';
-                  }, 50);
                   setTimeout(() => {
                     code.classList.add('hidden');
+                    preview.classList.remove('hidden');
                   }, 500);
                 }
                 icon.classList.toggle('rotate-90');
@@ -343,7 +338,7 @@ function MyComponent() {
         </div>
 
         {/* Code Preview (visible when closed) */}
-        <div id="accessibility-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4 transition-opacity duration-500" style={{ maxHeight: '6.6rem', opacity: 1 }}>
+        <div id="accessibility-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4" style={{ maxHeight: '6.6rem' }}>
           <div className="relative">
             <pre className="text-sm font-mono">
               <code>
@@ -501,23 +496,18 @@ function MyComponent() {
                   if (preview && code && icon) {
                     const isHidden = code.classList.contains('hidden');
                     if (isHidden) {
-                      // Opening: fade out preview, expand to full
-                      preview.style.opacity = '0';
+                      // Opening: start at preview height, expand to full
+                      preview.classList.add('hidden');
                       code.classList.remove('hidden');
                       code.style.maxHeight = '6.6rem'; // Match preview height (3 lines)
                       code.offsetHeight; // Force reflow
                       code.style.maxHeight = code.scrollHeight + 'px';
-                      setTimeout(() => preview.classList.add('hidden'), 500);
                     } else {
-                      // Closing: collapse to preview height, fade in preview
+                      // Closing: collapse to preview height, then swap
                       code.style.maxHeight = '6.6rem';
-                      preview.classList.remove('hidden');
-                      preview.style.opacity = '0';
-                      setTimeout(() => {
-                        preview.style.opacity = '1';
-                      }, 50);
                       setTimeout(() => {
                         code.classList.add('hidden');
+                        preview.classList.remove('hidden');
                       }, 500);
                     }
                     icon.classList.toggle('rotate-90');
@@ -560,7 +550,7 @@ function MyComponent() {
             </div>
 
             {/* Code Preview (visible when closed) */}
-            <div id="css-tailwind-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4 transition-opacity duration-500" style={{ maxHeight: '6.6rem', opacity: 1 }}>
+            <div id="css-tailwind-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4" style={{ maxHeight: '6.6rem' }}>
               <div className="relative">
                 <pre className="text-sm font-mono">
                   <code>
@@ -670,23 +660,18 @@ function MyComponent() {
                     if (preview && code && icon) {
                       const isHidden = code.classList.contains('hidden');
                       if (isHidden) {
-                        // Opening: fade out preview, expand to full
-                        preview.style.opacity = '0';
+                        // Opening: start at preview height, expand to full
+                        preview.classList.add('hidden');
                         code.classList.remove('hidden');
                         code.style.maxHeight = '6.6rem'; // Match preview height (3 lines)
                         code.offsetHeight; // Force reflow
                         code.style.maxHeight = code.scrollHeight + 'px';
-                        setTimeout(() => preview.classList.add('hidden'), 500);
                       } else {
-                        // Closing: collapse to preview height, fade in preview
+                        // Closing: collapse to preview height, then swap
                         code.style.maxHeight = '6.6rem';
-                        preview.classList.remove('hidden');
-                        preview.style.opacity = '0';
-                        setTimeout(() => {
-                          preview.style.opacity = '1';
-                        }, 50);
                         setTimeout(() => {
                           code.classList.add('hidden');
+                          preview.classList.remove('hidden');
                         }, 500);
                       }
                       icon.classList.toggle('rotate-90');
@@ -745,7 +730,7 @@ function MyComponent() {
               </div>
 
               {/* Code Preview (visible when closed) */}
-              <div id="framer-motion-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4 transition-opacity duration-500" style={{ maxHeight: '6.6rem', opacity: 1 }}>
+              <div id="framer-motion-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4" style={{ maxHeight: '6.6rem' }}>
                 <div className="relative">
                   <pre className="text-sm font-mono">
                     <code>
@@ -940,23 +925,18 @@ function MyComponent() {
                     if (preview && code && icon) {
                       const isHidden = code.classList.contains('hidden');
                       if (isHidden) {
-                        // Opening: fade out preview, expand to full
-                        preview.style.opacity = '0';
+                        // Opening: start at preview height, expand to full
+                        preview.classList.add('hidden');
                         code.classList.remove('hidden');
                         code.style.maxHeight = '6.6rem'; // Match preview height (3 lines)
                         code.offsetHeight; // Force reflow
                         code.style.maxHeight = code.scrollHeight + 'px';
-                        setTimeout(() => preview.classList.add('hidden'), 500);
                       } else {
-                        // Closing: collapse to preview height, fade in preview
+                        // Closing: collapse to preview height, then swap
                         code.style.maxHeight = '6.6rem';
-                        preview.classList.remove('hidden');
-                        preview.style.opacity = '0';
-                        setTimeout(() => {
-                          preview.style.opacity = '1';
-                        }, 50);
                         setTimeout(() => {
                           code.classList.add('hidden');
+                          preview.classList.remove('hidden');
                         }, 500);
                       }
                       icon.classList.toggle('rotate-90');
@@ -1009,7 +989,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
               </div>
 
               {/* Code Preview (visible when closed) */}
-              <div id="gsap-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4 transition-opacity duration-500" style={{ maxHeight: '6.6rem', opacity: 1 }}>
+              <div id="gsap-preview" className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4" style={{ maxHeight: '6.6rem' }}>
                 <div className="relative">
                   <pre className="text-sm font-mono">
                     <code>
