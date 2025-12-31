@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { useTheme } from '../../hooks';
+import { syntaxColors } from '../../tokens/syntax';
 
 export interface SyntaxToken {
   text: string;
@@ -60,6 +62,10 @@ export function CollapsibleCodeBlock({
 }: CollapsibleCodeBlockProps) {
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
   const [copySuccess, setCopySuccess] = useState(false);
+  const { mode } = useTheme();
+
+  // Get the appropriate color scheme based on current theme mode
+  const colors = mode === 'dark' ? syntaxColors.dark : syntaxColors.light;
 
   // Convert code to string for copying
   const codeString = typeof code === 'string'
@@ -107,21 +113,20 @@ export function CollapsibleCodeBlock({
     }
   };
 
-  // Render syntax-highlighted code
+  // Render syntax-highlighted code with inline colors from tokens
   const renderCode = (tokens: string | SyntaxToken[]) => {
     if (typeof tokens === 'string') {
-      return <span className="text-[var(--syntax-plain,var(--color-text-primary))]">{tokens}</span>;
+      return <span style={{ color: colors.plain }}>{tokens}</span>;
     }
 
     return tokens.map((token, index) => {
-      const colorVar = token.type
-        ? `--syntax-${token.type}`
-        : '--syntax-plain';
+      // Get color from syntax tokens based on token type
+      const color = token.type ? colors[token.type] : colors.plain;
 
       return (
         <span
           key={index}
-          className={`text-[var(${colorVar},var(--color-text-primary))]`}
+          style={{ color }}
         >
           {token.text}
         </span>

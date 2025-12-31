@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ThemeProvider, CustomizerPanel } from '@ecosystem/design-system';
 import { allFontVariables } from '@/lib/fonts';
 import Link from 'next/link';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -79,6 +80,7 @@ export default function RootLayout({
           {/* Customizer Panel (bottom-right corner) */}
           <CustomizerPanel />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

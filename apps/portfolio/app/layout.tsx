@@ -3,6 +3,7 @@ import { CustomizerPanel } from '@ecosystem/design-system/features/customizer';
 import { ThemeProvider } from '@ecosystem/design-system';
 import { allFontVariables } from '../lib/fonts';
 import GoogleAnalytics from './components/GoogleAnalytics';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({
           {children}
           <CustomizerPanel />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

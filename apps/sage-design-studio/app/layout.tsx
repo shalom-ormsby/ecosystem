@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { ThemeProvider, ToastProvider } from '@ecosystem/design-system';
 import { allFontVariables } from '../lib/fonts';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export default function RootLayout({
             {children}
           </ToastProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
