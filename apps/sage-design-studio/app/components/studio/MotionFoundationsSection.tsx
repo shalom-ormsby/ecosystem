@@ -273,10 +273,10 @@ export function MotionFoundationsSection() {
                   code.classList.remove('hidden');
                   code.style.maxHeight = code.scrollHeight + 'px';
                 } else {
+                  preview.classList.remove('hidden');
                   code.style.maxHeight = '0px';
                   setTimeout(() => {
                     code.classList.add('hidden');
-                    preview.classList.remove('hidden');
                   }, 500);
                 }
                 icon.classList.toggle('rotate-90');
@@ -496,10 +496,10 @@ function MyComponent() {
                       code.classList.remove('hidden');
                       code.style.maxHeight = code.scrollHeight + 'px';
                     } else {
+                      preview.classList.remove('hidden');
                       code.style.maxHeight = '0px';
                       setTimeout(() => {
                         code.classList.add('hidden');
-                        preview.classList.remove('hidden');
                       }, 500);
                     }
                     icon.classList.toggle('rotate-90');
@@ -656,10 +656,10 @@ function MyComponent() {
                         code.classList.remove('hidden');
                         code.style.maxHeight = code.scrollHeight + 'px';
                       } else {
+                        preview.classList.remove('hidden');
                         code.style.maxHeight = '0px';
                         setTimeout(() => {
                           code.classList.add('hidden');
-                          preview.classList.remove('hidden');
                         }, 500);
                       }
                       icon.classList.toggle('rotate-90');
@@ -917,10 +917,10 @@ function MyComponent() {
                         code.classList.remove('hidden');
                         code.style.maxHeight = code.scrollHeight + 'px';
                       } else {
+                        preview.classList.remove('hidden');
                         code.style.maxHeight = '0px';
                         setTimeout(() => {
                           code.classList.add('hidden');
-                          preview.classList.remove('hidden');
                         }, 500);
                       }
                       icon.classList.toggle('rotate-90');
