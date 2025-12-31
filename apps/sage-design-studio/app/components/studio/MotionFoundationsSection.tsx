@@ -259,44 +259,70 @@ export function MotionFoundationsSection() {
           Some users experience motion sickness or find animations distracting.
         </p>
 
-        {/* Code Preview */}
-        <div
-          id="accessibility-preview"
-          className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-3"
-          style={{ maxHeight: '3.5rem' }}
-        >
-          <pre className="text-sm font-mono">
-            <code>
-              <span className="text-[#6A9955]">/* CSS approach */</span>
-              {'\n'}
-              <span className="text-[#D4D4D4]">@</span>
-              <span className="text-[#4EC9B0]">media</span>
-              <span className="text-[#D4D4D4]"> (</span>
-              <span className="text-[#9CDCFE]">prefers-reduced-motion</span>
-            </code>
-          </pre>
+        {/* Button Row */}
+        <div className="flex items-center gap-2 mb-4">
+          <button
+            onClick={() => {
+              const code = document.getElementById('accessibility-code');
+              const icon = document.getElementById('accessibility-icon');
+              if (code && icon) {
+                code.classList.toggle('hidden');
+                icon.classList.toggle('rotate-90');
+              }
+            }}
+            className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
+          >
+            <svg
+              id="accessibility-icon"
+              className="w-4 h-4 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+            <span>Show Code</span>
+          </button>
+          <button
+            onClick={() => {
+              const codeText = `/* CSS approach */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// React Hook approach (recommended)
+import { useMotionPreference } from '@ecosystem/design-system';
+
+function MyComponent() {
+  const { shouldAnimate } = useMotionPreference();
+
+  return (
+    <motion.div
+      initial={shouldAnimate ? { opacity: 0, y: 20 } : false}
+      animate={{ { opacity: 1, y: 0 } }}
+      transition={{ { duration: shouldAnimate ? 0.3 : 0 } }}
+    >
+      Content
+    </motion.div>
+  );
+}`;
+              navigator.clipboard.writeText(codeText);
+            }}
+            className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
+            title="Copy code to clipboard"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            <span>Copy</span>
+          </button>
         </div>
 
-        {/* Toggle Button */}
-        <button
-          onClick={() => {
-            const preview = document.getElementById('accessibility-preview');
-            const full = document.getElementById('accessibility-full');
-            const btn = document.getElementById('accessibility-btn');
-            if (preview && full && btn) {
-              preview.classList.toggle('hidden');
-              full.classList.toggle('hidden');
-              btn.textContent = full.classList.contains('hidden') ? '[ Code > ]' : '[ Hide Code ]';
-            }
-          }}
-          id="accessibility-btn"
-          className="text-sm font-mono text-[var(--color-primary)] hover:text-[var(--color-primary)]/80 transition-colors"
-        >
-          [ Code &gt; ]
-        </button>
-
-        {/* Full Code (hidden by default) */}
-        <div id="accessibility-full" className="hidden">
+        {/* Code Block (hidden by default) */}
+        <div id="accessibility-code" className="hidden">
           <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-x-auto">
             <pre className="text-sm font-mono">
               <code>
@@ -427,43 +453,55 @@ export function MotionFoundationsSection() {
               For simple transitions and states, use CSS transitions with our motion tokens.
             </p>
 
-            {/* Code Preview */}
-            <div
-              id="css-tailwind-preview"
-              className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-3"
-              style={{ maxHeight: '3.5rem' }}
-            >
-              <pre className="text-sm font-mono">
-                <code>
-                  <span className="text-[#6A9955]">/* Using CSS custom properties */</span>
-                  {'\n'}
-                  <span className="text-[#D4D4D4]">.</span>
-                  <span className="text-[#4EC9B0]">button</span>
-                  <span className="text-[#D4D4D4]"> {'{'}</span>
-                </code>
-              </pre>
+            {/* Button Row */}
+            <div className="flex items-center gap-2 mb-4">
+              <button
+                onClick={() => {
+                  const code = document.getElementById('css-tailwind-code');
+                  const icon = document.getElementById('css-tailwind-icon');
+                  if (code && icon) {
+                    code.classList.toggle('hidden');
+                    icon.classList.toggle('rotate-90');
+                  }
+                }}
+                className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
+              >
+                <svg
+                  id="css-tailwind-icon"
+                  className="w-4 h-4 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Show Code</span>
+              </button>
+              <button
+                onClick={() => {
+                  const codeText = `/* Using CSS custom properties */
+.button {
+  transition: all var(--duration-normal) var(--ease-default);
+}
+
+/* Using Tailwind */
+<button className="transition-all duration-300 ease-out hover:scale-105">
+  Hover me
+</button>`;
+                  navigator.clipboard.writeText(codeText);
+                }}
+                className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
+                title="Copy code to clipboard"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                <span>Copy</span>
+              </button>
             </div>
 
-            {/* Toggle Button */}
-            <button
-              onClick={() => {
-                const preview = document.getElementById('css-tailwind-preview');
-                const full = document.getElementById('css-tailwind-full');
-                const btn = document.getElementById('css-tailwind-btn');
-                if (preview && full && btn) {
-                  preview.classList.toggle('hidden');
-                  full.classList.toggle('hidden');
-                  btn.textContent = full.classList.contains('hidden') ? '[ Code > ]' : '[ Hide Code ]';
-                }
-              }}
-              id="css-tailwind-btn"
-              className="text-sm font-mono text-[var(--color-primary)] hover:text-[var(--color-primary)]/80 transition-colors"
-            >
-              [ Code &gt; ]
-            </button>
-
-            {/* Full Code (hidden by default) */}
-            <div id="css-tailwind-full" className="hidden">
+            {/* Code Block (hidden by default) */}
+            <div id="css-tailwind-code" className="hidden">
               <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-x-auto">
                 <pre className="text-sm font-mono">
                   <code>
@@ -545,45 +583,71 @@ export function MotionFoundationsSection() {
                 </ul>
               </div>
 
-              {/* Code Preview */}
-              <div
-                id="framer-motion-preview"
-                className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-3"
-                style={{ maxHeight: '3.5rem' }}
-              >
-                <pre className="text-sm font-mono">
-                  <code>
-                    <span className="text-[#C586C0]">import</span>
-                    <span className="text-[#D4D4D4]"> {'{ '}</span>
-                    <span className="text-[#9CDCFE]">motion</span>
-                    <span className="text-[#D4D4D4]"> {'} '}</span>
-                    <span className="text-[#C586C0]">from</span>
-                    <span className="text-[#D4D4D4]"> </span>
-                    <span className="text-[#CE9178]">'framer-motion'</span>
-                  </code>
-                </pre>
+              {/* Button Row */}
+              <div className="flex items-center gap-2 mb-4">
+                <button
+                  onClick={() => {
+                    const code = document.getElementById('framer-motion-code');
+                    const icon = document.getElementById('framer-motion-icon');
+                    if (code && icon) {
+                      code.classList.toggle('hidden');
+                      icon.classList.toggle('rotate-90');
+                    }
+                  }}
+                  className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
+                >
+                  <svg
+                    id="framer-motion-icon"
+                    className="w-4 h-4 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                  <span>Show Code</span>
+                </button>
+                <button
+                  onClick={() => {
+                    const codeText = `import { motion } from 'framer-motion';
+
+// Basic animation
+<motion.div
+  initial={{ { opacity: 0, y: 20 } }}
+  animate={{ { opacity: 1, y: 0 } }}
+  transition={{
+    duration: 0.3, // 300ms = normal
+    ease: [0, 0, 0.2, 1] // ease-out
+  }}
+>
+  Content
+</motion.div>
+
+// Using design system tokens
+<motion.button
+  whileHover={{ { scale: 1.05 } }}
+  whileTap={{ { scale: 0.95 } }}
+  transition={{
+    duration: 0.15, // fast
+    ease: [0.16, 1, 0.3, 1] // spring
+  }}
+>
+  Click me
+</motion.button>`;
+                    navigator.clipboard.writeText(codeText);
+                  }}
+                  className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
+                  title="Copy code to clipboard"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  <span>Copy</span>
+                </button>
               </div>
 
-              {/* Toggle Button */}
-              <button
-                onClick={() => {
-                  const preview = document.getElementById('framer-motion-preview');
-                  const full = document.getElementById('framer-motion-full');
-                  const btn = document.getElementById('framer-motion-btn');
-                  if (preview && full && btn) {
-                    preview.classList.toggle('hidden');
-                    full.classList.toggle('hidden');
-                    btn.textContent = full.classList.contains('hidden') ? '[ Code > ]' : '[ Hide Code ]';
-                  }
-                }}
-                id="framer-motion-btn"
-                className="text-sm font-mono text-[var(--color-primary)] hover:text-[var(--color-primary)]/80 transition-colors"
-              >
-                [ Code &gt; ]
-              </button>
-
-              {/* Full Code (hidden by default) */}
-              <div id="framer-motion-full" className="hidden">
+              {/* Code Block (hidden by default) */}
+              <div id="framer-motion-code" className="hidden">
                 <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-x-auto">
                   <pre className="text-sm font-mono">
                     <code>
@@ -752,45 +816,65 @@ export function MotionFoundationsSection() {
                 </ul>
               </div>
 
-              {/* Code Preview */}
-              <div
-                id="gsap-preview"
-                className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-3"
-                style={{ maxHeight: '3.5rem' }}
-              >
-                <pre className="text-sm font-mono">
-                  <code>
-                    <span className="text-[#C586C0]">import</span>
-                    <span className="text-[#D4D4D4]"> {'{ '}</span>
-                    <span className="text-[#9CDCFE]">gsap</span>
-                    <span className="text-[#D4D4D4]"> {'} '}</span>
-                    <span className="text-[#C586C0]">from</span>
-                    <span className="text-[#D4D4D4]"> </span>
-                    <span className="text-[#CE9178]">'gsap'</span>
-                  </code>
-                </pre>
+              {/* Button Row */}
+              <div className="flex items-center gap-2 mb-4">
+                <button
+                  onClick={() => {
+                    const code = document.getElementById('gsap-code');
+                    const icon = document.getElementById('gsap-icon');
+                    if (code && icon) {
+                      code.classList.toggle('hidden');
+                      icon.classList.toggle('rotate-90');
+                    }
+                  }}
+                  className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
+                >
+                  <svg
+                    id="gsap-icon"
+                    className="w-4 h-4 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                  <span>Show Code</span>
+                </button>
+                <button
+                  onClick={() => {
+                    const codeText = `import { gsap } from 'gsap';
+
+// Basic animation
+gsap.to('.element', {
+  opacity: 1,
+  y: 0,
+  duration: 0.3, // 300ms = normal
+  ease: 'power2.out' // Similar to ease-out
+});
+
+// Timeline sequence
+const tl = gsap.timeline();
+tl.to('.hero', { opacity: 1, duration: 0.5 })
+  .to('.cta', { scale: 1, duration: 0.15 }, '-=0.2')
+  .to('.features', {
+    y: 0,
+    stagger: 0.1, // Stagger items
+    duration: 0.3
+  });`;
+                    navigator.clipboard.writeText(codeText);
+                  }}
+                  className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
+                  title="Copy code to clipboard"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  <span>Copy</span>
+                </button>
               </div>
 
-              {/* Toggle Button */}
-              <button
-                onClick={() => {
-                  const preview = document.getElementById('gsap-preview');
-                  const full = document.getElementById('gsap-full');
-                  const btn = document.getElementById('gsap-btn');
-                  if (preview && full && btn) {
-                    preview.classList.toggle('hidden');
-                    full.classList.toggle('hidden');
-                    btn.textContent = full.classList.contains('hidden') ? '[ Code > ]' : '[ Hide Code ]';
-                  }
-                }}
-                id="gsap-btn"
-                className="text-sm font-mono text-[var(--color-primary)] hover:text-[var(--color-primary)]/80 transition-colors"
-              >
-                [ Code &gt; ]
-              </button>
-
-              {/* Full Code (hidden by default) */}
-              <div id="gsap-full" className="hidden">
+              {/* Code Block (hidden by default) */}
+              <div id="gsap-code" className="hidden">
                 <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-x-auto">
                   <pre className="text-sm font-mono">
                     <code>
