@@ -259,22 +259,41 @@ export function MotionFoundationsSection() {
           Some users experience motion sickness or find animations distracting.
         </p>
 
+        {/* Code Preview (visible when closed) */}
+        <div id="accessibility-preview" className="relative mb-4">
+          <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden" style={{ maxHeight: '5.5rem' }}>
+            <pre className="text-sm font-mono">
+              <code>
+                <span className="text-[#22863a] dark:text-[#22863a] dark:text-[#6A9955]">/* CSS approach */</span>
+                {'\n'}
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">@</span>
+                <span className="text-[#005cc5] dark:text-[#005cc5] dark:text-[#4EC9B0]">media</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> (</span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">prefers-reduced-motion</span>
+              </code>
+            </pre>
+          </div>
+          <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[var(--color-background)] to-transparent pointer-events-none rounded" />
+        </div>
+
         {/* Button Row */}
         <div className="flex items-center gap-2 mb-4">
           <button
             onClick={() => {
+              const preview = document.getElementById('accessibility-preview');
               const code = document.getElementById('accessibility-code');
               const icon = document.getElementById('accessibility-icon');
-              if (code && icon) {
+              if (preview && code && icon) {
+                preview.classList.toggle('hidden');
                 code.classList.toggle('hidden');
                 icon.classList.toggle('rotate-90');
               }
             }}
-            className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
+            className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-primary)] hover:text-[var(--color-primary-foreground)] hover:scale-105 hover:shadow-lg active:scale-95 border border-[var(--color-border)] rounded-md transition-all duration-200"
           >
             <svg
               id="accessibility-icon"
-              className="w-4 h-4 transition-transform"
+              className="w-4 h-4 transition-transform duration-300"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -311,7 +330,7 @@ function MyComponent() {
 }`;
               navigator.clipboard.writeText(codeText);
             }}
-            className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
+            className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-primary)] hover:text-[var(--color-primary-foreground)] hover:scale-105 hover:shadow-lg active:scale-95 border border-[var(--color-border)] rounded-md transition-all duration-200"
             title="Copy code to clipboard"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -321,117 +340,117 @@ function MyComponent() {
           </button>
         </div>
 
-        {/* Code Block (hidden by default) */}
-        <div id="accessibility-code" className="hidden">
+        {/* Full Code (hidden by default) */}
+        <div id="accessibility-code" className="hidden overflow-hidden transition-all duration-500" style={{ transition: 'max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out' }}>
           <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-x-auto">
             <pre className="text-sm font-mono">
               <code>
-                <span className="text-[#6A9955]">/* CSS approach */</span>
+                <span className="text-[#22863a] dark:text-[#22863a] dark:text-[#6A9955]">/* CSS approach */</span>
                 {'\n'}
-                <span className="text-[#D4D4D4]">@</span>
-                <span className="text-[#4EC9B0]">media</span>
-                <span className="text-[#D4D4D4]"> (</span>
-                <span className="text-[#9CDCFE]">prefers-reduced-motion</span>
-                <span className="text-[#D4D4D4]">: </span>
-                <span className="text-[#CE9178]">reduce</span>
-                <span className="text-[#D4D4D4]">) {'{'}</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">@</span>
+                <span className="text-[#005cc5] dark:text-[#005cc5] dark:text-[#4EC9B0]">media</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> (</span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">prefers-reduced-motion</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                <span className="text-[#c1592a] dark:text-[#c1592a] dark:text-[#CE9178]">reduce</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">) {'{'}</span>
                 {'\n  '}
-                <span className="text-[#D4D4D4]">* {'{'}</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">* {'{'}</span>
                 {'\n    '}
-                <span className="text-[#9CDCFE]">animation-duration</span>
-                <span className="text-[#D4D4D4]">: </span>
-                <span className="text-[#CE9178]">0.01ms</span>
-                <span className="text-[#D4D4D4]"> !important;</span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">animation-duration</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                <span className="text-[#c1592a] dark:text-[#c1592a] dark:text-[#CE9178]">0.01ms</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> !important;</span>
                 {'\n    '}
-                <span className="text-[#9CDCFE]">transition-duration</span>
-                <span className="text-[#D4D4D4]">: </span>
-                <span className="text-[#CE9178]">0.01ms</span>
-                <span className="text-[#D4D4D4]"> !important;</span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">transition-duration</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                <span className="text-[#c1592a] dark:text-[#c1592a] dark:text-[#CE9178]">0.01ms</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> !important;</span>
                 {'\n  '}
-                <span className="text-[#D4D4D4]">{'}'}</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">{'}'}</span>
                 {'\n'}
-                <span className="text-[#D4D4D4]">{'}'}</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">{'}'}</span>
                 {'\n\n'}
-                <span className="text-[#6A9955]">// React Hook approach (recommended)</span>
+                <span className="text-[#22863a] dark:text-[#22863a] dark:text-[#6A9955]">// React Hook approach (recommended)</span>
                 {'\n'}
-                <span className="text-[#C586C0]">import</span>
-                <span className="text-[#D4D4D4]"> {'{ '}</span>
-                <span className="text-[#9CDCFE]">useMotionPreference</span>
-                <span className="text-[#D4D4D4]"> {'} '}</span>
-                <span className="text-[#C586C0]">from</span>
-                <span className="text-[#D4D4D4]"> </span>
-                <span className="text-[#CE9178]">'@ecosystem/design-system'</span>
-                <span className="text-[#D4D4D4]">;</span>
+                <span className="text-[#8250df] dark:text-[#8250df] dark:text-[#C586C0]">import</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> {'{ '}</span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">useMotionPreference</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> {'} '}</span>
+                <span className="text-[#8250df] dark:text-[#8250df] dark:text-[#C586C0]">from</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> </span>
+                <span className="text-[#c1592a] dark:text-[#c1592a] dark:text-[#CE9178]">'@ecosystem/design-system'</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">;</span>
                 {'\n\n'}
-                <span className="text-[#C586C0]">function</span>
-                <span className="text-[#D4D4D4]"> </span>
-                <span className="text-[#DCDCAA]">MyComponent</span>
-                <span className="text-[#D4D4D4]">() {'{'}</span>
+                <span className="text-[#8250df] dark:text-[#8250df] dark:text-[#C586C0]">function</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> </span>
+                <span className="text-[#6639ba] dark:text-[#6639ba] dark:text-[#DCDCAA]">MyComponent</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">() {'{'}</span>
                 {'\n  '}
-                <span className="text-[#C586C0]">const</span>
-                <span className="text-[#D4D4D4]"> {'{ '}</span>
-                <span className="text-[#9CDCFE]">shouldAnimate</span>
-                <span className="text-[#D4D4D4]"> {'} = '}</span>
-                <span className="text-[#DCDCAA]">useMotionPreference</span>
-                <span className="text-[#D4D4D4]">();</span>
+                <span className="text-[#8250df] dark:text-[#8250df] dark:text-[#C586C0]">const</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> {'{ '}</span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">shouldAnimate</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> {'} = '}</span>
+                <span className="text-[#6639ba] dark:text-[#6639ba] dark:text-[#DCDCAA]">useMotionPreference</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">();</span>
                 {'\n\n  '}
-                <span className="text-[#C586C0]">return</span>
-                <span className="text-[#D4D4D4]"> (</span>
+                <span className="text-[#8250df] dark:text-[#8250df] dark:text-[#C586C0]">return</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> (</span>
                 {'\n    '}
-                <span className="text-[#808080]">{'<'}</span>
-                <span className="text-[#4EC9B0]">motion.div</span>
+                <span className="text-[#57606a] dark:text-[#57606a] dark:text-[#808080]">{'<'}</span>
+                <span className="text-[#005cc5] dark:text-[#005cc5] dark:text-[#4EC9B0]">motion.div</span>
                 {'\n      '}
-                <span className="text-[#9CDCFE]">initial</span>
-                <span className="text-[#D4D4D4]">=</span>
-                <span className="text-[#D4D4D4]">{'{'}</span>
-                <span className="text-[#9CDCFE]">shouldAnimate</span>
-                <span className="text-[#D4D4D4]"> ? {'{ '}</span>
-                <span className="text-[#9CDCFE]">opacity</span>
-                <span className="text-[#D4D4D4]">: </span>
-                <span className="text-[#B5CEA8]">0</span>
-                <span className="text-[#D4D4D4]">, </span>
-                <span className="text-[#9CDCFE]">y</span>
-                <span className="text-[#D4D4D4]">: </span>
-                <span className="text-[#B5CEA8]">20</span>
-                <span className="text-[#D4D4D4]"> {'} : '}</span>
-                <span className="text-[#569CD6]">false</span>
-                <span className="text-[#D4D4D4]">{'}'}</span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">initial</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">=</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">{'{'}</span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">shouldAnimate</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> ? {'{ '}</span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">opacity</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                <span className="text-[#0a3069] dark:text-[#0a3069] dark:text-[#B5CEA8]">0</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">, </span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">y</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                <span className="text-[#0a3069] dark:text-[#0a3069] dark:text-[#B5CEA8]">20</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> {'} : '}</span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#569CD6]">false</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">{'}'}</span>
                 {'\n      '}
-                <span className="text-[#9CDCFE]">animate</span>
-                <span className="text-[#D4D4D4]">=</span>
-                <span className="text-[#D4D4D4]">{'{{'} {'{ '}</span>
-                <span className="text-[#9CDCFE]">opacity</span>
-                <span className="text-[#D4D4D4]">: </span>
-                <span className="text-[#B5CEA8]">1</span>
-                <span className="text-[#D4D4D4]">, </span>
-                <span className="text-[#9CDCFE]">y</span>
-                <span className="text-[#D4D4D4]">: </span>
-                <span className="text-[#B5CEA8]">0</span>
-                <span className="text-[#D4D4D4]">{' } }}'}</span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">animate</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">=</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">{'{{'} {'{ '}</span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">opacity</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                <span className="text-[#0a3069] dark:text-[#0a3069] dark:text-[#B5CEA8]">1</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">, </span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">y</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                <span className="text-[#0a3069] dark:text-[#0a3069] dark:text-[#B5CEA8]">0</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">{' } }}'}</span>
                 {'\n      '}
-                <span className="text-[#9CDCFE]">transition</span>
-                <span className="text-[#D4D4D4]">=</span>
-                <span className="text-[#D4D4D4]">{'{{'} {'{ '}</span>
-                <span className="text-[#9CDCFE]">duration</span>
-                <span className="text-[#D4D4D4]">: </span>
-                <span className="text-[#9CDCFE]">shouldAnimate</span>
-                <span className="text-[#D4D4D4]"> ? </span>
-                <span className="text-[#B5CEA8]">0.3</span>
-                <span className="text-[#D4D4D4]"> : </span>
-                <span className="text-[#B5CEA8]">0</span>
-                <span className="text-[#D4D4D4]">{' } }}'}</span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">transition</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">=</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">{'{{'} {'{ '}</span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">duration</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">shouldAnimate</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> ? </span>
+                <span className="text-[#0a3069] dark:text-[#0a3069] dark:text-[#B5CEA8]">0.3</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> : </span>
+                <span className="text-[#0a3069] dark:text-[#0a3069] dark:text-[#B5CEA8]">0</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">{' } }}'}</span>
                 {'\n    '}
-                <span className="text-[#808080]">{'>'}</span>
+                <span className="text-[#57606a] dark:text-[#57606a] dark:text-[#808080]">{'>'}</span>
                 {'\n      '}
-                <span className="text-[#D4D4D4]">Content</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">Content</span>
                 {'\n    '}
-                <span className="text-[#808080]">{'</'}</span>
-                <span className="text-[#4EC9B0]">motion.div</span>
-                <span className="text-[#808080]">{'>'}</span>
+                <span className="text-[#57606a] dark:text-[#57606a] dark:text-[#808080]">{'</'}</span>
+                <span className="text-[#005cc5] dark:text-[#005cc5] dark:text-[#4EC9B0]">motion.div</span>
+                <span className="text-[#57606a] dark:text-[#57606a] dark:text-[#808080]">{'>'}</span>
                 {'\n  '}
-                <span className="text-[#D4D4D4]">);</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">);</span>
                 {'\n'}
-                <span className="text-[#D4D4D4]">{'}'}</span>
+                <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">{'}'}</span>
               </code>
             </pre>
           </div>
@@ -453,22 +472,42 @@ function MyComponent() {
               For simple transitions and states, use CSS transitions with our motion tokens.
             </p>
 
+            {/* Code Preview (visible when closed) */}
+            <div id="css-tailwind-preview" className="relative mb-4">
+              <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden" style={{ maxHeight: '5.5rem' }}>
+                <pre className="text-sm font-mono">
+                  <code>
+                    <span className="text-[#22863a] dark:text-[#22863a] dark:text-[#6A9955]">/* Using CSS custom properties */</span>
+                    {'\n'}
+                    <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">.</span>
+                    <span className="text-[#005cc5] dark:text-[#005cc5] dark:text-[#4EC9B0]">button</span>
+                    <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> {'{'}</span>
+                    {'\n  '}
+                    <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">transition</span>
+                  </code>
+                </pre>
+              </div>
+              <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[var(--color-background)] to-transparent pointer-events-none rounded" />
+            </div>
+
             {/* Button Row */}
             <div className="flex items-center gap-2 mb-4">
               <button
                 onClick={() => {
+                  const preview = document.getElementById('css-tailwind-preview');
                   const code = document.getElementById('css-tailwind-code');
                   const icon = document.getElementById('css-tailwind-icon');
-                  if (code && icon) {
+                  if (preview && code && icon) {
+                    preview.classList.toggle('hidden');
                     code.classList.toggle('hidden');
                     icon.classList.toggle('rotate-90');
                   }
                 }}
-                className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
+                className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-primary)] hover:text-[var(--color-primary-foreground)] hover:scale-105 hover:shadow-lg active:scale-95 border border-[var(--color-border)] rounded-md transition-all duration-200"
               >
                 <svg
                   id="css-tailwind-icon"
-                  className="w-4 h-4 transition-transform"
+                  className="w-4 h-4 transition-transform duration-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -490,7 +529,7 @@ function MyComponent() {
 </button>`;
                   navigator.clipboard.writeText(codeText);
                 }}
-                className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
+                className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-primary)] hover:text-[var(--color-primary-foreground)] hover:scale-105 hover:shadow-lg active:scale-95 border border-[var(--color-border)] rounded-md transition-all duration-200"
                 title="Copy code to clipboard"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -500,47 +539,47 @@ function MyComponent() {
               </button>
             </div>
 
-            {/* Code Block (hidden by default) */}
-            <div id="css-tailwind-code" className="hidden">
+            {/* Full Code (hidden by default) */}
+            <div id="css-tailwind-code" className="hidden overflow-hidden transition-all duration-500" style={{ transition: 'max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out' }}>
               <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-x-auto">
                 <pre className="text-sm font-mono">
                   <code>
-                    <span className="text-[#6A9955]">/* Using CSS custom properties */</span>
+                    <span className="text-[#22863a] dark:text-[#22863a] dark:text-[#6A9955]">/* Using CSS custom properties */</span>
                     {'\n'}
-                    <span className="text-[#D4D4D4]">.</span>
-                    <span className="text-[#4EC9B0]">button</span>
-                    <span className="text-[#D4D4D4]"> {'{'}</span>
+                    <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">.</span>
+                    <span className="text-[#005cc5] dark:text-[#005cc5] dark:text-[#4EC9B0]">button</span>
+                    <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> {'{'}</span>
                     {'\n  '}
-                    <span className="text-[#9CDCFE]">transition</span>
-                    <span className="text-[#D4D4D4]">: </span>
-                    <span className="text-[#CE9178]">all</span>
-                    <span className="text-[#D4D4D4]"> </span>
-                    <span className="text-[#DCDCAA]">var</span>
-                    <span className="text-[#D4D4D4]">(</span>
-                    <span className="text-[#CE9178]">--duration-normal</span>
-                    <span className="text-[#D4D4D4]">) </span>
-                    <span className="text-[#DCDCAA]">var</span>
-                    <span className="text-[#D4D4D4]">(</span>
-                    <span className="text-[#CE9178]">--ease-default</span>
-                    <span className="text-[#D4D4D4]">);</span>
+                    <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">transition</span>
+                    <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                    <span className="text-[#c1592a] dark:text-[#c1592a] dark:text-[#CE9178]">all</span>
+                    <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> </span>
+                    <span className="text-[#8250df] dark:text-[#6639ba] dark:text-[#DCDCAA]">var</span>
+                    <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">(</span>
+                    <span className="text-[#c1592a] dark:text-[#c1592a] dark:text-[#CE9178]">--duration-normal</span>
+                    <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">) </span>
+                    <span className="text-[#8250df] dark:text-[#6639ba] dark:text-[#DCDCAA]">var</span>
+                    <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">(</span>
+                    <span className="text-[#c1592a] dark:text-[#c1592a] dark:text-[#CE9178]">--ease-default</span>
+                    <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">);</span>
                     {'\n'}
-                    <span className="text-[#D4D4D4]">{'}'}</span>
+                    <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">{'}'}</span>
                     {'\n\n'}
-                    <span className="text-[#6A9955]">/* Using Tailwind */</span>
+                    <span className="text-[#22863a] dark:text-[#22863a] dark:text-[#6A9955]">/* Using Tailwind */</span>
                     {'\n'}
-                    <span className="text-[#808080]">{'<'}</span>
-                    <span className="text-[#4EC9B0]">button</span>
-                    <span className="text-[#D4D4D4]"> </span>
-                    <span className="text-[#9CDCFE]">className</span>
-                    <span className="text-[#D4D4D4]">=</span>
-                    <span className="text-[#CE9178]">"transition-all duration-300 ease-out hover:scale-105"</span>
-                    <span className="text-[#808080]">{'>'}</span>
+                    <span className="text-[#57606a] dark:text-[#57606a] dark:text-[#808080]">{'<'}</span>
+                    <span className="text-[#005cc5] dark:text-[#005cc5] dark:text-[#4EC9B0]">button</span>
+                    <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> </span>
+                    <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">className</span>
+                    <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">=</span>
+                    <span className="text-[#c1592a] dark:text-[#c1592a] dark:text-[#CE9178]">"transition-all duration-300 ease-out hover:scale-105"</span>
+                    <span className="text-[#57606a] dark:text-[#57606a] dark:text-[#808080]">{'>'}</span>
                     {'\n  '}
-                    <span className="text-[#D4D4D4]">Hover me</span>
+                    <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]">Hover me</span>
                     {'\n'}
-                    <span className="text-[#808080]">{'</'}</span>
-                    <span className="text-[#4EC9B0]">button</span>
-                    <span className="text-[#808080]">{'>'}</span>
+                    <span className="text-[#57606a] dark:text-[#57606a] dark:text-[#808080]">{'</'}</span>
+                    <span className="text-[#005cc5] dark:text-[#005cc5] dark:text-[#4EC9B0]">button</span>
+                    <span className="text-[#57606a] dark:text-[#57606a] dark:text-[#808080]">{'>'}</span>
                   </code>
                 </pre>
               </div>
@@ -583,22 +622,40 @@ function MyComponent() {
                 </ul>
               </div>
 
+              {/* Code Preview (visible when closed) */}
+              <div id="framer-motion-preview" className="relative mb-4">
+                <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden" style={{ maxHeight: '5.5rem' }}>
+                  <pre className="text-sm font-mono">
+                    <code>
+                      <span className="text-[#8250df] dark:text-[#8250df] dark:text-[#C586C0]">import</span>
+                      <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> {'{ '}</span>
+                      <span className="text-[#0550ae] dark:text-[#0550ae] dark:text-[#9CDCFE]">motion</span>
+                      <span className="text-[#1a1a1a] dark:text-[#1a1a1a] dark:text-[#D4D4D4]"> {'} '}</span>
+                      <span className="text-[#8250df] dark:text-[#8250df] dark:text-[#C586C0]">from</span>
+                    </code>
+                  </pre>
+                </div>
+                <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[var(--color-background)] to-transparent pointer-events-none rounded" />
+              </div>
+
               {/* Button Row */}
               <div className="flex items-center gap-2 mb-4">
                 <button
                   onClick={() => {
+                    const preview = document.getElementById('framer-motion-preview');
                     const code = document.getElementById('framer-motion-code');
                     const icon = document.getElementById('framer-motion-icon');
-                    if (code && icon) {
+                    if (preview && code && icon) {
+                      preview.classList.toggle('hidden');
                       code.classList.toggle('hidden');
                       icon.classList.toggle('rotate-90');
                     }
                   }}
-                  className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-primary)] hover:text-[var(--color-primary-foreground)] hover:scale-105 hover:shadow-lg active:scale-95 border border-[var(--color-border)] rounded-md transition-all duration-200"
                 >
                   <svg
                     id="framer-motion-icon"
-                    className="w-4 h-4 transition-transform"
+                    className="w-4 h-4 transition-transform duration-300"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -636,7 +693,7 @@ function MyComponent() {
 </motion.button>`;
                     navigator.clipboard.writeText(codeText);
                   }}
-                  className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-primary)] hover:text-[var(--color-primary-foreground)] hover:scale-105 hover:shadow-lg active:scale-95 border border-[var(--color-border)] rounded-md transition-all duration-200"
                   title="Copy code to clipboard"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -646,133 +703,133 @@ function MyComponent() {
                 </button>
               </div>
 
-              {/* Code Block (hidden by default) */}
-              <div id="framer-motion-code" className="hidden">
+              {/* Full Code (hidden by default) */}
+              <div id="framer-motion-code" className="hidden overflow-hidden transition-all duration-500" style={{ transition: 'max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out' }}>
                 <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-x-auto">
                   <pre className="text-sm font-mono">
                     <code>
-                      <span className="text-[#C586C0]">import</span>
-                      <span className="text-[#D4D4D4]"> {'{ '}</span>
-                      <span className="text-[#9CDCFE]">motion</span>
-                      <span className="text-[#D4D4D4]"> {'} '}</span>
-                      <span className="text-[#C586C0]">from</span>
-                      <span className="text-[#D4D4D4]"> </span>
-                      <span className="text-[#CE9178]">'framer-motion'</span>
-                      <span className="text-[#D4D4D4]">;</span>
+                      <span className="text-[#8250df] dark:text-[#C586C0]">import</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]"> {'{ '}</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">motion</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]"> {'} '}</span>
+                      <span className="text-[#8250df] dark:text-[#C586C0]">from</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]"> </span>
+                      <span className="text-[#c1592a] dark:text-[#CE9178]">'framer-motion'</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">;</span>
                       {'\n\n'}
-                      <span className="text-[#6A9955]">// Basic animation</span>
+                      <span className="text-[#22863a] dark:text-[#6A9955]">// Basic animation</span>
                       {'\n'}
-                      <span className="text-[#808080]">{'<'}</span>
-                      <span className="text-[#4EC9B0]">motion.div</span>
+                      <span className="text-[#57606a] dark:text-[#808080]">{'<'}</span>
+                      <span className="text-[#005cc5] dark:text-[#4EC9B0]">motion.div</span>
                       {'\n  '}
-                      <span className="text-[#9CDCFE]">initial</span>
-                      <span className="text-[#D4D4D4]">=</span>
-                      <span className="text-[#D4D4D4]">{'{{'} {'{ '}</span>
-                      <span className="text-[#9CDCFE]">opacity</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">0</span>
-                      <span className="text-[#D4D4D4]">, </span>
-                      <span className="text-[#9CDCFE]">y</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">20</span>
-                      <span className="text-[#D4D4D4]">{' } }}'}</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">initial</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">=</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">{'{{'} {'{ '}</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">opacity</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, </span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">y</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">20</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">{' } }}'}</span>
                       {'\n  '}
-                      <span className="text-[#9CDCFE]">animate</span>
-                      <span className="text-[#D4D4D4]">=</span>
-                      <span className="text-[#D4D4D4]">{'{{'} {'{ '}</span>
-                      <span className="text-[#9CDCFE]">opacity</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">1</span>
-                      <span className="text-[#D4D4D4]">, </span>
-                      <span className="text-[#9CDCFE]">y</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">0</span>
-                      <span className="text-[#D4D4D4]">{' } }}'}</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">animate</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">=</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">{'{{'} {'{ '}</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">opacity</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">1</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, </span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">y</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">{' } }}'}</span>
                       {'\n  '}
-                      <span className="text-[#9CDCFE]">transition</span>
-                      <span className="text-[#D4D4D4]">=</span>
-                      <span className="text-[#D4D4D4]">{'{{'}</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">transition</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">=</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">{'{{'}</span>
                       {'\n    '}
-                      <span className="text-[#9CDCFE]">duration</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">0.3</span>
-                      <span className="text-[#D4D4D4]">, </span>
-                      <span className="text-[#6A9955]">// 300ms = normal</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">duration</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0.3</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, </span>
+                      <span className="text-[#22863a] dark:text-[#6A9955]">// 300ms = normal</span>
                       {'\n    '}
-                      <span className="text-[#9CDCFE]">ease</span>
-                      <span className="text-[#D4D4D4]">: [</span>
-                      <span className="text-[#B5CEA8]">0</span>
-                      <span className="text-[#D4D4D4]">, </span>
-                      <span className="text-[#B5CEA8]">0</span>
-                      <span className="text-[#D4D4D4]">, </span>
-                      <span className="text-[#B5CEA8]">0.2</span>
-                      <span className="text-[#D4D4D4]">, </span>
-                      <span className="text-[#B5CEA8]">1</span>
-                      <span className="text-[#D4D4D4]">] </span>
-                      <span className="text-[#6A9955]">// ease-out</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">ease</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: [</span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0.2</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">1</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">] </span>
+                      <span className="text-[#22863a] dark:text-[#6A9955]">// ease-out</span>
                       {'\n  '}
-                      <span className="text-[#D4D4D4]">{'}}'}</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">{'}}'}</span>
                       {'\n'}
-                      <span className="text-[#808080]">{'>'}</span>
+                      <span className="text-[#57606a] dark:text-[#808080]">{'>'}</span>
                       {'\n  '}
-                      <span className="text-[#D4D4D4]">Content</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">Content</span>
                       {'\n'}
-                      <span className="text-[#808080]">{'</'}</span>
-                      <span className="text-[#4EC9B0]">motion.div</span>
-                      <span className="text-[#808080]">{'>'}</span>
+                      <span className="text-[#57606a] dark:text-[#808080]">{'</'}</span>
+                      <span className="text-[#005cc5] dark:text-[#4EC9B0]">motion.div</span>
+                      <span className="text-[#57606a] dark:text-[#808080]">{'>'}</span>
                       {'\n\n'}
-                      <span className="text-[#6A9955]">// Using design system tokens</span>
+                      <span className="text-[#22863a] dark:text-[#6A9955]">// Using design system tokens</span>
                       {'\n'}
-                      <span className="text-[#808080]">{'<'}</span>
-                      <span className="text-[#4EC9B0]">motion.button</span>
+                      <span className="text-[#57606a] dark:text-[#808080]">{'<'}</span>
+                      <span className="text-[#005cc5] dark:text-[#4EC9B0]">motion.button</span>
                       {'\n  '}
-                      <span className="text-[#9CDCFE]">whileHover</span>
-                      <span className="text-[#D4D4D4]">=</span>
-                      <span className="text-[#D4D4D4]">{'{{'} {'{ '}</span>
-                      <span className="text-[#9CDCFE]">scale</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">1.05</span>
-                      <span className="text-[#D4D4D4]">{' } }}'}</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">whileHover</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">=</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">{'{{'} {'{ '}</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">scale</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">1.05</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">{' } }}'}</span>
                       {'\n  '}
-                      <span className="text-[#9CDCFE]">whileTap</span>
-                      <span className="text-[#D4D4D4]">=</span>
-                      <span className="text-[#D4D4D4]">{'{{'} {'{ '}</span>
-                      <span className="text-[#9CDCFE]">scale</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">0.95</span>
-                      <span className="text-[#D4D4D4]">{' } }}'}</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">whileTap</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">=</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">{'{{'} {'{ '}</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">scale</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0.95</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">{' } }}'}</span>
                       {'\n  '}
-                      <span className="text-[#9CDCFE]">transition</span>
-                      <span className="text-[#D4D4D4]">=</span>
-                      <span className="text-[#D4D4D4]">{'{{'}</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">transition</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">=</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">{'{{'}</span>
                       {'\n    '}
-                      <span className="text-[#9CDCFE]">duration</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">0.15</span>
-                      <span className="text-[#D4D4D4]">, </span>
-                      <span className="text-[#6A9955]">// fast</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">duration</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0.15</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, </span>
+                      <span className="text-[#22863a] dark:text-[#6A9955]">// fast</span>
                       {'\n    '}
-                      <span className="text-[#9CDCFE]">ease</span>
-                      <span className="text-[#D4D4D4]">: [</span>
-                      <span className="text-[#B5CEA8]">0.16</span>
-                      <span className="text-[#D4D4D4]">, </span>
-                      <span className="text-[#B5CEA8]">1</span>
-                      <span className="text-[#D4D4D4]">, </span>
-                      <span className="text-[#B5CEA8]">0.3</span>
-                      <span className="text-[#D4D4D4]">, </span>
-                      <span className="text-[#B5CEA8]">1</span>
-                      <span className="text-[#D4D4D4]">] </span>
-                      <span className="text-[#6A9955]">// spring</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">ease</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: [</span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0.16</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">1</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0.3</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">1</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">] </span>
+                      <span className="text-[#22863a] dark:text-[#6A9955]">// spring</span>
                       {'\n  '}
-                      <span className="text-[#D4D4D4]">{'}}'}</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">{'}}'}</span>
                       {'\n'}
-                      <span className="text-[#808080]">{'>'}</span>
+                      <span className="text-[#57606a] dark:text-[#808080]">{'>'}</span>
                       {'\n  '}
-                      <span className="text-[#D4D4D4]">Click me</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">Click me</span>
                       {'\n'}
-                      <span className="text-[#808080]">{'</'}</span>
-                      <span className="text-[#4EC9B0]">motion.button</span>
-                      <span className="text-[#808080]">{'>'}</span>
+                      <span className="text-[#57606a] dark:text-[#808080]">{'</'}</span>
+                      <span className="text-[#005cc5] dark:text-[#4EC9B0]">motion.button</span>
+                      <span className="text-[#57606a] dark:text-[#808080]">{'>'}</span>
                     </code>
                   </pre>
                 </div>
@@ -816,22 +873,40 @@ function MyComponent() {
                 </ul>
               </div>
 
+              {/* Code Preview (visible when closed) */}
+              <div id="gsap-preview" className="relative mb-4">
+                <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden" style={{ maxHeight: '5.5rem' }}>
+                  <pre className="text-sm font-mono">
+                    <code>
+                      <span className="text-[#8250df] dark:text-[#C586C0]">import</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]"> {'{ '}</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">gsap</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]"> {'} '}</span>
+                      <span className="text-[#8250df] dark:text-[#C586C0]">from</span>
+                    </code>
+                  </pre>
+                </div>
+                <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[var(--color-background)] to-transparent pointer-events-none rounded" />
+              </div>
+
               {/* Button Row */}
               <div className="flex items-center gap-2 mb-4">
                 <button
                   onClick={() => {
+                    const preview = document.getElementById('gsap-preview');
                     const code = document.getElementById('gsap-code');
                     const icon = document.getElementById('gsap-icon');
-                    if (code && icon) {
+                    if (preview && code && icon) {
+                      preview.classList.toggle('hidden');
                       code.classList.toggle('hidden');
                       icon.classList.toggle('rotate-90');
                     }
                   }}
-                  className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-primary)] hover:text-[var(--color-primary-foreground)] hover:scale-105 hover:shadow-lg active:scale-95 border border-[var(--color-border)] rounded-md transition-all duration-200"
                 >
                   <svg
                     id="gsap-icon"
-                    className="w-4 h-4 transition-transform"
+                    className="w-4 h-4 transition-transform duration-300"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -863,7 +938,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
   });`;
                     navigator.clipboard.writeText(codeText);
                   }}
-                  className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-hover)] border border-[var(--color-border)] rounded-md transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 text-xs text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:bg-[var(--color-primary)] hover:text-[var(--color-primary-foreground)] hover:scale-105 hover:shadow-lg active:scale-95 border border-[var(--color-border)] rounded-md transition-all duration-200"
                   title="Copy code to clipboard"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -873,117 +948,117 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
                 </button>
               </div>
 
-              {/* Code Block (hidden by default) */}
-              <div id="gsap-code" className="hidden">
+              {/* Full Code (hidden by default) */}
+              <div id="gsap-code" className="hidden overflow-hidden transition-all duration-500" style={{ transition: 'max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out' }}>
                 <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-x-auto">
                   <pre className="text-sm font-mono">
                     <code>
-                      <span className="text-[#C586C0]">import</span>
-                      <span className="text-[#D4D4D4]"> {'{ '}</span>
-                      <span className="text-[#9CDCFE]">gsap</span>
-                      <span className="text-[#D4D4D4]"> {'} '}</span>
-                      <span className="text-[#C586C0]">from</span>
-                      <span className="text-[#D4D4D4]"> </span>
-                      <span className="text-[#CE9178]">'gsap'</span>
-                      <span className="text-[#D4D4D4]">;</span>
+                      <span className="text-[#8250df] dark:text-[#C586C0]">import</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]"> {'{ '}</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">gsap</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]"> {'} '}</span>
+                      <span className="text-[#8250df] dark:text-[#C586C0]">from</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]"> </span>
+                      <span className="text-[#c1592a] dark:text-[#CE9178]">'gsap'</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">;</span>
                       {'\n\n'}
-                      <span className="text-[#6A9955]">// Basic animation</span>
+                      <span className="text-[#22863a] dark:text-[#6A9955]">// Basic animation</span>
                       {'\n'}
-                      <span className="text-[#9CDCFE]">gsap</span>
-                      <span className="text-[#D4D4D4]">.</span>
-                      <span className="text-[#DCDCAA]">to</span>
-                      <span className="text-[#D4D4D4]">(</span>
-                      <span className="text-[#CE9178]">'.element'</span>
-                      <span className="text-[#D4D4D4]">, {'{'}</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">gsap</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">.</span>
+                      <span className="text-[#6639ba] dark:text-[#DCDCAA]">to</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">(</span>
+                      <span className="text-[#c1592a] dark:text-[#CE9178]">'.element'</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, {'{'}</span>
                       {'\n  '}
-                      <span className="text-[#9CDCFE]">opacity</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">1</span>
-                      <span className="text-[#D4D4D4]">,</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">opacity</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">1</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">,</span>
                       {'\n  '}
-                      <span className="text-[#9CDCFE]">y</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">0</span>
-                      <span className="text-[#D4D4D4]">,</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">y</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">,</span>
                       {'\n  '}
-                      <span className="text-[#9CDCFE]">duration</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">0.3</span>
-                      <span className="text-[#D4D4D4]">, </span>
-                      <span className="text-[#6A9955]">// 300ms = normal</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">duration</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0.3</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, </span>
+                      <span className="text-[#22863a] dark:text-[#6A9955]">// 300ms = normal</span>
                       {'\n  '}
-                      <span className="text-[#9CDCFE]">ease</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#CE9178]">'power2.out'</span>
-                      <span className="text-[#D4D4D4]"> </span>
-                      <span className="text-[#6A9955]">// Similar to ease-out</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">ease</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#c1592a] dark:text-[#CE9178]">'power2.out'</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]"> </span>
+                      <span className="text-[#22863a] dark:text-[#6A9955]">// Similar to ease-out</span>
                       {'\n'}
-                      <span className="text-[#D4D4D4]">{'}'});</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">{'}'});</span>
                       {'\n\n'}
-                      <span className="text-[#6A9955]">// Timeline sequence</span>
+                      <span className="text-[#22863a] dark:text-[#6A9955]">// Timeline sequence</span>
                       {'\n'}
-                      <span className="text-[#C586C0]">const</span>
-                      <span className="text-[#D4D4D4]"> </span>
-                      <span className="text-[#9CDCFE]">tl</span>
-                      <span className="text-[#D4D4D4]"> = </span>
-                      <span className="text-[#9CDCFE]">gsap</span>
-                      <span className="text-[#D4D4D4]">.</span>
-                      <span className="text-[#DCDCAA]">timeline</span>
-                      <span className="text-[#D4D4D4]">();</span>
+                      <span className="text-[#8250df] dark:text-[#C586C0]">const</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]"> </span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">tl</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]"> = </span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">gsap</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">.</span>
+                      <span className="text-[#6639ba] dark:text-[#DCDCAA]">timeline</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">();</span>
                       {'\n'}
-                      <span className="text-[#9CDCFE]">tl</span>
-                      <span className="text-[#D4D4D4]">.</span>
-                      <span className="text-[#DCDCAA]">to</span>
-                      <span className="text-[#D4D4D4]">(</span>
-                      <span className="text-[#CE9178]">'.hero'</span>
-                      <span className="text-[#D4D4D4]">, {'{ '}</span>
-                      <span className="text-[#9CDCFE]">opacity</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">1</span>
-                      <span className="text-[#D4D4D4]">, </span>
-                      <span className="text-[#9CDCFE]">duration</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">0.5</span>
-                      <span className="text-[#D4D4D4]"> {'}'})</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">tl</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">.</span>
+                      <span className="text-[#6639ba] dark:text-[#DCDCAA]">to</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">(</span>
+                      <span className="text-[#c1592a] dark:text-[#CE9178]">'.hero'</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, {'{ '}</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">opacity</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">1</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, </span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">duration</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0.5</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]"> {'}'})</span>
                       {'\n  '}
-                      <span className="text-[#D4D4D4]">.</span>
-                      <span className="text-[#DCDCAA]">to</span>
-                      <span className="text-[#D4D4D4]">(</span>
-                      <span className="text-[#CE9178]">'.cta'</span>
-                      <span className="text-[#D4D4D4]">, {'{ '}</span>
-                      <span className="text-[#9CDCFE]">scale</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">1</span>
-                      <span className="text-[#D4D4D4]">, </span>
-                      <span className="text-[#9CDCFE]">duration</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">0.15</span>
-                      <span className="text-[#D4D4D4]"> {'}'}, </span>
-                      <span className="text-[#CE9178]">'-=0.2'</span>
-                      <span className="text-[#D4D4D4]">)</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">.</span>
+                      <span className="text-[#6639ba] dark:text-[#DCDCAA]">to</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">(</span>
+                      <span className="text-[#c1592a] dark:text-[#CE9178]">'.cta'</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, {'{ '}</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">scale</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">1</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, </span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">duration</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0.15</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]"> {'}'}, </span>
+                      <span className="text-[#c1592a] dark:text-[#CE9178]">'-=0.2'</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">)</span>
                       {'\n  '}
-                      <span className="text-[#D4D4D4]">.</span>
-                      <span className="text-[#DCDCAA]">to</span>
-                      <span className="text-[#D4D4D4]">(</span>
-                      <span className="text-[#CE9178]">'.features'</span>
-                      <span className="text-[#D4D4D4]">, {'{'}</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">.</span>
+                      <span className="text-[#6639ba] dark:text-[#DCDCAA]">to</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">(</span>
+                      <span className="text-[#c1592a] dark:text-[#CE9178]">'.features'</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, {'{'}</span>
                       {'\n    '}
-                      <span className="text-[#9CDCFE]">y</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">0</span>
-                      <span className="text-[#D4D4D4]">,</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">y</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">,</span>
                       {'\n    '}
-                      <span className="text-[#9CDCFE]">stagger</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">0.1</span>
-                      <span className="text-[#D4D4D4]">, </span>
-                      <span className="text-[#6A9955]">// Stagger items</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">stagger</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0.1</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">, </span>
+                      <span className="text-[#22863a] dark:text-[#6A9955]">// Stagger items</span>
                       {'\n    '}
-                      <span className="text-[#9CDCFE]">duration</span>
-                      <span className="text-[#D4D4D4]">: </span>
-                      <span className="text-[#B5CEA8]">0.3</span>
+                      <span className="text-[#0550ae] dark:text-[#9CDCFE]">duration</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">: </span>
+                      <span className="text-[#0a3069] dark:text-[#B5CEA8]">0.3</span>
                       {'\n  '}
-                      <span className="text-[#D4D4D4]">{'}'});</span>
+                      <span className="text-[#1a1a1a] dark:text-[#D4D4D4]">{'}'});</span>
                     </code>
                   </pre>
                 </div>
