@@ -960,27 +960,67 @@ function MyComponent() {
           </Card>
         </div>
 
-        {/* String Input Example */}
+        {/* CSS Styling Example */}
         <div>
           <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
-            String Input Example
+            CSS Styling Example
           </h4>
           <Card className="p-6">
             <CollapsibleCodeBlock
-              id="string-example"
-              title="CSS Example (String Input)"
-              code={`.button {
-  padding: 12px 24px;
-  background: var(--color-primary);
-  color: var(--color-primary-foreground);
-  border-radius: 8px;
-  transition: all 0.2s ease;
-}
-
-.button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}`}
+              id="css-example"
+              title="CSS Styling with Design Tokens"
+              code={[
+                { text: '.', type: 'punctuation' },
+                { text: 'button', type: 'className' },
+                { text: ' {', type: 'punctuation' },
+                { text: '\n  ', type: 'plain' },
+                { text: 'padding', type: 'property' },
+                { text: ': ', type: 'punctuation' },
+                { text: '12px 24px', type: 'plain' },
+                { text: ';', type: 'punctuation' },
+                { text: '\n  ', type: 'plain' },
+                { text: 'background', type: 'property' },
+                { text: ': ', type: 'punctuation' },
+                { text: 'var(--color-primary)', type: 'function' },
+                { text: ';', type: 'punctuation' },
+                { text: '\n  ', type: 'plain' },
+                { text: 'color', type: 'property' },
+                { text: ': ', type: 'punctuation' },
+                { text: 'var(--color-primary-foreground)', type: 'function' },
+                { text: ';', type: 'punctuation' },
+                { text: '\n  ', type: 'plain' },
+                { text: 'border-radius', type: 'property' },
+                { text: ': ', type: 'punctuation' },
+                { text: '8px', type: 'plain' },
+                { text: ';', type: 'punctuation' },
+                { text: '\n  ', type: 'plain' },
+                { text: 'transition', type: 'property' },
+                { text: ': ', type: 'punctuation' },
+                { text: 'all ', type: 'plain' },
+                { text: '0.2s', type: 'plain' },
+                { text: ' ease', type: 'plain' },
+                { text: ';', type: 'punctuation' },
+                { text: '\n}', type: 'punctuation' },
+                { text: '\n\n', type: 'plain' },
+                { text: '.', type: 'punctuation' },
+                { text: 'button', type: 'className' },
+                { text: ':', type: 'punctuation' },
+                { text: 'hover', type: 'tag' },
+                { text: ' {', type: 'punctuation' },
+                { text: '\n  ', type: 'plain' },
+                { text: 'transform', type: 'property' },
+                { text: ': ', type: 'punctuation' },
+                { text: 'scale(', type: 'function' },
+                { text: '1.05', type: 'number' },
+                { text: ')', type: 'punctuation' },
+                { text: ';', type: 'punctuation' },
+                { text: '\n  ', type: 'plain' },
+                { text: 'box-shadow', type: 'property' },
+                { text: ': ', type: 'punctuation' },
+                { text: '0 4px 12px rgba(0, 0, 0, 0.1)', type: 'plain' },
+                { text: ';', type: 'punctuation' },
+                { text: '\n}', type: 'punctuation' },
+              ]}
               showCopy={true}
             />
           </Card>
