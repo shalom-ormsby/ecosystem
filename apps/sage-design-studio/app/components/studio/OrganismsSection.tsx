@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, Button, Header, SecondaryNav, TertiaryNav, Footer, Modal, ToastProvider, useToast, CollapsibleCodeBlock } from '@ecosystem/design-system';
+import { Card, Button, Header, SecondaryNav, TertiaryNav, Footer, Modal, ToastProvider, useToast, CollapsibleCodeBlock, Code } from '@ecosystem/design-system';
 import type { SyntaxToken } from '@ecosystem/design-system';
 
 type OrganismType = 'PrimaryNav' | 'FirstStack' | 'SecondStack' | 'Footer' | 'Toast' | 'Modal' | 'CollapsibleCodeBlock';
@@ -173,8 +173,8 @@ export function OrganismsSection({ activeItemId }: OrganismsSectionProps) {
               <div className="text-sm text-[var(--color-text-secondary)]">
                 <strong>Typography Customization:</strong>
                 <ul className="list-disc list-inside mt-2 space-y-1">
-                  <li><code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">--font-header-logo</code> - Controls logo/brand font</li>
-                  <li><code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">--font-header-nav</code> - Controls navigation link font</li>
+                  <li><Code syntax="plain">--font-header-logo</Code> - Controls logo/brand font</li>
+                  <li><Code syntax="plain">--font-header-nav</Code> - Controls navigation link font</li>
                   <li>Define these CSS variables in your globals.css for ecosystem-wide control</li>
                   <li>Logo font applied via inline styles on the logo ReactNode</li>
                   <li>Nav font automatically applied by the Header component</li>
@@ -182,7 +182,7 @@ export function OrganismsSection({ activeItemId }: OrganismsSectionProps) {
               </div>
               <div className="mt-4 p-3 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
                 <p className="text-xs text-[var(--color-text-muted)]">
-                  <strong>Single Source of Truth:</strong> Typography is controlled by CSS variables, not props. Change <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">--font-header-logo</code> and <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">--font-header-nav</code> in globals.css to update all Header instances across your ecosystem.
+                  <strong>Single Source of Truth:</strong> Typography is controlled by CSS variables, not props. Change <Code syntax="plain">--font-header-logo</Code> and <Code syntax="plain">--font-header-nav</Code> in globals.css to update all Header instances across your ecosystem.
                 </p>
               </div>
             </div>
@@ -234,8 +234,7 @@ export function OrganismsSection({ activeItemId }: OrganismsSectionProps) {
             Code Example
           </h4>
           <Card className="p-6 bg-[var(--color-surface)]">
-            <pre className="text-sm text-[var(--color-text-secondary)] overflow-x-auto">
-              <code>{`<Header
+            <Code inline={false} syntax="plain">{`<Header
   logo={
     <a href="/" className="font-semibold text-lg">
       Brand
@@ -264,8 +263,7 @@ export function OrganismsSection({ activeItemId }: OrganismsSectionProps) {
   }
   glassOnScroll={true}
   sticky={true}
-/>`}</code>
-            </pre>
+/>`}</Code>
           </Card>
         </div>
 
@@ -282,9 +280,9 @@ export function OrganismsSection({ activeItemId }: OrganismsSectionProps) {
               <div className="text-sm text-[var(--color-text-secondary)]">
                 <strong>Positioning:</strong>
                 <ul className="list-disc list-inside mt-2 space-y-1">
-                  <li><code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">top-0</code> - Sticks to top of viewport</li>
-                  <li><code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">z-50</code> - Highest layer for primary navigation</li>
-                  <li><code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">h-16 lg:h-20</code> - Height: 64px mobile, 80px desktop</li>
+                  <li><Code syntax="plain">top-0</Code> - Sticks to top of viewport</li>
+                  <li><Code syntax="plain">z-50</Code> - Highest layer for primary navigation</li>
+                  <li><Code syntax="plain">h-16 lg:h-20</Code> - Height: 64px mobile, 80px desktop</li>
                 </ul>
               </div>
             </div>
@@ -319,7 +317,7 @@ export function OrganismsSection({ activeItemId }: OrganismsSectionProps) {
               </div>
               <div className="mt-4 p-3 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
                 <p className="text-xs text-[var(--color-text-muted)]">
-                  <strong>Pattern:</strong> The SecondaryNav uses <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">top-16 lg:top-20</code> to position exactly below the Header's height (h-16 lg:h-20), creating a seamless stacked sticky navigation pattern.
+                  <strong>Pattern:</strong> The SecondaryNav uses <Code syntax="plain">top-16 lg:top-20</Code> to position exactly below the Header's height (h-16 lg:h-20), creating a seamless stacked sticky navigation pattern.
                 </p>
               </div>
             </div>
@@ -351,8 +349,7 @@ export function OrganismsSection({ activeItemId }: OrganismsSectionProps) {
             Code Example
           </h4>
           <Card className="p-6 bg-[var(--color-surface)]">
-            <pre className="text-sm text-[var(--color-text-secondary)] overflow-x-auto">
-              <code>{`const [activeSection, setActiveSection] = useState('overview');
+            <Code inline={false} syntax="plain">{`const [activeSection, setActiveSection] = useState('overview');
 
 const sections = [
   { id: 'overview', label: 'Overview' },
@@ -364,8 +361,7 @@ const sections = [
   items={sections}
   activeId={activeSection}
   onItemChange={setActiveSection}
-/>`}</code>
-            </pre>
+/>`}</Code>
           </Card>
         </div>
 
@@ -382,13 +378,13 @@ const sections = [
               <div className="text-sm text-[var(--color-text-secondary)]">
                 <strong>Stack Configuration:</strong>
                 <ul className="list-disc list-inside mt-2 space-y-1">
-                  <li><strong>Primary Nav:</strong> <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">top-0</code>, <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">z-50</code>, <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">h-16 lg:h-20</code></li>
-                  <li><strong>1st Stacking Row:</strong> <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">top-16 lg:top-20</code>, <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">z-40</code>, <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">h-16</code></li>
+                  <li><strong>Primary Nav:</strong> <Code syntax="plain">top-0</Code>, <Code syntax="plain">z-50</Code>, <Code syntax="plain">h-16 lg:h-20</Code></li>
+                  <li><strong>1st Stacking Row:</strong> <Code syntax="plain">top-16 lg:top-20</Code>, <Code syntax="plain">z-40</Code>, <Code syntax="plain">h-16</Code></li>
                 </ul>
               </div>
               <div className="mt-4 p-3 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
                 <p className="text-xs text-[var(--color-text-muted)]">
-                  <strong>Positioning Math:</strong> The 1st Stacking Row's <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">top</code> value equals the Primary Nav's height (64px mobile, 80px desktop).
+                  <strong>Positioning Math:</strong> The 1st Stacking Row's <Code syntax="plain">top</Code> value equals the Primary Nav's height (64px mobile, 80px desktop).
                 </p>
               </div>
             </div>
@@ -424,7 +420,7 @@ const sections = [
               </div>
               <div className="mt-4 p-3 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
                 <p className="text-xs text-[var(--color-text-muted)]">
-                  <strong>Pattern:</strong> The TertiaryNav uses <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">top-32 lg:top-36</code> to position below both Header (64/80px) and SecondaryNav (64px), creating a triple-stack sticky navigation pattern.
+                  <strong>Pattern:</strong> The TertiaryNav uses <Code syntax="plain">top-32 lg:top-36</Code> to position below both Header (64/80px) and SecondaryNav (64px), creating a triple-stack sticky navigation pattern.
                 </p>
               </div>
             </div>
@@ -458,8 +454,7 @@ const sections = [
             Code Example
           </h4>
           <Card className="p-6 bg-[var(--color-surface)]">
-            <pre className="text-sm text-[var(--color-text-secondary)] overflow-x-auto">
-              <code>{`const [activeComponent, setActiveComponent] = useState('button');
+            <Code inline={false} syntax="plain">{`const [activeComponent, setActiveComponent] = useState('button');
 
 const components = [
   { id: 'button', label: 'Button' },
@@ -471,8 +466,7 @@ const components = [
   items={components}
   activeId={activeComponent}
   onItemChange={setActiveComponent}
-/>`}</code>
-            </pre>
+/>`}</Code>
           </Card>
         </div>
 
@@ -489,9 +483,9 @@ const components = [
               <div className="text-sm text-[var(--color-text-secondary)]">
                 <strong>Stack Configuration:</strong>
                 <ul className="list-disc list-inside mt-2 space-y-1">
-                  <li><strong>Primary Nav:</strong> <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">top-0</code>, <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">z-50</code>, <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">h-16 lg:h-20</code></li>
-                  <li><strong>1st Stacking Row:</strong> <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">top-16 lg:top-20</code>, <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">z-40</code>, <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">h-16</code></li>
-                  <li><strong>2nd Stacking Row:</strong> <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">top-32 lg:top-36</code>, <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">z-30</code>, <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">h-14</code></li>
+                  <li><strong>Primary Nav:</strong> <Code syntax="plain">top-0</Code>, <Code syntax="plain">z-50</Code>, <Code syntax="plain">h-16 lg:h-20</Code></li>
+                  <li><strong>1st Stacking Row:</strong> <Code syntax="plain">top-16 lg:top-20</Code>, <Code syntax="plain">z-40</Code>, <Code syntax="plain">h-16</Code></li>
+                  <li><strong>2nd Stacking Row:</strong> <Code syntax="plain">top-32 lg:top-36</Code>, <Code syntax="plain">z-30</Code>, <Code syntax="plain">h-14</Code></li>
                 </ul>
               </div>
               <div className="text-sm text-[var(--color-text-secondary)]">
@@ -504,7 +498,7 @@ const components = [
               </div>
               <div className="mt-4 p-3 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
                 <p className="text-xs text-[var(--color-text-muted)]">
-                  <strong>Positioning Math:</strong> The 2nd Stacking Row's <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">top</code> value equals Primary Nav height (64/80px) + 1st Stacking Row height (64px) = 128px mobile, 144px desktop.
+                  <strong>Positioning Math:</strong> The 2nd Stacking Row's <Code syntax="plain">top</Code> value equals Primary Nav height (64/80px) + 1st Stacking Row height (64px) = 128px mobile, 144px desktop.
                 </p>
               </div>
             </div>
@@ -597,8 +591,7 @@ const components = [
             Code Example
           </h4>
           <Card className="p-6 bg-[var(--color-surface)]">
-            <pre className="text-sm text-[var(--color-text-secondary)] overflow-x-auto">
-              <code>{`<Footer
+            <Code inline={false} syntax="plain">{`<Footer
   logo="My Brand"
   sections={[
     {
@@ -631,8 +624,7 @@ const components = [
     email: 'hello@example.com',
   }}
   copyright="© 2025 Example Brand"
-/>`}</code>
-            </pre>
+/>`}</Code>
           </Card>
         </div>
 
@@ -649,19 +641,19 @@ const components = [
               <div className="text-sm text-[var(--color-text-secondary)]">
                 <strong>Grid Configuration:</strong>
                 <ul className="list-disc list-inside mt-2 space-y-1">
-                  <li><strong>Brand Section:</strong> <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">lg:col-span-4</code> - Takes 4 of 12 columns (33%)</li>
-                  <li><strong>Navigation Sections:</strong> <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">lg:col-span-2</code> - Each takes 2 of 12 columns (16.6%)</li>
-                  <li><strong>Social Links:</strong> <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">lg:col-span-2</code> - Takes remaining 2 columns (16.6%)</li>
+                  <li><strong>Brand Section:</strong> <Code syntax="plain">lg:col-span-4</Code> - Takes 4 of 12 columns (33%)</li>
+                  <li><strong>Navigation Sections:</strong> <Code syntax="plain">lg:col-span-2</Code> - Each takes 2 of 12 columns (16.6%)</li>
+                  <li><strong>Social Links:</strong> <Code syntax="plain">lg:col-span-2</Code> - Takes remaining 2 columns (16.6%)</li>
                 </ul>
               </div>
               <div className="text-sm text-[var(--color-text-secondary)]">
                 <strong>Spacing (8px base units):</strong>
                 <ul className="list-disc list-inside mt-2 space-y-1">
-                  <li><code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">py-16 sm:py-20 lg:py-24</code> - Vertical padding: 128/160/192px (16/20/24 units)</li>
-                  <li><code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">gap-12 lg:gap-8</code> - Column gaps: 96px mobile, 64px desktop (12/8 units)</li>
-                  <li><code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">mb-6</code> - Logo margin: 48px (6 units)</li>
-                  <li><code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">mb-4</code> - Section title margin: 32px (4 units)</li>
-                  <li><code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">space-y-3</code> - Link spacing: 24px (3 units)</li>
+                  <li><Code syntax="plain">py-16 sm:py-20 lg:py-24</Code> - Vertical padding: 128/160/192px (16/20/24 units)</li>
+                  <li><Code syntax="plain">gap-12 lg:gap-8</Code> - Column gaps: 96px mobile, 64px desktop (12/8 units)</li>
+                  <li><Code syntax="plain">mb-6</Code> - Logo margin: 48px (6 units)</li>
+                  <li><Code syntax="plain">mb-4</Code> - Section title margin: 32px (4 units)</li>
+                  <li><Code syntax="plain">space-y-3</Code> - Link spacing: 24px (3 units)</li>
                 </ul>
               </div>
               <div className="mt-4 p-3 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
@@ -693,7 +685,7 @@ const components = [
               </div>
               <div className="mt-4 p-3 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
                 <p className="text-xs text-[var(--color-text-muted)]">
-                  <strong>Icon Integration:</strong> The GitHubIcon uses <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">currentColor</code> to automatically adapt to light/dark modes and inherits the link's hover color.
+                  <strong>Icon Integration:</strong> The GitHubIcon uses <Code syntax="plain">currentColor</Code> to automatically adapt to light/dark modes and inherits the link's hover color.
                 </p>
               </div>
             </div>
@@ -746,8 +738,7 @@ const components = [
             Code Example
           </h4>
           <Card className="p-6 bg-[var(--color-surface)]">
-            <pre className="text-sm text-[var(--color-text-secondary)] overflow-x-auto">
-              <code>{`// Wrap your app with ToastProvider
+            <Code inline={false} syntax="plain">{`// Wrap your app with ToastProvider
 <ToastProvider position="bottom-right" maxToasts={3}>
   <App />
 </ToastProvider>
@@ -761,8 +752,7 @@ function MyComponent() {
       Save
     </Button>
   );
-}`}</code>
-            </pre>
+}`}</Code>
           </Card>
         </div>
         </section>
@@ -813,8 +803,7 @@ function MyComponent() {
             Code Example
           </h4>
           <Card className="p-6 bg-[var(--color-surface)]">
-            <pre className="text-sm text-[var(--color-text-secondary)] overflow-x-auto">
-              <code>{`function MyComponent() {
+            <Code inline={false} syntax="plain">{`function MyComponent() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -843,8 +832,7 @@ function MyComponent() {
       </Modal>
     </>
   );
-}`}</code>
-            </pre>
+}`}</Code>
           </Card>
         </div>
         </section>
@@ -1032,8 +1020,7 @@ function MyComponent() {
             Usage Example
           </h4>
           <Card className="p-6 bg-[var(--color-surface)]">
-            <pre className="text-sm text-[var(--color-text-secondary)] overflow-x-auto">
-              <code>{`import { CollapsibleCodeBlock } from '@ecosystem/design-system';
+            <Code inline={false} syntax="plain">{`import { CollapsibleCodeBlock } from '@ecosystem/design-system';
 import type { SyntaxToken } from '@ecosystem/design-system';
 
 // With tokenized syntax highlighting
@@ -1057,8 +1044,7 @@ const codeTokens: SyntaxToken[] = [
   code="const example = 'Hello World';"
   showCopy={true}
   defaultCollapsed={false}
-/>`}</code>
-            </pre>
+/>`}</Code>
           </Card>
         </div>
 
@@ -1070,37 +1056,37 @@ const codeTokens: SyntaxToken[] = [
           <Card className="p-6">
             <div className="space-y-4">
               <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
-                <code className="text-sm font-mono text-[var(--color-primary)]">id: string</code>
+                <Code syntax="plain">id: string</Code>
                 <p className="text-sm text-[var(--color-text-secondary)] mt-2">
                   Required. Unique identifier for the code block (used for animation control).
                 </p>
               </div>
               <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
-                <code className="text-sm font-mono text-[var(--color-primary)]">code: string | SyntaxToken[]</code>
+                <Code syntax="plain">code: string | SyntaxToken[]</Code>
                 <p className="text-sm text-[var(--color-text-secondary)] mt-2">
                   Required. The code to display - can be a plain string or array of syntax tokens for highlighting.
                 </p>
               </div>
               <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
-                <code className="text-sm font-mono text-[var(--color-primary)]">title?: string</code>
+                <Code syntax="plain">title?: string</Code>
                 <p className="text-sm text-[var(--color-text-secondary)] mt-2">
                   Optional. Title/label displayed above the code block.
                 </p>
               </div>
               <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
-                <code className="text-sm font-mono text-[var(--color-primary)]">showCopy?: boolean</code>
+                <Code syntax="plain">showCopy?: boolean</Code>
                 <p className="text-sm text-[var(--color-text-secondary)] mt-2">
                   Optional. Show/hide the copy button. Default: true.
                 </p>
               </div>
               <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
-                <code className="text-sm font-mono text-[var(--color-primary)]">defaultCollapsed?: boolean</code>
+                <Code syntax="plain">defaultCollapsed?: boolean</Code>
                 <p className="text-sm text-[var(--color-text-secondary)] mt-2">
                   Optional. Initial collapsed state. Default: true.
                 </p>
               </div>
               <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
-                <code className="text-sm font-mono text-[var(--color-primary)]">language?: string</code>
+                <Code syntax="plain">language?: string</Code>
                 <p className="text-sm text-[var(--color-text-secondary)] mt-2">
                   Optional. Language identifier (e.g., 'typescript', 'css', 'html').
                 </p>
@@ -1120,9 +1106,9 @@ const codeTokens: SyntaxToken[] = [
             </p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {['comment', 'keyword', 'function', 'string', 'number', 'boolean', 'operator', 'property', 'className', 'tag', 'attribute', 'variable', 'punctuation', 'plain'].map((type) => (
-                <code key={type} className="text-xs px-2 py-1 bg-[var(--color-surface)] rounded border border-[var(--color-border)] text-[var(--color-primary)]">
+                <Code key={type} syntax="plain">
                   {type}
-                </code>
+                </Code>
               ))}
             </div>
           </Card>
@@ -1150,7 +1136,7 @@ const codeTokens: SyntaxToken[] = [
               </div>
               <div className="mt-4 p-3 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
                 <p className="text-xs text-[var(--color-text-muted)]">
-                  <strong>Accessibility:</strong> The animation respects <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">prefers-reduced-motion</code> by skipping animations when users have this preference enabled.
+                  <strong>Accessibility:</strong> The animation respects <Code syntax="plain">prefers-reduced-motion</Code> by skipping animations when users have this preference enabled.
                 </p>
               </div>
             </div>

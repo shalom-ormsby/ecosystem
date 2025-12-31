@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, Button, TextField, TertiaryNav, Badge } from '@ecosystem/design-system';
+import { Card, Button, TextField, TertiaryNav, Badge, Code } from '@ecosystem/design-system';
 import { useForm, useTheme, useToast } from '@ecosystem/design-system';
 
 interface HooksSectionProps {
@@ -103,19 +103,19 @@ export function HooksSection({ activeItemId }: HooksSectionProps) {
                   <h5 className="font-medium text-[var(--color-text-primary)] mb-3">Options</h5>
                   <div className="space-y-3 text-sm">
                     <div className="border-l-2 border-[var(--color-primary)] pl-3">
-                      <code className="text-[var(--color-primary)] font-mono">initialValues: T</code>
+                      <Code syntax="plain">initialValues: T</Code>
                       <p className="text-[var(--color-text-secondary)] mt-1">Initial form values (required)</p>
                     </div>
                     <div className="border-l-2 border-[var(--color-border)] pl-3">
-                      <code className="text-[var(--color-text-primary)] font-mono">validations?: Partial&lt;Record&lt;keyof T, FieldValidation&gt;&gt;</code>
+                      <Code syntax="plain">validations?: Partial&lt;Record&lt;keyof T, FieldValidation&gt;&gt;</Code>
                       <p className="text-[var(--color-text-secondary)] mt-1">Validation rules for each field</p>
                     </div>
                     <div className="border-l-2 border-[var(--color-border)] pl-3">
-                      <code className="text-[var(--color-text-primary)] font-mono">onSubmit?: (values: T) =&gt; void | Promise&lt;void&gt;</code>
+                      <Code syntax="plain">onSubmit?: (values: T) =&gt; void | Promise&lt;void&gt;</Code>
                       <p className="text-[var(--color-text-secondary)] mt-1">Callback fired when form is submitted and valid</p>
                     </div>
                     <div className="border-l-2 border-[var(--color-border)] pl-3">
-                      <code className="text-[var(--color-text-primary)] font-mono">validateOn?: 'onChange' | 'onBlur' | 'onSubmit'</code>
+                      <Code syntax="plain">validateOn?: 'onChange' | 'onBlur' | 'onSubmit'</Code>
                       <p className="text-[var(--color-text-secondary)] mt-1">When to validate fields (default: 'onBlur')</p>
                     </div>
                   </div>
@@ -126,27 +126,27 @@ export function HooksSection({ activeItemId }: HooksSectionProps) {
                   <h5 className="font-medium text-[var(--color-text-primary)] mb-3">Return Value</h5>
                   <div className="space-y-2 text-sm">
                     <div className="flex gap-2">
-                      <code className="text-[var(--color-primary)] font-mono">values</code>
+                      <Code syntax="plain">values</Code>
                       <span className="text-[var(--color-text-secondary)]">Current form values</span>
                     </div>
                     <div className="flex gap-2">
-                      <code className="text-[var(--color-primary)] font-mono">errors</code>
+                      <Code syntax="plain">errors</Code>
                       <span className="text-[var(--color-text-secondary)]">Current form errors</span>
                     </div>
                     <div className="flex gap-2">
-                      <code className="text-[var(--color-primary)] font-mono">isSubmitting</code>
+                      <Code syntax="plain">isSubmitting</Code>
                       <span className="text-[var(--color-text-secondary)]">Whether form is submitting</span>
                     </div>
                     <div className="flex gap-2">
-                      <code className="text-[var(--color-primary)] font-mono">isDirty</code>
+                      <Code syntax="plain">isDirty</Code>
                       <span className="text-[var(--color-text-secondary)]">Whether form has been modified</span>
                     </div>
                     <div className="flex gap-2">
-                      <code className="text-[var(--color-primary)] font-mono">handleSubmit()</code>
+                      <Code syntax="plain">handleSubmit()</Code>
                       <span className="text-[var(--color-text-secondary)]">Form submit handler</span>
                     </div>
                     <div className="flex gap-2">
-                      <code className="text-[var(--color-primary)] font-mono">getFieldProps(name)</code>
+                      <Code syntax="plain">getFieldProps(name)</Code>
                       <span className="text-[var(--color-text-secondary)]">Get props for a field</span>
                     </div>
                   </div>
@@ -165,27 +165,27 @@ export function HooksSection({ activeItemId }: HooksSectionProps) {
               <Card className="p-6">
                 <h5 className="font-medium text-[var(--color-text-primary)] mb-3">Built-in Patterns</h5>
                 <p className="text-sm text-[var(--color-text-secondary)] mb-4">
-                  Import from <code className="px-1 py-0.5 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">@ecosystem/design-system/utils</code>
+                  Import from <Code syntax="plain">@ecosystem/design-system/utils</Code>
                 </p>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between items-center">
-                    <code className="text-[var(--color-primary)] font-mono">patterns.email</code>
+                    <Code syntax="plain">patterns.email</Code>
                     <Badge variant="default" size="sm">Regex</Badge>
                   </div>
                   <div className="flex justify-between items-center">
-                    <code className="text-[var(--color-primary)] font-mono">patterns.url</code>
+                    <Code syntax="plain">patterns.url</Code>
                     <Badge variant="default" size="sm">Regex</Badge>
                   </div>
                   <div className="flex justify-between items-center">
-                    <code className="text-[var(--color-primary)] font-mono">patterns.phone</code>
+                    <Code syntax="plain">patterns.phone</Code>
                     <Badge variant="default" size="sm">Regex</Badge>
                   </div>
                   <div className="flex justify-between items-center">
-                    <code className="text-[var(--color-primary)] font-mono">patterns.number</code>
+                    <Code syntax="plain">patterns.number</Code>
                     <Badge variant="default" size="sm">Regex</Badge>
                   </div>
                   <div className="flex justify-between items-center">
-                    <code className="text-[var(--color-primary)] font-mono">patterns.alphanumeric</code>
+                    <Code syntax="plain">patterns.alphanumeric</Code>
                     <Badge variant="default" size="sm">Regex</Badge>
                   </div>
                 </div>
@@ -196,19 +196,19 @@ export function HooksSection({ activeItemId }: HooksSectionProps) {
                 <h5 className="font-medium text-[var(--color-text-primary)] mb-3">Validation Rules</h5>
                 <div className="space-y-3 text-sm">
                   <div>
-                    <code className="text-[var(--color-primary)] font-mono">required</code>
+                    <Code syntax="plain">required</Code>
                     <p className="text-[var(--color-text-secondary)] mt-1">Field must have a value</p>
                   </div>
                   <div>
-                    <code className="text-[var(--color-primary)] font-mono">minLength / maxLength</code>
+                    <Code syntax="plain">minLength / maxLength</Code>
                     <p className="text-[var(--color-text-secondary)] mt-1">String length constraints</p>
                   </div>
                   <div>
-                    <code className="text-[var(--color-primary)] font-mono">pattern</code>
+                    <Code syntax="plain">pattern</Code>
                     <p className="text-[var(--color-text-secondary)] mt-1">Regex validation</p>
                   </div>
                   <div>
-                    <code className="text-[var(--color-primary)] font-mono">custom</code>
+                    <Code syntax="plain">custom</Code>
                     <p className="text-[var(--color-text-secondary)] mt-1">Custom validation function</p>
                   </div>
                 </div>
@@ -227,9 +227,7 @@ export function HooksSection({ activeItemId }: HooksSectionProps) {
                 <p className="text-sm text-[var(--color-text-secondary)] mb-4">
                   Validate a single field value against a set of validation rules. Returns an error message string or null if valid.
                 </p>
-                <div className="bg-[var(--color-surface)] p-4 rounded border border-[var(--color-border)] overflow-x-auto">
-                  <pre className="text-sm font-mono text-[var(--color-text-secondary)]">
-{`import { validateField, patterns } from '@ecosystem/design-system/utils';
+                <Code inline={false} syntax="plain">{`import { validateField, patterns } from '@ecosystem/design-system/utils';
 
 const emailError = validateField('invalid-email', {
   required: true,
@@ -244,9 +242,7 @@ const passwordError = validateField('abc', {
   required: true,
   minLength: { value: 8, message: 'Min 8 characters' }
 });
-// Returns: 'Min 8 characters'`}
-                  </pre>
-                </div>
+// Returns: 'Min 8 characters'`}</Code>
               </Card>
 
               <Card className="p-6">
@@ -254,9 +250,7 @@ const passwordError = validateField('abc', {
                 <p className="text-sm text-[var(--color-text-secondary)] mb-4">
                   Validate an entire form object against validation rules. Returns an object with field names as keys and error messages as values.
                 </p>
-                <div className="bg-[var(--color-surface)] p-4 rounded border border-[var(--color-border)] overflow-x-auto">
-                  <pre className="text-sm font-mono text-[var(--color-text-secondary)]">
-{`import { validateForm, patterns } from '@ecosystem/design-system/utils';
+                <Code inline={false} syntax="plain">{`import { validateForm, patterns } from '@ecosystem/design-system/utils';
 
 const values = {
   email: 'invalid-email',
@@ -282,9 +276,7 @@ const errors = validateForm(values, validations);
 // Returns: {
 //   email: 'Invalid email format',
 //   password: 'Min 8 characters'
-// }`}
-                  </pre>
-                </div>
+// }`}</Code>
               </Card>
             </div>
           </div>
@@ -294,9 +286,8 @@ const errors = validateForm(values, validations);
             <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
               Code Example
             </h4>
-            <Card className="p-6 bg-[var(--color-surface)]">
-              <pre className="text-sm text-[var(--color-text-secondary)] overflow-x-auto">
-                <code>{`import { useForm, patterns } from '@ecosystem/design-system';
+            <Card className="p-6">
+              <Code inline={false} syntax="plain">{`import { useForm, patterns } from '@ecosystem/design-system';
 
 function LoginForm() {
   const form = useForm({
@@ -329,8 +320,7 @@ function LoginForm() {
       </button>
     </form>
   );
-}`}</code>
-              </pre>
+}`}</Code>
             </Card>
           </div>
         </section>
@@ -446,10 +436,10 @@ function UseThemeSection() {
             <div className="text-sm text-[var(--color-text-secondary)]">
               <strong>Return Value:</strong>
               <ul className="list-disc list-inside mt-2 space-y-1">
-                <li><code className="text-[var(--color-primary)]">theme</code> - Current theme ('studio' | 'sage' | 'volt')</li>
-                <li><code className="text-[var(--color-primary)]">mode</code> - Current mode ('light' | 'dark')</li>
-                <li><code className="text-[var(--color-primary)]">setTheme(theme)</code> - Change the theme</li>
-                <li><code className="text-[var(--color-primary)]">setMode(mode)</code> - Change the mode</li>
+                <li><Code syntax="plain">theme</Code> - Current theme ('studio' | 'sage' | 'volt')</li>
+                <li><Code syntax="plain">mode</Code> - Current mode ('light' | 'dark')</li>
+                <li><Code syntax="plain">setTheme(theme)</Code> - Change the theme</li>
+                <li><Code syntax="plain">setMode(mode)</Code> - Change the mode</li>
               </ul>
             </div>
           </div>
@@ -499,9 +489,8 @@ function UseThemeSection() {
         <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
           Code Example
         </h4>
-        <Card className="p-6 bg-[var(--color-surface)]">
-          <pre className="text-sm text-[var(--color-text-secondary)] overflow-x-auto">
-            <code>{`import { useTheme } from '@ecosystem/design-system';
+        <Card className="p-6">
+          <Code inline={false} syntax="plain">{`import { useTheme } from '@ecosystem/design-system';
 
 function ThemeControls() {
   const { theme, mode, setTheme, setMode } = useTheme();
@@ -513,8 +502,7 @@ function ThemeControls() {
       <button onClick={() => setMode('dark')}>Dark Mode</button>
     </div>
   );
-}`}</code>
-          </pre>
+}`}</Code>
         </Card>
       </div>
     </section>
@@ -539,9 +527,9 @@ function UseToastSection() {
             <div className="text-sm text-[var(--color-text-secondary)]">
               <strong>Return Value:</strong>
               <ul className="list-disc list-inside mt-2 space-y-1">
-                <li><code className="text-[var(--color-primary)]">toast(message, type, duration)</code> - Show a toast notification</li>
-                <li><code className="text-[var(--color-primary)]">removeToast(id)</code> - Remove a specific toast</li>
-                <li><code className="text-[var(--color-primary)]">toasts</code> - Array of active toasts</li>
+                <li><Code syntax="plain">toast(message, type, duration)</Code> - Show a toast notification</li>
+                <li><Code syntax="plain">removeToast(id)</Code> - Remove a specific toast</li>
+                <li><Code syntax="plain">toasts</Code> - Array of active toasts</li>
               </ul>
             </div>
           </div>
@@ -576,9 +564,8 @@ function UseToastSection() {
         <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
           Code Example
         </h4>
-        <Card className="p-6 bg-[var(--color-surface)]">
-          <pre className="text-sm text-[var(--color-text-secondary)] overflow-x-auto">
-            <code>{`import { useToast } from '@ecosystem/design-system';
+        <Card className="p-6">
+          <Code inline={false} syntax="plain">{`import { useToast } from '@ecosystem/design-system';
 
 function MyComponent() {
   const { toast } = useToast();
@@ -593,8 +580,7 @@ function MyComponent() {
   };
 
   return <button onClick={handleSave}>Save</button>;
-}`}</code>
-          </pre>
+}`}</Code>
         </Card>
       </div>
     </section>
@@ -617,9 +603,9 @@ function UseMotionPreferenceSection() {
             <div className="text-sm text-[var(--color-text-secondary)]">
               <strong>Return Value:</strong>
               <ul className="list-disc list-inside mt-2 space-y-1">
-                <li><code className="text-[var(--color-primary)]">shouldAnimate</code> - Boolean indicating if animations should play</li>
-                <li><code className="text-[var(--color-primary)]">prefersReducedMotion</code> - Boolean from user's system preference</li>
-                <li><code className="text-[var(--color-primary)]">scale</code> - Animation scale factor (0-10, where 10 is normal speed)</li>
+                <li><Code syntax="plain">shouldAnimate</Code> - Boolean indicating if animations should play</li>
+                <li><Code syntax="plain">prefersReducedMotion</Code> - Boolean from user's system preference</li>
+                <li><Code syntax="plain">scale</Code> - Animation scale factor (0-10, where 10 is normal speed)</li>
               </ul>
             </div>
           </div>
@@ -631,9 +617,8 @@ function UseMotionPreferenceSection() {
         <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
           Code Example
         </h4>
-        <Card className="p-6 bg-[var(--color-surface)]">
-          <pre className="text-sm text-[var(--color-text-secondary)] overflow-x-auto">
-            <code>{`import { useMotionPreference } from '@ecosystem/design-system';
+        <Card className="p-6">
+          <Code inline={false} syntax="plain">{`import { useMotionPreference } from '@ecosystem/design-system';
 import { motion } from 'framer-motion';
 
 function AnimatedComponent() {
@@ -648,8 +633,7 @@ function AnimatedComponent() {
       Content
     </motion.div>
   );
-}`}</code>
-          </pre>
+}`}</Code>
         </Card>
       </div>
 
@@ -660,11 +644,9 @@ function AnimatedComponent() {
         </h4>
         <Card className="p-6">
           <p className="text-sm text-[var(--color-text-secondary)] mb-4">
-            Combine with animation utilities from <code className="px-1 py-0.5 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">@ecosystem/design-system/utils</code> for motion-aware animations:
+            Combine with animation utilities from <Code syntax="plain">@ecosystem/design-system/utils</Code> for motion-aware animations:
           </p>
-          <Card className="p-4 bg-[var(--color-surface)]">
-            <pre className="text-sm text-[var(--color-text-secondary)] overflow-x-auto">
-              <code>{`import { useMotionPreference } from '@ecosystem/design-system';
+          <Code inline={false} syntax="plain">{`import { useMotionPreference } from '@ecosystem/design-system';
 import { presets, scaleDuration } from '@ecosystem/design-system/utils';
 import { motion } from 'framer-motion';
 
@@ -680,9 +662,7 @@ function Card() {
       Card content
     </motion.div>
   );
-}`}</code>
-            </pre>
-          </Card>
+}`}</Code>
         </Card>
       </div>
     </section>

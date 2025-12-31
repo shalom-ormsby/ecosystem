@@ -1,6 +1,6 @@
 'use client';
 
-import { Card } from '@ecosystem/design-system';
+import { Card, Code } from '@ecosystem/design-system';
 
 export function OverviewSection() {
   return (
@@ -66,15 +66,12 @@ export function OverviewSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Card className="p-6">
             <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">Installation</h3>
-            <pre className="bg-[var(--color-surface)] p-4 rounded-md overflow-x-auto border border-[var(--color-border)]">
-              <code className="text-sm text-[var(--color-text-primary)]">pnpm add @ecosystem/design-system</code>
-            </pre>
+            <Code inline={false} syntax="plain">pnpm add @ecosystem/design-system</Code>
           </Card>
 
           <Card className="p-6">
             <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">Basic Usage</h3>
-            <pre className="bg-[var(--color-surface)] p-4 rounded-md overflow-x-auto border border-[var(--color-border)]">
-              <code className="text-sm text-[var(--color-text-primary)]">{`import { Button, Card } from '@ecosystem/design-system';
+            <Code inline={false} syntax="plain">{`import { Button, Card } from '@ecosystem/design-system';
 
 export function MyComponent() {
   return (
@@ -82,14 +79,12 @@ export function MyComponent() {
       <Button variant="primary">Click me</Button>
     </Card>
   );
-}`}</code>
-            </pre>
+}`}</Code>
           </Card>
 
           <Card className="p-6 md:col-span-2">
             <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">Theme Switching</h3>
-            <pre className="bg-[var(--color-surface)] p-4 rounded-md overflow-x-auto border border-[var(--color-border)]">
-              <code className="text-sm text-[var(--color-text-primary)]">{`import { useTheme } from '@ecosystem/design-system';
+            <Code inline={false} syntax="plain">{`import { useTheme } from '@ecosystem/design-system';
 
 export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
@@ -99,8 +94,7 @@ export function ThemeSwitcher() {
       Switch to Sage theme
     </button>
   );
-}`}</code>
-            </pre>
+}`}</Code>
           </Card>
         </div>
       </section>

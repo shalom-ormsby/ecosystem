@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Card } from '@ecosystem/design-system';
+import { Card, Code } from '@ecosystem/design-system';
 import { syntaxColors } from '@ecosystem/design-system/tokens';
 
 export function SyntaxTab() {
@@ -44,7 +44,7 @@ export function SyntaxTab() {
         </p>
         <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
           <p className="text-sm text-[var(--color-text-muted)]">
-            <strong>Usage:</strong> Use these CSS custom properties in your code blocks with <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">var(--syntax-keyword)</code> or use the <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">CollapsibleCodeBlock</code> organism with SyntaxToken types.
+            <strong>Usage:</strong> Use these CSS custom properties in your code blocks with <Code>var(--syntax-keyword)</Code> or use the <Code>CollapsibleCodeBlock</Code> organism with SyntaxToken types.
           </p>
         </div>
       </Card>
@@ -172,9 +172,9 @@ export function SyntaxTab() {
                 {/* Token Info */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <code className="text-sm font-mono text-[var(--color-primary)]">
+                    <Code className="text-sm">
                       {token.name}
-                    </code>
+                    </Code>
                   </div>
                   <p className="text-sm text-[var(--color-text-secondary)] mb-2">
                     {token.description}
@@ -188,15 +188,15 @@ export function SyntaxTab() {
                 <div className="hidden lg:flex flex-col gap-1 min-w-[200px]">
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-[var(--color-text-muted)] w-12">Light:</span>
-                    <code className="text-xs font-mono text-[var(--color-text-secondary)]">
+                    <Code className="text-xs">
                       {lightColor}
-                    </code>
+                    </Code>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-[var(--color-text-muted)] w-12">Dark:</span>
-                    <code className="text-xs font-mono text-[var(--color-text-secondary)]">
+                    <Code className="text-xs">
                       {darkColor}
-                    </code>
+                    </Code>
                   </div>
                 </div>
 
@@ -219,9 +219,7 @@ export function SyntaxTab() {
         <h3 className="text-xl font-semibold mb-3 text-[var(--color-text-primary)]">
           Usage Example
         </h3>
-        <div className="bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)]">
-          <pre className="text-sm font-mono text-[var(--color-text-secondary)] overflow-x-auto">
-            <code>{`// CSS approach
+        <Code inline={false}>{`// CSS approach
 <span className="text-[var(--syntax-keyword)]">const</span>
 <span className="text-[var(--syntax-plain)]"> example </span>
 <span className="text-[var(--syntax-operator)]">=</span>
@@ -238,9 +236,7 @@ import { CollapsibleCodeBlock } from '@ecosystem/design-system';
     { text: '=', type: 'operator' },
     { text: ' "value"', type: 'string' },
   ]}
-/>`}</code>
-          </pre>
-        </div>
+/>`}</Code>
       </Card>
     </div>
   );

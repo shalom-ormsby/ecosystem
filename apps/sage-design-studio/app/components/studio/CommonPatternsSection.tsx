@@ -1,6 +1,6 @@
 'use client';
 
-import { Card } from '@ecosystem/design-system';
+import { Card, Code } from '@ecosystem/design-system';
 
 export function CommonPatternsSection() {
   return (
@@ -24,8 +24,7 @@ export function CommonPatternsSection() {
           <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">
             Accessing design tokens via CSS variables
           </h3>
-          <pre className="bg-[var(--color-surface)] p-4 rounded-md text-sm overflow-x-auto border border-[var(--color-border)]">
-            <code className="text-[var(--color-text-primary)]">{`export function MyComponent() {
+          <Code inline={false} syntax="plain">{`export function MyComponent() {
   return (
     <div className="bg-[var(--color-primary)] text-[var(--color-primary-foreground)]">
       <h1 className="text-[var(--font-size-heading-1)]">
@@ -36,8 +35,7 @@ export function CommonPatternsSection() {
       </p>
     </div>
   );
-}`}</code>
-          </pre>
+}`}</Code>
           <div className="mt-4 p-4 bg-[var(--color-surface)] rounded-md border border-[var(--color-border)]">
             <p className="text-sm text-[var(--color-text-primary)]">
               <strong>Pro tip:</strong> Always use CSS variables (var(--token-name)) instead of hardcoded values.
@@ -56,8 +54,7 @@ export function CommonPatternsSection() {
           <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">
             Components that adapt to the current theme
           </h3>
-          <pre className="bg-[var(--color-surface)] p-4 rounded-md text-sm overflow-x-auto border border-[var(--color-border)]">
-            <code className="text-[var(--color-text-primary)]">{`import { useTheme } from '@ecosystem/design-system';
+          <Code inline={false} syntax="plain">{`import { useTheme } from '@ecosystem/design-system';
 
 export function ThemedCard() {
   const { theme } = useTheme();
@@ -75,8 +72,7 @@ export function ThemedCard() {
       </p>
     </div>
   );
-}`}</code>
-          </pre>
+}`}</Code>
         </Card>
       </section>
 
@@ -89,8 +85,7 @@ export function ThemedCard() {
           <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">
             Using useMotionPreference hook with Framer Motion
           </h3>
-          <pre className="bg-[var(--color-surface)] p-4 rounded-md text-sm overflow-x-auto border border-[var(--color-border)]">
-            <code className="text-[var(--color-text-primary)]">{`import { motion } from 'framer-motion';
+          <Code inline={false} syntax="plain">{`import { motion } from 'framer-motion';
 import { useMotionPreference } from '@ecosystem/design-system';
 
 export function AnimatedCard() {
@@ -109,11 +104,10 @@ export function AnimatedCard() {
       <p>This card respects motion preferences</p>
     </motion.div>
   );
-}`}</code>
-          </pre>
+}`}</Code>
           <div className="mt-4 p-4 bg-[var(--color-surface)] rounded-md border border-[var(--color-border)]">
             <p className="text-sm text-[var(--color-text-primary)]">
-              <strong>Accessibility first:</strong> When <code className="px-1.5 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">shouldReduceMotion</code> is true,
+              <strong>Accessibility first:</strong> When <Code syntax="plain">shouldReduceMotion</Code> is true,
               set duration to 0 and disable position/scale animations. This respects user preferences and system settings.
             </p>
           </div>
@@ -129,8 +123,7 @@ export function AnimatedCard() {
           <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">
             Mobile-first responsive component
           </h3>
-          <pre className="bg-[var(--color-surface)] p-4 rounded-md text-sm overflow-x-auto border border-[var(--color-border)]">
-            <code className="text-[var(--color-text-primary)]">{`export function ResponsiveGrid() {
+          <Code inline={false} syntax="plain">{`export function ResponsiveGrid() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <Card className="p-4">Item 1</Card>
@@ -138,17 +131,16 @@ export function AnimatedCard() {
       <Card className="p-4">Item 3</Card>
     </div>
   );
-}`}</code>
-          </pre>
+}`}</Code>
           <div className="mt-4 space-y-2">
             <p className="text-sm text-[var(--color-text-primary)]">
               <strong>Breakpoints:</strong>
             </p>
             <ul className="text-sm text-[var(--color-text-secondary)] space-y-1 ml-4">
-              <li>• <code className="px-1.5 py-0.5 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">sm:</code> 640px (phones in landscape)</li>
-              <li>• <code className="px-1.5 py-0.5 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">md:</code> 768px (tablets)</li>
-              <li>• <code className="px-1.5 py-0.5 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">lg:</code> 1024px (desktops)</li>
-              <li>• <code className="px-1.5 py-0.5 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">xl:</code> 1280px (large desktops)</li>
+              <li>• <Code syntax="plain">sm:</Code> 640px (phones in landscape)</li>
+              <li>• <Code syntax="plain">md:</Code> 768px (tablets)</li>
+              <li>• <Code syntax="plain">lg:</Code> 1024px (desktops)</li>
+              <li>• <Code syntax="plain">xl:</Code> 1280px (large desktops)</li>
             </ul>
           </div>
         </Card>
@@ -163,8 +155,7 @@ export function AnimatedCard() {
           <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">
             Building a SearchBar molecule from Input and Button atoms
           </h3>
-          <pre className="bg-[var(--color-surface)] p-4 rounded-md text-sm overflow-x-auto border border-[var(--color-border)]">
-            <code className="text-[var(--color-text-primary)]">{`import { Input, Button } from '@ecosystem/design-system';
+          <Code inline={false} syntax="plain">{`import { Input, Button } from '@ecosystem/design-system';
 
 interface SearchBarProps {
   placeholder?: string;
@@ -192,8 +183,7 @@ export function SearchBar({ placeholder, onSearch }: SearchBarProps) {
       </Button>
     </form>
   );
-}`}</code>
-          </pre>
+}`}</Code>
         </Card>
       </section>
 
@@ -206,8 +196,7 @@ export function SearchBar({ placeholder, onSearch }: SearchBarProps) {
           <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">
             Using the useForm hook for form validation
           </h3>
-          <pre className="bg-[var(--color-surface)] p-4 rounded-md text-sm overflow-x-auto border border-[var(--color-border)]">
-            <code className="text-[var(--color-text-primary)]">{`import { useForm, TextField, Button } from '@ecosystem/design-system';
+          <Code inline={false} syntax="plain">{`import { useForm, TextField, Button } from '@ecosystem/design-system';
 
 export function LoginForm() {
   const { values, errors, handleChange, handleSubmit } = useForm({
@@ -246,8 +235,7 @@ export function LoginForm() {
       </Button>
     </form>
   );
-}`}</code>
-          </pre>
+}`}</Code>
         </Card>
       </section>
 
@@ -260,8 +248,7 @@ export function LoginForm() {
           <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">
             Using the useToast hook for notifications
           </h3>
-          <pre className="bg-[var(--color-surface)] p-4 rounded-md text-sm overflow-x-auto border border-[var(--color-border)]">
-            <code className="text-[var(--color-text-primary)]">{`import { useToast, Button, ToastProvider } from '@ecosystem/design-system';
+          <Code inline={false} syntax="plain">{`import { useToast, Button, ToastProvider } from '@ecosystem/design-system';
 
 function MyComponent() {
   const { toast } = useToast();
@@ -289,8 +276,7 @@ export function App() {
       <MyComponent />
     </ToastProvider>
   );
-}`}</code>
-          </pre>
+}`}</Code>
         </Card>
       </section>
 
@@ -303,8 +289,7 @@ export function App() {
           <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">
             Using the Modal component with state management
           </h3>
-          <pre className="bg-[var(--color-surface)] p-4 rounded-md text-sm overflow-x-auto border border-[var(--color-border)]">
-            <code className="text-[var(--color-text-primary)]">{`import { useState } from 'react';
+          <Code inline={false} syntax="plain">{`import { useState } from 'react';
 import { Modal, Button } from '@ecosystem/design-system';
 
 export function ConfirmDialog() {
@@ -340,8 +325,7 @@ export function ConfirmDialog() {
       </Modal>
     </>
   );
-}`}</code>
-          </pre>
+}`}</Code>
         </Card>
       </section>
     </div>

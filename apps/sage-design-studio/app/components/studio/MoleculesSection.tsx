@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, TertiaryNav } from '@ecosystem/design-system';
+import { Card, Code, TertiaryNav } from '@ecosystem/design-system';
 import { moleculeRegistry } from '../lib/molecule-registry';
 
 interface MoleculesSectionProps {
@@ -105,9 +105,9 @@ export function MoleculesSection({ activeItemId }: MoleculesSectionProps) {
                   {Object.entries(currentMolecule.props).map(([propName, propConfig]) => (
                     <div key={propName} className="border-b border-[var(--color-border)] last:border-0 pb-4 last:pb-0">
                       <div className="flex items-baseline gap-2 mb-1">
-                        <code className="text-sm font-mono text-[var(--color-primary)]">
+                        <Code syntax="property">
                           {propName}
-                        </code>
+                        </Code>
                         <span className="text-xs text-[var(--color-text-muted)]">
                           {propConfig.type}
                         </span>
@@ -123,7 +123,7 @@ export function MoleculesSection({ activeItemId }: MoleculesSectionProps) {
                         </div>
                       )}
                       <div className="text-xs text-[var(--color-text-muted)]">
-                        Default: <code className="text-[var(--color-primary)]">{JSON.stringify(propConfig.default)}</code>
+                        Default: <Code syntax="plain">{JSON.stringify(propConfig.default)}</Code>
                       </div>
                     </div>
                   ))}

@@ -1,6 +1,6 @@
 'use client';
 
-import { Card } from '@ecosystem/design-system';
+import { Card, Code } from '@ecosystem/design-system';
 
 export function ArchitectureSection() {
   return (
@@ -141,8 +141,8 @@ export function ArchitectureSection() {
               <div>
                 <h3 className="font-semibold mb-2 text-[var(--color-text-primary)]">Component Names</h3>
                 <ul className="text-sm space-y-2 text-[var(--color-text-secondary)]">
-                  <li><code className="px-2 py-0.5 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">PascalCase</code> for component names</li>
-                  <li><code className="px-2 py-0.5 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">kebab-case</code> for file names</li>
+                  <li><Code syntax="plain">PascalCase</Code> for component names</li>
+                  <li><Code syntax="plain">kebab-case</Code> for file names</li>
                   <li>Descriptive, action-oriented names</li>
                 </ul>
               </div>
@@ -260,8 +260,7 @@ export function ArchitectureSection() {
             </div>
             <div>
               <h3 className="font-semibold mb-2 text-[var(--color-text-primary)]">How Tokens Cascade</h3>
-              <pre className="bg-[var(--color-surface)] p-4 rounded-md text-xs overflow-x-auto border border-[var(--color-border)]">
-                <code className="text-[var(--color-text-primary)]">{`1. Define in TypeScript
+              <Code inline={false} syntax="plain">{`1. Define in TypeScript
    tokens/studio/colors.ts
 
 2. Export as CSS variables
@@ -271,8 +270,7 @@ export function ArchitectureSection() {
    var(--color-primary)
 
 4. Switch themes at runtime
-   setTheme('sage')`}</code>
-              </pre>
+   setTheme('sage')`}</Code>
             </div>
           </div>
         </Card>
