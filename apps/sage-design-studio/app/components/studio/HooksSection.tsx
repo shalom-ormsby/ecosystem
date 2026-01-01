@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, Button, TextField, TertiaryNav, Badge, Code } from '@ecosystem/design-system';
+import { Card, Button, TextField, TertiaryNav, Badge, Code, CollapsibleCodeBlock } from '@ecosystem/design-system';
 import { useForm, useTheme, useToast } from '@ecosystem/design-system';
 
 interface HooksSectionProps {
@@ -227,7 +227,7 @@ export function HooksSection({ activeItemId }: HooksSectionProps) {
                 <p className="text-sm text-[var(--color-text-secondary)] mb-4">
                   Validate a single field value against a set of validation rules. Returns an error message string or null if valid.
                 </p>
-                <Code inline={false} syntax="plain">{`import { validateField, patterns } from '@ecosystem/design-system/utils';
+                <CollapsibleCodeBlock id="hook-1" code={`import { validateField, patterns } from '@ecosystem/design-system/utils';
 
 const emailError = validateField('invalid-email', {
   required: true,
@@ -242,7 +242,7 @@ const passwordError = validateField('abc', {
   required: true,
   minLength: { value: 8, message: 'Min 8 characters' }
 });
-// Returns: 'Min 8 characters'`}</Code>
+// Returns: 'Min 8 characters'`} defaultCollapsed={false} showCopy={true} />
               </Card>
 
               <Card className="p-6">
@@ -250,7 +250,7 @@ const passwordError = validateField('abc', {
                 <p className="text-sm text-[var(--color-text-secondary)] mb-4">
                   Validate an entire form object against validation rules. Returns an object with field names as keys and error messages as values.
                 </p>
-                <Code inline={false} syntax="plain">{`import { validateForm, patterns } from '@ecosystem/design-system/utils';
+                <CollapsibleCodeBlock id="hook-2" code={`import { validateForm, patterns } from '@ecosystem/design-system/utils';
 
 const values = {
   email: 'invalid-email',
@@ -276,7 +276,7 @@ const errors = validateForm(values, validations);
 // Returns: {
 //   email: 'Invalid email format',
 //   password: 'Min 8 characters'
-// }`}</Code>
+// }`} defaultCollapsed={false} showCopy={true} />
               </Card>
             </div>
           </div>
@@ -287,7 +287,7 @@ const errors = validateForm(values, validations);
               Code Example
             </h4>
             <Card className="p-6">
-              <Code inline={false} syntax="plain">{`import { useForm, patterns } from '@ecosystem/design-system';
+              <CollapsibleCodeBlock id="hook-3" code={`import { useForm, patterns } from '@ecosystem/design-system';
 
 function LoginForm() {
   const form = useForm({
@@ -320,7 +320,7 @@ function LoginForm() {
       </button>
     </form>
   );
-}`}</Code>
+}`} defaultCollapsed={false} showCopy={true} />
             </Card>
           </div>
         </section>
@@ -490,7 +490,7 @@ function UseThemeSection() {
           Code Example
         </h4>
         <Card className="p-6">
-          <Code inline={false} syntax="plain">{`import { useTheme } from '@ecosystem/design-system';
+          <CollapsibleCodeBlock id="hook-4" code={`import { useTheme } from '@ecosystem/design-system';
 
 function ThemeControls() {
   const { theme, mode, setTheme, setMode } = useTheme();
@@ -502,7 +502,7 @@ function ThemeControls() {
       <button onClick={() => setMode('dark')}>Dark Mode</button>
     </div>
   );
-}`}</Code>
+}`} defaultCollapsed={false} showCopy={true} />
         </Card>
       </div>
     </section>
@@ -565,7 +565,7 @@ function UseToastSection() {
           Code Example
         </h4>
         <Card className="p-6">
-          <Code inline={false} syntax="plain">{`import { useToast } from '@ecosystem/design-system';
+          <CollapsibleCodeBlock id="hook-5" code={`import { useToast } from '@ecosystem/design-system';
 
 function MyComponent() {
   const { toast } = useToast();
@@ -580,7 +580,7 @@ function MyComponent() {
   };
 
   return <button onClick={handleSave}>Save</button>;
-}`}</Code>
+}`} defaultCollapsed={false} showCopy={true} />
         </Card>
       </div>
     </section>
@@ -618,7 +618,7 @@ function UseMotionPreferenceSection() {
           Code Example
         </h4>
         <Card className="p-6">
-          <Code inline={false} syntax="plain">{`import { useMotionPreference } from '@ecosystem/design-system';
+          <CollapsibleCodeBlock id="hook-6" code={`import { useMotionPreference } from '@ecosystem/design-system';
 import { motion } from 'framer-motion';
 
 function AnimatedComponent() {
@@ -633,7 +633,7 @@ function AnimatedComponent() {
       Content
     </motion.div>
   );
-}`}</Code>
+}`} defaultCollapsed={false} showCopy={true} />
         </Card>
       </div>
 
@@ -646,7 +646,7 @@ function AnimatedComponent() {
           <p className="text-sm text-[var(--color-text-secondary)] mb-4">
             Combine with animation utilities from <Code syntax="plain">@ecosystem/design-system/utils</Code> for motion-aware animations:
           </p>
-          <Code inline={false} syntax="plain">{`import { useMotionPreference } from '@ecosystem/design-system';
+          <CollapsibleCodeBlock id="hook-7" code={`import { useMotionPreference } from '@ecosystem/design-system';
 import { presets, scaleDuration } from '@ecosystem/design-system/utils';
 import { motion } from 'framer-motion';
 
@@ -662,7 +662,7 @@ function Card() {
       Card content
     </motion.div>
   );
-}`}</Code>
+}`} defaultCollapsed={false} showCopy={true} />
         </Card>
       </div>
     </section>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Code } from '@ecosystem/design-system';
+import { Card, Code, CollapsibleCodeBlock } from '@ecosystem/design-system';
 
 export function ArchitectureSection() {
   return (
@@ -260,7 +260,7 @@ export function ArchitectureSection() {
             </div>
             <div>
               <h3 className="font-semibold mb-2 text-[var(--color-text-primary)]">How Tokens Cascade</h3>
-              <Code inline={false} syntax="plain">{`1. Define in TypeScript
+              <CollapsibleCodeBlock id="arch-1" code={`1. Define in TypeScript
    tokens/studio/colors.ts
 
 2. Export as CSS variables
@@ -270,7 +270,7 @@ export function ArchitectureSection() {
    var(--color-primary)
 
 4. Switch themes at runtime
-   setTheme('sage')`}</Code>
+   setTheme('sage')`} defaultCollapsed={false} showCopy={true} />
             </div>
           </div>
         </Card>

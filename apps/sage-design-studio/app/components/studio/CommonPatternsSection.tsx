@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Code } from '@ecosystem/design-system';
+import { Card, Code, CollapsibleCodeBlock } from '@ecosystem/design-system';
 
 export function CommonPatternsSection() {
   return (
@@ -24,7 +24,7 @@ export function CommonPatternsSection() {
           <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">
             Accessing design tokens via CSS variables
           </h3>
-          <Code inline={false} syntax="plain">{`export function MyComponent() {
+          <CollapsibleCodeBlock id="pattern-1" code={`export function MyComponent() {
   return (
     <div className="bg-[var(--color-primary)] text-[var(--color-primary-foreground)]">
       <h1 className="text-[var(--font-size-heading-1)]">
@@ -35,7 +35,7 @@ export function CommonPatternsSection() {
       </p>
     </div>
   );
-}`}</Code>
+}`} defaultCollapsed={false} showCopy={true} />
           <div className="mt-4 p-4 bg-[var(--color-surface)] rounded-md border border-[var(--color-border)]">
             <p className="text-sm text-[var(--color-text-primary)]">
               <strong>Pro tip:</strong> Always use CSS variables (var(--token-name)) instead of hardcoded values.
@@ -54,7 +54,7 @@ export function CommonPatternsSection() {
           <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">
             Components that adapt to the current theme
           </h3>
-          <Code inline={false} syntax="plain">{`import { useTheme } from '@ecosystem/design-system';
+          <CollapsibleCodeBlock id="pattern-2" code={`import { useTheme } from '@ecosystem/design-system';
 
 export function ThemedCard() {
   const { theme } = useTheme();
@@ -72,7 +72,7 @@ export function ThemedCard() {
       </p>
     </div>
   );
-}`}</Code>
+}`} defaultCollapsed={false} showCopy={true} />
         </Card>
       </section>
 
@@ -85,7 +85,7 @@ export function ThemedCard() {
           <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">
             Using useMotionPreference hook with Framer Motion
           </h3>
-          <Code inline={false} syntax="plain">{`import { motion } from 'framer-motion';
+          <CollapsibleCodeBlock id="pattern-3" code={`import { motion } from 'framer-motion';
 import { useMotionPreference } from '@ecosystem/design-system';
 
 export function AnimatedCard() {
@@ -104,7 +104,7 @@ export function AnimatedCard() {
       <p>This card respects motion preferences</p>
     </motion.div>
   );
-}`}</Code>
+}`} defaultCollapsed={false} showCopy={true} />
           <div className="mt-4 p-4 bg-[var(--color-surface)] rounded-md border border-[var(--color-border)]">
             <p className="text-sm text-[var(--color-text-primary)]">
               <strong>Accessibility first:</strong> When <Code syntax="plain">shouldReduceMotion</Code> is true,
@@ -123,7 +123,7 @@ export function AnimatedCard() {
           <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">
             Mobile-first responsive component
           </h3>
-          <Code inline={false} syntax="plain">{`export function ResponsiveGrid() {
+          <CollapsibleCodeBlock id="pattern-4" code={`export function ResponsiveGrid() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <Card className="p-4">Item 1</Card>
@@ -131,7 +131,7 @@ export function AnimatedCard() {
       <Card className="p-4">Item 3</Card>
     </div>
   );
-}`}</Code>
+}`} defaultCollapsed={false} showCopy={true} />
           <div className="mt-4 space-y-2">
             <p className="text-sm text-[var(--color-text-primary)]">
               <strong>Breakpoints:</strong>
@@ -155,7 +155,7 @@ export function AnimatedCard() {
           <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">
             Building a SearchBar molecule from Input and Button atoms
           </h3>
-          <Code inline={false} syntax="plain">{`import { Input, Button } from '@ecosystem/design-system';
+          <CollapsibleCodeBlock id="pattern-5" code={`import { Input, Button } from '@ecosystem/design-system';
 
 interface SearchBarProps {
   placeholder?: string;
@@ -183,7 +183,7 @@ export function SearchBar({ placeholder, onSearch }: SearchBarProps) {
       </Button>
     </form>
   );
-}`}</Code>
+}`} defaultCollapsed={false} showCopy={true} />
         </Card>
       </section>
 
@@ -196,7 +196,7 @@ export function SearchBar({ placeholder, onSearch }: SearchBarProps) {
           <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">
             Using the useForm hook for form validation
           </h3>
-          <Code inline={false} syntax="plain">{`import { useForm, TextField, Button } from '@ecosystem/design-system';
+          <CollapsibleCodeBlock id="pattern-6" code={`import { useForm, TextField, Button } from '@ecosystem/design-system';
 
 export function LoginForm() {
   const { values, errors, handleChange, handleSubmit } = useForm({
@@ -235,7 +235,7 @@ export function LoginForm() {
       </Button>
     </form>
   );
-}`}</Code>
+}`} defaultCollapsed={false} showCopy={true} />
         </Card>
       </section>
 
@@ -248,7 +248,7 @@ export function LoginForm() {
           <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">
             Using the useToast hook for notifications
           </h3>
-          <Code inline={false} syntax="plain">{`import { useToast, Button, ToastProvider } from '@ecosystem/design-system';
+          <CollapsibleCodeBlock id="pattern-7" code={`import { useToast, Button, ToastProvider } from '@ecosystem/design-system';
 
 function MyComponent() {
   const { toast } = useToast();
@@ -276,7 +276,7 @@ export function App() {
       <MyComponent />
     </ToastProvider>
   );
-}`}</Code>
+}`} defaultCollapsed={false} showCopy={true} />
         </Card>
       </section>
 
@@ -289,7 +289,7 @@ export function App() {
           <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">
             Using the Modal component with state management
           </h3>
-          <Code inline={false} syntax="plain">{`import { useState } from 'react';
+          <CollapsibleCodeBlock id="pattern-8" code={`import { useState } from 'react';
 import { Modal, Button } from '@ecosystem/design-system';
 
 export function ConfirmDialog() {
@@ -325,7 +325,7 @@ export function ConfirmDialog() {
       </Modal>
     </>
   );
-}`}</Code>
+}`} defaultCollapsed={false} showCopy={true} />
         </Card>
       </section>
     </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Code } from '@ecosystem/design-system';
+import { Card, Code, CollapsibleCodeBlock } from '@ecosystem/design-system';
 
 export function OverviewSection() {
   return (
@@ -71,7 +71,9 @@ export function OverviewSection() {
 
           <Card className="p-6">
             <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">Basic Usage</h3>
-            <Code inline={false} syntax="plain">{`import { Button, Card } from '@ecosystem/design-system';
+            <CollapsibleCodeBlock
+              id="basic-usage"
+              code={`import { Button, Card } from '@ecosystem/design-system';
 
 export function MyComponent() {
   return (
@@ -79,12 +81,17 @@ export function MyComponent() {
       <Button variant="primary">Click me</Button>
     </Card>
   );
-}`}</Code>
+}`}
+              defaultCollapsed={false}
+              showCopy={true}
+            />
           </Card>
 
           <Card className="p-6 md:col-span-2">
             <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">Theme Switching</h3>
-            <Code inline={false} syntax="plain">{`import { useTheme } from '@ecosystem/design-system';
+            <CollapsibleCodeBlock
+              id="theme-switching"
+              code={`import { useTheme } from '@ecosystem/design-system';
 
 export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
@@ -94,7 +101,10 @@ export function ThemeSwitcher() {
       Switch to Sage theme
     </button>
   );
-}`}</Code>
+}`}
+              defaultCollapsed={false}
+              showCopy={true}
+            />
           </Card>
         </div>
       </section>

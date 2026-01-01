@@ -234,7 +234,7 @@ export function OrganismsSection({ activeItemId }: OrganismsSectionProps) {
             Code Example
           </h4>
           <Card className="p-6 bg-[var(--color-surface)]">
-            <Code inline={false} syntax="plain">{`<Header
+            <CollapsibleCodeBlock id="org-usage-1" code={`<Header
   logo={
     <a href="/" className="font-semibold text-lg">
       Brand
@@ -263,7 +263,7 @@ export function OrganismsSection({ activeItemId }: OrganismsSectionProps) {
   }
   glassOnScroll={true}
   sticky={true}
-/>`}</Code>
+/>`} defaultCollapsed={false} showCopy={true} />
           </Card>
         </div>
 
@@ -349,7 +349,7 @@ export function OrganismsSection({ activeItemId }: OrganismsSectionProps) {
             Code Example
           </h4>
           <Card className="p-6 bg-[var(--color-surface)]">
-            <Code inline={false} syntax="plain">{`const [activeSection, setActiveSection] = useState('overview');
+            <CollapsibleCodeBlock id="org-usage-2" code={`const [activeSection, setActiveSection] = useState('overview');
 
 const sections = [
   { id: 'overview', label: 'Overview' },
@@ -361,7 +361,7 @@ const sections = [
   items={sections}
   activeId={activeSection}
   onItemChange={setActiveSection}
-/>`}</Code>
+/>`} defaultCollapsed={false} showCopy={true} />
           </Card>
         </div>
 
@@ -454,7 +454,7 @@ const sections = [
             Code Example
           </h4>
           <Card className="p-6 bg-[var(--color-surface)]">
-            <Code inline={false} syntax="plain">{`const [activeComponent, setActiveComponent] = useState('button');
+            <CollapsibleCodeBlock id="org-usage-3" code={`const [activeComponent, setActiveComponent] = useState('button');
 
 const components = [
   { id: 'button', label: 'Button' },
@@ -466,7 +466,7 @@ const components = [
   items={components}
   activeId={activeComponent}
   onItemChange={setActiveComponent}
-/>`}</Code>
+/>`} defaultCollapsed={false} showCopy={true} />
           </Card>
         </div>
 
@@ -591,7 +591,7 @@ const components = [
             Code Example
           </h4>
           <Card className="p-6 bg-[var(--color-surface)]">
-            <Code inline={false} syntax="plain">{`<Footer
+            <CollapsibleCodeBlock id="org-usage-4" code={`<Footer
   logo="My Brand"
   sections={[
     {
@@ -624,7 +624,7 @@ const components = [
     email: 'hello@example.com',
   }}
   copyright="© 2025 Example Brand"
-/>`}</Code>
+/>`} defaultCollapsed={false} showCopy={true} />
           </Card>
         </div>
 
@@ -738,7 +738,7 @@ const components = [
             Code Example
           </h4>
           <Card className="p-6 bg-[var(--color-surface)]">
-            <Code inline={false} syntax="plain">{`// Wrap your app with ToastProvider
+            <CollapsibleCodeBlock id="org-usage-5" code={`// Wrap your app with ToastProvider
 <ToastProvider position="bottom-right" maxToasts={3}>
   <App />
 </ToastProvider>
@@ -752,7 +752,7 @@ function MyComponent() {
       Save
     </Button>
   );
-}`}</Code>
+}`} defaultCollapsed={false} showCopy={true} />
           </Card>
         </div>
         </section>
@@ -803,7 +803,7 @@ function MyComponent() {
             Code Example
           </h4>
           <Card className="p-6 bg-[var(--color-surface)]">
-            <Code inline={false} syntax="plain">{`function MyComponent() {
+            <CollapsibleCodeBlock id="org-usage-6" code={`function MyComponent() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -832,7 +832,7 @@ function MyComponent() {
       </Modal>
     </>
   );
-}`}</Code>
+}`} defaultCollapsed={false} showCopy={true} />
           </Card>
         </div>
         </section>

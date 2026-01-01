@@ -34,17 +34,41 @@ export function SyntaxTab() {
 
   return (
     <div className="space-y-8">
+      {/* Syntax Parser Overview */}
+      <Card className="p-6">
+        <h3 className="text-xl font-semibold mb-3 text-[var(--color-text-primary)]">
+          Automatic Syntax Parser
+        </h3>
+        <p className="text-[var(--color-text-secondary)] mb-4">
+          The design system includes a lightweight, automatic syntax parser that tokenizes TypeScript/JavaScript/JSX code for multi-color syntax highlighting. Just pass plain code strings - no manual tokenization required!
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
+            <h4 className="font-semibold text-[var(--color-text-primary)] mb-2">Automatic</h4>
+            <p className="text-sm text-[var(--color-text-muted)]">Pass plain strings - parsing happens automatically with zero configuration</p>
+          </div>
+          <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
+            <h4 className="font-semibold text-[var(--color-text-primary)] mb-2">Lightweight</h4>
+            <p className="text-sm text-[var(--color-text-muted)]">~2KB regex-based implementation with O(n) performance</p>
+          </div>
+          <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
+            <h4 className="font-semibold text-[var(--color-text-primary)] mb-2">14 Token Types</h4>
+            <p className="text-sm text-[var(--color-text-muted)]">Comprehensive support for TS/JS/JSX syntax elements</p>
+          </div>
+        </div>
+      </Card>
+
       {/* Overview */}
       <Card className="p-6">
         <h3 className="text-xl font-semibold mb-3 text-[var(--color-text-primary)]">
           Syntax Highlighting Colors
         </h3>
         <p className="text-[var(--color-text-secondary)] mb-4">
-          Theme-aware syntax highlighting colors based on VS Code Dark+ theme. These tokens automatically switch between light and dark modes to ensure optimal contrast and readability for code examples.
+          Theme-aware syntax highlighting colors based on VS Code Dark+ theme. These tokens automatically switch between light and dark modes to ensure optimal contrast and readability (WCAG AA 4.5:1).
         </p>
         <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
           <p className="text-sm text-[var(--color-text-muted)]">
-            <strong>Usage:</strong> Use these CSS custom properties in your code blocks with <Code>var(--syntax-keyword)</Code> or use the <Code>CollapsibleCodeBlock</Code> organism with SyntaxToken types.
+            <strong>Note:</strong> The syntax parser automatically applies these colors when you use <Code>CollapsibleCodeBlock</Code>. For manual styling, use CSS custom properties like <Code>var(--syntax-keyword)</Code>.
           </p>
         </div>
       </Card>
