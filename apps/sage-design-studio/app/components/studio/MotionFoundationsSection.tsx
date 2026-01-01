@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Card, Button, CollapsibleCodeBlock } from '@ecosystem/design-system';
 import type { SyntaxToken } from '@ecosystem/design-system';
 import { baseTokens, motion } from '@ecosystem/design-system/tokens';
@@ -18,6 +18,24 @@ function MotionExample({
   label: string;
 }) {
   const [isAnimating, setIsAnimating] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [maxDistance, setMaxDistance] = useState(0);
+
+  useEffect(() => {
+    const updateMaxDistance = () => {
+      if (containerRef.current) {
+        // Calculate max travel distance: container width - element width - padding
+        const containerWidth = containerRef.current.offsetWidth;
+        const elementWidth = 48; // w-12 = 48px
+        const padding = 16; // p-4 = 16px on each side
+        setMaxDistance(containerWidth - elementWidth - (padding * 2));
+      }
+    };
+
+    updateMaxDistance();
+    window.addEventListener('resize', updateMaxDistance);
+    return () => window.removeEventListener('resize', updateMaxDistance);
+  }, []);
 
   const handleAnimate = () => {
     setIsAnimating(true);
@@ -26,11 +44,11 @@ function MotionExample({
 
   return (
     <div className="flex items-center gap-4">
-      <div className="flex-1 bg-[var(--color-background)] rounded-lg p-4 overflow-hidden">
+      <div ref={containerRef} className="flex-1 bg-[var(--color-background)] rounded-lg p-4 overflow-hidden">
         <div
           className="w-12 h-12 bg-[var(--color-primary)] rounded-lg"
           style={{
-            transform: isAnimating ? 'translateX(200px)' : 'translateX(0)',
+            transform: isAnimating ? `translateX(${maxDistance}px)` : 'translateX(0)',
             transition: `transform ${duration} ${easing}`,
           }}
         />
