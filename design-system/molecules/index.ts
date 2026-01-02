@@ -5,6 +5,7 @@
  * common UI patterns with reduced boilerplate.
  */
 
+export * from './Breadcrumbs';
 export * from './Form';
 export * from './ThemeToggle';
 export * from './Dropdown';

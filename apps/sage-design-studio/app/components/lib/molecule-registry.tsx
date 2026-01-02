@@ -1,7 +1,94 @@
-import { Dropdown, Tooltip, ThemeToggle, FormField, SearchBar, RadioGroup, CheckboxGroup, Button } from '@ecosystem/design-system';
+import { Dropdown, Tooltip, ThemeToggle, FormField, SearchBar, RadioGroup, CheckboxGroup, Button, Breadcrumbs } from '@ecosystem/design-system';
 import type { ComponentConfig } from './component-registry';
 
 export const moleculeRegistry: Record<string, ComponentConfig> = {
+  Breadcrumbs: {
+    component: Breadcrumbs,
+    description: 'Navigation component showing page hierarchy with clickable links and customizable separators.',
+    props: {
+      variant: {
+        type: 'select',
+        options: ['subtle', 'bold', 'underline'] as const,
+        default: 'subtle',
+        description: 'Visual style of breadcrumb links',
+      },
+      separator: {
+        type: 'text',
+        default: '/',
+        description: 'Custom separator between items (e.g., /, ›, →)',
+      },
+    },
+    examples: [
+      {
+        label: 'Subtle Variant',
+        props: {
+          variant: 'subtle',
+          items: [
+            { label: 'Home', href: '#' },
+            { label: 'Products', href: '#' },
+            { label: 'Electronics', href: '#' },
+            { label: 'Laptop' },
+          ],
+        },
+        children: null,
+      },
+      {
+        label: 'Bold Variant',
+        props: {
+          variant: 'bold',
+          items: [
+            { label: 'Docs', href: '#' },
+            { label: 'Components', href: '#' },
+            { label: 'Molecules', href: '#' },
+            { label: 'Breadcrumbs' },
+          ],
+        },
+        children: null,
+      },
+      {
+        label: 'Underline Variant',
+        props: {
+          variant: 'underline',
+          items: [
+            { label: 'Dashboard', href: '#' },
+            { label: 'Projects', href: '#' },
+            { label: 'Ecosystem' },
+          ],
+        },
+        children: null,
+      },
+      {
+        label: 'Custom Separator',
+        props: {
+          variant: 'subtle',
+          separator: '›',
+          items: [
+            { label: 'Home', href: '#' },
+            { label: 'Blog', href: '#' },
+            { label: 'Article Title' },
+          ],
+        },
+        children: null,
+      },
+      {
+        label: 'Long Path',
+        props: {
+          variant: 'subtle',
+          items: [
+            { label: 'Root', href: '#' },
+            { label: 'Workspace', href: '#' },
+            { label: 'Documents', href: '#' },
+            { label: '2024', href: '#' },
+            { label: 'Q4', href: '#' },
+            { label: 'Reports', href: '#' },
+            { label: 'Financial Analysis.pdf' },
+          ],
+        },
+        children: null,
+      },
+    ],
+  },
+
   Dropdown: {
     component: Dropdown,
     description: 'A menu that appears when clicking a trigger element with keyboard navigation support.',
