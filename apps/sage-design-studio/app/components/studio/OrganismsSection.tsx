@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, Button, Header, SecondaryNav, TertiaryNav, Footer, Modal, ToastProvider, useToast, CollapsibleCodeBlock, Code } from '@ecosystem/design-system';
+import { Card, Button, Header, SecondaryNav, TertiaryNav, Footer, Modal, ToastProvider, useToast, CollapsibleCodeBlock, Code, CustomizerPanel } from '@ecosystem/design-system';
 import type { SyntaxToken } from '@ecosystem/design-system';
 
-type OrganismType = 'PrimaryNav' | 'SecondaryNav' | 'TertiaryNav' | 'FirstStack' | 'SecondStack' | 'Footer' | 'Toast' | 'Modal' | 'CollapsibleCodeBlock';
+type OrganismType = 'PrimaryNav' | 'SecondaryNav' | 'TertiaryNav' | 'FirstStack' | 'SecondStack' | 'Footer' | 'Toast' | 'Modal' | 'CollapsibleCodeBlock' | 'Customizer';
 
 interface OrganismsSectionProps {
   activeItemId?: string;
@@ -104,7 +104,7 @@ export function OrganismsSection({ activeItemId }: OrganismsSectionProps) {
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join('') as OrganismType;
 
-      if (['PrimaryNav', 'SecondaryNav', 'TertiaryNav', 'FirstStack', 'SecondStack', 'Footer', 'Toast', 'Modal', 'CollapsibleCodeBlock'].includes(organismName)) {
+      if (['PrimaryNav', 'SecondaryNav', 'TertiaryNav', 'FirstStack', 'SecondStack', 'Footer', 'Toast', 'Modal', 'CollapsibleCodeBlock', 'Customizer'].includes(organismName)) {
         setSelectedOrganism(organismName);
       }
     }
@@ -120,6 +120,7 @@ export function OrganismsSection({ activeItemId }: OrganismsSectionProps) {
     { id: 'Toast', label: 'Toast' },
     { id: 'Modal', label: 'Modal' },
     { id: 'CollapsibleCodeBlock', label: 'Code Block' },
+    { id: 'Customizer', label: 'Customizer' },
   ];
 
   return (
@@ -1390,6 +1391,199 @@ const customTokens: SyntaxToken[] = [
                   <strong>Accessibility:</strong> The animation respects <Code syntax="plain">prefers-reduced-motion</Code> by skipping animations when users have this preference enabled.
                 </p>
               </div>
+            </div>
+          </Card>
+        </div>
+        </section>
+      )}
+
+      {/* Customizer Component */}
+      {selectedOrganism === 'Customizer' && (
+        <section className="space-y-6">
+        <div>
+          <h3 className="text-2xl font-semibold mb-2 text-[var(--color-text-primary)]">
+            Customizer
+          </h3>
+          <Card className="p-6">
+            <p className="text-[var(--color-text-primary)] mb-4">
+              A floating panel that lets users experiment with themes, motion, and preferences in real-time. Available in two modes: full-featured customizer or lightweight theme switcher.
+            </p>
+            <div className="space-y-4">
+              <div className="text-sm text-[var(--color-text-secondary)]">
+                <strong>Key Features:</strong>
+                <ul className="list-disc list-inside mt-2 space-y-1">
+                  <li>Two modes: full (all controls) and lightweight (light/dark mode only)</li>
+                  <li>Live theme switching between Studio, Sage, and Volt themes (full mode)</li>
+                  <li>Light/dark mode toggle (both modes)</li>
+                  <li>Motion scale control with instant feedback (full mode)</li>
+                  <li>X-Ray mode for debugging component boundaries (full mode)</li>
+                  <li>All preferences persist to localStorage</li>
+                  <li>Floating button with collapsible panel</li>
+                  <li>Glass morphism effect with backdrop blur</li>
+                  <li>Theme-aware colors using CSS custom properties</li>
+                </ul>
+              </div>
+              <div className="mt-4 p-3 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
+                <p className="text-xs text-[var(--color-text-muted)]">
+                  <strong>Usage Recommendation:</strong> Use the full mode for design system documentation and demos. Use the lightweight mode for production applications where you only want to offer light/dark mode switching.
+                </p>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* Live Example - Full Mode */}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
+            Live Example - Full Mode
+          </h4>
+          <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+            This is the full-featured customizer you see on this page! Look for the floating ⚙ button in the bottom right corner.
+          </p>
+          <Card className="p-6">
+            <p className="text-sm text-[var(--color-text-secondary)]">
+              The Customizer is already active on this page. Click the floating button in the bottom right to open it and see all available controls.
+            </p>
+          </Card>
+        </div>
+
+        {/* Code Example - Full Mode */}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
+            Code Example - Full Mode
+          </h4>
+          <Card className="p-6 bg-[var(--color-surface)]">
+            <CollapsibleCodeBlock id="customizer-full-usage" code={`import { CustomizerPanel } from '@ecosystem/design-system';
+
+// Full-featured customizer (default)
+export function MyApp() {
+  return (
+    <>
+      {/* Your app content */}
+      <CustomizerPanel mode="full" />
+    </>
+  );
+}
+
+// Or omit the mode prop - defaults to "full"
+export function MyApp() {
+  return (
+    <>
+      {/* Your app content */}
+      <CustomizerPanel />
+    </>
+  );
+}`} defaultCollapsed={false} showCopy={true} />
+          </Card>
+        </div>
+
+        {/* Code Example - Lightweight Mode */}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
+            Code Example - Lightweight Mode
+          </h4>
+          <Card className="p-6 bg-[var(--color-surface)]">
+            <CollapsibleCodeBlock id="customizer-lightweight-usage" code={`import { CustomizerPanel } from '@ecosystem/design-system';
+
+// Lightweight mode - just light/dark switching
+export function MyApp() {
+  return (
+    <>
+      {/* Your app content */}
+      <CustomizerPanel mode="lightweight" />
+    </>
+  );
+}`} defaultCollapsed={false} showCopy={true} />
+          </Card>
+        </div>
+
+        {/* Props Reference */}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
+            Props Reference
+          </h4>
+          <Card className="p-6">
+            <div className="space-y-4">
+              <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
+                <Code syntax="plain">mode?: &quot;full&quot; | &quot;lightweight&quot;</Code>
+                <p className="text-sm text-[var(--color-text-secondary)] mt-2">
+                  Optional. Determines which controls are shown:
+                </p>
+                <ul className="text-sm text-[var(--color-text-secondary)] mt-2 space-y-1 list-disc list-inside ml-4">
+                  <li><strong>&quot;full&quot; (default):</strong> Shows theme selector, light/dark mode, motion control, and X-ray mode</li>
+                  <li><strong>&quot;lightweight&quot;:</strong> Shows only light/dark mode toggle</li>
+                </ul>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* Mode Comparison */}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
+            Mode Comparison
+          </h4>
+          <Card className="p-6">
+            <div className="space-y-4">
+              <div className="text-sm text-[var(--color-text-secondary)]">
+                <strong>Full Mode Includes:</strong>
+                <ul className="list-disc list-inside mt-2 space-y-1">
+                  <li>Motion intensity slider (0-10 scale)</li>
+                  <li>Theme selector (Studio, Sage, Volt)</li>
+                  <li>Typography preview for selected theme</li>
+                  <li>Light/dark mode toggle</li>
+                  <li>X-Ray mode toggle for debugging</li>
+                </ul>
+              </div>
+              <div className="text-sm text-[var(--color-text-secondary)]">
+                <strong>Lightweight Mode Includes:</strong>
+                <ul className="list-disc list-inside mt-2 space-y-1">
+                  <li>Light/dark mode toggle only</li>
+                  <li>Smaller, more compact panel</li>
+                  <li>Different icon (🌓 instead of ⚙️)</li>
+                  <li>Perfect for production apps</li>
+                </ul>
+              </div>
+              <div className="mt-4 p-3 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
+                <p className="text-xs text-[var(--color-text-muted)]">
+                  <strong>Design Decision:</strong> The lightweight mode is perfect when you want to offer users the ability to switch between light and dark themes without exposing all design system controls.
+                </p>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* Integration Notes */}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
+            Integration Notes
+          </h4>
+          <Card className="p-6">
+            <p className="text-[var(--color-text-primary)] mb-4">
+              The Customizer requires the ThemeProvider to be present in your app tree.
+            </p>
+            <div className="space-y-4">
+              <div className="text-sm text-[var(--color-text-secondary)]">
+                <strong>Requirements:</strong>
+                <ul className="list-disc list-inside mt-2 space-y-1">
+                  <li>Must be wrapped by <Code syntax="plain">ThemeProvider</Code></li>
+                  <li>Uses Zustand stores for theme and customizer state</li>
+                  <li>Automatically persists preferences to localStorage</li>
+                  <li>Fixed positioning (bottom-right corner)</li>
+                  <li>High z-index (z-50) to stay above content</li>
+                </ul>
+              </div>
+              <CollapsibleCodeBlock id="customizer-integration" code={`import { ThemeProvider } from '@ecosystem/design-system/providers';
+import { CustomizerPanel } from '@ecosystem/design-system';
+
+export default function App({ children }) {
+  return (
+    <ThemeProvider defaultTheme="studio" defaultMode="light">
+      {children}
+      <CustomizerPanel mode="full" />
+    </ThemeProvider>
+  );
+}`} defaultCollapsed={false} showCopy={true} />
             </div>
           </Card>
         </div>

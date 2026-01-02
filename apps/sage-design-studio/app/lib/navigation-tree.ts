@@ -296,6 +296,17 @@ export const navigationTree: NavigationItem[] = [
               },
             ],
           },
+          {
+            id: 'customization',
+            label: 'Customization',
+            children: [
+              {
+                id: 'customizer',
+                label: 'Customizer',
+                section: 'organisms',
+              },
+            ],
+          },
         ],
       },
     ],

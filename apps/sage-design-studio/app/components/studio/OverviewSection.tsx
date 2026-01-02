@@ -422,6 +422,9 @@ export function ThemeSwitcher() {
                     <span>Preferences saved across sessions</span>
                   </div>
                 </div>
+                <p className="text-xs text-[var(--color-text-muted)] mt-4">
+                  → See full documentation in <strong className="text-[var(--color-text-primary)]">Components &gt; Organisms &gt; Customization &gt; Customizer</strong>
+                </p>
               </div>
               <div className="flex items-center justify-center p-8 bg-[var(--color-background)] rounded-lg border border-[var(--color-border)]">
                 <p className="text-sm text-[var(--color-text-secondary)] text-center">
