@@ -32,52 +32,217 @@ export interface ComponentConfig {
 export const componentRegistry: Record<string, ComponentConfig> = {
   Button: {
     component: Button,
-    description: 'Interactive button component with multiple variants and sizes. Supports keyboard navigation and respects motion preferences.',
+    description: 'Interactive button component with multiple variants, sizes, and states. Supports icons, loading states, keyboard navigation, and respects motion preferences.',
     props: {
       variant: {
         type: 'select',
         options: ['primary', 'secondary', 'ghost'] as const,
         default: 'primary',
-        description: 'Visual style variant',
+        description: 'Visual style variant - primary for main actions, secondary for alternative actions, ghost for subtle actions',
       },
       size: {
         type: 'select',
         options: ['sm', 'md', 'lg'] as const,
         default: 'md',
-        description: 'Size variant',
+        description: 'Size variant - sm for compact spaces, md for standard use, lg for prominent actions',
+      },
+      loading: {
+        type: 'boolean',
+        default: false,
+        description: 'Show loading spinner and disable button interaction',
+      },
+      disabled: {
+        type: 'boolean',
+        default: false,
+        description: 'Disable button interaction and show disabled state',
       },
     },
     examples: [
-      { label: 'Primary', props: { variant: 'primary', size: 'md' }, children: 'Click me' },
-      { label: 'Secondary', props: { variant: 'secondary', size: 'md' }, children: 'Secondary' },
-      { label: 'Ghost', props: { variant: 'ghost', size: 'md' }, children: 'Ghost' },
-      { label: 'Large Primary', props: { variant: 'primary', size: 'lg' }, children: 'Large Button' },
-      { label: 'Small Secondary', props: { variant: 'secondary', size: 'sm' }, children: 'Small' },
+      { label: 'Primary', props: { variant: 'primary', size: 'md' }, children: 'Primary Action' },
+      { label: 'Secondary', props: { variant: 'secondary', size: 'md' }, children: 'Secondary Action' },
+      { label: 'Ghost', props: { variant: 'ghost', size: 'md' }, children: 'Ghost Action' },
+      { label: 'Small', props: { variant: 'primary', size: 'sm' }, children: 'Small' },
+      { label: 'Large', props: { variant: 'primary', size: 'lg' }, children: 'Large Action' },
+      { label: 'Loading', props: { variant: 'primary', size: 'md', loading: true }, children: 'Loading...' },
+      { label: 'Disabled', props: { variant: 'primary', size: 'md', disabled: true }, children: 'Disabled' },
+      { label: 'With Icon', props: { variant: 'primary', size: 'md' }, children: (
+        <>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0z"/>
+            <path d="M11.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+          </svg>
+          With Icon
+        </>
+      )},
+      { label: 'Icon Right', props: { variant: 'secondary', size: 'md' }, children: (
+        <>
+          Icon Right
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+          </svg>
+        </>
+      )},
     ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { Button } from '@ecosystem/design-system';
+
+<Button variant="primary" onClick={() => console.log('Clicked!')}>
+  Click Me
+</Button>`,
+        description: 'Simple button with click handler',
+      },
+      {
+        title: 'All Variants',
+        code: `<div className="flex gap-3">
+  <Button variant="primary">Primary</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="ghost">Ghost</Button>
+</div>`,
+        description: 'Showcase of all three visual variants',
+      },
+      {
+        title: 'With Icons',
+        code: `import { Button } from '@ecosystem/design-system';
+import { CheckIcon, ArrowRightIcon } from 'your-icon-library';
+
+{/* Icon on the left */}
+<Button variant="primary">
+  <CheckIcon />
+  Save Changes
+</Button>
+
+{/* Icon on the right */}
+<Button variant="secondary">
+  Continue
+  <ArrowRightIcon />
+</Button>
+
+{/* Icon only */}
+<Button variant="ghost" aria-label="Settings">
+  <SettingsIcon />
+</Button>`,
+        description: 'Buttons with icons in different positions',
+      },
+      {
+        title: 'Loading State',
+        code: `const [isLoading, setIsLoading] = useState(false);
+
+<Button
+  variant="primary"
+  loading={isLoading}
+  onClick={async () => {
+    setIsLoading(true);
+    await saveData();
+    setIsLoading(false);
+  }}
+>
+  {isLoading ? 'Saving...' : 'Save'}
+</Button>`,
+        description: 'Button with loading spinner during async operations',
+      },
+      {
+        title: 'Sizes',
+        code: `<div className="flex items-center gap-3">
+  <Button size="sm">Small</Button>
+  <Button size="md">Medium</Button>
+  <Button size="lg">Large</Button>
+</div>`,
+        description: 'All available button sizes',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/atoms/Button/Button.tsx',
   },
 
   Card: {
     component: Card,
-    description: 'Container component with glass-morphism styling and optional hover effects. Uses theme-aware borders and shadows.',
+    description: 'Container component with glass-morphism styling and optional hover effects. Uses theme-aware borders and shadows. Perfect for grouping related content.',
     props: {
       hoverEffect: {
         type: 'boolean',
         default: true,
-        description: 'Enable hover lift and shadow effect',
+        description: 'Enable hover lift and shadow effect for interactive cards',
       },
     },
     examples: [
       {
         label: 'With Hover',
         props: { hoverEffect: true },
-        children: 'Card content with hover effect',
+        children: 'Hover over me to see the lift effect',
       },
       {
         label: 'Without Hover',
         props: { hoverEffect: false },
-        children: 'Card content without hover',
+        children: 'Static card without hover effects',
+      },
+      {
+        label: 'With Content',
+        props: { hoverEffect: true },
+        children: (
+          <div>
+            <h3 style={{ marginBottom: '8px', fontWeight: '600' }}>Card Title</h3>
+            <p style={{ color: 'var(--color-text-secondary)' }}>Card description with multiple lines of text content.</p>
+          </div>
+        ),
       },
     ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { Card } from '@ecosystem/design-system';
+
+<Card>
+  <p>Your content goes here</p>
+</Card>`,
+        description: 'Simple card container with default hover effects',
+      },
+      {
+        title: 'Content Card',
+        code: `<Card className="p-6">
+  <h3 className="text-lg font-semibold mb-2">Feature Title</h3>
+  <p className="text-[var(--color-text-secondary)]">
+    Description of your feature or content that explains what this card represents.
+  </p>
+</Card>`,
+        description: 'Card with structured content and custom padding',
+      },
+      {
+        title: 'Interactive Card Grid',
+        code: `<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+  {features.map((feature) => (
+    <Card
+      key={feature.id}
+      hoverEffect={true}
+      className="p-6 cursor-pointer"
+      onClick={() => handleFeatureClick(feature.id)}
+    >
+      <h3 className="font-semibold mb-2">{feature.title}</h3>
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        {feature.description}
+      </p>
+    </Card>
+  ))}
+</div>`,
+        description: 'Grid of interactive cards with click handlers',
+      },
+      {
+        title: 'Static Information Card',
+        code: `<Card hoverEffect={false} className="p-6 bg-[var(--color-surface)]">
+  <div className="flex items-start gap-4">
+    <InfoIcon className="text-[var(--color-primary)]" />
+    <div>
+      <h4 className="font-medium mb-1">Important Notice</h4>
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        This is a static card for displaying information without interaction.
+      </p>
+    </div>
+  </div>
+</Card>`,
+        description: 'Static card without hover effects for non-interactive content',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/atoms/Card/Card.tsx',
   },
 
   Code: {
@@ -159,6 +324,53 @@ export const componentRegistry: Record<string, ComponentConfig> = {
         ),
       },
     ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { Link } from '@ecosystem/design-system';
+
+<Link href="/about">Learn More</Link>`,
+        description: 'Simple link with default styling',
+      },
+      {
+        title: 'Inline Text Links',
+        code: `<p className="text-[var(--color-text-secondary)]">
+  Check out our{' '}
+  <Link variant="inline" href="/docs">
+    documentation
+  </Link>{' '}
+  to learn more about the features.
+</p>`,
+        description: 'Links embedded within text paragraphs',
+      },
+      {
+        title: 'External Links',
+        code: `<Link
+  href="https://github.com/your-repo"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  View on GitHub
+</Link>`,
+        description: 'Opening links in a new tab with security attributes',
+      },
+      {
+        title: 'Navigation Menu',
+        code: `<nav className="flex gap-4">
+  {['Home', 'About', 'Services', 'Contact'].map((item) => (
+    <Link
+      key={item}
+      href={\`/\${item.toLowerCase()}\`}
+      variant="default"
+    >
+      {item}
+    </Link>
+  ))}
+</nav>`,
+        description: 'Using links in navigation menus',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/atoms/Link/Link.tsx',
   },
 
   Badge: {
