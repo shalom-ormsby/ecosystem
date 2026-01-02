@@ -397,6 +397,146 @@ ELIFECYCLE Command failed with exit code 1.`}
           </Card>
         </section>
       )}
+
+      {/* Component Changes Not Showing on Deployed Site */}
+      {activeSection === 'troubleshooting' && (
+        <Card className="p-6 mb-6">
+          <h3 className="text-xl font-bold mb-4 text-[var(--color-text-primary)]">
+            Component Changes Not Appearing on Deployed Site
+          </h3>
+
+          <div className="space-y-6">
+            {/* Problem */}
+            <div>
+              <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Problem</h4>
+              <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                You've updated a component in the design-system package (e.g., Breadcrumbs hover states), but the changes don't appear on the deployed site, even after committing and pushing.
+              </p>
+            </div>
+
+            {/* Root Cause */}
+            <div>
+              <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Root Cause</h4>
+              <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                The examples in the studio app DO pull from the actual component code via imports. The issue is that Vercel isn't rebuilding the design-system package properly, so it's using stale dist files from a previous build.
+              </p>
+              <div className="bg-[var(--color-surface)] p-4 rounded-md border border-[var(--color-border)]">
+                <p className="text-xs font-semibold text-[var(--color-text-primary)] mb-2">Understanding the Build Chain:</p>
+                <ol className="text-xs text-[var(--color-text-secondary)] space-y-1 list-decimal list-inside">
+                  <li>Component source: <Code syntax="plain">design-system/molecules/Component/Component.tsx</Code></li>
+                  <li>Built to: <Code syntax="plain">design-system/dist/index.mjs</Code> (via tsup)</li>
+                  <li>Exported by: <Code syntax="plain">design-system/package.json</Code> exports field</li>
+                  <li>Imported by: <Code syntax="plain">molecule-registry.tsx</Code> from '@ecosystem/design-system'</li>
+                  <li>Rendered in: Studio app examples</li>
+                </ol>
+              </div>
+            </div>
+
+            {/* Diagnosis Steps */}
+            <div>
+              <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">How to Diagnose</h4>
+              <ol className="space-y-2 text-sm text-[var(--color-text-secondary)]">
+                <li className="flex items-start gap-2">
+                  <span className="text-[var(--color-primary)] font-bold">1.</span>
+                  <span>Verify source code has your changes: Check the actual .tsx component file</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[var(--color-primary)] font-bold">2.</span>
+                  <span>Check local dist build has changes: <Code syntax="plain">grep "your-change" design-system/dist/index.mjs</Code></span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[var(--color-primary)] font-bold">3.</span>
+                  <span>Verify examples import correctly: Check molecule-registry.tsx imports from '@ecosystem/design-system'</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[var(--color-primary)] font-bold">4.</span>
+                  <span>If all above check out → It's a deployment build issue, not a code issue</span>
+                </li>
+              </ol>
+            </div>
+
+            {/* Solution */}
+            <div>
+              <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Solution</h4>
+              <ol className="space-y-3 text-sm text-[var(--color-text-secondary)]">
+                <li className="flex items-start gap-2">
+                  <span className="text-[var(--color-primary)] font-bold">1.</span>
+                  <div className="flex-1">
+                    <p className="mb-2">Ensure vercel.json uses turbo build:</p>
+                    <CollapsibleCodeBlock
+                      id="troubleshoot-vercel-config"
+                      code={`{
+  "buildCommand": "turbo build --filter=@ecosystem/sage-design-studio",
+  "installCommand": "pnpm install --frozen-lockfile"
+}`}
+                      defaultCollapsed={false}
+                      showCopy={true}
+                    />
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[var(--color-primary)] font-bold">2.</span>
+                  <div className="flex-1">
+                    <p className="mb-2">Ensure package.json exports dist files:</p>
+                    <CollapsibleCodeBlock
+                      id="troubleshoot-exports"
+                      code={`"exports": {
+  ".": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js",
+    "default": "./dist/index.js"
+  }
+}`}
+                      defaultCollapsed={false}
+                      showCopy={true}
+                    />
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[var(--color-primary)] font-bold">3.</span>
+                  <span>Build locally to verify: <Code syntax="plain">pnpm build --filter=@ecosystem/design-system</Code></span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[var(--color-primary)] font-bold">4.</span>
+                  <span>Push changes: <Code syntax="plain">git push</Code></span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[var(--color-primary)] font-bold">5.</span>
+                  <span>Clear Vercel build cache: Project Settings → Clear Cache</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[var(--color-primary)] font-bold">6.</span>
+                  <span>Redeploy in Vercel</span>
+                </li>
+              </ol>
+            </div>
+
+            {/* Prevention */}
+            <div>
+              <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Preventing This Issue</h4>
+              <ul className="space-y-2 text-sm text-[var(--color-text-secondary)]">
+                <li className="flex items-start gap-2">
+                  <span className="text-[var(--color-primary)]">•</span>
+                  <span>Always rebuild design-system locally after component changes</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[var(--color-primary)]">•</span>
+                  <span>Verify dist files contain your changes before pushing</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[var(--color-primary)]">•</span>
+                  <span>Remember: Examples use real components, not hardcoded props</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[var(--color-primary)]">•</span>
+                  <span>If source is correct but deployed site is wrong → It's always a build/deployment issue</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </Card>
+      )}
       </div>
     </>
   );
