@@ -119,7 +119,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         return `${baseStyles} text-[var(--color-text-muted)] font-medium`;
       }
       if (isLink) {
-        return `${baseStyles} text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-hover)] px-2 py-1 -mx-2 -my-1 rounded`;
+        return `${baseStyles} text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-hover)] px-1.5 py-1.5 -mx-1.5 -my-1.5 rounded`;
       }
     }
 
@@ -128,7 +128,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         return `${baseStyles} text-[var(--color-text-primary)] font-semibold`;
       }
       if (isLink) {
-        return `${baseStyles} text-[var(--color-primary)] hover:bg-[var(--color-text-primary)] hover:text-[var(--color-background)] font-medium px-2 py-1 -mx-2 -my-1 rounded`;
+        return `${baseStyles} text-[var(--color-primary)] hover:bg-[var(--color-text-primary)] hover:text-[var(--color-background)] font-medium px-1.5 py-1.5 -mx-1.5 -my-1.5 rounded`;
       }
     }
 
@@ -137,7 +137,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         return `${baseStyles} text-[var(--color-text-primary)] font-medium`;
       }
       if (isLink) {
-        return `${baseStyles} text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] underline-offset-2 hover:underline decoration-[var(--color-primary)]/40 hover:decoration-[var(--color-primary)] decoration-1 hover:decoration-2`;
+        return `${baseStyles} text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] underline-offset-2 hover:underline decoration-[var(--color-primary)]/40 hover:decoration-[var(--color-primary)] decoration-1 hover:decoration-2 px-1.5 py-1.5 -mx-1.5 -my-1.5`;
       }
     }
 
