@@ -421,19 +421,41 @@ export function ThemeSwitcher() {
                     <span className="text-[var(--color-primary)]">✓</span>
                     <span>Preferences saved across sessions</span>
                   </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-[var(--color-primary)]">✓</span>
+                    <span>Two modes: full-featured or lightweight</span>
+                  </div>
                 </div>
                 <p className="text-xs text-[var(--color-text-muted)] mt-4">
                   → See full documentation in <strong className="text-[var(--color-text-primary)]">Components &gt; Organisms &gt; Customization &gt; Customizer</strong>
                 </p>
               </div>
-              <div className="flex items-center justify-center p-8 bg-[var(--color-background)] rounded-lg border border-[var(--color-border)]">
-                <p className="text-sm text-[var(--color-text-secondary)] text-center">
-                  Look for the floating{' '}
-                  <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] font-bold mx-1">
-                    ⚙
-                  </span>{' '}
-                  button on this page to try it yourself!
-                </p>
+              <div className="flex flex-col items-center justify-center p-6 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] space-y-4">
+                <div className="relative w-full aspect-[4/3] bg-[var(--color-background)] rounded-lg border border-[var(--color-border)] overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center text-[var(--color-text-muted)] text-sm">
+                    Customizer Preview
+                  </div>
+                  <div className="absolute bottom-2 right-2 bg-background p-3 rounded-xl shadow-lg border border-[var(--color-border)] text-foreground w-28">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs font-semibold">Theme</span>
+                      <span className="text-xs">✕</span>
+                    </div>
+                    <div className="space-y-1.5">
+                      <div className="h-6 bg-[var(--color-primary)] rounded text-[10px] flex items-center justify-center text-[var(--color-primary-foreground)]">
+                        ☀️ Light
+                      </div>
+                      <div className="h-6 bg-[var(--color-surface)] rounded text-[10px] flex items-center justify-center text-[var(--color-text-secondary)]">
+                        🌙 Dark
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a
+                  href="#organisms"
+                  className="text-sm font-medium text-[var(--color-primary)] hover:underline flex items-center gap-1"
+                >
+                  View Interactive Demos →
+                </a>
               </div>
             </div>
           </Card>

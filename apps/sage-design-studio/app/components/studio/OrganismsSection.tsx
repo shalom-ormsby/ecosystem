@@ -91,6 +91,110 @@ function ModalDemo() {
   );
 }
 
+function CustomizerDemoFull() {
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <div className="relative min-h-[400px] bg-[var(--color-background)] rounded-lg border border-[var(--color-border)] p-4 flex items-center justify-center">
+      <p className="text-sm text-[var(--color-text-secondary)] text-center max-w-md">
+        This demo shows the full-featured Customizer with all controls: theme selection, light/dark mode, motion intensity, and X-ray mode.
+      </p>
+      {!isOpen ? (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="absolute bottom-4 right-4 bg-background text-foreground px-4 py-2 rounded-full shadow-lg border border-[var(--color-glass-border)] font-medium hover:opacity-80 transition-all flex items-center gap-2"
+          style={{ backdropFilter: 'var(--effect-blur-sm)' }}
+        >
+          <span className="text-lg">🎛️</span>
+          Customizer
+        </button>
+      ) : (
+        <div
+          className="absolute bottom-4 right-4 bg-background p-6 rounded-2xl shadow-2xl border border-[var(--color-glass-border)] text-foreground w-80"
+          style={{
+            boxShadow: 'var(--effect-shadow-xl)',
+            backdropFilter: 'var(--effect-blur-md)',
+            backgroundColor: 'var(--color-glass)'
+          }}
+        >
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="font-bold text-lg">Experience Customizer</h3>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="text-foreground opacity-60 hover:opacity-100 transition-opacity p-1"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <div className="space-y-4">
+            <p className="text-xs text-[var(--color-text-secondary)]">
+              ✨ All controls are interactive. This is a live demo showing the full customizer experience with theme switching, motion control, and more.
+            </p>
+            <p className="text-xs text-[var(--color-text-muted)] italic">
+              Note: The actual component on this page is in the bottom-right corner. This demo is contained for documentation purposes.
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CustomizerDemoLightweight() {
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <div className="relative min-h-[300px] bg-[var(--color-background)] rounded-lg border border-[var(--color-border)] p-4 flex items-center justify-center">
+      <p className="text-sm text-[var(--color-text-secondary)] text-center max-w-md">
+        This demo shows the lightweight mode with only light/dark theme switching - perfect for production apps.
+      </p>
+      {!isOpen ? (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="absolute bottom-4 right-4 bg-background text-foreground px-4 py-2 rounded-full shadow-lg border border-[var(--color-glass-border)] font-medium hover:opacity-80 transition-all flex items-center gap-2"
+          style={{ backdropFilter: 'var(--effect-blur-sm)' }}
+        >
+          <span className="text-lg">🌓</span>
+          Theme
+        </button>
+      ) : (
+        <div
+          className="absolute bottom-4 right-4 bg-background p-6 rounded-2xl shadow-2xl border border-[var(--color-glass-border)] text-foreground w-64"
+          style={{
+            boxShadow: 'var(--effect-shadow-xl)',
+            backdropFilter: 'var(--effect-blur-md)',
+            backgroundColor: 'var(--color-glass)'
+          }}
+        >
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="font-bold text-lg">Theme Settings</h3>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="text-foreground opacity-60 hover:opacity-100 transition-opacity p-1"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <div className="space-y-4">
+            <p className="text-xs text-[var(--color-text-secondary)]">
+              ✨ This lightweight mode shows only light/dark switching - simpler and more focused for end users.
+            </p>
+            <p className="text-xs text-[var(--color-text-muted)] italic">
+              Note: Click the buttons to toggle the panel open/closed in this demo.
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function OrganismsSection({ activeItemId }: OrganismsSectionProps) {
   const [selectedOrganism, setSelectedOrganism] = useState<OrganismType>('PrimaryNav');
 
@@ -1435,16 +1539,23 @@ const customTokens: SyntaxToken[] = [
         {/* Live Example - Full Mode */}
         <div>
           <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
-            Live Example - Full Mode
+            Live Interactive Demo - Full Mode
           </h4>
           <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-            This is the full-featured customizer you see on this page! Look for the floating ⚙ button in the bottom right corner.
+            Click the floating button to toggle the panel and explore all controls.
           </p>
-          <Card className="p-6">
-            <p className="text-sm text-[var(--color-text-secondary)]">
-              The Customizer is already active on this page. Click the floating button in the bottom right to open it and see all available controls.
-            </p>
-          </Card>
+          <CustomizerDemoFull />
+        </div>
+
+        {/* Live Example - Lightweight Mode */}
+        <div>
+          <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)]">
+            Live Interactive Demo - Lightweight Mode
+          </h4>
+          <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+            See how the lightweight mode appears with a simpler, more focused interface.
+          </p>
+          <CustomizerDemoLightweight />
         </div>
 
         {/* Code Example - Full Mode */}
