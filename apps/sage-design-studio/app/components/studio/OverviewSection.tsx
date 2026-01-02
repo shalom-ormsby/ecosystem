@@ -128,19 +128,12 @@ export function OverviewSection() {
     <div className="space-y-16">
       {/* 1. WELCOME & VALUE PROPOSITION */}
       <section className="border-b border-[var(--color-border)] pb-12">
-        <div className="text-center max-w-4xl mx-auto">
+        <div className="text-center max-w-5xl mx-auto">
           <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-[var(--color-text-primary)]">
             Welcome to the Sage Design System
           </h1>
-          <p className="text-xl text-[var(--color-text-primary)] mb-4 leading-relaxed">
-            A human-centered design system that makes user control, transparency,
-            and emotional resonance tangible through code.
-          </p>
-          <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed">
-            This isn't just a component library. It's a functional design philosophy
-            that helps you build products where users feel <strong className="text-[var(--color-text-primary)]">seen</strong>,
-            <strong className="text-[var(--color-text-primary)]"> capable</strong>, and{' '}
-            <strong className="text-[var(--color-text-primary)]">empowered</strong>.
+          <p className="text-base text-[var(--color-text-secondary)] leading-relaxed">
+            A human-centered design system that makes user control, transparency, and emotional resonance tangible through code.
           </p>
         </div>
       </section>
@@ -908,11 +901,6 @@ export function Controls() {
             >
               <Button variant="primary" size="lg">
                 View on GitHub
-              </Button>
-            </a>
-            <a href="#atoms">
-              <Button variant="secondary" size="lg">
-                Browse Components
               </Button>
             </a>
           </div>
