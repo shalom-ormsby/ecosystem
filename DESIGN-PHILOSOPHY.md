@@ -46,7 +46,7 @@ Each principle is a pathway to lovability. They work together, and when they ten
 ### 4. Generous by Design
 **Open source. Teachable. Accessible to all.** The code is part of the offering. Knowledge should flow freely.
 
-**Why:** Shalom's differentiator is his judgment, taste, and experience, not proprietary code. Democratizing access to knowledge is Creative Powerup's mission. This ecosystem fully embodies that.
+**Why:** Knowledge should flow freely. Democratizing access to design systems and patterns enables others to build better products. This ecosystem fully embodies that.
 
 **In practice:** MIT License from day one. Code that others can learn from. Documentation that teaches. The GitHub repo is as much the product as the deployed apps.
 
@@ -103,18 +103,15 @@ This ecosystem is built *with* AI, including Claude Code, Gemini, Goose, and Not
 
 This isn't a collection of separate projects. It's an **ecosystem** expressing a unified vision through different lenses:
 
-### The Four Expressions (Current)
+### The Expressions (Current)
 
-**Portfolio** (`apps/portfolio/`)  
+**Portfolio** (`apps/portfolio/`)
 The proof of philosophy. An interactive experience that embodies human-centered design through the experience itself.
 
-**Sage Stocks** (`apps/sage-stocks/`)  
-AI-powered investment intelligence. ~15k LOC production app that demonstrates transparent AI, calm confidence, and zero-hallucination architecture.
+**Creative Powerup** (`apps/creative-powerup/`)
+Community platform and experiment gallery for purpose-driven creators.
 
-**Creative Powerup** (`apps/creative-powerup/`)  
-Community platform for purpose-driven creators. Where heart-led visions meet AI-enhanced execution.
-
-**SageOS** (`apps/sageos/`)  
+**SageOS** (`apps/sageos/`)
 Personal operating system. Future home for the productivity philosophy and tools that power everything else.
 
 ### The Shared Foundation

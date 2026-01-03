@@ -15,8 +15,9 @@ The purpose of this open source monorepo isn't just to answer this question; it'
 This ecosystem expresses one unified vision through multiple products:
 
 - **Portfolio** — The proof of philosophy. A living showcase of human-centered design with the Customizer as its centerpiece.
-- **Sage Stocks** — AI-powered investment intelligence that respects user agency *(planned)*
-- **Creative Powerup** — Community platform for purpose-driven innovators *(planned)*
+- **Sage Design Studio** — Interactive documentation platform for the design system. Makes design tokens, components, and design decisions publicly explorable.
+- **Creative Powerup** — Community platform and experiment gallery for purpose-driven innovators *(in development)*
+- **Sage Stocks** — AI-powered investment intelligence that respects user agency *(migration pending)*
 - **SageOS** — Personal operating system for creative work *(future)*
 
 **The unifying element:** A shared design system that embodies human-centered principles into every component, token, and interaction.
@@ -56,21 +57,124 @@ This ecosystem is built on four principles:
 
 ---
 
-## The Design System
+## The Sage Design System
 
-The heart of this ecosystem. Every app imports from it.
+The heart of this ecosystem. Every app imports from it. **Version 1.0 — Production Ready**
 
-**What makes it different:**
-- Three distinct themes (Studio, Sage, Volt) with unique personalities
-- User-controlled motion system (0-10 scale, respects `prefers-reduced-motion`)
-- Built-in Customizer for runtime theme/motion adjustments
-- Automatic syntax parser for code highlighting (lightweight, zero dependencies)
-- Zustand + localStorage for persistent preferences
-- WCAG AA accessible by default
+### Architecture
 
-**Technologies:** React 18/19, TypeScript, Tailwind CSS, Framer Motion, Zustand
+The design system follows atomic design principles with a clear component hierarchy:
 
-[Design System Documentation →](design-system/README.md)
+- **Atoms** (11 families) — Primitives with no internal dependencies
+  - Button, Input family (TextField, TextArea, Select, Checkbox, Radio, Switch), Card, Badge, Avatar, Link, Icon, Code, Spinner, ProgressBar, Motion components
+
+- **Molecules** (8 components) — Composed from atoms
+  - FormField, SearchBar, CheckboxGroup, RadioGroup, Dropdown, Tooltip, Breadcrumbs, ThemeToggle
+
+- **Organisms** (8 components) — Complex compositions
+  - Header, SecondaryNav, TertiaryNav, Footer, Modal, Toast, PageLayout, CollapsibleCodeBlock
+
+### Three Distinct Themes
+
+Each theme has a unique personality and embodies different design values:
+
+- **Studio** — Professional, balanced, modern (inspired by Framer/Vercel/Linear)
+  - Cool blues and grays, clean sans-serif typography (Outfit, Manrope, Fira Code)
+  - Smooth, professional motion curves
+
+- **Sage** — Calm, organic, thoughtful
+  - Warm earth tones, muted sage greens, terracotta accents
+  - Serif headings (Lora), clean body text (Instrument Sans)
+  - Slower, flowing motion curves
+
+- **Volt** — Bold, electric, energetic
+  - Electric blues, vibrant cyans, high contrast
+  - Geometric sans-serif (Space Grotesk), technical mono (Fira Code)
+  - Fast, snappy motion curves
+
+All themes support both light and dark modes with WCAG AA contrast ratios.
+
+### Token System
+
+Design decisions as code, not locked in design tools:
+
+- **Colors** — Semantic color system with foreground variants for proper light/dark mode support
+- **Typography** — 10 size scales (xs-8xl), complete type presets (display, headings, body, caption)
+- **Spacing** — 4px base grid with semantic aliases (xs-3xl)
+- **Motion** — Duration presets and easing curves that scale with user preference
+- **Syntax Highlighting** — 14 token types for automatic code highlighting (comment, keyword, function, string, number, boolean, operator, property, className, tag, attribute, variable, punctuation, plain)
+
+### User-Controlled Motion System
+
+Every animation respects user preference:
+- **Motion intensity slider** (0-10 scale)
+- **Automatic sync** with system `prefers-reduced-motion`
+- **Zero animation** when disabled (instant state changes only)
+- **Scaled durations** based on user preference and theme personality
+
+### The Customizer
+
+User control made tangible. A floating panel that gives users ownership of their experience:
+- **Motion intensity** — 0-10 scale with system preference sync
+- **Theme switching** — Studio, Sage, or Volt with distinct personalities
+- **Color mode** — Light or dark mode
+- **X-Ray Mode** — Toggle for transparency features *(in development)*
+
+All preferences persist to localStorage and survive page reloads.
+
+### Syntax Highlighting System
+
+Built-in automatic syntax parser (~2KB) for beautiful code examples:
+- **Zero configuration** — Just pass plain code strings
+- **14 token types** — Comprehensive TypeScript/JavaScript/JSX tokenization
+- **Theme-aware colors** — Adapts to light/dark mode with WCAG AA contrast
+- **No dependencies** — Completely self-contained
+- **CollapsibleCodeBlock organism** — Full-featured code display with copy, collapse, and syntax highlighting
+
+### Accessibility-First Design
+
+- **WCAG AA compliance** — All color combinations meet 4.5:1 contrast minimum
+- **Keyboard navigation** — Full support with visible focus indicators
+- **Screen reader compatible** — Semantic HTML and proper ARIA attributes
+- **Motion preferences** — Complete respect for reduced motion settings
+- **Focus management** — Proper focus ring styling with CSS variables
+
+### State Management
+
+- **Zustand stores** with localStorage persistence
+- **Theme state** — Current theme name and color mode
+- **Customizer state** — Motion intensity, x-ray mode, system preferences
+- **Toast context** — Notification system with provider
+
+### Hooks
+
+Three custom React hooks for common patterns:
+- **useTheme()** — Theme and mode control with toggle functions
+- **useMotionPreference()** — Motion settings and system preference sync
+- **useForm()** — Generic form state with validation and dirty tracking
+
+### Technologies
+
+- React 18/19 (peerDependency supports both)
+- TypeScript 5 (strict mode)
+- Tailwind CSS 3 (via CSS variables)
+- Framer Motion 12 (all animations respect preferences)
+- Zustand 5 (with localStorage persistence)
+- tsup (ESM + CJS outputs for npm publishing)
+
+### Interactive Documentation
+
+The **Sage Design Studio** app ([apps/sage-design-studio](apps/sage-design-studio)) provides:
+- **Component playground** with live prop controls
+- **Token visualization** for all design tokens across themes
+- **Code examples** with automatic syntax highlighting
+- **LLM-optimized documentation** with JSON-LD structured data
+- **Accessibility notes** for every component
+- **GitHub source links** for transparency
+
+Visit the live documentation at [https://studio.shalomormsby.com/](https://studio.shalomormsby.com/)
+
+[Full Design System Documentation →](design-system/README.md)
 
 ---
 
@@ -78,18 +182,30 @@ The heart of this ecosystem. Every app imports from it.
 
 ```
 ecosystem/
-├── apps/               # Next.js 16 applications
-│   ├── portfolio/      # Active development
-│   ├── sage-stocks/    # Scaffold
-│   └── creative-powerup/
-├── design-system/      # The heart (at root, not in packages/)
-│   ├── tokens/         # Design decisions as code
-│   ├── atoms/          # Button, Card, Motion
-│   ├── hooks/          # useTheme, useMotionPreference
-│   ├── features/       # Customizer (philosophy-embodying)
-│   └── providers/      # ThemeProvider
-├── docs/               # Guides and documentation
-└── packages/           # Shared config and utilities
+├── apps/                      # Next.js applications
+│   ├── portfolio/             # Proof of philosophy (production-ready)
+│   ├── sage-design-studio/    # Interactive design system docs (production)
+│   ├── creative-powerup/      # Experiment gallery (in development)
+│   ├── sage-stocks/           # Migration pending
+│   └── sageos/                # Future
+├── design-system/             # The heart (at root, not in packages/)
+│   ├── tokens/                # Design decisions as code
+│   │   ├── base.ts            # Shared scales
+│   │   ├── studio.ts          # Studio theme
+│   │   ├── sage.ts            # Sage theme
+│   │   ├── volt.ts            # Volt theme
+│   │   ├── typography.ts      # Type system
+│   │   └── syntax.ts          # Code highlighting
+│   ├── atoms/                 # 11 primitive component families
+│   ├── molecules/             # 8 composed components
+│   ├── organisms/             # 8 complex compositions
+│   ├── hooks/                 # useTheme, useMotionPreference, useForm
+│   ├── features/              # Customizer (philosophy-embodying)
+│   ├── providers/             # ThemeProvider, ToastProvider
+│   ├── store/                 # Zustand state management
+│   └── utils/                 # Validation, animations, colors, syntax parser
+├── docs/                      # Guides and documentation
+└── packages/                  # Shared config and utilities
 ```
 
 **Why design-system at root?** It signals importance and is structured for npm publishing from day one.
@@ -203,22 +319,21 @@ The work is the proof. Every component, every interaction, every line of code de
 
 ## Status & Roadmap
 
-**Currently implemented:**
-- Design system (tokens, atoms, Customizer, themes)
-- Portfolio app (active development)
-- Motion preference system
-- Theme switching with persistence
+**Production Ready (v1.0):**
+- **Design system** — Complete with 27 components, 3 themes, comprehensive token system
+- **Sage Design Studio** — Interactive documentation with LLM optimization (Phase 7 complete)
+- **Portfolio app** — Living showcase with Customizer integration
 
-**In development:**
-- X-Ray Mode (toggle exists, UI overlay pending)
+**In Active Development:**
+- **Creative Powerup** — Experiment gallery (9 live experiments: games, visualizations, animations, tools)
+- **X-Ray Mode** — Toggle exists, UI overlay implementation pending
+- **AI Notes component** — Transparency feature for documenting AI collaboration
 
 **Planned:**
-- AI Notes component
-- Molecules and patterns
-- Sage Stocks app
-- Creative Powerup app
-- Testing suite (Vitest + Testing Library)
-- Storybook documentation
+- **Sage Stocks migration** — Existing 15k LOC app to be integrated into monorepo
+- **SageOS** — Personal operating system for creative work
+- **Testing suite** — Vitest + Testing Library for comprehensive test coverage
+- **Additional organisms** — Advanced layout patterns and compositions
 
 [Full implementation status →](AGENTS.md#current-implementation-state)
 
