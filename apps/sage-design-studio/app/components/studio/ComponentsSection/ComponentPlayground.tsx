@@ -85,10 +85,10 @@ export function ComponentPlayground({ componentName, config }: ComponentPlaygrou
                   )}
                   {(propConfig.type === 'array' || propConfig.type === 'object' ||
                     propConfig.type === 'interface' || propConfig.type === 'custom') && (
-                    <span className="text-xs font-mono text-[var(--color-text-muted)] ml-2">
-                      {propConfig.typeDefinition || propConfig.type}
-                    </span>
-                  )}
+                      <span className="text-xs font-mono text-[var(--color-text-muted)] ml-2">
+                        {propConfig.typeDefinition || propConfig.type}
+                      </span>
+                    )}
                   {propConfig.description && (
                     <span className="text-xs text-[var(--color-text-muted)] ml-2">
                       ({propConfig.description})
@@ -104,10 +104,9 @@ export function ComponentPlayground({ componentName, config }: ComponentPlaygrou
                         onClick={() => updateProp(propName, option)}
                         className={`
                           px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200
-                          ${
-                            props[propName] === option
-                              ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-md hover:opacity-90'
-                              : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-primary)]'
+                          ${props[propName] === option
+                            ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-md hover:opacity-90'
+                            : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-primary)]'
                           }
                         `}
                       >
@@ -122,10 +121,9 @@ export function ComponentPlayground({ componentName, config }: ComponentPlaygrou
                     onClick={() => updateProp(propName, !props[propName])}
                     className={`
                       px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
-                      ${
-                        props[propName]
-                          ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-md hover:opacity-90'
-                          : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-primary)]'
+                      ${props[propName]
+                        ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-md hover:opacity-90'
+                        : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-primary)]'
                       }
                     `}
                   >
@@ -143,6 +141,25 @@ export function ComponentPlayground({ componentName, config }: ComponentPlaygrou
                 )}
               </div>
             ))}
+          </Card>
+        </div>
+      )}
+
+      {/* Accessibility Notes Section */}
+      {config.accessibilityNotes && config.accessibilityNotes.length > 0 && (
+        <div>
+          <h3 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)] flex items-center gap-2">
+            <span>♿</span> Accessibility
+          </h3>
+          <Card className="p-6 bg-[var(--color-surface)] border-l-4 border-[var(--color-primary)]">
+            <ul className="space-y-2">
+              {config.accessibilityNotes.map((note, index) => (
+                <li key={index} className="text-sm text-[var(--color-text-secondary)] flex items-start gap-3">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[var(--color-primary)] shrink-0" />
+                  <span>{note}</span>
+                </li>
+              ))}
+            </ul>
           </Card>
         </div>
       )}

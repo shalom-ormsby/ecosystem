@@ -40,6 +40,9 @@ export function generateComponentMetadata(config: ComponentConfig, name: string)
       "name": example.label,
       "description": `${name} with props: ${JSON.stringify(example.props)}`,
     })),
+
+    // Accessibility considerations
+    "accessibilityNotes": config.accessibilityNotes,
   };
 }
 

@@ -27,6 +27,8 @@ export interface ComponentConfig {
   }>;
   // GitHub source link for LLM navigation
   sourceUrl?: string;
+  // Accessibility notes for documenting a11y features
+  accessibilityNotes?: string[];
 }
 
 export const componentRegistry: Record<string, ComponentConfig> = {
@@ -65,23 +67,27 @@ export const componentRegistry: Record<string, ComponentConfig> = {
       { label: 'Large', props: { variant: 'primary', size: 'lg' }, children: 'Large Action' },
       { label: 'Loading', props: { variant: 'primary', size: 'md', loading: true }, children: 'Loading...' },
       { label: 'Disabled', props: { variant: 'primary', size: 'md', disabled: true }, children: 'Disabled' },
-      { label: 'With Icon', props: { variant: 'primary', size: 'md' }, children: (
-        <>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0z"/>
-            <path d="M11.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-          </svg>
-          With Icon
-        </>
-      )},
-      { label: 'Icon Right', props: { variant: 'secondary', size: 'md' }, children: (
-        <>
-          Icon Right
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
-          </svg>
-        </>
-      )},
+      {
+        label: 'With Icon', props: { variant: 'primary', size: 'md' }, children: (
+          <>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0z" />
+              <path d="M11.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+            </svg>
+            With Icon
+          </>
+        )
+      },
+      {
+        label: 'Icon Right', props: { variant: 'secondary', size: 'md' }, children: (
+          <>
+            Icon Right
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+            </svg>
+          </>
+        )
+      },
     ],
     codeExamples: [
       {
@@ -153,6 +159,14 @@ import { CheckIcon, ArrowRightIcon } from 'your-icon-library';
       },
     ],
     sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/atoms/Button/Button.tsx',
+    accessibilityNotes: [
+      'Uses semantic <button> element for proper keyboard and screen reader support',
+      'focus-visible outline ensures visible focus ring only for keyboard navigation',
+      'Loading spinner has aria-hidden="true" to prevent screen reader announcement',
+      'disabled state properly conveyed to assistive technologies',
+      'Extends native HTMLButtonElement, inheriting all standard ARIA attributes',
+      'Supports focus management with React.forwardRef',
+    ],
   },
 
   Card: {

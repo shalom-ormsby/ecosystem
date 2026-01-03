@@ -137,6 +137,14 @@ const items: BreadcrumbItem[] = [
       },
     ],
     sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/molecules/Breadcrumbs/Breadcrumbs.tsx',
+    accessibilityNotes: [
+      'Uses semantic <nav> element with configurable aria-label (default: "Breadcrumb")',
+      'Ordered list <ol> with <li> items for screen reader navigation',
+      'Current/last item uses aria-current="page" for proper page indication',
+      'All clickable links are focusable and keyboard navigable (Tab/Enter)',
+      'Visible focus rings on interactive elements for keyboard users',
+      'Separators are purely decorative (aria-hidden implied by CSS content)',
+    ],
   },
 
   Dropdown: {
@@ -582,7 +590,7 @@ const menuItems: DropdownItem[] = [
         type: 'custom',
         typeDefinition: '(query: string) => void',
         required: true,
-        default: () => {},
+        default: () => { },
         description: 'Callback fired when search query changes (debounced)',
       },
       showClearButton: {
@@ -601,7 +609,7 @@ const menuItems: DropdownItem[] = [
         label: 'Default',
         props: {
           placeholder: 'Search...',
-          onSearch: () => {},
+          onSearch: () => { },
         },
         children: null,
       },
@@ -609,7 +617,7 @@ const menuItems: DropdownItem[] = [
         label: 'With Clear Button',
         props: {
           placeholder: 'Search products...',
-          onSearch: () => {},
+          onSearch: () => { },
           showClearButton: true,
         },
         children: null,
@@ -701,7 +709,7 @@ const [results, setResults] = useState([]);
         type: 'custom',
         typeDefinition: '(value: string) => void',
         required: true,
-        default: () => {},
+        default: () => { },
         description: 'Callback when selection changes',
       },
       orientation: {
@@ -722,7 +730,7 @@ const [results, setResults] = useState([]);
             { value: 'enterprise', label: 'Enterprise Plan' },
           ],
           value: 'pro',
-          onChange: () => {},
+          onChange: () => { },
         },
         children: null,
       },
@@ -736,7 +744,7 @@ const [results, setResults] = useState([]);
             { value: 'lg', label: 'Large' },
           ],
           value: 'md',
-          onChange: () => {},
+          onChange: () => { },
           orientation: 'horizontal',
         },
         children: null,
@@ -822,7 +830,7 @@ const [plan, setPlan] = useState('pro');
         type: 'custom',
         typeDefinition: '(values: string[]) => void',
         required: true,
-        default: () => {},
+        default: () => { },
         description: 'Callback when selection changes',
       },
       orientation: {
@@ -843,7 +851,7 @@ const [plan, setPlan] = useState('pro');
             { value: 'api', label: 'API Access' },
           ],
           value: ['analytics', 'api'],
-          onChange: () => {},
+          onChange: () => { },
         },
         children: null,
       },
