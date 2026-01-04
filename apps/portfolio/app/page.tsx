@@ -9,7 +9,7 @@ export default function Home() {
     <main className="min-h-screen bg-background flex flex-col">
       <Header
         logo={
-          <NextLink href="/" className="font-bold text-lg text-foreground" style={{ fontFamily: 'var(--font-header-logo)' }}>
+          <NextLink href="/" className="font-header font-bold text-lg text-foreground">
             Shalom Ormsby
           </NextLink>
         }
@@ -48,12 +48,9 @@ export default function Home() {
                 Work
               </h2>
               <nav className="space-y-3">
-                <NextLink
-                  href="/case-studies"
-                  className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
-                >
+                <Link href="/case-studies" className="block">
                   → Portfolio (Case Studies)
-                </NextLink>
+                </Link>
                 <Link
                   href="/resume.pdf"
                   className="block"
@@ -87,18 +84,12 @@ export default function Home() {
                 >
                   → Love Is the Way
                 </Link>
-                <NextLink
-                  href="/poetry"
-                  className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
-                >
+                <Link href="/poetry" className="block">
                   → Poetry
-                </NextLink>
-                <NextLink
-                  href="/art-in-space"
-                  className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
-                >
+                </Link>
+                <Link href="/art-in-space" className="block">
                   → Art in Space
-                </NextLink>
+                </Link>
               </nav>
             </Card>
 
@@ -108,30 +99,23 @@ export default function Home() {
                 Tools
               </h2>
               <nav className="space-y-3">
-                <a
+                <Link
                   href="https://studio.shalomormsby.com"
-                  className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
+                  className="block"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   → Sage Design Studio
-                </a>
-                <NextLink
-                  href="/cosmograph"
-                  className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
-                >
+                </Link>
+                <Link href="/cosmograph" className="block">
                   → Cosmograph (Explore Everything)
-                </NextLink>
-                <NextLink
-                  href="/sage-stocks"
-                  className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
-                >
+                </Link>
+                <Link href="/sage-stocks" className="block">
                   → Sage Stocks
-                </NextLink>
-                <NextLink
-                  href="/sageos"
-                  className="block px-2 py-1 -mx-2 -my-1 rounded transition-all duration-200 hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
-                >
+                </Link>
+                <Link href="/sageos" className="block">
                   → SageOS
-                </NextLink>
+                </Link>
               </nav>
             </Card>
           </div>

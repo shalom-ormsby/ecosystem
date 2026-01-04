@@ -1,7 +1,7 @@
 'use client';
 
 import NextLink from 'next/link';
-import { Header, Card, Link } from '@ecosystem/design-system';
+import { Header, Footer, Card, Link } from '@ecosystem/design-system';
 import { ecosystemNavigation } from '@/lib/navigation';
 
 export default function CaseStudiesPage() {
@@ -9,7 +9,7 @@ export default function CaseStudiesPage() {
     <main className="min-h-screen bg-background flex flex-col">
       <Header
         logo={
-          <NextLink href="/" className="font-bold text-lg text-foreground" style={{ fontFamily: 'var(--font-header-logo)' }}>
+          <NextLink href="/" className="font-header font-bold text-lg text-foreground">
             Shalom Ormsby
           </NextLink>
         }
@@ -57,40 +57,42 @@ export default function CaseStudiesPage() {
         </section>
       </div>
 
-      {/* Footer */}
-      <footer className="border-t border-foreground/10 py-8 px-6 mt-auto">
-        <div className="max-w-3xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <p className="text-foreground opacity-60 text-sm">
-              © {new Date().getFullYear()} Shalom Ormsby
-            </p>
-            <nav className="flex gap-6">
-              <a
-                href="mailto:shalom@shalomormsby.com"
-                className="text-foreground hover:text-primary transition-colors text-sm"
-              >
-                Email
-              </a>
-              <a
-                href="https://github.com/shalom-ormsby"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground hover:text-primary transition-colors text-sm"
-              >
-                GitHub
-              </a>
-              <a
-                href="https://www.linkedin.com/in/shalomormsby"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground hover:text-primary transition-colors text-sm"
-              >
-                LinkedIn
-              </a>
-            </nav>
-          </div>
-        </div>
-      </footer>
+      <Footer
+        logo={<NextLink href="/">Shalom Ormsby</NextLink>}
+        sections={[
+          {
+            title: 'Work',
+            links: [
+              { label: 'Portfolio (Case Studies)', href: '/case-studies' },
+              { label: 'Resume', href: '/resume.pdf', external: true },
+            ],
+          },
+          {
+            title: 'Play',
+            links: [
+              { label: 'Creative Sandbox', href: 'https://ecosystem-creative-powerup.vercel.app/', external: true },
+              { label: 'Love Is the Way', href: 'https://shalomormsby.substack.com/', external: true },
+              { label: 'Poetry', href: '/poetry' },
+              { label: 'Art in Space', href: '/art-in-space' },
+            ],
+          },
+          {
+            title: 'Tools',
+            links: [
+              { label: 'Sage Design Studio', href: 'https://studio.shalomormsby.com', external: true },
+              { label: 'Cosmograph', href: '/cosmograph' },
+              { label: 'Sage Stocks', href: '/sage-stocks' },
+              { label: 'SageOS', href: '/sageos' },
+            ],
+          },
+        ]}
+        socialLinks={{
+          github: 'https://github.com/shalom-ormsby',
+          linkedin: 'https://www.linkedin.com/in/shalomormsby',
+          email: 'shalom@shalomormsby.com',
+        }}
+        copyright={`© ${new Date().getFullYear()} Shalom Ormsby`}
+      />
     </main>
   );
 }
