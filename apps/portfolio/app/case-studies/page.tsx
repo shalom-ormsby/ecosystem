@@ -1,7 +1,7 @@
 'use client';
 
 import NextLink from 'next/link';
-import { Header, Footer, Card, Link } from '@ecosystem/design-system';
+import { Header, Footer, Card, Link, Breadcrumbs } from '@ecosystem/design-system';
 import { ecosystemNavigation } from '@/lib/navigation';
 
 export default function CaseStudiesPage() {
@@ -16,8 +16,20 @@ export default function CaseStudiesPage() {
         navLinks={ecosystemNavigation}
       />
       <div className="flex-grow">
+        {/* Breadcrumbs */}
+        <div className="pt-24 px-6">
+          <div className="max-w-3xl mx-auto">
+            <Breadcrumbs
+              items={[
+                { label: 'Home', href: '/' },
+                { label: 'Case Studies' }
+              ]}
+            />
+          </div>
+        </div>
+
         {/* Hero Section */}
-        <section className="pt-32 md:pt-40 pb-16 px-6">
+        <section className="pt-8 md:pt-12 pb-16 px-6">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               Case Studies
@@ -81,7 +93,7 @@ export default function CaseStudiesPage() {
             links: [
               { label: 'Sage Design Studio', href: 'https://studio.shalomormsby.com', external: true },
               { label: 'Cosmograph', href: '/cosmograph' },
-              { label: 'Sage Stocks', href: '/sage-stocks' },
+              { label: 'Sage Stocks', href: 'https://stocks.shalomormsby.com/', external: true },
               { label: 'SageOS', href: '/sageos' },
             ],
           },

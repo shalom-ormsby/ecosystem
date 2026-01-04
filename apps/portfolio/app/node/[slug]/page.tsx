@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getAllNodes, getNodeById, getConnectedNodes } from '@/lib/content/parser';
-import { Card } from '@ecosystem/design-system/atoms';
+import { Card, Breadcrumbs, Badge } from '@ecosystem/design-system';
 import type { Metadata } from 'next';
 
 /**
@@ -61,31 +61,15 @@ export default async function NodePage({ params }: NodePageProps) {
     <main className="min-h-screen bg-background">
       <div className="container mx-auto px-6 py-8 max-w-4xl">
         {/* Breadcrumb */}
-        <nav className="mb-6 text-sm" aria-label="Breadcrumb">
-          <ol className="flex items-center gap-2 text-foreground opacity-60">
-            <li>
-              <Link
-                href="/cosmograph"
-                className="hover:text-primary transition-colors"
-              >
-                Cosmograph
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li>
-              <Link
-                href={`/cosmograph#${node.cluster}`}
-                className="hover:text-primary transition-colors capitalize"
-              >
-                {node.cluster}
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li className="text-foreground" aria-current="page">
-              {node.title}
-            </li>
-          </ol>
-        </nav>
+        <Breadcrumbs
+          items={[
+            { label: 'Home', href: '/' },
+            { label: 'Cosmograph', href: '/cosmograph' },
+            { label: node.cluster, href: `/cosmograph#${node.cluster}` },
+            { label: node.title }
+          ]}
+          className="mb-6"
+        />
 
         {/* Node Content */}
         <article>
@@ -122,12 +106,9 @@ export default async function NodePage({ params }: NodePageProps) {
             {node.themes.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {node.themes.map((theme) => (
-                  <span
-                    key={theme}
-                    className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm"
-                  >
+                  <Badge key={theme} variant="primary" size="md">
                     {theme}
-                  </span>
+                  </Badge>
                 ))}
               </div>
             )}

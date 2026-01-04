@@ -110,7 +110,7 @@ export default function Home() {
                 <Link href="/cosmograph" className="block">
                   → Cosmograph (Explore Everything)
                 </Link>
-                <Link href="/sage-stocks" className="block">
+                <Link href="https://stocks.shalomormsby.com/" className="block" target="_blank" rel="noopener noreferrer">
                   → Sage Stocks
                 </Link>
                 <Link href="/sageos" className="block">
@@ -147,7 +147,7 @@ export default function Home() {
             links: [
               { label: 'Sage Design Studio', href: 'https://studio.shalomormsby.com', external: true },
               { label: 'Cosmograph', href: '/cosmograph' },
-              { label: 'Sage Stocks', href: '/sage-stocks' },
+              { label: 'Sage Stocks', href: 'https://stocks.shalomormsby.com/', external: true },
               { label: 'SageOS', href: '/sageos' },
             ],
           },

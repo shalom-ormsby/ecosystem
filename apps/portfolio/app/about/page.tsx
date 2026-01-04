@@ -1,9 +1,16 @@
 import Link from 'next/link';
-import { Button } from '@ecosystem/design-system/atoms';
+import { Button, Breadcrumbs } from '@ecosystem/design-system';
 
 export default function About() {
     return (
         <main className="min-h-screen p-8 max-w-3xl mx-auto">
+            <Breadcrumbs
+                items={[
+                    { label: 'Home', href: '/' },
+                    { label: 'About' }
+                ]}
+                className="mb-6"
+            />
             <h1 className="text-4xl font-bold mb-6 text-foreground">About Me</h1>
             <p className="text-xl text-foreground opacity-80 mb-6">
                 I am a product design leader focused on human-centered systems.

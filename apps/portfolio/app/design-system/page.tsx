@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Card, Button } from '@ecosystem/design-system/atoms';
+import { Card, Button, Breadcrumbs } from '@ecosystem/design-system';
 
 export default function DesignSystemPage() {
   return (
@@ -9,12 +9,13 @@ export default function DesignSystemPage() {
       <div className="max-w-4xl mx-auto px-6 py-20">
         {/* Header */}
         <div className="mb-16">
-          <Link
-            href="/"
-            className="text-foreground opacity-60 hover:opacity-100 transition-opacity inline-flex items-center gap-2 mb-8"
-          >
-            ← Back to home
-          </Link>
+          <Breadcrumbs
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Design System' }
+            ]}
+            className="mb-8"
+          />
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Design System
           </h1>

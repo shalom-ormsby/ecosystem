@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Card } from '@ecosystem/design-system/atoms';
+import { Card, Badge } from '@ecosystem/design-system';
 import type { Node, Cluster } from '@/lib/content/types';
 
 /**
@@ -232,12 +232,9 @@ export function NavigationFallback({
                               {node.themes.length > 0 && (
                                 <div className="flex flex-wrap gap-1">
                                   {node.themes.slice(0, 3).map((theme) => (
-                                    <span
-                                      key={theme}
-                                      className="px-2 py-0.5 rounded-full bg-foreground/10 text-foreground text-xs"
-                                    >
+                                    <Badge key={theme} variant="default" size="sm">
                                       {theme}
-                                    </span>
+                                    </Badge>
                                   ))}
                                 </div>
                               )}
