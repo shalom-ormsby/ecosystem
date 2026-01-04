@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { Breadcrumbs, TertiaryNav, CollapsibleCodeBlock, Card, type BreadcrumbItem } from '@ecosystem/design-system';
+import { useState, useEffect } from 'react';
+import { Breadcrumbs, TertiaryNav, CollapsibleCodeBlock, Card, PageTemplate, type BreadcrumbItem } from '@ecosystem/design-system';
 
 interface TemplatesSectionProps {
   breadcrumbs?: BreadcrumbItem[];
@@ -11,6 +11,13 @@ interface TemplatesSectionProps {
 
 export function TemplatesSection({ breadcrumbs, activeItemId, onItemChange }: TemplatesSectionProps) {
   const [selectedTemplate, setSelectedTemplate] = useState(activeItemId || 'templates-overview');
+
+  // Sync selectedTemplate with activeItemId when it changes (from sidebar navigation)
+  useEffect(() => {
+    if (activeItemId && ['templates-overview', 'page-template'].includes(activeItemId)) {
+      setSelectedTemplate(activeItemId);
+    }
+  }, [activeItemId]);
 
   const handleTemplateChange = (id: string) => {
     setSelectedTemplate(id);
@@ -186,6 +193,107 @@ function MyPage() {
             </li>
           </ul>
         </Card>
+      </section>
+
+      {/* Live Preview */}
+      <section>
+        <h4 className="text-xl font-semibold mb-4 text-[var(--color-text-primary)]">Live Preview</h4>
+        <p className="text-[var(--color-text-secondary)] mb-4">
+          Interactive example showing the PageTemplate structure with all elements. Scroll within the preview to see sticky behavior.
+        </p>
+
+        <Card className="p-0 overflow-hidden border-2 border-[var(--color-border)]">
+          <div className="h-[600px] overflow-auto bg-[var(--color-background)]">
+            <div style={{ transform: 'scale(0.75)', transformOrigin: 'top left', width: '133.33%', height: '133.33%' }}>
+              <PageTemplate
+                header={{
+                  logo: <span className="font-bold">Logo</span>,
+                  navLinks: [
+                    { label: 'Home', href: '#' },
+                    { label: 'About', href: '#' },
+                    { label: 'Services', href: '#' },
+                    { label: 'Contact', href: '#' },
+                  ],
+                  sticky: true,
+                }}
+                title="Example Page Title"
+                subtitle="This is a descriptive subtitle that provides context about the page content"
+                breadcrumbs={[
+                  { label: 'Home', href: '#' },
+                  { label: 'Category', href: '#' },
+                  { label: 'Current Page' },
+                ]}
+                showCustomizer={false}
+              >
+                <div className="space-y-8">
+                  <section>
+                    <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
+                      Lorem Ipsum Dolor Sit Amet
+                    </h2>
+                    <p className="text-[var(--color-text-secondary)] mb-4">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                    <p className="text-[var(--color-text-secondary)]">
+                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                  </section>
+
+                  <section>
+                    <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
+                      Structured Content Section
+                    </h2>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <Card className="p-4">
+                        <h3 className="font-semibold mb-2 text-[var(--color-text-primary)]">Feature One</h3>
+                        <p className="text-sm text-[var(--color-text-secondary)]">
+                          Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </p>
+                      </Card>
+                      <Card className="p-4">
+                        <h3 className="font-semibold mb-2 text-[var(--color-text-primary)]">Feature Two</h3>
+                        <p className="text-sm text-[var(--color-text-secondary)]">
+                          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+                        </p>
+                      </Card>
+                    </div>
+                  </section>
+
+                  <section>
+                    <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
+                      Additional Content
+                    </h2>
+                    <p className="text-[var(--color-text-secondary)] mb-4">
+                      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                      totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                    </p>
+                    <ul className="list-disc list-inside space-y-2 text-[var(--color-text-secondary)]">
+                      <li>Nemo enim ipsam voluptatem quia voluptas sit aspernatur</li>
+                      <li>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet</li>
+                      <li>Consectetur, adipisci velit, sed quia non numquam eius modi tempora</li>
+                    </ul>
+                  </section>
+
+                  <section>
+                    <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
+                      Final Section
+                    </h2>
+                    <p className="text-[var(--color-text-secondary)]">
+                      At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
+                      quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia
+                      deserunt mollitia animi, id est laborum et dolorum fuga.
+                    </p>
+                  </section>
+                </div>
+              </PageTemplate>
+            </div>
+          </div>
+        </Card>
+
+        <p className="text-sm text-[var(--color-text-muted)] mt-3">
+          💡 Scroll within the preview to see the header's sticky behavior and Swiss Grid spacing in action.
+        </p>
       </section>
 
       {/* Basic Usage */}
