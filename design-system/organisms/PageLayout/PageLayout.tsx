@@ -22,6 +22,9 @@ export interface PageLayoutProps {
   /** Apply Swiss Grid Design spacing to title/subtitle area */
   swissGridSpacing?: boolean;
 
+  /** Maximum width for title/subtitle area - should match content width for alignment */
+  contentMaxWidth?: 'max-w-7xl' | 'max-w-[1440px]' | 'max-w-4xl';
+
   /** Optional secondary navigation (first stack) */
   secondaryNav?: React.ReactNode;
 
@@ -87,6 +90,7 @@ export function PageLayout({
   title,
   subtitle,
   swissGridSpacing = false,
+  contentMaxWidth = 'max-w-7xl',
   secondaryNav,
   tertiaryNav,
   footer,
@@ -101,9 +105,11 @@ export function PageLayout({
   const stickyHeaderSpacing = stickyHeader ? 'pt-16 lg:pt-20' : '';
 
   // Swiss Grid spacing classes
-  const titleAreaSpacing = swissGridSpacing ? 'py-12 lg:py-16' : 'py-8';
+  // When breadcrumbs are below title, reduce bottom padding on title area to avoid excessive space
+  const titleAreaTopSpacing = swissGridSpacing ? 'pt-12 lg:pt-16' : 'pt-8';
+  const titleAreaBottomSpacing = swissGridSpacing && showBreadcrumbsBelowTitle ? 'pb-3' : swissGridSpacing ? 'pb-12 lg:pb-16' : 'pb-8';
   const titleBottomMargin = swissGridSpacing ? 'mb-4' : 'mb-3';
-  const breadcrumbsAreaSpacing = swissGridSpacing ? 'py-6' : 'py-4';
+  const breadcrumbsAreaSpacing = swissGridSpacing ? 'pt-4 pb-8' : 'pt-3 pb-6';
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -122,7 +128,7 @@ export function PageLayout({
           `}
           style={{ zIndex: 45 }}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <div className={`${contentMaxWidth} mx-auto px-4 sm:px-6 lg:px-8 py-3`}>
             {breadcrumbs}
           </div>
         </div>
@@ -130,8 +136,8 @@ export function PageLayout({
 
       {/* Title/Subtitle Area - Swiss Grid Design */}
       {(title || subtitle) && (
-        <div className={`${titleAreaSpacing} ${!showBreadcrumbsAtTop ? stickyHeaderSpacing : ''} bg-[var(--color-background)]`}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={`${titleAreaTopSpacing} ${titleAreaBottomSpacing} ${!showBreadcrumbsAtTop ? stickyHeaderSpacing : ''} bg-[var(--color-background)]`}>
+          <div className={`${contentMaxWidth} mx-auto px-4 sm:px-6 lg:px-8`}>
             {/* Title */}
             {title && (
               <div className={titleBottomMargin}>
@@ -148,7 +154,7 @@ export function PageLayout({
       {/* Breadcrumbs below title+subtitle (only if position='below-title') */}
       {breadcrumbs && showBreadcrumbsBelowTitle && (
         <div className={`${breadcrumbsAreaSpacing} bg-[var(--color-background)]`}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className={`${contentMaxWidth} mx-auto px-4 sm:px-6 lg:px-8`}>
             {breadcrumbs}
           </div>
         </div>

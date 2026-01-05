@@ -1,7 +1,7 @@
 'use client';
 
 import NextLink from 'next/link';
-import { PageTemplate } from '@ecosystem/design-system';
+import { PageTemplate, Footer } from '@ecosystem/design-system';
 import { ecosystemNavigation } from '@/lib/navigation';
 import { NavigationFallback } from '@/components/cosmograph/NavigationFallback';
 import type { Node } from '@/lib/content/types';
@@ -15,7 +15,7 @@ export function CosmographClient({ nodes }: CosmographClientProps) {
     <PageTemplate
       header={{
         logo: (
-          <NextLink href="/" className="font-header font-bold text-lg text-foreground">
+          <NextLink href="/" className="font-header font-bold text-lg text-[var(--color-text-primary)]">
             Shalom Ormsby
           </NextLink>
         ),
@@ -30,6 +30,46 @@ export function CosmographClient({ nodes }: CosmographClientProps) {
       ]}
       showCustomizer={false}
       variant="wide"
+      footer={
+        <Footer
+          logo={
+            <NextLink href="/" className="font-header font-bold text-lg text-[var(--color-text-primary)]">
+              Shalom Ormsby
+            </NextLink>
+          }
+          sections={[
+            {
+              title: 'Work',
+              links: [
+                { label: 'Portfolio', href: '/case-studies' },
+                { label: 'Resume', href: '/resume.pdf' },
+              ],
+            },
+            {
+              title: 'Play',
+              links: [
+                { label: 'Creative Sandbox', href: 'https://ecosystem-creative-powerup.vercel.app/', external: true },
+                { label: 'Love Is the Way', href: 'https://shalomormsby.substack.com/', external: true },
+                { label: 'Poetry', href: '/poetry' },
+              ],
+            },
+            {
+              title: 'Tools',
+              links: [
+                { label: 'Sage Design Studio', href: 'https://studio.shalomormsby.com', external: true },
+                { label: 'Cosmograph', href: '/cosmograph' },
+                { label: 'Sage Stocks', href: '/sage-stocks' },
+              ],
+            },
+          ]}
+          socialLinks={{
+            github: 'https://github.com/shalomormsby',
+            linkedin: 'https://linkedin.com/in/shalomormsby',
+            email: 'hello@shalomormsby.com',
+          }}
+          copyright="© 2026 Shalom Ormsby. Designed with intention and care."
+        />
+      }
     >
       <NavigationFallback nodes={nodes} />
     </PageTemplate>

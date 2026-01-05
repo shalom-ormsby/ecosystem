@@ -113,7 +113,7 @@ export function PageTemplate({
     standard: 'max-w-7xl',    // 1280px - default, matches most pages
     wide: 'max-w-[1440px]',   // 1440px - for dashboard-like pages
     narrow: 'max-w-4xl',      // 896px - for reading-focused pages
-  }[variant];
+  }[variant] as 'max-w-7xl' | 'max-w-[1440px]' | 'max-w-4xl';
 
   return (
     <>
@@ -124,6 +124,7 @@ export function PageTemplate({
             navLinks={header.navLinks}
             actions={header.actions}
             sticky={header.sticky ?? true}
+            maxWidth={maxWidthClass}
           />
         }
         stickyHeader={header.sticky ?? true}
@@ -152,6 +153,7 @@ export function PageTemplate({
         }
         footer={footer}
         swissGridSpacing
+        contentMaxWidth={maxWidthClass}
       >
         <div className={`${maxWidthClass} mx-auto px-4 sm:px-6 lg:px-8 py-12`}>
           {children}

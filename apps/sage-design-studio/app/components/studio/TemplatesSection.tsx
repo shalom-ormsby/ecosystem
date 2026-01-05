@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Breadcrumbs, TertiaryNav, CollapsibleCodeBlock, Card, PageTemplate, type BreadcrumbItem } from '@ecosystem/design-system';
+import { Breadcrumbs, TertiaryNav, CollapsibleCodeBlock, Card, PageTemplate, Footer, type BreadcrumbItem } from '@ecosystem/design-system';
 
 interface TemplatesSectionProps {
   breadcrumbs?: BreadcrumbItem[];
@@ -236,13 +236,26 @@ function MyPage() {
                   onItemChange: setActiveSection,
                 }}
                 footer={
-                  <footer className="bg-[var(--color-surface)] border-t border-[var(--color-border)] py-8">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                      <p className="text-sm text-[var(--color-text-secondary)] text-center">
-                        © 2026 Example Company. Built with Swiss Grid Design principles.
-                      </p>
-                    </div>
-                  </footer>
+                  <Footer
+                    logo="Example Brand"
+                    sections={[
+                      {
+                        title: 'Product',
+                        links: [
+                          { label: 'Features', href: '#' },
+                          { label: 'Pricing', href: '#' },
+                        ],
+                      },
+                      {
+                        title: 'Company',
+                        links: [
+                          { label: 'About', href: '#' },
+                          { label: 'Contact', href: '#' },
+                        ],
+                      },
+                    ]}
+                    copyright="© 2026 Example Company. Built with Swiss Grid Design principles."
+                  />
                 }
                 showCustomizer={false}
               >

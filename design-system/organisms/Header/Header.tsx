@@ -62,6 +62,11 @@ export interface HeaderProps {
      */
     fontFamily?: string;
     /**
+     * Maximum width for header content
+     * @default 'max-w-7xl' (1280px)
+     */
+    maxWidth?: 'max-w-7xl' | 'max-w-[1440px]' | 'max-w-4xl';
+    /**
      * Additional className for customization
      */
     className?: string;
@@ -78,6 +83,7 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
             sticky = true,
             navLinkSize = 'text-sm',
             fontFamily = 'var(--font-header-nav)',
+            maxWidth = 'max-w-7xl',
             className = '',
         },
         ref
@@ -129,7 +135,7 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                     ref={ref}
                     className={`${baseStyles} ${positionStyles} ${transitionStyles} ${backgroundStyles} ${className}`}
                 >
-                    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className={`${maxWidth} mx-auto px-4 sm:px-6 lg:px-8`}>
                         <div className="flex items-center justify-between h-16 lg:h-20 relative">
                             {/* Logo */}
                             {logo && (
