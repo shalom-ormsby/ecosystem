@@ -47,7 +47,7 @@ The Studio embeds **JSON-LD structured data** using Schema.org vocabulary to mak
 - AI coding assistants understand component APIs instantly
 - Supports semantic web and linked data standards
 
-See [PHASE-7-COMPLETION.md](./PHASE-7-COMPLETION.md) for implementation details.
+See [PHASE-7-COMPLETION.md](./docs/PHASE-7-COMPLETION.md) for implementation details.
 
 ## Development
 
@@ -190,7 +190,7 @@ export const componentRegistry: Record<string, ComponentConfig> = {
 - ✅ Accessibility notes for all components
 - ✅ GitHub source links for all components
 
-See [PHASE-7-COMPLETION.md](./PHASE-7-COMPLETION.md) for full details.
+See [PHASE-7-COMPLETION.md](./docs/PHASE-7-COMPLETION.md) for full details.
 
 ### Phase 8 (Enhancement)
 - Search/filter functionality
@@ -233,7 +233,7 @@ The Sage Design Studio documents and showcases the design system. For comprehens
 
 ### Studio-Specific Documentation
 
-- [PHASE-7-COMPLETION.md](./PHASE-7-COMPLETION.md) - Documentation overhaul completion details
+- [PHASE-7-COMPLETION.md](./docs/PHASE-7-COMPLETION.md) - Documentation overhaul completion details
 - [CHANGELOG.md](./CHANGELOG.md) - Version history and changes
 
 ---

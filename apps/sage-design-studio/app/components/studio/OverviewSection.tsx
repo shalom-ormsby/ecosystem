@@ -130,10 +130,10 @@ export function OverviewSection() {
       <section className="border-b border-[var(--color-border)] pb-12">
         <div className="text-center max-w-5xl mx-auto">
           <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-[var(--color-text-primary)]">
-            Welcome to the Sage Design System
+            Sage Design System
           </h1>
           <p className="text-base text-[var(--color-text-secondary)] leading-relaxed">
-            A human-centered design system that makes user control, transparency, and emotional resonance tangible through code.
+            Build lovable products at AI speed. A complete design system that AI coding tools understand.
           </p>
         </div>
       </section>
@@ -218,6 +218,43 @@ export function OverviewSection() {
         <p className="text-center text-[var(--color-text-secondary)] mb-8 max-w-3xl mx-auto">
           These aren't abstract principles. They're design decisions you can see, touch, and fork.
         </p>
+
+        {/* Component-First Architecture Callout */}
+        <Card className="p-6 mb-8 border-2 border-[var(--color-primary)]/20 bg-[var(--color-primary)]/5">
+          <div className="flex items-start gap-4">
+            <div className="text-3xl">🏗️</div>
+            <div>
+              <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">
+                Component-First Architecture
+              </h3>
+              <p className="text-sm text-[var(--color-text-secondary)] mb-4">
+                Design tokens are encapsulated in components, never manually applied. This is the foundation of the entire system.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div className="p-3 bg-red-500/10 border border-red-500/20 rounded">
+                  <p className="font-semibold text-red-600 dark:text-red-400 mb-1">❌ Don't do this:</p>
+                  <Code className="text-xs block">{`<span className="text-[var(--color-text-primary)]">Text</span>`}</Code>
+                </div>
+                <div className="p-3 bg-green-500/10 border border-green-500/20 rounded">
+                  <p className="font-semibold text-green-600 dark:text-green-400 mb-1">✅ Do this instead:</p>
+                  <Code className="text-xs block">{`<Text>Text</Text>`}</Code>
+                </div>
+              </div>
+              <p className="text-xs text-[var(--color-text-muted)] mt-3">
+                → See{' '}
+                <a
+                  href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/USAGE_GUIDE.md"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[var(--color-primary)] hover:underline"
+                >
+                  USAGE_GUIDE.md
+                </a>{' '}
+                for complete component-first documentation
+              </p>
+            </div>
+          </div>
+        </Card>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Principle 1: Emotionally Resonant */}
@@ -599,8 +636,13 @@ export function ThemeSwitcher() {
               Learn the architecture, philosophy, and design decisions.
             </p>
             <div className="space-y-2 text-sm">
-              <a href="#architecture" className="block text-[var(--color-primary)] hover:underline">
-                1. How It Works →
+              <a
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/USAGE_GUIDE.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-[var(--color-primary)] hover:underline"
+              >
+                1. Usage Guide →
               </a>
               <a href="#tokens" className="block text-[var(--color-primary)] hover:underline">
                 2. Explore Tokens →
@@ -625,14 +667,29 @@ export function ThemeSwitcher() {
               Understand the file structure, add components, or create your own theme.
             </p>
             <div className="space-y-2 text-sm">
-              <a href="#architecture" className="block text-[var(--color-primary)] hover:underline">
-                1. Architecture Overview →
+              <a
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/ARCHITECTURE-GUIDE.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-[var(--color-primary)] hover:underline"
+              >
+                1. Architecture Guide →
               </a>
-              <a href="#adding-components" className="block text-[var(--color-primary)] hover:underline">
-                2. Adding Components →
+              <a
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/COMPONENT_WORKFLOW.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-[var(--color-primary)] hover:underline"
+              >
+                2. Component Workflow →
               </a>
-              <a href="#contributing" className="block text-[var(--color-primary)] hover:underline">
-                3. Contributing Guide →
+              <a
+                href="https://github.com/shalom-ormsby/ecosystem"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-[var(--color-primary)] hover:underline"
+              >
+                3. Fork on GitHub →
               </a>
             </div>
           </Card>
@@ -654,8 +711,13 @@ export function ThemeSwitcher() {
               >
                 1. AGENTS.md →
               </a>
-              <a href="#architecture" className="block text-[var(--color-primary)] hover:underline">
-                2. Architecture Deep Dive →
+              <a
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/USAGE_GUIDE.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-[var(--color-primary)] hover:underline"
+              >
+                2. Usage Guide →
               </a>
               <a href="#atoms" className="block text-[var(--color-primary)] hover:underline">
                 3. Component Catalog →
@@ -679,16 +741,26 @@ export function ThemeSwitcher() {
           <p className="text-[var(--color-text-secondary)] mb-4">
             All design decisions are encoded as importable JavaScript objects, not locked in Figma. This makes them version-controllable, type-safe, and usable in code.
           </p>
+          <div className="p-3 bg-yellow-500/10 border border-yellow-500/20 rounded mb-4">
+            <p className="text-sm text-[var(--color-text-secondary)]">
+              <strong className="text-[var(--color-text-primary)]">Important:</strong> Tokens are consumed through components, not applied directly. Use <Code className="text-xs">{`<Button>`}</Code> instead of manually styling with <Code className="text-xs">{`className="bg-[var(--color-primary)]"`}</Code>.
+            </p>
+          </div>
           <CollapsibleCodeBlock
             id="tokens-example"
             code={`import { colorTokens, spacingTokens } from '@ecosystem/design-system/tokens';
 
-// Access any design token
+// Tokens are available for reference
 const primaryColor = colorTokens.studio.light.primary;
 const spacing = spacingTokens.lg; // "1.5rem" (24px)
 
-// Tokens cascade through CSS custom properties
-// --color-primary, --spacing-lg, etc.`}
+// But consumed through components:
+import { Button, Text } from '@ecosystem/design-system';
+<Button variant="primary">Click me</Button>  // ✅ Correct
+<Text>Hello</Text>                           // ✅ Correct
+
+// NOT manually applied:
+// <button className="bg-[var(--color-primary)]">...</button> // ❌ Wrong`}
             defaultCollapsed={false}
             showCopy={true}
           />
@@ -882,6 +954,118 @@ export function Controls() {
             </div>
           </Card>
         </div>
+      </section>
+
+      {/* DOCUMENTATION & RESOURCES */}
+      <section id="documentation" className="border-t border-[var(--color-border)] pt-12">
+        <h2 className="text-3xl font-bold mb-6 text-[var(--color-text-primary)] text-center">
+          Documentation & Resources
+        </h2>
+        <p className="text-center text-[var(--color-text-secondary)] mb-8 max-w-3xl mx-auto">
+          Comprehensive guides organized by your role and needs.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          {/* For Users */}
+          <Card className="p-6">
+            <div className="text-3xl mb-3">📖</div>
+            <h3 className="text-lg font-semibold mb-2 text-[var(--color-text-primary)]">
+              For Users
+            </h3>
+            <p className="text-sm text-[var(--color-text-secondary)] mb-4">
+              Building with the design system
+            </p>
+            <div className="space-y-2 text-sm">
+              <a
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/USAGE_GUIDE.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-[var(--color-primary)] hover:underline"
+              >
+                → Usage Guide
+              </a>
+              <p className="text-xs text-[var(--color-text-muted)]">
+                Complete guide to component-first architecture, component inventory, common patterns
+              </p>
+            </div>
+          </Card>
+
+          {/* For Contributors */}
+          <Card className="p-6">
+            <div className="text-3xl mb-3">🔧</div>
+            <h3 className="text-lg font-semibold mb-2 text-[var(--color-text-primary)]">
+              For Contributors
+            </h3>
+            <p className="text-sm text-[var(--color-text-secondary)] mb-4">
+              Extending the design system
+            </p>
+            <div className="space-y-2 text-sm">
+              <a
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/COMPONENT_WORKFLOW.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-[var(--color-primary)] hover:underline"
+              >
+                → Component Workflow
+              </a>
+              <a
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/ARCHITECTURE-GUIDE.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-[var(--color-primary)] hover:underline"
+              >
+                → Architecture Guide
+              </a>
+            </div>
+          </Card>
+
+          {/* For Troubleshooting */}
+          <Card className="p-6">
+            <div className="text-3xl mb-3">🔍</div>
+            <h3 className="text-lg font-semibold mb-2 text-[var(--color-text-primary)]">
+              Troubleshooting
+            </h3>
+            <p className="text-sm text-[var(--color-text-secondary)] mb-4">
+              Known issues and solutions
+            </p>
+            <div className="space-y-2 text-sm">
+              <a
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/UNRESOLVED_ISSUES.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-[var(--color-primary)] hover:underline"
+              >
+                → Unresolved Issues
+              </a>
+              <p className="text-xs text-[var(--color-text-muted)]">
+                Current known issues with root causes and context
+              </p>
+            </div>
+          </Card>
+        </div>
+
+        {/* Studio Developers */}
+        <Card className="p-6 bg-[var(--color-surface)]">
+          <div className="flex items-start gap-4">
+            <div className="text-3xl">🎨</div>
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold mb-2 text-[var(--color-text-primary)]">
+                Working on the Studio itself?
+              </h3>
+              <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                If you're developing or modifying Sage Design Studio (this documentation site), start here:
+              </p>
+              <a
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/apps/sage-design-studio/GETTING_STARTED.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-[var(--color-primary)] hover:underline font-medium"
+              >
+                → Studio Getting Started Guide
+              </a>
+            </div>
+          </div>
+        </Card>
       </section>
 
       {/* FINAL CTA */}

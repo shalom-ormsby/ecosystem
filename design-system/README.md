@@ -2,7 +2,7 @@
 
 > **The heart of the ecosystem.** This design system is how we make our design philosophy tangible.
 
-**This design system is built as a scalable component-based architecture that encapsulates design tokens and follows atomic design principles.** Components automatically handle theming, dark mode, responsive behavior, and accessibility—so you can focus on building features, not managing CSS variables.
+**This design system is built as a scalable component-based architecture that encapsulates design tokens and follows atomic design principles.** Components automatically handle theming, dark mode, responsive behavior, and accessibility, allowing you to focus on building features, not managing CSS variables.
 
 Every token, component, and pattern here exists to serve one purpose: helping us build products that make people feel *seen*, *capable*, and *empowered*. If a component doesn't contribute to that goal, it doesn't belong here.
 
