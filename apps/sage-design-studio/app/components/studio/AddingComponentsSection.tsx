@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Card, Code, CollapsibleCodeBlock, SecondaryNav, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
+import { CheckCircle, XCircle } from 'lucide-react';
 
 interface AddingComponentsSectionProps {
   breadcrumbs?: BreadcrumbItem[];
@@ -333,7 +334,10 @@ ELIFECYCLE Command failed with exit code 1.`}
                     but Next.js doesn't recognize the <Code syntax="plain">--filter</Code> flag (it's a Turborepo flag).
                   </p>
                   <div className="bg-[var(--color-surface)] p-4 rounded-md border border-[var(--color-border)]">
-                    <p className="text-xs text-[var(--color-text-muted)] mb-2">❌ Incorrect (runs through package.json):</p>
+                    <p className="text-xs text-[var(--color-text-muted)] mb-2 flex items-center gap-1.5">
+                      <XCircle className="w-3.5 h-3.5 text-red-500" />
+                      Incorrect (runs through package.json):
+                    </p>
                     <CollapsibleCodeBlock
                       id="troubleshoot-2"
                       code={`{
@@ -353,7 +357,10 @@ ELIFECYCLE Command failed with exit code 1.`}
                     This invokes Turborepo's build orchestration, which will build the design-system package first, then the app.
                   </p>
                   <div className="bg-[var(--color-success)]/10 p-4 rounded-md border border-[var(--color-success)]/30">
-                    <p className="text-xs text-[var(--color-text-muted)] mb-2">✅ Correct (runs turbo directly):</p>
+                    <p className="text-xs text-[var(--color-text-muted)] mb-2 flex items-center gap-1.5">
+                      <CheckCircle className="w-3.5 h-3.5 text-[var(--color-success)]" />
+                      Correct (runs turbo directly):
+                    </p>
                     <CollapsibleCodeBlock
                       id="troubleshoot-3"
                       code={`{

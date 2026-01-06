@@ -1,7 +1,9 @@
+import { BookOpen, Palette, Component, Webhook, LayoutTemplate } from 'lucide-react';
+
 export interface NavigationItem {
   id: string;
   label: string;
-  icon?: string;
+  icon?: React.ReactNode;
   children?: NavigationItem[];
   section?: string; // Maps to Section type for navigation
 }
@@ -10,7 +12,7 @@ export const navigationTree: NavigationItem[] = [
   {
     id: 'getting-started',
     label: 'Getting Started',
-    icon: '📖',
+    icon: <BookOpen className="w-4 h-4" />,
     children: [
       {
         id: 'overview',
@@ -42,7 +44,7 @@ export const navigationTree: NavigationItem[] = [
   {
     id: 'foundations',
     label: 'Design Tokens',
-    icon: '🎨',
+    icon: <Palette className="w-4 h-4" />,
     children: [
       {
         id: 'colors',
@@ -110,7 +112,7 @@ export const navigationTree: NavigationItem[] = [
   {
     id: 'components',
     label: 'Components',
-    icon: '🧩',
+    icon: <Component className="w-4 h-4" />,
     children: [
       {
         id: 'atoms',
@@ -325,7 +327,7 @@ export const navigationTree: NavigationItem[] = [
   {
     id: 'hooks',
     label: 'Hooks',
-    icon: '🪝',
+    icon: <Webhook className="w-4 h-4" />,
     children: [
       {
         id: 'use-form',
@@ -352,7 +354,7 @@ export const navigationTree: NavigationItem[] = [
   {
     id: 'templates',
     label: 'Templates',
-    icon: '📐',
+    icon: <LayoutTemplate className="w-4 h-4" />,
     children: [
       {
         id: 'templates-overview',

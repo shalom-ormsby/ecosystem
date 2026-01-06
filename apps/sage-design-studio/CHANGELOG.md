@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.1] - 2026-01-05
 
+### Changed
+- **Icon System Migration**
+  - Replaced all direct emoji usage with `lucide-react` icons for consistency and accessibility.
+  - **Sidebar:** Updated navigation icons (BookOpen, Palette, Component, Webhook, LayoutTemplate).
+  - **Documentation:** Replaced status emojis (✅/❌) with CheckCircle/XCircle.
+  - **Accessibility:** Replaced wheelchair emoji (♿) with Accessibility icon.
+  - **Architecture:** Replaced text arrows with proper ArrowRight icons.
+
 ### Fixed
 - **Mobile Responsive Layout**
   - **Issue:** Severe horizontal scrolling and content overflow on mobile viewports due to unconstrained flex containers and code blocks.
@@ -28,14 +36,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Added `overflow-x-hidden` to the main page layout to prevent global scroll leaks.
     - Fixed `portfolio` build failure by exporting `SearchInput` from `design-system`.
   - **Outcome:** Zero horizontal scroll on mobile. Content now correctly shrinks to fit the viewport, and code blocks trigger their own internal scrollbars instead of breaking the page layout.
-
-### WIP
-- **Icon System Migration**
-  - **Objective:** Replace all direct emoji usage with `lucide-react` icons throughout the design system and studio app to ensure visual consistency and better accessibility.
-  - **Plan:**
-    - Audit all occurrences of emoji.
-    - Select appropriate Lucide icons.
-    - Replace and verify.
 
 ## [2.0.0] - 2026-01-02
 

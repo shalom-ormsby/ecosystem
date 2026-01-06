@@ -1,6 +1,7 @@
 'use client';
 
 import { Card, Code, CollapsibleCodeBlock, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
+import { ArrowRight } from 'lucide-react';
 
 interface ArchitectureSectionProps {
   breadcrumbs?: BreadcrumbItem[];
@@ -245,25 +246,25 @@ export function ArchitectureSection({ breadcrumbs }: ArchitectureSectionProps) {
               <h3 className="font-semibold mb-2 text-[var(--color-text-primary)]">Token Categories</h3>
               <ul className="space-y-2 text-sm text-[var(--color-text-secondary)]">
                 <li className="flex items-start gap-2">
-                  <span className="text-[var(--color-primary)]">→</span>
+                  <ArrowRight className="w-4 h-4 text-[var(--color-primary)] mt-0.5" />
                   <div>
                     <strong>Colors:</strong> Brand, semantic, surface, and text colors
                   </div>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[var(--color-primary)]">→</span>
+                  <ArrowRight className="w-4 h-4 text-[var(--color-primary)] mt-0.5" />
                   <div>
                     <strong>Typography:</strong> Font families, sizes, weights, line heights
                   </div>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[var(--color-primary)]">→</span>
+                  <ArrowRight className="w-4 h-4 text-[var(--color-primary)] mt-0.5" />
                   <div>
                     <strong>Spacing:</strong> Margin, padding, and gap scales
                   </div>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[var(--color-primary)]">→</span>
+                  <ArrowRight className="w-4 h-4 text-[var(--color-primary)] mt-0.5" />
                   <div>
                     <strong>Motion:</strong> Animation durations and easing functions
                   </div>

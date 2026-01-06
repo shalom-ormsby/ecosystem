@@ -6,6 +6,7 @@ import type { ComponentConfig } from '../../lib/component-registry';
 import { CodeSnippet } from './CodeSnippet';
 import { JsonLdMetadata } from '../../JsonLdMetadata';
 import { generateComponentMetadata } from '../../../lib/metadata-generator';
+import { Accessibility } from 'lucide-react';
 
 interface ComponentPlaygroundProps {
   componentName: string;
@@ -149,7 +150,8 @@ export function ComponentPlayground({ componentName, config }: ComponentPlaygrou
       {config.accessibilityNotes && config.accessibilityNotes.length > 0 && (
         <div>
           <h3 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)] flex items-center gap-2">
-            <span>♿</span> Accessibility
+            <Accessibility className="w-5 h-5 text-[var(--color-primary)]" />
+            Accessibility
           </h3>
           <Card className="p-6 bg-[var(--color-surface)] border-l-4 border-[var(--color-primary)]">
             <ul className="space-y-2">

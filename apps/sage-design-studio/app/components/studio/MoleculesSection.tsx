@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Card, Code, TertiaryNav, CollapsibleCodeBlock, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
+import { Accessibility } from 'lucide-react';
 import { moleculeRegistry } from '../lib/molecule-registry';
 import { JsonLdMetadata } from '../JsonLdMetadata';
 import { generateComponentMetadata } from '../../lib/metadata-generator';
@@ -201,7 +202,8 @@ export function MoleculesSection({ activeItemId, breadcrumbs, onItemChange }: Mo
             {currentMolecule.accessibilityNotes && currentMolecule.accessibilityNotes.length > 0 && (
               <div>
                 <h4 className="text-lg font-semibold mb-3 text-[var(--color-text-primary)] flex items-center gap-2">
-                  <span>♿</span> Accessibility
+                  <Accessibility className="w-5 h-5 text-[var(--color-primary)]" />
+                  Accessibility
                 </h4>
                 <Card className="p-6 bg-[var(--color-surface)] border-l-4 border-[var(--color-primary)]">
                   <ul className="space-y-2">

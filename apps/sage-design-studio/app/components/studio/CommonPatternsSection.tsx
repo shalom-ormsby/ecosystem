@@ -1,6 +1,7 @@
 'use client';
 
 import { Card, Code, CollapsibleCodeBlock, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
+import { CheckCircle, XCircle } from 'lucide-react';
 
 interface CommonPatternsSectionProps {
   breadcrumbs?: BreadcrumbItem[];
@@ -46,14 +47,15 @@ export function CommonPatternsSection({ breadcrumbs }: CommonPatternsSectionProp
             </div>
           </div>
 
-          <h3 className="font-semibold mb-3 text-[var(--color-text-primary)] mt-6">
-            ✅ Correct - Multi-Color Syntax Highlighting
+          <h3 className="font-semibold mb-3 text-[var(--color-text-primary)] mt-6 flex items-center gap-2">
+            <CheckCircle className="w-5 h-5 text-[var(--color-success)]" />
+            Correct - Multi-Color Syntax Highlighting
           </h3>
           <CollapsibleCodeBlock
             id="pattern-code-correct"
             code={`import { CollapsibleCodeBlock } from '@ecosystem/design-system';
 
-// ✅ RECOMMENDED: Automatic syntax highlighting
+// [Recommended]: Automatic syntax highlighting
 <CollapsibleCodeBlock
   id="unique-id"
   code={\`const greeting = "Hello World";
@@ -65,14 +67,15 @@ console.log(greeting);\`}
             showCopy={true}
           />
 
-          <h3 className="font-semibold mb-3 text-[var(--color-text-primary)] mt-6">
-            ❌ Avoid - Single Color, No Highlighting
+          <h3 className="font-semibold mb-3 text-[var(--color-text-primary)] mt-6 flex items-center gap-2">
+            <XCircle className="w-5 h-5 text-red-500" />
+            Avoid - Single Color, No Highlighting
           </h3>
           <CollapsibleCodeBlock
             id="pattern-code-wrong"
             code={`import { Code } from '@ecosystem/design-system';
 
-// ❌ AVOID: Single-color text, no syntax highlighting
+// [Avoid]: Single-color text, no syntax highlighting
 <Code inline={false}>{\`const greeting = "Hello World";
 console.log(greeting);\`}</Code>`}
             defaultCollapsed={false}
