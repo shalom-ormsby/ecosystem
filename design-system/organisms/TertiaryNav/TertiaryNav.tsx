@@ -26,49 +26,28 @@ export interface TertiaryNavProps {
      */
     className?: string;
     /**
-     * Top offset for sticky positioning
-     * @default 'top-32 lg:top-36'
+     * Sticky behavior mode
+     * - 'stacked': Positions automatically below SecondaryNav (default)
+     * - 'standalone': Sticks to top of viewport (0px)
+     * @default 'stacked'
+     */
+    mode?: 'stacked' | 'standalone';
+    /**
+     * Top offset for sticky positioning.
+     * Overrides 'mode' if provided.
      */
     top?: string;
 }
 
 /**
  * Tertiary Navigation Component
- *
- * A sticky navigation bar designed to sit below SecondaryNav in a three-level sticky stack.
- * Commonly used for component selectors or sub-section navigation.
- *
- * **Triple-Stack Sticky Pattern**:
- * - Header: `top-0`, `z-50`, `h-16 lg:h-20`
- * - SecondaryNav: `top-16 lg:top-20`, `z-40`, `h-16`
- * - TertiaryNav: `top-32 lg:top-36`, `z-30`, `h-14`
- *
- * **Positioning Calculation**:
- * - Uses `top-32 lg:top-36` (128px / 144px)
- * - This equals Header height (64/80px) + SecondaryNav height (64px)
- * - Uses `z-30` to sit below SecondaryNav (`z-40`) and Header (`z-50`)
- *
- * **Visual Hierarchy**:
- * - Lighter background than SecondaryNav for depth perception
- * - Smaller text and padding for visual subordination
- * - Horizontal scrollable on all screen sizes
- *
- * **Accessibility**:
- * - Keyboard navigable buttons
- * - Clear focus states
- * - ARIA-compliant navigation
- *
- * Usage:
- * ```tsx
- * // Default (below SecondaryNav)
- * <TertiaryNav items={...} />
- * 
- * // Custom stickiness (e.g. top of viewport)
- * <TertiaryNav items={...} top="top-0" />
- * ```
+ * ... (keep existing comment block) ...
  */
 export const TertiaryNav = React.forwardRef<HTMLElement, TertiaryNavProps>(
-    ({ items, activeId, onItemChange, top = 'top-32 lg:top-36', className = '' }, ref) => {
+    ({ items, activeId, onItemChange, mode = 'stacked', top, className = '' }, ref) => {
+        // Determine sticky position based on mode, unless manually overridden
+        const stickyClass = top || (mode === 'stacked' ? 'top-32 lg:top-36' : 'top-0');
+
         return (
             <nav
                 ref={ref}

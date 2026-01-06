@@ -399,7 +399,7 @@ export function OrganismsSection({ activeItemId, breadcrumbs, onItemChange }: Or
           items={organisms}
           activeId={selectedOrganism}
           onItemChange={(id) => handleOrganismChange(id as OrganismType)}
-          top="top-0"
+          mode="standalone"
         />
       </div>
 

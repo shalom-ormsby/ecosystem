@@ -64,7 +64,7 @@ export function ComponentsSection({ activeItemId, breadcrumbs, onItemChange }: C
           items={componentItems}
           activeId={selectedComponent}
           onItemChange={handleComponentChange}
-          top="top-0"
+          mode="standalone"
         />
       </div>
 

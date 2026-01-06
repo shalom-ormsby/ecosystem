@@ -56,7 +56,7 @@ export function TemplatesSection({ breadcrumbs, activeItemId, onItemChange }: Te
           ]}
           activeId={selectedTemplate}
           onItemChange={handleTemplateChange}
-          top="top-0"
+          mode="standalone"
         />
       </div>
 

@@ -66,7 +66,7 @@ export function TokensSection({ activeItemId, breadcrumbs, onItemChange }: Token
           items={availableTabs}
           activeId={activeTab}
           onItemChange={handleTabChange}
-          top="top-0"
+          mode="standalone"
         />
       </div>
 

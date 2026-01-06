@@ -31,48 +31,33 @@ export interface SecondaryNavProps {
      */
     className?: string;
     /**
-     * Top offset for sticky positioning
-     * @default 'top-16 lg:top-20'
+     * Sticky behavior mode
+     * - 'stacked': Positions automatically below Header (default)
+     * - 'standalone': Sticks to top of viewport (0px)
+     * @default 'stacked'
+     */
+    mode?: 'stacked' | 'standalone';
+    /**
+     * Top offset for sticky positioning.
+     * Overrides 'mode' if provided.
      */
     top?: string;
 }
 
 /**
  * Secondary Navigation Component
- *
- * A sticky navigation bar designed to sit below a primary sticky header.
- * Commonly used for section/tab navigation within a page.
- *
- * **Sticky Positioning Pattern**:
- * - Uses `top-16 lg:top-20` to position below the Header (which has `h-16 lg:h-20`)
- * - Uses `z-40` to sit below the Header (`z-50`) but above page content
- * - Glass morphism effect with backdrop blur for visual hierarchy
- *
- * **Responsive Behavior**:
- * - Horizontal scrollable on mobile
- * - Maintains sticky position on all screen sizes
- *
- * **Accessibility**:
- * - Keyboard navigable buttons
- * - Clear focus states
- * - ARIA-compliant navigation
- *
- * Usage:
- * ```tsx
- * // Default (below header)
- * <SecondaryNav items={...} />
- * 
- * // Custom stickiness (e.g. top of page)
- * <SecondaryNav items={...} top="top-0" />
- * ```
+ * ... (keep existing comment block) ...
  */
 export const SecondaryNav = React.forwardRef<HTMLElement, SecondaryNavProps>(
-    ({ items, activeId, onItemChange, maxWidth = 'max-w-7xl', top = 'top-16 lg:top-20', className = '' }, ref) => {
+    ({ items, activeId, onItemChange, maxWidth = 'max-w-7xl', mode = 'stacked', top, className = '' }, ref) => {
+        // Determine sticky position based on mode, unless manually overridden
+        const stickyClass = top || (mode === 'stacked' ? 'top-16 lg:top-20' : 'top-0');
+
         return (
             <nav
                 ref={ref}
                 className={`
-                    sticky ${top} z-40
+                    sticky ${stickyClass} z-40
                     bg-[var(--color-surface)]/60 backdrop-blur-md
                     border-b border-[var(--color-border)]
                     ${className}
