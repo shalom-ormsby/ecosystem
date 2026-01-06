@@ -1,6 +1,6 @@
-import type { NavLink } from '@ecosystem/design-system';
+import type { HeaderNavLink } from '@ecosystem/design-system';
 
-export const ecosystemNavigation: NavLink[] = [
+export const ecosystemNavigation: HeaderNavLink[] = [
   {
     label: 'Work',
     children: [

@@ -1,6 +1,6 @@
-import type { NavLink } from '@ecosystem/design-system';
+import type { HeaderNavLink } from '@ecosystem/design-system';
 
-export const ecosystemNavigation: NavLink[] = [
+export const ecosystemNavigation: HeaderNavLink[] = [
   {
     label: 'Work',
     children: [
@@ -31,7 +31,7 @@ export const ecosystemNavigation: NavLink[] = [
 /**
  * Helper function to set active states based on current path
  */
-export function getNavigationWithActiveStates(currentPath: string): NavLink[] {
+export function getNavigationWithActiveStates(currentPath: string): HeaderNavLink[] {
   return ecosystemNavigation.map(link => ({
     ...link,
     active: link.href === currentPath,
