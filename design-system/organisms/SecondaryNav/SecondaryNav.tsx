@@ -80,7 +80,7 @@ export const SecondaryNav = React.forwardRef<HTMLElement, SecondaryNavProps>(
                 aria-label="Secondary navigation"
             >
                 <div className={`${maxWidth} mx-auto px-4 sm:px-6 lg:px-8`}>
-                    <div className="flex items-center gap-1 overflow-x-auto py-2 scrollbar-hide">
+                    <div className="flex items-center gap-1 overflow-x-auto py-3 scrollbar-hide">
                         {items.map((item) => (
                             <Button
                                 key={item.id}

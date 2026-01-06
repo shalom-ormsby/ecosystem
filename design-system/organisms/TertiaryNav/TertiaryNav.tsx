@@ -81,7 +81,7 @@ export const TertiaryNav = React.forwardRef<HTMLElement, TertiaryNavProps>(
                 aria-label="Tertiary navigation"
             >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center gap-2 overflow-x-auto py-2 scrollbar-hide">
+                    <div className="flex items-center gap-2 overflow-x-auto py-3 scrollbar-hide">
                         {items.map((item) => (
                             <FilterButton
                                 key={item.id}
