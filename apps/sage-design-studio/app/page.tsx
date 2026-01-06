@@ -253,7 +253,7 @@ export default function StudioPage() {
       />
 
       {/* Main Content */}
-      <main className="flex-1 min-h-screen flex flex-col lg:ml-[280px] min-w-0 w-full max-w-[100vw] overflow-x-hidden">
+      <main className="flex-1 min-h-screen flex flex-col lg:ml-[280px] min-w-0 w-full max-w-[100vw]">
         {/* Mobile Menu Button - Floating */}
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}

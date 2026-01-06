@@ -38,6 +38,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Added `overflow-x-hidden` to the main page layout to prevent global scroll leaks.
     - Fixed `portfolio` build failure by exporting `SearchInput` from `design-system`.
   - **Outcome:** Zero horizontal scroll on mobile. Content now correctly shrinks to fit the viewport, and code blocks trigger their own internal scrollbars instead of breaking the page layout.
+- **Sticky Navigation Restoration**
+  - **Issue:** Sticky headers (`SecondaryNav`, `TertiaryNav`) stopped sticking due to `overflow-x-hidden` applied to `PageLayout` container during mobile responsive fixes.
+  - **Fix:** Removed `overflow-x-hidden` from `PageLayout` and `StudioPage` containers. Horizontal overflow protection is now handled exclusively by the `body` element constraints.
 
 ## [2.0.0] - 2026-01-02
 
