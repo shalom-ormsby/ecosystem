@@ -206,7 +206,7 @@ export function CollapsibleCodeBlock({
       {/* Code Preview (visible when collapsed) */}
       <div
         id={`${id}-preview`}
-        className={`bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4 ${isCollapsed ? '' : 'hidden'}`}
+        className={`bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] overflow-hidden mb-4 w-full max-w-full ${isCollapsed ? '' : 'hidden'}`}
         style={{ height: '6.6rem' }}
       >
         <div className="relative">
@@ -220,7 +220,7 @@ export function CollapsibleCodeBlock({
       {/* Full Code (hidden by default) */}
       <div
         id={`${id}-code`}
-        className={`transition-all duration-500 ease-out overflow-hidden bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] ${isCollapsed ? 'hidden' : ''}`}
+        className={`transition-all duration-500 ease-out overflow-hidden bg-[var(--color-background)] p-4 rounded border border-[var(--color-border)] w-full max-w-full ${isCollapsed ? 'hidden' : ''}`}
         style={{
           maxHeight: isCollapsed ? '0px' : 'none',
           transition: 'max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',

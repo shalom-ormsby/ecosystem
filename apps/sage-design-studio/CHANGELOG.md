@@ -23,8 +23,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
       - `OrganismsSection`
       - `TemplatesSection`
       - `TokensSection`
-    - Constrained `CollapsibleCodeBlock` containers with `max-w-full`.
+    - Constrained `CollapsibleCodeBlock` internal containers with `w-full max-w-full` in the design system to ensure independent responsiveness.
     - Added `overflow-x-hidden` to the main page layout to prevent global scroll leaks.
+    - Fixed `portfolio` build failure by exporting `SearchInput` from `design-system`.
   - **Outcome:** Zero horizontal scroll on mobile, correct stacking of cards, and properly constrained code blocks that scroll internally.
 
 ## [2.0.0] - 2026-01-02

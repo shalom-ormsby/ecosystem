@@ -22,3 +22,6 @@ export type { SelectProps, SelectOption } from './Select';
 
 export { Switch } from './Switch';
 export type { SwitchProps } from './Switch';
+
+export { SearchInput } from './SearchInput';
+export type { SearchInputProps } from './SearchInput';
