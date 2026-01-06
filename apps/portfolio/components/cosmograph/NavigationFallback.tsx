@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Card, Badge, Heading, Text, SearchInput, FilterButton } from '@ecosystem/design-system';
+import { Card, Badge, Heading, Text, SearchInput, FilterButton, Button } from '@ecosystem/design-system';
 import { ChevronRight } from 'lucide-react';
 import type { Node, Cluster } from '@/lib/content/types';
 
@@ -173,9 +173,9 @@ export function NavigationFallback({
                       >
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex-1">
-                            <h3 className="text-lg font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-primary)] transition-colors mb-1">
+                            <Heading level={3} className="group-hover:text-[var(--color-primary)] transition-colors mb-1">
                               {node.title}
-                            </h3>
+                            </Heading>
                             {node.summary && (
                               <Text variant="secondary" size="sm" className="mb-2">
                                 {node.summary}
@@ -219,12 +219,13 @@ export function NavigationFallback({
           <Text size="lg" variant="secondary">
             No content found matching "{searchQuery}"
           </Text>
-          <button
+          <Button
+            variant="link"
             onClick={() => setSearchQuery('')}
-            className="mt-4 text-[var(--color-primary)] hover:underline"
+            className="mt-4"
           >
             Clear search
-          </button>
+          </Button>
         </div>
       )}
     </div>

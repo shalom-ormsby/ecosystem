@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { Button } from '../../atoms';
 
 export interface SecondaryNavItem {
     id: string;
@@ -82,22 +83,17 @@ export const SecondaryNav = React.forwardRef<HTMLElement, SecondaryNavProps>(
                 <div className={`${maxWidth} mx-auto px-4 sm:px-6 lg:px-8`}>
                     <div className="flex items-center gap-1 overflow-x-auto py-4 scrollbar-hide">
                         {items.map((item) => (
-                            <button
+                            <Button
                                 key={item.id}
                                 onClick={() => onItemChange(item.id)}
-                                className={`
-                                    px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap
-                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2
-                                    ${
-                                        activeId === item.id
-                                            ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)]'
-                                            : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface)]'
-                                    }
-                                `}
+                                variant={activeId === item.id ? 'primary' : 'ghost'}
+                                size="sm"
+                                className={`whitespace-nowrap ${activeId !== item.id ? 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]' : ''
+                                    }`}
                                 aria-current={activeId === item.id ? 'page' : undefined}
                             >
                                 {item.label}
-                            </button>
+                            </Button>
                         ))}
                     </div>
                 </div>

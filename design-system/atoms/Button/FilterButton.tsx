@@ -4,15 +4,25 @@ export interface FilterButtonProps extends React.ButtonHTMLAttributes<HTMLButton
     active?: boolean;
     count?: number;
     children: React.ReactNode;
+    /**
+     * Shape of the button
+     * @default 'pill'
+     */
+    shape?: 'pill' | 'rounded';
 }
 
 export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProps>(
-    ({ active = false, count, children, className = '', ...props }, ref) => {
+    ({ active = false, count, children, shape = 'pill', className = '', ...props }, ref) => {
+        const shapes = {
+            pill: "rounded-full",
+            rounded: "rounded-lg"
+        };
+
         return (
             <button
                 ref={ref}
                 className={`
-          flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
+          flex items-center gap-2 px-4 py-2 ${shapes[shape]} text-sm font-medium transition-all duration-200
           border
           ${active
                         ? 'bg-[var(--color-primary)] border-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-[var(--effect-shadow-sm)]'

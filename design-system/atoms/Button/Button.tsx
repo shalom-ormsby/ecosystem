@@ -9,7 +9,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
      * Visual variant of the button
      * @default 'primary'
      */
-    variant?: 'primary' | 'secondary' | 'ghost';
+    variant?: 'primary' | 'secondary' | 'ghost' | 'link';
     /**
      * Size of the button
      * @default 'md'
@@ -39,7 +39,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         const variants = {
             primary: "bg-[var(--color-primary)] text-[var(--color-primary-foreground)] hover:opacity-90 shadow-lg",
             secondary: "bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] hover:bg-[var(--color-hover)] border-2 border-[var(--color-border)]",
-            ghost: "text-[var(--color-foreground)] hover:bg-[var(--color-hover)]"
+            ghost: "text-[var(--color-foreground)] hover:bg-[var(--color-hover)]",
+            link: "text-[var(--color-primary)] hover:underline p-0 h-auto font-medium"
         };
 
         const sizes = {

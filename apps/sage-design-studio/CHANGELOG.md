@@ -41,6 +41,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Sticky Navigation Restoration**
   - **Issue:** Sticky headers (`SecondaryNav`, `TertiaryNav`) stopped sticking due to `overflow-x-hidden` applied to `PageLayout` container during mobile responsive fixes.
   - **Fix:** Removed `overflow-x-hidden` from `PageLayout` and `StudioPage` containers. Horizontal overflow protection is now handled exclusively by the `body` element constraints.
+- **Component Architecture Refactor**
+  - **Issue:** Several components (`NavigationFallback`, `SecondaryNav`, `TertiaryNav`) relied on manual utility classes instead of atomic components, violating design system principles.
+  - **Fix:** Refactored these components to use `Heading`, `Text`, `Button`, and `FilterButton` strictly.
+  - **Enhancement:** Added `variant="link"` to `Button` and `shape` prop to `FilterButton` to support these patterns natively.
 
 ## [2.0.0] - 2026-01-02
 

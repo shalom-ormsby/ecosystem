@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { FilterButton } from '../../atoms';
 
 export interface TertiaryNavItem {
     id: string;
@@ -83,22 +84,16 @@ export const TertiaryNav = React.forwardRef<HTMLElement, TertiaryNavProps>(
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center gap-2 overflow-x-auto py-3 scrollbar-hide">
                         {items.map((item) => (
-                            <button
+                            <FilterButton
                                 key={item.id}
                                 onClick={() => onItemChange(item.id)}
-                                className={`
-                                    px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap
-                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2
-                                    ${
-                                        activeId === item.id
-                                            ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)]'
-                                            : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] border border-[var(--color-border)]'
-                                    }
-                                `}
+                                active={activeId === item.id}
+                                shape="rounded"
                                 aria-current={activeId === item.id ? 'page' : undefined}
+                                className="whitespace-nowrap"
                             >
                                 {item.label}
-                            </button>
+                            </FilterButton>
                         ))}
                     </div>
                 </div>
