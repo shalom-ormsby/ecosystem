@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - **Mobile Responsive Layout**
   - **Issue:** Severe horizontal scrolling and content overflow on mobile viewports due to unconstrained flex containers and code blocks.
-  - **Root Cause:** Deeply nested flex containers in section components (`AddingComponentsSection`, `OrganismsSection`, etc.) were missing `min-w-0` and `w-full` constraints, causing them to expand beyond the viewport width driven by wide children (like `<pre>` blocks). The main page wrapper repair was insufficient because inner components forced the width open.
+  - **Root Cause:** Deeply nested flex containers in section components (`AddingComponentsSection`, `OrganismsSection`, etc.) were missing `min-w-0` and `w-full` constraints. Specifically, `flex-1` containers within list items (`li`) would refuse to shrink below the intrinsic width of their children (code blocks with long paths), forcing the parent card to expand beyond the viewport.
   - **Fix:** Systemically applied the "Flatten & Clamp" strategy:
     - Added `w-full min-w-0` to the root container of all studio sections:
       - `AddingComponentsSection`
@@ -23,10 +23,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
       - `OrganismsSection`
       - `TemplatesSection`
       - `TokensSection`
+    - **Crucial:** Added `min-w-0` to all `flex-1` containers in list items to allow flex shrinking.
     - Constrained `CollapsibleCodeBlock` internal containers with `w-full max-w-full` in the design system to ensure independent responsiveness.
     - Added `overflow-x-hidden` to the main page layout to prevent global scroll leaks.
     - Fixed `portfolio` build failure by exporting `SearchInput` from `design-system`.
-  - **Outcome:** Zero horizontal scroll on mobile, correct stacking of cards, and properly constrained code blocks that scroll internally.
+  - **Outcome:** Zero horizontal scroll on mobile. Content now correctly shrinks to fit the viewport, and code blocks trigger their own internal scrollbars instead of breaking the page layout.
+
+### WIP
+- **Icon System Migration**
+  - **Objective:** Replace all direct emoji usage with `lucide-react` icons throughout the design system and studio app to ensure visual consistency and better accessibility.
+  - **Plan:**
+    - Audit all occurrences of emoji.
+    - Select appropriate Lucide icons.
+    - Replace and verify.
 
 ## [2.0.0] - 2026-01-02
 
