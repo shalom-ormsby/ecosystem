@@ -61,7 +61,7 @@ export function TokensSection({ activeItemId, breadcrumbs, onItemChange }: Token
       </div>
 
       {/* Sticky Tertiary Navigation for Token Tabs */}
-      <div className="bg-[var(--color-background)] pb-4 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 mb-4">
+      <div className="sticky top-0 z-10 bg-[var(--color-background)] pb-4 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 mb-4">
         <TertiaryNav
           items={availableTabs}
           activeId={activeTab}
