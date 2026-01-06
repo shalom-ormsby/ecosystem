@@ -24,6 +24,13 @@ Map existing emojis to Lucide icons:
 - ♿ Accessibility -> `Accessibility` (if available) or `PersonStanding`
 - 1, 2, 3... (Step counters) -> Use strictly styled `span` circles with text, or numbered icons if desired.
 
+### Sidebar Icons
+- 📖 Getting Started -> `BookOpen`
+- 🎨 Design Tokens -> `Palette`
+- 🧩 Components -> `Component` or `Puzzle` (if available) or `Box`
+- 🪝 Hooks -> `Webhook` or `Anchor`
+- 📐 Templates -> `LayoutTemplate` or `Ruler`
+
 ## 3. Implementation Steps
 1.  **Dependencies:** Verify `lucide-react` is installed in `design-system` and `sage-design-studio`.
 2.  **Design System Updates:**
