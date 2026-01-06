@@ -12,5 +12,8 @@ export * from './Badge';
 export * from './Avatar';
 export * from './Spinner';
 export * from './ProgressBar';
+export * from './Stack';
+export * from './Grid';
+export * from './AspectImage';
 
 

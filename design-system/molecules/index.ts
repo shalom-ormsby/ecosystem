@@ -10,3 +10,4 @@ export * from './Form';
 export * from './ThemeToggle';
 export * from './Dropdown';
 export * from './Tooltip';
+export * from './DescriptionList';
