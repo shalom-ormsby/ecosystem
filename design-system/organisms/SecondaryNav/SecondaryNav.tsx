@@ -73,14 +73,14 @@ export const SecondaryNav = React.forwardRef<HTMLElement, SecondaryNavProps>(
                 ref={ref}
                 className={`
                     sticky ${top} z-40
-                    bg-[var(--color-surface)]/80 backdrop-blur-xl
+                    bg-[var(--color-surface)]/60 backdrop-blur-md
                     border-b border-[var(--color-border)]
                     ${className}
                 `}
                 aria-label="Secondary navigation"
             >
                 <div className={`${maxWidth} mx-auto px-4 sm:px-6 lg:px-8`}>
-                    <div className="flex items-center gap-1 overflow-x-auto py-4 scrollbar-hide">
+                    <div className="flex items-center gap-1 overflow-x-auto py-2 scrollbar-hide">
                         {items.map((item) => (
                             <Button
                                 key={item.id}
