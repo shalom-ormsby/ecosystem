@@ -141,6 +141,70 @@ The brilliance of shadcn/ui is that it separates **Structure** (Radix UI) from *
 4.  **Reference Implementation:**
     Look at [React Native Reusables](https://rnr-docs.vercel.app/). It is effectively "shadcn/ui for React Native". You shouldn't blindly install it, but you should **study its source code** to see how they implement shadcn patterns in NativeWind.
 
-## Conclusion
 
-This approach doesn't just "support" mobile; it treats mobile as a first-class citizen while respecting the fact that *native apps behave differently than websites*. By fixing the **Tokens** and **Logic** as universal truths, you gain the efficiency you need without creating a "lowest common denominator" generic app.
+---
+
+## 6. The Role of an SDS MCP Server (The "AI Agent" Interface)
+
+You asked if an **SDS MCP (Model Context Protocol) Server** is redundant given this roadmap. 
+**Answer: No. It is the distinct "Force Multiplier" that makes this entire architecture significantly faster to build.**
+
+### How they work together:
+
+*   **The Roadmap** provides the **Structure** (Files, Folders, Tokens, Components).
+*   **The MCP Server** provides the **Intelligence** (Tools for Agents to read/write that structure correctly).
+
+### Why you still want an SDS MCP Server:
+
+1.  **Eliminating Hallucinations:**
+    Without an MCP server, an AI guessing at your token names might try `text-primary-500`. With an MCP tool like `get_sds_token('primary')`, the agent gets the *exact* value `var(--color-primary)` every time.
+
+2.  **The "Universal Copy-Paste" Automator:**
+    Remember the "manual" copy-paste workflow from shadcn? An MCP server automates this.
+    *   *You:* "Add a card component."
+    *   *Agent (via MCP):*
+        1.  Reads `sds/templates/card` schema.
+        2.  Writes `design-system/atoms/Card.tsx` (Web version).
+        3.  Writes `sage-mobile/components/Card.tsx` (Native version).
+        4.  Updates export files.
+    *   *Result:* Zero context switching for you.
+
+3.  **Cross-Platform Consistency Police:**
+    The MCP server can have a tool `validate_component_parity`. It checks if `Button` on web has the same props as `Button` on mobile. If they drift apart, the agent warns you.
+
+### Integrating into the Roadmap;
+*   **Phase 1 (Tokens):** The MCP server exposes a `read_tokens` tool.
+*   **Phase 2 (Components):** The MCP server tools `scaffold_web_component` and `scaffold_native_component` ensure your file structures (Web vs. Native) are always respected.
+
+
+---
+
+## 7. Learning from Chakra UI v3 (Validating the Architecture)
+
+You asked for an analysis of [Chakra UI](https://chakra-ui.com/). Its recent evolution (v3) is a massive validation of the strategy we are proposing for SDS, but also offers a "Fork in the Road" you must be aware of.
+
+### Lesson 1: The Death of Runtime CSS-in-JS
+Chakra v2 used runtime styles (Emotion). It was slow.
+Chakra v3 moved to **Panda CSS** (Zero-runtime, build-time).
+*   **SDS Validation:** This confirms that **NativeWind** (which is also build-time) is the correct storage engine. **Do not** go back to styled-components or Emotion if you want 60fps on mobile.
+
+### Lesson 2: Headless Logic is the Holy Grail
+Chakra v3 is built on **Zag.js** (State Machines). They moved ALL logic (`isOpen`, `onClose`, `isHovered`) out of React components into pure JavaScript state machines.
+*   **Why?** So they can run on React, Vue, Solid... and **Mobile**.
+*   **The "Solopreneur Trade-off":**
+    *   *Option A (Zag.js):* Maximum purity. You define state machines for everything. Harder to learn.
+    *   *Option B (Radix/rn-primitives):* "Gold Standard" for React. Easier to copy-paste.
+    *   **SDS Decision:** Stick with **Option B (rn-primitives)** for now. It aligns better with the `shadcn` "copy-paste" workflow. Zag.js is powerful but might be "over-engineering" for a solo dev.
+
+### Lesson 3: The "Snippet" Model
+Transitioning from "installing a library" to "copying snippets" (which Chakra v3 now supports) is the industry trend.
+*   **Action for SDS:** Your distribution method should primarily be **CLI-based generators (MCP tools)**, not just an NPM package.
+
+## Final Synthesis: The "Sage Stack"
+
+| Layer | Technology | Status |
+| :--- | :--- | :--- |
+| **Logic** | `rn-primitives` (Mobile) / Radix (Web) | **Approvals** ✅ |
+| **Styling** | NativeWind v4 (Universal Tokens) | **Approvals** ✅ |
+| **Distribution** | "Copy-Paste" via MCP Server | **Approvals** ✅ |
+| **Inspiration** | shadcn (Workflow) + Chakra (Architecture) | **Approvals** ✅ |
