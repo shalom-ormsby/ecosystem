@@ -25,12 +25,46 @@ module.exports = {
                     DEFAULT: 'var(--color-accent)',
                     foreground: 'var(--color-accent-foreground)',
                 },
+                destructive: {
+                    DEFAULT: 'var(--color-destructive)',
+                    foreground: 'var(--color-destructive-foreground)',
+                },
+                muted: {
+                    DEFAULT: 'var(--color-muted)',
+                    foreground: 'var(--color-muted-foreground)',
+                },
+                popover: {
+                    DEFAULT: 'var(--color-popover)',
+                    foreground: 'var(--color-popover-foreground)',
+                },
+                card: {
+                    DEFAULT: 'var(--color-card)',
+                    foreground: 'var(--color-card-foreground)',
+                },
+                success: {
+                    DEFAULT: 'var(--color-success)',
+                    foreground: 'var(--color-success-foreground)',
+                },
+                warning: {
+                    DEFAULT: 'var(--color-warning)',
+                    foreground: 'var(--color-warning-foreground)',
+                },
+                error: {
+                    DEFAULT: 'var(--color-error)',
+                    foreground: 'var(--color-error-foreground)',
+                },
+                info: {
+                    DEFAULT: 'var(--color-info)',
+                    foreground: 'var(--color-info-foreground)',
+                },
                 surface: 'var(--color-surface)',
                 border: 'var(--color-border)',
+                input: 'var(--color-input)',
+                ring: 'var(--color-ring)',
                 glass: {
                     DEFAULT: 'var(--color-glass)',
                     border: 'var(--color-glass-border)',
-                }
+                },
             },
             fontFamily: {
                 heading: ['var(--font-heading)'],

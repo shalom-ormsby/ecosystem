@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, Button, Header, SecondaryNav, TertiaryNav, Footer, Modal, ToastProvider, useToast, CollapsibleCodeBlock, Code, CustomizerPanel, Breadcrumbs, PageLayout, type BreadcrumbItem } from '@ecosystem/design-system';
+import { Card, Button } from '@sds/ui';
+import { Header, SecondaryNav, TertiaryNav, Footer, Modal, ToastProvider, useToast, CollapsibleCodeBlock, Code, CustomizerPanel, Breadcrumbs, PageLayout, type BreadcrumbItem } from '@ecosystem/design-system';
 import { SlidersHorizontal, Sun, Moon, SunMoon, Building2, Leaf, Zap, X } from 'lucide-react';
 import type { SyntaxToken } from '@ecosystem/design-system';
 

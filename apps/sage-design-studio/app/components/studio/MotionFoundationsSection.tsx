@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Card, Button, CollapsibleCodeBlock } from '@ecosystem/design-system';
+import { Card, Button } from '@sds/ui';
+import { CollapsibleCodeBlock } from '@ecosystem/design-system';
 import type { SyntaxToken } from '@ecosystem/design-system';
 import { baseTokens, motion } from '@ecosystem/design-system/tokens';
 import { CheckCircle, XCircle } from 'lucide-react';

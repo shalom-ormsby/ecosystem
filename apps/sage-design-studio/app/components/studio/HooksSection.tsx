@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, Button, TextField, TertiaryNav, Badge, Code, CollapsibleCodeBlock, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
+import { Card, Button, Badge } from '@sds/ui';
+import { TextField, TertiaryNav, Code, CollapsibleCodeBlock, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
 import { useForm, useTheme, useToast } from '@ecosystem/design-system';
 
 interface HooksSectionProps {

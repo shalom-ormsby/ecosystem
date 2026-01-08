@@ -1,4 +1,5 @@
-import { Dropdown, Tooltip, ThemeToggle, FormField, SearchBar, RadioGroup, CheckboxGroup, Button, Breadcrumbs } from '@ecosystem/design-system';
+import { Button } from '@sds/ui';
+import { Dropdown, Tooltip, ThemeToggle, FormField, SearchBar, RadioGroup, CheckboxGroup, Breadcrumbs } from '@ecosystem/design-system';
 import type { ComponentConfig } from './component-registry';
 
 export const moleculeRegistry: Record<string, ComponentConfig> = {

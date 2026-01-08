@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Card } from '@ecosystem/design-system';
+import { Card } from '@sds/ui';
 import type { ComponentConfig } from '../../lib/component-registry';
 import { CodeSnippet } from './CodeSnippet';
 import { JsonLdMetadata } from '../../JsonLdMetadata';

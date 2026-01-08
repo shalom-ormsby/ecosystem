@@ -1,6 +1,7 @@
 'use client';
 
-import { Card, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
+import { Card } from '@sds/ui';
+import { Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
 import { ArrowRight } from 'lucide-react';
 
 interface ContributingSectionProps {

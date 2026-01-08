@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { ThemeProvider, ToastProvider } from '@ecosystem/design-system';
+import { ThemeProvider } from '@sds/core';
+import { ToastProvider } from '@ecosystem/design-system';
 import { allFontVariables } from '../lib/fonts';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ecosystem/design-system": "workspace:*",
+    "@sds/core": "workspace:*",
     "@sds/ui": "workspace:*",
     "@vercel/analytics": "^1.6.1",
     "class-variance-authority": "^0.7.1",

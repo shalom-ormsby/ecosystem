@@ -1,6 +1,7 @@
 'use client';
 
-import { Card, Code, CollapsibleCodeBlock, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
+import { Card } from '@sds/ui';
+import { Code, CollapsibleCodeBlock, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
 import { CheckCircle, XCircle } from 'lucide-react';
 
 interface CommonPatternsSectionProps {

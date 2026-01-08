@@ -1,6 +1,6 @@
 'use client';
 
-import { Card } from '@ecosystem/design-system';
+import { Card } from '@sds/ui';
 
 interface ComingSoonSectionProps {
   title: string;

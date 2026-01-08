@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Card, Button, Code, CollapsibleCodeBlock } from '@ecosystem/design-system';
+import { Card, Button } from '@sds/ui';
+import { Code, CollapsibleCodeBlock } from '@ecosystem/design-system';
 import { baseTokens, motion } from '@ecosystem/design-system/tokens';
 import { VariableWeightText } from '@ecosystem/design-system';
 

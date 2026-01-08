@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useThemeStore } from '@ecosystem/design-system';
+import { useThemeStore } from '@sds/core';
 
 /**
  * Lightweight mode switcher for the design system documentation

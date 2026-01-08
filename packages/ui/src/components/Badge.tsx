@@ -15,10 +15,10 @@ const badgeVariants = cva(
                     "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
                 outline: "text-foreground",
                 // Semantic variants from original design system
-                success: "border-transparent bg-[var(--color-success)] text-[var(--color-success-foreground)]",
-                warning: "border-transparent bg-[var(--color-warning)] text-[var(--color-warning-foreground)]",
-                error: "border-transparent bg-[var(--color-error)] text-[var(--color-error-foreground)]",
-                info: "border-transparent bg-[var(--color-info)] text-[var(--color-info-foreground)]",
+                success: "border-transparent bg-success text-success-foreground hover:bg-success/80",
+                warning: "border-transparent bg-warning text-warning-foreground hover:bg-warning/80",
+                error: "border-transparent bg-error text-error-foreground hover:bg-error/80",
+                info: "border-transparent bg-info text-info-foreground hover:bg-info/80",
             },
             size: {
                 sm: "px-2 py-0.5 text-xs",

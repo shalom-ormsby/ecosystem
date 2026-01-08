@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, Code, CollapsibleCodeBlock, Button } from '@ecosystem/design-system';
+import { Card, Button } from '@sds/ui';
+import { Code, CollapsibleCodeBlock } from '@ecosystem/design-system';
 import { useTheme } from '@ecosystem/design-system/hooks';
 import {
   Sliders, Building2, Leaf, Zap, Sun, Moon, Laptop, Palette, Bot, BookOpen,
