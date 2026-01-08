@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { TertiaryNav, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
-import { ComponentPlayground } from './ComponentPlayground';
+import { EnhancedComponentPlayground } from './EnhancedComponentPlayground';
 import { componentRegistry } from '../../lib/component-registry';
 
 interface ComponentsSectionProps {
@@ -71,7 +71,7 @@ export function ComponentsSection({ activeItemId, breadcrumbs, onItemChange }: C
       {/* Component Playground with spacing for sticky nav */}
       <div className="mt-4">
         {selectedComponent && (
-          <ComponentPlayground
+          <EnhancedComponentPlayground
             componentName={selectedComponent}
             config={componentRegistry[selectedComponent]}
           />
