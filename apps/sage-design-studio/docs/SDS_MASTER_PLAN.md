@@ -110,3 +110,34 @@ To ensure shipping velocity, we explicitly de-scope the following:
 
 1.  **Approval:** Confirm this plan aligns with your vision.
 2.  **Execution:** Begin Phase 1 (Create `packages/tokens`).
+
+## 6. Known Issues & Workarounds
+- **React 19 Compatibility**: `react-native-web`@0.19.x requires a patch to work with React 19 (which removed `render` and `hydrate`). A patch file (`patch-rnw-render.js`) is applied in `node_modules` for Studio.
+- **Expo & NativeWind**: Requires `unstable_enablePackageExports: true` in Metro config to resolve `react-native-css-interop` correctly.
+
+## 7. Troubleshooting Log: Web Styling (Phase 2)
+**Status**: BLOCKED
+**Date**: 2026-01-07
+**Issue**: Universal components (`@sds/ui`) render unstyled in the Next.js app (`sage-design-studio`), specifically those using `react-native-web` primitives (`Pressable`, `Text`).
+
+### Root Cause Analysis
+1.  **Tailwind Scanning is Working**: Standard HTML elements (`<button>`, `<div>`) in `apps/sage-design-studio` are correctly styled by Tailwind when testing. This confirms `tailwind.config.ts` content paths are correct (using absolute paths).
+2.  **React Native Web + NativeWind**: The issue is specifically with how `nativewind` processes styles for React Native components. `nativewind` transforms `className` props into React Native style objects.
+3.  **Compiler Conflict**:
+    *   `next/font` (Google Fonts) requires Next.js to use the **SWC** compiler.
+    *   `nativewind` (v4) requires **Babel** to process styles in a Next.js environment.
+    *   **Conflict**: Enabling Babel (via `babel.config.js`) forces Next.js to disable SWC, which breaks `next/font`.
+    *   **Current State**: We have temporarily mocked `next/font` imports in `lib/fonts.ts` to allow Babel to run without crashing the build.
+
+### Attempted Solutions (Failed)
+1.  **Tailwind Path Fixes**: Switched to absolute paths (`path.join(__dirname, ...)`) in `tailwind.config.ts`. (Proved effective for HTML, not RNW).
+2.  **Explicit Transpilation**: Added `@sds/ui`, `nativewind`, `react-native-css-interop` to `transpilePackages` in `next.config.mjs`.
+3.  **Babel Configuration**: Added `babel.config.js` with `presets: ['next/babel', 'nativewind/babel']`.
+4.  **Local Component**: Created `LocalUniversalButton.tsx` inside the app to bypass monorepo resolution issues. It also failed to style, confirming the issue is the compilation environment, not the package link.
+
+### Hypotheses for Next Steps
+1.  **NativeWind Next.js Plugin**: We might be missing a dedicated Next.js plugin for NativeWind v4 that handles this SWC/Babel interop better than manual config.
+2.  **SWC Support**: Check if NativeWind has released SWC support, which would eliminate the need for Babel.
+3.  **Expo Adapter**: Switching the "Web" app to use Expo Router (via `apps/mobile` serving web) works flawlessly. The issue is strictly integrating RNW+NativeWind into a *standard* Next.js app.
+    *   *Alternative*: Re-evaluate if `sage-design-studio` *needs* to be a raw Next.js app or if it can be an Expo Web app.
+

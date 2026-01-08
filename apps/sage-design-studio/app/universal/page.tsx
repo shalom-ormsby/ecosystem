@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@sds/ui';
+import { LocalUniversalButton } from '../components/LocalUniversalButton';
 
 export default function UniversalPage() {
     return (
@@ -34,6 +35,26 @@ export default function UniversalPage() {
                     <Button size="sm">Small</Button>
                     <Button size="default">Default</Button>
                     <Button size="lg">Large</Button>
+                </div>
+            </div>
+
+            <div className="space-y-4">
+                <h2 className="text-lg font-semibold">Local Copy (Internal to App)</h2>
+                <div className="flex gap-4 items-center">
+                    <LocalUniversalButton>Local Button</LocalUniversalButton>
+                    <LocalUniversalButton variant="destructive">Local Destructive</LocalUniversalButton>
+                </div>
+            </div>
+
+            <div className="space-y-4">
+                <h2 className="text-lg font-semibold">Debug Probe (Standard HTML)</h2>
+                <div className="flex gap-4">
+                    <button className="bg-red-500 text-white p-4 rounded hover:bg-red-700">
+                        Tailwind HTML Button
+                    </button>
+                    <div className="bg-blue-500 text-white p-4 rounded">
+                        Tailwind Div
+                    </div>
                 </div>
             </div>
         </div>

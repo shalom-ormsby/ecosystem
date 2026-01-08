@@ -1,4 +1,5 @@
-import { Button, Card, Code, Link, Badge, Avatar, Spinner, ProgressBar } from '@ecosystem/design-system';
+import { Card, Code, Link, Badge, Avatar, Spinner, ProgressBar } from '@ecosystem/design-system';
+import { Button } from '@sds/ui';
 
 export interface PropConfig {
   type: 'select' | 'boolean' | 'text' | 'array' | 'object' | 'interface' | 'custom';
