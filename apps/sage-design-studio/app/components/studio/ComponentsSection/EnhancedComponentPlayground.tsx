@@ -24,8 +24,9 @@ export function EnhancedComponentPlayground({ componentName, config }: Component
 
   const Component = config.component;
 
-  // Generate installation command
-  const installCommand = `pnpm add @sds/ui`;
+  // Generate installation command (component-specific)
+  const installCommand = `# Install @sds/ui to use ${componentName}
+pnpm add @sds/ui`;
 
   // Generate import statement
   const generateImportStatement = () => {
@@ -99,7 +100,7 @@ export function EnhancedComponentPlayground({ componentName, config }: Component
               className="absolute top-3 right-3 p-2 rounded-md bg-[var(--color-background)] border border-[var(--color-border)] hover:bg-[var(--color-surface)] transition-colors opacity-0 group-hover:opacity-100"
               aria-label="Copy installation command"
             >
-              {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+              {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4 text-[var(--color-text-primary)]" />}
             </button>
           </div>
         </div>
@@ -114,7 +115,7 @@ export function EnhancedComponentPlayground({ componentName, config }: Component
           </div>
         </div>
 
-        <Card className="p-16 flex items-center justify-center min-h-[300px] bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-background)]">
+        <Card hoverEffect={false} className="p-16 flex items-center justify-center min-h-[300px] bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-background)]">
           <Component {...props}>
             {componentName === 'Button' ? 'Click me' : props.children || config.examples[0]?.children}
           </Component>
@@ -129,7 +130,7 @@ export function EnhancedComponentPlayground({ componentName, config }: Component
             <span>Customize</span>
           </div>
 
-          <Card className="p-6">
+          <Card hoverEffect={false} className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {Object.entries(config.props).map(([propName, propConfig]) => (
                 <div key={propName} className="space-y-2">
@@ -220,7 +221,7 @@ export function EnhancedComponentPlayground({ componentName, config }: Component
               onClick={() => copyToClipboard(generateImportStatement())}
               className="absolute top-3 right-3 p-2 rounded-md bg-[var(--color-background)] border border-[var(--color-border)] hover:bg-[var(--color-surface)] transition-colors opacity-0 group-hover:opacity-100"
             >
-              {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+              {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4 text-[var(--color-text-primary)]" />}
             </button>
           </div>
 
@@ -239,7 +240,7 @@ export function EnhancedComponentPlayground({ componentName, config }: Component
               onClick={() => copyToClipboard(generateUsageCode())}
               className="absolute top-3 right-3 p-2 rounded-md bg-[var(--color-background)] border border-[var(--color-border)] hover:bg-[var(--color-surface)] transition-colors opacity-0 group-hover:opacity-100"
             >
-              {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+              {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4 text-[var(--color-text-primary)]" />}
             </button>
           </div>
         </div>

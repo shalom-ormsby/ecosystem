@@ -35,30 +35,19 @@ export interface ComponentConfig {
 export const componentRegistry: Record<string, ComponentConfig> = {
   Button: {
     component: Button,
-    description: 'Interactive button component with multiple variants, sizes, and states. Supports icons, loading states, keyboard navigation, and respects motion preferences.',
+    description: 'Interactive button component with multiple variants, sizes, and states. Built with Radix UI primitives for accessibility.',
     props: {
       variant: {
         type: 'select',
-        options: ['primary', 'secondary', 'ghost'] as const,
-        default: 'primary',
-        description: 'Visual style variant - primary for main actions, secondary for alternative actions, ghost for subtle actions',
+        options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'] as const,
+        default: 'default',
+        description: 'Visual style variant - default for primary actions, destructive for dangerous actions, outline for secondary emphasis, secondary for alternative actions, ghost for subtle actions, link for text-style links',
       },
       size: {
         type: 'select',
-        options: ['sm', 'md', 'lg'] as const,
-        default: 'md',
-        description: 'Size variant - sm for compact spaces, md for standard use, lg for prominent actions',
-      },
-      shape: {
-        type: 'select',
-        options: ['rounded', 'pill'] as const,
-        default: 'rounded',
-        description: 'Shape variant - rounded for rectangular buttons with rounded corners (primary style), pill for fully rounded (capsule) buttons',
-      },
-      loading: {
-        type: 'boolean',
-        default: false,
-        description: 'Show loading spinner and disable button interaction',
+        options: ['sm', 'default', 'lg', 'icon'] as const,
+        default: 'default',
+        description: 'Size variant - sm (h-8) for compact spaces, default (h-9) for standard use, lg (h-10) for prominent actions, icon (h-9 w-9) for icon-only buttons',
       },
       disabled: {
         type: 'boolean',
@@ -67,44 +56,20 @@ export const componentRegistry: Record<string, ComponentConfig> = {
       },
     },
     examples: [
-      // Rounded (Primary Button Type)
-      { label: 'Primary', props: { variant: 'primary', size: 'md', shape: 'rounded' }, children: 'Primary Action' },
-      { label: 'Secondary', props: { variant: 'secondary', size: 'md', shape: 'rounded' }, children: 'Secondary Action' },
-      { label: 'Ghost', props: { variant: 'ghost', size: 'md', shape: 'rounded' }, children: 'Ghost Action' },
-      { label: 'Small', props: { variant: 'primary', size: 'sm', shape: 'rounded' }, children: 'Small' },
-      { label: 'Large', props: { variant: 'primary', size: 'lg', shape: 'rounded' }, children: 'Large Action' },
-      { label: 'Loading', props: { variant: 'primary', size: 'md', shape: 'rounded', loading: true }, children: 'Loading...' },
-      { label: 'Disabled', props: { variant: 'primary', size: 'md', shape: 'rounded', disabled: true }, children: 'Disabled' },
-      {
-        label: 'With Icon', props: { variant: 'primary', size: 'md', shape: 'rounded' }, children: (
-          <>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0z" />
-              <path d="M11.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-            </svg>
-            With Icon
-          </>
-        )
-      },
-      {
-        label: 'Icon Right', props: { variant: 'secondary', size: 'md', shape: 'rounded' }, children: (
-          <>
-            Icon Right
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-            </svg>
-          </>
-        )
-      },
-      // Pill Variant
-      { label: 'Primary Pill', props: { variant: 'primary', size: 'md', shape: 'pill' }, children: 'Primary Pill' },
-      { label: 'Secondary Pill', props: { variant: 'secondary', size: 'md', shape: 'pill' }, children: 'Secondary Pill' },
-      { label: 'Ghost Pill', props: { variant: 'ghost', size: 'md', shape: 'pill' }, children: 'Ghost Pill' },
+      { label: 'Default', props: { variant: 'default', size: 'default' }, children: 'Default' },
+      { label: 'Destructive', props: { variant: 'destructive', size: 'default' }, children: 'Destructive' },
+      { label: 'Outline', props: { variant: 'outline', size: 'default' }, children: 'Outline' },
+      { label: 'Secondary', props: { variant: 'secondary', size: 'default' }, children: 'Secondary' },
+      { label: 'Ghost', props: { variant: 'ghost', size: 'default' }, children: 'Ghost' },
+      { label: 'Link', props: { variant: 'link', size: 'default' }, children: 'Link' },
+      { label: 'Small', props: { variant: 'default', size: 'sm' }, children: 'Small' },
+      { label: 'Large', props: { variant: 'default', size: 'lg' }, children: 'Large' },
+      { label: 'Disabled', props: { variant: 'default', size: 'default', disabled: true }, children: 'Disabled' },
     ],
     codeExamples: [
       {
         title: 'Basic Usage',
-        code: `import { Button } from '@ecosystem/design-system';
+        code: `import { Button } from '@sds/ui';
 
 <Button variant="default" onClick={() => console.log('Clicked!')}>
   Click Me
@@ -113,83 +78,31 @@ export const componentRegistry: Record<string, ComponentConfig> = {
       },
       {
         title: 'All Variants',
-        code: `<div className="flex gap-3">
-  <Button variant="default">Primary</Button>
+        code: `import { Button } from '@sds/ui';
+
+<div className="flex gap-3">
+  <Button variant="default">Default</Button>
+  <Button variant="destructive">Destructive</Button>
+  <Button variant="outline">Outline</Button>
   <Button variant="secondary">Secondary</Button>
   <Button variant="ghost">Ghost</Button>
+  <Button variant="link">Link</Button>
 </div>`,
-        description: 'Showcase of all three visual variants',
-      },
-      {
-        title: 'Button Shapes',
-        code: `<div className="flex flex-col gap-4">
-  {/* Rounded rectangular buttons (default) */}
-  <div className="flex gap-3">
-    <Button variant="default">Primary</Button>
-    <Button variant="secondary">Secondary</Button>
-    <Button variant="ghost">Ghost</Button>
-  </div>
-
-  {/* Pill-shaped buttons */}
-  <div className="flex gap-3">
-    <Button variant="default" shape="pill">Pill Primary</Button>
-    <Button variant="secondary" shape="pill">Pill Secondary</Button>
-    <Button variant="ghost" shape="pill">Pill Ghost</Button>
-  </div>
-</div>`,
-        description: 'Rectangular buttons with rounded corners are the default. Use shape="pill" for fully rounded capsule buttons.',
-      },
-      {
-        title: 'With Icons',
-        code: `import { Button } from '@ecosystem/design-system';
-import { CheckIcon, ArrowRightIcon } from 'your-icon-library';
-
-{/* Icon on the left */}
-<Button variant="default">
-  <CheckIcon />
-  Save Changes
-</Button>
-
-{/* Icon on the right */}
-<Button variant="secondary">
-  Continue
-  <ArrowRightIcon />
-</Button>
-
-{/* Icon only */}
-<Button variant="ghost" aria-label="Settings">
-  <SettingsIcon />
-</Button>`,
-        description: 'Buttons with icons in different positions',
-      },
-      {
-        title: 'Loading State',
-        code: `const [isLoading, setIsLoading] = useState(false);
-
-<Button
-  variant="default"
-  loading={isLoading}
-  onClick={async () => {
-    setIsLoading(true);
-    await saveData();
-    setIsLoading(false);
-  }}
->
-  {isLoading ? 'Saving...' : 'Save'}
-</Button>`,
-        description: 'Button with loading spinner during async operations',
+        description: 'Showcase of all button variants',
       },
       {
         title: 'Sizes',
-        code: `<div className="flex items-center gap-3">
+        code: `import { Button } from '@sds/ui';
+
+<div className="flex items-center gap-3">
   <Button size="sm">Small</Button>
-  <Button size="md">Medium</Button>
+  <Button size="default">Default</Button>
   <Button size="lg">Large</Button>
 </div>`,
         description: 'All available button sizes',
       },
     ],
-    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/atoms/Button/Button.tsx',
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/Button.tsx',
     accessibilityNotes: [
       'Uses semantic <button> element for proper keyboard and screen reader support',
       'focus-visible outline ensures visible focus ring only for keyboard navigation',
