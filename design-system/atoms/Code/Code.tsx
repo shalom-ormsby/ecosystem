@@ -1,7 +1,8 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, useMemo } from 'react';
 import type { SyntaxType } from '../../utils/syntax-parser';
+import { parseCode } from '../../utils/syntax-parser';
 
 export interface CodeProps {
   /** The code content to display */
@@ -52,6 +53,14 @@ export function Code({
   const [copied, setCopied] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
 
+  // Auto-parse code for block syntax highlighting
+  const tokens = useMemo(() => {
+    if (!inline && typeof children === 'string') {
+      return parseCode(children);
+    }
+    return null;
+  }, [children, inline]);
+
   // Handle copy to clipboard for block code
   const handleCopy = async () => {
     const text = typeof children === 'string' ? children : String(children);
@@ -90,12 +99,29 @@ export function Code({
           borderColor: 'var(--code-border)',
         }}
       >
-        <code
-          style={{
-            color: `var(--syntax-${syntax})`,
-          }}
-        >
-          {children}
+        <code>
+          {tokens ? (
+            // Automatic syntax highlighting with parsed tokens
+            tokens.map((token, index) => (
+              <span
+                key={index}
+                style={{
+                  color: `var(--syntax-${token.type})`,
+                }}
+              >
+                {token.text}
+              </span>
+            ))
+          ) : (
+            // Fallback to single color for non-string children
+            <span
+              style={{
+                color: `var(--syntax-${syntax})`,
+              }}
+            >
+              {children}
+            </span>
+          )}
         </code>
       </pre>
 

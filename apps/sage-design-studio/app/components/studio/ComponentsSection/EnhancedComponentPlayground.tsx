@@ -146,7 +146,7 @@ pnpm add @sds/ui`;
             </Component>
           ) : componentName === 'Code' ? (
             <div className="w-full max-w-2xl space-y-2">
-              <Component inline={false} showCopy={true} {...props} syntax="function">
+              <Component inline={false} showCopy={true} {...props}>
 {`function fibonacci(n) {
   if (n <= 1) return n;
   return fibonacci(n - 1) + fibonacci(n - 2);
