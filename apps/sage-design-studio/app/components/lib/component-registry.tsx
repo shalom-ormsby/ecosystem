@@ -106,7 +106,7 @@ export const componentRegistry: Record<string, ComponentConfig> = {
         title: 'Basic Usage',
         code: `import { Button } from '@ecosystem/design-system';
 
-<Button variant="primary" onClick={() => console.log('Clicked!')}>
+<Button variant="default" onClick={() => console.log('Clicked!')}>
   Click Me
 </Button>`,
         description: 'Simple button with click handler',
@@ -114,7 +114,7 @@ export const componentRegistry: Record<string, ComponentConfig> = {
       {
         title: 'All Variants',
         code: `<div className="flex gap-3">
-  <Button variant="primary">Primary</Button>
+  <Button variant="default">Primary</Button>
   <Button variant="secondary">Secondary</Button>
   <Button variant="ghost">Ghost</Button>
 </div>`,
@@ -125,14 +125,14 @@ export const componentRegistry: Record<string, ComponentConfig> = {
         code: `<div className="flex flex-col gap-4">
   {/* Rounded rectangular buttons (default) */}
   <div className="flex gap-3">
-    <Button variant="primary">Primary</Button>
+    <Button variant="default">Primary</Button>
     <Button variant="secondary">Secondary</Button>
     <Button variant="ghost">Ghost</Button>
   </div>
 
   {/* Pill-shaped buttons */}
   <div className="flex gap-3">
-    <Button variant="primary" shape="pill">Pill Primary</Button>
+    <Button variant="default" shape="pill">Pill Primary</Button>
     <Button variant="secondary" shape="pill">Pill Secondary</Button>
     <Button variant="ghost" shape="pill">Pill Ghost</Button>
   </div>
@@ -145,7 +145,7 @@ export const componentRegistry: Record<string, ComponentConfig> = {
 import { CheckIcon, ArrowRightIcon } from 'your-icon-library';
 
 {/* Icon on the left */}
-<Button variant="primary">
+<Button variant="default">
   <CheckIcon />
   Save Changes
 </Button>
@@ -167,7 +167,7 @@ import { CheckIcon, ArrowRightIcon } from 'your-icon-library';
         code: `const [isLoading, setIsLoading] = useState(false);
 
 <Button
-  variant="primary"
+  variant="default"
   loading={isLoading}
   onClick={async () => {
     setIsLoading(true);
@@ -743,7 +743,7 @@ const [uploadProgress, setUploadProgress] = useState(0);
     <span>Uploading file.pdf</span>
     <span>{uploadProgress}%</span>
   </div>
-  <ProgressBar value={uploadProgress} variant="primary" showLabel={false} />
+  <ProgressBar value={uploadProgress} variant="default" showLabel={false} />
 </div>`,
         description: 'Progress bar for file upload with custom label',
       },
@@ -783,7 +783,7 @@ useEffect(() => {
   return () => clearInterval(timer);
 }, []);
 
-<ProgressBar value={progress} variant="primary" showLabel />`,
+<ProgressBar value={progress} variant="default" showLabel />`,
         description: 'Animated progress bar that updates over time',
       },
     ],

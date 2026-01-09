@@ -344,7 +344,7 @@ const menuItems: DropdownItem[] = [
         code: `import { Tooltip, Button } from '@ecosystem/design-system';
 
 <Tooltip content="Click to save your changes" position="top">
-  <Button variant="primary">Save</Button>
+  <Button variant="default">Save</Button>
 </Tooltip>`,
         description: 'Simple tooltip on a button',
       },

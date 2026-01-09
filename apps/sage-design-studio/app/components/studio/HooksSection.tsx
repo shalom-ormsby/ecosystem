@@ -474,10 +474,10 @@ function UseThemeSection() {
           <div className="space-y-4">
             <div>
               <p className="text-sm font-medium mb-2 text-[var(--color-text-primary)]">
-                Current Theme: <Badge variant="primary" size="sm">{theme}</Badge>
+                Current Theme: <Badge variant="default" size="sm">{theme}</Badge>
               </p>
               <p className="text-sm font-medium mb-2 text-[var(--color-text-primary)]">
-                Current Mode: <Badge variant="primary" size="sm">{mode}</Badge>
+                Current Mode: <Badge variant="default" size="sm">{mode}</Badge>
               </p>
             </div>
             <div className="flex gap-2">
@@ -562,7 +562,7 @@ function UseToastSection() {
         </h4>
         <Card className="p-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <Button variant="primary" size="sm" onClick={() => toast('Success!', 'success')}>
+            <Button variant="default" size="sm" onClick={() => toast('Success!', 'success')}>
               Success
             </Button>
             <Button variant="secondary" size="sm" onClick={() => toast('Error occurred', 'error')}>

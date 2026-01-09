@@ -21,7 +21,7 @@ function ToastDemo() {
     <div className="space-y-4">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <Button
-          variant="primary"
+          variant="default"
           size="sm"
           onClick={() => toast('Operation successful!', 'success')}
         >
@@ -60,16 +60,16 @@ function ModalDemo() {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <Button variant="primary" size="sm" onClick={() => { setSize('sm'); setIsOpen(true); }}>
+        <Button variant="default" size="sm" onClick={() => { setSize('sm'); setIsOpen(true); }}>
           Small Modal
         </Button>
-        <Button variant="primary" size="sm" onClick={() => { setSize('md'); setIsOpen(true); }}>
+        <Button variant="default" size="sm" onClick={() => { setSize('md'); setIsOpen(true); }}>
           Medium Modal
         </Button>
-        <Button variant="primary" size="sm" onClick={() => { setSize('lg'); setIsOpen(true); }}>
+        <Button variant="default" size="sm" onClick={() => { setSize('lg'); setIsOpen(true); }}>
           Large Modal
         </Button>
-        <Button variant="primary" size="sm" onClick={() => { setSize('xl'); setIsOpen(true); }}>
+        <Button variant="default" size="sm" onClick={() => { setSize('xl'); setIsOpen(true); }}>
           XL Modal
         </Button>
       </div>
@@ -82,7 +82,7 @@ function ModalDemo() {
         footer={
           <>
             <Button variant="ghost" onClick={() => setIsOpen(false)}>Cancel</Button>
-            <Button variant="primary" onClick={() => setIsOpen(false)}>Confirm</Button>
+            <Button variant="default" onClick={() => setIsOpen(false)}>Confirm</Button>
           </>
         }
       >
@@ -536,7 +536,7 @@ export function OrganismsSection({ activeItemId, breadcrumbs, onItemChange }: Or
                   actions={
                     <>
                       <a href="/signin">Sign In</a>
-                      <Button variant="primary" size="sm">
+                      <Button variant="default" size="sm">
                         Get Started
                       </Button>
                     </>
@@ -575,7 +575,7 @@ export function OrganismsSection({ activeItemId, breadcrumbs, onItemChange }: Or
   actions={
     <>
       <a href="/signin">Sign In</a>
-      <Button variant="primary" size="sm">
+      <Button variant="default" size="sm">
         Get Started
       </Button>
     </>

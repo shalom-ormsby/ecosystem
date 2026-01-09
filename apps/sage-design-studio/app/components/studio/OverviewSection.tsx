@@ -786,7 +786,7 @@ const spacing = spacingTokens.lg; // "1.5rem" (24px)
 
 // But consumed through components:
 import { Button, Text } from '@ecosystem/design-system';
-<Button variant="primary">Click me</Button>  // ✅ Correct
+<Button variant="default">Click me</Button>  // ✅ Correct
 <Text>Hello</Text>                           // ✅ Correct
 
 // NOT manually applied:
@@ -910,7 +910,7 @@ export function MyComponent() {
     <Card>
       <h2>Hello, Sage!</h2>
       <Badge variant="success">New</Badge>
-      <Button variant="primary" size="lg">
+      <Button variant="default" size="lg">
         Get Started
       </Button>
     </Card>
@@ -1113,7 +1113,7 @@ export function Controls() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button variant="primary" size="lg">
+              <Button variant="default" size="lg">
                 View on GitHub
               </Button>
             </a>

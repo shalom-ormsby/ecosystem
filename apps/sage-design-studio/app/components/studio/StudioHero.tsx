@@ -40,7 +40,7 @@ export function StudioHero() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button variant="primary" size="lg">
+              <Button variant="default" size="lg">
                 <GitHubIcon size={20} className="mr-2" />
                 View on GitHub
               </Button>

@@ -285,7 +285,7 @@ export function SearchBar({ placeholder, onSearch }: SearchBarProps) {
         placeholder={placeholder || 'Search...'}
         className="flex-1"
       />
-      <Button type="submit" variant="primary">
+      <Button type="submit" variant="default">
         Search
       </Button>
     </form>
@@ -337,7 +337,7 @@ export function LoginForm() {
         onChange={handleChange}
         error={errors.password}
       />
-      <Button type="submit" variant="primary">
+      <Button type="submit" variant="default">
         Log In
       </Button>
     </form>
@@ -422,7 +422,7 @@ export function ConfirmDialog() {
             <Button variant="secondary" onClick={() => setIsOpen(false)}>
               Cancel
             </Button>
-            <Button variant="primary" onClick={handleConfirm}>
+            <Button variant="default" onClick={handleConfirm}>
               Confirm
             </Button>
           </>
