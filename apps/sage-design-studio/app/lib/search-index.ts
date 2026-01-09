@@ -123,6 +123,15 @@ export const searchIndex: SearchResult[] = [
     path: 'atoms-progressbar',
     keywords: ['progress', 'loading', 'completion', 'percentage'],
   },
+  {
+    id: 'switch',
+    title: 'Switch',
+    description: 'Toggle control for binary state changes',
+    type: 'component',
+    category: 'Atoms',
+    path: 'atoms-switch',
+    keywords: ['toggle', 'switch', 'checkbox', 'binary', 'on', 'off', 'control'],
+  },
 
   // Molecules
   {
@@ -160,6 +169,15 @@ export const searchIndex: SearchResult[] = [
     category: 'Molecules',
     path: 'molecules-themetoggle',
     keywords: ['theme', 'dark mode', 'light mode', 'switch'],
+  },
+  {
+    id: 'theme-switcher',
+    title: 'ThemeSwitcher',
+    description: 'Enhanced theme control panel with expandable options',
+    type: 'component',
+    category: 'Molecules',
+    path: 'molecules-themeswitcher',
+    keywords: ['theme', 'dark mode', 'light mode', 'settings', 'system', 'auto'],
   },
   {
     id: 'form-field',

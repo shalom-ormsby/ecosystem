@@ -61,6 +61,7 @@ const routeConfig: RouteConfig = {
       avatar: { label: 'Avatar' },
       spinner: { label: 'Spinner' },
       'progress-bar': { label: 'Progress Bar' },
+      switch: { label: 'Switch' },
     }
   },
   molecules: {
@@ -70,6 +71,7 @@ const routeConfig: RouteConfig = {
       dropdown: { label: 'Dropdown' },
       tooltip: { label: 'Tooltip' },
       'theme-toggle': { label: 'Theme Toggle' },
+      'theme-switcher': { label: 'Theme Switcher' },
       'form-field': { label: 'Form Field' },
       'search-bar': { label: 'Search Bar' },
       'radio-group': { label: 'Radio Group' },

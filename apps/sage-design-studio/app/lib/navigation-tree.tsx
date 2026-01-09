@@ -158,6 +158,11 @@ export const navigationTree: NavigationItem[] = [
             label: 'ProgressBar',
             section: 'atoms',
           },
+          {
+            id: 'switch',
+            label: 'Switch',
+            section: 'atoms',
+          },
         ],
       },
       {
