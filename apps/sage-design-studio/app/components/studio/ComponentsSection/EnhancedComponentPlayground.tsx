@@ -146,7 +146,7 @@ pnpm add @sds/ui`;
             </Component>
           ) : componentName === 'Code' ? (
             <div className="w-full max-w-2xl space-y-2">
-              <Component inline={false} syntax="plain" showCopy={true}>
+              <Component {...props} syntax="plain">
 {`function fibonacci(n) {
   if (n <= 1) return n;
   return fibonacci(n - 1) + fibonacci(n - 2);
@@ -176,7 +176,7 @@ console.log(result); // 55`}
       </div>
 
       {/* Interactive Controls - UNIQUE FEATURE */}
-      {Object.keys(config.props).length > 0 && componentName !== 'Code' && (
+      {Object.keys(config.props).length > 0 && (
         <div className="space-y-4">
           <div className="flex items-center gap-2 text-sm font-medium text-[var(--color-text-primary)]">
             <Settings className="w-4 h-4" />

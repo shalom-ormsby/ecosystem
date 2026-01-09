@@ -217,15 +217,9 @@ export const componentRegistry: Record<string, ComponentConfig> = {
     component: Code,
     description: 'A semantic code wrapper with enhanced visual styling and automatic syntax highlighting. Features distinct treatments for inline (pale amber background) vs block code (cool gray background with copy-on-hover). Accessible contrast ratios (WCAG AA 4.5:1).',
     props: {
-      syntax: {
-        type: 'select',
-        options: ['plain', 'comment', 'keyword', 'function', 'string', 'number', 'boolean', 'operator', 'property', 'className', 'tag', 'attribute', 'variable', 'punctuation'] as const,
-        default: 'plain',
-        description: 'Syntax highlighting type for the code',
-      },
       inline: {
         type: 'boolean',
-        default: true,
+        default: false,
         description: 'Render as inline code (true) or block code (false)',
       },
       showCopy: {
