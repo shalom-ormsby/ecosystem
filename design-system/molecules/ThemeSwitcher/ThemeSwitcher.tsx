@@ -185,14 +185,16 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
       {isExpanded && (
         <div
           className={`
-            absolute top-full right-0 mt-2
+            absolute bottom-full right-0 mb-2
             min-w-[280px]
+            max-h-[80vh]
+            overflow-y-auto
             p-4
             rounded-lg
             bg-[var(--color-surface)]
             border border-[var(--color-border)]
             shadow-lg
-            animate-in fade-in slide-in-from-top-2
+            animate-in fade-in slide-in-from-bottom-2
             duration-200
             z-50
             ${sizeClasses[size]}
