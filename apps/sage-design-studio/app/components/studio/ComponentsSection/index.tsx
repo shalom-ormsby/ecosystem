@@ -17,8 +17,11 @@ export function ComponentsSection({ activeItemId, breadcrumbs, onItemChange }: C
   // Update selected component when activeItemId changes
   useEffect(() => {
     if (activeItemId) {
-      // Convert lowercase id to PascalCase component name (e.g., 'button' -> 'Button')
-      const componentName = activeItemId.charAt(0).toUpperCase() + activeItemId.slice(1);
+      // Convert kebab-case to PascalCase (e.g., 'progress-bar' -> 'ProgressBar', 'switch' -> 'Switch')
+      const componentName = activeItemId
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join('');
       if (componentRegistry[componentName]) {
         setSelectedComponent(componentName);
       }
@@ -28,9 +31,11 @@ export function ComponentsSection({ activeItemId, breadcrumbs, onItemChange }: C
   // Handle component selection and notify parent
   const handleComponentChange = (componentName: string) => {
     setSelectedComponent(componentName);
-    // Convert PascalCase to lowercase for parent state (e.g., 'Button' -> 'button')
-    const lowercase = componentName.toLowerCase();
-    onItemChange?.(lowercase);
+    // Convert PascalCase to kebab-case (e.g., 'ProgressBar' -> 'progress-bar', 'Button' -> 'button')
+    const kebabCase = componentName
+      .replace(/([a-z])([A-Z])/g, '$1-$2')
+      .toLowerCase();
+    onItemChange?.(kebabCase);
   };
 
   const components = Object.keys(componentRegistry);
