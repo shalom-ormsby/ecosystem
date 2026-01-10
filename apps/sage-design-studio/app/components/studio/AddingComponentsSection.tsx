@@ -1,23 +1,16 @@
 'use client';
 
-import { useState } from 'react';
-import { Card, Code, CollapsibleCodeBlock, SecondaryNav, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
-import { CheckCircle, XCircle } from 'lucide-react';
+import { Card, Code, CollapsibleCodeBlock, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
+import { CheckCircle, XCircle, AlertOctagon, AlertTriangle } from 'lucide-react';
 
 interface AddingComponentsSectionProps {
   breadcrumbs?: BreadcrumbItem[];
+  activeItemId?: string;
 }
 
-export function AddingComponentsSection({ breadcrumbs }: AddingComponentsSectionProps) {
-  const [activeSection, setActiveSection] = useState('atoms');
-
-  const sections = [
-    { id: 'atoms', label: 'Adding Atoms' },
-    { id: 'molecules', label: 'Adding Molecules' },
-    { id: 'modifying', label: 'Modifying Components' },
-    { id: 'tokens', label: 'Adding Tokens' },
-    { id: 'troubleshooting', label: 'Troubleshooting' },
-  ];
+export function AddingComponentsSection({ breadcrumbs, activeItemId }: AddingComponentsSectionProps) {
+  // Determine active view based on activeItemId (default to methodology)
+  const currentView = (!activeItemId || activeItemId === 'adding-components') ? 'methodology' : activeItemId;
 
   return (
     <div className="w-full min-w-0">
@@ -39,18 +32,82 @@ export function AddingComponentsSection({ breadcrumbs }: AddingComponentsSection
         )}
       </div>
 
-      {/* Secondary Navigation - Sticky below header */}
-      <SecondaryNav
-        items={sections}
-        activeId={activeSection}
-        onItemChange={setActiveSection}
-      />
-
       {/* Main Content */}
       <div className="space-y-12">
 
+        {/* Methodology (New Section) */}
+        {currentView === 'methodology' && (
+          <section>
+            <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
+              Core Methodology
+            </h2>
+            <Card className="p-6">
+              <div className="mb-6 bg-[var(--color-surface)] p-4 rounded-md border border-[var(--color-border)]">
+                <div className="flex items-start gap-3">
+                  <AlertOctagon className="w-5 h-5 text-[var(--color-primary)] mt-0.5" />
+                  <div>
+                    <h3 className="font-semibold text-[var(--color-text-primary)] mb-1">Do Not Skip Steps</h3>
+                    <p className="text-sm text-[var(--color-text-secondary)]">
+                      Creating a <Code syntax="plain">.tsx</Code> file is only 20% of the work. A component is not "done" until it is fully documented, exported, and showcased in the Studio. Incomplete components cause build failures and confusion.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <ol className="space-y-8">
+                <li className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] flex items-center justify-center font-bold">1</div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">Create the Component</h3>
+                    <p className="text-sm text-[var(--color-text-secondary)] mb-2">
+                      Build the component in <Code syntax="plain">packages/ui/src/components/</Code>. Ensure it uses <Code syntax="plain">React.forwardRef</Code> and properly types its props.
+                    </p>
+                  </div>
+                </li>
+
+                <li className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] flex items-center justify-center font-bold">2</div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">Export the Component</h3>
+                    <p className="text-sm text-[var(--color-text-secondary)] mb-2">
+                      Add an export statement to <Code syntax="plain">packages/ui/src/index.ts</Code>.
+                    </p>
+                    <CollapsibleCodeBlock id="meth-2" code="export * from './components/NewComponent';" defaultCollapsed={false} showCopy={true} />
+                  </div>
+                </li>
+
+                <li className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] flex items-center justify-center font-bold">3</div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">Build the Design System</h3>
+                    <p className="text-sm text-[var(--color-text-secondary)] mb-2">
+                      You MUST rebuild the package for the Studio app to see the new component. The Studio consumes the <i>built</i> version of the library, not the raw source.
+                    </p>
+                    <CollapsibleCodeBlock id="meth-3" code="pnpm --filter @ecosystem/design-system build" defaultCollapsed={false} showCopy={true} />
+                  </div>
+                </li>
+
+                <li className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] flex items-center justify-center font-bold">4</div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">Register in Studio</h3>
+                    <p className="text-sm text-[var(--color-text-secondary)] mb-2">
+                      Add the component configuration to <Code syntax="plain">apps/sage-design-studio/app/components/lib/component-registry.tsx</Code>. This powers the documentation page.
+                    </p>
+                    <ul className="list-disc list-inside text-sm text-[var(--color-text-secondary)] ml-2 mb-2">
+                      <li>Define props controls (select, boolean, text)</li>
+                      <li>Add usage examples</li>
+                      <li>Add "Preview" and "Customize" sections via the registry config</li>
+                    </ul>
+                  </div>
+                </li>
+              </ol>
+            </Card>
+          </section>
+        )}
+
         {/* Adding a New Atom */}
-        {activeSection === 'atoms' && (
+        {currentView === 'atoms' && (
           <section>
             <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
               Adding a New Atom
@@ -136,7 +193,7 @@ export { ComponentName } from './components/ComponentName';`} defaultCollapsed={
         )}
 
         {/* Adding a New Molecule */}
-        {activeSection === 'molecules' && (
+        {currentView === 'molecules' && (
           <section>
             <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
               Adding a New Molecule
@@ -166,7 +223,7 @@ export function SearchBar() {
         )}
 
         {/* Modifying an Existing Component */}
-        {activeSection === 'modifying' && (
+        {currentView === 'modifying' && (
           <section>
             <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
               Modifying an Existing Component
@@ -226,7 +283,7 @@ export function SearchBar() {
         )}
 
         {/* Adding a New Design Token */}
-        {activeSection === 'tokens' && (
+        {currentView === 'tokens' && (
           <section>
             <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
               Adding a New Design Token
@@ -251,7 +308,8 @@ export function SearchBar() {
                     <CollapsibleCodeBlock id="add-comp-10" code={`export interface ColorTokens {
   // ... existing tokens
   newColor: string;
-}`} defaultCollapsed={false} showCopy={true} />
+}
+`} defaultCollapsed={false} showCopy={true} />
                   </div>
                 </li>
 
@@ -293,11 +351,65 @@ export const colors: ColorTokens = {
         )}
 
         {/* Troubleshooting */}
-        {activeSection === 'troubleshooting' && (
+        {currentView === 'troubleshooting' && (
           <section>
             <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
               Troubleshooting
             </h2>
+
+            {/* Switch Component Failure */}
+            <Card className="p-6 mb-6">
+              <h3 className="text-xl font-bold mb-4 text-[var(--color-text-primary)]">
+                Error: Cannot read properties of undefined (reading 'track')
+              </h3>
+
+              <div className="space-y-6 w-full min-w-0">
+                {/* Problem */}
+                <div>
+                  <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Problem</h4>
+                  <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                    The component breaks the entire page with a runtime error when rendering styles based on a prop (e.g., <Code syntax="plain">size</Code>).
+                  </p>
+                  <CollapsibleCodeBlock
+                    id="troubleshoot-switch-1"
+                    code={`// Error encountered in Switch.tsx
+const { track } = sizes[size]; // size is undefined or invalid -> CRASH`}
+                    defaultCollapsed={false}
+                    showCopy={false}
+                  />
+                </div>
+
+                {/* Root Cause */}
+                <div>
+                  <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Root Cause</h4>
+                  <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                    This usually happens when a prop is passed as <Code syntax="plain">undefined</Code> (despite TypeScript types) or an invalid string value, and used directly as a key to access an object without validation. In compiled JS, this results in trying to access a property on <Code syntax="plain">undefined</Code>.
+                  </p>
+                </div>
+
+                {/* Solution */}
+                <div>
+                  <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Solution</h4>
+                  <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                    Always validate keys before using them to access style objects. Implement a "safeguard" or fallback mechanism.
+                  </p>
+                  <div className="bg-[var(--color-success)]/10 p-4 rounded-md border border-[var(--color-success)]/30">
+                    <p className="text-xs text-[var(--color-text-muted)] mb-2 flex items-center gap-1.5">
+                      <CheckCircle className="w-3.5 h-3.5 text-[var(--color-success)]" />
+                      Robust Implementation:
+                    </p>
+                    <CollapsibleCodeBlock
+                      id="troubleshoot-switch-2"
+                      code={`// Design pattern for safe property access
+const safeSize = (size && sizes[size]) ? size : 'md';
+const { track } = sizes[safeSize]; // Safe access guaranteed`}
+                      defaultCollapsed={false}
+                      showCopy={true}
+                    />
+                  </div>
+                </div>
+              </div>
+            </Card>
 
             {/* Vercel Build Failures in Monorepo */}
             <Card className="p-6 mb-6">
@@ -414,92 +526,90 @@ ELIFECYCLE Command failed with exit code 1.`}
                 </div>
               </div>
             </Card>
-          </section>
-        )}
 
-        {/* Component Changes Not Showing on Deployed Site */}
-        {activeSection === 'troubleshooting' && (
-          <Card className="p-6 mb-6">
-            <h3 className="text-xl font-bold mb-4 text-[var(--color-text-primary)]">
-              Component Changes Not Appearing on Deployed Site
-            </h3>
+            {/* Component Changes Not Showing on Deployed Site */}
+            {activeItemId === 'troubleshooting' && (
+              <Card className="p-6 mb-6">
+                <h3 className="text-xl font-bold mb-4 text-[var(--color-text-primary)]">
+                  Component Changes Not Appearing on Deployed Site
+                </h3>
 
-            <div className="space-y-6">
-              {/* Problem */}
-              <div>
-                <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Problem</h4>
-                <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-                  You've updated a component in the design-system package (e.g., Breadcrumbs hover states), but the changes don't appear on the deployed site, even after committing and pushing.
-                </p>
-              </div>
+                <div className="space-y-6">
+                  {/* Problem */}
+                  <div>
+                    <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Problem</h4>
+                    <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                      You've updated a component in the design-system package (e.g., Breadcrumbs hover states), but the changes don't appear on the deployed site, even after committing and pushing.
+                    </p>
+                  </div>
 
-              {/* Root Cause */}
-              <div>
-                <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Root Cause</h4>
-                <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-                  The examples in the studio app DO pull from the actual component code via imports. The issue is that Vercel isn't rebuilding the design-system package properly, so it's using stale dist files from a previous build.
-                </p>
-                <div className="bg-[var(--color-surface)] p-4 rounded-md border border-[var(--color-border)]">
-                  <p className="text-xs font-semibold text-[var(--color-text-primary)] mb-2">Understanding the Build Chain:</p>
-                  <ol className="text-xs text-[var(--color-text-secondary)] space-y-1 list-decimal list-inside">
-                    <li>Component source: <Code syntax="plain">design-system/molecules/Component/Component.tsx</Code></li>
-                    <li>Built to: <Code syntax="plain">design-system/dist/index.mjs</Code> (via tsup)</li>
-                    <li>Exported by: <Code syntax="plain">design-system/package.json</Code> exports field</li>
-                    <li>Imported by: <Code syntax="plain">molecule-registry.tsx</Code> from '@ecosystem/design-system'</li>
-                    <li>Rendered in: Studio app examples</li>
-                  </ol>
-                </div>
-              </div>
+                  {/* Root Cause */}
+                  <div>
+                    <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Root Cause</h4>
+                    <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                      The examples in the studio app DO pull from the actual component code via imports. The issue is that Vercel isn't rebuilding the design-system package properly, so it's using stale dist files from a previous build.
+                    </p>
+                    <div className="bg-[var(--color-surface)] p-4 rounded-md border border-[var(--color-border)]">
+                      <p className="text-xs font-semibold text-[var(--color-text-primary)] mb-2">Understanding the Build Chain:</p>
+                      <ol className="text-xs text-[var(--color-text-secondary)] space-y-1 list-decimal list-inside">
+                        <li>Component source: <Code syntax="plain">design-system/molecules/Component/Component.tsx</Code></li>
+                        <li>Built to: <Code syntax="plain">design-system/dist/index.mjs</Code> (via tsup)</li>
+                        <li>Exported by: <Code syntax="plain">design-system/package.json</Code> exports field</li>
+                        <li>Imported by: <Code syntax="plain">molecule-registry.tsx</Code> from '@ecosystem/design-system'</li>
+                        <li>Rendered in: Studio app examples</li>
+                      </ol>
+                    </div>
+                  </div>
 
-              {/* Diagnosis Steps */}
-              <div>
-                <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">How to Diagnose</h4>
-                <ol className="space-y-2 text-sm text-[var(--color-text-secondary)]">
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-primary)] font-bold">1.</span>
-                    <span>Verify source code has your changes: Check the actual .tsx component file</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-primary)] font-bold">2.</span>
-                    <span>Check local dist build has changes: <Code syntax="plain">grep "your-change" design-system/dist/index.mjs</Code></span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-primary)] font-bold">3.</span>
-                    <span>Verify examples import correctly: Check molecule-registry.tsx imports from '@ecosystem/design-system'</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-primary)] font-bold">4.</span>
-                    <span>If all above check out → It's a deployment build issue, not a code issue</span>
-                  </li>
-                </ol>
-              </div>
+                  {/* Diagnosis Steps */}
+                  <div>
+                    <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">How to Diagnose</h4>
+                    <ol className="space-y-2 text-sm text-[var(--color-text-secondary)]">
+                      <li className="flex items-start gap-2">
+                        <span className="text-[var(--color-primary)] font-bold">1.</span>
+                        <span>Verify source code has your changes: Check the actual .tsx component file</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[var(--color-primary)] font-bold">2.</span>
+                        <span>Check local dist build has changes: <Code syntax="plain">grep "your-change" design-system/dist/index.mjs</Code></span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[var(--color-primary)] font-bold">3.</span>
+                        <span>Verify examples import correctly: Check molecule-registry.tsx imports from '@ecosystem/design-system'</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[var(--color-primary)] font-bold">4.</span>
+                        <span>If all above check out → It's a deployment build issue, not a code issue</span>
+                      </li>
+                    </ol>
+                  </div>
 
-              {/* Solution */}
-              <div>
-                <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Solution</h4>
-                <ol className="space-y-3 text-sm text-[var(--color-text-secondary)]">
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-primary)] font-bold">1.</span>
-                    <div className="flex-1">
-                      <p className="mb-2">Ensure vercel.json uses turbo build:</p>
-                      <CollapsibleCodeBlock
-                        id="troubleshoot-vercel-config"
-                        code={`{
+                  {/* Solution */}
+                  <div>
+                    <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Solution</h4>
+                    <ol className="space-y-3 text-sm text-[var(--color-text-secondary)]">
+                      <li className="flex items-start gap-2">
+                        <span className="text-[var(--color-primary)] font-bold">1.</span>
+                        <div className="flex-1">
+                          <p className="mb-2">Ensure vercel.json uses turbo build:</p>
+                          <CollapsibleCodeBlock
+                            id="troubleshoot-vercel-config"
+                            code={`{
   "buildCommand": "turbo build --filter=@ecosystem/sage-design-studio",
   "installCommand": "pnpm install --frozen-lockfile"
 }`}
-                        defaultCollapsed={false}
-                        showCopy={true}
-                      />
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-primary)] font-bold">2.</span>
-                    <div className="flex-1">
-                      <p className="mb-2">Ensure package.json exports dist files:</p>
-                      <CollapsibleCodeBlock
-                        id="troubleshoot-exports"
-                        code={`"exports": {
+                            defaultCollapsed={false}
+                            showCopy={true}
+                          />
+                        </div>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[var(--color-primary)] font-bold">2.</span>
+                        <div className="flex-1">
+                          <p className="mb-2">Ensure package.json exports dist files:</p>
+                          <CollapsibleCodeBlock
+                            id="troubleshoot-exports"
+                            code={`"exports": {
   ".": {
     "types": "./dist/index.d.ts",
     "import": "./dist/index.mjs",
@@ -507,54 +617,56 @@ ELIFECYCLE Command failed with exit code 1.`}
     "default": "./dist/index.js"
   }
 }`}
-                        defaultCollapsed={false}
-                        showCopy={true}
-                      />
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-primary)] font-bold">3.</span>
-                    <span>Build locally to verify: <Code syntax="plain">pnpm build --filter=@ecosystem/design-system</Code></span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-primary)] font-bold">4.</span>
-                    <span>Push changes: <Code syntax="plain">git push</Code></span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-primary)] font-bold">5.</span>
-                    <span>Clear Vercel build cache: Project Settings → Clear Cache</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-primary)] font-bold">6.</span>
-                    <span>Redeploy in Vercel</span>
-                  </li>
-                </ol>
-              </div>
+                            defaultCollapsed={false}
+                            showCopy={true}
+                          />
+                        </div>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[var(--color-primary)] font-bold">3.</span>
+                        <span>Build locally to verify: <Code syntax="plain">pnpm build --filter=@ecosystem/design-system</Code></span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[var(--color-primary)] font-bold">4.</span>
+                        <span>Push changes: <Code syntax="plain">git push</Code></span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[var(--color-primary)] font-bold">5.</span>
+                        <span>Clear Vercel build cache: Project Settings → Clear Cache</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[var(--color-primary)] font-bold">6.</span>
+                        <span>Redeploy in Vercel</span>
+                      </li>
+                    </ol>
+                  </div>
 
-              {/* Prevention */}
-              <div>
-                <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Preventing This Issue</h4>
-                <ul className="space-y-2 text-sm text-[var(--color-text-secondary)]">
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-primary)]">•</span>
-                    <span>Always rebuild design-system locally after component changes</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-primary)]">•</span>
-                    <span>Verify dist files contain your changes before pushing</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-primary)]">•</span>
-                    <span>Remember: Examples use real components, not hardcoded props</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-primary)]">•</span>
-                    <span>If source is correct but deployed site is wrong → It's always a build/deployment issue</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </Card>
+                  {/* Prevention */}
+                  <div>
+                    <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Preventing This Issue</h4>
+                    <ul className="space-y-2 text-sm text-[var(--color-text-secondary)]">
+                      <li className="flex items-start gap-2">
+                        <span className="text-[var(--color-primary)]">•</span>
+                        <span>Always rebuild design-system locally after component changes</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[var(--color-primary)]">•</span>
+                        <span>Verify dist files contain your changes before pushing</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[var(--color-primary)]">•</span>
+                        <span>Remember: Examples use real components, not hardcoded props</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[var(--color-primary)]">•</span>
+                        <span>If source is correct but deployed site is wrong → It's always a build/deployment issue</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </Card>
+            )}
+          </section>
         )}
       </div>
     </div>

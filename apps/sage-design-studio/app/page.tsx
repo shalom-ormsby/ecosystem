@@ -37,7 +37,17 @@ type Section =
 const routeConfig: RouteConfig = {
   overview: { label: 'Overview' },
   architecture: { label: 'Architecture' },
-  'adding-components': { label: 'Adding Components' },
+  'adding-components': {
+    label: 'Adding Components',
+    children: {
+      methodology: { label: 'Methodology' },
+      atoms: { label: 'Adding Atoms' },
+      molecules: { label: 'Adding Molecules' },
+      modifying: { label: 'Modifying Components' },
+      tokens: { label: 'Adding Tokens' },
+      troubleshooting: { label: 'Troubleshooting' },
+    }
+  },
   'common-patterns': { label: 'Common Patterns' },
   contributing: { label: 'Contributing' },
   tokens: {
@@ -200,6 +210,10 @@ export default function StudioPage() {
     if (path === 'overview') {
       setActiveSection('overview');
       setActiveItemId('overview');
+    } else if (path.startsWith('adding-components')) {
+      setActiveSection('adding-components');
+      const itemId = path.replace('adding-components-', '');
+      setActiveItemId(itemId);
     } else if (path.startsWith('tokens')) {
       setActiveSection('tokens');
       // Extract specific token item (e.g., 'tokens-colors' -> 'colors')
@@ -282,7 +296,12 @@ export default function StudioPage() {
           <div className="flex-1 px-4 sm:px-6 lg:px-8 py-8 w-full max-w-7xl mx-auto min-w-0">
             {activeSection === 'overview' && <OverviewSection />}
             {activeSection === 'architecture' && <ArchitectureSection breadcrumbs={breadcrumbs} />}
-            {activeSection === 'adding-components' && <AddingComponentsSection breadcrumbs={breadcrumbs} />}
+            {activeSection === 'adding-components' && (
+              <AddingComponentsSection
+                breadcrumbs={breadcrumbs}
+                activeItemId={activeItemId}
+              />
+            )}
             {activeSection === 'common-patterns' && <CommonPatternsSection breadcrumbs={breadcrumbs} />}
             {activeSection === 'contributing' && <ContributingSection breadcrumbs={breadcrumbs} />}
             {activeSection === 'tokens' && (
