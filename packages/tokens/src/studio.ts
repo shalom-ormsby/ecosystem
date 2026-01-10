@@ -85,7 +85,7 @@ export const studioTokens = {
       // Foregrounds
       foreground: '#fafafa',
       foregroundSecondary: '#a3a3a3',
-      foregroundTertiary: '#525252',
+      foregroundTertiary: '#858585',
 
       // Brand
       primary: '#ffffff',
