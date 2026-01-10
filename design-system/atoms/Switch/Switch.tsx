@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-export interface SwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface SwitchProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'size' | 'onChange'> {
   /**
    * Whether the switch is checked
    */
@@ -58,8 +58,9 @@ export interface SwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputEle
  * <Switch size="lg" checked={value} onCheckedChange={setValue} />
  * ```
  */
-export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
-  ({ checked = false, onCheckedChange, size = 'md', disabled = false, className = '', ...props }, ref) => {
+export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
+
+  ({ checked = false, onCheckedChange, size = 'md', disabled = false, className = '', onClick, ...props }, ref) => {
     const sizes = {
       sm: {
         track: 'w-8 h-4',
@@ -78,25 +79,27 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
       },
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (onCheckedChange) {
-        onCheckedChange(e.target.checked);
-      }
-      if (props.onChange) {
-        props.onChange(e);
-      }
-    };
+    const safeSize = (size && sizes[size]) ? size : 'md';
+    const { track, thumb, translate } = sizes[safeSize];
 
     return (
       <button
         type="button"
         role="switch"
         aria-checked={checked}
+        data-state={checked ? 'checked' : 'unchecked'}
         disabled={disabled}
-        onClick={() => !disabled && onCheckedChange?.(!checked)}
+        ref={ref}
+        {...props}
+        onClick={(e) => {
+          onClick?.(e);
+          if (!disabled) {
+            onCheckedChange?.(!checked);
+          }
+        }}
         className={`
           relative inline-flex items-center
-          ${sizes[size].track}
+          ${track}
           rounded-full
           transition-colors duration-200 ease-in-out
           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
@@ -108,23 +111,15 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
           ${className}
         `}
       >
-        <input
-          ref={ref}
-          type="checkbox"
-          checked={checked}
-          onChange={handleChange}
-          disabled={disabled}
-          className="sr-only"
-          {...props}
-        />
         <span
           className={`
-            ${sizes[size].thumb}
+            ${thumb}
             rounded-full
             bg-white
             shadow-lg
             transform transition-transform duration-200 ease-in-out
-            ${checked ? sizes[size].translate : 'translate-x-0.5'}
+            pointer-events-none
+            ${checked ? translate : 'translate-x-0.5'}
           `}
         />
       </button>
