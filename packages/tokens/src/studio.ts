@@ -28,7 +28,7 @@ export const studioTokens = {
       accentForeground: '#ffffff',
 
       // Borders
-      border: '#e5e5e5',
+      border: '#d4d4d4',
       borderSubtle: '#f5f5f5',
 
       // States
@@ -98,7 +98,7 @@ export const studioTokens = {
       accentForeground: '#ffffff',
 
       // Borders
-      border: '#262626',
+      border: '#404040',
       borderSubtle: '#1a1a1a',
 
       // States
