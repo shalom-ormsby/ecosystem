@@ -29,6 +29,11 @@ export interface SwitchProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonE
    * Additional className for custom styling
    */
   className?: string;
+
+  /**
+   * Optional label text displayed next to the switch
+   */
+  label?: string;
 }
 
 /**
@@ -47,11 +52,8 @@ export interface SwitchProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonE
  * // Basic usage
  * <Switch checked={enabled} onCheckedChange={setEnabled} />
  *
- * // Controlled with label
- * <label className="flex items-center gap-2">
- *   <Switch checked={darkMode} onCheckedChange={setDarkMode} />
- *   <span>Dark Mode</span>
- * </label>
+ * // Controlled with label prop
+ * <Switch checked={darkMode} onCheckedChange={setDarkMode} label="Dark Mode" />
  *
  * // Different sizes
  * <Switch size="sm" checked={value} onCheckedChange={setValue} />
@@ -60,7 +62,7 @@ export interface SwitchProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonE
  */
 export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
 
-  ({ checked = false, onCheckedChange, size = 'md', disabled = false, className = '', onClick, ...props }, ref) => {
+  ({ checked = false, onCheckedChange, size = 'md', disabled = false, className = '', label, onClick, ...props }, ref) => {
     const sizes = {
       sm: {
         track: 'w-8 h-4',
@@ -82,7 +84,7 @@ export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     const safeSize = (size && sizes[size]) ? size : 'md';
     const { track, thumb, translate } = sizes[safeSize];
 
-    return (
+    const switchComponent = (
       <button
         type="button"
         role="switch"
@@ -108,7 +110,7 @@ export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
             : 'bg-[var(--color-border)] focus-visible:ring-[var(--color-border)]'
           }
           ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
-          ${className}
+          ${!label ? className : ''}
         `}
       >
         <span
@@ -124,6 +126,25 @@ export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
         />
       </button>
     );
+
+    if (label) {
+      return (
+        <div className={`inline-flex items-center gap-3 ${className}`}>
+          {switchComponent}
+          <label
+            onClick={() => !disabled && onCheckedChange?.(!checked)}
+            className={`
+              text-sm font-medium text-[var(--color-text-primary)]
+              ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}
+            `}
+          >
+            {label}
+          </label>
+        </div>
+      );
+    }
+
+    return switchComponent;
   }
 );
 

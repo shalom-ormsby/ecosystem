@@ -709,6 +709,7 @@ useEffect(() => {
         description: 'Size variant - sm (w-8), md (w-11), lg (w-14)',
       },
       disabled: { type: 'boolean', default: false, description: 'When true, prevents interaction and shows disabled state' },
+      label: { type: 'text', default: 'Airplane Mode', description: 'Optional label displayed next to the switch' },
     },
     examples: [
       { label: 'Small', props: { size: 'sm', checked: false }, children: null },

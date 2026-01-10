@@ -40,8 +40,8 @@ pnpm add @sds/ui`;
     const relatedExports = componentName === 'Select'
       ? ['Select', 'SelectTrigger', 'SelectContent', 'SelectItem', 'SelectValue']
       : componentName === 'Card'
-      ? ['Card', 'CardHeader', 'CardTitle', 'CardDescription', 'CardContent', 'CardFooter']
-      : [componentName];
+        ? ['Card', 'CardHeader', 'CardTitle', 'CardDescription', 'CardContent', 'CardFooter']
+        : [componentName];
 
     const packageName = designSystemComponents.includes(componentName)
       ? '@ecosystem/design-system'
@@ -157,7 +157,7 @@ pnpm add @sds/ui`;
           ) : componentName === 'Code' ? (
             <div className="w-full max-w-2xl space-y-2">
               <Component inline={false} showCopy={true} {...props}>
-{`function fibonacci(n) {
+                {`function fibonacci(n) {
   if (n <= 1) return n;
   return fibonacci(n - 1) + fibonacci(n - 2);
 }
@@ -177,18 +177,6 @@ console.log(result); // 55`}
               ]}
               onSelect={(value: string) => console.log('Selected:', value)}
             />
-          ) : componentName === 'Switch' ? (
-            <div className="flex items-center gap-3">
-              <Component
-                {...props}
-                onCheckedChange={(checked: boolean) => {
-                  updateProp('checked', checked);
-                }}
-              />
-              <span className="text-sm text-[var(--color-text-secondary)]">
-                {props.checked ? 'On' : 'Off'}
-              </span>
-            </div>
           ) : (
             <Component {...props}>
               {componentName === 'Button' ? 'Click me' : props.children || config.examples[0]?.children}
@@ -248,8 +236,8 @@ console.log(result); // 55`}
                             ${props[propName] === option
                               ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-sm'
                               : componentName === 'Code' && propName === 'syntax' && props[propName] === 'all'
-                              ? 'bg-[var(--color-surface)] text-[var(--color-text-muted)] opacity-50 border border-[var(--color-border)]'
-                              : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-[var(--color-primary)]'
+                                ? 'bg-[var(--color-surface)] text-[var(--color-text-muted)] opacity-50 border border-[var(--color-border)]'
+                                : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-[var(--color-primary)]'
                             }
                           `}
                         >
