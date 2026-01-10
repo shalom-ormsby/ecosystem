@@ -6,14 +6,19 @@ This document outlines the strategy to reach full feature parity with Shadcn/ui 
 
 Before beginning component migration, verify the following:
 
-1. **Token Integration Verification**
-   - Confirm Tailwind config correctly maps `primary`, `secondary`, etc. to CSS variables
-   - Test one Shadcn component end-to-end to validate token mapping
-   - Document any required token transformation patterns
+1. **Token Integration Automation**
+   - Configure `components.json` (Shadcn CLI config) to automatically use SDS CSS variables
+   - Update Shadcn's theme mapping to point to our existing tokens (e.g., `--color-primary`)
+   - Test one component end-to-end to validate automated token mapping works
+   - **Goal**: Zero manual token refactoring per component
+   - Document the `components.json` configuration for reference
 
-2. **Legacy Component Audit**
+2. **Legacy Component Audit & CSS Isolation**
    - Identify all current usages of legacy components across the ecosystem
    - Document breaking changes for each migration
+   - **Prevent CSS Conflicts**: Ensure legacy component styles are scoped (module CSS, unique class prefixes)
+   - Verify no global style bleeding between legacy `Modal` and new `Dialog`, etc.
+   - Consider namespacing legacy components (e.g., `.legacy-modal`) if conflicts arise
 
 3. **Testing Infrastructure**
    - Set up Vitest + React Testing Library for unit tests
@@ -103,14 +108,14 @@ For each component added, follow this workflow:
     ```
 
 2.  **Instant Refine**: Immediately refactor the added component:
-    *   **Tokens**: Verify Tailwind color mappings work with our CSS variables (verified in Prerequisites)
+    *   **Tokens**: Should be automatic via `components.json` config - verify it works, no manual changes needed
     *   **Exports**: Export the component from `packages/ui/src/index.ts`
     *   **Customize**: Apply SDS-specific defaults or styling if needed (document all deviations)
 
-3.  **Testing**: Write comprehensive tests
-    *   Unit tests with Vitest + React Testing Library (80% coverage minimum)
-    *   Accessibility tests with axe-core
-    *   Visual regression tests
+3.  **Testing**: Write tests based on phase requirements (see Staged Quality Gates)
+    *   **Phase 1 (Critical)**: Critical path tests + accessibility tests with axe-core
+    *   **Phase 2/3**: Same as Phase 1 (move fast, backfill later)
+    *   **Post-Phase 3**: Backfill to 80% coverage + visual regression baseline
 
 4.  **Documentation**:
     *   Add component to `apps/sage-design-studio/.../component-registry.tsx`
@@ -129,10 +134,11 @@ We currently have a split state between `packages/ui` (New) and `design-system` 
 
 **Migration Strategy:**
 1.  **Freeze Legacy**: Stop adding to `design-system/atoms|molecules`
-2.  **Replace**: For items like `Modal` (Legacy), install Shadcn `Dialog` into `packages/ui` and deprecate the legacy `Modal`
-3.  **Add Deprecation Warnings**: Update legacy components with console warnings pointing to new imports
-4.  **Update Consumers**: Migrate all internal usage to `@sds/ui` imports
-5.  **Breaking Change**: Remove legacy components in a major version bump with proper communication
+2.  **Isolate CSS**: Ensure legacy styles are scoped to prevent conflicts with new components (critical during Phases 1-5 when both exist)
+3.  **Replace**: For items like `Modal` (Legacy), install Shadcn `Dialog` into `packages/ui` and deprecate the legacy `Modal`
+4.  **Add Deprecation Warnings**: Update legacy components with console warnings pointing to new imports
+5.  **Update Consumers**: Migrate all internal usage to `@sds/ui` imports
+6.  **Breaking Change**: Remove legacy components in a major version bump with proper communication
 
 **Legacy Components Requiring Migration:**
 - Dialog (Modal) → `@sds/ui/dialog`
@@ -144,37 +150,64 @@ We currently have a split state between `packages/ui` (New) and `design-system` 
 - Tooltip → `@sds/ui/tooltip`
 - Aspect Ratio (AspectImage) → `@sds/ui/aspect-ratio`
 
-### C. Quality Gates
+### C. Staged Quality Gates
 
-All components must meet these standards before being marked "Done":
+To maximize velocity while maintaining quality, we use **staged quality gates** that increase rigor after core functionality is complete.
 
-**Accessibility:**
+#### Phase 1-3: Velocity-Optimized Quality Gate
+
+**Purpose**: Move fast, ship components, get them in use
+**Requirements:**
+
+**Accessibility (Non-negotiable):**
 - WCAG 2.1 AA compliance
 - Keyboard navigation support
 - Screen reader compatibility
 - Focus management
+- Passing axe-core automated tests
 
-**Testing:**
-- 80% minimum unit test coverage
-- All interactive states tested
-- Accessibility tests passing
-- Visual regression baseline established
+**Testing (Critical Path Only):**
+- Test primary user interactions (click, type, submit, etc.)
+- Test accessibility with axe-core
+- Test dark mode support
+- **No coverage requirement** - focus on critical paths
+- **No visual regression** - defer until Post-Phase 3
 
 **Browser Support:**
-- Latest 2 versions of Chrome, Firefox, Safari, Edge
-- Mobile Safari and Chrome on iOS/Android
+- Manual testing in Chrome + Safari (primary browsers)
+- Defer exhaustive cross-browser testing
 
 **Design System Integration:**
-- Uses SDS design tokens
+- Uses SDS design tokens (automated via `components.json`)
 - Supports light and dark modes
-- Responsive behavior documented
 - Consistent API patterns with existing components
 
-**Documentation:**
-- Props table with descriptions
-- Usage examples for common scenarios
-- Accessibility notes
-- Migration guide (for legacy replacements)
+**Documentation (Lightweight):**
+- Add to component registry with basic example
+- Document props and variants
+- Defer comprehensive docs
+
+#### Post-Phase 3: Backfill Quality Gate
+
+**Purpose**: Harden components for production, increase confidence
+
+**Testing Backfill:**
+- Increase coverage to 80% across all components
+- Test all interactive states and edge cases
+- Establish visual regression baseline (Chromatic/Percy)
+- Add integration tests for complex components
+
+**Browser Support Backfill:**
+- Test in Firefox, Edge, mobile browsers
+- Fix cross-browser issues
+
+**Documentation Backfill:**
+- Add comprehensive usage examples
+- Document all props with descriptions
+- Add accessibility usage notes
+- Create migration guides for legacy replacements
+
+**Rationale**: This approach prevents testing overhead from blocking component availability in Phases 1-3, while ensuring we don't ship inaccessible or broken components. We backfill comprehensive testing once all primitives exist.
 
 ## 3. Organization Proposal
 
@@ -213,16 +246,18 @@ Full page layouts or entire app shells.
 - Data Table (new)
 
 **Additional Tasks:**
-- Complete all Prerequisites (token verification, testing setup)
-- Validate entire adoption workflow with first component
-- Document any token transformation patterns
-- Establish baseline quality gates
+- **Configure `components.json`** for automated token mapping (Prerequisite 1)
+- Verify CSS isolation between legacy and new components (Prerequisite 2)
+- Set up testing infrastructure (Vitest + axe-core)
+- Validate entire adoption workflow with first component (e.g., Alert)
+- Establish velocity-optimized quality gate baseline
 
 **Success Criteria:**
-- All 8 critical components passing quality gates
+- All 8 critical components passing Phase 1-3 quality gates
 - Testing infrastructure operational
-- Token integration confirmed working
-- Component registry updated
+- **Zero manual token refactoring required** (automated via `components.json`)
+- No CSS conflicts between legacy and new components
+- Component registry updated with all 8 components
 
 ---
 
@@ -275,6 +310,8 @@ Full page layouts or entire app shells.
 - 100% Shadcn component parity achieved
 - All legacy components have modern equivalents
 - Complete primitive (Tier 1) library ready
+
+**Note**: After Phase 3, schedule a **Testing & Documentation Backfill Sprint** to harden all components before Phase 4. This includes 80% test coverage, visual regression, comprehensive docs, and cross-browser testing.
 
 ---
 
