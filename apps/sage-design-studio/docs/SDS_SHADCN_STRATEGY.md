@@ -2,6 +2,29 @@
 
 This document outlines the strategy to reach full feature parity with Shadcn/ui efficiently and ethically, while organizing the system for the long-term goal of enabling rapid development of complex applications.
 
+## Prerequisites
+
+Before beginning component migration, verify the following:
+
+1. **Token Integration Verification**
+   - Confirm Tailwind config correctly maps `primary`, `secondary`, etc. to CSS variables
+   - Test one Shadcn component end-to-end to validate token mapping
+   - Document any required token transformation patterns
+
+2. **Legacy Component Audit**
+   - Identify all current usages of legacy components across the ecosystem
+   - Document breaking changes for each migration
+
+3. **Testing Infrastructure**
+   - Set up Vitest + React Testing Library for unit tests
+   - Configure accessibility testing with axe-core
+   - Establish visual regression testing (Chromatic or Percy)
+
+4. **Package Architecture**
+   - Verify monorepo build configuration (Turborepo)
+   - Ensure shared Radix UI version management across workspace
+   - Set up independent semantic versioning for packages
+
 ## 1. Component State Analysis
 
 The following table compares the current state of SDS components against the standard Shadcn UI library.
@@ -13,8 +36,8 @@ The following table compares the current state of SDS components against the sta
 
 | Component | SDS Status | Shadcn | Priority | Notes |
 | :--- | :--- | :--- | :--- | :--- |
-| **Accordion** | ❌ Missing | Available | High | Essential for FAQs and collapsed content. |
-| **Alert** | ❌ Missing | Available | High | Essential for feedback messages. |
+| **Accordion** | ❌ Missing | Available | Medium | Essential for FAQs and collapsed content. |
+| **Alert** | ❌ Missing | Available | **Critical** | Essential for feedback messages. |
 | **Alert Dialog** | ❌ Missing | Available | Medium | |
 | **Aspect Ratio** | ⚠️ Legacy (`AspectImage`) | Available | Low | |
 | **Avatar** | ⚠️ Legacy | Available | High | Needs migration to `@sds/ui`. |
@@ -29,7 +52,7 @@ The following table compares the current state of SDS components against the sta
 | **Combobox** | ❌ Missing | Available | High | Often requested for forms. |
 | **Command** | ❌ Missing | Available | High | Basis for command palettes. |
 | **ContextMenu** | ❌ Missing | Available | Low | |
-| **Data Table** | ❌ Missing | Available | High | Critical for dashboards. |
+| **Data Table** | ❌ Missing | Available | **Critical** | Essential for dashboards and data display. |
 | **Date Picker** | ❌ Missing | Available | Medium | |
 | **Dialog (Modal)** | ⚠️ Legacy (`Modal`) | Available | **Critical** | Major UI building block. |
 | **Drawer** | ❌ Missing | Available | Medium | Good for mobile. |
@@ -44,7 +67,7 @@ The following table compares the current state of SDS components against the sta
 | **Pagination** | ❌ Missing | Available | Medium | |
 | **Popover** | ❌ Missing | Available | High | |
 | **Progress** | ⚠️ Legacy (`ProgressBar`) | Available | Medium | Needs migration. |
-| **Radio Group** | ❌ Missing | Available | High | Basic form element. |
+| **Radio Group** | ❌ Missing | Available | **Critical** | Basic form element. |
 | **Resizable** | ❌ Missing | Available | Low | |
 | **Scroll Area** | ✅ @sds/ui | Available | Done | |
 | **Select** | ✅ @sds/ui | Available | Done | |
@@ -69,21 +92,89 @@ To efficiently reach parity while maintaining an "ethical" and high-quality code
 ### A. The "Adoption" Workflow (Ethical & Efficient)
 Shadcn/ui is designed to be "owned" code, not a node_module dependency. This is the most ethical usage as it complies with their philosophy: copy, paste, and customize.
 
+#### Component Addition Checklist
+
+For each component added, follow this workflow:
+
 1.  **Automated Ingestion**: Use the `shadcn` CLI to pull component code directly into `packages/ui`.
     ```bash
     cd packages/ui
     npx shadcn@latest add [component-name]
     ```
+
 2.  **Instant Refine**: Immediately refactor the added component:
-    *   **Tokens**: Replace hardcoded Tailwind colors (e.g., `bg-primary`) with our CSS variables (`bg-[var(--color-primary)]`) if our Tailwind config doesn't auto-map them. *Note: Our Tailwind config likely maps `primary` to `var(--color-primary)`, so this might be automatic.*
-    *   **Exports**: Export the component from `packages/ui/src/index.ts`.
-3.  **Registry Update**: Add the component to `apps/sage-design-studio/.../component-registry.tsx` to visualize it immediately.
+    *   **Tokens**: Verify Tailwind color mappings work with our CSS variables (verified in Prerequisites)
+    *   **Exports**: Export the component from `packages/ui/src/index.ts`
+    *   **Customize**: Apply SDS-specific defaults or styling if needed (document all deviations)
+
+3.  **Testing**: Write comprehensive tests
+    *   Unit tests with Vitest + React Testing Library (80% coverage minimum)
+    *   Accessibility tests with axe-core
+    *   Visual regression tests
+
+4.  **Documentation**:
+    *   Add component to `apps/sage-design-studio/.../component-registry.tsx`
+    *   Document API, props, and usage examples
+    *   Note any customizations or deviations from Shadcn defaults
+
+5.  **Review**: Code review focusing on:
+    *   Token integration
+    *   Accessibility compliance (WCAG 2.1 AA)
+    *   Browser compatibility
+    *   Dark mode support
 
 ### B. Migration of Legacy Components
+
 We currently have a split state between `packages/ui` (New) and `design-system` (Old).
-1.  **Freeze Legacy**: Stop adding to `design-system/atoms|molecules`.
-2.  **Replace**: For items like `Modal` (Legacy), install Shadcn `Dialog` into `packages/ui` and deprecate the legacy `Modal`.
-3.  **Migrate**: Update consumers to import from `@sds/ui`.
+
+**Migration Strategy:**
+1.  **Freeze Legacy**: Stop adding to `design-system/atoms|molecules`
+2.  **Replace**: For items like `Modal` (Legacy), install Shadcn `Dialog` into `packages/ui` and deprecate the legacy `Modal`
+3.  **Add Deprecation Warnings**: Update legacy components with console warnings pointing to new imports
+4.  **Update Consumers**: Migrate all internal usage to `@sds/ui` imports
+5.  **Breaking Change**: Remove legacy components in a major version bump with proper communication
+
+**Legacy Components Requiring Migration:**
+- Dialog (Modal) → `@sds/ui/dialog`
+- Dropdown Menu → `@sds/ui/dropdown-menu`
+- Form → `@sds/ui/form`
+- Avatar → `@sds/ui/avatar`
+- Breadcrumb → `@sds/ui/breadcrumb`
+- Progress → `@sds/ui/progress`
+- Tooltip → `@sds/ui/tooltip`
+- Aspect Ratio (AspectImage) → `@sds/ui/aspect-ratio`
+
+### C. Quality Gates
+
+All components must meet these standards before being marked "Done":
+
+**Accessibility:**
+- WCAG 2.1 AA compliance
+- Keyboard navigation support
+- Screen reader compatibility
+- Focus management
+
+**Testing:**
+- 80% minimum unit test coverage
+- All interactive states tested
+- Accessibility tests passing
+- Visual regression baseline established
+
+**Browser Support:**
+- Latest 2 versions of Chrome, Firefox, Safari, Edge
+- Mobile Safari and Chrome on iOS/Android
+
+**Design System Integration:**
+- Uses SDS design tokens
+- Supports light and dark modes
+- Responsive behavior documented
+- Consistent API patterns with existing components
+
+**Documentation:**
+- Props table with descriptions
+- Usage examples for common scenarios
+- Accessibility notes
+- Migration guide (for legacy replacements)
 
 ## 3. Organization Proposal
 
@@ -106,8 +197,262 @@ These are functional, feature-ready compositions of Primitives. They solve a spe
 Full page layouts or entire app shells.
 *   *Examples*: `SaaSDashboardDetails`, `MarketingLandingPage`, `SettingsLayout`.
 
-## 4. Next Steps (Action Plan)
+## 4. Phased Migration Plan
 
-1.  **Execute Component Batch 1**: Install "Critical" missing components (`Dialog`, `Dropdown Menu`, `Sheet`, `Table`, `Form`).
-2.  **Unify**: Deprecate legacy duplicates in `design-system` and point them to `@sds/ui`.
-3.  **Refine Registry**: Update the Studio Sidebar to group components by these Tiers (Primitives vs. Assemblies).
+### Phase 1: Critical Components + Foundation
+**Goal**: Establish core building blocks and validate workflow
+
+**Components to Add:**
+- Alert (new)
+- Dialog (replaces Modal)
+- Dropdown Menu (replaces Dropdown)
+- Form (replaces legacy Form)
+- Radio Group (new)
+- Sheet (new)
+- Table (new)
+- Data Table (new)
+
+**Additional Tasks:**
+- Complete all Prerequisites (token verification, testing setup)
+- Validate entire adoption workflow with first component
+- Document any token transformation patterns
+- Establish baseline quality gates
+
+**Success Criteria:**
+- All 8 critical components passing quality gates
+- Testing infrastructure operational
+- Token integration confirmed working
+- Component registry updated
+
+---
+
+### Phase 2: High Priority Components
+**Goal**: Add frequently-requested form elements and UI patterns
+
+**Components to Add:**
+- Avatar (migrate from legacy)
+- Combobox
+- Command
+- Popover
+- Tabs
+- Textarea
+- Sonner (Toast replacement/enhancement)
+
+**Success Criteria:**
+- All high-priority components available
+- Legacy Avatar migrated
+- Form-building capabilities complete
+
+---
+
+### Phase 3: Complete Component Coverage
+**Goal**: Achieve 100% Shadcn parity - add ALL remaining components
+
+**Components to Add:**
+- Accordion
+- Alert Dialog
+- Aspect Ratio (migrate from AspectImage)
+- Breadcrumb (migrate from legacy)
+- Calendar
+- Carousel
+- Collapsible
+- Context Menu
+- Date Picker
+- Drawer
+- Hover Card
+- Input OTP
+- Menubar
+- Navigation Menu
+- Pagination
+- Progress (migrate from ProgressBar)
+- Resizable
+- Slider
+- Toggle
+- Toggle Group
+- Tooltip (migrate from legacy)
+
+**Success Criteria:**
+- 100% Shadcn component parity achieved
+- All legacy components have modern equivalents
+- Complete primitive (Tier 1) library ready
+
+---
+
+### Phase 4: Legacy Deprecation
+**Goal**: Prepare ecosystem for breaking changes
+
+**Tasks:**
+- Add deprecation warnings to all legacy components
+- Create migration guides for each legacy → modern component
+- Update all internal apps to use `@sds/ui` imports
+- Document breaking changes for next major version
+- Communicate timeline to all consumers
+
+**Success Criteria:**
+- Zero internal usage of legacy components
+- Migration guides published
+- Deprecation warnings active
+- Breaking change documentation complete
+
+---
+
+### Phase 5: Legacy Removal (Breaking Change)
+**Goal**: Clean up codebase and remove technical debt
+
+**Tasks:**
+- Remove all legacy components from `design-system`
+- Publish major version bump
+- Archive old package or mark as deprecated
+- Update all documentation to reference only `@sds/ui`
+
+**Success Criteria:**
+- Clean, unified component library
+- No duplicate components
+- Simplified package structure
+- Reduced bundle size
+
+---
+
+### Phase 6: Assemblies & Templates (Solopreneur Acceleration)
+**Goal**: Build high-velocity development tools by assembling primitives into ready-to-use components
+
+**Package Structure:**
+
+#### `@sds/assemblies` (New Package)
+Feature-ready compositions that solve specific UI problems:
+
+**Authentication & User Management:**
+- LoginForm (email/password + OAuth options)
+- SignupForm (validation + password strength)
+- ForgotPasswordForm
+- UserProfileCard
+- AccountSettingsPanel
+
+**E-commerce:**
+- ProductCard
+- PricingTable (with tier comparison)
+- CheckoutSummary
+- CreditCardForm (with validation)
+- OrderHistoryTable
+
+**Content & Communication:**
+- CommentSection (nested threads)
+- NewsletterSignup
+- ContactForm
+- FeedbackWidget
+- NotificationCenter
+
+**Dashboard & Data:**
+- StatCard (with trend indicators)
+- ChartContainer (with legend, tooltips)
+- FilterPanel
+- DataTableWithFilters
+- KPIDashboard
+
+**Onboarding & Modals:**
+- OnboardingFlow (multi-step wizard)
+- CookieConsent
+- UpgradePrompt
+- DeleteConfirmationDialog
+
+#### `@sds/templates` (New Package)
+Full page layouts and app shells:
+
+**Marketing:**
+- LandingPageHero
+- FeaturesGrid
+- PricingPage
+- TestimonialsSection
+- BlogPostLayout
+
+**Application:**
+- SaaSDashboard
+- SettingsLayout (with sidebar navigation)
+- UserProfilePage
+- DataTablePage
+- EmptyState templates
+
+**Shared Layouts:**
+- AppShell (header, sidebar, content)
+- AuthenticationLayout
+- MarketingLayout
+- DocumentationLayout
+
+**Phase 6 Tasks:**
+1. Create `@sds/assemblies` package with proper build config
+2. Create `@sds/templates` package
+3. Build assemblies by composing Tier 1 primitives
+4. Add comprehensive examples to design studio
+5. Create template showcase gallery
+6. Document composition patterns and best practices
+7. Add copy-paste code snippets for rapid integration
+
+**Success Criteria:**
+- 20+ production-ready assemblies
+- 10+ full page templates
+- All assemblies have usage examples
+- Copy-paste snippets available
+- Templates significantly reduce time-to-market for common pages
+- Solopreneurs can build complete app pages in hours instead of days
+
+---
+
+## 5. Success Metrics & Tracking
+
+**Component Parity:**
+- Track completion percentage for each phase
+- Target: 100% Shadcn parity by end of Phase 3
+
+**Adoption Metrics:**
+- Monitor usage of `@sds/ui` vs legacy components across all apps
+- Track import statements in codebase
+- Target: 100% migration before Phase 5
+
+**Quality Metrics:**
+- Test coverage percentage (target: 80%+)
+- Accessibility audit pass rate (target: 100% WCAG 2.1 AA)
+- Visual regression test stability
+
+**Developer Velocity (Phase 6):**
+- Time to build common pages (before vs after assemblies/templates)
+- Reduction in boilerplate code
+- Developer satisfaction surveys
+
+**Bundle Size:**
+- Monitor package size with each addition
+- Ensure tree-shaking works properly
+- Target: No more than 20% increase from current baseline
+
+**Maintenance Burden:**
+- Track time spent on component updates
+- Monitor dependency update frequency
+- Track number of component-related bugs
+
+---
+
+## 6. Customization Principles
+
+When adapting Shadcn components for SDS:
+
+**Prefer Composition Over Modification:**
+- Build on top of Shadcn primitives rather than modifying internals
+- Use wrapper components for SDS-specific behavior
+
+**Maintain Radix Primitives Unchanged:**
+- Don't modify underlying Radix UI components
+- Keep accessibility features intact
+
+**Styling Guidelines:**
+- Use SDS design tokens for all styling
+- Customize only visual appearance and defaults
+- Maintain responsive behavior patterns
+
+**Document All Deviations:**
+- Note why customization was needed
+- Document impact on upgradability
+- Provide migration path for future Shadcn updates
+
+**Upgradability Strategy:**
+- Keep customizations minimal to ease upstream syncing
+- Tag customized sections in code with `// SDS-specific`
+- Periodically review Shadcn updates for improvements
