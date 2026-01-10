@@ -2,12 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+html.dark {
+  background-color: black;
+}
+
 /* Clash Display - True Variable Font (Fontshare) */
 @font-face {
   font-family: 'Clash Display';
   src: url('https://cdn.fontshare.com/wf/DK2FOA46SRWJ5HXWWU5TK4N4CMHYD236/FPEAXZZSH5L2K5MTJFRIWD2MC32IJMN3/THOOS4VOCKT7H2XEB27NQDYM2NYS4AAR.woff2') format('woff2'),
-       url('https://cdn.fontshare.com/wf/DK2FOA46SRWJ5HXWWU5TK4N4CMHYD236/FPEAXZZSH5L2K5MTJFRIWD2MC32IJMN3/THOOS4VOCKT7H2XEB27NQDYM2NYS4AAR.woff') format('woff');
-  font-weight: 200 700; /* Variable font weight range */
+    url('https://cdn.fontshare.com/wf/DK2FOA46SRWJ5HXWWU5TK4N4CMHYD236/FPEAXZZSH5L2K5MTJFRIWD2MC32IJMN3/THOOS4VOCKT7H2XEB27NQDYM2NYS4AAR.woff') format('woff');
+  font-weight: 200 700;
+  /* Variable font weight range */
   font-display: swap;
   font-style: normal;
   font-named-instance: 'Regular';
@@ -28,7 +33,12 @@
   }
 
   /* Headings: Instrument Sans - elegant, modern, versatile */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-sage-body), system-ui, sans-serif;
   }
 

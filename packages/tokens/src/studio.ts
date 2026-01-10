@@ -78,7 +78,7 @@ export const studioTokens = {
   dark: {
     colors: {
       // Backgrounds
-      background: '#0a0a0a',
+      background: '#000000',
       backgroundSecondary: '#171717',
       backgroundTertiary: '#262626',
 
