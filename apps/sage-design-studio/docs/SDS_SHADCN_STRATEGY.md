@@ -662,6 +662,7 @@ When adapting Shadcn components for SDS:
 - ✅ Exported from \`packages/ui/src/index.ts\`
 - ✅ Added to navigation tree and route config
 - ✅ Registered in \`component-registry.tsx\` with examples
+- ✅ **Fixed TS2742 Error**: Added explicit type annotations (\`React.ForwardRefExoticComponent\`) to all forwardRef components to prevent portability issues
 - ✅ Verified build success
 
 ### ✅ Combobox Component (COMPLETED)
@@ -735,6 +736,11 @@ When adapting Shadcn components for SDS:
 - ✅ Studio app: Production build successful
 - ✅ Zero TypeScript errors
 - ✅ Zero webpack/build errors
+
+**Lessons Learned**:
+- ⚠️ **TS2742 Error Fixed**: Initial Command component caused TS2742 portability errors on all forwardRef components. Fixed by adding explicit type annotations: \`React.ForwardRefExoticComponent<Props & React.RefAttributes<Ref>>\`
+- 📝 **Pattern to Follow**: All future forwardRef components must include explicit type annotations to avoid TS2742 errors in strict build environments (Vercel)
+- ✅ **Solution Applied**: Command.tsx updated with proper type annotations for all 6 forwardRef subcomponents
 
 **Next Phase**: Phase 3 - Complete Component Coverage (20 remaining components for 100% Shadcn parity)
 
