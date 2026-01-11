@@ -3,10 +3,11 @@
     "version": "0.0.1",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
     "sideEffects": false,
     "license": "MIT",
     "scripts": {
-        "build": "tsup src/index.ts --format esm,cjs",
+        "build": "tsup src/index.ts --format esm,cjs && tsc --emitDeclarationOnly --declaration",
         "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
         "lint": "eslint src/"
     },

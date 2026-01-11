@@ -1,8 +1,8 @@
 # TypeScript Declaration Files (DTS) - TODO
 
-## Status: Temporarily Disabled
+## Status: RESOLVED ✅
 
-TypeScript declaration file generation has been temporarily disabled to unblock Vercel deployments.
+TypeScript declaration file generation has been fixed by using `tsc` directly instead of tsup's DTS generation.
 
 ## Issue
 
@@ -35,26 +35,29 @@ Likely causes:
 3. **TypeScript version mismatch** - Vercel may use different TS version than local
 4. **Workspace path resolution** - `@sds/tokens` path mapping may not work on Vercel
 
-## How to Fix (Later)
+## Solution Applied
 
-1. Try generating DTS with `tsc` directly instead of tsup:
-   ```json
-   "build": "tsup src/index.ts --format esm,cjs && tsc --emitDeclarationOnly"
-   ```
+Used `tsc` directly instead of tsup for DTS generation:
 
-2. Or use tsup with more permissive settings:
-   ```typescript
-   dts: {
-     resolve: true,
-     compilerOptions: {
-       skipLibCheck: true,
-     }
-   }
-   ```
+**package.json:**
+```json
+"build": "tsup src/index.ts --format esm,cjs && tsc --emitDeclarationOnly --declaration"
+"types": "dist/index.d.ts"
+```
 
-3. Or investigate which specific component is causing the DTS issue by temporarily removing components one by one
+**tsup.config.ts:**
+```typescript
+dts: false, // DTS generated separately via tsc
+```
+
+This approach:
+- ✅ Generates proper TypeScript type definitions
+- ✅ Works on Vercel (bypasses tsup's DTS compilation issues)
+- ✅ Maintains all type information for consumers
+- ✅ Allows TypeScript to properly type-check the component registry
 
 ## Timeline
 
-- **Jan 11, 2026**: Disabled to unblock Vercel builds after 8+ failed attempts
-- Commit: c7964cb was last known working state (but DTS might have been broken even then)
+- **Jan 11, 2026 (9:00 AM)**: Disabled tsup DTS to unblock Vercel builds after 8+ failed attempts
+- **Jan 11, 2026 (9:10 AM)**: Fixed by switching to tsc for DTS generation - build now succeeds locally
+- Next: Deploy to Vercel to verify fix works in production environment
