@@ -194,6 +194,11 @@ export const navigationTree: NavigationItem[] = [
             label: 'Switch',
             section: 'atoms',
           },
+          {
+            id: 'textarea',
+            label: 'Textarea',
+            section: 'atoms',
+          },
         ],
       },
       {

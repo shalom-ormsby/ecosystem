@@ -132,6 +132,15 @@ export const searchIndex: SearchResult[] = [
     path: 'atoms-switch',
     keywords: ['toggle', 'switch', 'checkbox', 'binary', 'on', 'off', 'control'],
   },
+  {
+    id: 'textarea',
+    title: 'Textarea',
+    description: 'Multi-line text input field',
+    type: 'component',
+    category: 'Atoms',
+    path: 'atoms-textarea',
+    keywords: ['input', 'text', 'field', 'form', 'area', 'write'],
+  },
 
   // Molecules
   {
