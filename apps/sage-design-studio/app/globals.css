@@ -7,14 +7,17 @@ html.dark {
 }
 
 /* Clash Display - True Variable Font (Fontshare) */
+/*
 @font-face {
   font-family: 'Clash Display';
   src: url('https://cdn.fontshare.com/wf/DK2FOA46SRWJ5HXWWU5TK4N4CMHYD236/FPEAXZZSH5L2K5MTJFRIWD2MC32IJMN3/THOOS4VOCKT7H2XEB27NQDYM2NYS4AAR.woff2') format('woff2'),
-    url('https://cdn.fontshare.com/wf/DK2FOA46SRWJ5HXWWU5TK4N4CMHYD236/FPEAXZZSH5L2K5MTJFRIWD2MC32IJMN3/THOOS4VOCKT7H2XEB27NQDYM2NYS4AAR.woff') format('woff');
-  font-weight: 400;
+    url('https://cdn.fontshare.com/wf/DK2FOA46SRWJ5HXWWWU5TK4N4CMHYD236/FPEAXZZSH5L2K5MTJFRIWD2MC32IJMN3/THOOS4VOCKT7H2XEB27NQDYM2NYS4AAR.woff') format('woff');
+  font-weight: 200 700;
   font-display: swap;
   font-style: normal;
+  font-named-instance: 'Regular';
 }
+*/
 
 /* Header Component Typography (independent of themes) */
 :root {
