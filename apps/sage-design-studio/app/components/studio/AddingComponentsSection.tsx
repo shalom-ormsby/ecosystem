@@ -461,6 +461,90 @@ const { track } = sizes[safeSize]; // Safe access guaranteed`}
               </div>
             </Card>
 
+            {/* Complex Build Failures (CSS, Types, Dependencies) */}
+            <Card className="p-6 mb-6">
+              <h3 className="text-xl font-bold mb-4 text-[var(--color-text-primary)]">
+                Complex Build Failures (CSS, Types, Dependencies)
+              </h3>
+
+              <div className="space-y-6 w-full min-w-0">
+                {/* Problem */}
+                <div>
+                  <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Symptoms</h4>
+                  <ul className="list-disc list-inside text-sm text-[var(--color-text-secondary)] space-y-1">
+                    <li>Build passes locally but fails on Vercel with generic "Webpack errors".</li>
+                    <li>Errors pointing to <Code syntax="plain">globals.css</Code> or <Code syntax="plain">css-loader</Code>.</li>
+                    <li>TypeScript errors like <Code syntax="plain">TS2742: The inferred type cannot be named</Code>.</li>
+                  </ul>
+                </div>
+
+                {/* Solutions */}
+                <div>
+                  <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Solutions</h4>
+
+                  <div className="space-y-4">
+                    {/* 1. Phantom Deps */}
+                    <div className="bg-[var(--color-surface)] p-4 rounded-md border border-[var(--color-border)]">
+                      <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-1">1. Fix Phantom Dependencies</p>
+                      <p className="text-xs text-[var(--color-text-secondary)] mb-2">
+                        If a config file (e.g., <Code syntax="plain">tailwind.config.ts</Code>) imports a workspace package, it MUST be listed in <Code syntax="plain">devDependencies</Code>.
+                      </p>
+                      <CollapsibleCodeBlock
+                        id="troubleshoot-phantom"
+                        code={`// package.json in the app
+"devDependencies": {
+  "@sds/config": "workspace:*", // Required for tailwind config
+}`}
+                        defaultCollapsed={true}
+                        showCopy={true}
+                      />
+                    </div>
+
+                    {/* 2. CSS Parsing */}
+                    <div className="bg-[var(--color-surface)] p-4 rounded-md border border-[var(--color-border)]">
+                      <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-1">2. Simplify CSS</p>
+                      <p className="text-xs text-[var(--color-text-secondary)]">
+                        Strict build environments may fail on experimental CSS (like <Code syntax="plain">font-named-instance</Code>) or complex variable font ranges (<Code syntax="plain">200 700</Code>). Use standard syntax.
+                      </p>
+                    </div>
+
+                    {/* 3. Explicit Types */}
+                    <div className="bg-[var(--color-surface)] p-4 rounded-md border border-[var(--color-border)]">
+                      <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-1">3. Explicit Type Annotations</p>
+                      <p className="text-xs text-[var(--color-text-secondary)] mb-2">
+                        For library re-exports, explicit types prevent portability issues.
+                      </p>
+                      <CollapsibleCodeBlock
+                        id="troubleshoot-types"
+                        code={`// Instead of: const Form = FormProvider;
+// Use:
+const Form: typeof FormProvider = FormProvider;`}
+                        defaultCollapsed={true}
+                        showCopy={true}
+                      />
+                    </div>
+
+                    {/* 4. Build Scripts */}
+                    <div className="bg-[var(--color-surface)] p-4 rounded-md border border-[var(--color-border)]">
+                      <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-1">4. Allow Build Scripts</p>
+                      <p className="text-xs text-[var(--color-text-secondary)] mb-2">
+                        Ensure binaries like <Code syntax="plain">esbuild</Code> are allowed to run.
+                      </p>
+                      <CollapsibleCodeBlock
+                        id="troubleshoot-scripts"
+                        code={`// Root package.json
+"pnpm": {
+  "onlyBuiltDependencies": ["esbuild", "sharp"]
+}`}
+                        defaultCollapsed={true}
+                        showCopy={true}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+
             {/* Vercel Build Failures in Monorepo */}
             <Card className="p-6 mb-6">
               <h3 className="text-xl font-bold mb-4 text-[var(--color-text-primary)]">
