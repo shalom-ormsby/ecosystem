@@ -151,7 +151,7 @@ export const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           variant="outlined"
-          className="pl-10"
+          className="pl-10 !bg-[var(--color-surface)]"
           style={{ paddingRight: showClear ? '2.5rem' : undefined }}
           {...props}
         />
