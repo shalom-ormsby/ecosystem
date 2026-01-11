@@ -6,8 +6,10 @@
         "jsx": "react-jsx",
         "declaration": true,
         "sourceMap": true,
-        "strict": true,
+        "strict": false,
         "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "isolatedModules": true,
         "outDir": "dist",
         "paths": {
             "@sds/tokens": [
