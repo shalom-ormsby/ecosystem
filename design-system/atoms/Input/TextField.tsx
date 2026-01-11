@@ -80,7 +80,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     // Variant classes
     const variantClasses = {
       outlined: `
-        bg-[var(--color-background)]
+        bg-[var(--color-surface)]
         border-2
         ${error ? 'border-[var(--color-error)]' : 'border-[var(--color-border)]'}
         focus:border-[var(--color-primary)]
