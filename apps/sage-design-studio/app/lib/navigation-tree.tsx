@@ -150,8 +150,38 @@ export const navigationTree: NavigationItem[] = [
         label: 'Atoms',
         children: [
           {
+            id: 'accordion',
+            label: 'Accordion',
+            section: 'atoms',
+          },
+          {
+            id: 'alert-dialog',
+            label: 'Alert Dialog',
+            section: 'atoms',
+          },
+          {
+            id: 'aspect-ratio',
+            label: 'Aspect Ratio',
+            section: 'atoms',
+          },
+          {
+            id: 'avatar',
+            label: 'Avatar',
+            section: 'atoms',
+          },
+          {
+            id: 'badge',
+            label: 'Badge',
+            section: 'atoms',
+          },
+          {
             id: 'button',
             label: 'Button',
+            section: 'atoms',
+          },
+          {
+            id: 'calendar',
+            label: 'Calendar',
             section: 'atoms',
           },
           {
@@ -160,8 +190,18 @@ export const navigationTree: NavigationItem[] = [
             section: 'atoms',
           },
           {
+            id: 'carousel',
+            label: 'Carousel',
+            section: 'atoms',
+          },
+          {
             id: 'code',
             label: 'Code',
+            section: 'atoms',
+          },
+          {
+            id: 'collapsible',
+            label: 'Collapsible',
             section: 'atoms',
           },
           {
@@ -175,23 +215,58 @@ export const navigationTree: NavigationItem[] = [
             section: 'atoms',
           },
           {
+            id: 'context-menu',
+            label: 'Context Menu',
+            section: 'atoms',
+          },
+          {
+            id: 'date-picker',
+            label: 'Date Picker',
+            section: 'atoms',
+          },
+          {
+            id: 'drawer',
+            label: 'Drawer',
+            section: 'atoms',
+          },
+          {
+            id: 'hover-card',
+            label: 'Hover Card',
+            section: 'atoms',
+          },
+          {
+            id: 'input-otp',
+            label: 'Input OTP',
+            section: 'atoms',
+          },
+          {
             id: 'link',
             label: 'Link',
             section: 'atoms',
           },
           {
-            id: 'badge',
-            label: 'Badge',
+            id: 'menubar',
+            label: 'Menubar',
             section: 'atoms',
           },
           {
-            id: 'avatar',
-            label: 'Avatar',
+            id: 'navigation-menu',
+            label: 'Navigation Menu',
             section: 'atoms',
           },
           {
-            id: 'spinner',
-            label: 'Spinner',
+            id: 'pagination',
+            label: 'Pagination',
+            section: 'atoms',
+          },
+          {
+            id: 'popover',
+            label: 'Popover',
+            section: 'atoms',
+          },
+          {
+            id: 'progress',
+            label: 'Progress',
             section: 'atoms',
           },
           {
@@ -200,8 +275,18 @@ export const navigationTree: NavigationItem[] = [
             section: 'atoms',
           },
           {
-            id: 'popover',
-            label: 'Popover',
+            id: 'resizable',
+            label: 'Resizable',
+            section: 'atoms',
+          },
+          {
+            id: 'slider',
+            label: 'Slider',
+            section: 'atoms',
+          },
+          {
+            id: 'spinner',
+            label: 'Spinner',
             section: 'atoms',
           },
           {
@@ -222,6 +307,16 @@ export const navigationTree: NavigationItem[] = [
           {
             id: 'toaster',
             label: 'Toaster',
+            section: 'atoms',
+          },
+          {
+            id: 'toggle',
+            label: 'Toggle',
+            section: 'atoms',
+          },
+          {
+            id: 'toggle-group',
+            label: 'Toggle Group',
             section: 'atoms',
           },
         ],

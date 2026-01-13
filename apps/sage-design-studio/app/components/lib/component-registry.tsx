@@ -1,5 +1,34 @@
 import { Code, Link, Spinner, ProgressBar, Switch } from '@ecosystem/design-system';
-import { Label, Alert, AlertDescription, AlertTitle, Avatar, AvatarImage, AvatarFallback, Button, Card, Badge, Checkbox, Combobox, Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut, DataTable, Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Popover, PopoverAnchor, PopoverContent, PopoverTrigger, RadioGroup, RadioGroupItem, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Separator, ScrollArea, Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, Skeleton, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toaster, ToastProvider, useToast } from '@sds/ui';
+import {
+  // Phase 1 & 2 components
+  Label, Alert, AlertDescription, AlertTitle, Avatar, AvatarImage, AvatarFallback, Button, Card, Badge, Checkbox, Combobox, Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut, DataTable, Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Popover, PopoverAnchor, PopoverContent, PopoverTrigger, RadioGroup, RadioGroupItem, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Separator, ScrollArea, Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, Skeleton, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toaster, ToastProvider, useToast,
+  // Phase 3 Batch 1
+  Accordion, AccordionItem, AccordionTrigger, AccordionContent,
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
+  Collapsible, CollapsibleTrigger, CollapsibleContent,
+  HoverCard, HoverCardTrigger, HoverCardContent,
+  Tooltip, TooltipTrigger, TooltipContent, TooltipProvider,
+  // Phase 3 Batch 2
+  Slider,
+  Toggle,
+  ToggleGroup, ToggleGroupItem,
+  AspectRatio,
+  Progress,
+  // Phase 3 Batch 3
+  Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis,
+  ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuCheckboxItem, ContextMenuRadioItem, ContextMenuLabel, ContextMenuSeparator, ContextMenuShortcut, ContextMenuGroup, ContextMenuPortal, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuRadioGroup,
+  Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarSeparator, MenubarShortcut, MenubarGroup, MenubarPortal, MenubarSub, MenubarRadioGroup,
+  NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport, navigationMenuTriggerStyle,
+  Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious,
+  // Phase 3 Batch 4
+  Drawer, DrawerPortal, DrawerOverlay, DrawerTrigger, DrawerClose, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription,
+  Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext,
+  Calendar,
+  DatePicker,
+  // Phase 3 Batch 5
+  InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator,
+  ResizablePanelGroup, ResizablePanel, ResizableHandle,
+} from '@sds/ui';
 
 export interface PropConfig {
   type: 'select' | 'boolean' | 'text' | 'array' | 'object' | 'interface' | 'custom';
@@ -1867,5 +1896,936 @@ toast("Event created", {
       },
     ],
     sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/Sonner.tsx',
+  },
+
+  // Phase 3 Batch 1 Components
+  Accordion: {
+    component: Accordion,
+    description: 'Vertically stacked set of interactive headings that reveal content panels. Built on Radix UI.',
+    props: {
+      type: {
+        type: 'select',
+        options: ['single', 'multiple'] as const,
+        default: 'single',
+        description: 'Allow single or multiple items to be open at once',
+      },
+      collapsible: {
+        type: 'boolean',
+        default: false,
+        description: 'Allow all items to be closed when type is "single"',
+      },
+    },
+    examples: [
+      {
+        label: 'Default',
+        props: { type: 'single', collapsible: true, className: 'w-full' },
+        children: (
+          <>
+            <AccordionItem value="item-1">
+              <AccordionTrigger>Is it accessible?</AccordionTrigger>
+              <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger>Is it styled?</AccordionTrigger>
+              <AccordionContent>Yes. It comes with default styles that match your theme.</AccordionContent>
+            </AccordionItem>
+          </>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@sds/ui"
+
+<Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Is it accessible?</AccordionTrigger>
+    <AccordionContent>
+      Yes. It adheres to the WAI-ARIA design pattern.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>`,
+        description: 'Simple accordion with collapsible items',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/Accordion.tsx',
+  },
+
+  AlertDialog: {
+    component: AlertDialog,
+    description: 'Modal dialog that interrupts the user with important content and expects a response. Built on Radix UI.',
+    props: {},
+    examples: [
+      {
+        label: 'Default',
+        props: {},
+        children: (
+          <>
+            <AlertDialogTrigger asChild>
+              <Button variant="destructive">Delete Account</Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. This will permanently delete your account.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction>Continue</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Confirmation Dialog',
+        code: `import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@sds/ui"
+
+<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button variant="destructive">Delete</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>`,
+        description: 'Confirmation dialog for destructive actions',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/AlertDialog.tsx',
+  },
+
+  Collapsible: {
+    component: Collapsible,
+    description: 'Interactive component which expands/collapses a panel. Built on Radix UI.',
+    props: {},
+    examples: [
+      {
+        label: 'Default',
+        props: {},
+        children: (
+          <div className="w-[350px] space-y-2">
+            <div className="flex items-center justify-between space-x-4 px-4">
+              <h4 className="text-sm font-semibold">@peduarte starred 3 repositories</h4>
+              <CollapsibleTrigger asChild>
+                <Button variant="ghost" size="sm">Toggle</Button>
+              </CollapsibleTrigger>
+            </div>
+            <div className="rounded-md border px-4 py-2 font-mono text-sm">
+              @radix-ui/primitives
+            </div>
+            <CollapsibleContent className="space-y-2">
+              <div className="rounded-md border px-4 py-2 font-mono text-sm">@radix-ui/colors</div>
+              <div className="rounded-md border px-4 py-2 font-mono text-sm">@stitches/react</div>
+            </CollapsibleContent>
+          </div>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@sds/ui"
+
+<Collapsible>
+  <CollapsibleTrigger>Can I use this in my project?</CollapsibleTrigger>
+  <CollapsibleContent>
+    Yes. Free to use for personal and commercial projects.
+  </CollapsibleContent>
+</Collapsible>`,
+        description: 'Collapsible panel with trigger',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/Collapsible.tsx',
+  },
+
+  HoverCard: {
+    component: HoverCard,
+    description: 'For sighted users to preview content available behind a link. Built on Radix UI.',
+    props: {},
+    examples: [
+      {
+        label: 'Default',
+        props: {},
+        children: (
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button variant="link">@nextjs</Button>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-80">
+              <div className="space-y-2">
+                <h4 className="text-sm font-semibold">@nextjs</h4>
+                <p className="text-sm">The React Framework – created and maintained by @vercel.</p>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { HoverCard, HoverCardContent, HoverCardTrigger } from "@sds/ui"
+
+<HoverCard>
+  <HoverCardTrigger>Hover me</HoverCardTrigger>
+  <HoverCardContent>
+    The React Framework for the Web
+  </HoverCardContent>
+</HoverCard>`,
+        description: 'Hover card with preview content',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/HoverCard.tsx',
+  },
+
+  Tooltip: {
+    component: Tooltip,
+    description: 'Popup that displays information related to an element when it receives keyboard focus or hover.',
+    props: {},
+    examples: [
+      {
+        label: 'Default',
+        props: {},
+        children: (
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline">Hover me</Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Add to library</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@sds/ui"
+
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger>Hover</TooltipTrigger>
+    <TooltipContent>
+      <p>Tooltip content</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>`,
+        description: 'Simple tooltip on hover',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/Tooltip.tsx',
+  },
+
+  // Phase 3 Batch 2 Components
+  Slider: {
+    component: Slider,
+    description: 'Input component for selecting a value from a range. Built on Radix UI.',
+    props: {
+      min: { type: 'text', default: '0', description: 'Minimum value' },
+      max: { type: 'text', default: '100', description: 'Maximum value' },
+      step: { type: 'text', default: '1', description: 'Step increment' },
+      defaultValue: { type: 'array', default: [50], description: 'Default value' },
+    },
+    examples: [
+      {
+        label: 'Default',
+        props: { defaultValue: [50], max: 100, step: 1, className: 'w-[60%]' },
+        children: null,
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { Slider } from "@sds/ui"
+
+<Slider defaultValue={[50]} max={100} step={1} />`,
+        description: 'Range slider with default value',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/Slider.tsx',
+  },
+
+  Toggle: {
+    component: Toggle,
+    description: 'Two-state button that can be either on or off.',
+    props: {
+      variant: {
+        type: 'select',
+        options: ['default', 'outline'] as const,
+        default: 'default',
+        description: 'Visual style variant',
+      },
+      size: {
+        type: 'select',
+        options: ['default', 'sm', 'lg'] as const,
+        default: 'default',
+        description: 'Size of the toggle',
+      },
+    },
+    examples: [
+      {
+        label: 'Default',
+        props: { 'aria-label': 'Toggle italic' },
+        children: 'Toggle',
+      },
+      {
+        label: 'Outline',
+        props: { variant: 'outline', 'aria-label': 'Toggle bold' },
+        children: 'Outline',
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { Toggle } from "@sds/ui"
+
+<Toggle aria-label="Toggle italic">
+  Toggle
+</Toggle>`,
+        description: 'Simple toggle button',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/Toggle.tsx',
+  },
+
+  ToggleGroup: {
+    component: ToggleGroup,
+    description: 'A set of two-state buttons that can be toggled on or off.',
+    props: {
+      type: {
+        type: 'select',
+        options: ['single', 'multiple'] as const,
+        default: 'single',
+        description: 'Allow single or multiple items to be selected',
+      },
+    },
+    examples: [
+      {
+        label: 'Single',
+        props: { type: 'single' },
+        children: (
+          <>
+            <ToggleGroupItem value="left" aria-label="Align left">Left</ToggleGroupItem>
+            <ToggleGroupItem value="center" aria-label="Align center">Center</ToggleGroupItem>
+            <ToggleGroupItem value="right" aria-label="Align right">Right</ToggleGroupItem>
+          </>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { ToggleGroup, ToggleGroupItem } from "@sds/ui"
+
+<ToggleGroup type="single">
+  <ToggleGroupItem value="a">A</ToggleGroupItem>
+  <ToggleGroupItem value="b">B</ToggleGroupItem>
+  <ToggleGroupItem value="c">C</ToggleGroupItem>
+</ToggleGroup>`,
+        description: 'Toggle group with single selection',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/ToggleGroup.tsx',
+  },
+
+  AspectRatio: {
+    component: AspectRatio,
+    description: 'Displays content within a desired aspect ratio. Built on Radix UI.',
+    props: {
+      ratio: { type: 'text', default: '16/9', description: 'Aspect ratio (e.g., 16/9, 4/3, 1/1)' },
+    },
+    examples: [
+      {
+        label: '16:9',
+        props: { ratio: 16 / 9, className: 'bg-muted' },
+        children: (
+          <div className="flex h-full items-center justify-center">
+            <p className="text-sm text-muted-foreground">16:9 Aspect Ratio</p>
+          </div>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Image Container',
+        code: `import { AspectRatio } from "@sds/ui"
+
+<AspectRatio ratio={16 / 9}>
+  <img src="/photo.jpg" alt="Photo" className="object-cover" />
+</AspectRatio>`,
+        description: 'Maintain aspect ratio for images',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/AspectRatio.tsx',
+  },
+
+  Progress: {
+    component: Progress,
+    description: 'Displays an indicator showing the completion progress of a task. Built on Radix UI.',
+    props: {
+      value: { type: 'text', default: '0', description: 'Progress value (0-100)' },
+    },
+    examples: [
+      {
+        label: '60%',
+        props: { value: 60, className: 'w-[60%]' },
+        children: null,
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { Progress } from "@sds/ui"
+
+<Progress value={33} />`,
+        description: 'Progress indicator',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/Progress.tsx',
+  },
+
+  // Phase 3 Batch 3 Components
+  Breadcrumb: {
+    component: Breadcrumb,
+    description: 'Navigation hierarchy that helps users understand their current location.',
+    props: {},
+    examples: [
+      {
+        label: 'Default',
+        props: {},
+        children: (
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@sds/ui"
+
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Current</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>`,
+        description: 'Navigation breadcrumb trail',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/Breadcrumb.tsx',
+  },
+
+  ContextMenu: {
+    component: ContextMenu,
+    description: 'Displays a menu at the pointer position, triggered by right-click. Built on Radix UI.',
+    props: {},
+    examples: [
+      {
+        label: 'Default',
+        props: {},
+        children: (
+          <>
+            <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+              Right click here
+            </ContextMenuTrigger>
+            <ContextMenuContent className="w-64">
+              <ContextMenuItem>Back</ContextMenuItem>
+              <ContextMenuItem>Forward</ContextMenuItem>
+              <ContextMenuItem>Reload</ContextMenuItem>
+              <ContextMenuSeparator />
+              <ContextMenuItem>More tools</ContextMenuItem>
+            </ContextMenuContent>
+          </>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@sds/ui"
+
+<ContextMenu>
+  <ContextMenuTrigger>Right click</ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Edit</ContextMenuItem>
+    <ContextMenuItem>Delete</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>`,
+        description: 'Context menu on right-click',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/ContextMenu.tsx',
+  },
+
+  Menubar: {
+    component: Menubar,
+    description: 'Visually persistent menu common in desktop applications. Built on Radix UI.',
+    props: {},
+    examples: [
+      {
+        label: 'Default',
+        props: {},
+        children: (
+          <>
+            <MenubarMenu>
+              <MenubarTrigger>File</MenubarTrigger>
+              <MenubarContent>
+                <MenubarItem>New Tab</MenubarItem>
+                <MenubarItem>New Window</MenubarItem>
+                <MenubarSeparator />
+                <MenubarItem>Share</MenubarItem>
+                <MenubarSeparator />
+                <MenubarItem>Print</MenubarItem>
+              </MenubarContent>
+            </MenubarMenu>
+          </>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from "@sds/ui"
+
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>File</MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>New</MenubarItem>
+      <MenubarItem>Open</MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>`,
+        description: 'Application menubar',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/Menubar.tsx',
+  },
+
+  NavigationMenu: {
+    component: NavigationMenu,
+    description: 'Collection of links for navigating websites. Built on Radix UI.',
+    props: {},
+    examples: [
+      {
+        label: 'Default',
+        props: {},
+        children: (
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <NavigationMenuLink className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                  <div className="text-sm font-medium leading-none">Introduction</div>
+                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                    Getting started with the library
+                  </p>
+                </NavigationMenuLink>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@sds/ui"
+
+<NavigationMenu>
+  <NavigationMenuList>
+    <NavigationMenuItem>
+      <NavigationMenuTrigger>Item</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <NavigationMenuLink>Link</NavigationMenuLink>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+  </NavigationMenuList>
+</NavigationMenu>`,
+        description: 'Navigation menu with dropdowns',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/NavigationMenu.tsx',
+  },
+
+  Pagination: {
+    component: Pagination,
+    description: 'Navigation for paginated content.',
+    props: {},
+    examples: [
+      {
+        label: 'Default',
+        props: {},
+        children: (
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious href="#" />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">1</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#" isActive>2</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">3</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationEllipsis />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext href="#" />
+            </PaginationItem>
+          </PaginationContent>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@sds/ui"
+
+<Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href="#" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">1</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="#" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>`,
+        description: 'Page navigation controls',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/Pagination.tsx',
+  },
+
+  // Phase 3 Batch 4 Components
+  Drawer: {
+    component: Drawer,
+    description: 'Dialog that slides in from the edge of the screen. Built with Vaul.',
+    props: {},
+    examples: [
+      {
+        label: 'Default',
+        props: {},
+        children: (
+          <>
+            <DrawerTrigger asChild>
+              <Button variant="outline">Open Drawer</Button>
+            </DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader>
+                <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                <DrawerDescription>This action cannot be undone.</DrawerDescription>
+              </DrawerHeader>
+              <DrawerFooter>
+                <Button>Submit</Button>
+                <DrawerClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </DrawerClose>
+              </DrawerFooter>
+            </DrawerContent>
+          </>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@sds/ui"
+
+<Drawer>
+  <DrawerTrigger>Open</DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Title</DrawerTitle>
+      <DrawerDescription>Description</DrawerDescription>
+    </DrawerHeader>
+  </DrawerContent>
+</Drawer>`,
+        description: 'Bottom drawer panel',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/Drawer.tsx',
+  },
+
+  Carousel: {
+    component: Carousel,
+    description: 'Carousel for cycling through content. Built with Embla Carousel.',
+    props: {},
+    examples: [
+      {
+        label: 'Default',
+        props: { className: 'w-full max-w-xs' },
+        children: (
+          <>
+            <CarouselContent>
+              <CarouselItem>
+                <div className="p-1">
+                  <Card className="p-6">
+                    <div className="flex aspect-square items-center justify-center">
+                      <span className="text-4xl font-semibold">1</span>
+                    </div>
+                  </Card>
+                </div>
+              </CarouselItem>
+              <CarouselItem>
+                <div className="p-1">
+                  <Card className="p-6">
+                    <div className="flex aspect-square items-center justify-center">
+                      <span className="text-4xl font-semibold">2</span>
+                    </div>
+                  </Card>
+                </div>
+              </CarouselItem>
+              <CarouselItem>
+                <div className="p-1">
+                  <Card className="p-6">
+                    <div className="flex aspect-square items-center justify-center">
+                      <span className="text-4xl font-semibold">3</span>
+                    </div>
+                  </Card>
+                </div>
+              </CarouselItem>
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@sds/ui"
+
+<Carousel>
+  <CarouselContent>
+    <CarouselItem>Slide 1</CarouselItem>
+    <CarouselItem>Slide 2</CarouselItem>
+    <CarouselItem>Slide 3</CarouselItem>
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>`,
+        description: 'Image/content carousel',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/Carousel.tsx',
+  },
+
+  Calendar: {
+    component: Calendar,
+    description: 'Date picker component for selecting dates. Built with react-day-picker.',
+    props: {
+      mode: {
+        type: 'select',
+        options: ['single', 'multiple', 'range'] as const,
+        default: 'single',
+        description: 'Selection mode',
+      },
+    },
+    examples: [
+      {
+        label: 'Default',
+        props: { mode: 'single', className: 'rounded-md border' },
+        children: null,
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { Calendar } from "@sds/ui"
+import { useState } from "react"
+
+const [date, setDate] = useState<Date | undefined>(new Date())
+
+<Calendar
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+/>`,
+        description: 'Single date selection',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/Calendar.tsx',
+  },
+
+  DatePicker: {
+    component: DatePicker,
+    description: 'Input field with calendar popover for selecting dates.',
+    props: {
+      placeholder: {
+        type: 'text',
+        default: 'Pick a date',
+        description: 'Placeholder text',
+      },
+      disabled: {
+        type: 'boolean',
+        default: false,
+        description: 'Disable the date picker',
+      },
+    },
+    examples: [
+      {
+        label: 'Default',
+        props: { placeholder: 'Pick a date' },
+        children: null,
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { DatePicker } from "@sds/ui"
+
+<DatePicker
+  date={date}
+  onDateChange={setDate}
+  placeholder="Pick a date"
+/>`,
+        description: 'Date input with calendar',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/DatePicker.tsx',
+  },
+
+  // Phase 3 Batch 5 Components
+  InputOTP: {
+    component: InputOTP,
+    description: 'One-time password input component. Built with input-otp.',
+    props: {
+      maxLength: {
+        type: 'text',
+        default: '6',
+        description: 'Maximum number of characters',
+      },
+    },
+    examples: [
+      {
+        label: 'Default',
+        props: { maxLength: 6 },
+        children: (
+          <InputOTPGroup>
+            <InputOTPSlot index={0} />
+            <InputOTPSlot index={1} />
+            <InputOTPSlot index={2} />
+            <InputOTPSlot index={3} />
+            <InputOTPSlot index={4} />
+            <InputOTPSlot index={5} />
+          </InputOTPGroup>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { InputOTP, InputOTPGroup, InputOTPSlot } from "@sds/ui"
+
+<InputOTP maxLength={6}>
+  <InputOTPGroup>
+    <InputOTPSlot index={0} />
+    <InputOTPSlot index={1} />
+    <InputOTPSlot index={2} />
+    <InputOTPSlot index={3} />
+    <InputOTPSlot index={4} />
+    <InputOTPSlot index={5} />
+  </InputOTPGroup>
+</InputOTP>`,
+        description: '6-digit OTP input',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/InputOTP.tsx',
+  },
+
+  ResizablePanelGroup: {
+    component: ResizablePanelGroup,
+    description: 'Resizable panel layout. Built with react-resizable-panels.',
+    props: {
+      direction: {
+        type: 'select',
+        options: ['horizontal', 'vertical'] as const,
+        default: 'horizontal',
+        description: 'Panel layout direction',
+      },
+    },
+    examples: [
+      {
+        label: 'Horizontal',
+        props: { direction: 'horizontal', className: 'min-h-[200px] max-w-md rounded-lg border' },
+        children: (
+          <>
+            <ResizablePanel defaultSize={50}>
+              <div className="flex h-full items-center justify-center p-6">
+                <span className="font-semibold">One</span>
+              </div>
+            </ResizablePanel>
+            <ResizableHandle />
+            <ResizablePanel defaultSize={50}>
+              <div className="flex h-full items-center justify-center p-6">
+                <span className="font-semibold">Two</span>
+              </div>
+            </ResizablePanel>
+          </>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Usage',
+        code: `import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@sds/ui"
+
+<ResizablePanelGroup direction="horizontal">
+  <ResizablePanel defaultSize={50}>
+    <div>Panel 1</div>
+  </ResizablePanel>
+  <ResizableHandle />
+  <ResizablePanel defaultSize={50}>
+    <div>Panel 2</div>
+  </ResizablePanel>
+</ResizablePanelGroup>`,
+        description: 'Resizable panel layout',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/Resizable.tsx',
   },
 };
