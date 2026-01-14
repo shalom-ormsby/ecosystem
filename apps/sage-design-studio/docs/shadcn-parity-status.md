@@ -258,7 +258,7 @@ These components have confirmed issues that need fixing:
 
 | # | Component | SDS Exists | Shadcn Reference | To Spec | Notes |
 |---|-----------|------------|------------------|---------|-------|
-| 1 | Accordion | ✅ | ✅ | ❌ | User reported: animation issues, width jumping, inconsistent toggles. Modified in current session, NOT VERIFIED. |
+| 1 | Accordion | ✅ | ✅ | ✅ | Verified: smooth animation, no jumps. Fixed transition-all. |
 | 2 | Alert | ✅ | ✅ | ❌ | Phase 1. Not browser tested. |
 | 3 | AlertDialog | ✅ | ✅ | ❌ | Phase 3. Code reviewed only, not browser tested. |
 | 4 | AspectRatio | ✅ | ✅ | ❌ | Phase 2/3. Not verified. |
@@ -273,7 +273,7 @@ These components have confirmed issues that need fixing:
 | 13 | Collapsible | ✅ | ✅ | ❌ | Phase 3. Modified with animations, NOT VERIFIED. |
 | 14 | Command | ✅ | ✅ | ❌ | Phase 2. Not verified. |
 | 15 | ContextMenu | ✅ | ✅ | ❌ | Phase 3. Code reviewed, not browser tested. |
-| 16 | DatePicker | ✅ | ✅ | ❌ | User reported: transparent background, doesn't render properly. Theme tokens added, NOT VERIFIED. |
+| 16 | DatePicker | ✅ | ✅ | ❓ | Likely Fixed: Uses popover tokens which were added. Needs Verify. |
 | 17 | Dialog | ✅ | ✅ | ❌ | Phase 1. Not browser tested. |
 | 18 | Drawer | ✅ | ✅ | ❌ | Phase 3. Code reviewed, not browser tested. |
 | 19 | DropdownMenu | ✅ | ✅ | ❌ | Phase 1. Not browser tested. |
@@ -285,10 +285,10 @@ These components have confirmed issues that need fixing:
 | 25 | Menubar | ✅ | ✅ | ❌ | Phase 2/3. Code reviewed, not browser tested. |
 | 26 | NavigationMenu | ✅ | ✅ | ❌ | Phase 2/3. Not verified. |
 | 27 | Pagination | ✅ | ✅ | ❌ | Phase 2/3. Not verified. |
-| 28 | Popover | ✅ | ✅ | ❌ | Phase 3. User reported: transparent background. Theme tokens added, NOT VERIFIED. |
+| 28 | Popover | ✅ | ✅ | ✅ | Verified: Background fixed via globals.css tokens. |
 | 29 | Progress | ✅ | ✅ | ❌ | Phase 2/3. Not verified. |
 | 30 | RadioGroup | ✅ | ✅ | ❌ | Phase 1. Not browser tested. |
-| 31 | Resizable | ✅ | ✅ | ❌ | Phase 3. User reported: page doesn't load at all. Registry alias added, NOT VERIFIED. CRITICAL. |
+| 31 | Resizable | ✅ | ✅ | ✅ | Verified: Renders correctly, interaction works. |
 | 32 | ScrollArea | ✅ | ✅ | ❌ | Phase 1. Not browser tested. |
 | 33 | Select | ✅ | ✅ | ❌ | Phase 1. Not browser tested. |
 | 34 | Separator | ✅ | ✅ | ❌ | Phase 1. Not browser tested. |
@@ -306,9 +306,10 @@ These components have confirmed issues that need fixing:
 | 46 | Spinner | ✅ | ❌ | ❌ | Legacy SDS component, not in Shadcn. User reported: shows nothing in preview. |
 
 **Total Components:** 46 (45 Shadcn + 1 legacy)
-**To Spec:** 0
-**Needs Verification:** 46
-**Known Broken:** 6 (Accordion, DatePicker, Popover, Resizable, InputOTP, Spinner)
+**To Spec:** 3
+**Needs Verification:** 43
+**Likely Fixed:** 1 (DatePicker)
+**Known Broken:** 2 (InputOTP, Spinner)
 
 ---
 
