@@ -92,7 +92,7 @@ export function ComponentsSection({ activeItemId, breadcrumbs, onItemChange }: C
   };
 
   // Get components for the selected category
-  const categoryComponents = COMPONENT_CATEGORIES[selectedCategory]?.components || [];
+  const categoryComponents = COMPONENT_CATEGORIES[selectedCategory as keyof typeof COMPONENT_CATEGORIES]?.components || [];
   const availableComponents = categoryComponents.filter(name => componentRegistry[name]);
   const componentItems = availableComponents.map(name => ({ id: name, label: name }));
 
@@ -138,10 +138,10 @@ export function ComponentsSection({ activeItemId, breadcrumbs, onItemChange }: C
       </div>
 
       {/* Category Description */}
-      {COMPONENT_CATEGORIES[selectedCategory] && (
+      {COMPONENT_CATEGORIES[selectedCategory as keyof typeof COMPONENT_CATEGORIES] && (
         <div className="px-2">
           <p className="text-base text-[var(--color-text-muted)] italic">
-            {COMPONENT_CATEGORIES[selectedCategory].description}
+            {COMPONENT_CATEGORIES[selectedCategory as keyof typeof COMPONENT_CATEGORIES].description}
           </p>
         </div>
       )}
