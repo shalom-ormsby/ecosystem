@@ -41,54 +41,54 @@ The following table compares the current state of SDS components against the sta
 
 | Component | SDS Status | Shadcn | Priority | Notes |
 | :--- | :--- | :--- | :--- | :--- |
-| **Accordion** | ❌ Missing | Available | Medium | Essential for FAQs and collapsed content. |
-| **Alert** | ❌ Missing | Available | **Critical** | Essential for feedback messages. |
-| **Alert Dialog** | ❌ Missing | Available | Medium | |
-| **Aspect Ratio** | ⚠️ Legacy (`AspectImage`) | Available | Low | |
-| **Avatar** | ⚠️ Legacy | Available | High | Needs migration to `@sds/ui`. |
+| **Accordion** | ✅ @sds/ui | Available | Medium | **Verified Fix**: Animation smoothed. Essential for FAQs. |
+| **Alert** | ✅ @sds/ui | Available | **Critical** | Essential for feedback messages. |
+| **Alert Dialog** | ✅ @sds/ui | Available | Medium | |
+| **Aspect Ratio** | ✅ @sds/ui | Available | Low | Migrated from AspectImage. |
+| **Avatar** | ✅ @sds/ui | Available | High | Replaces legacy Avatar. |
 | **Badge** | ✅ @sds/ui | Available | Done | |
-| **Breadcrumb** | ⚠️ Legacy | Available | Medium | |
+| **Breadcrumb** | ✅ @sds/ui | Available | Medium | Replaces legacy Breadcrumb. |
 | **Button** | ✅ @sds/ui | Available | Done | |
-| **Calendar** | ❌ Missing | Available | Low | Complex, add when needed. |
+| **Calendar** | ✅ @sds/ui | Available | Low | Complex, add when needed. |
 | **Card** | ✅ @sds/ui | Available | Done | |
-| **Carousel** | ❌ Missing | Available | Low | |
+| **Carousel** | ✅ @sds/ui | Available | Low | |
 | **Checkbox** | ✅ @sds/ui | Available | Done | |
-| **Collapsible** | ❌ Missing | Available | Medium | |
-| **Combobox** | ❌ Missing | Available | High | Often requested for forms. |
-| **Command** | ❌ Missing | Available | High | Basis for command palettes. |
-| **ContextMenu** | ❌ Missing | Available | Low | |
-| **Data Table** | ❌ Missing | Available | **Critical** | Essential for dashboards and data display. |
-| **Date Picker** | ❌ Missing | Available | Medium | |
-| **Dialog (Modal)** | ⚠️ Legacy (`Modal`) | Available | **Critical** | Major UI building block. |
-| **Drawer** | ❌ Missing | Available | Medium | Good for mobile. |
-| **Dropdown Menu** | ⚠️ Legacy (`Dropdown`) | Available | **Critical** | Essential for actions. |
-| **Form** | ⚠️ Legacy | Available | **Critical** | `react-hook-form` + `zod` integration. |
-| **Hover Card** | ❌ Missing | Available | Low | |
+| **Collapsible** | ✅ @sds/ui | Available | Medium | |
+| **Combobox** | ✅ @sds/ui | Available | High | Often requested for forms. |
+| **Command** | ✅ @sds/ui | Available | High | Basis for command palettes. |
+| **ContextMenu** | ✅ @sds/ui | Available | Low | |
+| **Data Table** | ✅ @sds/ui | Available | **Critical** | Essential for dashboards and data display. |
+| **Date Picker** | ✅ @sds/ui | Available | Medium | |
+| **Dialog (Modal)** | ✅ @sds/ui | Available | **Critical** | Replaces legacy Modal. Major UI building block. |
+| **Drawer** | ✅ @sds/ui | Available | Medium | Good for mobile. |
+| **Dropdown Menu** | ✅ @sds/ui | Available | **Critical** | Replaces legacy Dropdown. Essential for actions. |
+| **Form** | ✅ @sds/ui | Available | **Critical** | Replaces legacy Form. `react-hook-form` + `zod` integration. |
+| **Hover Card** | ✅ @sds/ui | Available | Low | |
 | **Input** | ✅ @sds/ui | Available | Done | |
-| **Input OTP** | ❌ Missing | Available | Low | |
+| **Input OTP** | ✅ @sds/ui | Available | Low | |
 | **Label** | ✅ @sds/ui | Available | Done | |
-| **Menubar** | ❌ Missing | Available | Low | Desktop app feel. |
-| **Navigation Menu** | ❌ Missing | Available | Medium | For complex headers. |
-| **Pagination** | ❌ Missing | Available | Medium | |
-| **Popover** | ❌ Missing | Available | High | |
-| **Progress** | ⚠️ Legacy (`ProgressBar`) | Available | Medium | Needs migration. |
-| **Radio Group** | ❌ Missing | Available | **Critical** | Basic form element. |
-| **Resizable** | ❌ Missing | Available | Low | |
+| **Menubar** | ✅ @sds/ui | Available | Low | Desktop app feel. |
+| **Navigation Menu** | ✅ @sds/ui | Available | Medium | For complex headers. |
+| **Pagination** | ✅ @sds/ui | Available | Medium | |
+| **Popover** | ✅ @sds/ui | Available | High | **Verified Fix**: Token background issues resolved. |
+| **Progress** | ✅ @sds/ui | Available | Medium | Replaces legacy ProgressBar. |
+| **Radio Group** | ✅ @sds/ui | Available | **Critical** | Basic form element. |
+| **Resizable** | ✅ @sds/ui | Available | Low | **Verified**: Renders correctly (fixed import group issues). |
 | **Scroll Area** | ✅ @sds/ui | Available | Done | |
 | **Select** | ✅ @sds/ui | Available | Done | |
 | **Separator** | ✅ @sds/ui | Available | Done | |
-| **Sheet** | ❌ Missing | Available | **Critical** | Sidebars, panels. |
+| **Sheet** | ✅ @sds/ui | Available | **Critical** | Sidebars, panels. |
 | **Skeleton** | ✅ @sds/ui | Available | Done | |
-| **Slider** | ❌ Missing | Available | Medium | |
-| **Sonner (Toast)** | ❌ Missing | Available | High | A better toast experience. |
+| **Slider** | ✅ @sds/ui | Available | Medium | |
+| **Sonner (Toast)** | ✅ @sds/ui | Available | High | A better toast experience. |
 | **Switch** | ✅ @sds/ui | Available | Done | |
-| **Table** | ❌ Missing | Available | **Critical** | Basic data presentation. |
-| **Tabs** | ❌ Missing | Available | High | Content organization. |
-| **Textarea** | ❌ Missing | Available | High | Form element. |
+| **Table** | ✅ @sds/ui | Available | **Critical** | Basic data presentation. |
+| **Tabs** | ✅ @sds/ui | Available | High | Content organization. |
+| **Textarea** | ✅ @sds/ui | Available | High | Form element. |
 | **Toast** | ✅ @sds/ui | Available | Done | |
-| **Toggle** | ❌ Missing | Available | Low | |
-| **Toggle Group** | ❌ Missing | Available | Low | |
-| **Tooltip** | ⚠️ Legacy | Available | Medium | Needs migration. |
+| **Toggle** | ✅ @sds/ui | Available | Low | |
+| **Toggle Group** | ✅ @sds/ui | Available | Low | |
+| **Tooltip** | ✅ @sds/ui | Available | Medium | Replaces legacy Tooltip. |
 
 ## 2. Strategy for Efficient Parity
 
@@ -954,3 +954,32 @@ When adapting Shadcn components for SDS:
 **Next Phase**: Phase 4 - Legacy Deprecation (add deprecation warnings, create migration guides, update internal usage)
 
 ---
+
+## Phase 3.5: Quality Hardening & Search Fixes (COMPLETED)
+**Date**: 2026-01-14
+
+**Objective**: Address immediate quality issues (animations, theming) and fix discovery bugs (Search) to ensure the newly added Phase 3 components are actually usable and findable.
+
+### ✅ Search Index Repair
+- **Issue**: Most atomic components (Accordion, Popover, Resizable, etc.) were **missing from the global search** (`Cmd+K`).
+- **Fix**: Manually updated `search-index.ts` with 30+ missing entries, ensuring comprehensive discovery.
+- **Verification**: Verified "Accordion" and others appear in search results and navigate correctly.
+
+### ✅ Accordion Animation Fix
+- **Issue**: `AccordionTrigger` had `transition-all` which caused width-jumping/jittery animation during toggle.
+- **Fix**: Removed `transition-all` from the trigger class string.
+- **Verification**: Verified smooth, jump-free expansion/collapse in browser.
+
+### ✅ Global Theme & Popover Fix
+- **Issue**: `Popover` (and likely `Card`/`DatePicker`) backgrounds were transparent because `globals.css` lacked the full Shadcn variable set (e.g., `--color-popover`).
+- **Fix**: Populated `apps/sage-design-studio/app/globals.css` with the complete set of CSS variables (`--color-background`, `--color-popover`, etc.) mapped to SDS tokens.
+- **Verification**: `Popover` now renders with correct white/dark background and borders.
+
+### ✅ Resizable Verification
+- **Issue**: Reports of page load failures for Resizable component.
+- **Verification**: Verified in browser. The page loads correctly, and the split-pane interaction works as expected. (Likely fixed by previous import path corrections).
+
+**Current State**: 
+- **100% Component Parity** (Codebase)
+- **Search Discovery Fixed** (UX)
+- **Critical Visual Bugs Fixed** (Quality)
