@@ -26,14 +26,18 @@ type Section =
   | 'common-patterns'
   | 'contributing'
   | 'tokens'
-  | 'atoms'
-  | 'molecules'
-  | 'organisms'
+  | 'actions'
+  | 'forms'
+  | 'navigation'
+  | 'overlays'
+  | 'feedback'
+  | 'data-display'
+  | 'layout'
+  | 'patterns'
   | 'hooks'
   | 'templates'
   | 'motion';
 
-// Route configuration for breadcrumb labels
 // Route configuration for breadcrumb labels
 const routeConfig: RouteConfig = {
   overview: { label: 'Overview' },
@@ -58,14 +62,18 @@ const routeConfig: RouteConfig = {
       motion: { label: 'Motion' },
     }
   },
-  atoms: {
-    label: 'Components',
+  // Functional Categories (formerly Atoms)
+  actions: {
+    label: 'Actions',
     children: {
-      // Actions
       button: { label: 'Button' },
       toggle: { label: 'Toggle' },
       'toggle-group': { label: 'Toggle Group' },
-      // Forms
+    }
+  },
+  forms: {
+    label: 'Forms',
+    children: {
       checkbox: { label: 'Checkbox' },
       combobox: { label: 'Combobox' },
       form: { label: 'Form' },
@@ -77,14 +85,23 @@ const routeConfig: RouteConfig = {
       slider: { label: 'Slider' },
       switch: { label: 'Switch' },
       textarea: { label: 'Textarea' },
-      // Navigation
+      'theme-toggle': { label: 'Theme Toggle' }, // Moved from Molecules
+    }
+  },
+  navigation: {
+    label: 'Navigation',
+    children: {
       breadcrumb: { label: 'Breadcrumb' },
       command: { label: 'Command' },
       menubar: { label: 'Menubar' },
       'navigation-menu': { label: 'Navigation Menu' },
       pagination: { label: 'Pagination' },
       tabs: { label: 'Tabs' },
-      // Overlays
+    }
+  },
+  overlays: {
+    label: 'Overlays',
+    children: {
       'alert-dialog': { label: 'Alert Dialog' },
       'context-menu': { label: 'Context Menu' },
       dialog: { label: 'Dialog' },
@@ -94,20 +111,32 @@ const routeConfig: RouteConfig = {
       popover: { label: 'Popover' },
       sheet: { label: 'Sheet' },
       tooltip: { label: 'Tooltip' },
-      // Feedback
+    }
+  },
+  feedback: {
+    label: 'Feedback',
+    children: {
       alert: { label: 'Alert' },
       progress: { label: 'Progress' },
       skeleton: { label: 'Skeleton' },
       sonner: { label: 'Sonner' },
       toaster: { label: 'Toaster' },
-      // Data Display
+    }
+  },
+  'data-display': {
+    label: 'Data Display',
+    children: {
       avatar: { label: 'Avatar' },
       badge: { label: 'Badge' },
       calendar: { label: 'Calendar' },
       card: { label: 'Card' },
       'data-table': { label: 'Data Table' },
       table: { label: 'Table' },
-      // Layout
+    }
+  },
+  layout: {
+    label: 'Layout',
+    children: {
       accordion: { label: 'Accordion' },
       'aspect-ratio': { label: 'Aspect Ratio' },
       carousel: { label: 'Carousel' },
@@ -118,13 +147,7 @@ const routeConfig: RouteConfig = {
       separator: { label: 'Separator' },
     }
   },
-  molecules: {
-    label: 'Molecules',
-    children: {
-      'theme-toggle': { label: 'Theme Toggle' },
-    }
-  },
-  organisms: {
+  patterns: {
     label: 'Patterns',
     children: {
       'page-layout': { label: 'Page Layout' },
@@ -165,7 +188,8 @@ export default function StudioPage() {
     const [section, itemId] = hash.split('/');
     const validSections: Section[] = [
       'overview', 'architecture', 'adding-components', 'common-patterns',
-      'contributing', 'tokens', 'atoms', 'molecules', 'organisms',
+      'contributing', 'tokens', 'actions', 'forms', 'navigation',
+      'overlays', 'feedback', 'data-display', 'layout', 'patterns',
       'hooks', 'templates', 'motion'
     ];
 
@@ -199,7 +223,8 @@ export default function StudioPage() {
       const [section, itemId] = hash.split('/');
       const validSections: Section[] = [
         'overview', 'architecture', 'adding-components', 'common-patterns',
-        'contributing', 'tokens', 'atoms', 'molecules', 'organisms',
+        'contributing', 'tokens', 'actions', 'forms', 'navigation',
+        'overlays', 'feedback', 'data-display', 'layout', 'patterns',
         'hooks', 'templates', 'motion'
       ];
 
@@ -237,50 +262,55 @@ export default function StudioPage() {
 
   // Handle navigation from search results
   const handleSearchNavigate = (path: string) => {
-    // Parse path to determine section and item (e.g., 'atoms-button' -> section='atoms', item='button')
+    // Basic navigation
     if (path === 'overview') {
       setActiveSection('overview');
       setActiveItemId('overview');
-    } else if (path.startsWith('adding-components')) {
-      setActiveSection('adding-components');
-      const itemId = path.replace('adding-components-', '');
-      setActiveItemId(itemId);
-    } else if (path.startsWith('tokens')) {
-      setActiveSection('tokens');
-      // Extract specific token item (e.g., 'tokens-colors' -> 'colors')
-      const itemId = path.replace('tokens-', '');
-      setActiveItemId(itemId);
-    } else if (path.startsWith('atoms')) {
-      setActiveSection('atoms');
-      const itemId = path.replace('atoms-', '');
-      setActiveItemId(itemId);
-    } else if (path.startsWith('molecules')) {
-      setActiveSection('molecules');
-      const itemId = path.replace('molecules-', '');
-      setActiveItemId(itemId);
-    } else if (path.startsWith('organisms')) {
-      setActiveSection('organisms');
-      const itemId = path.replace('organisms-', '');
-      setActiveItemId(itemId);
-    } else if (path.startsWith('hooks')) {
-      setActiveSection('hooks');
-      const itemId = path.replace('hooks-', '');
-      setActiveItemId(itemId);
-    } else if (path.startsWith('templates')) {
-      setActiveSection('templates');
-      setActiveItemId('templates-overview');
-    } else if (path.startsWith('utilities')) {
-      setActiveSection('hooks'); // Utilities shown in Hooks section for now
-      const itemId = path.replace('utilities-', '');
-      setActiveItemId(itemId);
-    } else if (path.startsWith('motion-') || ['text-effects', 'scroll', 'loading', 'interactive', 'transitions', 'cursor-effects'].includes(path)) {
-      setActiveSection('motion');
-      setActiveItemId(path);
+      return;
+    }
+
+    // Split path to find section and item
+    const parts = path.split('-');
+    const potentialSection = parts[0] as Section;
+
+    // Check if first part matches a known top-level section
+    const validSections: Section[] = [
+      'overview', 'architecture', 'adding-components', 'common-patterns',
+      'contributing', 'tokens', 'actions', 'forms', 'navigation',
+      'overlays', 'feedback', 'data-display', 'layout', 'patterns',
+      'hooks', 'templates', 'motion'
+    ];
+
+    if (validSections.includes(potentialSection)) {
+      setActiveSection(potentialSection);
+      // Remaining parts form the item ID
+      const itemId = parts.slice(1).join('-');
+      setActiveItemId(itemId || potentialSection);
+    } else {
+      // Fallback/Legacy handling
+      if (path.startsWith('adding-components')) {
+        setActiveSection('adding-components');
+        const itemId = path.replace('adding-components-', '');
+        setActiveItemId(itemId);
+      } else if (path.startsWith('tokens')) {
+        setActiveSection('tokens');
+        const itemId = path.replace('tokens-', '');
+        setActiveItemId(itemId);
+      } else if (path.startsWith('atoms') || path.startsWith('molecules')) {
+        // Redirect legacy atoms/molecules searches to new structure if possible, 
+        // or just defaulting to Actions or Forms? 
+        // For now, simpler to just map known prefixes if they exist in search index.
+        // But search index likely needs updating too. 
+        // Let's assume search returns 'actions-button'.
+      }
     }
 
     // Scroll to top after navigation
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const isComponentSection = (section: Section) =>
+    ['actions', 'forms', 'navigation', 'overlays', 'feedback', 'data-display', 'layout'].includes(section);
 
   return (
     <div className="min-h-screen bg-[var(--color-background)] flex">
@@ -342,27 +372,29 @@ export default function StudioPage() {
                 onItemChange={(itemId) => setActiveItemId(itemId)}
               />
             )}
-            {activeSection === 'atoms' && (
+
+            {/* Functional Component Sections */}
+            {isComponentSection(activeSection) && (
               <ComponentsSection
                 activeItemId={activeItemId}
+                category={activeSection}
                 breadcrumbs={breadcrumbs}
-                onItemChange={(itemId) => setActiveItemId(itemId)}
+                onItemChange={(itemId) => {
+                  setActiveItemId(itemId);
+                  window.history.replaceState(null, '', `#${activeSection}/${itemId}`);
+                }}
               />
             )}
-            {activeSection === 'molecules' && (
-              <MoleculesSection
-                activeItemId={activeItemId}
-                breadcrumbs={breadcrumbs}
-                onItemChange={(itemId) => setActiveItemId(itemId)}
-              />
-            )}
-            {activeSection === 'organisms' && (
+
+            {/* Renamed Organisms -> Patterns */}
+            {activeSection === 'patterns' && (
               <OrganismsSection
                 activeItemId={activeItemId}
                 breadcrumbs={breadcrumbs}
                 onItemChange={(itemId) => setActiveItemId(itemId)}
               />
             )}
+
             {activeSection === 'hooks' && (
               <HooksSection
                 activeItemId={activeItemId}

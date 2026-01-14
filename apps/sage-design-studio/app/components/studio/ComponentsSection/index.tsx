@@ -7,6 +7,7 @@ import { componentRegistry } from '../../lib/component-registry';
 
 interface ComponentsSectionProps {
   activeItemId?: string;
+  category?: string;
   breadcrumbs?: BreadcrumbItem[];
   onItemChange?: (itemId: string) => void;
 }
@@ -56,9 +57,16 @@ const COMPONENT_CATEGORIES = {
   },
 };
 
-export function ComponentsSection({ activeItemId, breadcrumbs, onItemChange }: ComponentsSectionProps) {
-  const [selectedComponent, setSelectedComponent] = useState<string>('Button');
-  const [selectedCategory, setSelectedCategory] = useState<string>('actions');
+export function ComponentsSection({ activeItemId, category, breadcrumbs, onItemChange }: ComponentsSectionProps) {
+  const [selectedComponent, setSelectedComponent] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string>(category || 'actions');
+
+  // Update selected category when prop changes
+  useEffect(() => {
+    if (category) {
+      setSelectedCategory(category);
+    }
+  }, [category]);
 
   // Update selected component when activeItemId changes
   useEffect(() => {
@@ -68,18 +76,22 @@ export function ComponentsSection({ activeItemId, breadcrumbs, onItemChange }: C
         .split('-')
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join('');
+
       if (componentRegistry[componentName]) {
         setSelectedComponent(componentName);
-        // Find which category this component belongs to
-        for (const [categoryKey, category] of Object.entries(COMPONENT_CATEGORIES)) {
-          if (category.components.includes(componentName)) {
-            setSelectedCategory(categoryKey);
-            break;
+
+        // If no category provided, infer it (fallback)
+        if (!category) {
+          for (const [categoryKey, cat] of Object.entries(COMPONENT_CATEGORIES)) {
+            if (cat.components.includes(componentName)) {
+              setSelectedCategory(categoryKey);
+              break;
+            }
           }
         }
       }
     }
-  }, [activeItemId]);
+  }, [activeItemId, category]);
 
   // Handle component selection and notify parent
   const handleComponentChange = (componentName: string) => {

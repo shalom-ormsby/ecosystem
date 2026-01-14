@@ -27,37 +27,13 @@ export function TemplatesSection({ breadcrumbs, activeItemId, onItemChange }: Te
 
   return (
     <div className="space-y-8 w-full min-w-0">
-      <div>
-        <h2 className="text-3xl font-bold mb-2 text-[var(--color-text-primary)]">
-          Templates
-        </h2>
-
-        <p className="text-lg text-[var(--color-text-secondary)] mb-2">
-          <strong>Content Structure:</strong> Layouts that define how organisms and components fit together without specific content. They act as the "blueprint" or wireframe for a page.
-        </p>
-        <p className="text-base text-[var(--color-text-muted)] mb-4">
-          Page-level layouts and structural blueprints for consistent experiences.
-        </p>
-
-        {/* Breadcrumbs - positioned after title and description, before navigation */}
+      <div className="mb-8">
+        {/* Breadcrumbs */}
         {breadcrumbs && breadcrumbs.length > 1 && (
-          <div className="mt-6">
+          <div className="mb-4">
             <Breadcrumbs variant="subtle" items={breadcrumbs} />
           </div>
         )}
-      </div>
-
-      {/* Template Navigation */}
-      <div className="sticky top-0 z-10 -mx-4 sm:-mx-6 lg:-mx-8 mb-4">
-        <TertiaryNav
-          items={[
-            { id: 'templates-overview', label: 'Overview' },
-            { id: 'page-template', label: 'Page Template' },
-          ]}
-          activeId={selectedTemplate}
-          onItemChange={handleTemplateChange}
-          mode="standalone"
-        />
       </div>
 
       {/* Template Content */}
@@ -109,63 +85,63 @@ function OverviewContent() {
 function PageTemplateContent() {
   const [activeSection, setActiveSection] = useState('overview');
 
-  const basicUsageCode = `import { PageTemplate, Brand, Footer } from '@ecosystem/design-system';
+  const basicUsageCode = `import {PageTemplate, Brand, Footer} from '@ecosystem/design-system';
 
-function MyPage() {
+      function MyPage() {
   return (
-    <PageTemplate
-      header={{
-        logo: <Brand href="/">Brand Name</Brand>,
-        navLinks: [
+      <PageTemplate
+        header={{
+          logo: <Brand href="/">Brand Name</Brand>,
+          navLinks: [
+            { label: 'Home', href: '/' },
+            { label: 'About', href: '/about' },
+          ],
+          sticky: true,
+        }}
+        title="Welcome to Our Platform"
+        subtitle="Build amazing experiences with our design system"
+        breadcrumbs={[
           { label: 'Home', href: '/' },
-          { label: 'About', href: '/about' },
-        ],
-        sticky: true,
-      }}
-      title="Welcome to Our Platform"
-      subtitle="Build amazing experiences with our design system"
-      breadcrumbs={[
-        { label: 'Home', href: '/' },
-        { label: 'Platform' },
-      ]}
-      footer={
-        <Footer
-          logo={<Brand>Brand Name</Brand>}
-          sections={[...]}
-          copyright="© 2026 Company"
-        />
-      }
-    >
-      <article>Your content here</article>
-    </PageTemplate>
-  );
+          { label: 'Platform' },
+        ]}
+        footer={
+          <Footer
+            logo={<Brand>Brand Name</Brand>}
+            sections={[...]}
+            copyright="© 2026 Company"
+          />
+        }
+      >
+        <article>Your content here</article>
+      </PageTemplate>
+      );
 }`;
 
   const withSecondaryNavCode = `<PageTemplate
-  header={{ /* ... */ }}
-  title="Documentation"
-  breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Docs' }]}
-  secondaryNav={{
-    items: [
-      { id: 'getting-started', label: 'Getting Started' },
-      { id: 'components', label: 'Components' },
-      { id: 'api', label: 'API Reference' },
-    ],
-    activeId: 'getting-started',
-    onItemChange: (id) => navigate(id),
-  }}
->
-  <section>Documentation content</section>
-</PageTemplate>`;
+        header={{ /* ... */ }}
+        title="Documentation"
+        breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Docs' }]}
+        secondaryNav={{
+          items: [
+            { id: 'getting-started', label: 'Getting Started' },
+            { id: 'components', label: 'Components' },
+            { id: 'api', label: 'API Reference' },
+          ],
+          activeId: 'getting-started',
+          onItemChange: (id) => navigate(id),
+        }}
+      >
+        <section>Documentation content</section>
+      </PageTemplate>`;
 
   const variantsCode = `// Standard width (1280px) - default
-<PageTemplate variant="standard" {...props}>
+      <PageTemplate variant="standard" {...props}>
 
 // Wide width (1440px) - for dashboards
-<PageTemplate variant="wide" {...props}>
+        <PageTemplate variant="wide" {...props}>
 
 // Narrow width (896px) - for reading-focused pages
-<PageTemplate variant="narrow" {...props}>`;
+          <PageTemplate variant="narrow" {...props}>`;
 
   return (
     <div className="space-y-12">

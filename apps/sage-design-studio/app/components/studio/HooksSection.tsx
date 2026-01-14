@@ -49,33 +49,13 @@ export function HooksSection({ activeItemId, breadcrumbs, onItemChange }: HooksS
 
   return (
     <div className="space-y-8 w-full min-w-0">
-      <div>
-        <h2 className="text-3xl font-bold mb-2 text-[var(--color-text-primary)]">
-          Hooks
-        </h2>
-
-        <p className="text-lg text-[var(--color-text-secondary)] mb-2">
-          <strong>React Hooks:</strong> Reusable stateful logic for forms, theming, notifications, and animations.
-        </p>
-        <p className="text-base text-[var(--color-text-muted)] mb-4">
-          Import from @ecosystem/design-system or @ecosystem/design-system/hooks
-        </p>
-
-        {/* Breadcrumbs - positioned after title and description */}
+      <div className="mb-8">
+        {/* Breadcrumbs */}
         {breadcrumbs && breadcrumbs.length > 1 && (
-          <div className="mt-6">
+          <div className="mb-8">
             <Breadcrumbs variant="subtle" items={breadcrumbs} />
           </div>
         )}
-      </div>
-
-      {/* Sticky Tertiary Navigation for Hook Selector */}
-      <div className="sticky top-0 z-10 bg-[var(--color-background)] pb-4 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 mb-4">
-        <TertiaryNav
-          items={hooks}
-          activeId={activeHook}
-          onItemChange={handleHookChange}
-        />
       </div>
 
       {/* Hook Display with spacing for sticky nav */}

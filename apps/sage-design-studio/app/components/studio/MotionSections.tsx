@@ -56,29 +56,12 @@ export function MotionSections({ activeItemId, breadcrumbs, onItemChange }: Moti
   return (
     <div>
       <div className="mb-8">
-        <h2 className="text-3xl font-bold mb-2 text-[var(--color-text-primary)]">
-          Motion
-        </h2>
-
-        <p className="text-lg text-[var(--color-text-secondary)] mb-4">
-          Bring your interfaces to life with purposeful animations and transitions.
-        </p>
-
-        {/* Breadcrumbs - positioned after title and description */}
+        {/* Breadcrumbs */}
         {breadcrumbs && breadcrumbs.length > 1 && (
-          <div className="mt-6">
+          <div className="mb-4">
             <Breadcrumbs variant="subtle" items={breadcrumbs} />
           </div>
         )}
-      </div>
-
-      {/* Sticky Tertiary Navigation for Motion Tabs */}
-      <div className="sticky top-0 z-10 bg-[var(--color-background)] pb-4 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 mb-4">
-        <TertiaryNav
-          items={availableTabs}
-          activeId={activeTab}
-          onItemChange={handleTabChange}
-        />
       </div>
 
       {/* Tab Content with spacing for sticky nav */}
