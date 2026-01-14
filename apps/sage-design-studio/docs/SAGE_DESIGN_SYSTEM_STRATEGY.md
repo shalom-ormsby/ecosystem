@@ -46,6 +46,8 @@ The Sage Design System (SDS) is evolving from a traditional enterprise design sy
    - JSON-LD metadata for LLM consumption
    - Clear component interfaces and documentation
    - Predictable patterns for AI code generation
+   - MCP (Model Context Protocol) server for direct AI integration
+   - Enables LLMs to discover, search, and install components programmatically
 
 ---
 
@@ -431,7 +433,19 @@ A component is ONLY complete when ALL criteria are met:
 - [ ] **Dark mode** works correctly
 - [ ] **No console errors** or warnings
 - [ ] **Code matches** latest shadcn implementation
-- [ ] **Documentation** in component registry
+- [ ] **Documentation complete** in component registry:
+  - Component description and use cases
+  - All props documented with types and defaults
+  - Code examples with syntax highlighting
+  - Accessibility notes
+  - GitHub source link
+- [ ] **Studio page functional** at https://studio.shalomormsby.com/:
+  - Dedicated component page accessible via navigation
+  - Working "Preview" section showing component in action
+  - Interactive "Customize" controls for all props
+  - Live prop updates (changes reflected immediately)
+  - Multiple example variations
+  - Copy-paste code snippets
 
 ### Quality Gates
 
@@ -653,6 +667,114 @@ git merge feat/component-name
 
 ---
 
+## MCP (Model Context Protocol) Server
+
+### Overview
+
+The MCP server will enable AI assistants (like Claude Desktop, Cursor, and others) to directly interact with the Sage Design System. This is a critical piece of the AI-native development workflow.
+
+**Reference:** https://ui.shadcn.com/docs/mcp
+
+### What is MCP?
+
+The Model Context Protocol (MCP) is an open standard for connecting AI assistants to external systems. It allows LLMs to:
+- Query available components
+- Search by functionality or category
+- Get detailed component information (props, examples, accessibility)
+- Install components directly into user projects
+- Receive contextual component recommendations
+
+### Why It's Essential
+
+1. **Removes Friction:** Developers can ask "add a date picker" and the AI handles the entire installation
+2. **Semantic Discovery:** AI understands component purposes, not just names
+3. **Context-Aware:** Recommendations based on existing code and project structure
+4. **Copy-Paste Elimination:** Direct installation replaces manual code copying
+5. **Solopreneur Acceleration:** Dramatically speeds up UI development with AI assistance
+
+### Planned Features
+
+#### MVP (Q2 2026)
+- **Component Listing:** List all available components with categories
+- **Component Search:** Semantic search across component library
+- **Component Details:** Get props, examples, and documentation
+- **Component Installation:** Add component files to user project
+- **Integration:** Works with Claude Desktop and other MCP clients
+
+#### Future Enhancements
+- **Smart Recommendations:** Suggest components based on context
+- **Dependency Resolution:** Auto-install required dependencies
+- **Code Generation:** Generate component usage examples
+- **Project Analysis:** Scan project and suggest missing components
+- **Update Notifications:** Alert when component updates available
+
+### Implementation Plan
+
+**Phase 1: Server Setup**
+- Create MCP server package (`@sds/mcp-server`)
+- Implement component listing endpoint
+- Add search functionality
+- Set up authentication (if needed)
+
+**Phase 2: Tools Implementation**
+- `list-components` - List all available components
+- `search-components` - Search by keyword or category
+- `get-component` - Get detailed component information
+- `install-component` - Add component to user project
+
+**Phase 3: Integration**
+- Package for npm distribution
+- Documentation for setup and usage
+- Test with Claude Desktop
+- Test with Cursor and other MCP clients
+
+**Phase 4: Enhancement**
+- Smart recommendations based on project context
+- Component update tracking
+- Usage analytics (anonymous)
+- Community component registry
+
+### Technical Architecture
+
+```typescript
+// Example MCP tool definitions
+{
+  tools: [
+    {
+      name: "list-components",
+      description: "List all available Sage Design System components",
+      parameters: {
+        category?: string,  // Filter by category
+        search?: string,    // Search query
+      }
+    },
+    {
+      name: "install-component",
+      description: "Install a component into the user's project",
+      parameters: {
+        component: string,     // Component name (e.g., "Button")
+        targetPath?: string,   // Optional custom path
+      }
+    }
+  ]
+}
+```
+
+### Success Metrics
+
+- [ ] MCP server responds to component queries
+- [ ] Claude Desktop can list SDS components
+- [ ] Components install correctly via MCP
+- [ ] Search returns relevant results
+- [ ] Integration works in real projects
+- [ ] Documentation is clear and complete
+
+### Strategic Priority
+
+**HIGH** - This is a key differentiator for the "AI-native" positioning. shadcn/ui's MCP server is a major competitive advantage, and SDS should match or exceed this capability.
+
+---
+
 ## Roadmap
 
 ### Immediate (Q1 2026)
@@ -675,7 +797,13 @@ git merge feat/component-name
   - Add accessibility testing with axe-core
   - 80% coverage target
 
-### Medium Term (Q3 2026)
+- [ ] 📋 **MCP Server MVP** (High Priority)
+  - Basic component listing and search
+  - Component installation via MCP tools
+  - Integration with Claude Desktop
+  - Enables AI-native component workflow
+
+### Medium Term
 
 - [ ] 📋 Phase 5: Legacy removal (breaking change v3.0.0)
 - [ ] 📋 Visual regression testing (Chromatic or Percy)
@@ -691,9 +819,29 @@ git merge feat/component-name
   - 10+ page layouts
   - DashboardLayout, MarketingLanding, etc.
 
+- [ ] 📋 **MCP (Model Context Protocol) Server**
+  - AI-native component discovery and installation
+  - Enable LLMs to add components directly via tools
+  - Semantic search across component library
+  - Real-time component recommendations based on context
+  - Integration with Claude Desktop, Cursor, and other MCP clients
+  - Reference: https://ui.shadcn.com/docs/mcp
+  - **Strategic Priority:** Essential for AI-native development workflow
+
 - [ ] 📋 Component generator CLI
+  - Scaffold new components from templates
+  - Auto-generate registry entries
+  - Validate component completeness
+
 - [ ] 📋 Visual component gallery with search
+  - Interactive showcase of all components
+  - Filter by category, props, use cases
+  - Copy-paste code snippets
+
 - [ ] 📋 Figma integration for design tokens
+  - Sync tokens with Figma variables
+  - Export component specs from Figma
+  - Design-to-code workflow
 
 ---
 
