@@ -105,33 +105,13 @@ export function ComponentsSection({ activeItemId, breadcrumbs, onItemChange }: C
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-3xl font-bold mb-2 text-[var(--color-text-primary)]">
-          Components
-        </h2>
-
-        {/* Breadcrumbs - positioned after title, before description */}
+        {/* Breadcrumbs */}
         {breadcrumbs && breadcrumbs.length > 1 && (
           <div className="mb-4">
             <Breadcrumbs variant="subtle" items={breadcrumbs} />
           </div>
         )}
-
-        <p className="text-lg text-[var(--color-text-secondary)] mb-2">
-          <strong>Functional Organization:</strong> Components organized by their primary purpose and use case.
-        </p>
-        <p className="text-base text-[var(--color-text-muted)]">
-          Interactive component playground. Adjust props and see live changes. Components are grouped by function for better discoverability.
-        </p>
       </div>
-
-      {/* Category Description */}
-      {COMPONENT_CATEGORIES[selectedCategory as keyof typeof COMPONENT_CATEGORIES] && (
-        <div className="px-2">
-          <p className="text-base text-[var(--color-text-muted)] italic">
-            {COMPONENT_CATEGORIES[selectedCategory as keyof typeof COMPONENT_CATEGORIES].description}
-          </p>
-        </div>
-      )}
 
       {/* Component Playground */}
 
