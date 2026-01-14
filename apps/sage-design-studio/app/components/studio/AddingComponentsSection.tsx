@@ -661,6 +661,54 @@ ELIFECYCLE Command failed with exit code 1.`}
               </div>
             </Card>
 
+            {/* Workspace Module Resolution Failures */}
+            <Card className="p-6 mb-6">
+              <h3 className="text-xl font-bold mb-4 text-[var(--color-text-primary)]">
+                Workspace Module Resolution Failures
+              </h3>
+
+              <div className="space-y-6 w-full min-w-0">
+                {/* Problem */}
+                <div>
+                  <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Problem</h4>
+                  <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                    Build fails with <Code syntax="plain">Module not found: Can't resolve '@sds/tokens'</Code> or similar errors pointing to workspace packages.
+                  </p>
+                </div>
+
+                {/* Root Cause */}
+                <div>
+                  <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Root Cause</h4>
+                  <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                    Workspace packages (like <Code syntax="plain">@ecosystem/design-system</Code>) are symlinked in <Code syntax="plain">node_modules</Code>.
+                    If these packages export raw TypeScript files (e.g., <Code syntax="plain">src/index.ts</Code>), Next.js will not compile them by default, leading to resolution errors in the server-side build.
+                  </p>
+                </div>
+
+                {/* Solution */}
+                <div>
+                  <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Solution</h4>
+                  <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                    Explicitly tell Next.js to transpile these packages in <Code syntax="plain">next.config.js</Code>.
+                  </p>
+                  <div className="bg-[var(--color-success)]/10 p-4 rounded-md border border-[var(--color-success)]/30">
+                    <p className="text-xs text-[var(--color-text-muted)] mb-2 flex items-center gap-1.5">
+                      <CheckCircle className="w-3.5 h-3.5 text-[var(--color-success)]" />
+                      Add transpilePackages:
+                    </p>
+                    <CollapsibleCodeBlock
+                      id="troubleshoot-transpile"
+                      code={`const nextConfig = {
+  transpilePackages: ['@ecosystem/design-system', '@sds/tokens'],
+};`}
+                      defaultCollapsed={false}
+                      showCopy={true}
+                    />
+                  </div>
+                </div>
+              </div>
+            </Card>
+
             {/* Component Changes Not Showing on Deployed Site */}
             {activeItemId === 'troubleshooting' && (
               <Card className="p-6 mb-6">
