@@ -53,6 +53,9 @@ export function useMotionPreference(): MotionPreference {
 
   // Listen for system prefers-reduced-motion changes
   useEffect(() => {
+    // Only run in browser environment
+    if (typeof window === 'undefined') return;
+
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     // Set initial value

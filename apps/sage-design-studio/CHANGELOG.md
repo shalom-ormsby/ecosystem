@@ -71,6 +71,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `packages/design-system`: Updated legacy `Card` component to disable `hoverEffect` by default, resolving UI inconsistencies in the "Adding Components" section.
     - **Release**: Bumped `@sds/ui` to v0.0.2 and `@ecosystem/design-system` to v1.0.1 to ensure fresh builds on deployment.
     - **Hotfix**: Refactored `Toast.tsx` to move style injection into `useEffect` to prevent build-time crashes. Bumped versions to v0.0.3 / v1.0.2.
+    - **Critical Fix**: Fixed SSR build crash in `useMotionPreference.ts` by adding browser environment check before accessing `window.matchMedia`. This was causing Vercel deployment failures for all commits after the functional design framework refactor. Bumped versions to v0.0.4 / v1.0.3.
 
 ### Changed
 
