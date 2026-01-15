@@ -1619,6 +1619,18 @@ import { Textarea } from "@sds/ui"
         default: 'Select option...',
         description: 'Placeholder text for the trigger button',
       },
+      options: {
+        type: 'array',
+        default: [
+          { value: 'react', label: 'React' },
+          { value: 'vue', label: 'Vue' },
+          { value: 'angular', label: 'Angular' },
+          { value: 'svelte', label: 'Svelte' },
+          { value: 'nextjs', label: 'Next.js' },
+        ],
+        description: 'Array of options to display',
+        typeDefinition: '{ value: string; label: string }[]',
+      },
       disabled: {
         type: 'boolean',
         default: false,

@@ -63,11 +63,15 @@ export default function Error({
             <Button variant="default" size="lg" onClick={reset}>
               Try Again
             </Button>
-            <a href="/#overview">
-              <Button variant="outline" size="lg">
-                Go to Homepage
-              </Button>
-            </a>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => {
+                window.location.href = '/';
+              }}
+            >
+              Go to Homepage
+            </Button>
           </div>
 
           {/* Help Text */}
