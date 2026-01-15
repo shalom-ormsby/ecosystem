@@ -55,6 +55,11 @@ export const navigationTree: NavigationItem[] = [
         label: 'Contributing',
         section: 'contributing',
       },
+      {
+        id: 'mcp-server',
+        label: 'MCP Server',
+        section: 'mcp-server',
+      },
     ],
   },
   {

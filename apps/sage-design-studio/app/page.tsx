@@ -18,6 +18,7 @@ import { OrganismsSection } from './components/studio/OrganismsSection';
 import { HooksSection } from './components/studio/HooksSection';
 import { TemplatesSection } from './components/studio/TemplatesSection';
 import { MotionSections } from './components/studio/MotionSections';
+import { McpSection } from './components/studio/McpSection';
 
 type Section =
   | 'overview'
@@ -25,6 +26,7 @@ type Section =
   | 'adding-components'
   | 'common-patterns'
   | 'contributing'
+  | 'mcp-server'
   | 'tokens'
   | 'actions'
   | 'forms'
@@ -52,6 +54,7 @@ const routeConfig: RouteConfig = {
   },
   'common-patterns': { label: 'Common Patterns' },
   contributing: { label: 'Contributing' },
+  'mcp-server': { label: 'MCP Server' },
   tokens: {
     label: 'Design Tokens',
     children: {
@@ -188,7 +191,7 @@ export default function StudioPage() {
     const [section, itemId] = hash.split('/');
     const validSections: Section[] = [
       'overview', 'architecture', 'adding-components', 'common-patterns',
-      'contributing', 'tokens', 'actions', 'forms', 'navigation',
+      'contributing', 'mcp-server', 'tokens', 'actions', 'forms', 'navigation',
       'overlays', 'feedback', 'data-display', 'layout', 'patterns',
       'hooks', 'templates', 'motion'
     ];
@@ -223,7 +226,7 @@ export default function StudioPage() {
       const [section, itemId] = hash.split('/');
       const validSections: Section[] = [
         'overview', 'architecture', 'adding-components', 'common-patterns',
-        'contributing', 'tokens', 'actions', 'forms', 'navigation',
+        'contributing', 'mcp-server', 'tokens', 'actions', 'forms', 'navigation',
         'overlays', 'feedback', 'data-display', 'layout', 'patterns',
         'hooks', 'templates', 'motion'
       ];
@@ -276,7 +279,7 @@ export default function StudioPage() {
     // Check if first part matches a known top-level section
     const validSections: Section[] = [
       'overview', 'architecture', 'adding-components', 'common-patterns',
-      'contributing', 'tokens', 'actions', 'forms', 'navigation',
+      'contributing', 'mcp-server', 'tokens', 'actions', 'forms', 'navigation',
       'overlays', 'feedback', 'data-display', 'layout', 'patterns',
       'hooks', 'templates', 'motion'
     ];
@@ -365,6 +368,7 @@ export default function StudioPage() {
             )}
             {activeSection === 'common-patterns' && <CommonPatternsSection breadcrumbs={breadcrumbs} />}
             {activeSection === 'contributing' && <ContributingSection breadcrumbs={breadcrumbs} />}
+            {activeSection === 'mcp-server' && <McpSection breadcrumbs={breadcrumbs} />}
             {activeSection === 'tokens' && (
               <TokensSection
                 activeItemId={activeItemId}

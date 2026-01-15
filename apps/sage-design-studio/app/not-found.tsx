@@ -40,11 +40,11 @@ export default function NotFound() {
 
           {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
-            <Link href="/">
-              <Button variant="default" size="lg">
+            <Button variant="default" size="lg" asChild>
+              <Link href="/">
                 Go to Homepage
-              </Button>
-            </Link>
+              </Link>
+            </Button>
             <Link href="/#actions">
               <Button variant="outline" size="lg">
                 Browse Components
