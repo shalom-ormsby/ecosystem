@@ -13,6 +13,7 @@ export * from './components/actions/ToggleGroup';
 // Forms
 export * from './components/forms/Checkbox';
 export * from './components/forms/Combobox';
+export * from './components/forms/FilterButton';
 export * from './components/forms/Form';
 export * from './components/forms/Input';
 export * from './components/forms/InputOTP';
@@ -27,20 +28,25 @@ export * from './components/forms/ThemeToggle';
 
 // Navigation
 export * from './components/navigation/Breadcrumb';
+export * from './components/navigation/Breadcrumbs';
 export * from './components/navigation/Command';
 export * from './components/navigation/Menubar';
 export * from './components/navigation/NavLink';
 export * from './components/navigation/NavigationMenu';
 export * from './components/navigation/Pagination';
+export * from './components/navigation/SecondaryNav';
 export * from './components/navigation/Tabs';
+export * from './components/navigation/TertiaryNav';
 
 // Overlays
 export * from './components/overlays/AlertDialog';
 export * from './components/overlays/ContextMenu';
 export * from './components/overlays/Dialog';
 export * from './components/overlays/Drawer';
+export * from './components/overlays/Dropdown';
 export * from './components/overlays/DropdownMenu';
 export * from './components/overlays/HoverCard';
+export * from './components/overlays/Modal';
 export * from './components/overlays/Popover';
 export * from './components/overlays/Sheet';
 export * from './components/overlays/Tooltip';
@@ -48,19 +54,24 @@ export * from './components/overlays/Tooltip';
 // Feedback
 export * from './components/feedback/Alert';
 export * from './components/feedback/Progress';
+export * from './components/feedback/ProgressBar';
 export * from './components/feedback/Skeleton';
 export * from './components/feedback/Sonner';
+export * from './components/feedback/Spinner';
 export * from './components/feedback/Toast';
 
 
 // Data Display
+export * from './components/data-display/AspectImage';
 export * from './components/data-display/Avatar';
 export * from './components/data-display/Badge';
+export * from './components/data-display/Brand';
 export * from './components/data-display/Calendar';
 export * from './components/data-display/Card';
 export * from './components/data-display/Code';
 export * from './components/data-display/CollapsibleCodeBlock';
 export * from './components/data-display/DataTable';
+export * from './components/data-display/DescriptionList';
 export * from './components/data-display/GitHubIcon';
 export * from './components/data-display/Heading';
 export * from './components/data-display/Table';
@@ -71,12 +82,18 @@ export * from './components/layout/Accordion';
 export * from './components/layout/AspectRatio';
 export * from './components/layout/Carousel';
 export * from './components/layout/Collapsible';
+export * from './components/layout/Container';
+export * from './components/layout/CustomizerPanel';
 export * from './components/layout/DatePicker';
 export * from './components/layout/Footer';
+export * from './components/layout/Grid';
 export * from './components/layout/Header';
+export * from './components/layout/PageLayout';
+export * from './components/layout/PageTemplate';
 export * from './components/layout/Resizable';
 export * from './components/layout/ScrollArea';
 export * from './components/layout/Separator';
+export * from './components/layout/Stack';
 
 // Providers
 export * from './providers/ThemeProvider';
@@ -90,6 +107,9 @@ export * from './hooks/useForm';
 export * from './lib/store';
 
 // Utilities
+export * from './lib/animations';
+export * from './lib/breadcrumbs';
+export * from './lib/colors';
 export * from './lib/utils';
 export * from './lib/validation';
 export * from './lib/syntax-parser';
