@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { useMotionPreference } from '../../../hooks/useMotionPreference';
 
 export type ToastType = 'success' | 'error' | 'warning' | 'info';
@@ -63,6 +63,30 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
 
   const removeToast = useCallback((id: string) => {
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
+  }, []);
+
+  // Inject animation styles
+  useEffect(() => {
+    if (typeof document !== 'undefined' && !document.getElementById('sds-toast-animations')) {
+      const style = document.createElement('style');
+      style.id = 'sds-toast-animations';
+      style.textContent = `
+        @keyframes slide-in-right {
+          from {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        .animate-slide-in-right {
+          animation: slide-in-right 0.3s ease-out;
+        }
+      `;
+      document.head.appendChild(style);
+    }
   }, []);
 
   const addToast = useCallback(
@@ -216,26 +240,4 @@ export const useToast = () => {
   };
 };
 
-// Add animation keyframes via global styles
-if (typeof document !== 'undefined') {
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes slide-in-right {
-      from {
-        transform: translateX(100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-    .animate-slide-in-right {
-      animation: slide-in-right 0.3s ease-out;
-    }
-  `;
-  if (!document.querySelector('style[data-toast-animations]')) {
-    style.setAttribute('data-toast-animations', 'true');
-    document.head.appendChild(style);
-  }
-}
+
