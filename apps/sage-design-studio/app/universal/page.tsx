@@ -127,14 +127,14 @@ export default function UniversalPage() {
             <div className="space-y-4">
                 <h2 className="text-lg font-semibold">Badges</h2>
                 <div className="flex gap-4 items-center flex-wrap">
-                    <Badge variant="default">Default</Badge>
-                    <Badge variant="secondary">Secondary</Badge>
-                    <Badge variant="destructive">Destructive</Badge>
-                    <Badge variant="outline">Outline</Badge>
-                    <Badge variant="success">Success</Badge>
-                    <Badge variant="warning">Warning</Badge>
-                    <Badge variant="error" dot>Error + Dot</Badge>
-                    <Badge variant="info" size="sm">Info Small</Badge>
+                    <Badge variant="default" className="" dot={false} size="md">Default</Badge>
+                    <Badge variant="secondary" className="" dot={false} size="md">Secondary</Badge>
+                    <Badge variant="destructive" className="" dot={false} size="md">Destructive</Badge>
+                    <Badge variant="outline" className="" dot={false} size="md">Outline</Badge>
+                    <Badge variant="success" className="" dot={false} size="md">Success</Badge>
+                    <Badge variant="warning" className="" dot={false} size="md">Warning</Badge>
+                    <Badge variant="error" className="" dot={true} size="md">Error + Dot</Badge>
+                    <Badge variant="info" size="sm" className="" dot={false}>Info Small</Badge>
                 </div>
             </div>
 
@@ -177,9 +177,9 @@ export default function UniversalPage() {
                             <CardDescription>Loading placeholder for cards</CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <Skeleton className="h-12 w-12 rounded-full" />
-                            <Skeleton className="h-4 w-[250px]" />
-                            <Skeleton className="h-4 w-[200px]" />
+                            <Skeleton className="h-12 w-12 rounded-full" width={48} height={48} style={{}} />
+                            <Skeleton className="h-4 w-[250px]" width={250} height={16} style={{}} />
+                            <Skeleton className="h-4 w-[200px]" width={200} height={16} style={{}} />
                         </CardContent>
                     </Card>
 
@@ -191,10 +191,10 @@ export default function UniversalPage() {
                         <CardContent className="space-y-3">
                             {Array.from({ length: 3 }).map((_, i) => (
                                 <div key={i} className="flex items-center space-x-4">
-                                    <Skeleton className="h-12 w-12 rounded-full" />
+                                    <Skeleton className="h-12 w-12 rounded-full" width={48} height={48} style={{}} />
                                     <div className="space-y-2">
-                                        <Skeleton className="h-4 w-[200px]" />
-                                        <Skeleton className="h-4 w-[150px]" />
+                                        <Skeleton className="h-4 w-[200px]" width={200} height={16} style={{}} />
+                                        <Skeleton className="h-4 w-[150px]" width={150} height={16} style={{}} />
                                     </div>
                                 </div>
                             ))}

@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, Button, Badge } from '@sds/ui';
-import { TextField, TertiaryNav, Code, CollapsibleCodeBlock, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
+import { Card, Button, Badge, Code, CollapsibleCodeBlock } from '@sds/ui';
+import { TextField, TertiaryNav, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
 import { useForm, useTheme, useToast } from '@ecosystem/design-system';
 
 interface HooksSectionProps {
@@ -102,19 +102,19 @@ export function HooksSection({ activeItemId, breadcrumbs, onItemChange }: HooksS
                     <h5 className="font-medium text-[var(--color-text-primary)] mb-3">Options</h5>
                     <div className="space-y-3 text-sm">
                       <div className="border-l-2 border-[var(--color-primary)] pl-3">
-                        <Code syntax="plain">initialValues: T</Code>
+                        <Code syntax="plain" className="">initialValues: T</Code>
                         <p className="text-[var(--color-text-secondary)] mt-1">Initial form values (required)</p>
                       </div>
                       <div className="border-l-2 border-[var(--color-border)] pl-3">
-                        <Code syntax="plain">validations?: Partial&lt;Record&lt;keyof T, FieldValidation&gt;&gt;</Code>
+                        <Code syntax="plain" className="">validations?: Partial&lt;Record&lt;keyof T, FieldValidation&gt;&gt;</Code>
                         <p className="text-[var(--color-text-secondary)] mt-1">Validation rules for each field</p>
                       </div>
                       <div className="border-l-2 border-[var(--color-border)] pl-3">
-                        <Code syntax="plain">onSubmit?: (values: T) =&gt; void | Promise&lt;void&gt;</Code>
+                        <Code syntax="plain" className="">onSubmit?: (values: T) =&gt; void | Promise&lt;void&gt;</Code>
                         <p className="text-[var(--color-text-secondary)] mt-1">Callback fired when form is submitted and valid</p>
                       </div>
                       <div className="border-l-2 border-[var(--color-border)] pl-3">
-                        <Code syntax="plain">validateOn?: 'onChange' | 'onBlur' | 'onSubmit'</Code>
+                        <Code syntax="plain" className="">validateOn?: 'onChange' | 'onBlur' | 'onSubmit'</Code>
                         <p className="text-[var(--color-text-secondary)] mt-1">When to validate fields (default: 'onBlur')</p>
                       </div>
                     </div>
@@ -125,27 +125,27 @@ export function HooksSection({ activeItemId, breadcrumbs, onItemChange }: HooksS
                     <h5 className="font-medium text-[var(--color-text-primary)] mb-3">Return Value</h5>
                     <div className="space-y-2 text-sm">
                       <div className="flex gap-2">
-                        <Code syntax="plain">values</Code>
+                        <Code syntax="plain" className="">values</Code>
                         <span className="text-[var(--color-text-secondary)]">Current form values</span>
                       </div>
                       <div className="flex gap-2">
-                        <Code syntax="plain">errors</Code>
+                        <Code syntax="plain" className="">errors</Code>
                         <span className="text-[var(--color-text-secondary)]">Current form errors</span>
                       </div>
                       <div className="flex gap-2">
-                        <Code syntax="plain">isSubmitting</Code>
+                        <Code syntax="plain" className="">isSubmitting</Code>
                         <span className="text-[var(--color-text-secondary)]">Whether form is submitting</span>
                       </div>
                       <div className="flex gap-2">
-                        <Code syntax="plain">isDirty</Code>
+                        <Code syntax="plain" className="">isDirty</Code>
                         <span className="text-[var(--color-text-secondary)]">Whether form has been modified</span>
                       </div>
                       <div className="flex gap-2">
-                        <Code syntax="plain">handleSubmit()</Code>
+                        <Code syntax="plain" className="">handleSubmit()</Code>
                         <span className="text-[var(--color-text-secondary)]">Form submit handler</span>
                       </div>
                       <div className="flex gap-2">
-                        <Code syntax="plain">getFieldProps(name)</Code>
+                        <Code syntax="plain" className="">getFieldProps(name)</Code>
                         <span className="text-[var(--color-text-secondary)]">Get props for a field</span>
                       </div>
                     </div>
@@ -164,28 +164,28 @@ export function HooksSection({ activeItemId, breadcrumbs, onItemChange }: HooksS
                 <Card className="p-6">
                   <h5 className="font-medium text-[var(--color-text-primary)] mb-3">Built-in Patterns</h5>
                   <p className="text-sm text-[var(--color-text-secondary)] mb-4">
-                    Import from <Code syntax="plain">@ecosystem/design-system/utils</Code>
+                    Import from <Code syntax="plain" className="">@ecosystem/design-system/utils</Code>
                   </p>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between items-center">
-                      <Code syntax="plain">patterns.email</Code>
-                      <Badge variant="default" size="sm">Regex</Badge>
+                      <Code syntax="plain" className="">patterns.email</Code>
+                      <Badge variant="default" size="sm" className="" dot={false}>Regex</Badge>
                     </div>
                     <div className="flex justify-between items-center">
-                      <Code syntax="plain">patterns.url</Code>
-                      <Badge variant="default" size="sm">Regex</Badge>
+                      <Code syntax="plain" className="">patterns.url</Code>
+                      <Badge variant="default" size="sm" className="" dot={false}>Regex</Badge>
                     </div>
                     <div className="flex justify-between items-center">
-                      <Code syntax="plain">patterns.phone</Code>
-                      <Badge variant="default" size="sm">Regex</Badge>
+                      <Code syntax="plain" className="">patterns.phone</Code>
+                      <Badge variant="default" size="sm" className="" dot={false}>Regex</Badge>
                     </div>
                     <div className="flex justify-between items-center">
-                      <Code syntax="plain">patterns.number</Code>
-                      <Badge variant="default" size="sm">Regex</Badge>
+                      <Code syntax="plain" className="">patterns.number</Code>
+                      <Badge variant="default" size="sm" className="" dot={false}>Regex</Badge>
                     </div>
                     <div className="flex justify-between items-center">
-                      <Code syntax="plain">patterns.alphanumeric</Code>
-                      <Badge variant="default" size="sm">Regex</Badge>
+                      <Code syntax="plain" className="">patterns.alphanumeric</Code>
+                      <Badge variant="default" size="sm" className="" dot={false}>Regex</Badge>
                     </div>
                   </div>
                 </Card>
@@ -195,19 +195,19 @@ export function HooksSection({ activeItemId, breadcrumbs, onItemChange }: HooksS
                   <h5 className="font-medium text-[var(--color-text-primary)] mb-3">Validation Rules</h5>
                   <div className="space-y-3 text-sm">
                     <div>
-                      <Code syntax="plain">required</Code>
+                      <Code syntax="plain" className="">required</Code>
                       <p className="text-[var(--color-text-secondary)] mt-1">Field must have a value</p>
                     </div>
                     <div>
-                      <Code syntax="plain">minLength / maxLength</Code>
+                      <Code syntax="plain" className="">minLength / maxLength</Code>
                       <p className="text-[var(--color-text-secondary)] mt-1">String length constraints</p>
                     </div>
                     <div>
-                      <Code syntax="plain">pattern</Code>
+                      <Code syntax="plain" className="">pattern</Code>
                       <p className="text-[var(--color-text-secondary)] mt-1">Regex validation</p>
                     </div>
                     <div>
-                      <Code syntax="plain">custom</Code>
+                      <Code syntax="plain" className="">custom</Code>
                       <p className="text-[var(--color-text-secondary)] mt-1">Custom validation function</p>
                     </div>
                   </div>
@@ -226,22 +226,26 @@ export function HooksSection({ activeItemId, breadcrumbs, onItemChange }: HooksS
                   <p className="text-sm text-[var(--color-text-secondary)] mb-4">
                     Validate a single field value against a set of validation rules. Returns an error message string or null if valid.
                   </p>
-                  <CollapsibleCodeBlock id="hook-1" code={`import { validateField, patterns } from '@ecosystem/design-system/utils';
-
-const emailError = validateField('invalid-email', {
-  required: true,
-  pattern: {
-    value: patterns.email,
-    message: 'Invalid email format'
-  }
-});
-// Returns: 'Invalid email format'
-
-const passwordError = validateField('abc', {
-  required: true,
-  minLength: { value: 8, message: 'Min 8 characters' }
-});
-// Returns: 'Min 8 characters'`} defaultCollapsed={false} showCopy={true} />
+                  <CollapsibleCodeBlock
+                    id="hook-1"
+                    title="validateField()"
+                    language="typescript"
+                    code={`import { validateField, patterns } from '@ecosystem/design-system/utils';
+ 
+ const emailError = validateField('invalid-email', {
+   required: true,
+   pattern: {
+     value: patterns.email,
+     message: 'Invalid email format'
+   }
+ });
+ // Returns: 'Invalid email format'
+ 
+ const passwordError = validateField('abc', {
+   required: true,
+   minLength: { value: 8, message: 'Min 8 characters' }
+ });
+ // Returns: 'Min 8 characters'`} defaultCollapsed={false} showCopy={true} />
                 </Card>
 
                 <Card className="p-6">
@@ -249,33 +253,37 @@ const passwordError = validateField('abc', {
                   <p className="text-sm text-[var(--color-text-secondary)] mb-4">
                     Validate an entire form object against validation rules. Returns an object with field names as keys and error messages as values.
                   </p>
-                  <CollapsibleCodeBlock id="hook-2" code={`import { validateForm, patterns } from '@ecosystem/design-system/utils';
-
-const values = {
-  email: 'invalid-email',
-  password: 'abc',
-  age: '25'
-};
-
-const validations = {
-  email: {
-    required: true,
-    pattern: patterns.email
-  },
-  password: {
-    required: true,
-    minLength: { value: 8, message: 'Min 8 characters' }
-  },
-  age: {
-    pattern: patterns.number
-  }
-};
-
-const errors = validateForm(values, validations);
-// Returns: {
-//   email: 'Invalid email format',
-//   password: 'Min 8 characters'
-// }`} defaultCollapsed={false} showCopy={true} />
+                  <CollapsibleCodeBlock
+                    id="hook-2"
+                    title="validateForm()"
+                    language="typescript"
+                    code={`import { validateForm, patterns } from '@ecosystem/design-system/utils';
+ 
+ const values = {
+   email: 'invalid-email',
+   password: 'abc',
+   age: '25'
+ };
+ 
+ const validations = {
+   email: {
+     required: true,
+     pattern: patterns.email
+   },
+   password: {
+     required: true,
+     minLength: { value: 8, message: 'Min 8 characters' }
+   },
+   age: {
+     pattern: patterns.number
+   }
+ };
+ 
+ const errors = validateForm(values, validations);
+ // Returns: {
+ //   email: 'Invalid email format',
+ //   password: 'Min 8 characters'
+ // }`} defaultCollapsed={false} showCopy={true} />
                 </Card>
               </div>
             </div>
@@ -286,40 +294,44 @@ const errors = validateForm(values, validations);
                 Code Example
               </h4>
               <Card className="p-6">
-                <CollapsibleCodeBlock id="hook-3" code={`import { useForm, patterns } from '@ecosystem/design-system';
-
-function LoginForm() {
-  const form = useForm({
-    initialValues: { email: '', password: '' },
-    validations: {
-      email: {
-        required: true,
-        pattern: patterns.email
-      },
-      password: {
-        required: true,
-        minLength: { value: 8, message: 'Min 8 characters' }
-      }
-    },
-    onSubmit: async (values) => {
-      await login(values);
-    }
-  });
-
-  return (
-    <form onSubmit={form.handleSubmit}>
-      <input {...form.getFieldProps('email')} />
-      {form.errors.email && <span>{form.errors.email}</span>}
-
-      <input {...form.getFieldProps('password')} type="password" />
-      {form.errors.password && <span>{form.errors.password}</span>}
-
-      <button type="submit" disabled={form.isSubmitting}>
-        Submit
-      </button>
-    </form>
-  );
-}`} defaultCollapsed={false} showCopy={true} />
+                <CollapsibleCodeBlock
+                  id="hook-3"
+                  title="useForm Example"
+                  language="typescript"
+                  code={`import { useForm, patterns } from '@ecosystem/design-system';
+ 
+ function LoginForm() {
+   const form = useForm({
+     initialValues: { email: '', password: '' },
+     validations: {
+       email: {
+         required: true,
+         pattern: patterns.email
+       },
+       password: {
+         required: true,
+         minLength: { value: 8, message: 'Min 8 characters' }
+       }
+     },
+     onSubmit: async (values) => {
+       await login(values);
+     }
+   });
+ 
+   return (
+     <form onSubmit={form.handleSubmit}>
+       <input {...form.getFieldProps('email')} />
+       {form.errors.email && <span>{form.errors.email}</span>}
+ 
+       <input {...form.getFieldProps('password')} type="password" />
+       {form.errors.password && <span>{form.errors.password}</span>}
+ 
+       <button type="submit" disabled={form.isSubmitting}>
+         Submit
+       </button>
+     </form>
+   );
+ }`} defaultCollapsed={false} showCopy={true} />
               </Card>
             </div>
           </section>
@@ -408,7 +420,7 @@ function UseFormDemo() {
               {form.isSubmitting ? 'Submitting...' : 'Submit'}
             </Button>
             {form.isDirty && (
-              <Badge variant="warning" size="sm">Unsaved changes</Badge>
+              <Badge variant="warning" size="sm" className="" dot={false}>Unsaved changes</Badge>
             )}
           </div>
         </form>
@@ -435,10 +447,10 @@ function UseThemeSection() {
             <div className="text-sm text-[var(--color-text-secondary)]">
               <strong>Return Value:</strong>
               <ul className="list-disc list-inside mt-2 space-y-1">
-                <li><Code syntax="plain">theme</Code> - Current theme ('studio' | 'sage' | 'volt')</li>
-                <li><Code syntax="plain">mode</Code> - Current mode ('light' | 'dark')</li>
-                <li><Code syntax="plain">setTheme(theme)</Code> - Change the theme</li>
-                <li><Code syntax="plain">setMode(mode)</Code> - Change the mode</li>
+                <li><Code syntax="plain" className="">theme</Code> - Current theme ('studio' | 'sage' | 'volt')</li>
+                <li><Code syntax="plain" className="">mode</Code> - Current mode ('light' | 'dark')</li>
+                <li><Code syntax="plain" className="">setTheme(theme)</Code> - Change the theme</li>
+                <li><Code syntax="plain" className="">setMode(mode)</Code> - Change the mode</li>
               </ul>
             </div>
           </div>
@@ -454,10 +466,10 @@ function UseThemeSection() {
           <div className="space-y-4">
             <div>
               <p className="text-sm font-medium mb-2 text-[var(--color-text-primary)]">
-                Current Theme: <Badge variant="default" size="sm">{theme}</Badge>
+                Current Theme: <Badge variant="default" size="sm" className="" dot={false}>{theme}</Badge>
               </p>
               <p className="text-sm font-medium mb-2 text-[var(--color-text-primary)]">
-                Current Mode: <Badge variant="default" size="sm">{mode}</Badge>
+                Current Mode: <Badge variant="default" size="sm" className="" dot={false}>{mode}</Badge>
               </p>
             </div>
             <div className="flex gap-2">
@@ -489,19 +501,23 @@ function UseThemeSection() {
           Code Example
         </h4>
         <Card className="p-6">
-          <CollapsibleCodeBlock id="hook-4" code={`import { useTheme } from '@ecosystem/design-system';
-
-function ThemeControls() {
-  const { theme, mode, setTheme, setMode } = useTheme();
-
-  return (
-    <div>
-      <p>Current: {theme} ({mode})</p>
-      <button onClick={() => setTheme('sage')}>Sage Theme</button>
-      <button onClick={() => setMode('dark')}>Dark Mode</button>
-    </div>
-  );
-}`} defaultCollapsed={false} showCopy={true} />
+          <CollapsibleCodeBlock
+            id="hook-4"
+            title="useTheme Example"
+            language="typescript"
+            code={`import { useTheme } from '@ecosystem/design-system';
+ 
+ function ThemeControls() {
+   const { theme, mode, setTheme, setMode } = useTheme();
+ 
+   return (
+     <div>
+       <p>Current: {theme} ({mode})</p>
+       <button onClick={() => setTheme('sage')}>Sage Theme</button>
+       <button onClick={() => setMode('dark')}>Dark Mode</button>
+     </div>
+   );
+ }`} defaultCollapsed={false} showCopy={true} />
         </Card>
       </div>
     </section>
@@ -526,9 +542,9 @@ function UseToastSection() {
             <div className="text-sm text-[var(--color-text-secondary)]">
               <strong>Return Value:</strong>
               <ul className="list-disc list-inside mt-2 space-y-1">
-                <li><Code syntax="plain">toast(message, type, duration)</Code> - Show a toast notification</li>
-                <li><Code syntax="plain">removeToast(id)</Code> - Remove a specific toast</li>
-                <li><Code syntax="plain">toasts</Code> - Array of active toasts</li>
+                <li><Code syntax="plain" className="">toast(message, type, duration)</Code> - Show a toast notification</li>
+                <li><Code syntax="plain" className="">removeToast(id)</Code> - Remove a specific toast</li>
+                <li><Code syntax="plain" className="">toasts</Code> - Array of active toasts</li>
               </ul>
             </div>
           </div>
@@ -564,22 +580,26 @@ function UseToastSection() {
           Code Example
         </h4>
         <Card className="p-6">
-          <CollapsibleCodeBlock id="hook-5" code={`import { useToast } from '@ecosystem/design-system';
-
-function MyComponent() {
-  const { toast } = useToast();
-
-  const handleSave = async () => {
-    try {
-      await saveData();
-      toast('Saved successfully!', 'success');
-    } catch (error) {
-      toast('Failed to save', 'error');
-    }
-  };
-
-  return <button onClick={handleSave}>Save</button>;
-}`} defaultCollapsed={false} showCopy={true} />
+          <CollapsibleCodeBlock
+            id="hook-5"
+            title="useToast Example"
+            language="typescript"
+            code={`import { useToast } from '@ecosystem/design-system';
+ 
+ function MyComponent() {
+   const { toast } = useToast();
+ 
+   const handleSave = async () => {
+     try {
+       await saveData();
+       toast('Saved successfully!', 'success');
+     } catch (error) {
+       toast('Failed to save', 'error');
+     }
+   };
+ 
+   return <button onClick={handleSave}>Save</button>;
+ }`} defaultCollapsed={false} showCopy={true} />
         </Card>
       </div>
     </section>
@@ -602,9 +622,9 @@ function UseMotionPreferenceSection() {
             <div className="text-sm text-[var(--color-text-secondary)]">
               <strong>Return Value:</strong>
               <ul className="list-disc list-inside mt-2 space-y-1">
-                <li><Code syntax="plain">shouldAnimate</Code> - Boolean indicating if animations should play</li>
-                <li><Code syntax="plain">prefersReducedMotion</Code> - Boolean from user's system preference</li>
-                <li><Code syntax="plain">scale</Code> - Animation scale factor (0-10, where 10 is normal speed)</li>
+                <li><Code syntax="plain" className="">shouldAnimate</Code> - Boolean indicating if animations should play</li>
+                <li><Code syntax="plain" className="">prefersReducedMotion</Code> - Boolean from user's system preference</li>
+                <li><Code syntax="plain" className="">scale</Code> - Animation scale factor (0-10, where 10 is normal speed)</li>
               </ul>
             </div>
           </div>
@@ -617,22 +637,26 @@ function UseMotionPreferenceSection() {
           Code Example
         </h4>
         <Card className="p-6">
-          <CollapsibleCodeBlock id="hook-6" code={`import { useMotionPreference } from '@ecosystem/design-system';
-import { motion } from 'framer-motion';
-
-function AnimatedComponent() {
-  const { shouldAnimate, scale } = useMotionPreference();
-
-  return (
-    <motion.div
-      initial={shouldAnimate ? { opacity: 0 } : false}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 * (scale / 10) }}
-    >
-      Content
-    </motion.div>
-  );
-}`} defaultCollapsed={false} showCopy={true} />
+          <CollapsibleCodeBlock
+            id="hook-6"
+            title="Motion Preference Example"
+            language="typescript"
+            code={`import { useMotionPreference } from '@ecosystem/design-system';
+ import { motion } from 'framer-motion';
+ 
+ function AnimatedComponent() {
+   const { shouldAnimate, scale } = useMotionPreference();
+ 
+   return (
+     <motion.div
+       initial={shouldAnimate ? { opacity: 0 } : false}
+       animate={{ opacity: 1 }}
+       transition={{ duration: 0.3 * (scale / 10) }}
+     >
+       Content
+     </motion.div>
+   );
+ }`} defaultCollapsed={false} showCopy={true} />
         </Card>
       </div>
 
@@ -643,25 +667,29 @@ function AnimatedComponent() {
         </h4>
         <Card className="p-6">
           <p className="text-sm text-[var(--color-text-secondary)] mb-4">
-            Combine with animation utilities from <Code syntax="plain">@ecosystem/design-system/utils</Code> for motion-aware animations:
+            Combine with animation utilities from <Code syntax="plain" className="">@ecosystem/design-system/utils</Code> for motion-aware animations:
           </p>
-          <CollapsibleCodeBlock id="hook-7" code={`import { useMotionPreference } from '@ecosystem/design-system';
-import { presets, scaleDuration } from '@ecosystem/design-system/utils';
-import { motion } from 'framer-motion';
-
-function Card() {
-  const { shouldAnimate, scale } = useMotionPreference();
-  const duration = scaleDuration(0.3, scale);
-
-  return (
-    <motion.div
-      {...(shouldAnimate ? presets.fade : {})}
-      transition={{ duration }}
-    >
-      Card content
-    </motion.div>
-  );
-}`} defaultCollapsed={false} showCopy={true} />
+          <CollapsibleCodeBlock
+            id="hook-7"
+            title="Animation Presets Example"
+            language="typescript"
+            code={`import { useMotionPreference } from '@ecosystem/design-system';
+ import { presets, scaleDuration } from '@ecosystem/design-system/utils';
+ import { motion } from 'framer-motion';
+ 
+ function Card() {
+   const { shouldAnimate, scale } = useMotionPreference();
+   const duration = scaleDuration(0.3, scale);
+ 
+   return (
+     <motion.div
+       {...(shouldAnimate ? presets.fade : {})}
+       transition={{ duration }}
+     >
+       Card content
+     </motion.div>
+   );
+ }`} defaultCollapsed={false} showCopy={true} />
         </Card>
       </div>
     </section>

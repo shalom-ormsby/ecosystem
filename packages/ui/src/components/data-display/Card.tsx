@@ -18,7 +18,7 @@ const cardVariants = cva(
         },
         defaultVariants: {
             variant: "default",
-            hoverEffect: true,
+            hoverEffect: false,
         },
     }
 )

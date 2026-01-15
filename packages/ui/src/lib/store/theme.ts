@@ -5,7 +5,7 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { ThemeName, ColorMode } from '../tokens';
+import type { ThemeName, ColorMode } from '@sds/tokens';
 
 // Re-export types for convenience
 export type { ThemeName, ColorMode };

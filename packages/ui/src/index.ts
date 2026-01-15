@@ -51,7 +51,7 @@ export * from './components/feedback/Progress';
 export * from './components/feedback/Skeleton';
 export * from './components/feedback/Sonner';
 export * from './components/feedback/Toast';
-export * from './components/feedback/Toast/Toast';
+
 
 // Data Display
 export * from './components/data-display/Avatar';

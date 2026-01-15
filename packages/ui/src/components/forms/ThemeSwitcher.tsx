@@ -255,7 +255,6 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
                 <Switch
                   checked={useSystemTheme}
                   onCheckedChange={setUseSystemTheme}
-                  size="sm"
                 />
               </label>
               <p className="text-[var(--color-text-muted)]">

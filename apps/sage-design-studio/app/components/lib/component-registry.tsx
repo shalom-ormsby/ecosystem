@@ -79,8 +79,8 @@ export const componentRegistry: Record<string, ComponentConfig> = {
         props: { variant: 'default' },
         children: (
           <>
-            <AlertTitle>Heads up!</AlertTitle>
-            <AlertDescription>
+            <AlertTitle className="">Heads up!</AlertTitle>
+            <AlertDescription className="">
               You can add components to your app using the cli.
             </AlertDescription>
           </>
@@ -91,8 +91,8 @@ export const componentRegistry: Record<string, ComponentConfig> = {
         props: { variant: 'destructive' },
         children: (
           <>
-            <AlertTitle>Error</AlertTitle>
-            <AlertDescription>
+            <AlertTitle className="">Error</AlertTitle>
+            <AlertDescription className="">
               Your session has expired. Please log in again.
             </AlertDescription>
           </>
@@ -273,19 +273,19 @@ export const componentRegistry: Record<string, ComponentConfig> = {
       },
       hoverEffect: {
         type: 'boolean',
-        default: true,
+        default: false,
         description: 'Enable hover lift and shadow effect for interactive cards',
       },
     },
     examples: [
       {
         label: 'Default',
-        props: { variant: 'default', hoverEffect: true },
+        props: { variant: 'default', hoverEffect: false },
         children: 'Standard Card',
       },
       {
         label: 'Glass',
-        props: { variant: 'glass', hoverEffect: true },
+        props: { variant: 'glass', hoverEffect: false },
         children: 'Glass Effect Card',
       },
       {
@@ -295,7 +295,7 @@ export const componentRegistry: Record<string, ComponentConfig> = {
       },
       {
         label: 'With Content',
-        props: { variant: 'default', hoverEffect: true },
+        props: { variant: 'default', hoverEffect: false },
         children: (
           <div className="p-4">
             <h3 className="font-bold mb-2">Card Title</h3>
@@ -312,7 +312,7 @@ export const componentRegistry: Record<string, ComponentConfig> = {
 <Card>
   <p>Your content goes here</p>
 </Card>`,
-        description: 'Simple card container with default hover effects',
+        description: 'Simple card container',
       },
       {
         title: 'Glass Variant',
@@ -380,15 +380,15 @@ export const componentRegistry: Record<string, ComponentConfig> = {
             <DialogTrigger asChild>
               <Button variant="outline">Open Dialog</Button>
             </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Are you absolutely sure?</DialogTitle>
-                <DialogDescription>
+            <DialogContent className="">
+              <DialogHeader className="">
+                <DialogTitle className="">Are you absolutely sure?</DialogTitle>
+                <DialogDescription className="">
                   This action cannot be undone. This will permanently delete your account
                   and remove your data from our servers.
                 </DialogDescription>
               </DialogHeader>
-              <DialogFooter>
+              <DialogFooter className="">
                 <Button variant="outline">Cancel</Button>
                 <Button variant="destructive">Delete Account</Button>
               </DialogFooter>
@@ -1277,9 +1277,9 @@ const [darkMode, setDarkMode] = useState(false);
               <Button variant="outline">Open Sheet</Button>
             </SheetTrigger>
             <SheetContent>
-              <SheetHeader>
-                <SheetTitle>Sheet Title</SheetTitle>
-                <SheetDescription>
+              <SheetHeader className="">
+                <SheetTitle className="">Sheet Title</SheetTitle>
+                <SheetDescription className="">
                   This is a sheet that slides in from the right side.
                 </SheetDescription>
               </SheetHeader>
@@ -2163,15 +2163,15 @@ toast("Event created", {
               <Button variant="destructive">Delete Account</Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                <AlertDialogDescription>
+              <AlertDialogHeader className="">
+                <AlertDialogTitle className="">Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription className="">
                   This action cannot be undone. This will permanently delete your account.
                 </AlertDialogDescription>
               </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction>Continue</AlertDialogAction>
+              <AlertDialogFooter className="">
+                <AlertDialogCancel className="">Cancel</AlertDialogCancel>
+                <AlertDialogAction className="">Continue</AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </>
@@ -2518,11 +2518,11 @@ toast("Event created", {
             <BreadcrumbItem>
               <BreadcrumbLink href="/">Home</BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
+            <BreadcrumbSeparator className="">/</BreadcrumbSeparator>
             <BreadcrumbItem>
               <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
+            <BreadcrumbSeparator className="">/</BreadcrumbSeparator>
             <BreadcrumbItem>
               <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
             </BreadcrumbItem>
@@ -2696,22 +2696,22 @@ toast("Event created", {
         children: (
           <PaginationContent>
             <PaginationItem>
-              <PaginationPrevious href="#" />
+              <PaginationPrevious href="#" className="" />
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink href="#">1</PaginationLink>
+              <PaginationLink href="#" className="" isActive={false}>1</PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink href="#" isActive>2</PaginationLink>
+              <PaginationLink href="#" isActive className="">2</PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink href="#">3</PaginationLink>
+              <PaginationLink href="#" className="" isActive={false}>3</PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationEllipsis />
+              <PaginationEllipsis className="" />
             </PaginationItem>
             <PaginationItem>
-              <PaginationNext href="#" />
+              <PaginationNext href="#" className="" />
             </PaginationItem>
           </PaginationContent>
         ),
@@ -2756,11 +2756,11 @@ toast("Event created", {
               <Button variant="outline">Open Drawer</Button>
             </DrawerTrigger>
             <DrawerContent>
-              <DrawerHeader>
-                <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-                <DrawerDescription>This action cannot be undone.</DrawerDescription>
+              <DrawerHeader className="">
+                <DrawerTitle className="">Are you absolutely sure?</DrawerTitle>
+                <DrawerDescription className="">This action cannot be undone.</DrawerDescription>
               </DrawerHeader>
-              <DrawerFooter>
+              <DrawerFooter className="">
                 <Button>Submit</Button>
                 <DrawerClose asChild>
                   <Button variant="outline">Cancel</Button>
@@ -2830,8 +2830,8 @@ toast("Event created", {
                 </div>
               </CarouselItem>
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="" />
+            <CarouselNext className="" />
           </>
         ),
       },
@@ -3001,7 +3001,7 @@ const [date, setDate] = useState<Date | undefined>(new Date())
                 <span className="font-semibold">One</span>
               </div>
             </ResizablePanel>
-            <ResizableHandle />
+            <ResizableHandle className="" withHandle={false} />
             <ResizablePanel defaultSize={50}>
               <div className="flex h-full items-center justify-center p-6">
                 <span className="font-semibold">Two</span>
@@ -3103,7 +3103,7 @@ const [date, setDate] = useState<Date | undefined>(new Date())
                 <span className="font-semibold">One</span>
               </div>
             </ResizablePanel>
-            <ResizableHandle />
+            <ResizableHandle className="" withHandle={false} />
             <ResizablePanel defaultSize={50}>
               <div className="flex h-full items-center justify-center p-6">
                 <span className="font-semibold">Two</span>

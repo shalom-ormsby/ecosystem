@@ -51,12 +51,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Impact: HIGH - Input is a fundamental form component
   - Resolution: Added comprehensive 99-line registry entry
 
+
 - **Label component missing** from Studio registry
   - Component was exported from `@sds/ui` ✓
   - Component was in navigation list ✓
   - Component was NOT in component registry ✗
   - Impact: HIGH - Label is essential for accessible forms (WCAG 2.1 AA)
   - Resolution: Added comprehensive 86-line registry entry
+
+#### Build & Infrastructure Fixes
+- **Functional Organization Build Repairs**
+  - **Issue:** `@sds/ui` build failing after massive refactor due to import path and prop errors.
+  - **Resolution:**
+    - `packages/ui/src/lib/store/theme.ts`: Fixed import path from `../tokens` to `@sds/tokens` workspace package.
+    - `packages/ui/src/components/forms/ThemeSwitcher.tsx`: Removed unsupported `size` prop from `Switch` component.
+    - `packages/ui/src/components/feedback/Toast.tsx`: Deleted duplicate file (conflicting with `Toast/Toast.tsx`).
+    - `packages/ui/src/index.ts` & `src/components/feedback/index.ts`: Removed duplicate exports for Toast component.
+    - `apps/sage-design-studio`: Resolved all TypeScript build errors in `component-registry.tsx`, `HooksSection.tsx`, and `universal/page.tsx` by migrating imports and adding required props to satisfy strict types.
+
+### Changed
+
+#### Component Updates
+- **Card Component**
+  - Changed default `hoverEffect` from `true` to `false`.
+  - Effect: Cards no longer elevate on hover by default, removing false interaction affordance.
+  - Opt-in: Explicitly pass `hoverEffect={true}` to restore the elevation animation.
+  - Updated Component Registry documentation and examples to match new default.
 
 ### Verified
 
