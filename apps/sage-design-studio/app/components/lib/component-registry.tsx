@@ -2228,6 +2228,11 @@ toast("Event created", {
         default: 'single',
         description: 'Allow single or multiple items to be selected',
       },
+      defaultValue: {
+        type: 'text',
+        default: 'left',
+        description: 'The default value of the item to select',
+      },
     },
     examples: [
       {
