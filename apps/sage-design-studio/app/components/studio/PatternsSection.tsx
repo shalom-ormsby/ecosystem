@@ -328,7 +328,7 @@ function CustomizerDemoLightweight() {
   );
 }
 
-export function OrganismsSection({ activeItemId, breadcrumbs, onItemChange }: PatternsSectionProps) {
+export function PatternsSection({ activeItemId, breadcrumbs, onItemChange }: PatternsSectionProps) {
   const [selectedPattern, setSelectedPattern] = useState<PatternType>('PrimaryNav');
 
   // Update selected pattern when activeItemId changes

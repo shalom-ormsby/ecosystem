@@ -116,8 +116,8 @@ Personal operating system. Future home for the productivity philosophy and tools
 
 ### The Shared Foundation
 
-**Design System** (`design-system/`)  
-The heart of the ecosystem. Shared components, tokens, and the three flagship features that embody the philosophy:
+**Design System** (`packages/ui/` + `packages/tokens/`)
+The heart of the ecosystem. Functionally-organized components, design tokens, and the three flagship features that embody the philosophy:
 
 1. **Customizer** — User control made tangible (motion slider, theme toggle, typography)
 2. **X-Ray Mode** — Transparency made interactive (reveal tokens, components, AI notes)
@@ -151,27 +151,29 @@ What would delight the human, create joy, or expand their degrees of freedom?
 ### Monorepo Structure
 
 ```
-shalom-ecosystem/
-├── apps/                  ← Portfolio, Sage Stocks, Creative Powerup, SageOS
-├── design-system/         ← THE HEART (shared components, tokens,
-│   │                        flagship features)
-│   ├── atoms/
-│   ├── molecules/
-│   ├── patterns/
-│   ├── features/          ← Customizer, X-Ray, AI Notes
-│   └── tokens/
-└── packages/              ← Shared config and utilities
+ecosystem/
+├── apps/                     ← Portfolio, Sage Stocks, Creative Powerup, SageOS
+│   └── sage-design-studio/   ← Documentation & playground
+├── packages/
+│   ├── ui/                   ← @sds/ui - Component library
+│   │   └── src/
+│   │       ├── components/   ← Functionally organized (actions, forms, navigation, etc.)
+│   │       ├── lib/          ← Utilities, validation, animations
+│   │       ├── hooks/        ← useTheme, useMotionPreference, etc.
+│   │       └── providers/    ← ThemeProvider, etc.
+│   ├── tokens/               ← @sds/tokens - Design system tokens
+│   └── config/               ← Shared config (Tailwind, etc.)
 ```
 
-**Why monorepo?**  
+**Why monorepo?**
 - Single source of truth for design philosophy and tokens
-- Atomic changes across multiple products
+- Changes to components ripple across multiple products
 - "One mind, many expressions" made architecturally visible
 
-**Why design-system at root?**  
-- **Discoverability** — visitors see it immediately
-- **Signals importance** — not buried in `/packages`
-- **Publishable** — structured for npm from day one
+**Why functional organization?**
+- **Developer clarity** — Components organized by what they *do*, not abstract hierarchy
+- **Industry standard** — Aligns with modern design systems (shadcn/ui, Material UI, Radix, Chakra)
+- **Eliminates ambiguity** — No debates about "is this an atom or molecule?"
 
 ---
 
@@ -205,7 +207,7 @@ This ecosystem demonstrates that:
 - `README.md` — Ecosystem overview and getting started
 - `AGENTS.md` — Technical setup and agent guidelines (read this second)
 - `apps/[app-name]/README.md` — App-specific setup instructions
-- `design-system/README.md` — Design system usage guide
+- `apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md` — Design system strategy and usage
 
 ---
 

@@ -13,8 +13,7 @@ import { CommonPatternsSection } from './components/studio/CommonPatternsSection
 import { ContributingSection } from './components/studio/ContributingSection';
 import { TokensSection } from './components/studio/TokensSection';
 import { ComponentsSection } from './components/studio/ComponentsSection';
-// MoleculesSection removed - atomic design deprecated in favor of functional organization
-import { OrganismsSection } from './components/studio/OrganismsSection';
+import { PatternsSection } from './components/studio/PatternsSection';
 import { HooksSection } from './components/studio/HooksSection';
 import { TemplatesSection } from './components/studio/TemplatesSection';
 import { MotionSections } from './components/studio/MotionSections';
@@ -405,9 +404,9 @@ export default function StudioPage() {
               />
             )}
 
-            {/* Renamed Organisms -> Patterns */}
+            {/* Patterns Section */}
             {activeSection === 'patterns' && (
-              <OrganismsSection
+              <PatternsSection
                 activeItemId={activeItemId}
                 breadcrumbs={breadcrumbs}
                 onItemChange={(itemId) => setActiveItemId(itemId)}

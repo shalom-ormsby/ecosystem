@@ -171,7 +171,7 @@ export function ContributingSection({ breadcrumbs }: ContributingSectionProps) {
               <div>
                 <span className="font-medium text-[var(--color-text-primary)]">Component added to studio showcase</span>
                 <p className="text-sm text-[var(--color-text-secondary)] mt-1">
-                  Add your component to the appropriate section (ComponentsSection, MoleculesSection, etc.)
+                  Add your component to ComponentsSection under the appropriate functional category
                 </p>
               </div>
             </label>

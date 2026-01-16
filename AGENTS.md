@@ -9,23 +9,26 @@
 This is a **monorepo** expressing one unified design philosophy through multiple products. You're not building separate apps—you're building different expressions of the same vision.
 
 ```
-shalom-ecosystem/
+ecosystem/
 ├── apps/
-│   ├── portfolio/          # Next.js 15 — The proof of philosophy
-│   ├── sage-stocks/        # Next.js 15 — AI-powered investment intelligence
-│   ├── creative-powerup/   # Next.js 15 — Community platform
-│   └── sageos/             # Future — Personal operating system
-├── design-system/          # THE HEART — shared components, tokens, features
-│   ├── tokens/             # Design tokens (colors, spacing, typography)
-│   ├── atoms/              # Primitive components
-│   ├── molecules/          # Composite components
-│   ├── patterns/           # Layout and interaction patterns
-│   └── features/           # Customizer, X-Ray Mode, AI Notes
-├── docs/                   # Documentation including MCP setup
-└── packages/               # Shared config and utilities
+│   ├── portfolio/              # Next.js 15 — The proof of philosophy
+│   ├── sage-stocks/            # Next.js 15 — AI-powered investment intelligence
+│   ├── creative-powerup/       # Next.js 15 — Community platform
+│   ├── sageos/                 # Future — Personal operating system
+│   └── sage-design-studio/     # Documentation & playground
+├── packages/
+│   ├── ui/                     # @sds/ui — Component library (THE HEART)
+│   │   └── src/
+│   │       ├── components/     # Functionally organized (actions, forms, navigation, etc.)
+│   │       ├── lib/            # Utilities, validation, animations
+│   │       ├── hooks/          # useTheme, useMotionPreference, etc.
+│   │       └── providers/      # ThemeProvider, etc.
+│   ├── tokens/                 # @sds/tokens — Design system tokens
+│   └── config/                 # Shared config (Tailwind, etc.)
+└── docs/                       # Documentation including MCP setup
 ```
 
-**Key insight:** The `design-system/` lives at root level, not buried in `/packages`. This is intentional—it signals importance and is structured for npm publishing from day one.
+**Key insight:** Components are organized by **functional purpose** (what they do), not abstract hierarchy. This aligns with modern design systems and eliminates classification ambiguity.
 
 ---
 
@@ -58,9 +61,9 @@ shalom-ecosystem/
 
 **To verify current state:**
 1. **Check active apps:** `ls apps/`
-2. **Check design system output:** `ls design-system/dist`
+2. **Check UI package output:** `ls packages/ui/dist`
 3. **Check recent changes:** `git log -5 --oneline`
-4. **Check defined tokens:** Read `design-system/tokens/src/index.ts` (or similar path)
+4. **Check defined tokens:** Read `packages/tokens/src/index.ts`
 
 ---
 
@@ -72,35 +75,39 @@ shalom-ecosystem/
 
 | If you're creating... | Put it in... |
 |----------------------|--------------|
-| Shared component (used by 2+ apps) | `design-system/` at appropriate atomic level |
+| Shared component (used by 2+ apps) | `packages/ui/src/components/[category]/` (choose functional category) |
 | App-specific component | `apps/<app>/components/` |
-| Shared custom hook | `design-system/hooks/` |
+| Shared custom hook | `packages/ui/src/hooks/` |
 | App-specific hook | `apps/<app>/hooks/` |
-| Global state store (design system) | `design-system/store/` |
-| Feature-specific state | `design-system/features/<feature>/store.ts` |
+| Global state store (design system) | `packages/ui/src/lib/stores/` |
+| Feature-specific state | `packages/ui/src/features/<feature>/store.ts` |
 | App-specific state | `apps/<app>/store/` or `apps/<app>/lib/store/` |
-| React provider (design system) | `design-system/providers/` |
+| React provider (design system) | `packages/ui/src/providers/` |
 | App-specific provider | `apps/<app>/providers/` or `apps/<app>/components/providers/` |
-| Shared utility function | `packages/utils/` |
+| Shared utility function | `packages/ui/src/lib/` or `packages/utils/` |
 | App-specific utility | `apps/<app>/lib/` or `apps/<app>/utils/` |
-| Design tokens | `design-system/tokens/` |
-| Shared TypeScript types | `design-system/types/` or within component folder as `ComponentName.types.ts` |
+| Design tokens | `packages/tokens/src/` |
+| Shared TypeScript types | `packages/ui/src/types/` or within component folder as `ComponentName.types.ts` |
 | App-specific types | `apps/<app>/types/` or co-located with components |
 | Component-specific styles | Co-located with component (if not using Tailwind exclusively) |
 | Documentation | `docs/` (only if it serves multiple apps) |
 | App-specific docs | `apps/<app>/README.md` or `apps/<app>/docs/` |
 | Config files | Root or `packages/config/` (discuss first) |
 
-### Design System Atomic Levels
+### Functional Component Categories
 
-Place components at the correct level:
+Place components in the category that matches their **primary purpose**:
 
-- **atoms/** — Primitives with no dependencies on other components (Button, Input, Icon, Text)
-- **molecules/** — Compositions of atoms (Card, FormField, SearchBar)
-- **patterns/** — Reusable layout and interaction patterns (PageLayout, Modal, NavigationMenu)
+- **actions/** — Interactive elements that trigger behaviors (Button, Toggle, ToggleGroup)
+- **forms/** — Input controls for data collection (Input, Select, Checkbox, Switch, Slider, Label, Form, RadioGroup, Textarea, SearchBar, TextField)
+- **navigation/** — Moving through content hierarchy (Breadcrumb, Tabs, Pagination, Command, NavigationMenu, MenuBar)
+- **overlays/** — Contextual content above main UI (Dialog, Sheet, Popover, Tooltip, Drawer, DropdownMenu, ContextMenu, HoverCard, AlertDialog)
+- **feedback/** — Communicating system state (Alert, Toast, Progress, Skeleton, Sonner)
+- **data-display/** — Presenting information (Table, DataTable, Card, Avatar, Badge, Calendar)
+- **layout/** — Spatial organization (Accordion, Carousel, ScrollArea, Separator, AspectRatio, Collapsible, ResizablePanels, Sidebar)
 - **features/** — Complex, philosophy-embodying features (Customizer, X-Ray Mode, AI Notes)
 
-**When uncertain:** Start at the lowest level that makes sense. It's easier to promote a component up than to demote it down.
+**When uncertain:** Choose based on the component's **primary purpose**. If it could fit multiple categories, ask: "What is this component's main job?" For example, SearchBar is in `forms/` (collects input) not `navigation/` (even though it aids navigation).
 
 ### Do Not Create
 
@@ -129,25 +136,29 @@ START: What are you creating?
 │
 ├─ UI Component?
 │  ├─ YES → Will it be used by 2+ apps?
-│  │       ├─ YES → design-system/
-│  │       │       └─ Which level?
-│  │       │           ├─ No dependencies on other components → atoms/
-│  │       │           ├─ Combines atoms → molecules/
-│  │       │           ├─ Layout/interaction pattern → patterns/
+│  │       ├─ YES → packages/ui/src/components/
+│  │       │       └─ Which functional category?
+│  │       │           ├─ Triggers behavior → actions/
+│  │       │           ├─ Collects data → forms/
+│  │       │           ├─ Moves through content → navigation/
+│  │       │           ├─ Contextual overlay → overlays/
+│  │       │           ├─ Communicates state → feedback/
+│  │       │           ├─ Presents information → data-display/
+│  │       │           ├─ Organizes content → layout/
 │  │       │           └─ Philosophy-embodying feature → features/
 │  │       └─ NO → apps/<app>/components/
 │  │
 ├─ React Hook?
-│  ├─ Used by design system components → design-system/hooks/
+│  ├─ Used by design system components → packages/ui/src/hooks/
 │  └─ App-specific → apps/<app>/hooks/
 │
 ├─ State Store?
-│  ├─ Global (design system) → design-system/store/
-│  ├─ Feature-specific → design-system/features/<feature>/store.ts
+│  ├─ Global (design system) → packages/ui/src/lib/stores/
+│  ├─ Feature-specific → packages/ui/src/features/<feature>/store.ts
 │  └─ App-specific → apps/<app>/store/
 │
 ├─ React Provider?
-│  ├─ Design system provider → design-system/providers/
+│  ├─ Design system provider → packages/ui/src/providers/
 │  └─ App-specific → apps/<app>/providers/
 │
 ├─ Utility Function?
@@ -155,17 +166,17 @@ START: What are you creating?
 │  └─ App-specific → apps/<app>/lib/ or apps/<app>/utils/
 │
 ├─ Design Token?
-│  └─ Always → design-system/tokens/
+│  └─ Always → packages/tokens/src/
 │
 ├─ TypeScript Types?
 │  ├─ Component-specific → ComponentName.types.ts (co-located)
-│  ├─ Shared across design system → design-system/types/
+│  ├─ Shared across design system → packages/ui/src/types/
 │  └─ App-specific shared types → apps/<app>/types/
 │
 ├─ Documentation?
 │  ├─ Multi-app documentation → docs/
 │  ├─ App-specific → apps/<app>/README.md or apps/<app>/docs/
-│  └─ Design system docs → design-system/README.md
+│  └─ Design system docs → apps/sage-design-studio/docs/
 │
 ├─ Config File?
 │  ├─ Affects entire monorepo → Root (e.g., turbo.json, .mcp.json)
@@ -180,10 +191,10 @@ START: What are you creating?
 
 | "I'm creating..." | Where it goes |
 |-------------------|---------------|
-| A SearchBar that portfolio and sage-stocks will use | `design-system/molecules/SearchBar/` |
+| A SearchBar that portfolio and sage-stocks will use | `packages/ui/src/components/forms/SearchBar/` |
 | A hook to track scroll position in portfolio | `apps/portfolio/hooks/useScrollPosition.ts` |
-| A theme store for the design system | `design-system/store/theme.ts` |
-| Types for the Button component | `design-system/atoms/Button/Button.types.ts` |
+| A theme store for the design system | `packages/ui/src/lib/stores/theme.ts` |
+| Types for the Button component | `packages/ui/src/components/actions/Button/Button.types.ts` |
 | A utility to format currency in sage-stocks | `apps/sage-stocks/lib/formatCurrency.ts` |
 | Documentation about deployment | `docs/deployment.md` |
 
@@ -192,7 +203,7 @@ START: What are you creating?
 Multiple README.md files exist at different levels:
 - `/README.md` — Ecosystem overview (for GitHub visitors)
 - `/apps/<app>/README.md` — App-specific setup and context
-- `/design-system/README.md` — Design system usage guide
+- `/apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md` — Design system strategy and usage
 
 Always reference by full path.
 
@@ -331,8 +342,8 @@ After installation, verify everything is working:
 # 1. Check pnpm version
 pnpm --version  # Should be 8.15.0 or higher
 
-# 2. Verify design-system built successfully
-ls design-system/dist  # Should show index.js, index.d.ts, etc.
+# 2. Verify @sds/ui built successfully
+ls packages/ui/dist  # Should show index.js, index.d.ts, etc.
 
 # 3. Start portfolio app
 pnpm dev --filter portfolio
@@ -366,10 +377,10 @@ If port 3000 is taken, Next.js will automatically use the next available port (3
 
 ### Common Setup Issues
 
-**"Cannot find module '@ecosystem/design-system'"**
+**"Cannot find module '@sds/ui'"**
 ```bash
 # Solution: Build the design system first
-pnpm build --filter @ecosystem/design-system
+pnpm build --filter @sds/ui
 ```
 
 **pnpm install fails**
@@ -437,7 +448,7 @@ This monorepo uses Turborepo for orchestration. The `turbo.json` at root defines
 ### Build Process
 
 **Build outputs:**
-- **Design System:** `design-system/dist/` (ESM + CJS via tsup)
+- **Design System:** `packages/ui/dist/` (ESM + CJS via tsup)
 - **Next.js Apps:** `apps/<app>/.next/` (production-optimized bundles)
 
 ### Building Locally
@@ -447,13 +458,13 @@ This monorepo uses Turborepo for orchestration. The `turbo.json` at root defines
 pnpm build
 
 # Build only design system
-pnpm build --filter @ecosystem/design-system
+pnpm build --filter @sds/ui
 
 # Build specific app
 pnpm build --filter portfolio
 
 # Build with cache cleared (if seeing issues)
-rm -rf .turbo design-system/dist apps/*/. next
+rm -rf .turbo packages/ui/dist apps/*/.next
 pnpm build
 ```
 
@@ -507,12 +518,12 @@ vercel --prod
 **Status:** Not yet published to npm (prepared for future publishing)
 
 **When ready to publish:**
-1. Update version in `design-system/package.json`
-2. Build: `pnpm build --filter @ecosystem/design-system`
-3. Publish: `cd design-system && npm publish`
+1. Update version in `packages/ui/package.json`
+2. Build: `pnpm build --filter @sds/ui`
+3. Publish: `cd packages/ui && npm publish`
 4. Update CHANGELOG.md with version and changes
 
-**Package name:** `@ecosystem/design-system` (or update before publishing)
+**Package name:** `@sds/ui` (or update before publishing)
 
 #### Other Apps
 
@@ -536,10 +547,10 @@ Before deploying any app:
 **"Module not found" errors during build:**
 ```bash
 # Design system not built
-pnpm build --filter @ecosystem/design-system
+pnpm build --filter @sds/ui
 
 # Stale node_modules
-rm -rf node_modules apps/*/node_modules design-system/node_modules
+rm -rf node_modules apps/*/node_modules packages/*/node_modules
 pnpm install
 ```
 
@@ -607,14 +618,14 @@ jobs:
 | Layer | Technology | Version | Notes |
 |-------|------------|---------|-------|
 | **Framework** | Next.js (App Router) | 16.0.10 | Server components, streaming |
-| **React** | React | 18.3.1 (design-system)<br>19.2.1 (portfolio) | Using latest features |
+| **React** | React | 18.3.1 (@sds/ui)<br>19.2.1 (portfolio) | Using latest features |
 | **Language** | TypeScript | 5.x | Strict mode enabled |
 | **Styling** | Tailwind CSS | 3.x | Via CSS variables from design system |
 | **Animation** | Framer Motion | 12.23.26 | Respects motion preferences |
 | **State Management** | Zustand | 5.0.9 | With localStorage persistence |
 | **Package Manager** | pnpm | 8.15.0 | Workspace support required |
 | **Monorepo** | Turborepo | latest | Task orchestration, caching |
-| **Build Tool** | tsup | 8.5.1 | For design-system package |
+| **Build Tool** | tsup | 8.5.1 | For @sds/ui package |
 | **Deployment** | Vercel | - | Next.js optimized platform |
 
 ### Data & Content
@@ -655,7 +666,7 @@ jobs:
 
 ### Tailwind Conventions
 
-- Use design tokens from `design-system/tokens/` (imported as CSS variables)
+- Use design tokens from `packages/tokens/` (imported as CSS variables)
 - Prefer semantic class names via `@apply` in component styles when patterns repeat
 - All motion utilities must respect `prefers-reduced-motion`
 - Use Tailwind's arbitrary values sparingly—add to tokens if used repeatedly
@@ -668,13 +679,13 @@ The design system is the **heart** of this ecosystem. Every app imports from it.
 
 ### Package Structure
 
-The design system is published as `@ecosystem/design-system` and consumed via workspace references:
+The design system is published as `@sds/ui` and consumed via workspace references:
 
 ```json
 // In your app's package.json
 {
   "dependencies": {
-    "@ecosystem/design-system": "workspace:*"
+    "@sds/ui": "workspace:*"
   }
 }
 ```
@@ -684,19 +695,19 @@ The design system is published as `@ecosystem/design-system` and consumed via wo
 The package supports both main and scoped exports for tree-shaking:
 
 ```typescript
-// Main export (most common - imports from design-system/src/index.ts)
-import { Button, Card, useTheme, CustomizerPanel } from '@ecosystem/design-system'
+// Main export (most common - imports from packages/ui/src/index.ts)
+import { Button, Card, useTheme, CustomizerPanel } from '@sds/ui'
 
-// Scoped exports (for specific imports)
-import { Button, Card } from '@ecosystem/design-system/atoms'
-import { useMotionPreference, useTheme } from '@ecosystem/design-system/hooks'
-import { CustomizerPanel } from '@ecosystem/design-system/features'
-import { spacing, typography } from '@ecosystem/design-system/tokens'
-import { ThemeProvider } from '@ecosystem/design-system/providers'
+// Scoped exports (for specific imports) - all available via subpath exports
+import { useMotionPreference, useTheme } from '@sds/ui/hooks'
+import { ThemeProvider } from '@sds/ui/providers'
+import { cn } from '@sds/ui/utils'
+// Note: Tokens are from separate package
+import { spacing, typography } from '@sds/tokens'
 ```
 
 **When to use which:**
-- Use main export for most cases: `import { Button } from '@ecosystem/design-system'`
+- Use main export for most cases: `import { Button } from '@sds/ui'`
 - Use scoped exports when you want explicit paths or better IDE autocomplete
 
 ### Design Tokens
@@ -704,7 +715,7 @@ import { ThemeProvider } from '@ecosystem/design-system/providers'
 Tokens are the single source of truth for visual properties:
 
 ```typescript
-import { spacing, typography } from '@ecosystem/design-system/tokens'
+import { spacing, typography } from '@sds/ui/tokens'
 
 // Spacing scale
 spacing.xs    // 4px
@@ -712,7 +723,7 @@ spacing.sm    // 8px
 spacing.md    // 16px
 spacing.lg    // 24px
 spacing.xl    // 32px
-// ... see design-system/README.md for complete token documentation
+// ... see apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md for complete token documentation
 
 // Typography
 typography.fonts.sans      // Theme-specific sans-serif
@@ -720,7 +731,7 @@ typography.fonts.serif     // Theme-specific serif (Sage theme)
 typography.fonts.mono      // Theme-specific monospace
 typography.sizes.base      // 16px
 typography.weights.semibold // 600
-// ... see design-system/README.md for complete typography scale
+// ... see apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md for complete typography scale
 ```
 
 **Colors are CSS variables** applied by ThemeProvider:
@@ -732,7 +743,7 @@ const styles = {
   color: 'var(--color-text-primary)',
   borderColor: 'var(--color-border)',
 }
-// See design-system/README.md for complete list of CSS variables
+// See apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md for complete list of CSS variables
 ```
 
 ### Flagship Features
@@ -740,8 +751,8 @@ const styles = {
 Three features embody the philosophy. Here's their current status:
 
 1. **Customizer** — User control made tangible ✅ **IMPLEMENTED**
-   - Location: `design-system/features/customizer/`
-   - Import: `import { CustomizerPanel } from '@ecosystem/design-system'`
+   - Location: `packages/ui/src/features/customizer/`
+   - Import: `import { CustomizerPanel } from '@sds/ui'`
    - Features:
      - Motion intensity slider (0-10 scale, respects `prefers-reduced-motion`)
      - Theme selector (Studio, Sage, Volt)
@@ -757,7 +768,7 @@ Three features embody the philosophy. Here's their current status:
      - Reveal design tokens in use
      - Show component boundaries
      - Display AI collaboration notes
-   - **When building:** Create as `design-system/features/xray/XRayOverlay.tsx`
+   - **When building:** Create as `packages/ui/src/features/xray/XRayOverlay.tsx`
 
 3. **AI Notes** — Collaboration made visible 📋 **PLANNED**
    - Component not yet built
@@ -765,7 +776,7 @@ Three features embody the philosophy. Here's their current status:
      - Document AI involvement in building features
      - Show decision rationale
      - "Shows the receipts"
-   - **When building:** Create as `design-system/features/ai-notes/AINote.tsx`
+   - **When building:** Create as `packages/ui/src/features/ai-notes/AINote.tsx`
    - **Implementation suggestion:** Inline component that appears in context, triggered by X-Ray Mode
 
 ---
@@ -792,14 +803,14 @@ The ecosystem uses **Zustand** for client-side state management with localStorag
 
 | Store | Location | Purpose | Persists? |
 |-------|----------|---------|-----------|
-| **Theme Store** | `design-system/store/theme.ts` | Current theme name and color mode | ✅ Yes (localStorage) |
-| **Customizer Store** | `design-system/features/customizer/store.ts` | Motion intensity, x-ray mode, system preferences | ✅ Yes (localStorage) |
+| **Theme Store** | `packages/ui/src/lib/stores/theme.ts` | Current theme name and color mode | ✅ Yes (localStorage) |
+| **Customizer Store** | `packages/ui/src/features/customizer/store.ts` | Motion intensity, x-ray mode, system preferences | ✅ Yes (localStorage) |
 
 ### Using Existing Stores
 
 ```typescript
 // Theme store
-import { useTheme } from '@ecosystem/design-system/hooks'
+import { useTheme } from '@sds/ui/hooks'
 
 function ThemeSelector() {
   const { theme, mode, setTheme, setMode, toggleMode } = useTheme()
@@ -812,7 +823,7 @@ function ThemeSelector() {
 }
 
 // Customizer store
-import { useMotionPreference } from '@ecosystem/design-system/hooks'
+import { useMotionPreference } from '@sds/ui/hooks'
 
 function AnimatedComponent() {
   const { scale, shouldAnimate } = useMotionPreference()
@@ -829,7 +840,7 @@ function AnimatedComponent() {
 **Design System Store** (for shared state across all apps):
 
 ```typescript
-// design-system/store/myFeature.ts
+// packages/ui/src/lib/stores/myFeature.ts
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
@@ -870,8 +881,8 @@ export const useNavigation = create<NavigationState>((set) => ({
 
 ### Store Organization Rules
 
-1. **Global stores** → `design-system/store/`
-2. **Feature stores** → Co-locate with feature: `design-system/features/<feature>/store.ts`
+1. **Global stores** → `packages/ui/src/lib/stores/`
+2. **Feature stores** → Co-locate with feature: `packages/ui/src/features/<feature>/store.ts`
 3. **App stores** → `apps/<app>/store/` or `apps/<app>/lib/store/`
 
 ### Persistence Patterns
@@ -953,7 +964,7 @@ export const useMyStore = create<MyState>()(
 
 ### Package Types and Dependency Rules
 
-#### Shared Libraries (design-system, packages/*)
+#### Shared Libraries (@sds/ui, @sds/tokens, packages/*)
 
 **Rule:** Use `peerDependencies` with version ranges for packages that consuming apps will also depend on (React, framer-motion, etc.)
 
@@ -989,7 +1000,7 @@ export const useMyStore = create<MyState>()(
   "dependencies": {
     "react": "^19.2.1",                      // Gets 19.x updates, not 20.x
     "next": "^16.0.10",                      // Gets 16.x updates, not 17.x
-    "@ecosystem/design-system": "workspace:^" // Always use workspace protocol
+    "@sds/ui": "workspace:^" // Always use workspace protocol
   }
 }
 ```
@@ -1039,10 +1050,10 @@ export const useMyStore = create<MyState>()(
 
 ### Avoiding Version Conflicts
 
-**Problem:** Portfolio uses React 19, design-system locked to React 18
+**Problem:** Portfolio uses React 19, @sds/ui locked to React 18
 ```json
 // ❌ This creates conflicts
-// design-system/package.json
+// packages/ui/package.json
 {
   "dependencies": {
     "react": "18.3.1"  // Locked to 18
@@ -1060,7 +1071,7 @@ export const useMyStore = create<MyState>()(
 **Solution:** Design-system uses flexible peerDependencies
 ```json
 // ✅ This allows both versions
-// design-system/package.json
+// packages/ui/package.json
 {
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0"  // Supports both 18 and 19
@@ -1086,7 +1097,7 @@ If **YES**:
 3. Add same packages to `devDependencies` for development
 4. Only put true runtime dependencies in `dependencies`
 
-**Example:** Adding a new design-system feature that uses React:
+**Example:** Adding a new @sds/ui feature that uses React:
 ```json
 {
   "peerDependencies": {
@@ -1113,13 +1124,13 @@ If **YES**:
    ```json
    {
      "dependencies": {
-       "@ecosystem/design-system": "workspace:^"
+       "@sds/ui": "workspace:^"
      }
    }
    ```
 
 3. **Check peerDependency compatibility:**
-   - If design-system requires React 18+, app must satisfy that
+   - If @sds/ui requires React 18+, app must satisfy that
    - Run `pnpm install` to see peer dependency warnings
 
 ### Updating Dependencies
@@ -1140,15 +1151,15 @@ When updating a shared library's supported versions:
 3. **Test with all supported versions:**
    ```bash
    # Test with React 18
-   pnpm install --filter design-system react@^18.3.1
-   pnpm test --filter design-system
+   pnpm install --filter @sds/ui react@^18.3.1
+   pnpm test --filter @sds/ui
 
    # Test with React 19
-   pnpm install --filter design-system react@^19.2.1
-   pnpm test --filter design-system
+   pnpm install --filter @sds/ui react@^19.2.1
+   pnpm test --filter @sds/ui
    ```
 4. **Update CHANGELOG.md** noting new version support
-5. **Bump design-system version** (minor bump for new support)
+5. **Bump @sds/ui version** (minor bump for new support)
 
 #### Updating App Dependencies
 
@@ -1474,7 +1485,7 @@ Examples:
 
 ### To an App
 
-1. Check if the component belongs in design-system instead
+1. Check if the component belongs in the UI package instead
 2. If app-specific, create in `apps/<app>/components/`
 3. Use design system tokens and components
 4. Follow accessibility checklist
@@ -1528,7 +1539,7 @@ grep -r "oldPropName" apps/
 ### Making a Breaking Change
 
 **Step 1: Version bump**
-- Update `design-system/package.json` version:
+- Update `packages/ui/package.json` version:
   - Major bump (1.0.0 → 2.0.0) for breaking changes
   - Minor bump (1.0.0 → 1.1.0) for new features
   - Patch bump (1.0.0 → 1.0.1) for bug fixes
@@ -1554,7 +1565,7 @@ grep -r "oldPropName" apps/
 - Commit all changes together (atomic change)
 
 **Step 4: Create migration guide**
-- Add to `design-system/MIGRATION.md` (create if doesn't exist)
+- Add to `packages/ui/MIGRATION.md` (create if doesn't exist)
 - Include code examples (before/after)
 - Document every breaking change
 
@@ -1691,7 +1702,7 @@ pnpm build
 ### Essential Reading
 
 - **[DESIGN-PHILOSOPHY.md](DESIGN-PHILOSOPHY.md)** — **Read this first.** The North Star. Contains the four principles that guide all decisions.
-- **[design-system/README.md](design-system/README.md)** — Design system architecture, components, usage guide. Reference this for import paths and component APIs.
+- **[apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md](apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md)** — Design system architecture, components, usage guide. Reference this for import paths and component APIs.
 - **[CHANGELOG.md](CHANGELOG.md)** — Project history. Check here to see what's been done recently before starting work.
 
 ### Configuration Files

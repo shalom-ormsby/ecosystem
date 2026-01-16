@@ -63,16 +63,30 @@ The heart of this ecosystem. Every app imports from it. **Version 1.0 — Produc
 
 ### Architecture
 
-The design system follows atomic design principles with a clear component hierarchy:
+The design system organizes components by **functional purpose**, not abstract hierarchy. This eliminates classification ambiguity and aligns with modern design systems like shadcn/ui, Material UI, and Radix.
 
-- **Atoms** (11 families) — Primitives with no internal dependencies
-  - Button, Input family (TextField, TextArea, Select, Checkbox, Radio, Switch), Card, Badge, Avatar, Link, Icon, Code, Spinner, ProgressBar, Motion components
+**48+ components across 7 functional categories:**
 
-- **Molecules** (8 components) — Composed from atoms
-  - FormField, SearchBar, CheckboxGroup, RadioGroup, Dropdown, Tooltip, Breadcrumbs, ThemeToggle
+- **Actions** (3) — Interactive elements that trigger behaviors
+  Button, Toggle, ToggleGroup
 
-- **Organisms** (8 components) — Complex compositions
-  - Header, SecondaryNav, TertiaryNav, Footer, Modal, Toast, PageLayout, CollapsibleCodeBlock
+- **Forms** (11) — Input controls with validation
+  Input, Select, Checkbox, Switch, Slider, Label, Textarea, RadioGroup, Form
+
+- **Navigation** (6) — Moving through content hierarchy
+  Breadcrumb, Tabs, Pagination, Command, MenuBar, NavigationMenu
+
+- **Overlays** (9) — Contextual content above main UI
+  Dialog, Sheet, Popover, Tooltip, Drawer, DropdownMenu, ContextMenu, HoverCard, AlertDialog
+
+- **Feedback** (5) — System state communication
+  Alert, Toast, Progress, Skeleton, Sonner
+
+- **Data Display** (6) — Structured information presentation
+  Table, DataTable, Card, Avatar, Badge, Calendar
+
+- **Layout** (8) — Spatial organization
+  Accordion, Carousel, ScrollArea, Separator, Sidebar, Collapsible, AspectRatio, Resizable
 
 ### Three Distinct Themes
 
@@ -129,7 +143,7 @@ Built-in automatic syntax parser (~2KB) for beautiful code examples:
 - **14 token types** — Comprehensive TypeScript/JavaScript/JSX tokenization
 - **Theme-aware colors** — Adapts to light/dark mode with WCAG AA contrast
 - **No dependencies** — Completely self-contained
-- **CollapsibleCodeBlock organism** — Full-featured code display with copy, collapse, and syntax highlighting
+- **CollapsibleCodeBlock component** — Full-featured code display with copy, collapse, and syntax highlighting
 
 ### Accessibility-First Design
 
@@ -174,7 +188,7 @@ The **Sage Design Studio** app ([apps/sage-design-studio](apps/sage-design-studi
 
 Visit the live documentation at [https://studio.shalomormsby.com/](https://studio.shalomormsby.com/)
 
-[Full Design System Documentation →](design-system/README.md)
+[Full Design System Documentation →](apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md)
 
 ---
 
@@ -188,27 +202,33 @@ ecosystem/
 │   ├── creative-powerup/      # Experiment gallery (in development)
 │   ├── sage-stocks/           # Migration pending
 │   └── sageos/                # Future
-├── design-system/             # The heart (at root, not in packages/)
-│   ├── tokens/                # Design decisions as code
+├── packages/                  # Shared packages
+│   ├── ui/                    # @sds/ui - Component library
+│   │   └── src/
+│   │       ├── components/    # 48+ functionally-organized components
+│   │       │   ├── actions/   # Button, Toggle, ToggleGroup
+│   │       │   ├── forms/     # Input, Select, Checkbox, etc.
+│   │       │   ├── navigation/# Breadcrumb, Tabs, Pagination, etc.
+│   │       │   ├── overlays/  # Dialog, Sheet, Popover, etc.
+│   │       │   ├── feedback/  # Alert, Toast, Progress, etc.
+│   │       │   ├── data-display/  # Table, Card, Avatar, etc.
+│   │       │   └── layout/    # Accordion, Carousel, Separator, etc.
+│   │       ├── hooks/         # useTheme, useMotionPreference, useForm
+│   │       ├── providers/     # ThemeProvider, ToastProvider
+│   │       ├── features/      # Customizer (philosophy-embodying)
+│   │       ├── lib/           # Store, utils, validation, animations
+│   │       └── index.ts       # Main export barrel
+│   ├── tokens/                # @sds/tokens - Design decisions as code
+│   │   ├── studio/            # Studio theme tokens
+│   │   ├── sage/              # Sage theme tokens
+│   │   ├── volt/              # Volt theme tokens
 │   │   ├── base.ts            # Shared scales
-│   │   ├── studio.ts          # Studio theme
-│   │   ├── sage.ts            # Sage theme
-│   │   ├── volt.ts            # Volt theme
-│   │   ├── typography.ts      # Type system
-│   │   └── syntax.ts          # Code highlighting
-│   ├── atoms/                 # 11 primitive component families
-│   ├── molecules/             # 8 composed components
-│   ├── organisms/             # 8 complex compositions
-│   ├── hooks/                 # useTheme, useMotionPreference, useForm
-│   ├── features/              # Customizer (philosophy-embodying)
-│   ├── providers/             # ThemeProvider, ToastProvider
-│   ├── store/                 # Zustand state management
-│   └── utils/                 # Validation, animations, colors, syntax parser
-├── docs/                      # Guides and documentation
-└── packages/                  # Shared config and utilities
+│   │   └── index.ts           # Unified export
+│   └── config/                # Shared Tailwind and TypeScript config
+└── docs/                      # Guides and documentation
 ```
 
-**Why design-system at root?** It signals importance and is structured for npm publishing from day one.
+**Why functional organization?** Modern design systems organize by purpose (what components *do*), not abstract hierarchy. This approach eliminates classification debates and maps directly to developer workflows.
 
 ---
 
@@ -236,7 +256,7 @@ ecosystem/
 
 ### Reference Documentation
 
-- **[design-system/README.md](design-system/README.md)** — Design system architecture, components, tokens, and usage.
+- **[SAGE_DESIGN_SYSTEM_STRATEGY.md](apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md)** — Design system architecture, components, tokens, and usage.
 - **[apps/portfolio/README.md](apps/portfolio/README.md)** — Portfolio app setup and context.
 - **[docs/mcp-setup.md](docs/mcp-setup.md)** — Configure MCP servers for AI coding assistants.
 
@@ -266,7 +286,7 @@ All preferences persist to localStorage. This isn't a settings panel hidden in a
 Visual properties defined in code, not locked in Figma. Colors, spacing, typography, motion—all exposed as importable JavaScript.
 
 ```typescript
-import { spacing, typography } from '@ecosystem/design-system/tokens'
+import { spacing, typography } from '@sds/tokens'
 ```
 
 ### Motion That Respects Users
@@ -333,7 +353,7 @@ The work is the proof. Every component, every interaction, every line of code de
 - **Sage Stocks migration** — Existing 15k LOC app to be integrated into monorepo
 - **SageOS** — Personal operating system for creative work
 - **Testing suite** — Vitest + Testing Library for comprehensive test coverage
-- **Additional organisms** — Advanced layout patterns and compositions
+- **Additional components** — Advanced layout patterns and compositions
 
 [Full implementation status →](AGENTS.md#current-implementation-state)
 
