@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { Card, Button } from '@sds/ui';
-import { Code, CollapsibleCodeBlock } from '@ecosystem/design-system';
-import { useTheme } from '@ecosystem/design-system/hooks';
+import { Code, CollapsibleCodeBlock } from '@sds/ui';
+import { useTheme } from '@sds/ui/hooks';
 import {
   Sliders, Building2, Leaf, Zap, Sun, Moon, Laptop, Palette, Bot, BookOpen,
   Construction, XCircle, CheckCircle, Heart, Search, Sprout, Check
@@ -432,7 +432,7 @@ export function OverviewSection() {
               <div>
                 <CollapsibleCodeBlock
                   id="syntax-parser-demo"
-                  code={`import { parseCode } from '@ecosystem/design-system';
+                  code={`import { parseCode } from '@sds/ui';
 
 const code = \`function hello() {
   return "world";
@@ -475,7 +475,7 @@ const tokens = parseCode(code, 'typescript');
               <div>
                 <CollapsibleCodeBlock
                   id="motion-control-demo"
-                  code={`import { useMotion } from '@ecosystem/design-system';
+                  code={`import { useMotion } from '@sds/ui';
 
 export function MyComponent() {
   const { motionLevel, setMotionLevel } = useMotion();
@@ -558,7 +558,7 @@ export function MyComponent() {
 
               <CollapsibleCodeBlock
                 id="theme-switching-demo"
-                code={`import { useTheme } from '@ecosystem/design-system';
+                code={`import { useTheme } from '@sds/ui';
 
 export function ThemeSwitcher() {
   const { theme, setTheme, mode, setMode } = useTheme();
@@ -778,14 +778,14 @@ export function ThemeSwitcher() {
           </div>
           <CollapsibleCodeBlock
             id="tokens-example"
-            code={`import { colorTokens, spacingTokens } from '@ecosystem/design-system/tokens';
+            code={`import { colorTokens, spacingTokens } from '@sds/ui/tokens';
 
 // Tokens are available for reference
 const primaryColor = colorTokens.studio.light.primary;
 const spacing = spacingTokens.lg; // "1.5rem" (24px)
 
 // But consumed through components:
-import { Button, Text } from '@ecosystem/design-system';
+import { Button, Text } from '@sds/ui';
 <Button variant="default">Click me</Button>  // ✅ Correct
 <Text>Hello</Text>                           // ✅ Correct
 
@@ -879,11 +879,11 @@ import { Button, Text } from '@ecosystem/design-system';
                 </h3>
                 <CollapsibleCodeBlock
                   id="installation"
-                  code={`pnpm add @ecosystem/design-system
+                  code={`pnpm add @sds/ui
 # or
-npm install @ecosystem/design-system
+npm install @sds/ui
 # or
-yarn add @ecosystem/design-system`}
+yarn add @sds/ui`}
                   defaultCollapsed={false}
                   showCopy={true}
                 />
@@ -903,7 +903,7 @@ yarn add @ecosystem/design-system`}
                 </h3>
                 <CollapsibleCodeBlock
                   id="basic-usage-example"
-                  code={`import { Button, Card, Badge } from '@ecosystem/design-system';
+                  code={`import { Button, Card, Badge } from '@sds/ui';
 
 export function MyComponent() {
   return (
@@ -935,7 +935,7 @@ export function MyComponent() {
                 </h3>
                 <CollapsibleCodeBlock
                   id="theme-provider-example"
-                  code={`import { ThemeProvider } from '@ecosystem/design-system/providers';
+                  code={`import { ThemeProvider } from '@sds/ui/providers';
 
 export default function App({ children }) {
   return (
@@ -963,7 +963,7 @@ export default function App({ children }) {
                 </h3>
                 <CollapsibleCodeBlock
                   id="hooks-example"
-                  code={`import { useTheme, useMotion } from '@ecosystem/design-system/hooks';
+                  code={`import { useTheme, useMotion } from '@sds/ui/hooks';
 
 export function Controls() {
   const { theme, setTheme, mode, setMode } = useTheme();

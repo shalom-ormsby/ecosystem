@@ -1,7 +1,7 @@
 'use client';
 
-import { Card, CollapsibleCodeBlock } from '@ecosystem/design-system';
-import { VariableWeightText } from '@ecosystem/design-system';
+import { Card, CollapsibleCodeBlock } from '@sds/ui';
+import { VariableWeightText } from '@sds/ui';
 import { Check } from 'lucide-react';
 
 export function TextEffectsSection() {
@@ -70,7 +70,7 @@ export function TextEffectsSection() {
         {/* Code Example */}
         <CollapsibleCodeBlock
           id="variable-weight-text-code"
-          code={`import { VariableWeightText } from '@ecosystem/design-system';
+          code={`import { VariableWeightText } from '@sds/ui';
 
 <VariableWeightText minWeight={200} maxWeight={700}>
   Clash Display

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ThemeSwitcher } from '@ecosystem/design-system';
+import { ThemeSwitcher } from '@sds/ui';
 
 /**
  * Mode switcher for the design system documentation

@@ -1,4 +1,4 @@
-import { Code, Link, Spinner, ProgressBar, Switch } from '@ecosystem/design-system';
+import { Code, Link, Spinner, ProgressBar, Switch } from '@sds/ui';
 import {
   // Phase 1 & 2 components
   Label, Input, Alert, AlertDescription, AlertTitle, Avatar, AvatarImage, AvatarFallback, Button, Card, Badge, Checkbox, Combobox, Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut, DataTable, Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Popover, PopoverAnchor, PopoverContent, PopoverTrigger, RadioGroup, RadioGroupItem, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Separator, ScrollArea, Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, Skeleton, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toaster, ToastProvider, useToast,
@@ -485,7 +485,7 @@ export const componentRegistry: Record<string, ComponentConfig> = {
     codeExamples: [
       {
         title: 'Inline Code',
-        code: `import { Code } from '@ecosystem/design-system';
+        code: `import { Code } from '@sds/ui';
 
 <p>
   Use the <Code syntax="keyword">useState</Code> hook to manage component state.
@@ -513,7 +513,7 @@ console.log(greeting);\`)}
         code: `<div className="space-y-2">
   <p>Import the component:</p>
   <Code inline={false} syntax="keyword">
-    import {{ Button }} from '@ecosystem/design-system';
+    import {{ Button }} from '@sds/ui';
   </Code>
 
   <p>Then use it with <Code syntax="property">variant</Code> prop.</p>
@@ -569,7 +569,7 @@ console.log(greeting);\`)}
     codeExamples: [
       {
         title: 'Basic Usage',
-        code: `import { Link } from '@ecosystem/design-system';
+        code: `import { Link } from '@sds/ui';
 
 <Link href="/about">Learn More</Link>`,
         description: 'Simple link with default styling',
@@ -723,7 +723,7 @@ console.log(greeting);\`)}
     codeExamples: [
       {
         title: 'Basic Loading State',
-        code: `import { Spinner } from '@ecosystem/design-system';
+        code: `import { Spinner } from '@sds/ui';
 
 <div className="flex justify-center p-8">
   <Spinner />
@@ -797,7 +797,7 @@ console.log(greeting);\`)}
     codeExamples: [
       {
         title: 'Upload Progress',
-        code: `import { ProgressBar } from '@ecosystem/design-system';
+        code: `import { ProgressBar } from '@sds/ui';
 
 const [uploadProgress, setUploadProgress] = useState(0);
 
@@ -876,7 +876,7 @@ useEffect(() => {
     codeExamples: [
       {
         title: 'Basic Usage',
-        code: `import { Switch } from '@ecosystem/design-system';
+        code: `import { Switch } from '@sds/ui';
 
 const [enabled, setEnabled] = useState(false);
 
@@ -888,7 +888,7 @@ const [enabled, setEnabled] = useState(false);
       },
       {
         title: 'With Label',
-        code: `import { Switch } from '@ecosystem/design-system';
+        code: `import { Switch } from '@sds/ui';
 
 const [darkMode, setDarkMode] = useState(false);
 
@@ -900,7 +900,7 @@ const [darkMode, setDarkMode] = useState(false);
       },
       {
         title: 'Different Sizes',
-        code: `import { Switch } from '@ecosystem/design-system';
+        code: `import { Switch } from '@sds/ui';
 
 <div className="flex items-center gap-4">
   <Switch size="sm" checked={true} onCheckedChange={() => {}} />

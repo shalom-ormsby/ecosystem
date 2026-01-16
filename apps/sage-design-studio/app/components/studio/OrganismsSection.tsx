@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import { Card, Button } from '@sds/ui';
-import { Header, SecondaryNav, TertiaryNav, Footer, Modal, ToastProvider, useToast, CollapsibleCodeBlock, Code, CustomizerPanel, Breadcrumbs, PageLayout, type BreadcrumbItem } from '@ecosystem/design-system';
+import { Header, SecondaryNav, TertiaryNav, Footer, Modal, ToastProvider, useToast, CollapsibleCodeBlock, Code, CustomizerPanel, Breadcrumbs, PageLayout, type BreadcrumbItemLegacy } from '@sds/ui';
 import { SlidersHorizontal, Sun, Moon, SunMoon, Building2, Leaf, Zap, X } from 'lucide-react';
-import type { SyntaxToken } from '@ecosystem/design-system';
+import type { SyntaxToken } from '@sds/ui';
 
 type OrganismType = 'PageLayout' | 'PrimaryNav' | 'SecondaryNav' | 'TertiaryNav' | 'FirstStack' | 'SecondStack' | 'Footer' | 'Toast' | 'Modal' | 'CollapsibleCodeBlock' | 'Customizer';
 
 interface OrganismsSectionProps {
   activeItemId?: string;
-  breadcrumbs?: BreadcrumbItem[];
+  breadcrumbs?: BreadcrumbItemLegacy[];
   onItemChange?: (itemId: string) => void;
 }
 
@@ -437,7 +437,7 @@ export function OrganismsSection({ activeItemId, breadcrumbs, onItemChange }: Or
                 Usage Example
               </h4>
               <Card className="p-6 bg-[var(--color-surface)]">
-                <CollapsibleCodeBlock id="org-pagelayout-usage" code={`import { PageLayout, Header, Breadcrumbs } from '@ecosystem/design-system';
+                <CollapsibleCodeBlock id="org-pagelayout-usage" code={`import { PageLayout, Header, Breadcrumbs } from '@sds/ui';
 
 <PageLayout
   header={<Header logo="Sage" navLinks={links} />}
@@ -660,7 +660,7 @@ export function OrganismsSection({ activeItemId, breadcrumbs, onItemChange }: Or
                 Code Example
               </h4>
               <Card className="p-6 bg-[var(--color-surface)]">
-                <CollapsibleCodeBlock id="secondary-nav-usage" code={`import { SecondaryNav } from '@ecosystem/design-system';
+                <CollapsibleCodeBlock id="secondary-nav-usage" code={`import { SecondaryNav } from '@sds/ui';
 import { useState } from 'react';
 
 function MyPage() {
@@ -822,7 +822,7 @@ function MyPage() {
                 Code Example
               </h4>
               <Card className="p-6 bg-[var(--color-surface)]">
-                <CollapsibleCodeBlock id="tertiary-nav-usage" code={`import { TertiaryNav } from '@ecosystem/design-system';
+                <CollapsibleCodeBlock id="tertiary-nav-usage" code={`import { TertiaryNav } from '@sds/ui';
 import { useState } from 'react';
 
 function ComponentSelector() {
@@ -1580,7 +1580,7 @@ export function Button({ variant, onClick }: ButtonProps) {
               <Card className="p-6 bg-[var(--color-surface)]">
                 <CollapsibleCodeBlock
                   id="org-collapsible-usage"
-                  code={`import { CollapsibleCodeBlock, parseCode } from '@ecosystem/design-system';
+                  code={`import { CollapsibleCodeBlock, parseCode } from '@sds/ui';
 
 // [New]: Automatic syntax highlighting - just pass a string!
 <CollapsibleCodeBlock
@@ -1599,7 +1599,7 @@ const tokens = parseCode('const example = 42;');
 />
 
 // Manual tokenization (for custom control)
-import type { SyntaxToken } from '@ecosystem/design-system';
+import type { SyntaxToken } from '@sds/ui';
 
 const customTokens: SyntaxToken[] = [
   { text: 'const', type: 'keyword' },
@@ -1778,7 +1778,7 @@ const customTokens: SyntaxToken[] = [
                 Code Example - Full Mode
               </h4>
               <Card className="p-6 bg-[var(--color-surface)]">
-                <CollapsibleCodeBlock id="customizer-full-usage" code={`import { CustomizerPanel } from '@ecosystem/design-system';
+                <CollapsibleCodeBlock id="customizer-full-usage" code={`import { CustomizerPanel } from '@sds/ui';
 
 // Full-featured customizer (default)
 export function MyApp() {
@@ -1808,7 +1808,7 @@ export function MyApp() {
                 Code Example - Lightweight Mode
               </h4>
               <Card className="p-6 bg-[var(--color-surface)]">
-                <CollapsibleCodeBlock id="customizer-lightweight-usage" code={`import { CustomizerPanel } from '@ecosystem/design-system';
+                <CollapsibleCodeBlock id="customizer-lightweight-usage" code={`import { CustomizerPanel } from '@sds/ui';
 
 // Lightweight mode - just light/dark switching
 export function MyApp() {
@@ -1898,8 +1898,8 @@ export function MyApp() {
                       <li>High z-index (z-50) to stay above content</li>
                     </ul>
                   </div>
-                  <CollapsibleCodeBlock id="customizer-integration" code={`import { ThemeProvider } from '@ecosystem/design-system/providers';
-import { CustomizerPanel } from '@ecosystem/design-system';
+                  <CollapsibleCodeBlock id="customizer-integration" code={`import { ThemeProvider } from '@sds/ui/providers';
+import { CustomizerPanel } from '@sds/ui';
 
 export default function App({ children }) {
   return (

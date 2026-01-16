@@ -19,9 +19,11 @@ export * from './components/forms/Input';
 export * from './components/forms/InputOTP';
 export * from './components/forms/Label';
 export * from './components/forms/RadioGroup';
+export * from './components/forms/SearchBar';
 export * from './components/forms/Select';
 export * from './components/forms/Slider';
 export * from './components/forms/Switch';
+export * from './components/forms/TextField';
 export * from './components/forms/Textarea';
 export * from './components/forms/ThemeSwitcher';
 export * from './components/forms/ThemeToggle';
@@ -76,6 +78,7 @@ export * from './components/data-display/GitHubIcon';
 export * from './components/data-display/Heading';
 export * from './components/data-display/Table';
 export * from './components/data-display/Text';
+export * from './components/data-display/VariableWeightText';
 
 // Layout
 export * from './components/layout/Accordion';
@@ -113,6 +116,9 @@ export * from './lib/colors';
 export * from './lib/utils';
 export * from './lib/validation';
 export * from './lib/syntax-parser';
+
+// Tokens (selective re-exports)
+export { typographySystem } from '@sds/tokens';
 
 // ============================================================================
 // OPTIONAL CATEGORY-BASED EXPORTS (Future Use)

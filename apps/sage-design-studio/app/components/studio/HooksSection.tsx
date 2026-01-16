@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { Card, Button, Badge, Code, CollapsibleCodeBlock } from '@sds/ui';
-import { TextField, TertiaryNav, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
-import { useForm, useTheme, useToast } from '@ecosystem/design-system';
+import { TextField, TertiaryNav, Breadcrumbs, type BreadcrumbItemLegacy } from '@sds/ui';
+import { useForm, useTheme, useToast } from '@sds/ui';
 
 interface HooksSectionProps {
   activeItemId?: string;
-  breadcrumbs?: BreadcrumbItem[];
+  breadcrumbs?: BreadcrumbItemLegacy[];
   onItemChange?: (itemId: string) => void;
 }
 
@@ -164,7 +164,7 @@ export function HooksSection({ activeItemId, breadcrumbs, onItemChange }: HooksS
                 <Card className="p-6">
                   <h5 className="font-medium text-[var(--color-text-primary)] mb-3">Built-in Patterns</h5>
                   <p className="text-sm text-[var(--color-text-secondary)] mb-4">
-                    Import from <Code syntax="plain" className="">@ecosystem/design-system/utils</Code>
+                    Import from <Code syntax="plain" className="">@sds/ui/utils</Code>
                   </p>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between items-center">
@@ -230,7 +230,7 @@ export function HooksSection({ activeItemId, breadcrumbs, onItemChange }: HooksS
                     id="hook-1"
                     title="validateField()"
                     language="typescript"
-                    code={`import { validateField, patterns } from '@ecosystem/design-system/utils';
+                    code={`import { validateField, patterns } from '@sds/ui/utils';
  
  const emailError = validateField('invalid-email', {
    required: true,
@@ -257,7 +257,7 @@ export function HooksSection({ activeItemId, breadcrumbs, onItemChange }: HooksS
                     id="hook-2"
                     title="validateForm()"
                     language="typescript"
-                    code={`import { validateForm, patterns } from '@ecosystem/design-system/utils';
+                    code={`import { validateForm, patterns } from '@sds/ui/utils';
  
  const values = {
    email: 'invalid-email',
@@ -298,7 +298,7 @@ export function HooksSection({ activeItemId, breadcrumbs, onItemChange }: HooksS
                   id="hook-3"
                   title="useForm Example"
                   language="typescript"
-                  code={`import { useForm, patterns } from '@ecosystem/design-system';
+                  code={`import { useForm, patterns } from '@sds/ui';
  
  function LoginForm() {
    const form = useForm({
@@ -505,7 +505,7 @@ function UseThemeSection() {
             id="hook-4"
             title="useTheme Example"
             language="typescript"
-            code={`import { useTheme } from '@ecosystem/design-system';
+            code={`import { useTheme } from '@sds/ui';
  
  function ThemeControls() {
    const { theme, mode, setTheme, setMode } = useTheme();
@@ -584,7 +584,7 @@ function UseToastSection() {
             id="hook-5"
             title="useToast Example"
             language="typescript"
-            code={`import { useToast } from '@ecosystem/design-system';
+            code={`import { useToast } from '@sds/ui';
  
  function MyComponent() {
    const { toast } = useToast();
@@ -641,7 +641,7 @@ function UseMotionPreferenceSection() {
             id="hook-6"
             title="Motion Preference Example"
             language="typescript"
-            code={`import { useMotionPreference } from '@ecosystem/design-system';
+            code={`import { useMotionPreference } from '@sds/ui';
  import { motion } from 'framer-motion';
  
  function AnimatedComponent() {
@@ -667,14 +667,14 @@ function UseMotionPreferenceSection() {
         </h4>
         <Card className="p-6">
           <p className="text-sm text-[var(--color-text-secondary)] mb-4">
-            Combine with animation utilities from <Code syntax="plain" className="">@ecosystem/design-system/utils</Code> for motion-aware animations:
+            Combine with animation utilities from <Code syntax="plain" className="">@sds/ui/utils</Code> for motion-aware animations:
           </p>
           <CollapsibleCodeBlock
             id="hook-7"
             title="Animation Presets Example"
             language="typescript"
-            code={`import { useMotionPreference } from '@ecosystem/design-system';
- import { presets, scaleDuration } from '@ecosystem/design-system/utils';
+            code={`import { useMotionPreference } from '@sds/ui';
+ import { presets, scaleDuration } from '@sds/ui/utils';
  import { motion } from 'framer-motion';
  
  function Card() {

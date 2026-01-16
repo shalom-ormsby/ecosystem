@@ -1,7 +1,7 @@
 'use client';
 
 import NextLink from 'next/link';
-import { Card, Link, Header, Footer } from '@ecosystem/design-system';
+import { Card, Link, Header, Footer } from '@sds/ui';
 import { ecosystemNavigation } from '../lib/navigation';
 
 export default function Home() {

@@ -1,0 +1,139 @@
+
+> ecosystem-monorepo@0.1.0 build /Users/shalomormsby/Developer/work/ecosystem
+> turbo run build --filter=@ecosystem/sage-design-studio
+
+• turbo 2.7.4
+• Packages in scope: @ecosystem/sage-design-studio
+• Running build in 1 packages
+• Remote caching disabled
+@sds/tokens:build: cache hit, replaying logs 2a5f30ffe2f72048
+@sds/tokens:build: 
+@sds/tokens:build: > @sds/tokens@0.0.1 build /Users/shalomormsby/Developer/work/ecosystem/packages/tokens
+@sds/tokens:build: > tsup src/index.ts --format esm,cjs --dts
+@sds/tokens:build: 
+@sds/tokens:build: CLI Building entry: src/index.ts
+@sds/tokens:build: CLI Using tsconfig: tsconfig.json
+@sds/tokens:build: CLI tsup v8.5.1
+@sds/tokens:build: CLI Target: es2020
+@sds/tokens:build: ESM Build start
+@sds/tokens:build: CJS Build start
+@sds/tokens:build: CJS dist/index.js 29.37 KB
+@sds/tokens:build: CJS ⚡️ Build success in 56ms
+@sds/tokens:build: ESM dist/index.mjs 27.45 KB
+@sds/tokens:build: ESM ⚡️ Build success in 56ms
+@sds/tokens:build: DTS Build start
+@sds/tokens:build: DTS ⚡️ Build success in 545ms
+@sds/tokens:build: DTS dist/index.d.mts 47.23 KB
+@sds/tokens:build: DTS dist/index.d.ts  47.23 KB
+@sds/core:build: cache hit, replaying logs 9d466a00dd7fec9a
+@sds/core:build: 
+@sds/core:build: > @sds/core@0.0.1 build /Users/shalomormsby/Developer/work/ecosystem/packages/core
+@sds/core:build: > tsup src/index.ts --format esm,cjs --dts
+@sds/core:build: 
+@sds/core:build: CLI Building entry: src/index.ts
+@sds/core:build: CLI Using tsconfig: tsconfig.json
+@sds/core:build: CLI tsup v8.5.1
+@sds/core:build: CLI Using tsup config: /Users/shalomormsby/Developer/work/ecosystem/packages/core/tsup.config.ts
+@sds/core:build: CLI Target: es2020
+@sds/core:build: CLI Cleaning output folder
+@sds/core:build: ESM Build start
+@sds/core:build: CJS Build start
+@sds/core:build: CJS dist/index.js     33.17 KB
+@sds/core:build: CJS dist/index.js.map 57.67 KB
+@sds/core:build: CJS ⚡️ Build success in 47ms
+@sds/core:build: ESM dist/index.mjs     31.96 KB
+@sds/core:build: ESM dist/index.mjs.map 57.45 KB
+@sds/core:build: ESM ⚡️ Build success in 47ms
+@sds/core:build: DTS Build start
+@sds/core:build: DTS ⚡️ Build success in 1362ms
+@sds/core:build: DTS dist/index.d.mts 1.67 KB
+@sds/core:build: DTS dist/index.d.ts  1.67 KB
+@sds/ui:build: cache hit, replaying logs a3c73b39d6d64539
+@sds/ui:build: 
+@sds/ui:build: 
+@sds/ui:build: > @sds/ui@0.0.5 build /Users/shalomormsby/Developer/work/ecosystem/packages/ui
+@sds/ui:build: > tsup src/index.ts src/tokens.ts src/hooks.ts src/utils.ts src/providers.ts --format esm,cjs --dts
+@sds/ui:build: 
+@sds/ui:build: [34mCLI[39m Building entry: src/hooks.ts, src/index.ts, src/providers.ts, src/tokens.ts, src/utils.ts
+@sds/ui:build: [34mCLI[39m Using tsconfig: tsconfig.json
+@sds/ui:build: [34mCLI[39m tsup v8.5.1
+@sds/ui:build: [34mCLI[39m Using tsup config: /Users/shalomormsby/Developer/work/ecosystem/packages/ui/tsup.config.ts
+@sds/ui:build: [34mCLI[39m Target: es2020
+@sds/ui:build: [34mCLI[39m Cleaning output folder
+@sds/ui:build: [34mESM[39m Build start
+@sds/ui:build: [34mCJS[39m Build start
+@sds/ui:build: [32mCJS[39m [1mdist/tokens.js        [22m[32m1.12 KB[39m
+@sds/ui:build: [32mCJS[39m [1mdist/hooks.js         [22m[32m7.30 KB[39m
+@sds/ui:build: [32mCJS[39m [1mdist/index.js         [22m[32m276.21 KB[39m
+@sds/ui:build: [32mCJS[39m [1mdist/utils.js         [22m[32m19.83 KB[39m
+@sds/ui:build: [32mCJS[39m [1mdist/providers.js     [22m[32m9.65 KB[39m
+@sds/ui:build: [32mCJS[39m [1mdist/tokens.js.map    [22m[32m295.00 B[39m
+@sds/ui:build: [32mCJS[39m [1mdist/hooks.js.map     [22m[32m20.96 KB[39m
+@sds/ui:build: [32mCJS[39m [1mdist/utils.js.map     [22m[32m43.81 KB[39m
+@sds/ui:build: [32mCJS[39m [1mdist/providers.js.map [22m[32m14.03 KB[39m
+@sds/ui:build: [32mCJS[39m [1mdist/index.js.map     [22m[32m464.36 KB[39m
+@sds/ui:build: [32mCJS[39m ⚡️ Build success in 155ms
+@sds/ui:build: [32mESM[39m [1mdist/utils.mjs         [22m[32m17.55 KB[39m
+@sds/ui:build: [32mESM[39m [1mdist/providers.mjs     [22m[32m8.00 KB[39m
+@sds/ui:build: [32mESM[39m [1mdist/hooks.mjs         [22m[32m5.89 KB[39m
+@sds/ui:build: [32mESM[39m [1mdist/index.mjs         [22m[32m246.49 KB[39m
+@sds/ui:build: [32mESM[39m [1mdist/tokens.mjs        [22m[32m96.00 B[39m
+@sds/ui:build: [32mESM[39m [1mdist/utils.mjs.map     [22m[32m43.27 KB[39m
+@sds/ui:build: [32mESM[39m [1mdist/hooks.mjs.map     [22m[32m20.64 KB[39m
+@sds/ui:build: [32mESM[39m [1mdist/providers.mjs.map [22m[32m13.80 KB[39m
+@sds/ui:build: [32mESM[39m [1mdist/tokens.mjs.map    [22m[32m263.00 B[39m
+@sds/ui:build: [32mESM[39m [1mdist/index.mjs.map     [22m[32m466.87 KB[39m
+@sds/ui:build: [32mESM[39m ⚡️ Build success in 155ms
+@sds/ui:build: DTS Build start
+@sds/ui:build: DTS ⚡️ Build success in 3536ms
+@sds/ui:build: DTS dist/tokens.d.mts              29.00 B
+@sds/ui:build: DTS dist/index.d.mts               115.61 KB
+@sds/ui:build: DTS dist/providers.d.mts           91.00 B
+@sds/ui:build: DTS dist/hooks.d.mts               232.00 B
+@sds/ui:build: DTS dist/utils.d.mts               963.00 B
+@sds/ui:build: DTS dist/validation-Bj1ye-v_.d.mts 2.91 KB
+@sds/ui:build: DTS dist/providers-DlGAWq8Q.d.mts  462.00 B
+@sds/ui:build: DTS dist/hooks-CtlK__Gq.d.mts      6.06 KB
+@sds/ui:build: DTS dist/utils-WjDUW7GR.d.mts      25.45 KB
+@sds/ui:build: DTS dist/tokens.d.ts               29.00 B
+@sds/ui:build: DTS dist/index.d.ts                115.61 KB
+@sds/ui:build: DTS dist/providers.d.ts            90.00 B
+@sds/ui:build: DTS dist/hooks.d.ts                230.00 B
+@sds/ui:build: DTS dist/utils.d.ts                961.00 B
+@sds/ui:build: DTS dist/validation-Bj1ye-v_.d.ts  2.91 KB
+@sds/ui:build: DTS dist/providers-DlGAWq8Q.d.ts   462.00 B
+@sds/ui:build: DTS dist/hooks-Qt5wbOjb.d.ts       6.06 KB
+@sds/ui:build: DTS dist/utils-CHPHskih.d.ts       25.45 KB
+@ecosystem/sage-design-studio:build: cache miss, executing 6eb922512864b6ef
+@ecosystem/sage-design-studio:build: 
+@ecosystem/sage-design-studio:build: > @ecosystem/sage-design-studio@0.1.0 build /Users/shalomormsby/Developer/work/ecosystem/apps/sage-design-studio
+@ecosystem/sage-design-studio:build: > next build
+@ecosystem/sage-design-studio:build: 
+@ecosystem/sage-design-studio:build:    ▲ Next.js 15.5.9
+@ecosystem/sage-design-studio:build: 
+@ecosystem/sage-design-studio:build:    Creating an optimized production build ...
+@ecosystem/sage-design-studio:build:  ✓ Compiled successfully in 3.2s
+@ecosystem/sage-design-studio:build:    Linting and checking validity of types ...
+@ecosystem/sage-design-studio:build: Failed to compile.
+@ecosystem/sage-design-studio:build: 
+@ecosystem/sage-design-studio:build: ./app/components/lib/molecule-registry.tsx:2:91
+@ecosystem/sage-design-studio:build: Type error: Module '"@sds/ui"' has no exported member 'CheckboxGroup'.
+@ecosystem/sage-design-studio:build: 
+@ecosystem/sage-design-studio:build: [0m [90m 1 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m'@sds/ui'[39m[33m;[39m
+@ecosystem/sage-design-studio:build: [31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { [33mDropdown[39m[33m,[39m [33mTooltip[39m[33m,[39m [33mThemeToggle[39m[33m,[39m [33mThemeSwitcher[39m[33m,[39m [33mFormField[39m[33m,[39m [33mSearchBar[39m[33m,[39m [33mRadioGroup[39m[33m,[39m [33mCheckboxGroup[39m[33m,[39m [33mBreadcrumbs[39m } [36mfrom[39m [32m'@sds/ui'[39m[33m;[39m
+@ecosystem/sage-design-studio:build:  [90m   |[39m                                                                                           [31m[1m^[22m[39m
+@ecosystem/sage-design-studio:build:  [90m 3 |[39m [36mimport[39m type { [33mComponentConfig[39m } [36mfrom[39m [32m'./component-registry'[39m[33m;[39m
+@ecosystem/sage-design-studio:build:  [90m 4 |[39m
+@ecosystem/sage-design-studio:build:  [90m 5 |[39m [36mexport[39m [36mconst[39m moleculeRegistry[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m [33mComponentConfig[39m[33m>[39m [33m=[39m {[0m
+@ecosystem/sage-design-studio:build: Next.js build worker exited with code: 1 and signal: null
+@ecosystem/sage-design-studio:build:  ELIFECYCLE  Command failed with exit code 1.
+@ecosystem/sage-design-studio:build: ERROR: command finished with error: command (/Users/shalomormsby/Developer/work/ecosystem/apps/sage-design-studio) /opt/homebrew/bin/pnpm run build exited (1)
+@ecosystem/sage-design-studio#build: command (/Users/shalomormsby/Developer/work/ecosystem/apps/sage-design-studio) /opt/homebrew/bin/pnpm run build exited (1)
+
+ Tasks:    3 successful, 4 total
+Cached:    3 cached, 4 total
+  Time:    9.658s 
+Failed:    @ecosystem/sage-design-studio#build
+
+ ERROR  run failed: command  exited (1)
+ ELIFECYCLE  Command failed with exit code 1.

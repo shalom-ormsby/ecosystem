@@ -6,12 +6,40 @@
     "types": "dist/index.d.ts",
     "sideEffects": false,
     "license": "MIT",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js"
+        },
+        "./tokens": {
+            "types": "./dist/tokens.d.ts",
+            "import": "./dist/tokens.mjs",
+            "require": "./dist/tokens.js"
+        },
+        "./hooks": {
+            "types": "./dist/hooks.d.ts",
+            "import": "./dist/hooks.mjs",
+            "require": "./dist/hooks.js"
+        },
+        "./utils": {
+            "types": "./dist/utils.d.ts",
+            "import": "./dist/utils.mjs",
+            "require": "./dist/utils.js"
+        },
+        "./providers": {
+            "types": "./dist/providers.d.ts",
+            "import": "./dist/providers.mjs",
+            "require": "./dist/providers.js"
+        }
+    },
     "scripts": {
-        "build": "tsup src/index.ts --format esm,cjs && tsc --emitDeclarationOnly --declaration",
-        "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
+        "build": "tsup src/index.ts src/tokens.ts src/hooks.ts src/utils.ts src/providers.ts --format esm,cjs --dts",
+        "dev": "tsup src/index.ts src/tokens.ts src/hooks.ts src/utils.ts src/providers.ts --format esm,cjs --dts --watch",
         "lint": "eslint src/"
     },
     "peerDependencies": {
+        "framer-motion": "*",
         "react": "*"
     },
     "dependencies": {
@@ -42,6 +70,7 @@
         "@radix-ui/react-toggle": "^1.1.10",
         "@radix-ui/react-toggle-group": "^1.1.11",
         "@radix-ui/react-tooltip": "^1.2.8",
+        "@sds/tokens": "workspace:*",
         "@tanstack/react-table": "^8.21.3",
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.0",
@@ -61,8 +90,8 @@
     },
     "devDependencies": {
         "@sds/config": "workspace:*",
-        "@sds/tokens": "workspace:*",
         "@types/react": "^19.0.0",
+        "framer-motion": "^12.26.2",
         "tailwindcss": "^3.4.0",
         "tsup": "^8.0.0",
         "typescript": "^5.0.0"

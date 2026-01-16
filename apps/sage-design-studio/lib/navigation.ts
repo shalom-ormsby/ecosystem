@@ -1,4 +1,4 @@
-import type { HeaderNavLink } from '@ecosystem/design-system';
+import type { HeaderNavLink } from '@sds/ui';
 
 export const ecosystemNavigation: HeaderNavLink[] = [
   {

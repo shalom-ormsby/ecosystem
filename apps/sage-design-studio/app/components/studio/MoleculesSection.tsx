@@ -1,13 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
+import { Breadcrumbs, type BreadcrumbItemLegacy } from '@sds/ui';
 import { moleculeRegistry } from '../lib/molecule-registry';
 import { EnhancedComponentPlayground } from './ComponentsSection/EnhancedComponentPlayground';
 
 interface MoleculesSectionProps {
   activeItemId?: string;
-  breadcrumbs?: BreadcrumbItem[];
+  breadcrumbs?: BreadcrumbItemLegacy[];
   onItemChange?: (itemId: string) => void;
 }
 

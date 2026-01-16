@@ -2,9 +2,9 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Card, Button } from '@sds/ui';
-import { Code, CollapsibleCodeBlock } from '@ecosystem/design-system';
-import { baseTokens, motion } from '@ecosystem/design-system/tokens';
-import { VariableWeightText } from '@ecosystem/design-system';
+import { Code, CollapsibleCodeBlock } from '@sds/ui';
+import { baseTokens, motion } from '@sds/ui/tokens';
+import { VariableWeightText } from '@sds/ui';
 
 /**
  * Interactive example component for motion demonstrations
@@ -138,7 +138,7 @@ export function MotionTab() {
                     {/* Code Example */}
                     <CollapsibleCodeBlock
                         id="variable-weight-text-example"
-                        code={`import { VariableWeightText } from '@ecosystem/design-system';
+                        code={`import { VariableWeightText } from '@sds/ui';
 
 <VariableWeightText minWeight={200} maxWeight={700}>
   Clash Display
@@ -490,7 +490,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
 }
 
 // React Hook approach (recommended)
-import { useMotionPreference } from '@ecosystem/design-system';
+import { useMotionPreference } from '@sds/ui';
 
 function MyComponent() {
   const { shouldAnimate } = useMotionPreference();
@@ -518,7 +518,7 @@ function MyComponent() {
                 <p className="text-sm text-[var(--color-text-secondary)] mb-6">
                     Pre-built animation variants and presets for Framer Motion. Import from{' '}
                     <Code>
-                        @ecosystem/design-system/utils
+                        @sds/ui/utils
                     </Code>
                 </p>
 
@@ -532,7 +532,7 @@ function MyComponent() {
                         </p>
                         <CollapsibleCodeBlock
                             id="fade-variants"
-                            code={`import { fadeVariants } from '@ecosystem/design-system/utils';
+                            code={`import { fadeVariants } from '@sds/ui/utils';
 
 <motion.div
   initial="hidden"
@@ -554,7 +554,7 @@ function MyComponent() {
                         </p>
                         <CollapsibleCodeBlock
                             id="slide-variants"
-                            code={`import { slideVariants } from '@ecosystem/design-system/utils';
+                            code={`import { slideVariants } from '@sds/ui/utils';
 
 <motion.div
   initial="hidden"
@@ -576,7 +576,7 @@ function MyComponent() {
                         </p>
                         <CollapsibleCodeBlock
                             id="scale-variants"
-                            code={`import { scaleVariants } from '@ecosystem/design-system/utils';
+                            code={`import { scaleVariants } from '@sds/ui/utils';
 
 <motion.div
   initial="hidden"
@@ -598,7 +598,7 @@ function MyComponent() {
                         </p>
                         <CollapsibleCodeBlock
                             id="modal-variants"
-                            code={`import { modalVariants } from '@ecosystem/design-system/utils';
+                            code={`import { modalVariants } from '@sds/ui/utils';
 
 <motion.div variants={modalVariants.overlay}>
   <motion.div variants={modalVariants.content}>
@@ -618,7 +618,7 @@ function MyComponent() {
                         </p>
                         <CollapsibleCodeBlock
                             id="rotate-variants"
-                            code={`import { rotateVariants } from '@ecosystem/design-system/utils';
+                            code={`import { rotateVariants } from '@sds/ui/utils';
 
 <motion.div
   initial="hidden"
@@ -640,7 +640,7 @@ function MyComponent() {
                         </p>
                         <CollapsibleCodeBlock
                             id="drawer-variants"
-                            code={`import { drawerVariants } from '@ecosystem/design-system/utils';
+                            code={`import { drawerVariants } from '@sds/ui/utils';
 
 <motion.div
   initial="hidden"
@@ -662,7 +662,7 @@ function MyComponent() {
                         </p>
                         <CollapsibleCodeBlock
                             id="collapse-variants"
-                            code={`import { collapseVariants } from '@ecosystem/design-system/utils';
+                            code={`import { collapseVariants } from '@sds/ui/utils';
 
 <motion.div
   initial="collapsed"
@@ -708,7 +708,7 @@ function MyComponent() {
                         </div>
                         <CollapsibleCodeBlock
                             id="complete-presets"
-                            code={`import { presets } from '@ecosystem/design-system/utils';
+                            code={`import { presets } from '@sds/ui/utils';
 
 // Simple fade animation
 <motion.div {...presets.fade}>
@@ -742,7 +742,7 @@ function MyComponent() {
                     </p>
                     <CollapsibleCodeBlock
                         id="custom-animation-helper"
-                        code={`import { createAnimation, transitions, easings } from '@ecosystem/design-system/utils';
+                        code={`import { createAnimation, transitions, easings } from '@sds/ui/utils';
 
 const customAnimation = createAnimation(
   {

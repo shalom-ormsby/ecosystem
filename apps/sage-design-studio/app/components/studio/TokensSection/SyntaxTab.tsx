@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, Code, CollapsibleCodeBlock } from '@ecosystem/design-system';
-import { syntaxColors } from '@ecosystem/design-system/tokens';
+import { Card, Code, CollapsibleCodeBlock } from '@sds/ui';
+import { syntaxColors } from '@sds/ui/tokens';
 
 export function SyntaxTab() {
   const [copiedToken, setCopiedToken] = useState<string | null>(null);
@@ -253,7 +253,7 @@ export function SyntaxTab() {
             </p>
             <CollapsibleCodeBlock
               id="syntax-usage-1"
-              code={`import { CollapsibleCodeBlock, parseCode } from '@ecosystem/design-system';
+              code={`import { CollapsibleCodeBlock, parseCode } from '@sds/ui';
 
 // Automatic tokenization - just pass the code string!
 <CollapsibleCodeBlock

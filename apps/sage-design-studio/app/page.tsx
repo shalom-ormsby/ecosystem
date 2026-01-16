@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { generateBreadcrumbs, type BreadcrumbItem, type RouteConfig } from '@ecosystem/design-system';
+import { generateBreadcrumbs, type BreadcrumbItemLegacy, type RouteConfig } from '@sds/ui';
 import { ModeSwitcher } from './components/ModeSwitcher';
 import { NavigationSidebar } from './components/NavigationSidebar';
 import { SearchCommandPalette } from './components/SearchCommandPalette';
@@ -54,7 +54,16 @@ const routeConfig: RouteConfig = {
   },
   'common-patterns': { label: 'Common Patterns' },
   contributing: { label: 'Contributing' },
-  'mcp-server': { label: 'MCP Server' },
+  'mcp-server': {
+    label: 'MCP Server',
+    children: {
+      overview: { label: 'Overview' },
+      installation: { label: 'Installation' },
+      tools: { label: 'Available Tools' },
+      usage: { label: 'Usage Guide' },
+      troubleshooting: { label: 'Troubleshooting' },
+    }
+  },
   tokens: {
     label: 'Design Tokens',
     children: {
@@ -181,7 +190,7 @@ export default function StudioPage() {
   const [activeItemId, setActiveItemId] = useState<string>('overview');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbItem[]>([]);
+  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbItemLegacy[]>([]);
 
   // Initialize from URL hash on mount
   useEffect(() => {
@@ -368,7 +377,13 @@ export default function StudioPage() {
             )}
             {activeSection === 'common-patterns' && <CommonPatternsSection breadcrumbs={breadcrumbs} />}
             {activeSection === 'contributing' && <ContributingSection breadcrumbs={breadcrumbs} />}
-            {activeSection === 'mcp-server' && <McpSection breadcrumbs={breadcrumbs} />}
+            {activeSection === 'mcp-server' && (
+              <McpSection
+                breadcrumbs={breadcrumbs}
+                activeItemId={activeItemId}
+                onItemChange={(itemId: string) => setActiveItemId(itemId)}
+              />
+            )}
             {activeSection === 'tokens' && (
               <TokensSection
                 activeItemId={activeItemId}

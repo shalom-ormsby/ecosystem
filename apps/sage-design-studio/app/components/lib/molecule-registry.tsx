@@ -1,5 +1,5 @@
 import { Button } from '@sds/ui';
-import { Dropdown, Tooltip, ThemeToggle, ThemeSwitcher, FormField, SearchBar, RadioGroup, CheckboxGroup, Breadcrumbs } from '@ecosystem/design-system';
+import { Dropdown, Tooltip, ThemeToggle, ThemeSwitcher, FormField, SearchBar, RadioGroup, Breadcrumbs } from '@sds/ui';
 import type { ComponentConfig } from './component-registry';
 
 export const moleculeRegistry: Record<string, ComponentConfig> = {
@@ -102,7 +102,7 @@ export const moleculeRegistry: Record<string, ComponentConfig> = {
     codeExamples: [
       {
         title: 'Basic Usage',
-        code: `import { Breadcrumbs } from '@ecosystem/design-system';
+        code: `import { Breadcrumbs } from '@sds/ui';
 
 <Breadcrumbs
   items={[
@@ -214,7 +214,7 @@ const items: BreadcrumbItem[] = [
     codeExamples: [
       {
         title: 'Basic Usage',
-        code: `import { Dropdown, Button } from '@ecosystem/design-system';
+        code: `import { Dropdown, Button } from '@sds/ui';
 
 <Dropdown
   trigger={<Button variant="secondary">Options</Button>}
@@ -345,7 +345,7 @@ const menuItems: DropdownItem[] = [
     codeExamples: [
       {
         title: 'Basic Usage',
-        code: `import { Tooltip, Button } from '@ecosystem/design-system';
+        code: `import { Tooltip, Button } from '@sds/ui';
 
 <Tooltip content="Click to save your changes" position="top">
   <Button variant="default">Save</Button>
@@ -423,7 +423,7 @@ const menuItems: DropdownItem[] = [
     codeExamples: [
       {
         title: 'Basic Theme Toggle',
-        code: `import { ThemeToggle } from '@ecosystem/design-system';
+        code: `import { ThemeToggle } from '@sds/ui';
 
 <ThemeToggle />`,
         description: 'Simple icon-only theme switcher',
@@ -486,14 +486,14 @@ const menuItems: DropdownItem[] = [
     codeExamples: [
       {
         title: 'Basic Usage',
-        code: `import { ThemeSwitcher } from '@ecosystem/design-system';
+        code: `import { ThemeSwitcher } from '@sds/ui';
 
 <ThemeSwitcher />`,
         description: 'Simple theme switcher with expandable options',
       },
       {
         title: 'Expanded by Default',
-        code: `import { ThemeSwitcher } from '@ecosystem/design-system';
+        code: `import { ThemeSwitcher } from '@sds/ui';
 
 <ThemeSwitcher defaultExpanded />`,
         description: 'Theme switcher with options panel open by default',
@@ -571,7 +571,7 @@ const menuItems: DropdownItem[] = [
     codeExamples: [
       {
         title: 'Basic Form Field',
-        code: `import { FormField } from '@ecosystem/design-system';
+        code: `import { FormField } from '@sds/ui';
 
 <FormField label="Email Address" htmlFor="email">
   <input
@@ -683,7 +683,7 @@ const menuItems: DropdownItem[] = [
     codeExamples: [
       {
         title: 'Basic Search',
-        code: `import { SearchBar } from '@ecosystem/design-system';
+        code: `import { SearchBar } from '@sds/ui';
 
 const [results, setResults] = useState([]);
 
@@ -810,7 +810,7 @@ const [results, setResults] = useState([]);
     codeExamples: [
       {
         title: 'Subscription Plan Selector',
-        code: `import { RadioGroup } from '@ecosystem/design-system';
+        code: `import { RadioGroup } from '@sds/ui';
 
 const [plan, setPlan] = useState('pro');
 
@@ -860,118 +860,5 @@ const [plan, setPlan] = useState('pro');
     sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/molecules/Form/RadioGroup.tsx',
   },
 
-  CheckboxGroup: {
-    component: CheckboxGroup,
-    description: 'A group of checkboxes for selecting multiple options.',
-    props: {
-      name: {
-        type: 'text',
-        required: true,
-        default: '',
-        description: 'Name attribute for all checkbox inputs in the group',
-      },
-      options: {
-        type: 'array',
-        typeDefinition: 'Array<{ value: string; label: string; disabled?: boolean }>',
-        required: true,
-        default: [],
-        description: 'Array of options to render as checkboxes',
-      },
-      value: {
-        type: 'array',
-        typeDefinition: 'string[]',
-        default: [],
-        description: 'Array of currently selected values',
-      },
-      onChange: {
-        type: 'custom',
-        typeDefinition: '(values: string[]) => void',
-        required: true,
-        default: () => { },
-        description: 'Callback when selection changes',
-      },
-      orientation: {
-        type: 'select',
-        options: ['vertical', 'horizontal'] as const,
-        default: 'vertical',
-        description: 'Layout orientation of checkboxes',
-      },
-    },
-    examples: [
-      {
-        label: 'Multiple Selection',
-        props: {
-          name: 'features',
-          options: [
-            { value: 'analytics', label: 'Analytics' },
-            { value: 'notifications', label: 'Email Notifications' },
-            { value: 'api', label: 'API Access' },
-          ],
-          value: ['analytics', 'api'],
-          onChange: () => { },
-        },
-        children: null,
-      },
-    ],
-    codeExamples: [
-      {
-        title: 'Feature Selection',
-        code: `import { CheckboxGroup } from '@ecosystem/design-system';
 
-const [features, setFeatures] = useState(['analytics', 'api']);
-
-<CheckboxGroup
-  name="features"
-  value={features}
-  onChange={setFeatures}
-  options={[
-    { value: 'analytics', label: 'Analytics Dashboard' },
-    { value: 'notifications', label: 'Email Notifications' },
-    { value: 'api', label: 'API Access' },
-    { value: 'export', label: 'Data Export' },
-  ]}
-/>`,
-        description: 'Multiple feature selection with checkboxes',
-      },
-      {
-        title: 'Interests Selection',
-        code: `const [interests, setInterests] = useState([]);
-
-<div className="space-y-2">
-  <label className="font-medium">Select your interests:</label>
-  <CheckboxGroup
-    name="interests"
-    value={interests}
-    onChange={setInterests}
-    options={[
-      { value: 'tech', label: 'Technology' },
-      { value: 'design', label: 'Design' },
-      { value: 'business', label: 'Business' },
-      { value: 'science', label: 'Science' },
-    ]}
-  />
-  <p className="text-sm text-muted">
-    {interests.length} interests selected
-  </p>
-</div>`,
-        description: 'Checkbox group with selection count',
-      },
-      {
-        title: 'Permissions Manager',
-        code: `<CheckboxGroup
-  name="permissions"
-  value={userPermissions}
-  onChange={setUserPermissions}
-  options={[
-    { value: 'read', label: 'Read Access' },
-    { value: 'write', label: 'Write Access' },
-    { value: 'delete', label: 'Delete Access' },
-    { value: 'admin', label: 'Admin Rights', disabled: !isOwner },
-  ]}
-/>`,
-        description: 'Permission checkboxes with conditional disabling',
-      },
-    ],
-    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/molecules/Form/CheckboxGroup.tsx',
-  },
 };

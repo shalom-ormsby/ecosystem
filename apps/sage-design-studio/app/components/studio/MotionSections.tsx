@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { TertiaryNav, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
+import { TertiaryNav, Breadcrumbs, type BreadcrumbItemLegacy } from '@sds/ui';
 import { MotionFoundationsSection } from './MotionFoundationsSection';
 import { TextEffectsSection } from './TextEffectsSection';
 import { ScrollSection } from './ScrollSection';
@@ -14,7 +14,7 @@ type MotionTab = 'motion-foundations' | 'text-effects' | 'scroll' | 'loading' | 
 
 interface MotionSectionsProps {
   activeItemId?: string;
-  breadcrumbs?: BreadcrumbItem[];
+  breadcrumbs?: BreadcrumbItemLegacy[];
   onItemChange?: (itemId: string) => void;
 }
 

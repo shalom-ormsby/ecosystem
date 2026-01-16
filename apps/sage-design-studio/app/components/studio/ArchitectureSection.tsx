@@ -1,10 +1,10 @@
 'use client';
 
-import { Card, Code, CollapsibleCodeBlock, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
+import { Card, Code, CollapsibleCodeBlock, Breadcrumbs, type BreadcrumbItemLegacy } from '@sds/ui';
 import { ArrowRight } from 'lucide-react';
 
 interface ArchitectureSectionProps {
-  breadcrumbs?: BreadcrumbItem[];
+  breadcrumbs?: BreadcrumbItemLegacy[];
 }
 
 export function ArchitectureSection({ breadcrumbs }: ArchitectureSectionProps) {

@@ -1,14 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
+import { Breadcrumbs, type BreadcrumbItemLegacy } from '@sds/ui';
 import { EnhancedComponentPlayground } from './EnhancedComponentPlayground';
 import { componentRegistry } from '../../lib/component-registry';
 
 interface ComponentsSectionProps {
   activeItemId?: string;
   category?: string;
-  breadcrumbs?: BreadcrumbItem[];
+  breadcrumbs?: BreadcrumbItemLegacy[];
   onItemChange?: (itemId: string) => void;
 }
 

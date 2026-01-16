@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Card, Button, Breadcrumbs } from '@ecosystem/design-system';
+import { Card, Button, Breadcrumbs } from '@sds/ui';
 
 export default function DesignSystemPage() {
   return (

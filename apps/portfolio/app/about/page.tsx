@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Button, Breadcrumbs } from '@ecosystem/design-system';
+import { Button, Breadcrumbs } from '@sds/ui';
 
 export default function About() {
     return (

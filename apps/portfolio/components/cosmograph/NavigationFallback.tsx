@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Card, Badge, Heading, Text, SearchInput, FilterButton, Button } from '@ecosystem/design-system';
+import { Card, Badge, Heading, Text, SearchBar, FilterButton, Button } from '@sds/ui';
 import { ChevronRight } from 'lucide-react';
 import type { Node, Cluster } from '@/lib/content/types';
 
@@ -121,10 +121,10 @@ export function NavigationFallback({
 
       <div className="mb-8">
         <label htmlFor="search" className="sr-only">Search content</label>
-        <SearchInput
+        <SearchBar
           id="search"
           value={searchQuery}
-          onChange={setSearchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
           onClear={() => setSearchQuery('')}
           placeholder="Search by title, theme, or keyword..."
         />

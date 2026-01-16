@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@sds/ui';
-import { GitHubIcon } from '@ecosystem/design-system';
+import { GitHubIcon } from '@sds/ui';
 
 /**
  * StudioHero Component

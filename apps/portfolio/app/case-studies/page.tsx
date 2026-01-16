@@ -1,7 +1,7 @@
 'use client';
 
 import NextLink from 'next/link';
-import { Header, Footer, Card, Link, Breadcrumbs } from '@ecosystem/design-system';
+import { Header, Footer, Card, Link, Breadcrumbs } from '@sds/ui';
 import { ecosystemNavigation } from '@/lib/navigation';
 
 export default function CaseStudiesPage() {

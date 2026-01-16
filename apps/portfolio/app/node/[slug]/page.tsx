@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getAllNodes, getNodeById, getConnectedNodes } from '@/lib/content/parser';
-import { Card, Breadcrumbs, Badge } from '@ecosystem/design-system';
+import { Card, Breadcrumbs, Badge } from '@sds/ui';
 import type { Metadata } from 'next';
 
 /**
@@ -106,7 +106,7 @@ export default async function NodePage({ params }: NodePageProps) {
             {node.themes.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {node.themes.map((theme) => (
-                  <Badge key={theme} variant="primary" size="md">
+                  <Badge key={theme} variant="default" size="md">
                     {theme}
                   </Badge>
                 ))}

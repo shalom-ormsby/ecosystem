@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import type { Experiment } from '@/lib/types';
-import { Card } from '@ecosystem/design-system/atoms';
+import { Card } from '@sds/ui';
 
 interface ExperimentCardProps {
   experiment: Experiment;

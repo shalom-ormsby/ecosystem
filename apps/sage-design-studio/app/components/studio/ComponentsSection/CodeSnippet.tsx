@@ -1,6 +1,6 @@
 'use client';
 
-import { CollapsibleCodeBlock } from '@ecosystem/design-system';
+import { CollapsibleCodeBlock } from '@sds/ui';
 
 interface CodeSnippetProps {
   code: string;

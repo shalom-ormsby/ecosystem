@@ -1,10 +1,10 @@
 'use client';
 
-import { Card, Code, CollapsibleCodeBlock, Breadcrumbs, type BreadcrumbItem } from '@ecosystem/design-system';
+import { Card, Code, CollapsibleCodeBlock, Breadcrumbs, type BreadcrumbItemLegacy } from '@sds/ui';
 import { CheckCircle, XCircle, AlertOctagon, AlertTriangle } from 'lucide-react';
 
 interface AddingComponentsSectionProps {
-  breadcrumbs?: BreadcrumbItem[];
+  breadcrumbs?: BreadcrumbItemLegacy[];
   activeItemId?: string;
 }
 
@@ -105,7 +105,7 @@ export function AddingComponentsSection({ breadcrumbs, activeItemId }: AddingCom
                     <p className="text-sm text-[var(--color-text-secondary)] mb-2">
                       You MUST rebuild the package for the Studio app to see the new component. The Studio consumes the <i>built</i> version of the library, not the raw source.
                     </p>
-                    <CollapsibleCodeBlock id="meth-3" code="pnpm --filter @ecosystem/design-system build" defaultCollapsed={false} showCopy={true} />
+                    <CollapsibleCodeBlock id="meth-3" code="pnpm --filter @sds/ui build" defaultCollapsed={false} showCopy={true} />
                   </div>
                 </li>
 
@@ -631,7 +631,7 @@ ELIFECYCLE Command failed with exit code 1.`}
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[var(--color-primary)] font-bold">3.</span>
-                      <span>Builds <Code syntax="plain">@ecosystem/design-system</Code> first (runs tsup to generate dist files)</span>
+                      <span>Builds <Code syntax="plain">@sds/ui</Code> first (runs tsup to generate dist files)</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[var(--color-primary)] font-bold">4.</span>
@@ -741,7 +741,7 @@ ELIFECYCLE Command failed with exit code 1.`}
                         <li>Component source: <Code syntax="plain">design-system/molecules/Component/Component.tsx</Code></li>
                         <li>Built to: <Code syntax="plain">design-system/dist/index.mjs</Code> (via tsup)</li>
                         <li>Exported by: <Code syntax="plain">design-system/package.json</Code> exports field</li>
-                        <li>Imported by: <Code syntax="plain">molecule-registry.tsx</Code> from '@ecosystem/design-system'</li>
+                        <li>Imported by: <Code syntax="plain">molecule-registry.tsx</Code> from '@sds/ui'</li>
                         <li>Rendered in: Studio app examples</li>
                       </ol>
                     </div>
@@ -761,7 +761,7 @@ ELIFECYCLE Command failed with exit code 1.`}
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-[var(--color-primary)] font-bold">3.</span>
-                        <span>Verify examples import correctly: Check molecule-registry.tsx imports from '@ecosystem/design-system'</span>
+                        <span>Verify examples import correctly: Check molecule-registry.tsx imports from '@sds/ui'</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-[var(--color-primary)] font-bold">4.</span>
@@ -810,7 +810,7 @@ ELIFECYCLE Command failed with exit code 1.`}
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-[var(--color-primary)] font-bold">3.</span>
-                        <span>Build locally to verify: <Code syntax="plain">pnpm build --filter=@ecosystem/design-system</Code></span>
+                        <span>Build locally to verify: <Code syntax="plain">pnpm build --filter=@sds/ui</Code></span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-[var(--color-primary)] font-bold">4.</span>

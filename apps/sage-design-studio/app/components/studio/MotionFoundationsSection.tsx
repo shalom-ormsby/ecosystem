@@ -2,9 +2,9 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Card, Button } from '@sds/ui';
-import { CollapsibleCodeBlock } from '@ecosystem/design-system';
-import type { SyntaxToken } from '@ecosystem/design-system';
-import { baseTokens, motion } from '@ecosystem/design-system/tokens';
+import { CollapsibleCodeBlock } from '@sds/ui';
+import type { SyntaxToken } from '@sds/ui';
+import { baseTokens, motion } from '@sds/ui/tokens';
 import { CheckCircle, XCircle } from 'lucide-react';
 
 /**
@@ -297,7 +297,7 @@ export function MotionFoundationsSection() {
 }
 
 // React Hook approach (recommended)
-import { useMotionPreference } from '@ecosystem/design-system';
+import { useMotionPreference } from '@sds/ui';
 
 function MyComponent() {
   const { shouldAnimate } = useMotionPreference();
@@ -494,7 +494,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
         <p className="text-sm text-[var(--color-text-secondary)] mb-6">
           Pre-built animation variants and presets for Framer Motion. Import from{' '}
           <code className="px-1 py-0.5 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">
-            @ecosystem/design-system/utils
+            @sds/ui/utils
           </code>
         </p>
 
@@ -508,7 +508,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
             </p>
             <CollapsibleCodeBlock
               id="fade-variants"
-              code={`import { fadeVariants } from '@ecosystem/design-system/utils';
+              code={`import { fadeVariants } from '@sds/ui/utils';
 
 <motion.div
   initial="hidden"
@@ -531,7 +531,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
             </p>
             <CollapsibleCodeBlock
               id="slide-variants"
-              code={`import { slideVariants } from '@ecosystem/design-system/utils';
+              code={`import { slideVariants } from '@sds/ui/utils';
 
 <motion.div
   initial="hidden"
@@ -554,7 +554,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
             </p>
             <CollapsibleCodeBlock
               id="scale-variants"
-              code={`import { scaleVariants } from '@ecosystem/design-system/utils';
+              code={`import { scaleVariants } from '@sds/ui/utils';
 
 <motion.div
   initial="hidden"
@@ -577,7 +577,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
             </p>
             <CollapsibleCodeBlock
               id="modal-variants"
-              code={`import { modalVariants } from '@ecosystem/design-system/utils';
+              code={`import { modalVariants } from '@sds/ui/utils';
 
 <motion.div variants={modalVariants.overlay}>
   <motion.div variants={modalVariants.content}>
@@ -598,7 +598,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
             </p>
             <CollapsibleCodeBlock
               id="rotate-variants"
-              code={`import { rotateVariants } from '@ecosystem/design-system/utils';
+              code={`import { rotateVariants } from '@sds/ui/utils';
 
 <motion.div
   initial="hidden"
@@ -621,7 +621,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
             </p>
             <CollapsibleCodeBlock
               id="drawer-variants"
-              code={`import { drawerVariants } from '@ecosystem/design-system/utils';
+              code={`import { drawerVariants } from '@sds/ui/utils';
 
 <motion.div
   initial="hidden"
@@ -644,7 +644,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
             </p>
             <CollapsibleCodeBlock
               id="collapse-variants"
-              code={`import { collapseVariants } from '@ecosystem/design-system/utils';
+              code={`import { collapseVariants } from '@sds/ui/utils';
 
 <motion.div
   initial="collapsed"
@@ -691,7 +691,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
             </div>
             <CollapsibleCodeBlock
               id="complete-presets"
-              code={`import { presets } from '@ecosystem/design-system/utils';
+              code={`import { presets } from '@sds/ui/utils';
 
 // Simple fade animation
 <motion.div {...presets.fade}>
@@ -726,7 +726,7 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
           </p>
           <CollapsibleCodeBlock
             id="custom-animations"
-            code={`import { createAnimation, transitions, easings } from '@ecosystem/design-system/utils';
+            code={`import { createAnimation, transitions, easings } from '@sds/ui/utils';
 
 const customAnimation = createAnimation(
   {
@@ -762,7 +762,7 @@ const customAnimation = createAnimation(
               { text: ' } ', type: 'plain' },
               { text: 'from', type: 'keyword' },
               { text: ' ', type: 'plain' },
-              { text: "'@ecosystem/design-system'", type: 'string' },
+              { text: "'@sds/ui'", type: 'string' },
               { text: ';', type: 'punctuation' },
               { text: '\n\n', type: 'plain' },
               { text: 'const', type: 'keyword' },

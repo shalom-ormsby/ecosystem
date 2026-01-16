@@ -136,8 +136,8 @@ export default function ContributePage() {
               <strong className="text-primary">💡 Tip:</strong> Use design-system components for styling consistency:
             </p>
             <pre className="text-xs text-foreground/70 mt-2 overflow-x-auto">
-              <code>{`import { Button, Card } from '@ecosystem/design-system/atoms';
-import { useMotionPreference } from '@ecosystem/design-system/hooks';`}</code>
+              <code>{`import { Button, Card } from '@sds/ui';
+import { useMotionPreference } from '@sds/ui/hooks';`}</code>
             </pre>
           </div>
         </div>

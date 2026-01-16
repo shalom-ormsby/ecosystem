@@ -1,7 +1,7 @@
 'use client';
 
 import NextLink from 'next/link';
-import { PageTemplate, Footer, Brand } from '@ecosystem/design-system';
+import { PageTemplate, Footer, Brand } from '@sds/ui';
 import { ecosystemNavigation } from '@/lib/navigation';
 import { NavigationFallback } from '@/components/cosmograph/NavigationFallback';
 import type { Node } from '@/lib/content/types';

@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Code } from '@ecosystem/design-system';
+import { Card, Code } from '@sds/ui';
 
 /**
  * SpacingTab Component
