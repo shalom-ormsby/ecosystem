@@ -262,7 +262,7 @@ export function OverviewSection() {
               <p className="text-xs text-[var(--color-text-muted)] mt-3">
                 → See{' '}
                 <a
-                  href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/USAGE_GUIDE.md"
+                  href="https://github.com/shalom-ormsby/ecosystem/blob/main/apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[var(--color-primary)] hover:underline"
@@ -667,7 +667,7 @@ export function ThemeSwitcher() {
             </p>
             <div className="space-y-2 text-sm">
               <a
-                href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/USAGE_GUIDE.md"
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block text-[var(--color-primary)] hover:underline"
@@ -698,7 +698,7 @@ export function ThemeSwitcher() {
             </p>
             <div className="space-y-2 text-sm">
               <a
-                href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/ARCHITECTURE-GUIDE.md"
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md#architecture"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block text-[var(--color-primary)] hover:underline"
@@ -706,7 +706,7 @@ export function ThemeSwitcher() {
                 1. Architecture Guide →
               </a>
               <a
-                href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/COMPONENT_WORKFLOW.md"
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md#development-workflow"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block text-[var(--color-primary)] hover:underline"
@@ -742,7 +742,7 @@ export function ThemeSwitcher() {
                 1. AGENTS.md →
               </a>
               <a
-                href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/USAGE_GUIDE.md"
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block text-[var(--color-primary)] hover:underline"
@@ -840,20 +840,25 @@ import { Button, Text } from '@sds/ui';
             id="file-structure"
             code={`ecosystem/
 ├── packages/
-│   └── design-system/          # The design system package
-│       ├── src/
-│       │   ├── tokens/         # Design tokens (colors, spacing, etc.)
-│       │   ├── atoms/          # Atomic components (Button, Input, etc.)
-│       │   ├── molecules/      # Molecule components (TextField, etc.)
-│       │   ├── organisms/      # Organism components (Header, Footer, etc.)
-│       │   ├── hooks/          # React hooks (useTheme, useMotion, etc.)
-│       │   ├── features/       # Feature modules (syntax parser, etc.)
-│       │   └── providers/      # Context providers
-│       └── tsup.config.ts      # Build configuration
+│   ├── ui/                      # @sds/ui - Component library
+│   │   └── src/
+│   │       ├── components/
+│   │       │   ├── actions/     # Button, Toggle, ToggleGroup
+│   │       │   ├── forms/       # Input, Select, Checkbox, etc. (11 components)
+│   │       │   ├── navigation/  # Breadcrumb, Tabs, Pagination, etc. (6 components)
+│   │       │   ├── overlays/    # Dialog, Sheet, Popover, etc. (9 components)
+│   │       │   ├── feedback/    # Alert, Toast, Progress, etc. (5 components)
+│   │       │   ├── data-display/ # Card, Table, Avatar, etc. (6 components)
+│   │       │   └── layout/      # Accordion, Carousel, Separator, etc. (8 components)
+│   │       ├── lib/             # Utilities, validation, animations, stores
+│   │       ├── hooks/           # useTheme, useMotionPreference, useForm
+│   │       └── providers/       # ThemeProvider
+│   └── tokens/                  # @sds/tokens - Design system tokens
 │
 └── apps/
-    ├── sage-design-studio/     # This documentation site
-    └── portfolio/              # Example consumer app`}
+    ├── sage-design-studio/      # This documentation site
+    ├── portfolio/               # Example consumer app
+    └── creative-powerup/        # Example consumer app`}
             defaultCollapsed={false}
             showCopy={true}
           />
@@ -963,17 +968,17 @@ export default function App({ children }) {
                 </h3>
                 <CollapsibleCodeBlock
                   id="hooks-example"
-                  code={`import { useTheme, useMotion } from '@sds/ui/hooks';
+                  code={`import { useTheme, useMotionPreference } from '@sds/ui/hooks';
 
 export function Controls() {
   const { theme, setTheme, mode, setMode } = useTheme();
-  const { motionLevel, setMotionLevel } = useMotion();
+  const { scale, shouldAnimate } = useMotionPreference();
 
   return (
     <div>
       <button onClick={() => setTheme('sage')}>Sage Theme</button>
       <button onClick={() => setMode('dark')}>Dark Mode</button>
-      <button onClick={() => setMotionLevel(5)}>Moderate Motion</button>
+      <p>Motion Scale: {scale}/10 - Animations {shouldAnimate ? 'enabled' : 'disabled'}</p>
     </div>
   );
 }`}
@@ -1007,7 +1012,7 @@ export function Controls() {
             </p>
             <div className="space-y-2 text-sm">
               <a
-                href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/USAGE_GUIDE.md"
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block text-[var(--color-primary)] hover:underline"
@@ -1031,7 +1036,7 @@ export function Controls() {
             </p>
             <div className="space-y-2 text-sm">
               <a
-                href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/COMPONENT_WORKFLOW.md"
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md#development-workflow"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block text-[var(--color-primary)] hover:underline"
@@ -1039,7 +1044,7 @@ export function Controls() {
                 → Component Workflow
               </a>
               <a
-                href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/ARCHITECTURE-GUIDE.md"
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md#architecture"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block text-[var(--color-primary)] hover:underline"
@@ -1060,7 +1065,7 @@ export function Controls() {
             </p>
             <div className="space-y-2 text-sm">
               <a
-                href="https://github.com/shalom-ormsby/ecosystem/blob/main/design-system/docs/UNRESOLVED_ISSUES.md"
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md#roadmap"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block text-[var(--color-primary)] hover:underline"

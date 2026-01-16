@@ -82,7 +82,7 @@ export function AddingComponentsSection({ breadcrumbs, activeItemId }: AddingCom
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">Create the Component</h3>
                     <p className="text-sm text-[var(--color-text-secondary)] mb-2">
-                      Build the component in <Code syntax="plain">packages/ui/src/components/</Code>. Ensure it uses <Code syntax="plain">React.forwardRef</Code> and properly types its props.
+                      Build the component in <Code syntax="plain">packages/ui/src/components/[category]/</Code> where [category] is one of: actions, forms, navigation, overlays, feedback, data-display, or layout. Ensure it uses <Code syntax="plain">React.forwardRef</Code> and properly types its props.
                     </p>
                   </div>
                 </li>
@@ -92,9 +92,13 @@ export function AddingComponentsSection({ breadcrumbs, activeItemId }: AddingCom
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">Export the Component</h3>
                     <p className="text-sm text-[var(--color-text-secondary)] mb-2">
-                      Add an export statement to <Code syntax="plain">packages/ui/src/index.ts</Code>.
+                      Add exports to both the category index <Code syntax="plain">packages/ui/src/components/[category]/index.ts</Code> and the main barrel <Code syntax="plain">packages/ui/src/index.ts</Code>.
                     </p>
-                    <CollapsibleCodeBlock id="meth-2" code="export * from './components/NewComponent';" defaultCollapsed={false} showCopy={true} />
+                    <CollapsibleCodeBlock id="meth-2" code={`// 1. In packages/ui/src/components/[category]/index.ts:
+export * from './ComponentName';
+
+// 2. In packages/ui/src/index.ts:
+export * from './components/[category]/ComponentName';`} defaultCollapsed={false} showCopy={true} />
                   </div>
                 </li>
 
@@ -116,22 +120,21 @@ export function AddingComponentsSection({ breadcrumbs, activeItemId }: AddingCom
                     <div className="space-y-3 text-sm text-[var(--color-text-secondary)]">
                       <p>Ensure the component is accessible via the sidebar and has correct breadcrumbs:</p>
                       <div className="space-y-2">
-                        <p><strong className="text-[var(--color-text-primary)]">A. Add to Sidebar:</strong> Update <Code syntax="plain">apps/sage-design-studio/app/lib/navigation-tree.tsx</Code>.</p>
-                        <CollapsibleCodeBlock id="meth-4a" code={`{
-  id: 'new-component',
-  label: 'New Component',
-  section: 'atoms', // or 'molecules'
+                        <p><strong className="text-[var(--color-text-primary)]">A. Add to Navigation:</strong> Update <Code syntax="plain">apps/sage-design-studio/app/components/studio/ComponentsSection/index.tsx</Code> in the appropriate functional category.</p>
+                        <CollapsibleCodeBlock id="meth-4a" code={`// In COMPONENT_CATEGORIES object
+[category]: {
+  label: 'Category Label',
+  description: 'Category description',
+  components: ['ExistingComponent', 'NewComponent'], // Add here
 }`} defaultCollapsed={true} showCopy={true} />
                       </div>
                       <div className="space-y-2">
-                        <p><strong className="text-[var(--color-text-primary)]">B. Add to Routes:</strong> Update <Code syntax="plain">apps/sage-design-studio/app/page.tsx</Code> config.</p>
-                        <CollapsibleCodeBlock id="meth-4b" code={`// In routeConfig
-atoms: {
-  children: {
-    // ...
-    'new-component': { label: 'New Component' },
-  }
-}`} defaultCollapsed={true} showCopy={true} />
+                        <p><strong className="text-[var(--color-text-primary)]">B. Choose Functional Category:</strong> Select based on primary purpose: actions, forms, navigation, overlays, feedback, data-display, or layout.</p>
+                        <CollapsibleCodeBlock id="meth-4b" code={`// Examples of category selection:
+// - Button → actions (triggers behavior)
+// - Input → forms (collects data)
+// - Dialog → overlays (contextual content)
+// - Toast → feedback (communicates state)`} defaultCollapsed={true} showCopy={true} />
                       </div>
                     </div>
                   </div>
@@ -169,7 +172,7 @@ atoms: {
                   <div className="flex-1 min-w-0">
                     <h3 className="font-semibold mb-2 text-[var(--color-text-primary)]">Create component file</h3>
                     <div className="w-full min-w-0 max-w-full">
-                      <CollapsibleCodeBlock id="add-comp-1" code="packages/ui/src/components/ComponentName.tsx" defaultCollapsed={false} showCopy={true} />
+                      <CollapsibleCodeBlock id="add-comp-1" code="packages/ui/src/components/[category]/ComponentName.tsx" defaultCollapsed={false} showCopy={true} />
                     </div>
                   </div>
                 </li>

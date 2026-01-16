@@ -28,118 +28,169 @@ export function ArchitectureSection({ breadcrumbs }: ArchitectureSectionProps) {
         )}
       </div>
 
-      {/* Component Hierarchy */}
+      {/* Component Organization */}
       <section>
         <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
-          Component Hierarchy
+          Functional Organization
         </h2>
         <Card className="p-6">
           <div className="space-y-6">
             <div>
-              <h3 className="font-semibold text-lg mb-2 text-[var(--color-text-primary)]">Tokens → Atoms → Molecules → Organisms → Templates</h3>
+              <h3 className="font-semibold text-lg mb-2 text-[var(--color-text-primary)]">Components Organized by Purpose, Not Hierarchy</h3>
               <p className="text-[var(--color-text-secondary)]">
-                This system follows atomic design principles with a clear hierarchy from smallest to largest building blocks.
+                This system organizes components by what they <em>do</em>, not by abstract hierarchy. This eliminates classification ambiguity and improves developer discoverability.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <Card className="p-4 bg-[var(--color-surface)]">
-                <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Tokens</h4>
+                <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Actions (3)</h4>
                 <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-                  Raw values that define the visual language. Not functional on their own.
+                  Interactive elements that trigger behaviors
                 </p>
                 <div className="text-xs text-[var(--color-text-muted)] font-mono">
-                  packages/design-system/src/tokens/
+                  Button, Toggle, ToggleGroup
                 </div>
               </Card>
 
               <Card className="p-4 bg-[var(--color-surface)]">
-                <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Atoms</h4>
+                <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Forms (11)</h4>
                 <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-                  Smallest functional elements. Cannot be broken down further without losing core function.
+                  Input controls for data collection with validation
                 </p>
                 <div className="text-xs text-[var(--color-text-muted)] font-mono">
-                  Button, Input, Badge, Label
+                  Input, Select, Checkbox, Switch, Slider, Label...
                 </div>
               </Card>
 
               <Card className="p-4 bg-[var(--color-surface)]">
-                <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Molecules</h4>
+                <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Navigation (6)</h4>
                 <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-                  Simple groups bonded together for a single task. Highly reusable and context-agnostic.
+                  Moving through content hierarchy and app structure
                 </p>
                 <div className="text-xs text-[var(--color-text-muted)] font-mono">
-                  TextField, SearchBar, FormField
+                  Breadcrumb, Tabs, Pagination, Command...
                 </div>
               </Card>
 
               <Card className="p-4 bg-[var(--color-surface)]">
-                <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Organisms</h4>
+                <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Overlays (9)</h4>
                 <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-                  Complex compositions forming discrete sections. Often manage state or layout for children.
+                  Contextual content that appears above main UI
                 </p>
                 <div className="text-xs text-[var(--color-text-muted)] font-mono">
-                  Header, Footer, Modal, Navigation
+                  Dialog, Sheet, Popover, Tooltip, Drawer...
                 </div>
               </Card>
+
+              <Card className="p-4 bg-[var(--color-surface)]">
+                <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Feedback (5)</h4>
+                <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                  Communicating system state and user action results
+                </p>
+                <div className="text-xs text-[var(--color-text-muted)] font-mono">
+                  Alert, Toast, Progress, Skeleton, Sonner
+                </div>
+              </Card>
+
+              <Card className="p-4 bg-[var(--color-surface)]">
+                <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Data Display (6)</h4>
+                <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                  Presenting information in structured formats
+                </p>
+                <div className="text-xs text-[var(--color-text-muted)] font-mono">
+                  Table, DataTable, Card, Avatar, Badge, Calendar
+                </div>
+              </Card>
+
+              <Card className="p-4 bg-[var(--color-surface)]">
+                <h4 className="font-semibold mb-2 text-[var(--color-text-primary)]">Layout (8)</h4>
+                <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                  Spatial organization and structural elements
+                </p>
+                <div className="text-xs text-[var(--color-text-muted)] font-mono">
+                  Accordion, Carousel, ScrollArea, Separator...
+                </div>
+              </Card>
+            </div>
+
+            <div className="mt-4 p-4 bg-[var(--color-primary)] bg-opacity-10 rounded-md border border-[var(--color-primary)]">
+              <p className="text-sm text-[var(--color-text-primary)]">
+                <strong>Why functional organization?</strong> Modern design systems (shadcn/ui, Material UI, Radix, Chakra)
+                have moved away from atomic design. Developers think "I need a form input" not "I need an atom."
+                This approach eliminates classification ambiguity and maps to real development workflows.
+              </p>
             </div>
           </div>
         </Card>
       </section>
 
-      {/* Decision Framework */}
+      {/* Category Selection Guide */}
       <section>
         <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
-          Decision Framework
+          Choosing the Right Category
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Card className="p-6">
-            <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">When to create an Atom vs Molecule</h3>
-            <div className="space-y-3 text-sm">
+            <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">Actions, Forms & Navigation</h3>
+            <div className="space-y-4 text-sm">
               <div>
-                <strong className="text-[var(--color-text-primary)]">Create an Atom if:</strong>
-                <ul className="list-disc list-inside text-[var(--color-text-secondary)] mt-1 space-y-1 ml-2">
-                  <li>It's a single, indivisible UI element</li>
-                  <li>It has no child components</li>
-                  <li>It consumes design tokens directly</li>
-                  <li>Example: Button, Input, Badge</li>
-                </ul>
+                <strong className="text-[var(--color-text-primary)]">Actions:</strong>
+                <p className="text-[var(--color-text-secondary)] mt-1">
+                  Use when the component's primary purpose is to trigger a behavior or state change.
+                  Examples: Button (triggers action), Toggle (binary state), ToggleGroup (multiple toggles).
+                </p>
               </div>
               <div>
-                <strong className="text-[var(--color-text-primary)]">Create a Molecule if:</strong>
-                <ul className="list-disc list-inside text-[var(--color-text-secondary)] mt-1 space-y-1 ml-2">
-                  <li>It combines 2-3 atoms together</li>
-                  <li>It serves a single, specific purpose</li>
-                  <li>It's reusable across contexts</li>
-                  <li>Example: TextField (Label + Input), SearchBar (Input + Button)</li>
-                </ul>
+                <strong className="text-[var(--color-text-primary)]">Forms:</strong>
+                <p className="text-[var(--color-text-secondary)] mt-1">
+                  Use for any data input or collection component. Includes validation and form integration.
+                  Examples: Input, Select, Checkbox, RadioGroup, Slider, Form wrapper.
+                </p>
+              </div>
+              <div>
+                <strong className="text-[var(--color-text-primary)]">Navigation:</strong>
+                <p className="text-[var(--color-text-secondary)] mt-1">
+                  Use when helping users understand location or move through content hierarchy.
+                  Examples: Breadcrumb, Tabs, Pagination, Command palette.
+                </p>
               </div>
             </div>
           </Card>
 
           <Card className="p-6">
-            <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">When to create a Molecule vs Organism</h3>
-            <div className="space-y-3 text-sm">
+            <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">Overlays, Feedback & Display</h3>
+            <div className="space-y-4 text-sm">
               <div>
-                <strong className="text-[var(--color-text-primary)]">Create a Molecule if:</strong>
-                <ul className="list-disc list-inside text-[var(--color-text-secondary)] mt-1 space-y-1 ml-2">
-                  <li>It's a self-contained unit</li>
-                  <li>It doesn't manage complex layout</li>
-                  <li>It has a singular purpose</li>
-                  <li>Example: SearchBar, FormField</li>
-                </ul>
+                <strong className="text-[var(--color-text-primary)]">Overlays:</strong>
+                <p className="text-[var(--color-text-secondary)] mt-1">
+                  Use for contextual content that appears above the main UI without interrupting flow.
+                  Examples: Dialog, Popover, Tooltip, Sheet, Drawer.
+                </p>
               </div>
               <div>
-                <strong className="text-[var(--color-text-primary)]">Create an Organism if:</strong>
-                <ul className="list-disc list-inside text-[var(--color-text-secondary)] mt-1 space-y-1 ml-2">
-                  <li>Its primary job is to arrange other components</li>
-                  <li>It manages state or layout for children</li>
-                  <li>It forms a distinct section of the interface</li>
-                  <li>Example: Header (arranges logo, nav, actions), Footer (arranges links, info)</li>
-                </ul>
+                <strong className="text-[var(--color-text-primary)]">Feedback:</strong>
+                <p className="text-[var(--color-text-secondary)] mt-1">
+                  Use to communicate system state or results of user actions.
+                  Examples: Alert, Toast, Progress, Skeleton loaders.
+                </p>
+              </div>
+              <div>
+                <strong className="text-[var(--color-text-primary)]">Data Display & Layout:</strong>
+                <p className="text-[var(--color-text-secondary)] mt-1">
+                  Data Display: presenting information (Table, Card, Avatar).
+                  Layout: organizing content spatially (Accordion, Carousel, ScrollArea).
+                </p>
               </div>
             </div>
           </Card>
+        </div>
+        <div className="mt-4 p-4 bg-[var(--color-surface)] rounded-md border border-[var(--color-border)]">
+          <p className="text-sm text-[var(--color-text-primary)]">
+            <strong>Gray areas?</strong> Some components could fit multiple categories.
+            Use the <em>primary purpose</em> rule: SearchBar is in <strong>Forms</strong>
+            (primary purpose: collect input) not Navigation, even though it aids navigation.
+          </p>
         </div>
       </section>
 
