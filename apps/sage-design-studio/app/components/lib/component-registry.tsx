@@ -707,15 +707,15 @@ console.log(greeting);\`)}
       },
       className: {
         type: 'text',
-        default: 'relative h-[500px] w-full max-w-[280px] border-r shadow-none',
-        description: 'Additional CSS classes. Use "relative" to contain within a layout.',
+        default: '!relative !top-auto !left-auto !h-[500px] w-full max-w-[280px] border-r shadow-none',
+        description: 'Additional CSS classes. Use "!relative" to force containment within a layout if needed.',
       },
     },
     examples: [
       {
         label: 'Basic Sidebar',
         props: {
-          className: 'relative h-[400px] w-[260px] border rounded-lg overflow-hidden',
+          className: '!relative !top-auto !left-auto h-[400px] w-[260px] border rounded-lg overflow-hidden',
         },
         children: (
           <>
@@ -736,7 +736,7 @@ console.log(greeting);\`)}
       {
         label: 'Nested Navigation',
         props: {
-          className: 'relative h-[400px] w-[260px] border rounded-lg overflow-hidden',
+          className: '!relative !top-auto !left-auto h-[400px] w-[260px] border rounded-lg overflow-hidden',
         },
         children: (
           <SidebarContent>
@@ -753,7 +753,7 @@ console.log(greeting);\`)}
       {
         label: 'With Icons',
         props: {
-          className: 'relative h-[400px] w-[260px] border rounded-lg overflow-hidden',
+          className: '!relative !top-auto !left-auto h-[400px] w-[260px] border rounded-lg overflow-hidden',
         },
         children: (
           <SidebarContent>

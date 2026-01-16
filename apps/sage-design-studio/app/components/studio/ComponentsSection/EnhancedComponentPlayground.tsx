@@ -183,7 +183,7 @@ console.log(result); // 55`}
               onCheckedChange={(checked: boolean) => updateProp('checked', checked)}
             />
           ) : (
-            <Component {...props}>
+            <Component {...props} isOpen={props.isOpen ?? true}>
               {componentName === 'Button' ? 'Click me' : props.children || config.examples[0]?.children}
             </Component>
           )}

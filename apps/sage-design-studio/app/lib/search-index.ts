@@ -646,7 +646,7 @@ export const searchIndex: SearchResult[] = [
     description: 'Vertical navigation component with hierarchical support',
     type: 'component',
     category: 'Layout',
-    path: 'components-layout-sidebar',
+    path: '#layout/sidebar',
     keywords: ['navigation', 'drawer', 'menu', 'sidebar', 'vertical', 'layout'],
   },
   {
