@@ -647,7 +647,7 @@ export function ThemeSwitcher() {
                 2. Browse Components →
               </a>
               <a
-                href="https://github.com/shalom-ormsby/ecosystem/tree/main/design-system"
+                href="https://github.com/shalom-ormsby/ecosystem/tree/main/packages/ui"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block text-[var(--color-primary)] hover:underline"
@@ -1099,12 +1099,12 @@ export function Controls() {
                 If you're developing or modifying Sage Design Studio (this documentation site), start here:
               </p>
               <a
-                href="https://github.com/shalom-ormsby/ecosystem/blob/main/apps/sage-design-studio/GETTING_STARTED.md"
+                href="https://github.com/shalom-ormsby/ecosystem/blob/main/apps/sage-design-studio/README.md"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-[var(--color-primary)] hover:underline font-medium"
               >
-                → Studio Getting Started Guide
+                → Studio Development Guide
               </a>
             </div>
           </div>
