@@ -6,7 +6,7 @@ import type { ComponentConfig } from '../../lib/component-registry';
 import { CodeSnippet } from './CodeSnippet';
 import { JsonLdMetadata } from '../../JsonLdMetadata';
 import { generateComponentMetadata } from '../../../lib/metadata-generator';
-import { Copy, Check, Package, Code as CodeIcon, Settings, Accessibility, Eye } from 'lucide-react';
+import { Copy, Check, Package, Code as CodeIcon, Settings, Accessibility, Eye, Home, Search, User } from 'lucide-react';
 
 interface ComponentPlaygroundProps {
   componentName: string;

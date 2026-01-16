@@ -1,4 +1,5 @@
 import { Code, Link, Spinner, ProgressBar, Switch } from '@sds/ui';
+import { Home, Search, Settings, User } from 'lucide-react';
 import {
   // Phase 1 & 2 components
   Label, Input, Alert, AlertDescription, AlertTitle, Avatar, AvatarImage, AvatarFallback, Button, Card, Badge, Checkbox, Combobox, Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut, DataTable, Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Popover, PopoverAnchor, PopoverContent, PopoverTrigger, RadioGroup, RadioGroupItem, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Separator, ScrollArea, Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, Skeleton, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toaster, ToastProvider, useToast,
@@ -757,9 +758,30 @@ console.log(greeting);\`)}
         },
         children: (
           <SidebarContent>
-            <SidebarItem icon={<span className="text-xl">🏠</span>}>Home</SidebarItem>
-            <SidebarItem icon={<span className="text-xl">🔍</span>}>Search</SidebarItem>
-            <SidebarItem icon={<span className="text-xl">⚙️</span>}>Settings</SidebarItem>
+            <SidebarItem icon={<Home className="w-4 h-4" />}>Home</SidebarItem>
+            <SidebarItem icon={<Search className="w-4 h-4" />}>Search</SidebarItem>
+            <SidebarItem icon={<Settings className="w-4 h-4" />}>Settings</SidebarItem>
+          </SidebarContent>
+        ),
+      },
+      {
+        label: 'Interactive Group',
+        props: {
+          className: '!relative !top-auto !left-auto h-[400px] w-[260px] border rounded-lg overflow-hidden',
+        },
+        children: (
+          /* note: this is a static example, real interactivity requires state */
+          <SidebarContent>
+            <SidebarItem>Dashboard</SidebarItem>
+            <SidebarItem hasChildren isExpanded>
+              Collections
+            </SidebarItem>
+            <SidebarItem depth={1} isActive>Favorites</SidebarItem>
+            <SidebarItem depth={1}>Recent</SidebarItem>
+
+            <SidebarItem hasChildren={true} isExpanded={false}>
+              Archives
+            </SidebarItem>
           </SidebarContent>
         ),
       },
@@ -768,6 +790,7 @@ console.log(greeting);\`)}
       {
         title: 'Basic Structure',
         code: `import { Sidebar, SidebarHeader, SidebarContent, SidebarFooter, SidebarItem } from '@sds/ui';
+import { Home, Settings, User } from 'lucide-react';
 
 export default function AppSidebar() {
   return (
@@ -777,12 +800,12 @@ export default function AppSidebar() {
       </SidebarHeader>
       
       <SidebarContent>
-        <SidebarItem isActive>Dashboard</SidebarItem>
-        <SidebarItem>Settings</SidebarItem>
+        <SidebarItem icon={<Home className="w-4 h-4" />} isActive>Dashboard</SidebarItem>
+        <SidebarItem icon={<Settings className="w-4 h-4" />}>Settings</SidebarItem>
       </SidebarContent>
 
       <SidebarFooter>
-        <SidebarItem>Profile</SidebarItem>
+        <SidebarItem icon={<User className="w-4 h-4" />}>Profile</SidebarItem>
       </SidebarFooter>
     </Sidebar>
   );
