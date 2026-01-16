@@ -218,6 +218,7 @@ export const navigationTree: NavigationItem[] = [
           { id: 'resizable', label: 'Resizable', section: 'layout' },
           { id: 'scroll-area', label: 'Scroll Area', section: 'layout' },
           { id: 'separator', label: 'Separator', section: 'layout' },
+          { id: 'sidebar', label: 'Sidebar', section: 'layout' },
         ],
       },
     ],

@@ -47,7 +47,7 @@ const COMPONENT_CATEGORIES = {
   layout: {
     label: 'Layout',
     description: 'Structural and spacing components',
-    components: ['Accordion', 'AspectRatio', 'Carousel', 'Collapsible', 'DatePicker', 'ResizablePanelGroup', 'ScrollArea', 'Separator'],
+    components: ['Accordion', 'AspectRatio', 'Carousel', 'Collapsible', 'DatePicker', 'ResizablePanelGroup', 'ScrollArea', 'Separator', 'Sidebar'],
   },
   // Legacy components (not yet migrated to functional categories)
   legacy: {

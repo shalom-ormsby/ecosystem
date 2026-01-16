@@ -28,6 +28,7 @@ import {
   // Phase 3 Batch 5
   InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator,
   ResizablePanelGroup, ResizablePanel, ResizableHandle,
+  Sidebar, SidebarHeader, SidebarContent, SidebarFooter, SidebarItem,
 } from '@sds/ui';
 
 export interface PropConfig {
@@ -695,7 +696,108 @@ console.log(greeting);\`)}
     sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/Badge.tsx',
   },
 
+  Sidebar: {
+    component: Sidebar,
+    description: 'A composable, responsive sidebar component with support for nested navigation, headers, and footers. Handles expanded state and active items automatically.',
+    props: {
+      className: {
+        type: 'text',
+        default: '',
+        description: 'Additional CSS classes',
+      },
+    },
+    examples: [
+      {
+        label: 'Basic Sidebar',
+        props: {},
+        children: (
+          <div className="h-[400px] w-[240px] border rounded-lg bg-background overflow-hidden relative">
+            <Sidebar className="absolute inset-0">
+              <SidebarHeader>
+                <div className="px-2 font-bold text-lg">My App</div>
+              </SidebarHeader>
+              <SidebarContent>
+                <SidebarItem isActive>Overview</SidebarItem>
+                <SidebarItem>Analytics</SidebarItem>
+                <SidebarItem>Settings</SidebarItem>
+              </SidebarContent>
+              <SidebarFooter>
+                <SidebarItem>Logout</SidebarItem>
+              </SidebarFooter>
+            </Sidebar>
+          </div>
+        ),
+      },
+      {
+        label: 'Nested Navigation',
+        props: {},
+        children: (
+          <div className="h-[400px] w-[240px] border rounded-lg bg-background overflow-hidden relative">
+            <Sidebar className="absolute inset-0">
+              <SidebarContent>
+                <SidebarItem>Dashboard</SidebarItem>
+                <SidebarItem hasChildren isExpanded>
+                  Projects
+                </SidebarItem>
+                <SidebarItem depth={1} isActive>Project A</SidebarItem>
+                <SidebarItem depth={1}>Project B</SidebarItem>
+                <SidebarItem>Team</SidebarItem>
+              </SidebarContent>
+            </Sidebar>
+          </div>
+        ),
+      },
+      {
+        label: 'With Icons',
+        props: {},
+        children: (
+          <div className="h-[400px] w-[240px] border rounded-lg bg-background overflow-hidden relative">
+            <Sidebar className="absolute inset-0">
+              <SidebarContent>
+                <SidebarItem icon={<span className="text-xl">🏠</span>}>Home</SidebarItem>
+                <SidebarItem icon={<span className="text-xl">🔍</span>}>Search</SidebarItem>
+                <SidebarItem icon={<span className="text-xl">⚙️</span>}>Settings</SidebarItem>
+              </SidebarContent>
+            </Sidebar>
+          </div>
+        ),
+      },
+    ],
+    codeExamples: [
+      {
+        title: 'Basic Structure',
+        code: `import { Sidebar, SidebarHeader, SidebarContent, SidebarFooter, SidebarItem } from '@sds/ui';
 
+<Sidebar>
+  <SidebarHeader>
+    <h2>App Name</h2>
+  </SidebarHeader>
+  
+  <SidebarContent>
+    <SidebarItem isActive>Dashboard</SidebarItem>
+    <SidebarItem>Settings</SidebarItem>
+  </SidebarContent>
+
+  <SidebarFooter>
+    <SidebarItem>Profile</SidebarItem>
+  </SidebarFooter>
+</Sidebar>`,
+        description: 'Standard layout with header, content area, and footer.',
+      },
+      {
+        title: 'Nested Items',
+        code: `<SidebarContent>
+  <SidebarItem hasChildren isExpanded>
+    Collections
+  </SidebarItem>
+  <SidebarItem depth={1}>Nature</SidebarItem>
+  <SidebarItem depth={1}>Architecture</SidebarItem>
+</SidebarContent>`,
+        description: 'Using the depth prop to create visual hierarchy for nested navigation.',
+      },
+    ],
+    sourceUrl: 'https://github.com/shalom-ormsby/ecosystem/blob/main/packages/ui/src/components/layout/Sidebar.tsx',
+  },
 
   Spinner: {
     component: Spinner,

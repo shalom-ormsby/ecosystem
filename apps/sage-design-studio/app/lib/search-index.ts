@@ -640,8 +640,15 @@ export const searchIndex: SearchResult[] = [
     path: 'organisms-footer',
     keywords: ['footer', 'links', 'navigation', 'copyright'],
   },
-
-  // Hooks
+  {
+    id: 'sidebar',
+    title: 'Sidebar',
+    description: 'Vertical navigation component with hierarchical support',
+    type: 'component',
+    category: 'Layout',
+    path: 'components-layout-sidebar',
+    keywords: ['navigation', 'drawer', 'menu', 'sidebar', 'vertical', 'layout'],
+  },
   {
     id: 'use-form',
     title: 'useForm',
