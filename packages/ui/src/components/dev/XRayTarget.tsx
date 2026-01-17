@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 import { useXRay } from './XRayProvider';
 import type { XRayTargetProps, InspectorData } from './types';
 
@@ -18,7 +18,18 @@ export const XRayTarget: React.FC<XRayTargetProps> = ({
     children,
     className = '',
 }) => {
-    const { isActive, setInspectorData } = useXRay();
+    // Gracefully handle missing XRayProvider
+    let isActive = false;
+    let setInspectorData: any = () => {};
+
+    try {
+        const xrayContext = useXRay();
+        isActive = xrayContext.isActive;
+        setInspectorData = xrayContext.setInspectorData;
+    } catch (e) {
+        // XRayProvider not found - render children without X-Ray functionality
+    }
+
     const targetRef = useRef<HTMLDivElement>(null);
 
     const handleMouseEnter = (e: React.MouseEvent) => {
@@ -64,7 +75,7 @@ export const XRayTarget: React.FC<XRayTargetProps> = ({
     const handleMouseMove = (e: React.MouseEvent) => {
         if (!isActive) return;
         // Update inspector position as mouse moves
-        setInspectorData((prev) => {
+        setInspectorData((prev: InspectorData | null) => {
             if (!prev) return null;
             return {
                 ...prev,

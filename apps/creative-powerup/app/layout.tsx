@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { ThemeProvider, CustomizerPanel } from '@sds/ui';
+import { ThemeProvider, CustomizerPanel, XRayProvider } from '@sds/ui';
 import { allFontVariables } from '@/lib/fonts';
 import Link from 'next/link';
 import { Analytics } from '@vercel/analytics/next';
@@ -19,8 +19,9 @@ export default function RootLayout({
     <html lang="en" className={allFontVariables} suppressHydrationWarning>
       <body className="font-sans bg-background text-foreground antialiased" suppressHydrationWarning>
         <ThemeProvider>
-          {/* Top Navigation */}
-          <nav className="border-b border-[var(--color-glass-border)] bg-background/80 backdrop-blur-sm sticky top-0 z-40">
+          <XRayProvider>
+            {/* Top Navigation */}
+            <nav className="border-b border-[var(--color-glass-border)] bg-background/80 backdrop-blur-sm sticky top-0 z-40">
             <div className="container mx-auto px-6 py-4">
               <div className="flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
@@ -77,8 +78,9 @@ export default function RootLayout({
           {/* Main Content */}
           <main>{children}</main>
 
-          {/* Customizer Panel (bottom-right corner) */}
-          <CustomizerPanel />
+            {/* Customizer Panel (bottom-right corner) */}
+            <CustomizerPanel />
+          </XRayProvider>
         </ThemeProvider>
         <Analytics />
       </body>
