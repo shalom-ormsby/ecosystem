@@ -23,7 +23,8 @@ export function BackgroundsSection() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Galaxy Card */}
                 <Card
-                    className="p-6 cursor-pointer hover:shadow-lg transition-all border border-[var(--color-border)] hover:border-[var(--color-primary)] group"
+                    className="p-6 cursor-pointer group"
+                    hoverEffect={true}
                     onClick={() => {
                         // Using window.location.hash for internal router navigation in the studio
                         // Or if onItemChange is available in context, use that. 
@@ -52,7 +53,8 @@ export function BackgroundsSection() {
 
                 {/* Faulty Terminal Card */}
                 <Card
-                    className="p-6 cursor-pointer hover:shadow-lg transition-all border border-[var(--color-border)] hover:border-[var(--color-primary)] group"
+                    className="p-6 cursor-pointer group"
+                    hoverEffect={true}
                     onClick={() => {
                         window.location.hash = '#motion/faulty-terminal';
                     }}
