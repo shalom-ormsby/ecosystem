@@ -24,8 +24,8 @@ export default function TargetCursor({
 }: TargetCursorProps) {
     const cursorOuterRef = useRef<HTMLDivElement>(null);
     const cursorInnerRef = useRef<HTMLDivElement>(null);
-    const requestRef = useRef<number>();
-    const previousTimeRef = useRef<number>();
+    const requestRef = useRef<number | null>(null);
+    const previousTimeRef = useRef<number | null>(null);
 
     // Mouse position
     const endX = useRef(0);
