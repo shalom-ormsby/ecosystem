@@ -2,13 +2,33 @@
 
 import { useState, useEffect } from 'react';
 import { Breadcrumbs, type BreadcrumbItemLegacy } from '@sds/ui';
+
+// Landing Pages
 import { PrimitivesSection } from './PrimitivesSection';
 import { TextEffectsSection } from './TextEffectsSection';
 import { BackgroundsSection } from './BackgroundsSection';
 import { CursorsSection } from './CursorsSection';
 import { MicroInteractionsSection } from './MicroInteractionsSection';
 
-type MotionTab = 'primitives' | 'text-effects' | 'backgrounds' | 'cursors' | 'micro-interactions';
+// Detail Pages
+import { GalaxyPage } from './pages/motion/GalaxyPage';
+import { FaultyTerminalPage } from './pages/motion/FaultyTerminalPage';
+import {
+  DurationPage,
+  EasingPage,
+  VariableWeightPage,
+  TypewriterPage,
+  TargetCursorPage,
+  SplashCursorPage,
+  MagneticPage
+} from './pages/motion/MotionPlaceholders';
+
+type MotionTab =
+  | 'primitives' | 'duration' | 'easing'
+  | 'text-effects' | 'variable-weight' | 'typewriter'
+  | 'backgrounds' | 'galaxy' | 'faulty-terminal'
+  | 'cursors' | 'target-cursor' | 'splash-cursor'
+  | 'micro-interactions' | 'magnetic';
 
 interface MotionSectionsProps {
   activeItemId?: string;
@@ -21,13 +41,9 @@ export function MotionSections({ activeItemId, breadcrumbs, onItemChange }: Moti
 
   // Update active tab when activeItemId changes
   useEffect(() => {
-    if (activeItemId && [
-      'primitives',
-      'text-effects',
-      'backgrounds',
-      'cursors',
-      'micro-interactions'
-    ].includes(activeItemId)) {
+    if (activeItemId) {
+      // We cast here assuming the navigation tree provides valid IDs that match our MotionTab type
+      // in a real app you might want to validate this more strictly
       setActiveTab(activeItemId as MotionTab);
     }
   }, [activeItemId]);
@@ -45,11 +61,29 @@ export function MotionSections({ activeItemId, breadcrumbs, onItemChange }: Moti
 
       {/* Tab Content with spacing for sticky nav */}
       <div className="mt-4">
+        {/* Primitives */}
         {activeTab === 'primitives' && <PrimitivesSection />}
+        {activeTab === 'duration' && <DurationPage />}
+        {activeTab === 'easing' && <EasingPage />}
+
+        {/* Text Effects */}
         {activeTab === 'text-effects' && <TextEffectsSection />}
+        {activeTab === 'variable-weight' && <VariableWeightPage />}
+        {activeTab === 'typewriter' && <TypewriterPage />}
+
+        {/* Backgrounds */}
         {activeTab === 'backgrounds' && <BackgroundsSection />}
+        {activeTab === 'galaxy' && <GalaxyPage />}
+        {activeTab === 'faulty-terminal' && <FaultyTerminalPage />}
+
+        {/* Cursors */}
         {activeTab === 'cursors' && <CursorsSection />}
+        {activeTab === 'target-cursor' && <TargetCursorPage />}
+        {activeTab === 'splash-cursor' && <SplashCursorPage />}
+
+        {/* Micro Interactions */}
         {activeTab === 'micro-interactions' && <MicroInteractionsSection />}
+        {activeTab === 'magnetic' && <MagneticPage />}
       </div>
     </div>
   );

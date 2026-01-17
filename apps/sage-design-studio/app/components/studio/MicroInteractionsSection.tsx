@@ -1,14 +1,12 @@
 'use client';
 
 import { Card } from '@sds/ui';
-import { Fingerprint } from 'lucide-react';
 
 export function MicroInteractionsSection() {
     return (
         <div className="max-w-5xl mx-auto px-6 py-12">
             <div className="mb-12">
-                <h1 className="text-4xl font-bold mb-4 text-[var(--color-text-primary)] flex items-center gap-3">
-                    <Fingerprint className="w-8 h-8 text-[var(--color-primary)]" />
+                <h1 className="text-4xl font-bold mb-4 text-[var(--color-text-primary)]">
                     Micro-Interactions
                 </h1>
                 <p className="text-lg text-[var(--color-text-secondary)]">
