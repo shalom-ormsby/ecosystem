@@ -319,6 +319,10 @@ If you encounter errors, **STOP and refer to** [The Studio Troubleshooting Guide
 *   **Black Shader Previews (The "Unified Path" Fix):** If varying props (like `pageLoadAnimation={false}`) cause a shader to turn black, **avoid branching logic in GLSL** (e.g., `if (uUseAnimation > 0.5)`). Instead, **unify the code path**: always run the animation logic in the shader, but control the valid state from JavaScript (e.g., set `uProgress` to `1.0` immediately to skip the effect). This ensures the shader always executes a proven, active code path.
 *   **Missing Textures:** Verify that any required textures or assets are correctly loaded and accessible.
 
+**Common Build Errors:**
+*   **`useRef` Type Errors:** In strict TypeScript, `useRef<T>()` without arguments is invalid. Always initialize with `null` if the initial value isn't known: `useRef<T>(null)`.
+*   **`styled-jsx` in Components:** Avoid using `<style jsx>` in shared components as it can cause build failures. Use `useEffect` to inject global styles or CSS Modules/Tailwind for scoped styles.
+
 ---
 
 

@@ -1192,41 +1192,46 @@ export default function SplashCursor({
             return ((value - min) % range) + min;
         }
 
+        function getMousePos(e: MouseEvent | Touch, canvas: HTMLCanvasElement | null) {
+            if (!canvas) return { x: 0, y: 0 };
+            const rect = canvas.getBoundingClientRect();
+            return {
+                x: scaleByPixelRatio(e.clientX - rect.left),
+                y: scaleByPixelRatio(e.clientY - rect.top)
+            };
+        }
+
         window.addEventListener('mousedown', e => {
             const pointer = pointers[0];
-            const posX = scaleByPixelRatio(e.clientX);
-            const posY = scaleByPixelRatio(e.clientY);
-            updatePointerDownData(pointer, -1, posX, posY);
+            const pos = getMousePos(e, canvas);
+            updatePointerDownData(pointer, -1, pos.x, pos.y);
             clickSplat(pointer);
         });
 
         function handleFirstMouseMove(e: MouseEvent) {
             const pointer = pointers[0];
-            const posX = scaleByPixelRatio(e.clientX);
-            const posY = scaleByPixelRatio(e.clientY);
+            const pos = getMousePos(e, canvas);
             const color = generateColor();
             updateFrame();
-            updatePointerMoveData(pointer, posX, posY, color);
+            updatePointerMoveData(pointer, pos.x, pos.y, color);
             document.body.removeEventListener('mousemove', handleFirstMouseMove);
         }
         document.body.addEventListener('mousemove', handleFirstMouseMove);
 
         window.addEventListener('mousemove', e => {
             const pointer = pointers[0];
-            const posX = scaleByPixelRatio(e.clientX);
-            const posY = scaleByPixelRatio(e.clientY);
+            const pos = getMousePos(e, canvas);
             const color = pointer.color;
-            updatePointerMoveData(pointer, posX, posY, color);
+            updatePointerMoveData(pointer, pos.x, pos.y, color);
         });
 
         function handleFirstTouchStart(e: TouchEvent) {
             const touches = e.targetTouches;
             const pointer = pointers[0];
             for (let i = 0; i < touches.length; i++) {
-                const posX = scaleByPixelRatio(touches[i].clientX);
-                const posY = scaleByPixelRatio(touches[i].clientY);
+                const pos = getMousePos(touches[i], canvas);
                 updateFrame();
-                updatePointerDownData(pointer, touches[i].identifier, posX, posY);
+                updatePointerDownData(pointer, touches[i].identifier, pos.x, pos.y);
             }
             document.body.removeEventListener('touchstart', handleFirstTouchStart);
         }
@@ -1238,9 +1243,8 @@ export default function SplashCursor({
                 const touches = e.targetTouches;
                 const pointer = pointers[0];
                 for (let i = 0; i < touches.length; i++) {
-                    const posX = scaleByPixelRatio(touches[i].clientX);
-                    const posY = scaleByPixelRatio(touches[i].clientY);
-                    updatePointerDownData(pointer, touches[i].identifier, posX, posY);
+                    const pos = getMousePos(touches[i], canvas);
+                    updatePointerDownData(pointer, touches[i].identifier, pos.x, pos.y);
                 }
             },
             false
@@ -1252,9 +1256,8 @@ export default function SplashCursor({
                 const touches = e.targetTouches;
                 const pointer = pointers[0];
                 for (let i = 0; i < touches.length; i++) {
-                    const posX = scaleByPixelRatio(touches[i].clientX);
-                    const posY = scaleByPixelRatio(touches[i].clientY);
-                    updatePointerMoveData(pointer, posX, posY, pointer.color);
+                    const pos = getMousePos(touches[i], canvas);
+                    updatePointerMoveData(pointer, pos.x, pos.y, pointer.color);
                 }
             },
             false
