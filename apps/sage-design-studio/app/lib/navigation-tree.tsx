@@ -30,18 +30,18 @@ export const navigationTree: NavigationItem[] = [
         children: [
           {
             id: 'methodology',
-            label: 'Methodology',
-            section: 'adding-components',
-          },
-          {
-            id: 'modifying',
-            label: 'Modifying',
-            section: 'adding-components',
-          },
-          {
-            id: 'troubleshooting',
-            label: 'Troubleshooting',
-            section: 'adding-components',
+        label: 'Methodology',
+        section: 'adding-components',
+      },
+      {
+        id: 'modifying',
+        label: 'Modifying',
+        section: 'adding-components',
+      },
+      {
+        id: 'troubleshooting',
+        label: 'Troubleshooting',
+        section: 'adding-components',
           },
         ],
       },
@@ -116,26 +116,24 @@ export const navigationTree: NavigationItem[] = [
       },
     ],
   },
-],
-  },
-{
-  id: 'components',
+  {
+    id: 'components',
     label: 'Components',
-      icon: <Component className="w-4 h-4" />,
+    icon: <Component className="w-4 h-4" />,
+    children: [
+      {
+        id: 'actions',
+        label: 'Actions',
         children: [
-          {
-            id: 'actions',
-            label: 'Actions',
-            children: [
               { id: 'button', label: 'Button', section: 'actions' },
               { id: 'toggle', label: 'Toggle', section: 'actions' },
               { id: 'toggle-group', label: 'Toggle Group', section: 'actions' },
             ],
-          },
-          {
-            id: 'forms',
-            label: 'Forms',
-            children: [
+      },
+      {
+        id: 'forms',
+        label: 'Forms',
+        children: [
               { id: 'checkbox', label: 'Checkbox', section: 'forms' },
               { id: 'combobox', label: 'Combobox', section: 'forms' },
               { id: 'form', label: 'Form', section: 'forms' },
@@ -148,11 +146,11 @@ export const navigationTree: NavigationItem[] = [
               { id: 'switch', label: 'Switch', section: 'forms' },
               { id: 'textarea', label: 'Textarea', section: 'forms' },
             ],
-          },
-          {
-            id: 'navigation',
-            label: 'Navigation',
-            children: [
+      },
+      {
+        id: 'navigation',
+        label: 'Navigation',
+        children: [
               { id: 'breadcrumb', label: 'Breadcrumb', section: 'navigation' },
               { id: 'command', label: 'Command', section: 'navigation' },
               { id: 'menubar', label: 'Menubar', section: 'navigation' },
@@ -160,11 +158,11 @@ export const navigationTree: NavigationItem[] = [
               { id: 'pagination', label: 'Pagination', section: 'navigation' },
               { id: 'tabs', label: 'Tabs', section: 'navigation' },
             ],
-          },
-          {
-            id: 'overlays',
-            label: 'Overlays',
-            children: [
+      },
+      {
+        id: 'overlays',
+        label: 'Overlays',
+        children: [
               { id: 'alert-dialog', label: 'Alert Dialog', section: 'overlays' },
               { id: 'context-menu', label: 'Context Menu', section: 'overlays' },
               { id: 'dialog', label: 'Dialog', section: 'overlays' },
@@ -175,22 +173,22 @@ export const navigationTree: NavigationItem[] = [
               { id: 'sheet', label: 'Sheet', section: 'overlays' },
               { id: 'tooltip', label: 'Tooltip', section: 'overlays' },
             ],
-          },
-          {
-            id: 'feedback',
-            label: 'Feedback',
-            children: [
+      },
+      {
+        id: 'feedback',
+        label: 'Feedback',
+        children: [
               { id: 'alert', label: 'Alert', section: 'feedback' },
               { id: 'progress', label: 'Progress', section: 'feedback' },
               { id: 'skeleton', label: 'Skeleton', section: 'feedback' },
               { id: 'sonner', label: 'Sonner', section: 'feedback' },
               { id: 'toaster', label: 'Toaster', section: 'feedback' },
             ],
-          },
-          {
-            id: 'data-display',
-            label: 'Data Display',
-            children: [
+      },
+      {
+        id: 'data-display',
+        label: 'Data Display',
+        children: [
               { id: 'avatar', label: 'Avatar', section: 'data-display' },
               { id: 'badge', label: 'Badge', section: 'data-display' },
               { id: 'calendar', label: 'Calendar', section: 'data-display' },
@@ -198,11 +196,11 @@ export const navigationTree: NavigationItem[] = [
               { id: 'data-table', label: 'Data Table', section: 'data-display' },
               { id: 'table', label: 'Table', section: 'data-display' },
             ],
-          },
-          {
-            id: 'layout',
-            label: 'Layout',
-            children: [
+      },
+      {
+        id: 'layout',
+        label: 'Layout',
+        children: [
               { id: 'accordion', label: 'Accordion', section: 'layout' },
               { id: 'aspect-ratio', label: 'Aspect Ratio', section: 'layout' },
               { id: 'carousel', label: 'Carousel', section: 'layout' },
@@ -213,115 +211,115 @@ export const navigationTree: NavigationItem[] = [
               { id: 'separator', label: 'Separator', section: 'layout' },
               { id: 'sidebar', label: 'Sidebar', section: 'layout' },
             ],
-          },
-        ],
+      },
+    ],
   },
-{
-  id: 'patterns',
+  {
+    id: 'patterns',
     label: 'Patterns',
-      icon: <Layers className="w-4 h-4" />,
+    icon: <Layers className="w-4 h-4" />,
+    children: [
+      {
+        id: 'app-shell',
+        label: 'App Shell',
         children: [
-          {
-            id: 'app-shell',
-            label: 'App Shell',
-            children: [
               { id: 'page-layout', label: 'Page Layout', section: 'patterns' },
               { id: 'primary-nav', label: 'Primary Nav', section: 'patterns' },
               { id: 'secondary-nav', label: 'Secondary Nav', section: 'patterns' },
               { id: 'footer', label: 'Footer', section: 'patterns' },
             ],
-          },
-          {
-            id: 'customization',
-            label: 'Customization',
-            children: [
+      },
+      {
+        id: 'customization',
+        label: 'Customization',
+        children: [
               { id: 'customizer', label: 'Customizer', section: 'patterns' },
               { id: 'theme-toggle', label: 'Theme Toggle', section: 'forms' }, // Moved to forms
             ],
-          },
-          {
-            id: 'code',
-            label: 'Code',
-            children: [
+      },
+      {
+        id: 'code',
+        label: 'Code',
+        children: [
               { id: 'collapsible-code-block', label: 'Code Block', section: 'patterns' },
             ],
-          },
-        ],
+      },
+    ],
   },
-{
-  id: 'templates',
+  {
+    id: 'templates',
     label: 'Templates',
-      icon: <LayoutTemplate className="w-4 h-4" />,
-        children: [
-          {
-            id: 'templates-overview',
-            label: 'Overview',
-            section: 'templates',
-          },
-          {
-            id: 'page-template',
-            label: 'Page Template',
-            section: 'templates',
-          },
-        ],
+    icon: <LayoutTemplate className="w-4 h-4" />,
+    children: [
+      {
+        id: 'templates-overview',
+        label: 'Overview',
+        section: 'templates',
+      },
+      {
+        id: 'page-template',
+        label: 'Page Template',
+        section: 'templates',
+      },
+    ],
   },
-{
-  id: 'hooks',
+  {
+    id: 'hooks',
     label: 'Hooks',
-      icon: <Webhook className="w-4 h-4" />,
-        children: [
-          {
-            id: 'use-form',
-            label: 'useForm',
-            section: 'hooks',
-          },
-          {
-            id: 'use-theme',
-            label: 'useTheme',
-            section: 'hooks',
-          },
-          {
-            id: 'use-toast',
-            label: 'useToast',
-            section: 'hooks',
-          },
-          {
-            id: 'use-motion-preference',
-            label: 'useMotionPreference',
-            section: 'hooks',
-          },
-        ],
+    icon: <Webhook className="w-4 h-4" />,
+    children: [
+      {
+        id: 'use-form',
+        label: 'useForm',
+        section: 'hooks',
+      },
+      {
+        id: 'use-theme',
+        label: 'useTheme',
+        section: 'hooks',
+      },
+      {
+        id: 'use-toast',
+        label: 'useToast',
+        section: 'hooks',
+      },
+      {
+        id: 'use-motion-preference',
+        label: 'useMotionPreference',
+        section: 'hooks',
+      },
+    ],
   },
-{
-  id: 'mcp-server',
+  {
+    id: 'mcp-server',
     label: 'MCP Server',
-      icon: <Bot className="w-4 h-4" />,
-        children: [
-          {
-            id: 'overview',
-            label: 'Overview',
-            section: 'mcp-server',
-          },
-          {
-            id: 'installation',
-            label: 'Installation',
-            section: 'mcp-server',
-          },
-          {
-            id: 'tools',
-            label: 'Available Tools',
-            section: 'mcp-server',
-          },
-          {
-            id: 'usage',
-            label: 'Usage Guide',
-            section: 'mcp-server',
-          },
-          {
-            id: 'troubleshooting',
-            label: 'Troubleshooting',
-            section: 'mcp-server',
-          },
-        ],
+    icon: <Bot className="w-4 h-4" />,
+    children: [
+      {
+        id: 'overview',
+        label: 'Overview',
+        section: 'mcp-server',
+      },
+      {
+        id: 'installation',
+        label: 'Installation',
+        section: 'mcp-server',
+      },
+      {
+        id: 'tools',
+        label: 'Available Tools',
+        section: 'mcp-server',
+      },
+      {
+        id: 'usage',
+        label: 'Usage Guide',
+        section: 'mcp-server',
+      },
+      {
+        id: 'troubleshooting',
+        label: 'Troubleshooting',
+        section: 'mcp-server',
+      },
+    ],
   },
 ];
