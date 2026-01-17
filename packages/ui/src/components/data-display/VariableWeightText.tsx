@@ -60,7 +60,7 @@ export const VariableWeightText = ({
     maxWeight = 700,
     duration = 2,
     intensity,
-    fontFamily = 'Clash Display, sans-serif',
+    fontFamily = 'Clash Display',
     className,
     style,
     ...props
@@ -100,21 +100,20 @@ export const VariableWeightText = ({
     return (
         <motion.div
             initial={{
-                fontWeight: minWeight,
                 fontVariationSettings: `'wght' ${minWeight}`
             }}
             animate={{
-                fontWeight: maxWeight,
                 fontVariationSettings: `'wght' ${maxWeight}`
             }}
             transition={{
                 duration: scaledDuration,
                 repeat: Infinity,
                 repeatType: "reverse",
-                ease: [0.45, 0, 0.55, 1], // Custom cubic-bezier for ultra-smooth motion
+                ease: "easeInOut",
             }}
             style={{
                 fontFamily,
+                fontWeight: minWeight, // Fallback
                 textAlign: 'center',
                 width: '100%',
                 willChange: 'font-variation-settings', // GPU acceleration hint

@@ -16,12 +16,12 @@ import { FaultyTerminalPage } from './pages/motion/FaultyTerminalPage';
 import {
   DurationPage,
   EasingPage,
-  VariableWeightPage,
   TypewriterPage,
   MagneticPage
 } from './pages/motion/MotionPlaceholders';
 import { SplashCursorPage } from './pages/motion/SplashCursorPage';
 import { TargetCursorPage } from './pages/motion/TargetCursorPage';
+import { VariableWeightPage } from './pages/motion/VariableWeightPage';
 
 type MotionTab =
   | 'primitives' | 'duration' | 'easing'
