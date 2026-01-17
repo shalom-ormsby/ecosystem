@@ -115,6 +115,19 @@ export default function TargetCursor({
         return () => cancelAnimationFrame(requestRef.current!);
     }, []);
 
+    useEffect(() => {
+        if (isVisible) {
+            const style = document.createElement('style');
+            style.innerHTML = `body, a, button, input, [role="button"] { cursor: none !important; }`;
+            document.head.appendChild(style);
+            return () => {
+                if (document.head.contains(style)) {
+                    document.head.removeChild(style);
+                }
+            };
+        }
+    }, [isVisible]);
+
     // Inline styles for dynamic props
     const styles = {
         cursorInner: {
@@ -168,11 +181,7 @@ export default function TargetCursor({
                     ...styles.cursorInner
                 }}
             />
-            <style jsx global>{`
-                body, a, button, input {
-                    cursor: none !important;
-                }
-            `}</style>
+            {/* Default cursor hidden via useEffect */}
         </>
     );
 }
