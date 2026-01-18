@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CollapsibleCodeBlock, Label, Slider, Switch } from '@sds/ui';
+import { Card, CollapsibleCodeBlock, Label, Slider, Switch, Motion } from '@sds/ui';
 import { MousePointer2 } from 'lucide-react';
-import SplashCursor from '../../examples/splash-cursor/SplashCursor';
+const { SplashCursor } = Motion;
 
 const USAGE_CODE = `import SplashCursor from './SplashCursor';
 

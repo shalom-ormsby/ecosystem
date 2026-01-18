@@ -99,6 +99,10 @@ export * from './components/layout/Separator';
 export * from './components/layout/Sidebar';
 export * from './components/layout/Stack';
 
+// Motion
+export * from './components/cursor/SplashCursor';
+export * from './components/cursor/TargetCursor';
+
 // Providers
 export * from './providers/ThemeProvider';
 
@@ -136,5 +140,6 @@ export * as Overlays from './components/overlays';
 export * as Feedback from './components/feedback';
 export * as DataDisplay from './components/data-display';
 export * as Layout from './components/layout';
+export * as Motion from './components/cursor';
 export * as Providers from './providers';
 export * as Hooks from './hooks';

@@ -1,8 +1,8 @@
 'use client';
 
-import { Card } from '@sds/ui';
+import { Card, Motion } from '@sds/ui';
 import { useRouter } from 'next/navigation';
-import SplashCursor from './examples/splash-cursor/SplashCursor';
+const { SplashCursor } = Motion;
 
 export function CursorsSection() {
     const router = useRouter();
