@@ -2,8 +2,7 @@
 
 import { Card, Backgrounds } from '@sds/ui';
 import { useRouter } from 'next/navigation';
-import FaultyTerminal from './examples/faulty-terminal/FaultyTerminal';
-const { WarpBackground } = Backgrounds;
+const { WarpBackground, FaultyTerminal } = Backgrounds;
 
 export function BackgroundsSection() {
     const router = useRouter();

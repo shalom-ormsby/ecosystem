@@ -67,6 +67,15 @@ export const searchIndex: SearchResult[] = [
     path: '#motion/warp-speed',
     keywords: ['motion', 'background', 'starfield', 'galaxy', 'webgl', 'immersive', 'space'],
   },
+  {
+    id: 'faulty-terminal',
+    title: 'Faulty Terminal',
+    description: 'Retro CRT monitor effect with glitch, scanlines and mouse interaction',
+    type: 'component',
+    category: 'Motion',
+    path: '#motion/faulty-terminal',
+    keywords: ['motion', 'background', 'crt', 'retro', 'glitch', 'terminal', 'scanline', 'cyberpunk'],
+  },
 
   // Atoms
   {

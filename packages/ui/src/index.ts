@@ -101,6 +101,7 @@ export * from './components/layout/Stack';
 
 // Backgrounds
 export * from './components/backgrounds/WarpBackground';
+export * from './components/backgrounds/FaultyTerminal';
 
 // Motion
 export * from './components/cursor/SplashCursor';

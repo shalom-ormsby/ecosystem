@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CollapsibleCodeBlock, Label, Switch, Slider } from '@sds/ui';
+import { Card, CollapsibleCodeBlock, Label, Switch, Slider, Backgrounds } from '@sds/ui';
 import { Terminal } from 'lucide-react';
-import FaultyTerminal from '../../examples/faulty-terminal/FaultyTerminal';
+const { FaultyTerminal } = Backgrounds;
 
-const TERMINAL_CODE = `import FaultyTerminal from './FaultyTerminal';
+const TERMINAL_CODE = `import { Backgrounds } from '@sds/ui';
+const { FaultyTerminal } = Backgrounds;
 
 export default function NotFoundPage() {
   return (
@@ -17,7 +18,7 @@ export default function NotFoundPage() {
         mouseReact={true}
       />
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none">
-        <h1 className="text-9xl font-mono font-bold text-red-500 mb-4 opacity-80">404</h1>
+        <h1 className="text-9xl font-sans font-black text-red-500 mb-4 opacity-80 tracking-tighter">404</h1>
         <p className="text-xl font-mono text-red-400">System Malfunction</p>
       </div>
     </div>
@@ -54,7 +55,7 @@ export function FaultyTerminalPage() {
                             mouseReact={terminalConfig.mouseReact}
                         />
                         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none">
-                            <h1 className="text-9xl font-mono font-bold text-white/90 mb-4 mix-blend-overlay">404</h1>
+                            <h1 className="text-9xl font-sans font-black text-white/90 mb-4 mix-blend-overlay tracking-tighter">404</h1>
                             <div className="bg-black/50 backdrop-blur-md px-4 py-2 rounded border border-white/10">
                                 <p className="text-white font-mono text-sm">System Malfunction_</p>
                             </div>

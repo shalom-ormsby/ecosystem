@@ -67,6 +67,13 @@ ecosystem/
 
 ---
 
+
+## Workflows
+
+We use `.agent/workflows/` to store step-by-step guides for common tasks.
+
+- **[Register New Component](.agent/workflows/register-new-component.md)**: Steps to add a component to the library and Studio.
+
 ## File Organization Rules
 
 **AI agents: Read this carefully.** Disorganized file placement is one of the fastest ways to erode a codebase. Follow these rules strictly.

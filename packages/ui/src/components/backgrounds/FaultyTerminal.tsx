@@ -244,7 +244,7 @@ interface FaultyTerminalProps {
     [key: string]: any;
 }
 
-export default function FaultyTerminal({
+export function FaultyTerminal({
     scale = 1,
     gridMul = [2, 1],
     digitSize = 1.5,
