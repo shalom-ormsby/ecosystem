@@ -1,809 +1,329 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { Card, Button } from '@sds/ui';
-import { CollapsibleCodeBlock } from '@sds/ui';
-import type { SyntaxToken } from '@sds/ui';
-import { baseTokens, motion } from '@sds/ui/tokens';
-import { CheckCircle, XCircle } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Card, Button, Slider, CollapsibleCodeBlock, Switch, Label } from '@sds/ui';
+import { motion, AnimatePresence } from 'framer-motion';
+import { RotateCcw, Play, CheckCircle, XCircle } from 'lucide-react';
+import { baseTokens, motion as motionTokens } from '@sds/ui/tokens';
 
-/**
- * Interactive example component for motion demonstrations
- */
-function MotionExample({
-  duration,
-  easing,
-  label,
-}: {
-  duration: string;
-  easing: string;
-  label: string;
-}) {
-  const [isAnimating, setIsAnimating] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [maxDistance, setMaxDistance] = useState(0);
+// Types for our Motion Playground
+type DurationToken = keyof typeof baseTokens.duration;
+type EasingToken = keyof typeof motionTokens.easing | 'linear';
+type AnimationProperty = 'opacity' | 'scale' | 'x' | 'rotate';
 
+const PROPERTIES: { id: AnimationProperty; label: string }[] = [
+  { id: 'opacity', label: 'Fade' },
+  { id: 'scale', label: 'Scale' },
+  { id: 'x', label: 'Slide' },
+  { id: 'rotate', label: 'Rotate' },
+];
+
+export function PrimitivesSection() {
+  // Playground State
+  const [activeDuration, setActiveDuration] = useState<DurationToken>('normal');
+  const [activeEasing, setActiveEasing] = useState<EasingToken>('default');
+  const [activeProperty, setActiveProperty] = useState<AnimationProperty>('scale');
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [key, setKey] = useState(0); // Force re-render for replay
+
+  // Guide State
+  const [activeTab, setActiveTab] = useState<'duration' | 'easing'>('duration');
+
+  const handleReplay = () => {
+    setKey(k => k + 1);
+    setIsPlaying(true);
+  };
+
+  // Auto-reset playing state after animation
   useEffect(() => {
-    const updateMaxDistance = () => {
-      if (containerRef.current) {
-        // Calculate max travel distance: container width - element width - padding
-        const containerWidth = containerRef.current.offsetWidth;
-        const elementWidth = 48; // w-12 = 48px
-        const padding = 16; // p-4 = 16px on each side
-        setMaxDistance(containerWidth - elementWidth - (padding * 2));
-      }
+    if (isPlaying) {
+      const durationMs = parseInt(baseTokens.duration[activeDuration]);
+      const timer = setTimeout(() => setIsPlaying(false), durationMs + 500); // Buffer
+      return () => clearTimeout(timer);
+    }
+  }, [isPlaying, activeDuration]);
+
+  // Derived animation values
+  const getAnimationProps = () => {
+    const duration = parseInt(baseTokens.duration[activeDuration]) / 1000;
+    // Map token name to actual bezier/string value
+    const easeToken = activeEasing === 'linear' ? 'linear' : motionTokens.easing[activeEasing as keyof typeof motionTokens.easing];
+    // Cast strict string to Easing
+    const ease = easeToken as any; // Framer motion accepts cubic-bezier strings but types are strict
+
+    const variants = {
+      initial: {
+        opacity: activeProperty === 'opacity' ? 0.2 : 1,
+        scale: activeProperty === 'scale' ? 0.5 : 1,
+        x: activeProperty === 'x' ? -50 : 0,
+        rotate: activeProperty === 'rotate' ? -45 : 0,
+      },
+      animate: {
+        opacity: 1,
+        scale: 1,
+        x: activeProperty === 'x' ? 50 : 0,
+        rotate: 0,
+      },
     };
 
-    updateMaxDistance();
-    window.addEventListener('resize', updateMaxDistance);
-    return () => window.removeEventListener('resize', updateMaxDistance);
-  }, []);
-
-  const handleAnimate = () => {
-    setIsAnimating(true);
-    setTimeout(() => setIsAnimating(false), parseInt(duration) + 100);
+    return {
+      variants,
+      initial: 'initial',
+      animate: 'animate',
+      transition: { duration, ease }
+    };
   };
 
   return (
-    <div className="flex items-center gap-4">
-      <div ref={containerRef} className="flex-1 bg-[var(--color-background)] rounded-lg p-4 overflow-hidden">
-        <div
-          className="w-12 h-12 bg-[var(--color-primary)] rounded-lg"
-          style={{
-            transform: isAnimating ? `translateX(${maxDistance}px)` : 'translateX(0)',
-            transition: `transform ${duration} ${easing}`,
-          }}
-        />
-      </div>
-      <Button onClick={handleAnimate} variant="secondary" size="sm">
-        Play
-      </Button>
-    </div>
-  );
-}
-
-export function PrimitivesSection() {
-  const [selectedDuration, setSelectedDuration] = useState<keyof typeof baseTokens.duration>('normal');
-  const [selectedEasing, setSelectedEasing] = useState<keyof typeof motion.easing>('default');
-
-  return (
-    <div className="max-w-5xl mx-auto px-6 py-12">
-      {/* Header */}
+    <div className="max-w-6xl mx-auto px-6 py-12">
       <div className="mb-12">
         <h1 className="text-4xl font-bold mb-4 text-[var(--color-text-primary)]">
           Motion Primitives
         </h1>
-        <p className="text-lg text-[var(--color-text-secondary)] ">
-          Core principles, duration scales, easing curves, and motion preferences that form the foundation of our motion system.
+        <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl">
+          The foundational grammar of Sage's motion language. Compose duration and easing tokens to create fluid, meaningful interactions.
         </p>
       </div>
 
-      {/* Overview Card */}
-      <Card className="p-8 mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-[var(--color-text-primary)]">
-          What is Motion?
-        </h2>
-        <div className="space-y-4 text-[var(--color-text-secondary)]">
-          <p>
-            Motion brings interfaces to life. Our motion system provides a carefully crafted set of durations,
-            easing curves, and components that create smooth, purposeful animations. Use motion to guide attention,
-            provide feedback, and create delightful experiences.
-          </p>
-          <p>
-            Every motion in our design system respects accessibility preferences, particularly <code className="px-2 py-1 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">prefers-reduced-motion</code>,
-            ensuring all users have a comfortable experience.
-          </p>
-        </div>
-      </Card>
+      {/* --- Interactive Playground (Hero) --- */}
+      <Card className="p-0 overflow-hidden mb-16 border-[var(--color-border)] shadow-xl bg-[var(--color-surface)]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[500px]">
 
-      {/* When to Use Motion */}
-      <Card className="p-8 mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-[var(--color-text-primary)]">
-          When to Use Motion
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
-            <h3 className="font-semibold text-[var(--color-text-primary)] mb-3 flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-[var(--color-success)]" />
-              Good Uses
+          {/* Controls Panel (Left) */}
+          <div className="lg:col-span-4 p-6 border-r border-[var(--color-border)] bg-[var(--color-background)]">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-6">
+              Configure Motion
             </h3>
-            <ul className="space-y-2 text-sm text-[var(--color-text-secondary)]">
-              <li>• State changes (hover, active, disabled)</li>
-              <li>• Page transitions and navigation</li>
-              <li>• Drawing attention to important elements</li>
-              <li>• Providing feedback for user actions</li>
-              <li>• Revealing and hiding content</li>
-              <li>• Loading and progress indicators</li>
-            </ul>
-          </div>
-          <div className="p-4 bg-[var(--color-surface)] rounded border border-[var(--color-border)]">
-            <h3 className="font-semibold text-[var(--color-text-primary)] mb-3 flex items-center gap-2">
-              <XCircle className="w-5 h-5 text-[var(--color-error)]" />
-              Avoid
-            </h3>
-            <ul className="space-y-2 text-sm text-[var(--color-text-secondary)]">
-              <li>• Gratuitous animations without purpose</li>
-              <li>• Blocking critical content with motion</li>
-              <li>• Overly long durations (keep it fast)</li>
-              <li>• Animating layout properties (use transform)</li>
-              <li>• Motion that distracts from content</li>
-              <li>• Ignoring reduced motion preferences</li>
-            </ul>
-          </div>
-        </div>
-      </Card>
 
-      {/* Duration Scale */}
-      <Card className="p-8 mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-[var(--color-text-primary)]">
-          Duration Scale
-        </h2>
-        <p className="text-sm text-[var(--color-text-secondary)] mb-6">
-          Consistent timing creates rhythm. Choose durations based on the size and complexity of the animation.
-        </p>
-        <div className="space-y-4">
-          {Object.entries(baseTokens.duration).map(([name, value]) => (
-            <div key={name} className="border-b border-[var(--color-border)] pb-4 last:border-0">
-              <div className="flex items-center justify-between mb-3">
-                <div>
-                  <code className="text-sm font-mono text-[var(--color-primary)] px-2 py-1 bg-[var(--color-surface)] rounded">
-                    {name}
-                  </code>
-                  <span className="ml-3 text-sm text-[var(--color-text-muted)]">{value}</span>
-                </div>
-                <span className="text-xs text-[var(--color-text-muted)]">
-                  {name === 'instant' && 'Immediate feedback'}
-                  {name === 'fast' && 'Micro-interactions'}
-                  {name === 'normal' && 'Standard transitions'}
-                  {name === 'slow' && 'Complex animations'}
-                  {name === 'slower' && 'Dramatic effects'}
-                </span>
+            {/* Property Selector */}
+            <div className="mb-8">
+              <Label className="mb-2 block">Property</Label>
+              <div className="grid grid-cols-2 gap-2">
+                {PROPERTIES.map((prop) => (
+                  <button
+                    key={prop.id}
+                    onClick={() => { setActiveProperty(prop.id); handleReplay(); }}
+                    className={`px-3 py-2 rounded-md text-sm font-medium transition-all ${activeProperty === prop.id
+                      ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)]'
+                      : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-hover)]'
+                      }`}
+                  >
+                    {prop.label}
+                  </button>
+                ))}
               </div>
-              <MotionExample
-                duration={value}
-                easing={motion.easing.default}
-                label={name}
-              />
             </div>
-          ))}
-        </div>
-      </Card>
 
-      {/* Easing Curves */}
-      <Card className="p-8 mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-[var(--color-text-primary)]">
-          Easing Curves
-        </h2>
-        <p className="text-sm text-[var(--color-text-secondary)] mb-6">
-          Easing curves define the acceleration of animations. Different curves create different feelings of motion.
-        </p>
-        <div className="space-y-4">
-          {Object.entries(motion.easing).map(([name, value]) => (
-            <div key={name} className="border-b border-[var(--color-border)] pb-4 last:border-0">
-              <div className="flex items-center justify-between mb-3">
-                <div>
-                  <code className="text-sm font-mono text-[var(--color-primary)] px-2 py-1 bg-[var(--color-surface)] rounded">
-                    {name}
-                  </code>
-                </div>
-                <span className="text-xs text-[var(--color-text-muted)]">
-                  {name === 'default' && 'Natural, decelerating motion'}
-                  {name === 'spring' && 'Playful, bouncy feel'}
-                  {name === 'linear' && 'Constant speed'}
-                </span>
+            {/* Duration Selector */}
+            <div className="mb-8">
+              <Label className="mb-2 block">Duration</Label>
+              <div className="space-y-2">
+                {(Object.keys(baseTokens.duration) as DurationToken[]).map((token) => (
+                  <button
+                    key={token}
+                    onClick={() => { setActiveDuration(token); handleReplay(); }}
+                    className={`w-full px-3 py-2 rounded-md text-sm flex justify-between items-center transition-all ${activeDuration === token
+                      ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)]'
+                      : 'hover:bg-[var(--color-surface-hover)] text-[var(--color-text-secondary)]'
+                      }`}
+                  >
+                    <span className="capitalize">{token}</span>
+                    <span className="opacity-60 font-mono text-xs">{baseTokens.duration[token]}</span>
+                  </button>
+                ))}
               </div>
-              <code className="text-xs font-mono text-[var(--color-text-muted)] block mb-3">
-                {value}
-              </code>
-              <MotionExample
-                duration={baseTokens.duration.normal}
-                easing={value}
-                label={name}
-              />
             </div>
-          ))}
-        </div>
-      </Card>
 
-      {/* Interactive Playground */}
-      <Card className="p-8 mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-[var(--color-text-primary)]">
-          Interactive Playground
-        </h2>
-        <p className="text-sm text-[var(--color-text-secondary)] mb-6">
-          Experiment with different combinations of duration and easing to find the perfect motion.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          {/* Duration Selector */}
-          <div>
-            <label className="block text-sm font-medium text-[var(--color-text-primary)] mb-3">
-              Duration
-            </label>
-            <div className="grid grid-cols-2 gap-2">
-              {Object.entries(baseTokens.duration).map(([name, value]) => (
-                <button
-                  key={name}
-                  onClick={() => setSelectedDuration(name as keyof typeof baseTokens.duration)}
-                  className={`
-                                        px-3 py-2 rounded text-sm transition-all border
-                                        ${selectedDuration === name
-                      ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] border-[var(--color-primary)]'
-                      : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] border-[var(--color-border)]'
-                    }
-                                    `}
-                >
-                  {name}
-                </button>
-              ))}
+            {/* Easing Selector */}
+            <div className="mb-4">
+              <Label className="mb-2 block">Easing</Label>
+              <div className="space-y-2">
+                {['linear', ...Object.keys(motionTokens.easing)].map((token) => (
+                  <button
+                    key={token}
+                    onClick={() => { setActiveEasing(token as EasingToken); handleReplay(); }}
+                    className={`w-full px-3 py-2 rounded-md text-sm flex justify-between items-center transition-all ${activeEasing === token
+                      ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)]'
+                      : 'hover:bg-[var(--color-surface-hover)] text-[var(--color-text-secondary)]'
+                      }`}
+                  >
+                    <span className="capitalize">{token}</span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Easing Selector */}
-          <div>
-            <label className="block text-sm font-medium text-[var(--color-text-primary)] mb-3">
-              Easing
-            </label>
-            <div className="grid grid-cols-2 gap-2">
-              {Object.entries(motion.easing).map(([name]) => (
-                <button
-                  key={name}
-                  onClick={() => setSelectedEasing(name as keyof typeof motion.easing)}
-                  className={`
-                                         px-3 py-2 rounded text-sm transition-all border
-                                         ${selectedEasing === name
-                      ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] border-[var(--color-primary)]'
-                      : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] border-[var(--color-border)]'
-                    }
-                                     `}
-                >
-                  {name}
-                </button>
-              ))}
+          {/* Stage (Right) */}
+          <div className="lg:col-span-8 relative flex flex-col items-center justify-center p-12 bg-grid-pattern">
+            {/* Background Grid Pattern (Pseudo) */}
+            <div className="absolute inset-0 opacity-[0.03]" style={{
+              backgroundImage: 'linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)',
+              backgroundSize: '20px 20px'
+            }}></div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={key}
+                className="w-32 h-32 rounded-2xl bg-gradient-to-br from-[var(--color-primary)] to-purple-600 shadow-2xl flex items-center justify-center relative z-10"
+                {...getAnimationProps()}
+              >
+                <span className="text-white sr-only">Box</span>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Replay Button */}
+            <div className="absolute bottom-8 right-8">
+              <Button onClick={handleReplay} size="lg" className="rounded-full shadow-lg gap-2">
+                <RotateCcw className="w-4 h-4" /> Replay
+              </Button>
+            </div>
+
+            {/* Code Snippet */}
+            <div className="absolute top-8 right-8 left-8 flex justify-center pointer-events-none">
+              <div className="bg-[var(--color-surface)]/90 backdrop-blur border border-[var(--color-border)] rounded-full px-4 py-2 font-mono text-xs text-[var(--color-text-secondary)] shadow-sm">
+                duration: {baseTokens.duration[activeDuration]} • ease: {activeEasing}
+              </div>
             </div>
           </div>
         </div>
-
-        <div className="p-4 bg-[var(--color-background)] rounded border border-[var(--color-border)]">
-          <p className="text-xs font-mono text-[var(--color-text-muted)] mb-4">
-            transition: transform {baseTokens.duration[selectedDuration]} {motion.easing[selectedEasing]}
-          </p>
-          <MotionExample
-            duration={baseTokens.duration[selectedDuration]}
-            easing={motion.easing[selectedEasing]}
-            label="custom"
-          />
-        </div>
       </Card>
 
-      {/* Accessibility */}
-      <Card className="p-8 mb-8 bg-[var(--color-surface)]">
-        <h2 className="text-2xl font-semibold mb-2 text-[var(--color-text-primary)]">
-          Accessibility: Respecting User Preferences
-        </h2>
-        <p className="text-sm text-[var(--color-text-secondary)] mb-4">
-          Always respect the <code className="px-1 py-0.5 bg-[var(--color-background)] rounded text-[var(--color-primary)]">prefers-reduced-motion</code> media query.
-          Some users experience motion sickness or find animations distracting.
-        </p>
-
-        <CollapsibleCodeBlock
-          id="accessibility-motion"
-          code={`/* CSS approach */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-// React Hook approach (recommended)
-import { useMotionPreference } from '@sds/ui';
-
-function MyComponent() {
-  const { shouldAnimate } = useMotionPreference();
-
-  return (
-    <motion.div
-      initial={shouldAnimate ? { opacity: 0, y: 20 } : false}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: shouldAnimate ? 0.3 : 0 }}
-    >
-      Content
-    </motion.div>
-  );
-}`}
-          language="typescript"
-          showCopy={true}
-          defaultCollapsed={false}
-        />
-      </Card>
-
-      {/* Implementation Guide */}
-      <div className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-[var(--color-text-primary)]">
-          Implementation Guide
-        </h2>
-        <div className="space-y-6">
-          {/* CSS/Tailwind */}
-          <Card className="p-6">
-            <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">
-              CSS / Tailwind
-            </h3>
-            <p className="text-sm text-[var(--color-text-secondary)] mb-4">
-              For simple transitions and states, use CSS transitions with our motion tokens.
-            </p>
-
-            <CollapsibleCodeBlock
-              id="css-tailwind-motion"
-              code={`/* Using CSS custom properties */
-.button {
-  transition: all var(--duration-normal) var(--ease-default);
-}
-
-/* Using Tailwind */
-<button className="transition-all duration-300 ease-out hover:scale-105">
-  Hover me
-</button>`}
-              language="css"
-              showCopy={true}
-              defaultCollapsed={false}
-            />
-          </Card>
-
-          {/* Framer Motion */}
-          <Card className="p-6">
-            <div className="flex items-start justify-between mb-2">
-              <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">
-                Framer Motion
-              </h3>
-              <span className="text-xs px-2 py-1 bg-[var(--color-primary)] text-[var(--color-primary-foreground)] rounded">
-                Recommended
-              </span>
-            </div>
-            <a
-              href="https://motion.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-[var(--color-primary)] hover:underline inline-block mb-3"
+      {/* --- Documentation Guide (Below Fold) --- */}
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
+        {/* Navigation Tabs (Sticky) */}
+        <div className="md:col-span-3">
+          <div className="sticky top-24 space-y-2">
+            <button
+              onClick={() => setActiveTab('duration')}
+              className={`text-left w-full px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'duration' ? 'bg-[var(--color-surface)] text-[var(--color-primary)]' : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+                }`}
             >
-              motion.dev →
-            </a>
-            <p className="text-sm text-[var(--color-text-secondary)] mb-4">
-              Framer Motion is our recommended animation library for React. It provides declarative animations,
-              gesture support, and excellent TypeScript integration.
-            </p>
-            <div className="space-y-4">
-              <div>
-                <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-2">
-                  When to use Framer Motion:
-                </p>
-                <ul className="text-sm text-[var(--color-text-secondary)] space-y-1 ml-4">
-                  <li>• Component animations and transitions</li>
-                  <li>• Page transitions in React apps</li>
-                  <li>• Gesture-based interactions (drag, swipe)</li>
-                  <li>• Layout animations and shared element transitions</li>
-                  <li>• When you need React-aware animations</li>
-                </ul>
-              </div>
-
-              <CollapsibleCodeBlock
-                id="framer-motion-basics"
-                code={`import { motion } from 'framer-motion';
-
-// Basic animation
-<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{
-    duration: 0.3, // 300ms = normal
-    ease: [0, 0, 0.2, 1] // ease-out
-  }}
->
-  Content
-</motion.div>
-
-// Using design system tokens
-<motion.button
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
-  transition={{
-    duration: 0.15, // fast
-    ease: [0.16, 1, 0.3, 1] // spring
-  }}
->
-  Click me
-</motion.button>`}
-                language="typescript"
-                showCopy={true}
-                defaultCollapsed={false}
-              />
-            </div>
-          </Card>
-
-          {/* GSAP */}
-          <Card className="p-6">
-            <div className="flex items-start justify-between mb-2">
-              <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">
-                GSAP (GreenSock Animation Platform)
-              </h3>
-              <span className="text-xs px-2 py-1 bg-[var(--color-surface)] text-[var(--color-text-primary)] rounded border border-[var(--color-border)]">
-                Specialized
-              </span>
-            </div>
-            <a
-              href="https://gsap.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-[var(--color-primary)] hover:underline inline-block mb-3"
+              Duration Scale
+            </button>
+            <button
+              onClick={() => setActiveTab('easing')}
+              className={`text-left w-full px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'easing' ? 'bg-[var(--color-surface)] text-[var(--color-primary)]' : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+                }`}
             >
-              gsap.com →
-            </a>
-            <p className="text-sm text-[var(--color-text-secondary)] mb-4">
-              GSAP is the industry-standard animation library for complex, timeline-based animations.
-              Use it when you need precise control or advanced animation sequences.
-            </p>
-            <div className="space-y-4">
-              <div>
-                <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-2">
-                  When to use GSAP:
-                </p>
-                <ul className="text-sm text-[var(--color-text-secondary)] space-y-1 ml-4">
-                  <li>• Complex animation timelines and sequences</li>
-                  <li>• SVG animations and morphing</li>
-                  <li>• Scroll-triggered animations (ScrollTrigger)</li>
-                  <li>• When you need maximum performance</li>
-                  <li>• Framework-agnostic animations</li>
-                </ul>
-              </div>
-
-              <CollapsibleCodeBlock
-                id="gsap-basics"
-                code={`import { gsap } from 'gsap';
-
-// Basic animation
-gsap.to('.element', {
-  opacity: 1,
-  y: 0,
-  duration: 0.3, // 300ms = normal
-  ease: 'power2.out' // Similar to ease-out
-});
-
-// Timeline sequence
-const tl = gsap.timeline();
-tl.to('.hero', { opacity: 1, duration: 0.5 })
-  .to('.cta', { scale: 1, duration: 0.15 }, '-=0.2')
-  .to('.features', {
-    y: 0,
-    stagger: 0.1, // Stagger items
-    duration: 0.3
-  });`}
-                language="javascript"
-                showCopy={true}
-                defaultCollapsed={false}
-              />
-            </div>
-          </Card>
-        </div>
-      </div>
-
-      {/* Framer Motion Integration */}
-      <div>
-        <h2 className="text-2xl font-semibold mb-4 text-[var(--color-text-primary)]">
-          Framer Motion Integration
-        </h2>
-        <p className="text-sm text-[var(--color-text-secondary)] mb-6">
-          Pre-built animation variants and presets for Framer Motion. Import from{' '}
-          <code className="px-1 py-0.5 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">
-            @sds/ui/utils
-          </code>
-        </p>
-
-        {/* Animation Variants Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          {/* Fade Variants */}
-          <Card className="p-6">
-            <h3 className="font-medium text-[var(--color-text-primary)] mb-3">Fade Variants</h3>
-            <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-              Simple opacity transitions
-            </p>
-            <CollapsibleCodeBlock
-              id="fade-variants"
-              code={`import { fadeVariants } from '@sds/ui/utils';
-
-<motion.div
-  initial="hidden"
-  animate="visible"
-  variants={fadeVariants}
->
-  Content
-</motion.div>`}
-              language="typescript"
-              showCopy={true}
-              defaultCollapsed={true}
-            />
-          </Card>
-
-          {/* Slide Variants */}
-          <Card className="p-6">
-            <h3 className="font-medium text-[var(--color-text-primary)] mb-3">Slide Variants</h3>
-            <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-              Slide in from: Left, Right, Top, Bottom
-            </p>
-            <CollapsibleCodeBlock
-              id="slide-variants"
-              code={`import { slideVariants } from '@sds/ui/utils';
-
-<motion.div
-  initial="hidden"
-  animate="visible"
-  variants={slideVariants.fromBottom}
->
-  Content
-</motion.div>`}
-              language="typescript"
-              showCopy={true}
-              defaultCollapsed={true}
-            />
-          </Card>
-
-          {/* Scale Variants */}
-          <Card className="p-6">
-            <h3 className="font-medium text-[var(--color-text-primary)] mb-3">Scale Variants</h3>
-            <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-              Default, Grow, Pop effects
-            </p>
-            <CollapsibleCodeBlock
-              id="scale-variants"
-              code={`import { scaleVariants } from '@sds/ui/utils';
-
-<motion.div
-  initial="hidden"
-  animate="visible"
-  variants={scaleVariants.pop}
->
-  Content
-</motion.div>`}
-              language="typescript"
-              showCopy={true}
-              defaultCollapsed={true}
-            />
-          </Card>
-
-          {/* Modal Variants */}
-          <Card className="p-6">
-            <h3 className="font-medium text-[var(--color-text-primary)] mb-3">Modal Variants</h3>
-            <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-              Overlay + Content animations
-            </p>
-            <CollapsibleCodeBlock
-              id="modal-variants"
-              code={`import { modalVariants } from '@sds/ui/utils';
-
-<motion.div variants={modalVariants.overlay}>
-  <motion.div variants={modalVariants.content}>
-    Modal content
-  </motion.div>
-</motion.div>`}
-              language="typescript"
-              showCopy={true}
-              defaultCollapsed={true}
-            />
-          </Card>
-
-          {/* Rotate Variants */}
-          <Card className="p-6">
-            <h3 className="font-medium text-[var(--color-text-primary)] mb-3">Rotate Variants</h3>
-            <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-              Rotation animations with fade
-            </p>
-            <CollapsibleCodeBlock
-              id="rotate-variants"
-              code={`import { rotateVariants } from '@sds/ui/utils';
-
-<motion.div
-  initial="hidden"
-  animate="visible"
-  variants={rotateVariants}
->
-  Content
-</motion.div>`}
-              language="typescript"
-              showCopy={true}
-              defaultCollapsed={true}
-            />
-          </Card>
-
-          {/* Drawer Variants */}
-          <Card className="p-6">
-            <h3 className="font-medium text-[var(--color-text-primary)] mb-3">Drawer Variants</h3>
-            <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-              Slide-out panels from: Left, Right, Top, Bottom
-            </p>
-            <CollapsibleCodeBlock
-              id="drawer-variants"
-              code={`import { drawerVariants } from '@sds/ui/utils';
-
-<motion.div
-  initial="hidden"
-  animate="visible"
-  variants={drawerVariants.fromRight}
->
-  Drawer content
-</motion.div>`}
-              language="typescript"
-              showCopy={true}
-              defaultCollapsed={true}
-            />
-          </Card>
-
-          {/* Collapse Variants */}
-          <Card className="p-6">
-            <h3 className="font-medium text-[var(--color-text-primary)] mb-3">Collapse Variants</h3>
-            <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-              Height-based expand/collapse for accordions
-            </p>
-            <CollapsibleCodeBlock
-              id="collapse-variants"
-              code={`import { collapseVariants } from '@sds/ui/utils';
-
-<motion.div
-  initial="collapsed"
-  animate="expanded"
-  variants={collapseVariants}
->
-  Collapsible content
-</motion.div>`}
-              language="typescript"
-              showCopy={true}
-              defaultCollapsed={true}
-            />
-          </Card>
+              Easing Curves
+            </button>
+          </div>
         </div>
 
-        {/* Complete Presets */}
-        <Card className="p-6 mb-6">
-          <h3 className="font-medium text-[var(--color-text-primary)] mb-3">Complete Presets</h3>
-          <p className="text-sm text-[var(--color-text-secondary)] mb-4">
-            Ready-to-use animation configurations with variants + transitions included:
-          </p>
-          <div className="space-y-4">
-            <div className="bg-[var(--color-surface)] p-4 rounded">
-              <p className="text-sm font-medium text-[var(--color-text-primary)] mb-2">
-                Available Presets
+        {/* Content Area */}
+        <div className="md:col-span-9">
+          {activeTab === 'duration' ? (
+            <div className="space-y-8 fade-in">
+              <h2 className="text-2xl font-bold text-[var(--color-text-primary)]">Duration Scale</h2>
+              <p className="text-[var(--color-text-secondary)]">
+                Timing is the heartbeat of interface motion. We use a restricted scale to maintain consistency. Faster durations are for small changes and utility; slower durations are for emphasis and complex transitions.
               </p>
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                <div className="flex items-center gap-2">
-                  <code className="text-[var(--color-primary)] font-mono">presets.fade</code>
-                </div>
-                <div className="flex items-center gap-2">
-                  <code className="text-[var(--color-primary)] font-mono">presets.slideUp</code>
-                </div>
-                <div className="flex items-center gap-2">
-                  <code className="text-[var(--color-primary)] font-mono">presets.scale</code>
-                </div>
-                <div className="flex items-center gap-2">
-                  <code className="text-[var(--color-primary)] font-mono">presets.modal</code>
-                </div>
-                <div className="flex items-center gap-2">
-                  <code className="text-[var(--color-primary)] font-mono">presets.list</code>
-                </div>
+
+              <div className="grid gap-6">
+                {(Object.entries(baseTokens.duration) as [DurationToken, string][]).map(([name, value]) => (
+                  <Card key={name} className="p-6 hover:border-[var(--color-primary)] transition-colors group">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <span className="text-lg font-bold capitalize">{name}</span>
+                        <code className="text-xs bg-[var(--color-surface)] px-2 py-1 rounded border border-[var(--color-border)]">{value}</code>
+                      </div>
+                      <div className="h-1 w-24 bg-[var(--color-surface)] rounded-full overflow-hidden">
+                        <motion.div
+                          className="h-full bg-[var(--color-primary)]"
+                          initial={{ width: 0 }}
+                          whileInView={{ width: '100%' }}
+                          transition={{
+                            duration: parseInt(value) / 1000,
+                            repeat: Infinity,
+                            repeatDelay: 1,
+                            ease: 'linear'
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <p className="text-sm text-[var(--color-text-secondary)]">
+                      {name === 'instant' && "Used for immediate feedback where delay would feel unresponsive."}
+                      {name === 'fast' && "Best for micro-interactions like button hovers, toggles, and small scale changes."}
+                      {name === 'normal' && "The workhorse of the system. Use for modal opens, drawer slides, and major state changes."}
+                      {name === 'slow' && "For large layout shifts or transitions that require the user to follow the path of motion."}
+                      {name === 'slower' && "Reserved for background effects, emotional moments, or brand-specific storytelling."}
+                    </p>
+                  </Card>
+                ))}
               </div>
             </div>
-            <CollapsibleCodeBlock
-              id="complete-presets"
-              code={`import { presets } from '@sds/ui/utils';
+          ) : (
+            <div className="space-y-8 fade-in">
+              <h2 className="text-2xl font-bold text-[var(--color-text-primary)]">Easing Curves</h2>
+              <p className="text-[var(--color-text-secondary)]">
+                In the real world, nothing starts or stops instantly. Easing curves mimic the physics of the physical world, giving weight and momentum to digital objects.
+              </p>
 
-// Simple fade animation
-<motion.div {...presets.fade}>
-  Fades in
-</motion.div>
+              <div className="grid gap-6">
+                {/* Default Easing */}
+                <Card className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h3 className="text-lg font-bold mb-1">Default</h3>
+                      <code className="text-xs text-[var(--color-text-muted)]">{motionTokens.easing.default}</code>
+                    </div>
+                    <div className="bg-[var(--color-surface)] p-2 rounded">
+                      <motion.div
+                        className="w-8 h-8 bg-[var(--color-primary)] rounded-full"
+                        animate={{ x: [0, 100, 0] }}
+                        transition={{ duration: 2, ease: motionTokens.easing.default as any, repeat: Infinity }}
+                      />
+                    </div>
+                  </div>
+                  <p className="text-sm text-[var(--color-text-secondary)]">
+                    A standard "ease-out" curve. Objects start quickly and decelerate smoothly as they reach their destination. Use this for 80% of UI transitions (entering elements, moving items).
+                  </p>
+                </Card>
 
-// Slide up animation
-<motion.div {...presets.slideUp}>
-  Slides up from bottom
-</motion.div>
+                {/* Spring Easing */}
+                <Card className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h3 className="text-lg font-bold mb-1">Spring</h3>
+                      <code className="text-xs text-[var(--color-text-muted)]">{motionTokens.easing.spring}</code>
+                    </div>
+                    <div className="bg-[var(--color-surface)] p-2 rounded">
+                      <motion.div
+                        className="w-8 h-8 bg-[var(--color-primary)] rounded-full"
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{ duration: 1.5, ease: motionTokens.easing.spring as any, repeat: Infinity }}
+                      />
+                    </div>
+                  </div>
+                  <p className="text-sm text-[var(--color-text-secondary)]">
+                    An animated curve that overshoots its target slightly before settling. Creates a "bouncy," playful, and responsive feel. Great for success states, notifications, and delight moments.
+                  </p>
+                </Card>
 
-// Staggered list animation
-<motion.ul {...presets.list.container}>
-  {items.map(item => (
-    <motion.li key={item.id} {...presets.list.item}>
-      {item.name}
-    </motion.li>
-  ))}
-</motion.ul>`}
-              language="typescript"
-              showCopy={true}
-              defaultCollapsed={true}
-            />
-          </div>
-        </Card>
-
-        {/* Custom Animation Helper */}
-        <Card className="p-6">
-          <h3 className="font-medium text-[var(--color-text-primary)] mb-3">Create Custom Animations</h3>
-          <p className="text-sm text-[var(--color-text-secondary)] mb-4">
-            Use the <code className="px-1 py-0.5 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">createAnimation</code> helper to build custom variants:
-          </p>
-          <CollapsibleCodeBlock
-            id="custom-animations"
-            code={`import { createAnimation, transitions, easings } from '@sds/ui/utils';
-
-const customAnimation = createAnimation(
-  {
-    hidden: { opacity: 0, scale: 0.8, rotate: -10 },
-    visible: { opacity: 1, scale: 1, rotate: 0 },
-  },
-  transitions.bounce
-);
-
-<motion.div {...customAnimation}>
-  Custom bouncy fade-in with rotation
-</motion.div>`}
-            language="typescript"
-            showCopy={true}
-            defaultCollapsed={true}
-          />
-        </Card>
-
-        {/* CollapsibleCodeBlock Example */}
-        <Card className="p-6 mt-8">
-          <h3 className="font-medium text-[var(--color-text-primary)] mb-3">CollapsibleCodeBlock Component</h3>
-          <p className="text-sm text-[var(--color-text-secondary)] mb-4">
-            Use the <code className="px-1 py-0.5 bg-[var(--color-surface)] rounded text-[var(--color-primary)]">CollapsibleCodeBlock</code> component for reusable, syntax-highlighted code blocks with smooth animations:
-          </p>
-
-          <CollapsibleCodeBlock
-            id="example-usage"
-            title="Example Usage"
-            code={[
-              { text: 'import', type: 'keyword' },
-              { text: ' { ', type: 'plain' },
-              { text: 'CollapsibleCodeBlock', type: 'className' },
-              { text: ' } ', type: 'plain' },
-              { text: 'from', type: 'keyword' },
-              { text: ' ', type: 'plain' },
-              { text: "'@sds/ui'", type: 'string' },
-              { text: ';', type: 'punctuation' },
-              { text: '\n\n', type: 'plain' },
-              { text: 'const', type: 'keyword' },
-              { text: ' codeTokens ', type: 'plain' },
-              { text: '=', type: 'operator' },
-              { text: ' [', type: 'punctuation' },
-              { text: '\n  ', type: 'plain' },
-              { text: '{ ', type: 'punctuation' },
-              { text: 'text', type: 'property' },
-              { text: ': ', type: 'punctuation' },
-              { text: '"const"', type: 'string' },
-              { text: ', ', type: 'punctuation' },
-              { text: 'type', type: 'property' },
-              { text: ': ', type: 'punctuation' },
-              { text: '"keyword"', type: 'string' },
-              { text: ' }', type: 'punctuation' },
-              { text: ',', type: 'punctuation' },
-              { text: '\n  ', type: 'plain' },
-              { text: '{ ', type: 'punctuation' },
-              { text: 'text', type: 'property' },
-              { text: ': ', type: 'punctuation' },
-              { text: '" example "', type: 'string' },
-              { text: ', ', type: 'punctuation' },
-              { text: 'type', type: 'property' },
-              { text: ': ', type: 'punctuation' },
-              { text: '"plain"', type: 'string' },
-              { text: ' }', type: 'punctuation' },
-              { text: '\n];', type: 'punctuation' },
-              { text: '\n\n', type: 'plain' },
-              { text: '<', type: 'tag' },
-              { text: 'CollapsibleCodeBlock', type: 'className' },
-              { text: '\n  ', type: 'plain' },
-              { text: 'id', type: 'attribute' },
-              { text: '=', type: 'operator' },
-              { text: '"my-code"', type: 'string' },
-            ]}
-            language="tsx"
-            showCopy={true}
-            defaultCollapsed={false}
-          />
-        </Card>
+                {/* Linear Easing */}
+                <Card className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h3 className="text-lg font-bold mb-1">Linear</h3>
+                      <code className="text-xs text-[var(--color-text-muted)]">linear</code>
+                    </div>
+                    <div className="bg-[var(--color-surface)] p-2 rounded">
+                      <motion.div
+                        className="w-8 h-8 bg-[var(--color-primary)] rounded-full"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 2, ease: "linear", repeat: Infinity }}
+                      />
+                    </div>
+                  </div>
+                  <p className="text-sm text-[var(--color-text-secondary)]">
+                    Constant velocity with no acceleration. Feels mechanical. Use ONLY for continuous loops (like spinners) or opacity fades where acceleration isn't noticeable.
+                  </p>
+                </Card>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

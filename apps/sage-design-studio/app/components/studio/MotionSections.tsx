@@ -13,12 +13,6 @@ import { MicroInteractionsSection } from './MicroInteractionsSection';
 // Detail Pages
 import { WarpSpeedPage } from './pages/motion/WarpSpeedPage';
 import { FaultyTerminalPage } from './pages/motion/FaultyTerminalPage';
-import { DurationPage } from './pages/motion/DurationPage';
-import { EasingPage } from './pages/motion/EasingPage';
-import {
-  TypewriterPage,
-  MagneticPage
-} from './pages/motion/MotionPlaceholders';
 import { SplashCursorPage } from './pages/motion/SplashCursorPage';
 import { TargetCursorPage } from './pages/motion/TargetCursorPage';
 import { VariableWeightPage } from './pages/motion/VariableWeightPage';
@@ -63,13 +57,14 @@ export function MotionSections({ activeItemId, breadcrumbs, onItemChange }: Moti
       <div className="mt-4">
         {/* Primitives */}
         {activeTab === 'primitives' && <PrimitivesSection />}
-        {activeTab === 'duration' && <DurationPage />}
-        {activeTab === 'easing' && <EasingPage />}
+        {activeTab === 'duration' && <PrimitivesSection />} {/* Redirect old duration tab */}
+        {activeTab === 'easing' && <PrimitivesSection />} {/* Redirect old easing tab */}
 
         {/* Text Effects */}
         {activeTab === 'text-effects' && <TextEffectsSection />}
         {activeTab === 'variable-weight' && <VariableWeightPage />}
-        {activeTab === 'typewriter' && <TypewriterPage />}
+
+        {/* Typewriter placeholder removed */}
 
         {/* Backgrounds */}
         {activeTab === 'backgrounds' && <BackgroundsSection />}
@@ -83,7 +78,7 @@ export function MotionSections({ activeItemId, breadcrumbs, onItemChange }: Moti
 
         {/* Micro Interactions */}
         {activeTab === 'micro-interactions' && <MicroInteractionsSection />}
-        {activeTab === 'magnetic' && <MagneticPage />}
+        {/* Magnetic placeholder removed */}
       </div>
     </div>
   );
