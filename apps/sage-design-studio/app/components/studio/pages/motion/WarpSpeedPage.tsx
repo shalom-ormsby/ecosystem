@@ -58,7 +58,7 @@ export function WarpSpeedPage() {
                         {/* Overlay Content Example */}
                         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none">
                             <h3 className="text-4xl font-bold text-white tracking-tight mb-2 opacity-90">
-                                Starfield
+                                Warp Speed
                             </h3>
                             <p className="text-indigo-200 text-sm font-mono opacity-70">
                                 Interactive WebGL Background

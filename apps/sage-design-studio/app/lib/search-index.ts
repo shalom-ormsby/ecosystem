@@ -58,6 +58,15 @@ export const searchIndex: SearchResult[] = [
     path: 'tokens-motion',
     keywords: ['animation', 'transition', 'duration', 'easing', 'motion'],
   },
+  {
+    id: 'warp-speed',
+    title: 'Warp Speed',
+    description: 'Immersive 3D starfield warp effect using WebGL',
+    type: 'component',
+    category: 'Motion',
+    path: '#motion/warp-speed',
+    keywords: ['motion', 'background', 'starfield', 'galaxy', 'webgl', 'immersive', 'space'],
+  },
 
   // Atoms
   {

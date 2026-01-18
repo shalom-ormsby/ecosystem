@@ -112,7 +112,7 @@ export const navigationTree: NavigationItem[] = [
         label: 'Backgrounds',
         section: 'motion',
         children: [
-          { id: 'galaxy', label: 'Galaxy', section: 'motion' },
+          { id: 'warp-speed', label: 'Warp Speed', section: 'motion' },
           { id: 'faulty-terminal', label: 'Faulty Terminal', section: 'motion' },
         ],
       },
