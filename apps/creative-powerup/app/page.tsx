@@ -1,5 +1,7 @@
 import { experiments } from '@/lib/experiments';
 import { ExperimentCard } from '@/components/ExperimentCard';
+import { Button } from '@sds/ui';
+import Link from 'next/link';
 
 export default function HomePage() {
   return (
@@ -31,13 +33,12 @@ export default function HomePage() {
           <p className="text-foreground/70 mb-6">
             The sandbox is open to everyone. Add your experiment, game, visualization, or tool to the collection.
           </p>
-          <a
-            href="/contribute"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium"
-          >
-            <span>+</span>
-            <span>Create Your First Experiment</span>
-          </a>
+          <Button asChild size="lg" className="rounded-lg font-medium">
+            <Link href="/contribute">
+              <span className="mr-2">+</span>
+              <span>Create Your First Experiment</span>
+            </Link>
+          </Button>
         </div>
       </div>
     </div>

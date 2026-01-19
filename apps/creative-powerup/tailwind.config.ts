@@ -1,22 +1,17 @@
 import type { Config } from "tailwindcss";
+import path from "path";
 
 const config: Config = {
+  presets: [require("@sds/config/tailwind")],
   content: [
+    path.join(__dirname, "../../packages/ui/src/**/*.{js,ts,jsx,tsx}"),
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./lib/**/*.{js,ts,jsx,tsx,mdx}",
-    "../../design-system/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'class',
   theme: {
-    extend: {
-      colors: {
-        background: "var(--color-background)",
-        "background-secondary": "var(--color-background-secondary)",
-        foreground: "var(--color-foreground)",
-        primary: "var(--color-primary)",
-        accent: "var(--color-accent)",
-      },
-    },
+    extend: {},
   },
   plugins: [],
 };

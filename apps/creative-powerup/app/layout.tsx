@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { ThemeProvider, CustomizerPanel } from '@sds/ui';
+import { ThemeProvider, CustomizerPanel, Button } from '@sds/ui';
 import { allFontVariables } from '@/lib/fonts';
 import Link from 'next/link';
 import { Analytics } from '@vercel/analytics/next';
@@ -62,13 +62,12 @@ export default function RootLayout({
                   >
                     🔧 Tools
                   </Link>
-                  <Link
-                    href="/contribute"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors text-sm font-medium"
-                  >
-                    <span>+</span>
-                    <span>Create</span>
-                  </Link>
+                  <Button asChild variant="secondary" size="sm" className="bg-primary/10 text-primary hover:bg-primary/20">
+                    <Link href="/contribute">
+                      <span className="mr-2">+</span>
+                      <span>Create</span>
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </div>

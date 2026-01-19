@@ -1,6 +1,8 @@
 import { getExperimentsByCategory, categories } from '@/lib/experiments';
 import { ExperimentCard } from './ExperimentCard';
 import type { ExperimentCategory } from '@/lib/types';
+import { Button } from '@sds/ui';
+import Link from 'next/link';
 
 interface CategoryPageProps {
   category: ExperimentCategory;
@@ -39,13 +41,12 @@ export function CategoryPage({ category }: CategoryPageProps) {
           <p className="text-foreground/50 mb-6">
             No {category} yet. Be the first to create one!
           </p>
-          <a
-            href="/contribute"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium"
-          >
-            <span>+</span>
-            <span>Create New</span>
-          </a>
+          <Button asChild size="lg" className="rounded-lg font-medium">
+            <Link href="/contribute">
+              <span className="mr-2">+</span>
+              <span>Create New</span>
+            </Link>
+          </Button>
         </div>
       )}
     </div>

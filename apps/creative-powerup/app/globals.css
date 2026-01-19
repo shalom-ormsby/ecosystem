@@ -2,118 +2,165 @@
 @tailwind components;
 @tailwind utilities;
 
-/**
- * Theme CSS Variables
- * Dynamically set by ThemeProvider based on active theme/mode
- */
-:root {
-  /* Default Studio theme colors (overridden by ThemeProvider) */
-  --color-background: #ffffff;
-  --color-background-secondary: #fafafa;
-  --color-foreground: #0a0a0a;
-  --color-primary: #0a0a0a;
-  --color-accent: #0070f3;
-  --color-glass-border: rgba(0, 0, 0, 0.1);
+@layer base {
+  :root {
+    --color-background: #ffffff;
+    --color-background-secondary: #fafafa;
+    --color-background-tertiary: #f5f5f5;
+    --color-foreground: #0a0a0a;
+    --color-text-secondary: #525252;
+    --color-text-muted: #a3a3a3;
 
-  /* Effects */
-  --effect-blur-sm: blur(4px);
-  --effect-blur-md: blur(8px);
-  --effect-blur-lg: blur(16px);
-  --effect-blur-xl: blur(24px);
+    --color-primary: #0a0a0a;
+    --color-primary-foreground: #ffffff;
 
-  --effect-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --effect-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --effect-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --color-secondary: #f5f5f5;
+    --color-secondary-foreground: #0a0a0a;
 
-  /* Typography - Defaults (overridden by ThemeProvider) */
-  --font-heading: var(--font-studio-heading);
-  --font-body: var(--font-studio-body);
-  --font-mono: var(--font-studio-mono);
+    --color-accent: #0070f3;
+    --color-accent-foreground: #ffffff;
 
-  /* Motion */
-  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+    --color-destructive: #ef4444;
+    --color-destructive-foreground: #ffffff;
 
-  /* Legacy variables for backwards compatibility */
-  --foreground: var(--color-foreground);
-  --background: var(--color-background);
+    --color-muted: #f5f5f5;
+    --color-muted-foreground: #737373;
+
+    --color-popover: #ffffff;
+    --color-popover-foreground: #0a0a0a;
+
+    --color-card: #ffffff;
+    --color-card-foreground: #0a0a0a;
+
+    --color-success: #00a86b;
+    --color-success-foreground: #ffffff;
+
+    --color-warning: #f59e0b;
+    --color-warning-foreground: #ffffff;
+
+    --color-error: #ef4444;
+    --color-error-foreground: #ffffff;
+
+    --color-info: #0070f3;
+    --color-info-foreground: #ffffff;
+
+    --color-surface: #fafafa;
+    --color-border: #d4d4d4;
+    --color-input: #d4d4d4;
+    --color-ring: #0a0a0a;
+
+    --color-glass: rgba(255, 255, 255, 0.7);
+    --color-glass-border: rgba(0, 0, 0, 0.1);
+
+    --radius: 0.5rem;
+    
+    /* Effects */
+    --effect-blur-sm: blur(4px);
+    --effect-blur-md: blur(8px);
+    --effect-blur-lg: blur(16px);
+    --effect-blur-xl: blur(24px);
+
+    --effect-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --effect-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --effect-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --effect-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+    /* Fonts mapping for compatibility */
+    --font-heading: var(--font-studio-heading);
+    --font-body: var(--font-studio-body);
+    --font-mono: var(--font-studio-mono);
+  }
+
+  .dark {
+    --color-background: #000000;
+    --color-background-secondary: #171717;
+    --color-background-tertiary: #262626;
+    --color-foreground: #fafafa;
+    --color-text-secondary: #a3a3a3;
+    --color-text-muted: #858585;
+
+    --color-primary: #ffffff;
+    --color-primary-foreground: #0a0a0a;
+
+    --color-secondary: #262626;
+    --color-secondary-foreground: #fafafa;
+
+    --color-accent: #0090ff;
+    --color-accent-foreground: #ffffff;
+
+    --color-destructive: #ef4444;
+    --color-destructive-foreground: #ffffff;
+
+    --color-muted: #262626;
+    --color-muted-foreground: #a3a3a3;
+
+    --color-popover: #0a0a0a;
+    --color-popover-foreground: #fafafa;
+
+    --color-card: #0a0a0a;
+    --color-card-foreground: #fafafa;
+
+    --color-success: #10b981;
+    --color-success-foreground: #ffffff;
+
+    --color-warning: #f59e0b;
+    --color-warning-foreground: #ffffff;
+
+    --color-error: #ef4444;
+    --color-error-foreground: #ffffff;
+
+    --color-info: #0090ff;
+    --color-info-foreground: #ffffff;
+
+    --color-surface: #171717;
+    --color-border: #404040;
+    --color-input: #404040;
+    --color-ring: #d4d4d4;
+
+    --color-glass: rgba(0, 0, 0, 0.7);
+    --color-glass-border: rgba(255, 255, 255, 0.1);
+  }
 }
 
-/**
- * Theme Transitions
- * Smooth fade between themes (300-400ms)
- */
-:root.theme-transitioning {
-  transition: background-color 300ms var(--ease-default),
-              color 300ms var(--ease-default);
+html.dark {
+  background-color: black;
 }
 
-:root.theme-transitioning * {
-  transition: background-color 300ms var(--ease-default),
-              color 300ms var(--ease-default),
-              border-color 300ms var(--ease-default);
+@layer base {
+  body {
+    font-family: var(--font-body), system-ui, sans-serif;
+    @apply bg-background text-foreground;
+  }
+
+  h1, h2, h3, h4, h5, h6, strong {
+    font-family: var(--font-heading), system-ui, sans-serif;
+  }
+
+  /* Apply border color globally */
+  * {
+    @apply border-border;
+  }
 }
 
-body {
-  color: var(--color-foreground);
-  background: var(--color-background);
-  font-family: var(--font-body);
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
-/**
- * Automatic Heading Typography
- * All headings use the theme's heading font
- */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+/* Code block styling */
+pre {
+  @apply rounded-lg overflow-x-auto;
 }
 
-/**
- * Theme-Specific Typography Attributes
- * Set via data-theme attribute on html element
- */
-
-/* Studio: Clean, tight spacing, medium weight */
-[data-theme="studio"] h1,
-[data-theme="studio"] h2,
-[data-theme="studio"] h3 {
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-/* Sage: Elegant serif headings, relaxed spacing */
-[data-theme="sage"] h1,
-[data-theme="sage"] h2,
-[data-theme="sage"] h3 {
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-[data-theme="sage"] body,
-[data-theme="sage"] p {
-  letter-spacing: 0.01em;
-}
-
-/* Volt: Bold, tight spacing, high contrast */
-[data-theme="volt"] h1,
-[data-theme="volt"] h2,
-[data-theme="volt"] h3 {
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  text-transform: none;
-}
-
-[data-theme="volt"] body,
-[data-theme="volt"] p {
-  font-weight: 400;
-  letter-spacing: 0;
+code {
+  @apply font-mono text-sm;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
-
+  
   /* Font family utilities */
   .font-heading {
     font-family: var(--font-heading);
