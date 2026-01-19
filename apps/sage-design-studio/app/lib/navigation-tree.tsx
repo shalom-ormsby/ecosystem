@@ -93,10 +93,6 @@ export const navigationTree: NavigationItem[] = [
         id: 'primitives',
         label: 'Primitives',
         section: 'motion',
-        children: [
-          { id: 'duration', label: 'Duration', section: 'motion' },
-          { id: 'easing', label: 'Easing', section: 'motion' },
-        ],
       },
       {
         id: 'text-effects',

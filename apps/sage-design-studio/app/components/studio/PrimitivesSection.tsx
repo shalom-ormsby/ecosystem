@@ -103,10 +103,10 @@ export function PrimitivesSection() {
 
       {/* --- Interactive Playground (Hero) --- */}
       <Card className="p-0 overflow-hidden mb-16 border-[var(--color-border)] shadow-xl bg-[var(--color-surface)]">
-        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[550px]">
+        <div className="flex flex-col-reverse lg:grid lg:grid-cols-12 min-h-[550px]">
 
           {/* Controls Panel (Left) */}
-          <div className="lg:col-span-4 p-6 border-r border-[var(--color-border)] bg-[var(--color-background)] overflow-y-auto max-h-[600px]">
+          <div className="lg:col-span-4 p-6 border-t lg:border-t-0 lg:border-r border-[var(--color-border)] bg-[var(--color-background)] overflow-y-auto max-h-[600px]">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-6">
               Configure Motion
             </h3>
@@ -218,7 +218,7 @@ export function PrimitivesSection() {
           </div>
 
           {/* Stage (Right) */}
-          <div className="lg:col-span-8 relative flex flex-col items-center justify-center p-12 bg-grid-pattern overflow-hidden">
+          <div className="lg:col-span-8 relative flex flex-col items-center justify-center min-h-[400px] lg:h-auto p-12 bg-grid-pattern overflow-hidden">
             {/* Background Grid Pattern (Pseudo) */}
             <div className="absolute inset-0 opacity-[0.03]" style={{
               backgroundImage: 'linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)',
@@ -265,6 +265,7 @@ export function PrimitivesSection() {
           onItemChange={setActiveTab}
           maxWidth="max-w-4xl" // Match content width below
           mode="stacked"
+          top="top-0" // Force to top
           className="mb-8 bg-transparent border-0" // Customize to blend in
         />
 
