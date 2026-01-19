@@ -171,7 +171,7 @@ export function PrimitivesSection() {
               <Slider
                 value={[previewScale]}
                 min={0.5}
-                max={2.5}
+                max={4}
                 step={0.1}
                 onValueChange={([v]: number[]) => setPreviewScale(v)}
               />
@@ -266,7 +266,7 @@ export function PrimitivesSection() {
           maxWidth="max-w-4xl" // Match content width below
           mode="stacked"
           top="top-0" // Force to top
-          className="mb-8 bg-transparent border-0" // Customize to blend in
+          className="mb-8 -mx-6 px-6 bg-[var(--color-surface)]/80 backdrop-blur-md border-0" // Customize to blend in
         />
 
         <div className="max-w-4xl mx-auto">
@@ -322,22 +322,20 @@ export function PrimitivesSection() {
                 <Card className="p-0 overflow-hidden">
                   <div className="grid md:grid-cols-2 h-full">
                     <div className="p-8 flex items-center justify-center bg-[var(--color-surface)] border-r border-[var(--color-border)]">
-                      <div className="relative w-full h-32 flex items-center">
+                      <div className="relative w-full h-12 flex items-center">
                         {/* Track */}
-                        <div className="absolute inset-x-0 h-1 bg-[var(--color-border)] rounded-full"></div>
+                        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-1 bg-[var(--color-border)] rounded-full"></div>
                         {/* Ball */}
-                        <div className="absolute w-full px-6">
-                          <motion.div
-                            className="w-12 h-12 bg-[var(--color-primary)] rounded-full shadow-md"
-                            animate={{ x: ['0%', '400%', '0%'] }}
-                            transition={{
-                              duration: 2,
-                              ease: motionTokens.easing.default as any,
-                              repeat: Infinity,
-                              repeatDelay: 0.5
-                            }}
-                          />
-                        </div>
+                        <motion.div
+                          className="absolute top-0 w-12 h-12 bg-[var(--color-primary)] rounded-full shadow-md"
+                          animate={{ left: ['0%', 'calc(100% - 3rem)', '0%'] }}
+                          transition={{
+                            duration: 2,
+                            ease: motionTokens.easing.default as any,
+                            repeat: Infinity,
+                            repeatDelay: 0.5
+                          }}
+                        />
                       </div>
                     </div>
                     <div className="p-8 flex flex-col justify-center">
