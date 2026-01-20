@@ -1,14 +1,14 @@
 # Shadcn Parity Project - Status & Context Transfer
 
 **Last Updated:** 2026-01-13
-**Project:** Sage Design System (SDS) - Shadcn Component Parity
+**Project:** Sage UI - Shadcn Component Parity
 **Status:** Phase 3 incomplete, quality issues persist
 
 ---
 
 ## Executive Summary
 
-This project aims to achieve 100% parity with Shadcn/ui component library in the Sage Design System (SDS). The work has been divided into phases, but **critical quality issues remain unresolved**. Previous sessions claimed completion but components were not properly tested in browser, resulting in multiple broken or non-spec implementations.
+This project aims to achieve 100% parity with Shadcn/ui component library in the Sage UI. The work has been divided into phases, but **critical quality issues remain unresolved**. Previous sessions claimed completion but components were not properly tested in browser, resulting in multiple broken or non-spec implementations.
 
 ### Critical Issues Identified
 - Components were marked complete without browser testing
@@ -26,7 +26,7 @@ This project aims to achieve 100% parity with Shadcn/ui component library in the
 ```
 /Users/shalomormsby/Developer/work/ecosystem/
 ├── packages/
-│   ├── ui/                          # @sds/ui - Component library
+│   ├── ui/                          # @sage/ui - Component library
 │   │   └── src/components/          # All UI components
 │   ├── tokens/                      # @sage/tokens - Design tokens
 │   │   └── src/studio.ts            # Studio theme tokens
@@ -235,7 +235,7 @@ These components have confirmed issues that need fixing:
 ### Secondary Priority
 4. **Systematic Component Fixes** - For each non-spec component:
    - Fetch latest Shadcn source from ui.shadcn.com
-   - Compare line-by-line against SDS implementation
+   - Compare line-by-line against Sage UI implementation
    - Update classes to match exactly
    - Test in browser before marking complete
    - Update audit table below
@@ -256,7 +256,7 @@ These components have confirmed issues that need fixing:
 
 ## Component Audit Table
 
-| # | Component | SDS Exists | Shadcn Reference | To Spec | Notes |
+| # | Component | Sage UI Exists | Shadcn Reference | To Spec | Notes |
 |---|-----------|------------|------------------|---------|-------|
 | 1 | Accordion | ✅ | ✅ | ✅ | Verified: smooth animation, no jumps. Fixed transition-all. |
 | 2 | Alert | ✅ | ✅ | ❌ | Phase 1. Not browser tested. |
@@ -303,7 +303,7 @@ These components have confirmed issues that need fixing:
 | 43 | Toggle | ✅ | ✅ | ❌ | Phase 3. Not verified. |
 | 44 | ToggleGroup | ✅ | ✅ | ❌ | Phase 1/2/3. Not verified (appears in multiple phases). |
 | 45 | Tooltip | ✅ | ✅ | ❌ | Phase 2/3. Code reviewed, not browser tested. |
-| 46 | Spinner | ✅ | ❌ | ❌ | Legacy SDS component, not in Shadcn. User reported: shows nothing in preview. |
+| 46 | Spinner | ✅ | ❌ | ❌ | Legacy Sage UI component, not in Shadcn. User reported: shows nothing in preview. |
 
 **Total Components:** 46 (45 Shadcn + 1 legacy)
 **To Spec:** 3
@@ -384,7 +384,7 @@ For EACH component being fixed:
    - Download exact component code
 
 2. **Compare Implementation**
-   - Open SDS component: `/packages/ui/src/components/[ComponentName].tsx`
+   - Open Sage UI component: `/packages/ui/src/components/[ComponentName].tsx`
    - Compare line-by-line with Shadcn source
    - Note differences in:
      - CSS classes
@@ -393,7 +393,7 @@ For EACH component being fixed:
      - Component structure
 
 3. **Update Component**
-   - Update SDS component to match Shadcn exactly
+   - Update Sage UI component to match Shadcn exactly
    - Don't skip any CSS classes
    - Maintain exact animation timing (usually 0.2s ease-out)
 

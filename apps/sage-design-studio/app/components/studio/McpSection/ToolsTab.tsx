@@ -32,7 +32,7 @@ export function ToolsTab() {
                             <div className="bg-[var(--color-surface)] p-3 rounded-lg">
                                 <p className="text-xs font-semibold text-[var(--color-text-primary)] mb-2">Example prompts:</p>
                                 <ul className="text-xs text-[var(--color-text-secondary)] space-y-1">
-                                    <li>• "Show me all SDS components"</li>
+                                    <li>• "Show me all Sage UI components"</li>
                                     <li>• "List all form components"</li>
                                     <li>• "What overlay components are available?"</li>
                                 </ul>

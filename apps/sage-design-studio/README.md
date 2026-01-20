@@ -1,6 +1,6 @@
 # Sage Design Studio
 
-> **Interactive documentation for the Sage Design System.** Makes design tokens, components, and design decisions publicly explorable at [studio.shalomormsby.com](https://studio.shalomormsby.com).
+> **Interactive documentation for the Sage UI.** Makes design tokens, components, and design decisions publicly explorable at [studio.shalomormsby.com](https://studio.shalomormsby.com).
 
 ## Purpose & Scope
 
@@ -13,12 +13,12 @@
 
 ## Overview
 
-Sage Design Studio is the living documentation platform for the **Sage Design System** (`@sds/ui` + `@sds/tokens`)—a high-performance component library built on **Radix UI** and **Tailwind CSS**. It provides interactive component playgrounds, token visualization, and LLM-optimized documentation.
+Sage Design Studio is the living documentation platform for the **Sage UI** (`@sage/ui` + `@sage/tokens`)—a high-performance component library built on **Radix UI** and **Tailwind CSS**. It provides interactive component playgrounds, token visualization, and LLM-optimized documentation.
 
 ## Features
 
-- **Interactive Component Playground**: Explore `@sds/ui` components with live prop controls.
-- **Token Visualization**: See global design tokens (colors, typography) defined in `@sds/tokens`.
+- **Interactive Component Playground**: Explore `@sage/ui` components with live prop controls.
+- **Token Visualization**: See global design tokens (colors, typography) defined in `@sage/tokens`.
 - **Theme Switching**: Preview components in Studio, Sage, and Volt themes.
 - **Copy-Paste Workflow**: Integration guides for consuming the library in other Next.js apps.
 - **Accessibility-First**: All components built on accessible Radix primitives.
@@ -43,16 +43,16 @@ The Studio runs on **port 3001** by default.
 ### The "Sage Stack" (Web Edition)
 
 The Studio is a standard **Next.js 15** application that consumes:
-1.  **`@sds/ui`**: The React component library (exports `Button`, `Input`, etc.).
-2.  **`@sds/tokens`**: The design token definitions.
-3.  **`@sds/config`**: Shared Tailwind configurations.
+1.  **`@sage/ui`**: The React component library (exports `Button`, `Input`, etc.).
+2.  **`@sage/tokens`**: The design token definitions.
+3.  **`@sage/config`**: Shared Tailwind configurations.
 
 ### Design System Integration
 
 The Studio imports components directly from the local workspace packages, ensuring that documentation always matches the code:
 
 ```typescript
-import { Button, Input } from '@sds/ui';
+import { Button, Input } from '@sage/ui';
 // Styles are automatically applied via Tailwind content scanning
 ```
 
@@ -132,7 +132,7 @@ To add a new component to the playground:
 
 - **Framework**: Next.js 15 (App Router)
 - **Styling**: Tailwind CSS
-- **Components**: `@sds/ui` + `@sds/tokens`
+- **Components**: `@sage/ui` + `@sage/tokens`
 - **State**: React hooks + design system's Zustand stores
 - **Code Highlighting**: Custom syntax parser in CollapsibleCodeBlock component
 

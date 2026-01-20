@@ -7,8 +7,8 @@
 
 import { useEffect, useState } from 'react';
 import { useThemeStore } from '../lib/store/theme';
-import { studioTokens, sageTokens, voltTokens, syntaxColors, codeColors } from '@sds/tokens';
-import type { ThemeName, ColorMode } from '@sds/tokens';
+import { studioTokens, sageTokens, voltTokens, syntaxColors, codeColors } from '@sage/tokens';
+import type { ThemeName, ColorMode } from '@sage/tokens';
 
 // Theme token map
 const themeTokens = {

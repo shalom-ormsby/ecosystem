@@ -6,7 +6,7 @@
 
 ## What Is This?
 
-Sage Design Studio is an **interactive documentation website** for the Sage Design System. It's a Next.js app that imports components from `@ecosystem/design-system` and provides:
+Sage Design Studio is an **interactive documentation website** for the Sage UI. It's a Next.js app that imports components from `@ecosystem/design-system` and provides:
 
 - Live component playgrounds with interactive prop controls
 - Visual token documentation (colors, typography, spacing, motion)

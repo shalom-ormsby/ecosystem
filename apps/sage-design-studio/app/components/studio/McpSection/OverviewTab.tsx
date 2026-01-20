@@ -16,7 +16,7 @@ export function OverviewTab() {
                 </div>
 
                 <p className="text-sm text-[var(--color-text-muted)]">
-                    Enable AI assistants to browse, search, and install Sage Design System components through natural language
+                    Enable AI assistants to browse, search, and install Sage UI components through natural language
                 </p>
             </div>
 
@@ -27,7 +27,7 @@ export function OverviewTab() {
                 </h2>
                 <Card className="p-6">
                     <p className="text-[var(--color-text-secondary)] mb-4">
-                        The Model Context Protocol (MCP) Server connects AI assistants like Claude Desktop, Cursor, and VS Code to the Sage Design System.
+                        The Model Context Protocol (MCP) Server connects AI assistants like Claude Desktop, Cursor, and VS Code to the Sage UI.
                         It enables LLMs to discover, search, and install components directly through natural conversation.
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

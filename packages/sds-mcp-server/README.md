@@ -1,8 +1,8 @@
-# @sds/mcp-server
+# @sage/mcp
 
-**Model Context Protocol server for Sage Design System**
+**Model Context Protocol server for Sage UI**
 
-Enable AI assistants like Claude Desktop, Cursor, and VS Code to browse, search, and install Sage Design System components directly through natural language.
+Enable AI assistants like Claude Desktop, Cursor, and VS Code to browse, search, and install Sage UI components directly through natural language.
 
 ## Features
 
@@ -17,11 +17,11 @@ Enable AI assistants like Claude Desktop, Cursor, and VS Code to browse, search,
 ### Quick Start
 
 ```bash
-pnpm add -D @sds/mcp-server
+pnpm add -D @sage/mcp
 # or
-npm install --save-dev @sds/mcp-server
+npm install --save-dev @sage/mcp
 # or
-yarn add -D @sds/mcp-server
+yarn add -D @sage/mcp
 ```
 
 ### MCP Client Configuration
@@ -35,7 +35,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
   "mcpServers": {
     "sds": {
       "command": "npx",
-      "args": ["@sds/mcp-server"]
+      "args": ["@sage/mcp"]
     }
   }
 }
@@ -52,7 +52,7 @@ Add to `.cursor/mcp.json` in your project:
   "mcpServers": {
     "sds": {
       "command": "npx",
-      "args": ["@sds/mcp-server"]
+      "args": ["@sage/mcp"]
     }
   }
 }
@@ -67,7 +67,7 @@ Add to `.vscode/mcp.json`:
   "servers": {
     "sds": {
       "command": "npx",
-      "args": ["@sds/mcp-server"]
+      "args": ["@sage/mcp"]
     }
   }
 }
@@ -85,7 +85,7 @@ List all available components, optionally filtered by category.
 - `category` (optional): Filter by `actions`, `forms`, `navigation`, `overlays`, `feedback`, `data-display`, or `layout`
 
 **Example AI prompts:**
-- "Show me all SDS components"
+- "Show me all Sage UI components"
 - "List all form components"
 - "What overlay components are available?"
 
@@ -127,7 +127,7 @@ Get installation instructions for a component.
 
 ## Component Categories
 
-The Sage Design System organizes components functionally (not atomically):
+The Sage UI organizes components functionally (not atomically):
 
 - **Actions** (3) - Interactive elements that trigger behaviors
 - **Forms** (11) - Input controls for data collection
@@ -143,7 +143,7 @@ Once configured, you can interact with the server through your AI assistant:
 
 ### Browse Components
 
-> "Show me all components in the Sage Design System"
+> "Show me all components in the Sage UI"
 
 The AI will use `list_components` to display all 48 components organized by category.
 
@@ -180,7 +180,7 @@ The AI will use `install_component` to provide:
 
 The MCP server consists of:
 
-1. **Component Registry** (`src/registry.ts`) - Metadata for all 48 @sds/ui components
+1. **Component Registry** (`src/registry.ts`) - Metadata for all 48 @sage/ui components
 2. **MCP Server** (`src/index.ts`) - Model Context Protocol implementation
 3. **Tool Handlers** - Four tools for listing, searching, viewing, and installing
 
@@ -220,4 +220,4 @@ MIT © Shalom Ormsby
 
 ---
 
-**Part of the [Sage Design System](https://studio.shalomormsby.com/) - Build lovable products at AI speed.**
+**Part of the [Sage UI](https://studio.shalomormsby.com/) - Build lovable products at AI speed.**

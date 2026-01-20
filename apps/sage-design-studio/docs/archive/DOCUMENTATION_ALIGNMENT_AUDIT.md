@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-The Sage Design Studio "Getting Started" documentation is **critically misaligned** with the current architecture. All documentation references the **OLD** system (`@ecosystem/design-system` + atomic design) while the codebase is **actively migrating** to the **NEW** system (`@sds/ui` + functional organization).
+The Sage Design Studio "Getting Started" documentation is **critically misaligned** with the current architecture. All documentation references the **OLD** system (`@ecosystem/design-system` + atomic design) while the codebase is **actively migrating** to the **NEW** system (`@sage/ui` + functional organization).
 
 **Decision:** Complete Phase 4 migration first (Option C), then update all documentation to reflect the new architecture.
 
@@ -26,8 +26,8 @@ The Sage Design Studio "Getting Started" documentation is **critically misaligne
   - Studio navigation updated with two-level category system
 
 - ✅ **Phase 4 COMPLETE** (2026-01-15): Legacy Migration
-  - **Infrastructure:** Full infrastructure created in @sds/ui (syntax-parser, stores, hooks, providers)
-  - **Subpath Exports:** Configured for improved DX (`@sds/ui/tokens`, `@sds/ui/hooks`, `@sds/ui/utils`, `@sds/ui/providers`)
+  - **Infrastructure:** Full infrastructure created in @sage/ui (syntax-parser, stores, hooks, providers)
+  - **Subpath Exports:** Configured for improved DX (`@sage/ui/tokens`, `@sage/ui/hooks`, `@sage/ui/utils`, `@sage/ui/providers`)
   - **Components Migrated:** 44+ components migrated with strict functional organization
   - **New Components:** TextField, SearchBar, VariableWeightText added (not in legacy)
   - **App Migrations:** 44 files updated across 3 apps (Portfolio, Creative Powerup, Studio)
@@ -40,7 +40,7 @@ The Sage Design Studio "Getting Started" documentation is **critically misaligne
 ```
 ecosystem/
 ├── packages/
-│   ├── ui/                      # @sds/ui - Component library (NEW)
+│   ├── ui/                      # @sage/ui - Component library (NEW)
 │   │   └── src/
 │   │       ├── components/
 │   │       │   ├── actions/     # Button, Toggle, ToggleGroup
@@ -75,7 +75,7 @@ ecosystem/
 pnpm add @ecosystem/design-system
 
 // SHOULD BE:
-pnpm add @sds/ui @sage/tokens
+pnpm add @sage/ui @sage/tokens
 ```
 
 **Basic Usage (Lines ~905-918):**
@@ -84,7 +84,7 @@ pnpm add @sds/ui @sage/tokens
 import { Button, Card, Badge } from '@ecosystem/design-system';
 
 // SHOULD BE:
-import { Button, Card, Badge } from '@sds/ui';
+import { Button, Card, Badge } from '@sage/ui';
 ```
 
 **Theme Provider (Lines ~937-946):**
@@ -93,7 +93,7 @@ import { Button, Card, Badge } from '@sds/ui';
 import { ThemeProvider } from '@ecosystem/design-system/providers';
 
 // SHOULD BE:
-import { ThemeProvider } from '@sds/ui/providers';
+import { ThemeProvider } from '@sage/ui/providers';
 ```
 
 **Hooks Example (Lines ~965-982):**
@@ -102,7 +102,7 @@ import { ThemeProvider } from '@sds/ui/providers';
 import { useTheme, useMotion } from '@ecosystem/design-system/hooks';
 
 // SHOULD BE:
-import { useTheme, useMotion } from '@sds/ui/hooks';
+import { useTheme, useMotion } from '@sage/ui/hooks';
 ```
 
 **File Structure (Lines ~840-860):**
@@ -120,7 +120,7 @@ ecosystem/
 // SHOULD BE (functional structure):
 ecosystem/
 ├── packages/
-│   ├── ui/                     # @sds/ui - Component library
+│   ├── ui/                     # @sage/ui - Component library
 │   │   └── src/
 │   │       ├── components/
 │   │       │   ├── actions/    # Button, Toggle, ToggleGroup
@@ -177,7 +177,7 @@ export * from './components/[category]/ComponentName';
 pnpm --filter @ecosystem/design-system build
 
 # SHOULD BE:
-pnpm --filter @sds/ui build
+pnpm --filter @sage/ui build
 ```
 
 **Step 4: Navigation Updates (Lines ~115-138):**
@@ -186,13 +186,13 @@ pnpm --filter @sds/ui build
 
 **Step 5: Studio Registry (Lines ~143-153):**
 - Registry location remains: `apps/sage-design-studio/app/components/lib/component-registry.tsx`
-- Import path changes to: `import { ComponentName } from '@sds/ui'`
+- Import path changes to: `import { ComponentName } from '@sage/ui'`
 
 **Molecule Section (Lines ~245-273):**
 ```typescript
 // CURRENT (WRONG):
 "Follow the same steps as adding an Atom..."
-import { Input, Button } from '@sds/ui'; // This is correct
+import { Input, Button } from '@sage/ui'; // This is correct
 
 // SHOULD ADD:
 "Molecules are composed components that live in their appropriate functional category.
@@ -443,7 +443,7 @@ packages/tokens/src/studio.ts
 import { useTheme } from '@ecosystem/design-system';
 
 // SHOULD BE:
-import { useTheme } from '@sds/ui/hooks';
+import { useTheme } from '@sage/ui/hooks';
 ```
 
 **Pattern 3: Motion with Preference (Lines ~195-214):**
@@ -452,7 +452,7 @@ import { useTheme } from '@sds/ui/hooks';
 import { useMotionPreference } from '@ecosystem/design-system';
 
 // SHOULD BE:
-import { useMotionPreference } from '@sds/ui/hooks';
+import { useMotionPreference } from '@sage/ui/hooks';
 ```
 
 **Pattern 5: Composing Components (Lines ~265-293):**
@@ -461,7 +461,7 @@ import { useMotionPreference } from '@sds/ui/hooks';
 import { Input, Button } from '@ecosystem/design-system';
 
 // SHOULD BE:
-import { Input, Button } from '@sds/ui';
+import { Input, Button } from '@sage/ui';
 ```
 
 **Pattern 6: Form Handling (Lines ~306-345):**
@@ -470,9 +470,9 @@ import { Input, Button } from '@sds/ui';
 import { useForm, TextField, Button } from '@ecosystem/design-system';
 
 // SHOULD BE:
-import { useForm } from '@sds/ui/hooks';
-import { TextField, Button } from '@sds/ui';
-// Note: Need to verify if TextField exists in @sds/ui or needs to be created
+import { useForm } from '@sage/ui/hooks';
+import { TextField, Button } from '@sage/ui';
+// Note: Need to verify if TextField exists in @sage/ui or needs to be created
 ```
 
 **Pattern 7: Toast Notifications (Lines ~358-386):**
@@ -481,8 +481,8 @@ import { TextField, Button } from '@sds/ui';
 import { useToast, Button, ToastProvider } from '@ecosystem/design-system';
 
 // SHOULD BE:
-import { useToast } from '@sds/ui/hooks';
-import { Button, ToastProvider } from '@sds/ui';
+import { useToast } from '@sage/ui/hooks';
+import { Button, ToastProvider } from '@sage/ui';
 ```
 
 **Pattern 8: Modal Pattern (Lines ~400-435):**
@@ -491,7 +491,7 @@ import { Button, ToastProvider } from '@sds/ui';
 import { Modal, Button } from '@ecosystem/design-system';
 
 // SHOULD BE:
-import { Dialog, Button } from '@sds/ui';
+import { Dialog, Button } from '@sage/ui';
 // Note: Verify if "Modal" component exists or should be "Dialog"
 ```
 
@@ -514,7 +514,7 @@ These files also import from `@ecosystem/design-system` and may need updates:
 
 ## Component Availability Check Required
 
-Before updating code examples, verify these components exist in `@sds/ui`:
+Before updating code examples, verify these components exist in `@sage/ui`:
 
 - [ ] `TextField` (referenced in CommonPatternsSection)
 - [ ] `Modal` vs `Dialog` (name discrepancy)
@@ -634,7 +634,7 @@ Before updating code examples, verify these components exist in `@sds/ui`:
 |----------|-----------|
 | **Complete migration first (Option C)** | Documentation will be 100% accurate, avoids confusion |
 | **Replace atomic with functional entirely** | Aligns with strategy doc, matches modern design system patterns |
-| **Update all examples to @sds/ui** | Future-facing, prepares developers for production usage |
+| **Update all examples to @sage/ui** | Future-facing, prepares developers for production usage |
 | **Reflect new category structure** | File paths and workflows should match post-migration reality |
 | **Keep AI-native positioning** | Core differentiator, aligns with design philosophy |
 | **Improve sub-heading after migration** | Requires focused creative session, not rushed |
@@ -643,10 +643,10 @@ Before updating code examples, verify these components exist in `@sds/ui`:
 
 ## Questions for Future Session
 
-1. **Component naming:** Is "Modal" renamed to "Dialog" in @sds/ui? Check shadcn naming conventions.
-2. **Hook locations:** Are all hooks exported from `@sds/ui/hooks` or root `@sds/ui`?
-3. **Provider locations:** Is `ThemeProvider` at `@sds/ui/providers` or `@sds/ui`?
-4. **TextField existence:** Does `TextField` molecule exist in @sds/ui or need to be created?
+1. **Component naming:** Is "Modal" renamed to "Dialog" in @sage/ui? Check shadcn naming conventions.
+2. **Hook locations:** Are all hooks exported from `@sage/ui/hooks` or root `@sage/ui`?
+3. **Provider locations:** Is `ThemeProvider` at `@sage/ui/providers` or `@sage/ui`?
+4. **TextField existence:** Does `TextField` molecule exist in @sage/ui or need to be created?
 5. **Legacy sections:** Should MoleculesSection.tsx and OrganismsSection.tsx be:
    - Deleted entirely?
    - Converted to "Legacy" documentation?
@@ -658,10 +658,10 @@ Before updating code examples, verify these components exist in `@sds/ui`:
 
 Documentation updates are **COMPLETE** when:
 
-✅ All code examples use `@sds/ui` and `@sage/tokens`
+✅ All code examples use `@sage/ui` and `@sage/tokens`
 ✅ All file paths show functional categories (actions/forms/navigation/etc.)
 ✅ Architecture section explains functional organization, not atomic design
-✅ Build commands reference `@sds/ui` not `@ecosystem/design-system`
+✅ Build commands reference `@sage/ui` not `@ecosystem/design-system`
 ✅ GitHub links point to `/packages/ui/` not `/design-system/`
 ✅ No references to "atoms" or "molecules" in Getting Started sections
 ✅ All 48 components are documented under correct functional categories

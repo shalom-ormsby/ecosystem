@@ -6,7 +6,7 @@
  *
  * @example
  * ```ts
- * import { parseCode } from '@sds/ui';
+ * import { parseCode } from '@sage/ui';
  *
  * const tokens = parseCode('const greeting = "Hello World";');
  * // Use with CollapsibleCodeBlock:

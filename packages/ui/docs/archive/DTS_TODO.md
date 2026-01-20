@@ -33,7 +33,7 @@ Likely causes:
 1. **react-hook-form types** - Form.tsx imports may be problematic
 2. **@tanstack/react-table types** - DataTable.tsx imports may be problematic
 3. **TypeScript version mismatch** - Vercel may use different TS version than local
-4. **Workspace path resolution** - `@sds/tokens` path mapping may not work on Vercel
+4. **Workspace path resolution** - `@sage/tokens` path mapping may not work on Vercel
 
 ## Solution Applied
 

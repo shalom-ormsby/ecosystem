@@ -1,12 +1,12 @@
 ---
-description: Steps to register a new component in the Sage Design System (SDS)
+description: Steps to register a new component in the Sage UI
 ---
 
 # Register New Component Workflow
 
-Follow this systematic checklist when adding a new component to the Sage Design System. This ensures the component is available in the library, documented in the Studio, and discoverable via search.
+Follow this systematic checklist when adding a new component to the Sage UI. This ensures the component is available in the library, documented in the Studio, and discoverable via search.
 
-## Phase 1: Create in Library (`@sds/ui`)
+## Phase 1: Create in Library (`@sage/ui`)
 
 1.  **Create Component File**
     -   Location: `packages/ui/src/components/[category]/[ComponentName].tsx`
@@ -32,17 +32,17 @@ Follow this systematic checklist when adding a new component to the Sage Design 
     -   Action: Ensure the category namespace is exported (e.g., `export * as [Category] from './components/[category]';`).
 
 4.  **Install Dependencies (If needed)**
-    -   Action: If your component uses external libraries (like `ogl` or `framer-motion`), install them specifically in the UI package: `pnpm add [package-name] --filter @sds/ui`.
+    -   Action: If your component uses external libraries (like `ogl` or `framer-motion`), install them specifically in the UI package: `pnpm add [package-name] --filter @sage/ui`.
 
 5.  **Build Library**
-    -   Command: `pnpm build --filter @sds/ui`
+    -   Command: `pnpm build --filter @sage/ui`
     -   *Why: This generates the `.d.ts` type definitions so the Studio app can "see" the new component.*
 
 ## Phase 2: Register in Studio (`apps/sage-design-studio`)
 
 6.  **Create Documentation Page**
     -   Location: `apps/sage-design-studio/app/components/studio/pages/[category]/[ComponentName]Page.tsx`
-    -   Action: Import the component from `@sds/ui`.
+    -   Action: Import the component from `@sage/ui`.
     -   Action: Create a `CONST_CODE` string showing users how to import/use it.
     -   Action: Build the interactive preview (sliders, switches) to control the component props.
 

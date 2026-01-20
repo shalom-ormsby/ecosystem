@@ -1,6 +1,6 @@
 /**
  * Hooks subpath export
- * Allows: import { ... } from '@sds/ui/hooks'
+ * Allows: import { ... } from '@sage/ui/hooks'
  */
 
 // Re-export all hooks

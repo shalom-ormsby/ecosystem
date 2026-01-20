@@ -1,4 +1,4 @@
-# Sage Design System (SDS) vs Shadcn Parity Strategy
+# Sage UI vs Shadcn Parity Strategy
 
 This document outlines the strategy to reach full feature parity with Shadcn/ui efficiently and ethically, while organizing the system for the long-term goal of enabling rapid development of complex applications.
 
@@ -7,7 +7,7 @@ This document outlines the strategy to reach full feature parity with Shadcn/ui 
 Before beginning component migration, verify the following:
 
 1. **Token Integration Automation**
-   - Configure `components.json` (Shadcn CLI config) to automatically use SDS CSS variables
+   - Configure `components.json` (Shadcn CLI config) to automatically use Sage UI CSS variables
    - Update Shadcn's theme mapping to point to our existing tokens (e.g., `--color-primary`)
    - Test one component end-to-end to validate automated token mapping works
    - **Goal**: Zero manual token refactoring per component
@@ -32,63 +32,63 @@ Before beginning component migration, verify the following:
 
 ## 1. Component State Analysis
 
-The following table compares the current state of SDS components against the standard Shadcn UI library.
+The following table compares the current state of Sage UI components against the standard Shadcn UI library.
 
 **Legend:**
-*   ✅ **@sds/ui**: Implemented in the modern, Radix-based package.
-*   ⚠️ **Legacy**: Exists in `@ecosystem/design-system` but needs migration to `@sds/ui`.
+*   ✅ **@sage/ui**: Implemented in the modern, Radix-based package.
+*   ⚠️ **Legacy**: Exists in `@ecosystem/design-system` but needs migration to `@sage/ui`.
 *   ❌ **Missing**: Not yet present in SDS.
 
-| Component | SDS Status | Shadcn | Priority | Notes |
+| Component | Sage UI Status | Shadcn | Priority | Notes |
 | :--- | :--- | :--- | :--- | :--- |
-| **Accordion** | ✅ @sds/ui | Available | Medium | **Verified Fix**: Animation smoothed. Essential for FAQs. |
-| **Alert** | ✅ @sds/ui | Available | **Critical** | Essential for feedback messages. |
-| **Alert Dialog** | ✅ @sds/ui | Available | Medium | |
-| **Aspect Ratio** | ✅ @sds/ui | Available | Low | Migrated from AspectImage. |
-| **Avatar** | ✅ @sds/ui | Available | High | Replaces legacy Avatar. |
-| **Badge** | ✅ @sds/ui | Available | Done | |
-| **Breadcrumb** | ✅ @sds/ui | Available | Medium | Replaces legacy Breadcrumb. |
-| **Button** | ✅ @sds/ui | Available | Done | |
-| **Calendar** | ✅ @sds/ui | Available | Low | Complex, add when needed. |
-| **Card** | ✅ @sds/ui | Available | Done | |
-| **Carousel** | ✅ @sds/ui | Available | Low | |
-| **Checkbox** | ✅ @sds/ui | Available | Done | |
-| **Collapsible** | ✅ @sds/ui | Available | Medium | |
-| **Combobox** | ✅ @sds/ui | Available | High | Often requested for forms. |
-| **Command** | ✅ @sds/ui | Available | High | Basis for command palettes. |
-| **ContextMenu** | ✅ @sds/ui | Available | Low | |
-| **Data Table** | ✅ @sds/ui | Available | **Critical** | Essential for dashboards and data display. |
-| **Date Picker** | ✅ @sds/ui | Available | Medium | |
-| **Dialog (Modal)** | ✅ @sds/ui | Available | **Critical** | Replaces legacy Modal. Major UI building block. |
-| **Drawer** | ✅ @sds/ui | Available | Medium | Good for mobile. |
-| **Dropdown Menu** | ✅ @sds/ui | Available | **Critical** | Replaces legacy Dropdown. Essential for actions. |
-| **Form** | ✅ @sds/ui | Available | **Critical** | Replaces legacy Form. `react-hook-form` + `zod` integration. |
-| **Hover Card** | ✅ @sds/ui | Available | Low | |
-| **Input** | ✅ @sds/ui | Available | Done | |
-| **Input OTP** | ✅ @sds/ui | Available | Low | |
-| **Label** | ✅ @sds/ui | Available | Done | |
-| **Menubar** | ✅ @sds/ui | Available | Low | Desktop app feel. |
-| **Navigation Menu** | ✅ @sds/ui | Available | Medium | For complex headers. |
-| **Pagination** | ✅ @sds/ui | Available | Medium | |
-| **Popover** | ✅ @sds/ui | Available | High | **Verified Fix**: Token background issues resolved. |
-| **Progress** | ✅ @sds/ui | Available | Medium | Replaces legacy ProgressBar. |
-| **Radio Group** | ✅ @sds/ui | Available | **Critical** | Basic form element. |
-| **Resizable** | ✅ @sds/ui | Available | Low | **Verified**: Renders correctly (fixed import group issues). |
-| **Scroll Area** | ✅ @sds/ui | Available | Done | |
-| **Select** | ✅ @sds/ui | Available | Done | |
-| **Separator** | ✅ @sds/ui | Available | Done | |
-| **Sheet** | ✅ @sds/ui | Available | **Critical** | Sidebars, panels. |
-| **Skeleton** | ✅ @sds/ui | Available | Done | |
-| **Slider** | ✅ @sds/ui | Available | Medium | |
-| **Sonner (Toast)** | ✅ @sds/ui | Available | High | A better toast experience. |
-| **Switch** | ✅ @sds/ui | Available | Done | |
-| **Table** | ✅ @sds/ui | Available | **Critical** | Basic data presentation. |
-| **Tabs** | ✅ @sds/ui | Available | High | Content organization. |
-| **Textarea** | ✅ @sds/ui | Available | High | Form element. |
-| **Toast** | ✅ @sds/ui | Available | Done | |
-| **Toggle** | ✅ @sds/ui | Available | Low | |
-| **Toggle Group** | ✅ @sds/ui | Available | Low | |
-| **Tooltip** | ✅ @sds/ui | Available | Medium | Replaces legacy Tooltip. |
+| **Accordion** | ✅ @sage/ui | Available | Medium | **Verified Fix**: Animation smoothed. Essential for FAQs. |
+| **Alert** | ✅ @sage/ui | Available | **Critical** | Essential for feedback messages. |
+| **Alert Dialog** | ✅ @sage/ui | Available | Medium | |
+| **Aspect Ratio** | ✅ @sage/ui | Available | Low | Migrated from AspectImage. |
+| **Avatar** | ✅ @sage/ui | Available | High | Replaces legacy Avatar. |
+| **Badge** | ✅ @sage/ui | Available | Done | |
+| **Breadcrumb** | ✅ @sage/ui | Available | Medium | Replaces legacy Breadcrumb. |
+| **Button** | ✅ @sage/ui | Available | Done | |
+| **Calendar** | ✅ @sage/ui | Available | Low | Complex, add when needed. |
+| **Card** | ✅ @sage/ui | Available | Done | |
+| **Carousel** | ✅ @sage/ui | Available | Low | |
+| **Checkbox** | ✅ @sage/ui | Available | Done | |
+| **Collapsible** | ✅ @sage/ui | Available | Medium | |
+| **Combobox** | ✅ @sage/ui | Available | High | Often requested for forms. |
+| **Command** | ✅ @sage/ui | Available | High | Basis for command palettes. |
+| **ContextMenu** | ✅ @sage/ui | Available | Low | |
+| **Data Table** | ✅ @sage/ui | Available | **Critical** | Essential for dashboards and data display. |
+| **Date Picker** | ✅ @sage/ui | Available | Medium | |
+| **Dialog (Modal)** | ✅ @sage/ui | Available | **Critical** | Replaces legacy Modal. Major UI building block. |
+| **Drawer** | ✅ @sage/ui | Available | Medium | Good for mobile. |
+| **Dropdown Menu** | ✅ @sage/ui | Available | **Critical** | Replaces legacy Dropdown. Essential for actions. |
+| **Form** | ✅ @sage/ui | Available | **Critical** | Replaces legacy Form. `react-hook-form` + `zod` integration. |
+| **Hover Card** | ✅ @sage/ui | Available | Low | |
+| **Input** | ✅ @sage/ui | Available | Done | |
+| **Input OTP** | ✅ @sage/ui | Available | Low | |
+| **Label** | ✅ @sage/ui | Available | Done | |
+| **Menubar** | ✅ @sage/ui | Available | Low | Desktop app feel. |
+| **Navigation Menu** | ✅ @sage/ui | Available | Medium | For complex headers. |
+| **Pagination** | ✅ @sage/ui | Available | Medium | |
+| **Popover** | ✅ @sage/ui | Available | High | **Verified Fix**: Token background issues resolved. |
+| **Progress** | ✅ @sage/ui | Available | Medium | Replaces legacy ProgressBar. |
+| **Radio Group** | ✅ @sage/ui | Available | **Critical** | Basic form element. |
+| **Resizable** | ✅ @sage/ui | Available | Low | **Verified**: Renders correctly (fixed import group issues). |
+| **Scroll Area** | ✅ @sage/ui | Available | Done | |
+| **Select** | ✅ @sage/ui | Available | Done | |
+| **Separator** | ✅ @sage/ui | Available | Done | |
+| **Sheet** | ✅ @sage/ui | Available | **Critical** | Sidebars, panels. |
+| **Skeleton** | ✅ @sage/ui | Available | Done | |
+| **Slider** | ✅ @sage/ui | Available | Medium | |
+| **Sonner (Toast)** | ✅ @sage/ui | Available | High | A better toast experience. |
+| **Switch** | ✅ @sage/ui | Available | Done | |
+| **Table** | ✅ @sage/ui | Available | **Critical** | Basic data presentation. |
+| **Tabs** | ✅ @sage/ui | Available | High | Content organization. |
+| **Textarea** | ✅ @sage/ui | Available | High | Form element. |
+| **Toast** | ✅ @sage/ui | Available | Done | |
+| **Toggle** | ✅ @sage/ui | Available | Low | |
+| **Toggle Group** | ✅ @sage/ui | Available | Low | |
+| **Tooltip** | ✅ @sage/ui | Available | Medium | Replaces legacy Tooltip. |
 
 ## 2. Strategy for Efficient Parity
 
@@ -137,18 +137,18 @@ We currently have a split state between `packages/ui` (New) and `design-system` 
 2.  **Isolate CSS**: Ensure legacy styles are scoped to prevent conflicts with new components (critical during Phases 1-5 when both exist)
 3.  **Replace**: For items like `Modal` (Legacy), install Shadcn `Dialog` into `packages/ui` and deprecate the legacy `Modal`
 4.  **Add Deprecation Warnings**: Update legacy components with console warnings pointing to new imports
-5.  **Update Consumers**: Migrate all internal usage to `@sds/ui` imports
+5.  **Update Consumers**: Migrate all internal usage to `@sage/ui` imports
 6.  **Breaking Change**: Remove legacy components in a major version bump with proper communication
 
 **Legacy Components Requiring Migration:**
-- Dialog (Modal) → `@sds/ui/dialog`
-- Dropdown Menu → `@sds/ui/dropdown-menu`
-- Form → `@sds/ui/form`
-- Avatar → `@sds/ui/avatar`
-- Breadcrumb → `@sds/ui/breadcrumb`
-- Progress → `@sds/ui/progress`
-- Tooltip → `@sds/ui/tooltip`
-- Aspect Ratio (AspectImage) → `@sds/ui/aspect-ratio`
+- Dialog (Modal) → `@sage/ui/dialog`
+- Dropdown Menu → `@sage/ui/dropdown-menu`
+- Form → `@sage/ui/form`
+- Avatar → `@sage/ui/avatar`
+- Breadcrumb → `@sage/ui/breadcrumb`
+- Progress → `@sage/ui/progress`
+- Tooltip → `@sage/ui/tooltip`
+- Aspect Ratio (AspectImage) → `@sage/ui/aspect-ratio`
 
 ### C. Staged Quality Gates
 
@@ -178,7 +178,7 @@ To maximize velocity while maintaining quality, we use **staged quality gates** 
 - Defer exhaustive cross-browser testing
 
 **Design System Integration:**
-- Uses SDS design tokens (automated via `components.json`)
+- Uses Sage UI design tokens (automated via `components.json`)
 - Supports light and dark modes
 - Consistent API patterns with existing components
 
@@ -214,7 +214,7 @@ To maximize velocity while maintaining quality, we use **staged quality gates** 
 To scale from "Lego blocks" to "Solopreneur Templates", we should organize the library into three distinct tiers.
 
 ### Tier 1: Primitives (The "Parts")
-*Location: `@sds/ui` (and Shadcn parity)*
+*Location: `@sage/ui` (and Shadcn parity)*
 These are the dumb, stateless, accessible building blocks.
 *   *Examples*: Button, Input, Dialog, Switch, Card.
 *   *Goal*: 100% Shadcn parity.
@@ -321,7 +321,7 @@ Full page layouts or entire app shells.
 **Tasks:**
 - Add deprecation warnings to all legacy components
 - Create migration guides for each legacy → modern component
-- Update all internal apps to use `@sds/ui` imports
+- Update all internal apps to use `@sage/ui` imports
 - Document breaking changes for next major version
 - Communicate timeline to all consumers
 
@@ -340,7 +340,7 @@ Full page layouts or entire app shells.
 - Remove all legacy components from `design-system`
 - Publish major version bump
 - Archive old package or mark as deprecated
-- Update all documentation to reference only `@sds/ui`
+- Update all documentation to reference only `@sage/ui`
 
 **Success Criteria:**
 - Clean, unified component library
@@ -441,7 +441,7 @@ Full page layouts and app shells:
 - Target: 100% Shadcn parity by end of Phase 3
 
 **Adoption Metrics:**
-- Monitor usage of `@sds/ui` vs legacy components across all apps
+- Monitor usage of `@sage/ui` vs legacy components across all apps
 - Track import statements in codebase
 - Target: 100% migration before Phase 5
 
@@ -480,7 +480,7 @@ When adapting Shadcn components for SDS:
 - Keep accessibility features intact
 
 **Styling Guidelines:**
-- Use SDS design tokens for all styling
+- Use Sage UI design tokens for all styling
 - Customize only visual appearance and defaults
 - Maintain responsive behavior patterns
 
@@ -601,10 +601,10 @@ When adapting Shadcn components for SDS:
 8. ✅ Data Table - Advanced tables with sorting/filtering
 
 **Key Achievements**:
-- ✅ Zero manual token refactoring - All components use SDS tokens automatically
+- ✅ Zero manual token refactoring - All components use Sage UI tokens automatically
 - ✅ All components build successfully
 - ✅ All components fully registered in component registry per Core Methodology
-- ✅ All components exported from `@sds/ui`
+- ✅ All components exported from `@sage/ui`
 - ✅ 3 legacy components replaced (Modal → Dialog, Dropdown → DropdownMenu, Form → Form)
 
 **Dependencies Added**:
@@ -624,12 +624,12 @@ When adapting Shadcn components for SDS:
 **Date**: 2026-01-11
 
 **Actions Taken:**
-- ✅ Installed \`@radix-ui/react-avatar\` in \`@sds/ui\`
+- ✅ Installed \`@radix-ui/react-avatar\` in \`@sage/ui\`
 - ✅ Created \`packages/ui/src/components/Avatar.tsx\` (wrapping Radix primitives)
 - ✅ Exported from \`packages/ui/src/index.ts\`
 - ✅ Updated \`component-registry.tsx\`:
     - Removed Legacy \`Avatar\` configuration
-    - Added New \`Avatar\` configuration using \`@sds/ui\` imports
+    - Added New \`Avatar\` configuration using \`@sage/ui\` imports
 - ✅ Verified build success
 - ✅ **Migration**: Replaced legacy component in documentation
 
@@ -637,7 +637,7 @@ When adapting Shadcn components for SDS:
 **Date**: 2026-01-11
 
 **Actions Taken:**
-- ✅ Created \`packages/ui/src/components/Textarea.tsx\` (styled with SDS tokens)
+- ✅ Created \`packages/ui/src/components/Textarea.tsx\` (styled with Sage UI tokens)
 - ✅ Exported from \`packages/ui/src/index.ts\`
 - ✅ Added to \`component-registry.tsx\` with examples
 - ✅ Verified build success
@@ -716,10 +716,10 @@ When adapting Shadcn components for SDS:
 7. ✅ Sonner (Toaster) - Enhanced toast notifications
 
 **Key Achievements**:
-- ✅ Zero manual token refactoring - All components use SDS tokens automatically
+- ✅ Zero manual token refactoring - All components use Sage UI tokens automatically
 - ✅ All components build successfully with no errors
 - ✅ All components fully registered in component registry per Core Methodology
-- ✅ All components exported from \`@sds/ui\`
+- ✅ All components exported from \`@sage/ui\`
 - ✅ Navigation and routing updated for all components
 - ✅ Studio app builds successfully
 - ✅ No build failures - followed troubleshooting guidelines
@@ -732,7 +732,7 @@ When adapting Shadcn components for SDS:
 - sonner
 
 **Build Verification**:
-- ✅ @sds/ui package: 67.39 KB (CJS), 56.69 KB (ESM)
+- ✅ @sage/ui package: 67.39 KB (CJS), 56.69 KB (ESM)
 - ✅ Studio app: Production build successful
 - ✅ Zero TypeScript errors
 - ✅ Zero webpack/build errors
@@ -875,16 +875,16 @@ When adapting Shadcn components for SDS:
 ### Key Achievements
 
 **Complete Shadcn Parity:**
-- ✅ **43 total components** in @sds/ui (22 from Phases 1-2 + 21 from Phase 3)
+- ✅ **43 total components** in @sage/ui (22 from Phases 1-2 + 21 from Phase 3)
 - ✅ 100% feature parity with Shadcn UI library
-- ✅ All components use SDS design tokens automatically
+- ✅ All components use Sage UI design tokens automatically
 - ✅ All components fully accessible (WCAG 2.1 AA)
 - ✅ All components support light/dark mode
 - ✅ Zero TypeScript errors across entire library
 - ✅ Zero webpack/build errors
 
 **Build Metrics:**
-- ✅ @sds/ui package: 121.18 KB (CJS), 102.72 KB (ESM)
+- ✅ @sage/ui package: 121.18 KB (CJS), 102.72 KB (ESM)
 - ✅ Studio app: Production build successful (419 KB First Load JS)
 - ✅ Clean type definitions for all exports
 - ✅ Proper tree-shaking support
@@ -935,7 +935,7 @@ When adapting Shadcn components for SDS:
 
 ### Component Library Status
 
-**Total SDS Components: 43**
+**Total Sage UI Components: 43**
 - Phase 1: 8 components (Critical foundation)
 - Phase 2: 7 components (High priority)
 - Phase 3: 21 components (Complete coverage)
@@ -972,7 +972,7 @@ When adapting Shadcn components for SDS:
 
 ### ✅ Global Theme & Popover Fix
 - **Issue**: `Popover` (and likely `Card`/`DatePicker`) backgrounds were transparent because `globals.css` lacked the full Shadcn variable set (e.g., `--color-popover`).
-- **Fix**: Populated `apps/sage-design-studio/app/globals.css` with the complete set of CSS variables (`--color-background`, `--color-popover`, etc.) mapped to SDS tokens.
+- **Fix**: Populated `apps/sage-design-studio/app/globals.css` with the complete set of CSS variables (`--color-background`, `--color-popover`, etc.) mapped to Sage UI tokens.
 - **Verification**: `Popover` now renders with correct white/dark background and borders.
 
 ### ✅ Resizable Verification

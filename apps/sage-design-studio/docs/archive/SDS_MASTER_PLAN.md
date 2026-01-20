@@ -1,9 +1,9 @@
-# SDS Master Plan: The Solopreneur Stack (Web First)
+# Sage UI Master Plan: The Solopreneur Stack (Web First)
 
 > [!NOTE]
 > **CONTEXT FOR AI AGENTS:**
 > *   **North Star:** "The fastest way for a solopreneur to build premium, high-scale web apps."
-> *   **Active Strategy:** Web-First React Component Library (`@sds/ui`) consumed by a Next.js App (`apps/sage-design-studio`).
+> *   **Active Strategy:** Web-First React Component Library (`@sage/ui`) consumed by a Next.js App (`apps/sage-design-studio`).
 > *   **Core Philosophy:** Functional Organization > Atomic Design. Code Ownership > Black-box dependencies.
 > *   **Current Focus:** **Quality Hardening.** We are strictly verifying Phase 3 components for Shadcn parity.
 
@@ -11,7 +11,7 @@
 
 ## 1. The Vision: "Quality Speed"
 
-The Sage Design System (SDS) is pivoting from a traditional enterprise design system to a **Solopreneur-focused Accelerator**. The goal is not just "consistency" but "velocity."
+The Sage UI is pivoting from a traditional enterprise design system to a **Solopreneur-focused Accelerator**. The goal is not just "consistency" but "velocity."
 
 We adopt the **shadcn/ui distribution model**: components are code you own, allowing for maximum customization and AI-interpretability, while maintaining a robust, accessible foundation.
 
@@ -32,13 +32,13 @@ We use a high-performance **Web-Native Stack** to maximize velocity.
 | **Styling** | **Tailwind CSS** | Utility-first. Shared config across workspace. |
 | **Animation** | **CSS Variables & Keyframes** | Tightly coupled with Radix data attributes (e.g., `data-[state=open]`). |
 | **Framework** | **Next.js 15+** | Server Components, standard Web API. |
-| **Workspace** | **@sds/ui** | The reusable component library (Primitives). |
+| **Workspace** | **@sage/ui** | The reusable component library (Primitives). |
 | **Documentation** | **Sage Design Studio** | The visual interface and documentation. |
 
 ### The Three-Tier Model
 To scale development, we organize the system into three tiers:
 
-*   **Tier 1: Primitives (@sds/ui)**
+*   **Tier 1: Primitives (@sage/ui)**
     *   *Examples:* Button, Dialog, Select, Sonner.
     *   *Goal:* 100% Shadcn Parity. Accessible, unopinionated "lego blocks".
 *   **Tier 2: Assemblies (Future: @sds/assemblies)**
@@ -89,15 +89,15 @@ ecosystem/
 │   └── mobile/              # (Archived) Do not edit.
 ├── packages/
 │   ├── tokens/              # (@sage/tokens) Design tokens (studio.ts)
-│   ├── ui/                  # (@sds/ui) The Product. src/components/*.tsx
+│   ├── ui/                  # (@sage/ui) The Product. src/components/*.tsx
 │   ├── config/              # Shared configurations (tailwind).
-│   └── core/                # (@sds/core) Shared Logic (hooks/utils).
+│   └── core/                # (@sage/core) Shared Logic (hooks/utils).
 ```
 
 ---
 
 ## 5. Decision Log (Key Shifts)
-*   **2026-01-14:** ✅ **IMPLEMENTED Functional Organization.** Restructured all 48 @sds/ui components from flat structure into 7 functional categories (Actions, Forms, Navigation, Overlays, Feedback, Data Display, Layout). Updated Studio navigation to reflect new organization. All exports remain backward-compatible.
+*   **2026-01-14:** ✅ **IMPLEMENTED Functional Organization.** Restructured all 48 @sage/ui components from flat structure into 7 functional categories (Actions, Forms, Navigation, Overlays, Feedback, Data Display, Layout). Updated Studio navigation to reflect new organization. All exports remain backward-compatible.
 *   **2026-01-13:** Pivoted Master Plan to focus on **Functional Organization** and **Quality Hardening**. Confirmed "Shadcn Parity" as the primary goal for Tier 1.
 *   **2026-01-10:** Automated Token Integration. Shadcn CLI is used for ingestion, but tokens are mapped automatically via `components.json`.
 *   **2025-12:** "Clean Pivot" to Web-Only. Mobile paused.

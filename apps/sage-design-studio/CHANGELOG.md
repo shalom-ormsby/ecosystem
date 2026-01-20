@@ -9,14 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added - Motion Component Migration (2026-01-17)
 
-#### Motion Library Integration (@sds/ui)
-- **Migrated Motion Components** from Studio examples to `@sds/ui` package:
+#### Motion Library Integration (@sage/ui)
+- **Migrated Motion Components** from Studio examples to `@sage/ui` package:
   - `SplashCursor`: WebGL fluid simulation cursor
   - `TargetCursor`: Precise custom cursor with hover states
   - `WarpBackground`: Immersive 3D starfield warp effect (formerly Galaxy)
 - **Export Strategy**:
-  - **Named Exports**: Available as top-level named exports (e.g., `import { SplashCursor } from '@sds/ui'`)
-  - **Namespace Export**: Grouped under `Motion` and `Backgrounds` namespaces (e.g., `import { Backgrounds } from '@sds/ui';`)
+  - **Named Exports**: Available as top-level named exports (e.g., `import { SplashCursor } from '@sage/ui'`)
+  - **Namespace Export**: Grouped under `Motion` and `Backgrounds` namespaces (e.g., `import { Backgrounds } from '@sage/ui';`)
   - This dual strategy supports both convenient direct imports and semantic grouping.
 
 #### Studio Updates
@@ -91,7 +91,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Critical Registry Issues
 - **Input component missing** from Studio registry
-  - Component was exported from `@sds/ui` ✓
+  - Component was exported from `@sage/ui` ✓
   - Component was in navigation list ✓
   - Component was NOT in component registry ✗
   - Impact: HIGH - Input is a fundamental form component
@@ -99,7 +99,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 - **Label component missing** from Studio registry
-  - Component was exported from `@sds/ui` ✓
+  - Component was exported from `@sage/ui` ✓
   - Component was in navigation list ✓
   - Component was NOT in component registry ✗
   - Impact: HIGH - Label is essential for accessible forms (WCAG 2.1 AA)
@@ -107,7 +107,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Build & Infrastructure Fixes
 - **Functional Organization Build Repairs**
-  - **Issue:** `@sds/ui` build failing after massive refactor due to import path and prop errors.
+  - **Issue:** `@sage/ui` build failing after massive refactor due to import path and prop errors.
   - **Resolution:**
     - `packages/ui/src/lib/store/theme.ts`: Fixed import path from `../tokens` to `@sage/tokens` workspace package.
     - `packages/ui/src/components/forms/ThemeSwitcher.tsx`: Removed unsupported `size` prop from `Switch` component.
@@ -115,10 +115,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `packages/ui/src/index.ts` & `src/components/feedback/index.ts`: Removed duplicate exports for Toast component.
     - `apps/sage-design-studio`: Resolved all TypeScript build errors in `component-registry.tsx`, `HooksSection.tsx`, and `universal/page.tsx` by migrating imports and adding required props to satisfy strict types.
     - `packages/design-system`: Updated legacy `Card` component to disable `hoverEffect` by default, resolving UI inconsistencies in the "Adding Components" section.
-    - **Release**: Bumped `@sds/ui` to v0.0.2 and `@ecosystem/design-system` to v1.0.1 to ensure fresh builds on deployment.
+    - **Release**: Bumped `@sage/ui` to v0.0.2 and `@ecosystem/design-system` to v1.0.1 to ensure fresh builds on deployment.
     - **Hotfix**: Refactored `Toast.tsx` to move style injection into `useEffect` to prevent build-time crashes. Bumped versions to v0.0.3 / v1.0.2.
     - **Critical Fix**: Fixed SSR build crash in `useMotionPreference.ts` by adding browser environment check before accessing `window.matchMedia`. This was causing Vercel deployment failures for all commits after the functional design framework refactor. Bumped versions to v0.0.4 / v1.0.3.
-    - **Critical Fix**: Added missing `zustand` dependency to `@sds/ui` package.json. The package was using zustand in store files but it wasn't declared as a dependency, causing build failures on Vercel. Bumped versions to v0.0.5 / v1.0.4.
+    - **Critical Fix**: Added missing `zustand` dependency to `@sage/ui` package.json. The package was using zustand in store files but it wasn't declared as a dependency, causing build failures on Vercel. Bumped versions to v0.0.5 / v1.0.4.
 
 ### Changed
 
@@ -132,8 +132,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Verified
 
 #### Package Build Status
-- ✅ @sds/ui package builds successfully (112.71 KB ESM, 131.28 KB CJS)
-- ✅ @sds/mcp-server package builds successfully (32.22 KB ESM, 32.24 KB CJS)
+- ✅ @sage/ui package builds successfully (112.71 KB ESM, 131.28 KB CJS)
+- ✅ @sage/mcp package builds successfully (32.22 KB ESM, 32.24 KB CJS)
 - ✅ @ecosystem/sage-design-studio builds successfully (Next.js 15.5.9)
 - ✅ No TypeScript compilation errors
 - ✅ All type declarations generated correctly
@@ -206,9 +206,9 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 
 ### Added - Functional Organization Architecture
 
-**Major architectural restructure of the Sage Design System from atomic design to functional organization.**
+**Major architectural restructure of the Sage UI from atomic design to functional organization.**
 
-#### Component Library Restructure (@sds/ui)
+#### Component Library Restructure (@sage/ui)
 - **48 components reorganized** into 7 functional categories
   - Actions (3): Button, Toggle, ToggleGroup
   - Forms (11): Checkbox, Combobox, Form, Input, InputOTP, Label, RadioGroup, Select, Slider, Switch, Textarea
@@ -249,7 +249,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 - **Archived legacy documentation**:
   - Moved `SDS_MASTER_PLAN.md` to archive (superseded by new strategy doc)
   - Moved `SDS_SHADCN_STRATEGY.md` to archive (integrated into strategy doc)
-  - Moved `Evolving the Sage Design System from Atomic to functional organization.md` to archive (implemented)
+  - Moved `Evolving the Sage UI from Atomic to functional organization.md` to archive (implemented)
   - Moved `shadcn-parity-status.md` to archive (integrated into strategy doc)
 
 - **Updated remaining documentation**:
@@ -261,7 +261,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 
 #### Backward Compatibility Maintained
 - **Zero breaking changes** - all existing imports continue to work
-- `import { Button } from '@sds/ui'` still works exactly as before
+- `import { Button } from '@sage/ui'` still works exactly as before
 - Added optional category-based imports for future use
 - TypeScript compilation verified successful
 
@@ -279,7 +279,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 ### Technical Details
 
 #### Commits
-- `77c39eb` - refactor(@sds/ui): Restructure components from flat to functional organization
+- `77c39eb` - refactor(@sage/ui): Restructure components from flat to functional organization
 - `51f4747` - feat(studio): Implement functional category navigation
 - `78b7001` - fix(studio): Add TypeScript type assertion for category lookup
 
@@ -304,7 +304,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 **For Consumers:**
 - No action required - all imports work as before
 - Optional: Start using category-based imports when convenient
-- Example: `import { Button } from '@sds/ui/actions'` (future enhancement)
+- Example: `import { Button } from '@sage/ui/actions'` (future enhancement)
 
 **For Contributors:**
 - New components go in appropriate category directory
@@ -313,10 +313,10 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 
 ## [2.1.0] - 2026-01-07
 
-### Added - SDS Cross-Platform Architecture (Phase 1)
+### Added - Sage UI Cross-Platform Architecture (Phase 1)
 - **New Monorepo Strategy (The "Sage Stack")**
   - **`@sage/tokens`**: New dedicated workspace for universal design tokens. Extracted from `design-system` to serve as the single source of truth for Web and Mobile.
-  - **`@sds/config`**: New shared configuration workspace (Tailwind, etc.).
+  - **`@sage/config`**: New shared configuration workspace (Tailwind, etc.).
   - **`SDS_MASTER_PLAN.md`**: Comprehensive roadmap and migration strategy documentation.
 
 ### Changed
@@ -326,7 +326,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
   - Updated `package.json` to use workspace protocol: `"@sage/tokens": "workspace:*"`.
 
 ### Added - Universal UI (Phase 2)
-- **`@sds/ui` Workspace**:
+- **`@sage/ui` Workspace**:
   - Initialized with `nativewind` v4, `react-native-web`, and `@rn-primitives`.
   - Configured tailwind preset to consume `@sage/tokens`.
   - **Universal Button**: Created first cross-platform component (`src/components/Button.tsx`) using `Pressable` and `Slot` pattern.
@@ -337,7 +337,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
   - Initialized Expo (Managed) project with TypeScript.
   - Configured **Metro** for monorepo resolution (handling workspace packages).
   - Configured **NativeWind v4** with `babel` and `tailwind.config.js`.
-  - Consumes `@sds/ui` and `@sage/tokens` directly.
+  - Consumes `@sage/ui` and `@sage/tokens` directly.
   - Added Universal Button demo to `App.tsx`.
 
 ## [2.0.1] - 2026-01-05

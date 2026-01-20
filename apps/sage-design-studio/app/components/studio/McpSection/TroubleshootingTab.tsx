@@ -26,8 +26,8 @@ export function TroubleshootingTab() {
                             <ul className="text-sm text-[var(--color-text-secondary)] space-y-1">
                                 <li>• Verify configuration file syntax is correct</li>
                                 <li>• Restart your MCP client (Claude Desktop, Cursor, VS Code)</li>
-                                <li>• Check that <code className="text-xs px-1 py-0.5 bg-[var(--color-surface)] rounded">@sds/mcp-server</code> is installed</li>
-                                <li>• Try running <code className="text-xs px-1 py-0.5 bg-[var(--color-surface)] rounded">npx @sds/mcp-server</code> directly to test</li>
+                                <li>• Check that <code className="text-xs px-1 py-0.5 bg-[var(--color-surface)] rounded">@sage/mcp</code> is installed</li>
+                                <li>• Try running <code className="text-xs px-1 py-0.5 bg-[var(--color-surface)] rounded">npx @sage/mcp</code> directly to test</li>
                             </ul>
                         </div>
                     </div>

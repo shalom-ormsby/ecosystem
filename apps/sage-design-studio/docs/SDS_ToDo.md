@@ -1,10 +1,10 @@
-# Sage Design System - To Do
+# Sage UI - To Do
 
-This document tracks planned improvements and enhancements to the Sage Design System.
+This document tracks planned improvements and enhancements to the Sage UI.
 
 ---
 
-## 🚀 Strategic Rebrand: Sage Design System -> Sage UI
+## 🚀 Strategic Rebrand: Sage UI -> Sage UI
 **Date Added:** 2026-01-20
 **Priority:** Critical
 **Status:** Planning
@@ -16,6 +16,7 @@ This document tracks planned improvements and enhancements to the Sage Design Sy
     - Rename "Sage Design Studio" -> "Sage Studio" or "Sage UI Studio".
     - Update homepage copy: "The Solopreneur's Development Stack" / "AI-Native Components".
     - Update metadata/titles across the documentation site.
+    - [x] Global Find & Replace: `Sage Design System` -> `Sage UI`, `@sds/*` -> `@sage/*`.
 - [ ] **Feature Parity Strategy**:
     - Adopt "Mantine-style" utility hook library (`@sage/hooks`).
     - Adopt "Shadcn-style" chart library (`@sage/charts`).
@@ -24,9 +25,9 @@ This document tracks planned improvements and enhancements to the Sage Design Sy
 *Goal: Rename packages to align with new brand. Proposed Naming: `@sage/*` or `@sage-ui/*`.*
 
 - [x] **Package Renaming**:
-    - `@sds/ui` -> `@sage/ui` (The Primitives)
-    - `@sds/tokens` -> `@sage/tokens`
-    - `@sds/mcp-server` -> `@sage/mcp`
+    - `@sage/ui` -> `@sage/ui` (The Primitives)
+    - `@sage/tokens` -> `@sage/tokens`
+    - `@sage/mcp` -> `@sage/mcp`
 - [ ] **New Packages**:
     - `@sage/hooks` (New utility belt)
     - `@sage/charts` (Recharts wrapper)
@@ -137,14 +138,14 @@ const { shouldAnimate, scale } = useMotionPreference();
 **Date Added:** 2026-01-17
 **Status:** In Progress
 
-High-impact tasks to evolve the SDS Motion section and make it as useful as possible.
+High-impact tasks to evolve the Sage UI Motion section and make it as useful as possible.
 
 - [ ] **Fill the "Placeholders"**
     - [x] **DurationPage & EasingPage**: Critical foundation primitives. Users need to feel the difference. (Impact: High)
     - [x] **TypewriterPage**: A classic effect. (Impact: Medium)
     - [x] **MagneticPage**: Great for micro-interactions. (Impact: High)
 - [ ] **Standardize "Motion Primitives"**
-    - Create a `Motion` namespace in `@sds/ui` (e.g., `<Motion.Fade in>`). Reduces boilerplate. (Impact: High)
+    - Create a `Motion` namespace in `@sage/ui` (e.g., `<Motion.Fade in>`). Reduces boilerplate. (Impact: High)
 - [x] **"Playground" for Motion Tokens**
     - Build a page where users can tweak variables and see real-time effects on dummy UI. (Impact: High) - *Implemented as the new "Primitives" page*
 - [ ] **Accessibility First (Reduced Motion)**

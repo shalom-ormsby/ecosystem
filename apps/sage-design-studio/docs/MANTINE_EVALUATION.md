@@ -2,15 +2,15 @@
 
 ## Executive Summary
 
-Mantine UI is a massive, batteries-included component library with over 120 components and 50+ hooks. Sage UI (formerly Sage Design System), currently based on shadcn/ui principles, focuses on code ownership, modularity, and high-end aesthetics.
+Mantine UI is a massive, batteries-included component library with over 120 components and 50+ hooks. Sage UI (formerly Sage UI), currently based on shadcn/ui principles, focuses on code ownership, modularity, and high-end aesthetics.
 
 To achieve parity with Mantine effectively, Sage UI should **not** copy Mantine blindly but rather adopt its **comprehensive utility** while maintaining Sage UI's **architectural superiority** (headless primitives + Tailwind).
 
 **Key Strategic Findings:**
-1.  **Hooks Gap**: SDS completely lacks a standard utility hook library (`@mantine/hooks` is a major competitive advantage).
-2.  **Data Viz Gap**: Mantine has a dedicated Charts package. SDS currently has none (but can adopt shadcn charts).
-3.  **Complex Inputs**: Mantine excels at complex inputs (ColorPicker, NumberInput, Dropzone) which SDS lacks.
-4.  **Form Strategy**: Mantine has its own form library. SDS uses `react-hook-form`. **Recommendation:** Stick with `react-hook-form` (industry standard) but improve the `Form` wrapper.
+1.  **Hooks Gap**: Sage UI completely lacks a standard utility hook library (`@mantine/hooks` is a major competitive advantage).
+2.  **Data Viz Gap**: Mantine has a dedicated Charts package. Sage UI currently has none (but can adopt shadcn charts).
+3.  **Complex Inputs**: Mantine excels at complex inputs (ColorPicker, NumberInput, Dropzone) which Sage UI lacks.
+4.  **Form Strategy**: Mantine has its own form library. Sage UI uses `react-hook-form`. **Recommendation:** Stick with `react-hook-form` (industry standard) but improve the `Form` wrapper.
 
 ---
 
@@ -18,7 +18,7 @@ To achieve parity with Mantine effectively, Sage UI should **not** copy Mantine 
 
 ### 📦 Core Architecture
 
-| Feature | Mantine UI | Sage Design System (SDS) | Parity Strategy |
+| Feature | Mantine UI | Sage UI | Parity Strategy |
 | :--- | :--- | :--- | :--- |
 | **Styling** | CSS Modules / css-in-js (PostCSS) | Tailwind CSS + Class Variance Authority | ✅ **SDS is Superior** (Modern Standard) |
 | **Theming** | Strict Schema (JSON based) | CSS Variables + Tailwind Config | ✅ **SDS is Superior** (More Flexible) |
@@ -27,7 +27,7 @@ To achieve parity with Mantine effectively, Sage UI should **not** copy Mantine 
 
 ### 🛠 Utilities & Logic
 
-| Category | Mantine UI | SDS Current | Recommendation |
+| Category | Mantine UI | Sage UI Current | Recommendation |
 | :--- | :--- | :--- | :--- |
 | **Hooks** | **70+ Hooks** (`@mantine/hooks`)<br>*(useHover, useMove, useOs, etc.)* | **3 Hooks**<br>*(useTheme, useMotion, useForm)* | 🚨 **CRITICAL GAP**<br>Build `@sds/hooks` |
 | **Forms** | `@mantine/form`<br>*(Custom state management)* | `react-hook-form` + `zod` | ⛔ **Do Not Copy**<br>Stick to RHF standard |
@@ -37,7 +37,7 @@ To achieve parity with Mantine effectively, Sage UI should **not** copy Mantine 
 ### 🧩 Component Comparison
 
 #### Layout & Navigation
-| Component | Mantine | SDS | Gap / Action |
+| Component | Mantine | Sage UI | Gap / Action |
 | :--- | :--- | :--- | :--- |
 | AppShell | ✅ | ❌ | **Build `AppShell`** (Holy grail layout) |
 | Stepper | ✅ | ❌ | **Build `Stepper`** |
@@ -47,7 +47,7 @@ To achieve parity with Mantine effectively, Sage UI should **not** copy Mantine 
 | Grid / Group | ✅ | ✅ (Stack/Grid) | Parity |
 
 #### Inputs & Forms
-| Component | Mantine | SDS | Gap / Action |
+| Component | Mantine | Sage UI | Gap / Action |
 | :--- | :--- | :--- | :--- |
 | ColorPicker | ✅ | ❌ | **Build `ColorPicker`** |
 | FileInput / Dropzone | ✅ | ❌ | **Build `Dropzone`** |
@@ -58,14 +58,14 @@ To achieve parity with Mantine effectively, Sage UI should **not** copy Mantine 
 | Rich Text | ✅ (TipTap) | ❌ | **Build `Editor`** (TipTap wrapper) |
 
 #### Feedback & Overlays
-| Component | Mantine | SDS | Gap / Action |
+| Component | Mantine | Sage UI | Gap / Action |
 | :--- | :--- | :--- | :--- |
 | Loader | ✅ | ✅ (Progress/Skeleton) | Add generic `Spinner` |
 | Spotlight | ✅ (Cmd+K) | ✅ (Command) | Parity |
 | Modal Manager | ✅ | ❌ (Declarative only) | Consider Imperative Modal Hook |
 
 #### Data Display & Charts
-| Component | Mantine | SDS | Gap / Action |
+| Component | Mantine | Sage UI | Gap / Action |
 | :--- | :--- | :--- | :--- |
 | Area/Bar/Line Chart | ✅ | ❌ | 🚨 **High Priority Gap**<br>Integrate `recharts` |
 | Image | ✅ | ✅ (Next/Image) | Parity |
@@ -76,7 +76,7 @@ To achieve parity with Mantine effectively, Sage UI should **not** copy Mantine 
 
 ## 2. The "Mantine Parity" Playbook
 
-To achieve feature parity with Mantine, SDS needs to move beyond "basic UI" and into "application ecosystem" territory.
+To achieve feature parity with Mantine, Sage UI needs to move beyond "basic UI" and into "application ecosystem" territory.
 
 ### Phase 1: The "Utility Belt" (@sds/hooks)
 **Goal:** Match `@mantine/hooks` utility for utility.
@@ -94,7 +94,7 @@ This is low-effor/high-impact. We can port popular open-source hooks or write ou
 
 ### Phase 2: Data Visualization (Charts)
 **Goal:** Match `@mantine/charts`.
-Do **not** write from scratch. Adopt `recharts` and wrap them in SDS design tokens/Tailwind classes (similar to shadcn/charts).
+Do **not** write from scratch. Adopt `recharts` and wrap them in Sage UI design tokens/Tailwind classes (similar to shadcn/charts).
 
 **New Category:** `components/charts/`
 - `AreaChart`
@@ -108,7 +108,7 @@ Do **not** write from scratch. Adopt `recharts` and wrap them in SDS design toke
 
 1.  **ColorPicker**: Essential for creative apps (like the Customizer itself).
 2.  **NumberInput**: A robust numerical input with increment/decrement steppers and clamp logic.
-3.  **Dropzone**: A wrapper around `react-dropzone` with SDS styling.
+3.  **Dropzone**: A wrapper around `react-dropzone` with Sage UI styling.
 4.  **RichTextEditor**: A styled wrapper around `TipTap`.
 
 ### Phase 4: Time & Progress
@@ -129,7 +129,7 @@ Do **not** write from scratch. Adopt `recharts` and wrap them in SDS design toke
 
 ## 3. Strategic Pivot: Rebranding to Sage UI
 
-**Current Status:** "Sage Design System" (SDS)
+**Current Status:** "Sage UI" 
 **New Identity:** **Sage UI** (@sage/ui)
 
 ### The Problem with "Design System"
@@ -179,7 +179,7 @@ Rebranding to **Sage UI** aligns us with modern industry standards (Material UI,
 
 ## 5. Recommended Next Steps (Immediate)
 
-1.  **Rebrand Logic:** Begin renaming internal references from SDS to Sage UI where appropriate (keeping practical backward compat).
+1.  **Rebrand Logic:** Begin renaming internal references from Sage UI to Sage UI where appropriate (keeping practical backward compat).
 2.  **Create `@sds/hooks` (or `@sage/hooks`)**: Initialize this new sub-path and add 5 core hooks.
 3.  **Add `Chart` Primitives**: Import `recharts` and create the base Chart configuration.
 4.  **Build `NumberInput`**: This is the most requested "missing" input from standard HTML.

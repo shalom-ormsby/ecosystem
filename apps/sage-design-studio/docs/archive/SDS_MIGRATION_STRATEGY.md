@@ -1,4 +1,4 @@
-# SDS Strategic Analysis & Migration Plan
+# Sage UI Strategic Analysis & Migration Plan
 
 > [!IMPORTANT]
 > **Core User Need:** Implementation of a "Creative Solopreneur" stack that enables building premium apps efficiently.
@@ -25,7 +25,7 @@ We analyzed three major competitors to the proposed "Sage Stack":
 
 ---
 
-## 2. The New SDS Architecture (Monorepo Structure)
+## 2. The New Sage UI Architecture (Monorepo Structure)
 
 To verify "building the plane while flying", we must reorganize the repo into this standard Solito/Turbo structure:
 
@@ -84,7 +84,7 @@ Goal: Prove the "Shared Screen" concept.
 - [ ] **Verification:** Change text in `demo-screen.tsx` and watch it update on BOTH Web and Simulator instantly.
 
 ### Phase 5: The Great Migration (Refactoring)
-Goal: Move SDS components to the Universal structure one by one.
+Goal: Move Sage UI components to the Universal structure one by one.
 - [ ] Audit `design-system` components.
 - [ ] For each component (e.g., `Card`, `Input`):
     -   Rewrite using `rn-primitives`.

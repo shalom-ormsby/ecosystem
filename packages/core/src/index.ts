@@ -1,6 +1,6 @@
 /**
- * @sds/core
- * Core functionality for the Sage Design System
+ * @sage/core
+ * Core functionality for the Sage UI
  */
 
 // Theme Management

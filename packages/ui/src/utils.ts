@@ -1,6 +1,6 @@
 /**
  * Utils subpath export
- * Allows: import { ... } from '@sds/ui/utils'
+ * Allows: import { ... } from '@sage/ui/utils'
  */
 
 // Re-export all utilities

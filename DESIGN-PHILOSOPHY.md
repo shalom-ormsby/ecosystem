@@ -154,13 +154,13 @@ ecosystem/
 ├── apps/                     ← Portfolio, Sage Stocks, Creative Powerup, SageOS
 │   └── sage-design-studio/   ← Documentation & playground
 ├── packages/
-│   ├── ui/                   ← @sds/ui - Component library
+│   ├── ui/                   ← @sage/ui - Component library
 │   │   └── src/
 │   │       ├── components/   ← Functionally organized (actions, forms, navigation, etc.)
 │   │       ├── lib/          ← Utilities, validation, animations
 │   │       ├── hooks/        ← useTheme, useMotionPreference, etc.
 │   │       └── providers/    ← ThemeProvider, etc.
-│   ├── tokens/               ← @sds/tokens - Design system tokens
+│   ├── tokens/               ← @sage/tokens - Design system tokens
 │   └── config/               ← Shared config (Tailwind, etc.)
 ```
 

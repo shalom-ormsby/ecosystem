@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 /**
- * Sage Design System MCP Server
+ * Sage UI MCP Server
  *
  * Model Context Protocol server that enables AI assistants to:
- * - Browse and search SDS components
+ * - Browse and search Sage UI components
  * - Get detailed component information
  * - Install components into projects
  *
@@ -16,7 +16,7 @@
  *   "mcpServers": {
  *     "sds": {
  *       "command": "npx",
- *       "args": ["@sds/mcp-server"]
+ *       "args": ["@sage/mcp"]
  *     }
  *   }
  * }
@@ -62,7 +62,7 @@ const TOOLS: Tool[] = [
   {
     name: 'list_components',
     description:
-      'List all available Sage Design System components. Optionally filter by category (actions, forms, navigation, overlays, feedback, data-display, layout).',
+      'List all available Sage UI components. Optionally filter by category (actions, forms, navigation, overlays, feedback, data-display, layout).',
     inputSchema: {
       type: 'object',
       properties: {
@@ -151,7 +151,7 @@ function formatComponentList(components: ComponentMetadata[]): string {
     groupedByCategory[comp.category].push(comp);
   });
 
-  let output = `## Sage Design System Components\n\n`;
+  let output = `## Sage UI Components\n\n`;
   output += `Total: ${components.length} components\n\n`;
 
   Object.entries(groupedByCategory).forEach(([category, comps]) => {
@@ -199,7 +199,7 @@ function formatComponentDetails(component: ComponentMetadata): string {
   }
 
   output += `## Import\n`;
-  output += `\`\`\`typescript\nimport { ${component.name} } from '@sds/ui';\n\`\`\`\n\n`;
+  output += `\`\`\`typescript\nimport { ${component.name} } from '@sage/ui';\n\`\`\`\n\n`;
 
   output += `## Documentation\n`;
   output += `View full documentation at: https://studio.shalomormsby.com/#${component.category}/${component.name.toLowerCase().replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}\n`;
@@ -213,13 +213,13 @@ function formatComponentDetails(component: ComponentMetadata): string {
 function formatInstallationInstructions(component: ComponentMetadata): string {
   let output = `# Install ${component.name}\n\n`;
 
-  output += `## 1. Install @sds/ui package\n\n`;
+  output += `## 1. Install @sage/ui package\n\n`;
   output += `\`\`\`bash\n`;
-  output += `pnpm add @sds/ui\n`;
+  output += `pnpm add @sage/ui\n`;
   output += `# or\n`;
-  output += `npm install @sds/ui\n`;
+  output += `npm install @sage/ui\n`;
   output += `# or\n`;
-  output += `yarn add @sds/ui\n`;
+  output += `yarn add @sage/ui\n`;
   output += `\`\`\`\n\n`;
 
   if (component.dependencies.length > 0) {
@@ -232,7 +232,7 @@ function formatInstallationInstructions(component: ComponentMetadata): string {
 
   output += `## ${component.dependencies.length > 0 ? '3' : '2'}. Import and use\n\n`;
   output += `\`\`\`typescript\n`;
-  output += `import { ${component.name} } from '@sds/ui';\n\n`;
+  output += `import { ${component.name} } from '@sage/ui';\n\n`;
   output += `export function MyComponent() {\n`;
   output += `  return (\n`;
   output += `    <${component.name}>\n`;
@@ -452,7 +452,7 @@ async function main() {
   await server.connect(transport);
 
   // Log to stderr (stdout is used for MCP protocol)
-  console.error('Sage Design System MCP Server running');
+  console.error('Sage UI MCP Server running');
   console.error(`Components available: ${getComponentCount()}`);
 }
 

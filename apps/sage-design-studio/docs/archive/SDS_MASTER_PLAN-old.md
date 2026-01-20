@@ -1,4 +1,4 @@
-# SDS Master Plan: Cross-Platform Expansion
+# Sage UI Master Plan: Cross-Platform Expansion
 
 > [!IMPORTANT]
 > **Vision:** A "Creative Solopreneur" stack enabling the efficient building of premium web and native apps.
@@ -43,13 +43,13 @@ ecosystem/
 │   └── mobile/              # (New) iOS/Android App (Expo)
 ├── packages/
 │   ├── tokens/              # (@sage/tokens) The "Brain". JSON/TS definitions.
-│   ├── ui/                  # (@sds/ui) Universal Components (Button, Card).
-│   ├── core/                # (@sds/core) Logic, Hooks, Stores.
+│   ├── ui/                  # (@sage/ui) Universal Components (Button, Card).
+│   ├── core/                # (@sage/core) Logic, Hooks, Stores.
 │   └── config/              # Shared configurations (Tailwind, ESLint).
 ```
 
 ### The Solito Distinction
-*   **`@sds/ui`**: Contains *Components* (Atoms/Molecules).
+*   **`@sage/ui`**: Contains *Components* (Atoms/Molecules).
 *   **`packages/app` (Solito)**: Contains *Features* (Screens/Flows).
     *   *Usage Guideline:* Use Solito Shared Screens for simple flows (Marketing, Auth, Settings). Build platform-specific screens for complex, gesture-heavy interactions (Canvas editors, Hardware access).
 
@@ -77,13 +77,13 @@ To ensure shipping velocity, we explicitly de-scope the following:
 ### Phase 2: The Universal Atom
 **Goal:** Prove the "Universal Component" concept with ONE component.
 - [x] Initialize `packages/ui` with `nativewind` and `rn-primitives`.
-- [x] Implement `Button.tsx` in `@sds/ui` using the shared tokens.
-- **Exit Criteria:** `@sds/ui/Button` renders correctly on a **Web** test page within the Studio. ✅
+- [x] Implement `Button.tsx` in `@sage/ui` using the shared tokens.
+- **Exit Criteria:** `@sage/ui/Button` renders correctly on a **Web** test page within the Studio. ✅
 
 ### Phase 3: The Mobile Entry
 **Goal:** Boot up the iOS environment.
 - [x] Initialize `apps/mobile` (Expo).
-- [x] Configure to consume `@sds/ui` and `@sage/tokens`.
+- [x] Configure to consume `@sage/ui` and `@sage/tokens`.
 - **Exit Criteria:** `apps/mobile` runs in an iOS Simulator and displays the Universal Button. (Configured ✅ - Ready for local simulator launch)
 
 ### Phase 4: Workflow Validation (Solito)
@@ -93,7 +93,7 @@ To ensure shipping velocity, we explicitly de-scope the following:
 - **Exit Criteria:** Editing text in `demo-screen` hot-reloads on **both** Web and Simulator simultaneously.
 
 ### Phase 5: The Tiered Migration
-**Goal:** Systematically migrate components to `@sds/ui` based on value.
+**Goal:** Systematically migrate components to `@sage/ui` based on value.
 *   **Tier 1 (Core):** Button, Input, Card, Text, Box. (High Usage)
 *   **Tier 2 (structure):** Container, Stack, Grid.
 *   **Tier 3 (Niche):** Specific marketing components. (Migrate on demand).
@@ -118,7 +118,7 @@ To ensure shipping velocity, we explicitly de-scope the following:
 ## 7. Troubleshooting Log: Web Styling (Phase 2)
 **Status**: BLOCKED
 **Date**: 2026-01-07
-**Issue**: Universal components (`@sds/ui`) render unstyled in the Next.js app (`sage-design-studio`), specifically those using `react-native-web` primitives (`Pressable`, `Text`).
+**Issue**: Universal components (`@sage/ui`) render unstyled in the Next.js app (`sage-design-studio`), specifically those using `react-native-web` primitives (`Pressable`, `Text`).
 
 ### Root Cause Analysis
 1.  **Tailwind Scanning is Working**: Standard HTML elements (`<button>`, `<div>`) in `apps/sage-design-studio` are correctly styled by Tailwind when testing. This confirms `tailwind.config.ts` content paths are correct (using absolute paths).
@@ -131,7 +131,7 @@ To ensure shipping velocity, we explicitly de-scope the following:
 
 ### Attempted Solutions (Failed)
 1.  **Tailwind Path Fixes**: Switched to absolute paths (`path.join(__dirname, ...)`) in `tailwind.config.ts`. (Proved effective for HTML, not RNW).
-2.  **Explicit Transpilation**: Added `@sds/ui`, `nativewind`, `react-native-css-interop` to `transpilePackages` in `next.config.mjs`.
+2.  **Explicit Transpilation**: Added `@sage/ui`, `nativewind`, `react-native-css-interop` to `transpilePackages` in `next.config.mjs`.
 3.  **Babel Configuration**: Added `babel.config.js` with `presets: ['next/babel', 'nativewind/babel']`.
 4.  **Local Component**: Created `LocalUniversalButton.tsx` inside the app to bypass monorepo resolution issues. It also failed to style, confirming the issue is the compilation environment, not the package link.
 

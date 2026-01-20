@@ -1,7 +1,7 @@
 import { getExperimentsByCategory, categories } from '@/lib/experiments';
 import { ExperimentCard } from './ExperimentCard';
 import type { ExperimentCategory } from '@/lib/types';
-import { Button } from '@sds/ui';
+import { Button } from '@sage/ui';
 import Link from 'next/link';
 
 interface CategoryPageProps {

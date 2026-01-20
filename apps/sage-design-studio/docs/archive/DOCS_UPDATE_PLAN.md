@@ -1,4 +1,4 @@
-# Documentation Update Plan for SDS v2
+# Documentation Update Plan for Sage UI v2
 
 As we migrate to the "Sage Stack" (Universal Monorepo), the existing "How it Works" and "Getting Started" documentation on the Studio site will need updates.
 
@@ -6,12 +6,12 @@ As we migrate to the "Sage Stack" (Universal Monorepo), the existing "How it Wor
 
 ### 1. Overview / Introduction
 - **Current:** Describes a single `design-system` package.
-- **New:** Needs to describe the "Universal Brain" architecture (`@sage/tokens`, `@sds/ui`, `@sds/core`).
+- **New:** Needs to describe the "Universal Brain" architecture (`@sage/tokens`, `@sage/ui`, `@sage/core`).
 
 ### 2. Getting Started
 - **Current:** `pnpm install @ecosystem/design-system`
 - **New:** Explanation of the Monorepo structure for solopreneurs.
-    - How to use `@sds/ui` for cross-platform components.
+    - How to use `@sage/ui` for cross-platform components.
     - How to use Solito for shared screens.
 
 ### 3. "How it Works"

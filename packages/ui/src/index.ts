@@ -1,8 +1,8 @@
 // ============================================================================
 // MAIN BARREL EXPORTS - Backward Compatible
 // ============================================================================
-// All components remain importable from '@sds/ui' root
-// Example: import { Button, Card, Dialog } from '@sds/ui'
+// All components remain importable from '@sage/ui' root
+// Example: import { Button, Card, Dialog } from '@sage/ui'
 
 // Actions
 export * from './components/actions/Button';
@@ -129,13 +129,13 @@ export * from './lib/validation';
 export * from './lib/syntax-parser';
 
 // Tokens (selective re-exports)
-export { typographySystem } from '@sds/tokens';
+export { typographySystem } from '@sage/tokens';
 
 // ============================================================================
 // OPTIONAL CATEGORY-BASED EXPORTS (Future Use)
 // ============================================================================
 // These allow category-specific imports for better code organization
-// Example: import { Button } from '@sds/ui/actions'
+// Example: import { Button } from '@sage/ui/actions'
 // Note: These require package.json exports configuration
 
 // Re-export categories for convenience

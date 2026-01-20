@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import type { Experiment } from '@/lib/types';
-import { Card } from '@sds/ui';
+import { Card } from '@sage/ui';
 
 interface ExperimentCardProps {
   experiment: Experiment;

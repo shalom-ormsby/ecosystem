@@ -504,7 +504,7 @@ const { track } = sizes[safeSize]; // Safe access guaranteed`}
                         id="troubleshoot-phantom"
                         code={`// package.json in the app
 "devDependencies": {
-  "@sds/config": "workspace:*", // Required for tailwind config
+  "@sage/config": "workspace:*", // Required for tailwind config
 }`}
                         defaultCollapsed={true}
                         showCopy={true}

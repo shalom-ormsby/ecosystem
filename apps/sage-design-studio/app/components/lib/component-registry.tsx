@@ -1688,7 +1688,7 @@ export function PaymentsTable() {
 
   Textarea: {
     component: Textarea,
-    description: 'Multi-line text input field. Styled with SDS tokens.',
+    description: 'Multi-line text input field. Styled with Sage UI tokens.',
     props: {
       placeholder: {
         type: 'text',

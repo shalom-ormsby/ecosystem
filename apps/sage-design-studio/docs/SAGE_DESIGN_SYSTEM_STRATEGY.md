@@ -1,4 +1,4 @@
-# Sage Design System - Strategy & Implementation Status
+# Sage UI - Strategy & Implementation Status
 
 > **Last Updated:** 2026-01-15
 > **Current Phase:** ✅ Phase 5 - Assemblies & Templates (Planning)
@@ -23,7 +23,7 @@
 
 ### The Solopreneur Stack
 
-The Sage Design System (SDS) is evolving from a traditional enterprise design system to a **Solopreneur-focused Accelerator**. The goal is not just "consistency" but **"quality speed"** - enabling rapid development of premium, high-scale web applications.
+The Sage UI is evolving from a traditional enterprise design system to a **Solopreneur-focused Accelerator**. The goal is not just "consistency" but **"quality speed"** - enabling rapid development of premium, high-scale web applications.
 
 ### Core Principles
 
@@ -66,7 +66,7 @@ The Sage Design System (SDS) is evolving from a traditional enterprise design sy
 - **Documentation aligned** with new structure
 
 **Commits:**
-- `77c39eb` - Core restructure (@sds/ui components)
+- `77c39eb` - Core restructure (@sage/ui components)
 - `51f4747` - Studio navigation updates
 - `78b7001` - TypeScript fixes
 
@@ -129,7 +129,7 @@ Layout (8)         → Accordion, AspectRatio, Carousel, Collapsible,
 ```
 ecosystem/
 ├── packages/
-│   ├── ui/                          # @sds/ui - Component library (Tier 1)
+│   ├── ui/                          # @sage/ui - Component library (Tier 1)
 │   │   └── src/
 │   │       ├── components/
 │   │       │   ├── actions/
@@ -145,7 +145,7 @@ ecosystem/
 │   │   └── src/studio.ts
 │   ├── config/                      # Shared configs (Tailwind)
 │   │   └── tailwind/index.js
-│   └── core/                        # @sds/core - Shared logic/hooks
+│   └── core/                        # @sage/core - Shared logic/hooks
 ├── design-system/                   # @ecosystem/design-system (Legacy)
 │   └── src/                         # Atomic-organized components (deprecated)
 └── apps/
@@ -159,7 +159,7 @@ ecosystem/
 
 ### Three-Tier Architecture (Current + Planned)
 
-#### Tier 1: Primitives (@sds/ui) - ✅ COMPLETE
+#### Tier 1: Primitives (@sage/ui) - ✅ COMPLETE
 
 **Goal:** 100% shadcn/ui parity - accessible, unopinionated building blocks
 
@@ -335,7 +335,7 @@ Modern design systems have abandoned rigid Atomic Design hierarchies (atoms/mole
 #### ✅ Phase 0: Prerequisites (Complete)
 
 **Token Integration Automation:**
-- `components.json` configured to map shadcn tokens to SDS CSS variables
+- `components.json` configured to map shadcn tokens to Sage UI CSS variables
 - Zero manual token refactoring per component
 - Automatic theme mapping verified
 
@@ -411,7 +411,7 @@ Modern design systems have abandoned rigid Atomic Design hierarchies (atoms/mole
 **Status:** 100% complete
 
 **Infrastructure Setup (2026-01-14):**
-- ✅ Created complete infrastructure in @sds/ui:
+- ✅ Created complete infrastructure in @sage/ui:
   - `lib/syntax-parser/` - Full tokenizer for code highlighting
   - `lib/store/` - Theme and customizer stores
   - `lib/validation.ts` - Form validation utilities
@@ -421,10 +421,10 @@ Modern design systems have abandoned rigid Atomic Design hierarchies (atoms/mole
 
 **Subpath Exports Configuration (2026-01-15):**
 - ✅ Configured package.json exports field for better developer experience:
-  - `@sds/ui/tokens` - Re-exports from @sage/tokens
-  - `@sds/ui/hooks` - useTheme, useMotionPreference, useForm
-  - `@sds/ui/utils` - animations, breadcrumbs, colors, utils, validation, syntax-parser
-  - `@sds/ui/providers` - ThemeProvider
+  - `@sage/ui/tokens` - Re-exports from @sage/tokens
+  - `@sage/ui/hooks` - useTheme, useMotionPreference, useForm
+  - `@sage/ui/utils` - animations, breadcrumbs, colors, utils, validation, syntax-parser
+  - `@sage/ui/providers` - ThemeProvider
 - ✅ Created entry point files: `src/tokens.ts`, `src/hooks.ts`, `src/utils.ts`, `src/providers.ts`
 - ✅ Updated build configuration to generate TypeScript declarations (tsup --dts)
 - ✅ Moved @sage/tokens from devDependencies to dependencies
@@ -452,16 +452,16 @@ Modern design systems have abandoned rigid Atomic Design hierarchies (atoms/mole
 
 **App Import Migration (44 files updated):**
 - ✅ **Portfolio app** - 15 files migrated:
-  - Fixed legacy imports (`@sds/ui/atoms`, `@sds/ui/features/customizer`)
+  - Fixed legacy imports (`@sage/ui/atoms`, `@sage/ui/features/customizer`)
   - Updated component APIs (SearchInput → SearchBar with new onChange handler)
   - Fixed Badge variant API (variant="primary" → variant="default")
 - ✅ **Creative Powerup app** - 3 files migrated:
   - Fixed legacy imports in ExperimentCard and contribute page
 - ✅ **Sage Design Studio app** - 26+ files migrated:
-  - Updated all component imports to use @sds/ui root import
+  - Updated all component imports to use @sage/ui root import
 
 **Build Verification (All Apps):**
-- ✅ @sds/ui package builds successfully with TypeScript declarations
+- ✅ @sage/ui package builds successfully with TypeScript declarations
 - ✅ Sage Design Studio: Compiled successfully (5.0s)
 - ✅ Portfolio: Compiled successfully (3.1s)
 - ✅ Creative Powerup: Compiled successfully (2.8s)
@@ -679,7 +679,7 @@ Navigate to the component and verify:
 
 1. Go to https://ui.shadcn.com/docs/components/[component-name]
 2. View source on GitHub
-3. Compare line-by-line with SDS implementation
+3. Compare line-by-line with Sage UI implementation
 4. Note differences in CSS classes, animation timing, structure
 
 #### Common Issues & Fixes
@@ -709,7 +709,7 @@ cd /Users/shalomormsby/Developer/work/ecosystem
 pnpm build
 
 # Rebuild specific package
-pnpm build --filter=@sds/ui
+pnpm build --filter=@sage/ui
 pnpm build --filter=@sage/tokens
 pnpm build --filter=@ecosystem/sage-design-studio
 
@@ -747,7 +747,7 @@ git merge feat/component-name
 
 ### Overview
 
-The MCP server will enable AI assistants (like Claude Desktop, Cursor, and others) to directly interact with the Sage Design System. This is a critical piece of the AI-native development workflow.
+The MCP server will enable AI assistants (like Claude Desktop, Cursor, and others) to directly interact with the Sage UI. This is a critical piece of the AI-native development workflow.
 
 **Reference:** https://ui.shadcn.com/docs/mcp
 
@@ -787,7 +787,7 @@ The Model Context Protocol (MCP) is an open standard for connecting AI assistant
 ### Implementation Plan
 
 **Phase 1: Server Setup**
-- Create MCP server package (`@sds/mcp-server`)
+- Create MCP server package (`@sage/mcp`)
 - Implement component listing endpoint
 - Add search functionality
 - Set up authentication (if needed)
@@ -818,7 +818,7 @@ The Model Context Protocol (MCP) is an open standard for connecting AI assistant
   tools: [
     {
       name: "list-components",
-      description: "List all available Sage Design System components",
+      description: "List all available Sage UI components",
       parameters: {
         category?: string,  // Filter by category
         search?: string,    // Search query
@@ -839,7 +839,7 @@ The Model Context Protocol (MCP) is an open standard for connecting AI assistant
 ### Success Metrics
 
 - [ ] MCP server responds to component queries
-- [ ] Claude Desktop can list SDS components
+- [ ] Claude Desktop can list Sage UI components
 - [ ] Components install correctly via MCP
 - [ ] Search returns relevant results
 - [ ] Integration works in real projects
@@ -847,7 +847,7 @@ The Model Context Protocol (MCP) is an open standard for connecting AI assistant
 
 ### Strategic Priority
 
-**HIGH** - This is a key differentiator for the "AI-native" positioning. shadcn/ui's MCP server is a major competitive advantage, and SDS should match or exceed this capability.
+**HIGH** - This is a key differentiator for the "AI-native" positioning. shadcn/ui's MCP server is a major competitive advantage, and Sage UI should match or exceed this capability.
 
 ---
 
@@ -862,7 +862,7 @@ The Model Context Protocol (MCP) is an open standard for connecting AI assistant
   - Four MCP tools: list, search, get, install
   - Multi-client support (Claude Desktop, Cursor, VS Code)
   - Full documentation at studio site
-  - Package: @sds/mcp-server v0.1.0
+  - Package: @sage/mcp v0.1.0
 - [x] ✅ **Quality Verification Phase** (2026-01-14)
   - Component registry audit complete (48/48)
   - Fixed missing Input and Label components in Studio
@@ -880,7 +880,7 @@ The Model Context Protocol (MCP) is an open standard for connecting AI assistant
   - [x] Subpath exports configuration (tokens, hooks, utils, providers)
   - [x] All 44+ components migrated with functional organization
   - [x] 3 new components added (TextField, SearchBar, VariableWeightText)
-  - [x] Build @sds/ui package successfully with TypeScript declarations
+  - [x] Build @sage/ui package successfully with TypeScript declarations
   - [x] Migrated all app imports across 44 files (Portfolio, Creative Powerup, Studio)
   - [x] Removed legacy package (114 files deleted)
   - [x] Production deployment verified with zero errors
@@ -933,9 +933,9 @@ The Model Context Protocol (MCP) is an open standard for connecting AI assistant
 ### Major Decisions
 
 **2026-01-15 - Legacy Migration Complete (Phase 4)**
-- Successfully completed migration from `@ecosystem/design-system` to `@sds/ui`
+- Successfully completed migration from `@ecosystem/design-system` to `@sage/ui`
 - **Subpath exports configured** for improved developer experience:
-  - `@sds/ui/tokens`, `@sds/ui/hooks`, `@sds/ui/utils`, `@sds/ui/providers`
+  - `@sage/ui/tokens`, `@sage/ui/hooks`, `@sage/ui/utils`, `@sage/ui/providers`
   - Created dedicated entry point files for each subpath
   - Updated build configuration to generate TypeScript declarations with tsup --dts
 - **44+ components migrated** with strict functional organization
@@ -950,19 +950,19 @@ The Model Context Protocol (MCP) is an open standard for connecting AI assistant
 **2026-01-14 - Legacy Migration Started (Phase 4)**
 - Decided to skip formal deprecation phase since all usage is internal (3 apps only)
 - Going directly from quality verification to component migration
-- Created infrastructure in @sds/ui: syntax-parser, stores, hooks, providers
+- Created infrastructure in @sage/ui: syntax-parser, stores, hooks, providers
 - Migrated 15+ critical components to functionally organized structure
 - **Critical fix**: Removed molecules/ and organisms/ directories created by error
 - All components now strictly organized by function (actions/forms/navigation/overlays/feedback/data-display/layout)
 
 **2026-01-14 - MCP Server Configured in Claude Desktop**
-- Added @sds/mcp-server to Claude Desktop config at `~/Library/Application Support/Claude/claude_desktop_config.json`
+- Added @sage/mcp to Claude Desktop config at `~/Library/Application Support/Claude/claude_desktop_config.json`
 - Configuration uses local path: `node /Users/shalomormsby/Developer/work/ecosystem/packages/sds-mcp-server/dist/index.js`
-- Enables Claude Desktop to browse, search, and get installation instructions for all 48 SDS components
+- Enables Claude Desktop to browse, search, and get installation instructions for all 48 Sage UI components
 - Verified MCP server functionality with all four tools working
 
 **2026-01-14 - Quality Verification Complete**
-- Audited all 48 components across MCP server, @sds/ui, and Studio registry
+- Audited all 48 components across MCP server, @sage/ui, and Studio registry
 - Found and fixed 2 critical missing components (Input and Label) in Studio registry
 - Verified MCP server has 100% component coverage with working search
 - Created comprehensive verification report with manual testing checklist
@@ -970,18 +970,18 @@ The Model Context Protocol (MCP) is an open standard for connecting AI assistant
 - Ready for manual browser testing phase
 
 **2026-01-14 - MCP Server MVP Complete**
-- Implemented Model Context Protocol server at `@sds/mcp-server`
+- Implemented Model Context Protocol server at `@sage/mcp`
 - Created comprehensive component registry with all 48 components
 - Built four MCP tools: `list_components`, `search_components`, `get_component`, `install_component`
 - Added full documentation to studio site with dedicated page
 - Enables AI assistants (Claude Desktop, Cursor, VS Code) to interact with SDS
-- Strategic priority achieved: SDS is now truly AI-native
+- Strategic priority achieved: Sage UI is now truly AI-native
 
 **2026-01-14 - Functional Organization Implemented**
-- Restructured all 48 @sds/ui components into 7 functional categories
+- Restructured all 48 @sage/ui components into 7 functional categories
 - Updated Studio navigation to match
 - Zero breaking changes (backward compatible exports)
-- Aligns SDS with modern design system patterns
+- Aligns Sage UI with modern design system patterns
 
 **2026-01-13 - Functional Organization Strategy Approved**
 - Decided to abandon atomic design classification

@@ -1,8 +1,8 @@
 # Modern Design System Architecture: A Guide for Rapid Developer Adoption
 
-> **✅ IMPLEMENTATION STATUS (2026-01-14):** Functional organization has been implemented for @sds/ui components. All 48 shadcn components are now organized into 7 functional categories (Actions, Forms, Navigation, Overlays, Feedback, Data Display, Layout). The Studio app navigation reflects this new structure. See [Commit 77c39eb](../../) for implementation details.
+> **✅ IMPLEMENTATION STATUS (2026-01-14):** Functional organization has been implemented for @sage/ui components. All 48 shadcn components are now organized into 7 functional categories (Actions, Forms, Navigation, Overlays, Feedback, Data Display, Layout). The Studio app navigation reflects this new structure. See [Commit 77c39eb](../../) for implementation details.
 
-**Design systems in 2025-2026 have abandoned rigid Atomic Design hierarchies in favor of functional organization, headless primitives, and code-ownership distribution models.** The shadcn/ui approach—where developers copy and own component code rather than install black-box dependencies—has become the dominant paradigm for developer-focused systems. For the Sage Design System (SDS), this research reveals a clear path: adopt **functional component groupings**, implement a **three-tier architecture** (Primitives → Assemblies → Templates), and prioritize **visual discovery** alongside text navigation.
+**Design systems in 2025-2026 have abandoned rigid Atomic Design hierarchies in favor of functional organization, headless primitives, and code-ownership distribution models.** The shadcn/ui approach—where developers copy and own component code rather than install black-box dependencies—has become the dominant paradigm for developer-focused systems. For the Sage UI, this research reveals a clear path: adopt **functional component groupings**, implement a **three-tier architecture** (Primitives → Assemblies → Templates), and prioritize **visual discovery** alongside text navigation.
 
 The findings synthesize analysis of 12+ design systems including shadcn/ui, Radix, Park UI, Chakra, Mantine, Polaris, Spectrum, Primer, and Carbon, along with emerging 2025-2026 patterns in AI-assisted discovery and cross-platform architecture.
 
@@ -110,7 +110,7 @@ The most effective design system architecture uses three clearly-defined tiers t
 - **Semantic tokens**: `--color-primary: var(--blue-500)`
 - **Component tokens**: `--button-bg: var(--color-primary)`
 
-**Headless primitives** like Radix provide behavior, accessibility, and state management without styling opinions. Components handle focus management, keyboard navigation, ARIA attributes, and controlled/uncontrolled modes. SDS already uses Radix—this is the correct foundation.
+**Headless primitives** like Radix provide behavior, accessibility, and state management without styling opinions. Components handle focus management, keyboard navigation, ARIA attributes, and controlled/uncontrolled modes. Sage UI already uses Radix—this is the correct foundation.
 
 ### Tier 2: Assemblies (Styled Components)
 
@@ -171,7 +171,7 @@ Interactive playgrounds should be inline (not external links). Sandpack configur
 
 ## Cross-platform architecture without premature complexity
 
-The key insight for future-proofing SDS is **one layer of abstraction above and below**. Don't pre-optimize for platforms you don't have yet, but make decisions that don't preclude expansion.
+The key insight for future-proofing Sage UI is **one layer of abstraction above and below**. Don't pre-optimize for platforms you don't have yet, but make decisions that don't preclude expansion.
 
 **Tamagui's architecture** demonstrates cross-platform done right: 100% API parity between React and React Native, compile-time optimization per platform (atomic CSS on web, hoisted style objects on native), and a single token system that maps to CSS variables at build time.
 
@@ -193,7 +193,7 @@ The key insight for future-proofing SDS is **one layer of abstraction above and 
 }
 ```
 
-**For SDS now:** Configure Style Dictionary for CSS output only. Add iOS/Android transforms when mobile development begins. Use semantic tokens that abstract from raw values—changing `--color-primary` updates all components automatically regardless of platform.
+**For Sage UI now:** Configure Style Dictionary for CSS output only. Add iOS/Android transforms when mobile development begins. Use semantic tokens that abstract from raw values—changing `--color-primary` updates all components automatically regardless of platform.
 
 ---
 
@@ -221,7 +221,7 @@ Design systems built for AI need clear component structure, accessible tokens, c
 
 ---
 
-## Actionable recommendations for Sage Design System
+## Actionable recommendations for Sage UI
 
 ### Immediate actions
 
@@ -241,7 +241,7 @@ Design systems built for AI need clear component structure, accessible tokens, c
 
 2. **Keep Radix as behavioral foundation**: It provides the accessibility and keyboard navigation layer that styled components build upon
 
-3. **Document Server vs Client components**: Mark which SDS components require client-side JavaScript for RSC-aware applications
+3. **Document Server vs Client components**: Mark which Sage UI components require client-side JavaScript for RSC-aware applications
 
 4. **Add TypeScript-generated props tables**: Auto-generate API documentation from types, reducing maintenance burden
 

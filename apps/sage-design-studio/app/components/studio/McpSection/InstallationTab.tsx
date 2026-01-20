@@ -24,11 +24,11 @@ export function InstallationTab() {
                     </p>
                     <CollapsibleCodeBlock
                         id="mcp-install"
-                        code={`pnpm add -D @sds/mcp-server
+                        code={`pnpm add -D @sage/mcp
 # or
-npm install --save-dev @sds/mcp-server
+npm install --save-dev @sage/mcp
 # or
-yarn add -D @sds/mcp-server`}
+yarn add -D @sage/mcp`}
                         defaultCollapsed={false}
                         showCopy={true}
                     />
@@ -58,7 +58,7 @@ yarn add -D @sds/mcp-server`}
   "mcpServers": {
     "sds": {
       "command": "npx",
-      "args": ["@sds/mcp-server"]
+      "args": ["@sage/mcp"]
     }
   }
 }`}
@@ -87,7 +87,7 @@ yarn add -D @sds/mcp-server`}
   "mcpServers": {
     "sds": {
       "command": "npx",
-      "args": ["@sds/mcp-server"]
+      "args": ["@sage/mcp"]
     }
   }
 }`}
@@ -113,7 +113,7 @@ yarn add -D @sds/mcp-server`}
   "servers": {
     "sds": {
       "command": "npx",
-      "args": ["@sds/mcp-server"]
+      "args": ["@sage/mcp"]
     }
   }
 }`}

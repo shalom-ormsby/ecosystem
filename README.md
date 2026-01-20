@@ -14,8 +14,8 @@ The purpose of this open source monorepo isn't just to answer this question; it'
 
 This ecosystem expresses one unified vision through multiple products:
 
-- **[Portfolio](https://www.shalomormsby.com/)** — My design philosophy in action. Currently being built from the ground-up entirely with Sage Design System components.
-- **[Sage Design Studio](https://studio.shalomormsby.com/)** — Interactive documentation platform for the Sage Design System (SDS). A comprehensive suite of functional components, patterns, and templates that optimize human and AI-assisted creativity. Purpose-built for solopreneurs who want to build digital products not only with speed but also with precise creative control. 
+- **[Portfolio](https://www.shalomormsby.com/)** — My design philosophy in action. Currently being built from the ground-up entirely with Sage UI components.
+- **[Sage Design Studio](https://studio.shalomormsby.com/)** — Interactive documentation platform for the Sage UI. A comprehensive suite of functional components, patterns, and templates that optimize human and AI-assisted creativity. Purpose-built for solopreneurs who want to build digital products not only with speed but also with precise creative control. 
 - **[Creative Powerup](https://ecosystem-creative-powerup.vercel.app/)** — Community platform and experiment gallery for purpose-driven innovators *(in development)*
 - **[Sage Stocks](https://stocks.shalomormsby.com/)** — AI-powered investment intelligence that respects user agency *(migration pending)*
 - **SageOS** — Personal operating system for creative work *(Currently a WiP. To apply as a beta tester, email Shalom.)*
@@ -57,7 +57,7 @@ This ecosystem is built on four principles:
 
 ---
 
-## The Sage Design System
+## The Sage UI
 
 The heart of this ecosystem. Every app imports from it. **Version 1.0 — Production Ready**
 
@@ -202,7 +202,7 @@ ecosystem/
 │   ├── sage-stocks/           # Migration pending
 │   └── sageos/                # Future
 ├── packages/                  # Shared packages
-│   ├── ui/                    # @sds/ui - Component library
+│   ├── ui/                    # @sage/ui - Component library
 │   │   └── src/
 │   │       ├── components/    # 48+ functionally-organized components
 │   │       │   ├── actions/   # Button, Toggle, ToggleGroup
@@ -217,7 +217,7 @@ ecosystem/
 │   │       ├── features/      # Customizer (philosophy-embodying)
 │   │       ├── lib/           # Store, utils, validation, animations
 │   │       └── index.ts       # Main export barrel
-│   ├── tokens/                # @sds/tokens - Design decisions as code
+│   ├── tokens/                # @sage/tokens - Design decisions as code
 │   │   ├── studio/            # Studio theme tokens
 │   │   ├── sage/              # Sage theme tokens
 │   │   ├── volt/              # Volt theme tokens
@@ -284,7 +284,7 @@ All preferences persist to localStorage. This isn't a settings panel hidden in a
 Visual properties defined in code, not locked in Figma. Colors, spacing, typography, motion—all exposed as importable JavaScript.
 
 ```typescript
-import { spacing, typography } from '@sds/tokens'
+import { spacing, typography } from '@sage/tokens'
 ```
 
 ### Motion That Respects Users

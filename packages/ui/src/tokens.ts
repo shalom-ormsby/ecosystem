@@ -1,7 +1,7 @@
 /**
  * Tokens subpath export
- * Allows: import { ... } from '@sds/ui/tokens'
+ * Allows: import { ... } from '@sage/ui/tokens'
  */
 
-// Re-export all tokens from @sds/tokens
-export * from '@sds/tokens';
+// Re-export all tokens from @sage/tokens
+export * from '@sage/tokens';

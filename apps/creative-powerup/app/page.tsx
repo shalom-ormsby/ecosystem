@@ -1,6 +1,6 @@
 import { experiments } from '@/lib/experiments';
 import { ExperimentCard } from '@/components/ExperimentCard';
-import { Button } from '@sds/ui';
+import { Button } from '@sage/ui';
 import Link from 'next/link';
 
 export default function HomePage() {

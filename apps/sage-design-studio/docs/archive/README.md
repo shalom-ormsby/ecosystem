@@ -32,7 +32,7 @@ The following documents were archived as part of the documentation consolidation
 - Component addition workflow
 - Ethical adoption model documentation
 
-### 3. Evolving the Sage Design System from Atomic to functional organization.md
+### 3. Evolving the Sage UI from Atomic to functional organization.md
 **Reason:** Proposal implemented on 2026-01-14
 
 **Content integrated into:**
@@ -82,4 +82,4 @@ For current documentation, see:
 
 ---
 
-**Note:** These archived documents are preserved for historical reference and may contain outdated information. Always refer to the current active documentation for accurate information about the Sage Design System.
+**Note:** These archived documents are preserved for historical reference and may contain outdated information. Always refer to the current active documentation for accurate information about the Sage UI.

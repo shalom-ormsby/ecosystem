@@ -1,4 +1,4 @@
-# Sage Design System: Cross-Platform Strategic Roadmap
+# Sage UI: Cross-Platform Strategic Roadmap
 
 > [!IMPORTANT]
 > **Goal:** Enable efficient creation of premium web and mobile apps for solopreneurs and creatives.
@@ -19,7 +19,7 @@ However, to truly serve "solopreneurs" who need speed without technical debt, we
 
 ## 1. Architectural Evolution
 
-Currently, SDS is a single package `@ecosystem/design-system` containing web components. We will evolve this into a monorepo workspace structure.
+Currently, Sage UI is a single package `@ecosystem/design-system` containing web components. We will evolve this into a monorepo workspace structure.
 
 ### Phase 1: Universal Tokens (The "Brain")
 We must extract tokens from `design-system/tokens` into a dedicated package that builds for both platforms.
@@ -65,7 +65,7 @@ Solopreneurs lose time rewriting logic. We need a shared package for non-UI code
 | **Web Core** | **Next.js** | You already have this. Best for SEO and performance. |
 | **Styling** | **NativeWind (v4)** | "Tailwind for Mobile". Allows you to use the *same mental model* and tokens as web. |
 | **Navigation** | **Expo Router** | File-based routing for mobile, exactly like Next.js App Router. Reduces context switching. |
-| **Animation** | **React Native Reanimated** | Required for the "premium feel" (60fps gestures). Mapped to SDS Motion tokens. |
+| **Animation** | **React Native Reanimated** | Required for the "premium feel" (60fps gestures). Mapped to Sage UI Motion tokens. |
 | **Monorepo** | **Turborepo** | You already use pnpm/workspaces. Turbo speeds up builds. |
 
 ---
@@ -82,7 +82,7 @@ Create the mobile entry point in your monorepo.
 - **Action:** `pnpm create expo-app apps/sage-mobile -t expo-template-blank-typescript`
 - **Action:** Configure it to consume local packages (`workspace:*`).
 
-### Step 3: Set up NativeWind with SDS Tokens
+### Step 3: Set up NativeWind with Sage UI Tokens
 Configure `apps/sage-mobile/tailwind.config.js` to import the theme from `@ecosystem/tokens`.
 - This proves the "write once" concept immediately.
 
@@ -110,7 +110,7 @@ Create your first cross-platform component (e.g., `Button`).
 
 ## 5. Leveraging shadcn/ui (The Solopreneur's Secret Weapon)
 
-You asked how to "level up" SDS using inspiration from [shadcn/ui](https://ui.shadcn.com/). 
+You asked how to "level up" Sage UI using inspiration from [shadcn/ui](https://ui.shadcn.com/). 
 
 **The Philosophy:** shadcn/ui isn't a library; it's a *distribution method*. You copy the code, you own the code. This is perfect for a solopreneur who needs speed but hates being locked into a rigid library that's hard to customize.
 
@@ -136,7 +136,7 @@ The brilliance of shadcn/ui is that it separates **Structure** (Radix UI) from *
     - *Result:* You get accessible, beautiful components on both platforms that use the exact same Shared Tokens.
 
 3.  **Visual Consistency:**
-    shadcn/ui uses "foreground", "muted", "accent". Your SDS tokens should map 1:1 to these semantic names. This allows you to literally copy a shadcn web component, paste it into your web package, and have it *immediately* look like SDS because your Tailwind config powers it.
+    shadcn/ui uses "foreground", "muted", "accent". Your Sage UI tokens should map 1:1 to these semantic names. This allows you to literally copy a shadcn web component, paste it into your web package, and have it *immediately* look like Sage UI because your Tailwind config powers it.
 
 4.  **Reference Implementation:**
     Look at [React Native Reusables](https://rnr-docs.vercel.app/). It is effectively "shadcn/ui for React Native". You shouldn't blindly install it, but you should **study its source code** to see how they implement shadcn patterns in NativeWind.
@@ -144,7 +144,7 @@ The brilliance of shadcn/ui is that it separates **Structure** (Radix UI) from *
 
 ---
 
-## 6. The Role of an SDS MCP Server (The "AI Agent" Interface)
+## 6. The Role of an Sage UI MCP Server (The "AI Agent" Interface)
 
 You asked if an **SDS MCP (Model Context Protocol) Server** is redundant given this roadmap. 
 **Answer: No. It is the distinct "Force Multiplier" that makes this entire architecture significantly faster to build.**
@@ -154,7 +154,7 @@ You asked if an **SDS MCP (Model Context Protocol) Server** is redundant given t
 *   **The Roadmap** provides the **Structure** (Files, Folders, Tokens, Components).
 *   **The MCP Server** provides the **Intelligence** (Tools for Agents to read/write that structure correctly).
 
-### Why you still want an SDS MCP Server:
+### Why you still want an Sage UI MCP Server:
 
 1.  **Eliminating Hallucinations:**
     Without an MCP server, an AI guessing at your token names might try `text-primary-500`. With an MCP tool like `get_sds_token('primary')`, the agent gets the *exact* value `var(--color-primary)` every time.
