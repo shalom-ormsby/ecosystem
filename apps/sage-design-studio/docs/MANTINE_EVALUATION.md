@@ -1,10 +1,10 @@
-# Mantine UI vs Sage Design System: Parity Evaluation & Roadmap
+# Mantine UI vs Sage UI: Parity Evaluation & Roadmap
 
 ## Executive Summary
 
-Mantine UI is a massive, batteries-included component library with over 120 components and 50+ hooks. Sage Design System (SDS), currently based on shadcn/ui principles, focuses on code ownership, modularity, and high-end aesthetics.
+Mantine UI is a massive, batteries-included component library with over 120 components and 50+ hooks. Sage UI (formerly Sage Design System), currently based on shadcn/ui principles, focuses on code ownership, modularity, and high-end aesthetics.
 
-To achieve parity with Mantine effectively, SDS should **not** copy Mantine blindly but rather adopt its **comprehensive utility** while maintaining SDS's **architectural superiority** (headless primitives + Tailwind).
+To achieve parity with Mantine effectively, Sage UI should **not** copy Mantine blindly but rather adopt its **comprehensive utility** while maintaining Sage UI's **architectural superiority** (headless primitives + Tailwind).
 
 **Key Strategic Findings:**
 1.  **Hooks Gap**: SDS completely lacks a standard utility hook library (`@mantine/hooks` is a major competitive advantage).
@@ -124,9 +124,52 @@ Do **not** write from scratch. Adopt `recharts` and wrap them in SDS design toke
 
 ---
 
-## 3. Comparison Summary Table
 
-| Metric | Mantine UI | Sage Design System | Project Delta |
+---
+
+## 3. Strategic Pivot: Rebranding to Sage UI
+
+**Current Status:** "Sage Design System" (SDS)
+**New Identity:** **Sage UI** (@sage/ui)
+
+### The Problem with "Design System"
+The term "Design System" often implies:
+- Enterprise governance and bureaucracy
+- Rigid constraints ("You must use it this way")
+- Slow evolution
+- Heavy documentation requirements
+
+This contradicts our Solopreneur/AI-Native vision, which prioritizes:
+- **Velocity**
+- **Flexibility**
+- **Code Ownership**
+- **Ecosystem Scale**
+
+### The Solution: Sage UI
+Rebranding to **Sage UI** aligns us with modern industry standards (Material UI, Chakra UI, Mantine UI) while allowing for flexible scope scaling.
+
+**Brand Hierarchy:**
+- **Sage UI**: The master brand for the ecosystem.
+- **@sage-ui/ui**: The core primitives (Tier 1).
+- **@sage-ui/assemblies**: Pre-built functional combinations (Tier 2).
+- **@sage-ui/templates**: Full page layouts (Tier 3).
+- **@sage-ui/mcp**: The AI integration layer.
+
+**Tagline Candidates:**
+- *"AI-Native Components for Solopreneur Velocity"*
+- *"The Foundation for Premium Web Apps"*
+- *"From Primitives to Production"*
+
+### Competitive Positioning
+- **vs. Mantine (Library):** Sage UI offers the same utility depth but with better styling control (Tailwind) and code ownership.
+- **vs. shadcn/ui (Foundation):** Sage UI is a "batteries-included" ecosystem, not just a bare-bones foundation.
+- **vs. Material (System):** Sage UI is for creators, not just enterprise drones.
+
+---
+
+## 4. Comparison Summary Table
+
+| Metric | Mantine UI | Sage UI (formerly SDS) | Project Delta |
 | :--- | :--- | :--- | :--- |
 | **Component Count** | ~120 | ~50 | **-70** |
 | **Hook Count** | ~50 | 3 | **-47** |
@@ -134,8 +177,9 @@ Do **not** write from scratch. Adopt `recharts` and wrap them in SDS design toke
 | **Dependencies** | High (@mantine/core, etc) | Low (Radix + Tailwind) | **SDS Wins** |
 | **Customizability** | Styles API (Complex) | Tailwind (Standard) | **SDS Wins** |
 
-## 4. Recommended Next Steps (Immediate)
+## 5. Recommended Next Steps (Immediate)
 
-1.  **Create `@sds/hooks`**: Initialize this new sub-path and add 5 core hooks.
-2.  **Add `Chart` Primitives**: Import `recharts` and create the base Chart configuration.
-3.  **Build `NumberInput`**: This is the most requested "missing" input from standard HTML.
+1.  **Rebrand Logic:** Begin renaming internal references from SDS to Sage UI where appropriate (keeping practical backward compat).
+2.  **Create `@sds/hooks` (or `@sage/hooks`)**: Initialize this new sub-path and add 5 core hooks.
+3.  **Add `Chart` Primitives**: Import `recharts` and create the base Chart configuration.
+4.  **Build `NumberInput`**: This is the most requested "missing" input from standard HTML.
