@@ -5,8 +5,8 @@ import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Sage Design Studio',
-  description: 'The heart of the ecosystem. Explore the design system, brand guidelines, and resources that power the entire ecosystem.',
+  title: 'Sage Studio',
+  description: 'The Solopreneur\'s Development Stack. AI-Native components for velocity.',
 };
 
 export default function RootLayout({

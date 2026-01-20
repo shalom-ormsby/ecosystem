@@ -113,7 +113,7 @@ export function NavigationSidebar({
         <SidebarHeader>
           <div className="w-full flex items-center justify-between">
             <h2 className="text-lg font-bold text-foreground">
-              Sage Design System
+              Sage UI
             </h2>
             <button
               onClick={onToggle}

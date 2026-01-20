@@ -4,7 +4,46 @@ This document tracks planned improvements and enhancements to the Sage Design Sy
 
 ---
 
-## Motion Intensity Slider - Make Fully Functional
+## 🚀 Strategic Rebrand: Sage Design System -> Sage UI
+**Date Added:** 2026-01-20
+**Priority:** Critical
+**Status:** Planning
+
+**Objective:** Shift identity from a "Design System" (governance/enterprise constrains) to "Sage UI" (Solopreneur/Velocity Ecosystem). Move from `@sds/*` to `@sage-ui/*` (or `@sage/*`) namespace.
+
+### Phase 1: Identity & Documentation (Immediate)
+- [x] **Documentation Rebrand**:
+    - Rename "Sage Design Studio" -> "Sage Studio" or "Sage UI Studio".
+    - Update homepage copy: "The Solopreneur's Development Stack" / "AI-Native Components".
+    - Update metadata/titles across the documentation site.
+- [ ] **Feature Parity Strategy**:
+    - Adopt "Mantine-style" utility hook library (`@sage/hooks`).
+    - Adopt "Shadcn-style" chart library (`@sage/charts`).
+
+### Phase 2: Package Migration (Careful Execution)
+*Goal: Rename packages to align with new brand. Proposed Naming: `@sage/*` or `@sage-ui/*`.*
+
+- [ ] **Package Renaming**:
+    - `@sds/ui` -> `@sage/ui` (The Primitives)
+    - `@sds/tokens` -> `@sage/tokens`
+    - `@sds/mcp-server` -> `@sage/mcp`
+- [ ] **New Packages**:
+    - `@sage/hooks` (New utility belt)
+    - `@sage/charts` (Recharts wrapper)
+    - `@sage/templates` (Future Tier 3)
+- [ ] **Refactor Consumers**:
+    - Update imports in `apps/sage-design-studio`
+    - Update imports in `apps/portfolio`
+    - Update imports in `apps/ecosystem-creative-powerup`
+- [ ] **Infrastructure**:
+    - Update `tsconfig.json` paths.
+    - Update `turbo.json` pipeline configuration.
+
+### Phase 3: Public Presence
+- [ ] **Domain**: Secure `sage-ui.dev` or `sage-ui.com`.
+- [ ] **CLI**: Create `npx sage-ui init` (instead of manual copy-paste).
+
+---
 **Date Added:** 2026-01-16
 **Priority:** High
 **Effort:** Medium (3-5 days)

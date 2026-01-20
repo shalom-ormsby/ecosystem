@@ -133,10 +133,10 @@ export function OverviewSection() {
       <section className="border-b border-[var(--color-border)] pb-12">
         <div className="text-center max-w-5xl mx-auto">
           <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-[var(--color-text-primary)]">
-            Sage Design System
+            Sage UI
           </h1>
           <p className="text-base text-[var(--color-text-secondary)] leading-relaxed">
-            Build lovable products at AI speed. A complete design system that AI coding tools understand.
+            The Solopreneur's Development Stack. AI-Native components for velocity.
           </p>
         </div>
       </section>
@@ -510,8 +510,8 @@ export function MyComponent() {
                 <button
                   onClick={() => setTheme('studio')}
                   className={`p-4 rounded-lg border-2 transition-all ${theme === 'studio'
-                      ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/10'
-                      : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/50'
+                    ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/10'
+                    : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/50'
                     }`}
                 >
                   <div className="mb-2 text-[var(--color-primary)]">
@@ -526,8 +526,8 @@ export function MyComponent() {
                 <button
                   onClick={() => setTheme('sage')}
                   className={`p-4 rounded-lg border-2 transition-all ${theme === 'sage'
-                      ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/10'
-                      : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/50'
+                    ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/10'
+                    : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/50'
                     }`}
                 >
                   <div className="mb-2 text-[var(--color-primary)]">
@@ -542,8 +542,8 @@ export function MyComponent() {
                 <button
                   onClick={() => setTheme('volt')}
                   className={`p-4 rounded-lg border-2 transition-all ${theme === 'volt'
-                      ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/10'
-                      : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/50'
+                    ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/10'
+                    : 'border-[var(--color-border)] hover:border-[var(--color-primary)]/50'
                     }`}
                 >
                   <div className="mb-2 text-[var(--color-primary)]">
