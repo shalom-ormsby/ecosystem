@@ -279,30 +279,59 @@ export const navigationTree: NavigationItem[] = [
     ],
   },
   {
+    id: 'charts',
+    label: 'Charts',
+    icon: <div className="w-4 h-4 flex items-center justify-center font-bold text-xs">📊</div>,
+    children: [
+      {
+        id: 'overview',
+        label: 'Overview',
+        section: 'charts',
+      },
+      {
+        id: 'area-chart',
+        label: 'Area Chart',
+        section: 'charts',
+      },
+      {
+        id: 'bar-chart',
+        label: 'Bar Chart',
+        section: 'charts',
+      },
+      {
+        id: 'line-chart',
+        label: 'Line Chart',
+        section: 'charts',
+      },
+      {
+        id: 'pie-chart',
+        label: 'Pie Chart',
+        section: 'charts',
+      },
+    ],
+  },
+  {
     id: 'hooks',
     label: 'Hooks',
     icon: <Webhook className="w-4 h-4" />,
     children: [
       {
-        id: 'use-form',
-        label: 'useForm',
-        section: 'hooks',
+        id: 'core',
+        label: 'Core',
+        children: [
+          { id: 'use-form', label: 'useForm', section: 'hooks' },
+          { id: 'use-theme', label: 'useTheme', section: 'hooks' },
+          { id: 'use-toast', label: 'useToast', section: 'hooks' },
+          { id: 'use-motion-preference', label: 'useMotionPreference', section: 'hooks' },
+        ]
       },
       {
-        id: 'use-theme',
-        label: 'useTheme',
-        section: 'hooks',
-      },
-      {
-        id: 'use-toast',
-        label: 'useToast',
-        section: 'hooks',
-      },
-      {
-        id: 'use-motion-preference',
-        label: 'useMotionPreference',
-        section: 'hooks',
-      },
+        id: 'utilities',
+        label: 'Utilities',
+        children: [
+          { id: 'use-clipboard', label: 'useClipboard', section: 'hooks' },
+        ]
+      }
     ],
   },
   {

@@ -16,6 +16,7 @@ import { ComponentsSection } from './components/studio/ComponentsSection';
 import { PatternsSection } from './components/studio/PatternsSection';
 import { HooksSection } from './components/studio/HooksSection';
 import { TemplatesSection } from './components/studio/TemplatesSection';
+import { ChartsSections } from './components/studio/ChartsSections';
 import { MotionSections } from './components/studio/MotionSections';
 import { McpSection } from './components/studio/McpSection';
 
@@ -37,6 +38,7 @@ type Section =
   | 'patterns'
   | 'hooks'
   | 'templates'
+  | 'charts'
   | 'motion';
 
 // Route configuration for breadcrumb labels
@@ -171,6 +173,16 @@ const routeConfig: RouteConfig = {
   },
   hooks: { label: 'Hooks' },
   templates: { label: 'Templates' },
+  charts: {
+    label: 'Charts',
+    children: {
+      overview: { label: 'Overview' },
+      'area-chart': { label: 'Area Chart' },
+      'bar-chart': { label: 'Bar Chart' },
+      'line-chart': { label: 'Line Chart' },
+      'pie-chart': { label: 'Pie Chart' },
+    }
+  },
   motion: {
     label: 'Motion System',
     children: {
@@ -236,7 +248,7 @@ export default function StudioPage() {
         'overview', 'architecture', 'adding-components', 'common-patterns',
         'contributing', 'mcp-server', 'tokens', 'actions', 'forms', 'navigation',
         'overlays', 'feedback', 'data-display', 'layout', 'patterns',
-        'hooks', 'templates', 'motion'
+        'hooks', 'templates', 'charts', 'motion'
       ];
 
       if (validSections.includes(section as Section)) {
@@ -422,6 +434,13 @@ export default function StudioPage() {
             )}
             {activeSection === 'templates' && (
               <TemplatesSection
+                activeItemId={activeItemId}
+                breadcrumbs={breadcrumbs}
+                onItemChange={(itemId) => setActiveItemId(itemId)}
+              />
+            )}
+            {activeSection === 'charts' && (
+              <ChartsSections
                 activeItemId={activeItemId}
                 breadcrumbs={breadcrumbs}
                 onItemChange={(itemId) => setActiveItemId(itemId)}

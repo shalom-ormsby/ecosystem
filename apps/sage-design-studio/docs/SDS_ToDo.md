@@ -17,9 +17,9 @@ This document tracks planned improvements and enhancements to the Sage UI.
     - Update homepage copy: "The Solopreneur's Development Stack" / "AI-Native Components".
     - Update metadata/titles across the documentation site.
     - [x] Global Find & Replace: `Sage Design System` -> `Sage UI`, `@sds/*` -> `@sage/*`.
-- [ ] **Feature Parity Strategy**:
-    - Adopt "Mantine-style" utility hook library (`@sage/hooks`).
-    - Adopt "Shadcn-style" chart library (`@sage/charts`).
+- [x] **Feature Parity Strategy**:
+    - [x] Adopt "Mantine-style" utility hook library (`@sage/hooks`).
+    - [x] Adopt "Shadcn-style" chart library (`@sage/charts`).
 
 ### Phase 2: Package Migration (Careful Execution)
 *Goal: Rename packages to align with new brand. Proposed Naming: `@sage/*` or `@sage-ui/*`.*
@@ -28,10 +28,10 @@ This document tracks planned improvements and enhancements to the Sage UI.
     - `@sage/ui` -> `@sage/ui` (The Primitives)
     - `@sage/tokens` -> `@sage/tokens`
     - `@sage/mcp` -> `@sage/mcp`
-- [ ] **New Packages**:
-    - `@sage/hooks` (New utility belt)
-    - `@sage/charts` (Recharts wrapper)
-    - `@sage/templates` (Future Tier 3)
+- [x] **New Packages**:
+    - [x] `@sage/hooks` (New utility belt)
+    - [x] `@sage/charts` (Recharts wrapper)
+    - [ ] `@sage/templates` (Future Tier 3)
 - [x] **Refactor Consumers**:
     - Update imports in `apps/sage-design-studio`
     - Update imports in `apps/portfolio`

@@ -1,0 +1,31 @@
+{
+    "name": "@sage/charts",
+    "version": "0.1.0",
+    "private": true,
+    "description": "Chart components for Sage UI",
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js"
+        }
+    },
+    "scripts": {
+        "build": "tsup src/index.ts --format cjs,esm --dts",
+        "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+        "lint": "eslint src/"
+    },
+    "peerDependencies": {
+        "react": ">=18",
+        "recharts": "^2.12.0"
+    },
+    "devDependencies": {
+        "@sage/config": "workspace:*",
+        "@types/react": "^19.0.0",
+        "tsup": "^8.0.0",
+        "typescript": "^5.0.0"
+    }
+}
