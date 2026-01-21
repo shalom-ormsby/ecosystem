@@ -87,7 +87,7 @@ function UseClipboardSection() {
           <div className="flex flex-col gap-4">
             <div className="text-sm text-[var(--color-text-secondary)]">
               <strong>Import:</strong>
-              <Code syntax="typescript" className="mt-2">import {'{ useClipboard }'} from '@sage/hooks';</Code>
+              <Code syntax="plain" className="mt-2">import {'{ useClipboard }'} from '@sage/hooks';</Code>
             </div>
 
             <div>
