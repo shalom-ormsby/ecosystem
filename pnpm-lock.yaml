@@ -233,6 +233,9 @@ importers:
       '@sage/hooks':
         specifier: workspace:*
         version: link:../../packages/hooks
+      '@sage/tokens':
+        specifier: workspace:*
+        version: link:../../packages/tokens
       '@sage/ui':
         specifier: workspace:*
         version: link:../../packages/ui

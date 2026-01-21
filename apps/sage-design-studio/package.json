@@ -12,6 +12,7 @@
     "@sage/charts": "workspace:*",
     "@sage/core": "workspace:*",
     "@sage/hooks": "workspace:*",
+    "@sage/tokens": "workspace:*",
     "@sage/ui": "workspace:*",
     "@vercel/analytics": "^1.6.1",
     "class-variance-authority": "^0.7.1",
