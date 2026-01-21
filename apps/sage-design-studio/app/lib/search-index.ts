@@ -32,6 +32,15 @@ export const searchIndex: SearchResult[] = [
     keywords: ['color', 'palette', 'theme', 'background', 'text', 'brand', 'status'],
   },
   {
+    id: 'tokens-palettes',
+    title: 'Palettes',
+    description: '21 curated color palettes across Professional, Creative, Natural, Vibrant, Minimal, Tech, and Warm categories with WCAG compliance',
+    type: 'token',
+    category: 'Design Tokens',
+    path: '#tokens/palettes',
+    keywords: ['color', 'palette', 'curated', 'professional', 'creative', 'natural', 'vibrant', 'minimal', 'tech', 'warm', 'wcag', 'accessibility', 'theme', 'preset', 'customization'],
+  },
+  {
     id: 'tokens-typography',
     title: 'Typography',
     description: 'Font families, sizes, and text styles',

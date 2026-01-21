@@ -7,6 +7,259 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added - Dynamic Color Customization System (2026-01-20)
+
+#### Curated Color Palette Library
+- **New `@sage/tokens/color-palettes.ts`**: Created 21 professionally curated color palettes across 7 categories
+  - **Professional** (5 palettes): Midnight Sapphire, Forest Executive, Burgundy Trust, Slate Corporate, Navy Prestige
+  - **Creative** (3 palettes): Coral Sunset, Teal Wave, Purple Dream
+  - **Natural** (2 palettes): Earth Tones, Ocean Breeze
+  - **Vibrant** (2 palettes): Electric Lime, Sunset Orange
+  - **Minimal** (3 palettes): Monochrome, Pure Black, Soft Neutral
+  - **Tech** (3 palettes): Cyber Blue, Matrix Green, Developer Dark
+  - **Warm** (3 palettes): Golden Hour, Rust & Clay, Peach Cream
+- **Palette Metadata**: Each palette includes:
+  - Primary, secondary (optional), and accent colors
+  - Mood descriptors (trustworthy, creative, energetic, etc.)
+  - WCAG AA/AAA accessibility compliance flags
+  - Best use cases and inspiration notes
+  - Semantic categorization for easy discovery
+
+#### Advanced Color Engine
+- **New `@sage/tokens/color-utils.ts`**: Standalone color transformation utilities
+  - `hexToHSL()` / `hslToHex()`: Bidirectional color space conversion
+  - `adjustLightness()`: Perceptually uniform tint/shade generation
+  - `adjustSaturation()`: Saturation manipulation for color harmony
+  - `rotateHue()`: Hue rotation for complementary/analogous colors
+  - `getContrastRatio()`: WCAG contrast ratio calculation
+  - `getOptimalForeground()`: Automatic accessible foreground color selection
+  - **Why Standalone**: Prevents circular dependencies (@sage/tokens ← @sage/ui)
+- **Enhanced `@sage/ui/lib/colors.ts`**: Extended with HSL transformations
+  - `generateColorScale()`: Tailwind-style 50-900 tint/shade variants
+  - Integrated with existing color utilities for seamless token generation
+
+#### Token Dependency Graph ("Change Once, Ripple Everywhere")
+- **New `@sage/tokens/token-graph.ts`**: Explicit dependency mapping system
+  - Maps 15+ CSS variables that automatically derive from `--color-primary`
+  - **UI Tokens**: `--color-link`, `--color-link-hover`, `--color-ring`, `--color-accent`
+  - **Chart Tokens**: `--chart-1` through `--chart-5` with intelligent derivations
+    - Chart 1: Primary color (identity)
+    - Chart 2: +20% lighter (tint variation)
+    - Chart 3: -15% darker (shade variation)
+    - Chart 4: -30% saturation (muted variant)
+    - Chart 5: 180° hue rotation (complementary color)
+  - **Mode-Aware Derivations**: Different transformations for light vs dark mode
+  - `computeDerivedTokens()`: Single function call updates entire token tree
+  - **Architecture Benefit**: Single source of truth ensures design consistency
+
+#### Enhanced Customizer System
+- **Completely Rewritten `@sage/ui/lib/store/customizer.ts`**: Extended Zustand store
+  - **Per-Theme, Per-Mode Storage**: `customColors[theme][mode]` nested structure
+  - **ColorPalette Interface**: Complete palette object with:
+    - Primary/secondary/accent colors with auto-calculated foreground colors
+    - Full 50-900 color scale for each custom color
+    - Derived tokens map (15+ dependent CSS variables)
+  - **Simple vs Advanced Mode**:
+    - Simple: Single primary color, auto-generates secondary/accent
+    - Advanced: Discrete primary, secondary, and accent color controls (future enhancement)
+  - **Zustand Persist Middleware**:
+    - localStorage persistence with version migration (v2)
+    - Survives page refreshes and browser sessions
+    - Scope: Per-theme and per-mode (studio/light, sage/dark, etc.)
+  - **Actions**:
+    - `setCustomPrimaryColor(theme, mode, hexColor)`: Generates complete palette with dependency graph
+    - `setCustomSecondaryColor()`: Updates secondary + re-computes derived tokens
+    - `setCustomAccentColor()`: Updates accent + re-computes derived tokens
+    - `resetCustomColors(theme, mode?)`: Clears customizations (specific mode or entire theme)
+    - `getActiveColorPalette(theme, mode)`: Retrieves current custom palette
+
+#### Smart Theme Provider Integration
+- **Enhanced `@sage/ui/providers/ThemeProvider.tsx`**: Non-destructive token merging
+  - `mergeCustomColorTokens()`: Overlays custom palette onto base theme tokens
+  - **Merge Strategy**:
+    1. Start with base theme tokens (studio.ts, sage.ts, volt.ts)
+    2. Override primary color + foreground
+    3. Override full color scale (50-900)
+    4. Override secondary/accent if present
+    5. **Critical**: Merge all derived tokens from dependency graph
+  - **DOM Updates**: Batched via `requestAnimationFrame()` for performance
+  - **Data Attribute**: `data-custom-colors="active"` for debugging/styling
+  - **Reactive**: Automatically responds to theme/mode/palette changes
+
+#### New ColorPicker Component
+- **New `@sage/ui/components/forms/ColorPicker.tsx`**: Interactive color selection UI
+  - **Dual Input Methods**:
+    - Visual color picker (native `<input type="color">`)
+    - Hex code text input with validation
+  - **Features**:
+    - Real-time hex validation (`/^#[0-9A-Fa-f]{6}$/`)
+    - Live color preview swatch
+    - Error states for invalid input
+    - Optional/disabled states
+    - Label and description support
+  - **UX**: Synced two-way binding between picker and text input
+- **Exported from `@sage/ui`**: Available as `import { ColorPicker } from '@sage/ui'`
+
+#### PalettesTab in Design Tokens
+- **New `apps/sage-design-studio/app/components/studio/TokensSection/PalettesTab.tsx`**: Interactive palette browser
+  - **Category Filter Buttons**: 7 categories with icons (Briefcase, Palette, Leaf, Zap, Minimize, Code, Flame)
+  - **Accessibility Toggle**: "Show only WCAG AA compliant" filter
+  - **Palette Grid**: Visual cards with:
+    - Color swatches (primary + accent preview)
+    - Palette name and description
+    - Mood tags as chips
+    - "Apply Palette" button
+    - Accessibility badges (AA/AAA compliance)
+    - "Best for" use case tags
+  - **Apply Functionality**: One-click palette application to current theme/mode
+  - **Active State Indicator**: Shows which palette is currently applied
+  - **Responsive**: Grid layout adapts from 1-3 columns based on viewport
+- **Registered in TokensSection**: Added to tab navigation alongside Colors, Typography, Spacing, etc.
+
+#### Customizer Panel Enhancements
+- **Updated `@sage/ui/components/layout/CustomizerPanel.tsx`**: Added primary color customization
+  - **New Section**: "Primary Color" with Palette icon
+  - **ColorPicker Integration**: Visual picker + hex input
+  - **Apply/Reset Buttons**:
+    - "Apply Color": Disabled when no changes detected
+    - "Reset": Only shown when custom colors are active
+  - **Status Indicator**: "Custom color active for {theme} {colorMode} mode"
+  - **UX Flow**:
+    1. User selects color (picker or hex input)
+    2. Color stored in temp state
+    3. User clicks "Apply Color"
+    4. Entire UI updates instantly via token dependency graph
+    5. Reset button restores default theme colors
+
+#### Package Dependencies
+- **Fixed `apps/sage-design-studio/package.json`**: Added missing `@sage/tokens` dependency
+  - **Error**: Vercel build failing with "Cannot find module '@sage/tokens'"
+  - **Root Cause**: PalettesTab imports from @sage/tokens but dependency wasn't declared
+  - **Fix**: Added `"@sage/tokens": "workspace:*"` to dependencies
+  - **Verification**: Local build successful, Vercel deployment successful (commit `e6a5d98`)
+
+### Changed
+
+#### Token Architecture
+- **Separated Color Utilities**: Moved color transformation functions from @sage/ui to @sage/tokens
+  - **Why**: Prevents circular dependency (@sage/tokens depends on @sage/ui for utils, @sage/ui depends on @sage/tokens for tokens)
+  - **Solution**: Created standalone `color-utils.ts` in @sage/tokens package
+  - **Impact**: Clean dependency graph, faster builds, better code organization
+
+#### Customizer Store Schema
+- **Version Migration**: Bumped Zustand persist version from v1 to v2
+  - **New Fields**: `customizationMode`, `customColors` nested structure
+  - **Backward Compatibility**: Old localStorage data automatically migrated
+  - **Storage Key**: `ecosystem-customizer` (shared across themes)
+
+#### ThemeProvider Behavior
+- **Non-Destructive Theming**: Custom colors overlay base theme without replacement
+  - **Before**: Would need to replace entire theme object
+  - **After**: Merges only changed tokens, preserves theme personality
+  - **Benefit**: Custom colors don't break carefully crafted theme relationships
+
+### Fixed
+
+#### Build Errors
+- **Circular Dependency Resolution**:
+  - **Error**: `@sage/tokens` build failing when importing from `@sage/ui/utils`
+  - **Fix**: Created `@sage/tokens/color-utils.ts` with standalone utilities
+  - **Verification**: `pnpm build --filter @sage/tokens` successful (47.46 KB)
+
+- **Vercel Deployment Failure**:
+  - **Error**: `Type error: Cannot find module '@sage/tokens'` in PalettesTab.tsx
+  - **Fix**: Added workspace dependency to sage-design-studio package.json
+  - **Verification**: Vercel build successful, live site updated
+
+### Technical Details
+
+#### Architecture Decisions
+1. **HSL Color Space**: Chosen over RGB for perceptually uniform transformations
+   - Lightness adjustments produce consistent visual weight changes
+   - Saturation control enables harmonic color variations
+   - Hue rotation enables complementary/analogous color generation
+
+2. **Token Dependency Graph**: Explicit over implicit derivations
+   - Each derived token has documented transform function
+   - Enables future UI for "which tokens will change if I change primary?"
+   - Supports different derivation rules for light vs dark mode
+
+3. **Zustand Over Context**: State management choice
+   - Built-in persistence middleware (localStorage)
+   - Better performance (selective re-renders)
+   - DevTools integration
+   - Version migration support
+
+4. **Non-Destructive Merging**: Overlay pattern over replacement
+   - Preserves base theme carefully crafted relationships
+   - Enables "reset to default" without reloading page
+   - Supports partial customization (only primary, or primary + secondary)
+
+#### Files Created
+- `packages/tokens/src/color-palettes.ts` (428 lines) - 21 curated palettes
+- `packages/tokens/src/color-utils.ts` (187 lines) - Standalone color utilities
+- `packages/tokens/src/token-graph.ts` (156 lines) - Dependency graph system
+- `packages/ui/src/components/forms/ColorPicker.tsx` (98 lines) - Color selection UI
+- `apps/sage-design-studio/app/components/studio/TokensSection/PalettesTab.tsx` (267 lines) - Palette browser
+
+#### Files Modified
+- `packages/ui/src/lib/colors.ts` - Added HSL transformation functions
+- `packages/ui/src/lib/store/customizer.ts` - Completely rewritten for color customization
+- `packages/ui/src/providers/ThemeProvider.tsx` - Added smart token merging
+- `packages/ui/src/components/layout/CustomizerPanel.tsx` - Added primary color section
+- `packages/ui/src/components/forms/index.ts` - Exported ColorPicker
+- `packages/tokens/src/index.ts` - Exported new modules
+- `apps/sage-design-studio/app/components/studio/TokensSection/index.tsx` - Added PalettesTab
+- `apps/sage-design-studio/package.json` - Added @sage/tokens dependency
+
+#### Commits
+- `e6a5d98` - fix(sage-design-studio): Add missing @sage/tokens dependency for Vercel build
+
+### Benefits
+
+1. **"Change Once, Ripple Everywhere"**: Single primary color updates 15+ dependent tokens automatically
+2. **No Blank Page Problem**: 21 curated palettes eliminate designer's block
+3. **Accessibility First**: Auto-calculated WCAG-compliant foreground colors, palette compliance badges
+4. **Per-Theme Customization**: Different colors for Studio vs Sage vs Volt themes
+5. **Per-Mode Customization**: Different colors for light vs dark mode
+6. **Persistent Across Sessions**: localStorage ensures customizations survive page refreshes
+7. **Non-Destructive**: Reset to defaults without losing base theme personality
+8. **Developer-Friendly**: Token dependency graph makes customization predictable
+9. **Production-Ready**: Vercel build verified, no TypeScript errors
+10. **Future-Extensible**: Architecture supports Advanced mode (discrete primary/secondary/accent)
+
+### User Flow
+
+1. User opens Customizer panel (floating button bottom-right)
+2. User selects Theme (Studio/Sage/Volt)
+3. User selects Mode (Light/Dark)
+4. **Option A - Browse Palettes**:
+   - Navigate to Design Tokens → Palettes tab
+   - Filter by category (Professional, Creative, Natural, etc.)
+   - Toggle "Show only WCAG AA compliant"
+   - Click "Apply Palette" on desired palette
+5. **Option B - Custom Color**:
+   - In Customizer panel, use color picker or enter hex code
+   - Click "Apply Color"
+6. **Result**: Entire UI updates instantly
+   - Buttons use new primary color
+   - Links use new primary color
+   - Charts use harmonized color scale derived from primary
+   - Focus rings match primary color
+   - All changes scoped to selected theme + mode
+7. **Reset**: Click "Reset" button in Customizer to restore defaults
+
+### Next Steps (Future Enhancements)
+
+- **Advanced Mode**: Toggle to enable discrete Primary, Secondary, and Accent color controls
+- **Export/Import**: Share custom color schemes as JSON
+- **Preset Saving**: Save custom palettes for reuse
+- **Live Preview**: Real-time preview of color changes before applying
+- **Gradient Support**: Custom gradient generation from primary color
+- **Dark Mode Intelligence**: Auto-adjust lightness for dark mode compliance
+
+---
+
 ### Added - Charts Experience (2026-01-20)
 
 #### Interactive Chart Previews

@@ -68,6 +68,11 @@ export const navigationTree: NavigationItem[] = [
         section: 'tokens',
       },
       {
+        id: 'palettes',
+        label: 'Palettes',
+        section: 'tokens',
+      },
+      {
         id: 'typography',
         label: 'Typography',
         section: 'tokens',
