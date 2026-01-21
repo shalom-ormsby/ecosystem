@@ -267,23 +267,6 @@ export const navigationTree: NavigationItem[] = [
     ],
   },
   {
-    id: 'templates',
-    label: 'Templates',
-    icon: <LayoutTemplate className="w-4 h-4" />,
-    children: [
-      {
-        id: 'templates-overview',
-        label: 'Overview',
-        section: 'templates',
-      },
-      {
-        id: 'page-template',
-        label: 'Page Template',
-        section: 'templates',
-      },
-    ],
-  },
-  {
     id: 'charts',
     label: 'Charts',
     icon: <div className="w-4 h-4 flex items-center justify-center font-bold text-xs">📊</div>,

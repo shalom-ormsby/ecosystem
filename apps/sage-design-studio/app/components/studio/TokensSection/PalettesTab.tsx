@@ -58,18 +58,15 @@ export function PalettesTab() {
   const [editedAccentColor, setEditedAccentColor] = useState('');
 
   const { theme, mode } = useTheme();
-  const {
-    applyColorPalette,
-    getActiveColorPalette,
-    resetCustomColors,
-    getSavedPalettes,
-    deletePalette,
-    updatePalette,
-    savePalette,
-  } = useCustomizer();
 
-  const currentPalette = getActiveColorPalette(theme, mode);
-  const savedPalettes = getSavedPalettes();
+  // Use proper Zustand selectors for reactive state
+  const applyColorPalette = useCustomizer(state => state.applyColorPalette);
+  const resetCustomColors = useCustomizer(state => state.resetCustomColors);
+  const deletePalette = useCustomizer(state => state.deletePalette);
+  const updatePalette = useCustomizer(state => state.updatePalette);
+  const savePalette = useCustomizer(state => state.savePalette);
+  const savedPalettes = useCustomizer(state => state.savedPalettes);
+  const currentPalette = useCustomizer(state => state.customColors?.[theme]?.[mode] || null);
 
   // Combine curated and saved palettes
   const allPalettes = [
