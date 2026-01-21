@@ -27,7 +27,11 @@ export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: 
     const {
         motion,
         setMotion,
+        customizationMode,
+        setCustomizationMode,
         setCustomPrimaryColor,
+        setCustomSecondaryColor,
+        setCustomAccentColor,
         getActiveColorPalette,
         resetCustomColors
     } = useCustomizer();
@@ -36,21 +40,31 @@ export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: 
     // Get current custom colors
     const currentPalette = getActiveColorPalette(theme, colorMode);
     const [tempPrimaryColor, setTempPrimaryColor] = React.useState(currentPalette?.primary || '#0a0a0a');
+    const [tempSecondaryColor, setTempSecondaryColor] = React.useState(currentPalette?.secondary || '#5a67d8');
+    const [tempAccentColor, setTempAccentColor] = React.useState(currentPalette?.accent || '#ff6b35');
 
     // Update temp color when palette changes
     React.useEffect(() => {
         if (currentPalette) {
             setTempPrimaryColor(currentPalette.primary);
+            setTempSecondaryColor(currentPalette.secondary || currentPalette.primary);
+            setTempAccentColor(currentPalette.accent || '#ff6b35');
         }
     }, [currentPalette]);
 
     const handleApplyColor = () => {
         setCustomPrimaryColor(theme, colorMode, tempPrimaryColor);
+        if (customizationMode === 'advanced') {
+            setCustomSecondaryColor(theme, colorMode, tempSecondaryColor);
+            setCustomAccentColor(theme, colorMode, tempAccentColor);
+        }
     };
 
     const handleResetColors = () => {
         resetCustomColors(theme, colorMode);
         setTempPrimaryColor('#0a0a0a');
+        setTempSecondaryColor('#5a67d8');
+        setTempAccentColor('#ff6b35');
     };
 
     React.useEffect(() => {
@@ -198,19 +212,75 @@ export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: 
                     </div>
                 </div>
 
-                {/* Primary Color Customizer - Full mode only */}
+                {/* Color Customizer - Full mode only */}
                 {mode === 'full' && (
                     <div className="pt-4 border-t border-[var(--color-border)]">
-                        <div className="flex items-center gap-2 mb-3">
-                            <Palette className="w-4 h-4 opacity-80" />
-                            <label className="text-sm font-medium opacity-80">Primary Color</label>
+                        <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center gap-2">
+                                <Palette className="w-4 h-4 opacity-80" />
+                                <label className="text-sm font-medium opacity-80">Color Customization</label>
+                            </div>
+                            {/* Mode Toggle */}
+                            <div className="flex gap-1 bg-[var(--color-surface)] rounded-md p-0.5">
+                                <button
+                                    onClick={() => setCustomizationMode('simple')}
+                                    className={`
+                                        px-2 py-1 text-xs rounded transition-all
+                                        ${customizationMode === 'simple'
+                                            ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)]'
+                                            : 'opacity-60 hover:opacity-100'
+                                        }
+                                    `}
+                                >
+                                    Simple
+                                </button>
+                                <button
+                                    onClick={() => setCustomizationMode('advanced')}
+                                    className={`
+                                        px-2 py-1 text-xs rounded transition-all
+                                        ${customizationMode === 'advanced'
+                                            ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)]'
+                                            : 'opacity-60 hover:opacity-100'
+                                        }
+                                    `}
+                                >
+                                    Advanced
+                                </button>
+                            </div>
                         </div>
 
-                        <ColorPicker
-                            description="Customize the primary brand color for this theme and mode"
-                            value={tempPrimaryColor}
-                            onChange={setTempPrimaryColor}
-                        />
+                        <div className="space-y-4">
+                            {/* Primary Color */}
+                            <div>
+                                <label className="text-xs font-medium opacity-70 mb-2 block">Primary Color</label>
+                                <ColorPicker
+                                    value={tempPrimaryColor}
+                                    onChange={setTempPrimaryColor}
+                                />
+                            </div>
+
+                            {/* Secondary Color - Advanced mode only */}
+                            {customizationMode === 'advanced' && (
+                                <div>
+                                    <label className="text-xs font-medium opacity-70 mb-2 block">Secondary Color</label>
+                                    <ColorPicker
+                                        value={tempSecondaryColor}
+                                        onChange={setTempSecondaryColor}
+                                    />
+                                </div>
+                            )}
+
+                            {/* Accent Color - Advanced mode only */}
+                            {customizationMode === 'advanced' && (
+                                <div>
+                                    <label className="text-xs font-medium opacity-70 mb-2 block">Accent Color</label>
+                                    <ColorPicker
+                                        value={tempAccentColor}
+                                        onChange={setTempAccentColor}
+                                    />
+                                </div>
+                            )}
+                        </div>
 
                         {/* Action Buttons */}
                         <div className="flex gap-2 mt-4">
@@ -218,9 +288,12 @@ export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: 
                                 onClick={handleApplyColor}
                                 size="sm"
                                 className="flex-1"
-                                disabled={currentPalette?.primary === tempPrimaryColor}
+                                disabled={currentPalette?.primary === tempPrimaryColor &&
+                                         (customizationMode === 'simple' ||
+                                          (currentPalette?.secondary === tempSecondaryColor &&
+                                           currentPalette?.accent === tempAccentColor))}
                             >
-                                Apply Color
+                                Apply Colors
                             </Button>
                             {currentPalette && (
                                 <Button
@@ -236,7 +309,7 @@ export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: 
                         {/* Status Indicator */}
                         {currentPalette && (
                             <p className="text-xs opacity-60 mt-2">
-                                Custom color active for {theme} {colorMode} mode
+                                Custom colors active for {theme} {colorMode} mode
                             </p>
                         )}
                     </div>

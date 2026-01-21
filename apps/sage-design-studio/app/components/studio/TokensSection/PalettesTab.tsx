@@ -55,6 +55,7 @@ export function PalettesTab() {
   const [newPaletteName, setNewPaletteName] = useState('');
   const [newPaletteDescription, setNewPaletteDescription] = useState('');
   const [editedPrimaryColor, setEditedPrimaryColor] = useState('');
+  const [editedSecondaryColor, setEditedSecondaryColor] = useState('');
   const [editedAccentColor, setEditedAccentColor] = useState('');
 
   const { theme, mode } = useTheme();
@@ -107,6 +108,7 @@ export function PalettesTab() {
           name: newPaletteName.trim(),
           description: renamingPalette.description || `Custom version of ${renamingPalette.name}`,
           primary: renamingPalette.primary,
+          secondary: renamingPalette.secondary,
           accent: renamingPalette.accent,
           wcagAA: renamingPalette.wcagAA || false,
           wcagAAA: renamingPalette.wcagAAA || false,
@@ -128,6 +130,7 @@ export function PalettesTab() {
         // Update existing custom palette
         updatePalette(editingPalette.id, {
           primary: editedPrimaryColor,
+          secondary: editedSecondaryColor,
           accent: editedAccentColor,
         });
       } else {
@@ -136,6 +139,7 @@ export function PalettesTab() {
           name: `${editingPalette.name} (Custom)`,
           description: editingPalette.description || `Custom version of ${editingPalette.name}`,
           primary: editedPrimaryColor,
+          secondary: editedSecondaryColor,
           accent: editedAccentColor,
           wcagAA: editingPalette.wcagAA || false,
           wcagAAA: editingPalette.wcagAAA || false,
@@ -154,6 +158,7 @@ export function PalettesTab() {
         name: newPaletteName.trim(),
         description: newPaletteDescription.trim() || 'Custom palette',
         primary: editedPrimaryColor,
+        secondary: editedSecondaryColor,
         accent: editedAccentColor,
         wcagAA: false,
         wcagAAA: false,
@@ -164,6 +169,7 @@ export function PalettesTab() {
       setNewPaletteName('');
       setNewPaletteDescription('');
       setEditedPrimaryColor('');
+      setEditedSecondaryColor('');
       setEditedAccentColor('');
     }
   };
@@ -256,19 +262,33 @@ export function PalettesTab() {
             <Card
               key={palette.id}
               className={`
-                p-4 cursor-pointer transition-all relative
+                p-4 cursor-pointer transition-all
                 hover:shadow-lg hover:border-[var(--color-primary)]
                 ${isActive ? 'ring-2 ring-[var(--color-primary)]' : ''}
               `}
             >
-              {/* Dropdown Menu for All Palettes */}
-              <div className="absolute top-2 right-2 z-10">
+              {/* Title and Menu */}
+              <div className="flex items-start justify-between mb-2">
+                <div className="flex-1 pr-2">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h4 className="font-medium">{palette.name}</h4>
+                    {isActive && (
+                      <Badge variant="default" className="text-xs">
+                        <Check className="w-3 h-3 mr-1" />
+                        Active
+                      </Badge>
+                    )}
+                  </div>
+                  <p className="text-xs text-[var(--color-text-secondary)]">
+                    {palette.description}
+                  </p>
+                </div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="h-8 w-8 p-0"
+                      className="h-8 w-8 p-0 shrink-0"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <MoreVertical className="h-4 w-4" />
@@ -279,6 +299,7 @@ export function PalettesTab() {
                       e.stopPropagation();
                       setEditingPalette(palette);
                       setEditedPrimaryColor(palette.primary);
+                      setEditedSecondaryColor(palette.secondary || palette.primary);
                       setEditedAccentColor(palette.accent);
                     }}>
                       <Edit className="mr-2 h-4 w-4" />
@@ -324,6 +345,17 @@ export function PalettesTab() {
                     Primary
                   </div>
                 </div>
+                {/* Secondary Color */}
+                <div className="flex-1">
+                  <div
+                    className="h-16 rounded mb-1"
+                    style={{ backgroundColor: palette.secondary || palette.primary }}
+                    title={`Secondary: ${palette.secondary || palette.primary}`}
+                  />
+                  <div className="text-xs text-center text-[var(--color-text-secondary)] font-medium">
+                    Secondary
+                  </div>
+                </div>
                 {/* Accent Color */}
                 <div className="flex-1">
                   <div
@@ -339,20 +371,6 @@ export function PalettesTab() {
 
               {/* Palette Info */}
               <div className="space-y-2">
-                <div className="flex items-start justify-between">
-                  <h4 className="font-medium">{palette.name}</h4>
-                  {isActive && (
-                    <Badge variant="default" className="ml-2">
-                      <Check className="w-3 h-3 mr-1" />
-                      Active
-                    </Badge>
-                  )}
-                </div>
-
-                <p className="text-xs text-[var(--color-text-secondary)]">
-                  {palette.description}
-                </p>
-
                 {/* Mood Tags */}
                 <div className="flex flex-wrap gap-1">
                   {palette.mood.map(mood => (
@@ -400,6 +418,7 @@ export function PalettesTab() {
           onClick={() => {
             setCreatingPalette(true);
             setEditedPrimaryColor('#0066cc');
+            setEditedSecondaryColor('#5a67d8');
             setEditedAccentColor('#ff6b35');
           }}
         >
@@ -495,6 +514,13 @@ export function PalettesTab() {
               />
             </div>
             <div className="space-y-2">
+              <Label>Secondary Color</Label>
+              <ColorPicker
+                value={editedSecondaryColor}
+                onChange={setEditedSecondaryColor}
+              />
+            </div>
+            <div className="space-y-2">
               <Label>Accent Color</Label>
               <ColorPicker
                 value={editedAccentColor}
@@ -554,6 +580,13 @@ export function PalettesTab() {
               />
             </div>
             <div className="space-y-2">
+              <Label>Secondary Color</Label>
+              <ColorPicker
+                value={editedSecondaryColor}
+                onChange={setEditedSecondaryColor}
+              />
+            </div>
+            <div className="space-y-2">
               <Label>Accent Color</Label>
               <ColorPicker
                 value={editedAccentColor}
@@ -567,6 +600,7 @@ export function PalettesTab() {
               setNewPaletteName('');
               setNewPaletteDescription('');
               setEditedPrimaryColor('');
+              setEditedSecondaryColor('');
               setEditedAccentColor('');
             }}>
               Cancel
