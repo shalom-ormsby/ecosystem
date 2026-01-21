@@ -23,8 +23,12 @@
     },
     "devDependencies": {
         "@sage/config": "workspace:*",
+        "@types/node": "^25.0.9",
         "@types/react": "^19.0.0",
         "tsup": "^8.0.0",
         "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "usehooks-ts": "^3.1.1"
     }
 }
