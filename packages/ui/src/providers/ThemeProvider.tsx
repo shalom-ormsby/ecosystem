@@ -76,6 +76,10 @@ function getThemeVars(theme: ThemeName, mode: ColorMode): Record<string, string>
     '--color-border': colors?.border || colors?.glassBorder || 'rgba(0, 0, 0, 0.1)',
     '--color-focus': colors?.accent || colors?.primary || '#0070f3',
 
+    // Links and focus rings (can be overridden by derived tokens)
+    '--color-link': colors?.link || colors?.primary || '#0a0a0a',
+    '--color-ring': colors?.ring || colors?.primary || '#0a0a0a',
+
     // Interactive states
     '--color-hover': colors?.hover || colors?.backgroundSecondary || '#fafafa',
     '--color-active': colors?.active || colors?.backgroundTertiary || '#f0f0f0',

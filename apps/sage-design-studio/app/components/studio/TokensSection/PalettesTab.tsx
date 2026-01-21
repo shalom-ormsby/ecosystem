@@ -66,7 +66,10 @@ export function PalettesTab() {
   const updatePalette = useCustomizer(state => state.updatePalette);
   const savePalette = useCustomizer(state => state.savePalette);
   const savedPalettes = useCustomizer(state => state.savedPalettes);
-  const currentPalette = useCustomizer(state => state.customColors?.[theme]?.[mode] || null);
+
+  // Subscribe to entire customColors object to ensure reactivity, then derive current palette
+  const customColors = useCustomizer(state => state.customColors);
+  const currentPalette = customColors?.[theme]?.[mode] || null;
 
   // Combine curated and saved palettes
   const allPalettes = [
