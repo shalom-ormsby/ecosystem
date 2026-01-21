@@ -1,2 +1,5 @@
-// Export charts here
-export const VERSION = '0.0.1';
+export * from './components/chart';
+export * from 'recharts';
+
+// Override specific recharts exports if we wrapped them, 
+// otherwise we just export the primitives and let usage include regular recharts components.
