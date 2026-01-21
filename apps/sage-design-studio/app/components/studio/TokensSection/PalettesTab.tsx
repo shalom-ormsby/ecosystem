@@ -129,16 +129,28 @@ export function PalettesTab() {
             >
               {/* Color Preview */}
               <div className="flex gap-2 mb-3">
-                <div
-                  className="flex-1 h-16 rounded"
-                  style={{ backgroundColor: palette.primary }}
-                  title={`Primary: ${palette.primary}`}
-                />
-                <div
-                  className="flex-1 h-16 rounded"
-                  style={{ backgroundColor: palette.accent }}
-                  title={`Accent: ${palette.accent}`}
-                />
+                {/* Primary Color */}
+                <div className="flex-1">
+                  <div
+                    className="h-16 rounded mb-1"
+                    style={{ backgroundColor: palette.primary }}
+                    title={`Primary: ${palette.primary}`}
+                  />
+                  <div className="text-xs text-center text-[var(--color-text-secondary)] font-medium">
+                    Primary
+                  </div>
+                </div>
+                {/* Accent Color */}
+                <div className="flex-1">
+                  <div
+                    className="h-16 rounded mb-1"
+                    style={{ backgroundColor: palette.accent }}
+                    title={`Accent: ${palette.accent}`}
+                  />
+                  <div className="text-xs text-center text-[var(--color-text-secondary)] font-medium">
+                    Accent
+                  </div>
+                </div>
               </div>
 
               {/* Palette Info */}

@@ -210,24 +210,22 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     // Apply transition class
     root.classList.add('theme-transitioning');
 
-    // Apply CSS variables
-    requestAnimationFrame(() => {
-      Object.entries(finalTokens).forEach(([key, value]) => {
-        root.style.setProperty(key, value);
-      });
-
-      // Set data attributes for theme and mode
-      root.setAttribute('data-theme', theme);
-      root.setAttribute('data-mode', mode);
-      root.setAttribute('data-custom-colors', customPalette ? 'active' : 'default');
-
-      // Toggle 'dark' class for Tailwind dark: modifier support
-      if (mode === 'dark') {
-        root.classList.add('dark');
-      } else {
-        root.classList.remove('dark');
-      }
+    // Apply CSS variables IMMEDIATELY (no requestAnimationFrame delay)
+    Object.entries(finalTokens).forEach(([key, value]) => {
+      root.style.setProperty(key, value);
     });
+
+    // Set data attributes for theme and mode
+    root.setAttribute('data-theme', theme);
+    root.setAttribute('data-mode', mode);
+    root.setAttribute('data-custom-colors', customPalette ? 'active' : 'default');
+
+    // Toggle 'dark' class for Tailwind dark: modifier support
+    if (mode === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
 
     // End transition after animation completes
     const timeout = setTimeout(() => {
