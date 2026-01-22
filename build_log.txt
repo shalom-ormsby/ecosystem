@@ -1,0 +1,187 @@
+
+> ecosystem-monorepo@0.1.0 build /Users/shalomormsby/Developer/work/ecosystem
+> turbo run build --filter @ecosystem/sage-design-studio
+
+• turbo 2.7.5
+• Packages in scope: @ecosystem/sage-design-studio
+• Running build in 1 packages
+• Remote caching disabled
+@sage/hooks:build: cache hit, replaying logs 3db3835be5714db9
+@sage/charts:build: cache hit, replaying logs c65c7463e4bd0767
+@sage/tokens:build: cache hit, replaying logs 2f8b3689f9af48a0
+@sage/charts:build: 
+@sage/charts:build: 
+@sage/charts:build: > @sage/charts@0.1.0 build /Users/shalomormsby/Developer/work/ecosystem/packages/charts
+@sage/charts:build: > tsup src/index.ts --format cjs,esm --dts
+@sage/charts:build: 
+@sage/charts:build: [34mCLI[39m Building entry: src/index.ts
+@sage/charts:build: [34mCLI[39m Using tsconfig: tsconfig.json
+@sage/charts:build: [34mCLI[39m tsup v8.5.1
+@sage/charts:build: [34mCLI[39m Using tsup config: /Users/shalomormsby/Developer/work/ecosystem/packages/charts/tsup.config.ts
+@sage/charts:build: [34mCLI[39m Target: es2020
+@sage/charts:build: [34mCLI[39m Cleaning output folder
+@sage/charts:build: [34mCJS[39m Build start
+@sage/charts:build: [34mESM[39m Build start
+@sage/charts:build: [32mESM[39m [1mdist/index.mjs     [22m[32m4.07 KB[39m
+@sage/charts:build: [32mESM[39m [1mdist/index.mjs.map [22m[32m17.06 KB[39m
+@sage/charts:build: [32mESM[39m ⚡️ Build success in 36ms
+@sage/charts:build: [32mCJS[39m [1mdist/index.js     [22m[32m4.97 KB[39m
+@sage/charts:build: [32mCJS[39m [1mdist/index.js.map [22m[32m17.21 KB[39m
+@sage/charts:build: [32mCJS[39m ⚡️ Build success in 39ms
+@sage/charts:build: DTS Build start
+@sage/charts:build: DTS ⚡️ Build success in 1484ms
+@sage/charts:build: DTS dist/index.d.ts  2.37 KB
+@sage/charts:build: DTS dist/index.d.mts 2.37 KB
+@sage/hooks:build: 
+@sage/hooks:build: 
+@sage/hooks:build: > @sage/hooks@0.1.0 build /Users/shalomormsby/Developer/work/ecosystem/packages/hooks
+@sage/hooks:build: > tsup src/index.ts --format cjs,esm --dts
+@sage/hooks:build: 
+@sage/hooks:build: [34mCLI[39m Building entry: src/index.ts
+@sage/hooks:build: [34mCLI[39m Using tsconfig: tsconfig.json
+@sage/hooks:build: [34mCLI[39m tsup v8.5.1
+@sage/hooks:build: [34mCLI[39m Using tsup config: /Users/shalomormsby/Developer/work/ecosystem/packages/hooks/tsup.config.ts
+@sage/hooks:build: [34mCLI[39m Target: es2020
+@sage/hooks:build: [34mCLI[39m Cleaning output folder
+@sage/tokens:build: 
+@sage/tokens:build: > @sage/tokens@0.0.1 build /Users/shalomormsby/Developer/work/ecosystem/packages/tokens
+@sage/tokens:build: > tsup src/index.ts --format esm,cjs --dts
+@sage/tokens:build: 
+@sage/tokens:build: CLI Building entry: src/index.ts
+@sage/hooks:build: [34mCJS[39m Build start
+@sage/hooks:build: [34mESM[39m Build start
+@sage/hooks:build: [32mESM[39m [1mdist/index.mjs     [22m[32m1.91 KB[39m
+@sage/hooks:build: [32mESM[39m [1mdist/index.mjs.map [22m[32m8.43 KB[39m
+@sage/hooks:build: [32mESM[39m ⚡️ Build success in 12ms
+@sage/hooks:build: [32mCJS[39m [1mdist/index.js     [22m[32m2.49 KB[39m
+@sage/hooks:build: [32mCJS[39m [1mdist/index.js.map [22m[32m8.69 KB[39m
+@sage/hooks:build: [32mCJS[39m ⚡️ Build success in 12ms
+@sage/hooks:build: DTS Build start
+@sage/hooks:build: DTS ⚡️ Build success in 694ms
+@sage/hooks:build: DTS dist/index.d.ts  703.00 B
+@sage/hooks:build: DTS dist/index.d.mts 703.00 B
+@sage/tokens:build: CLI Using tsconfig: tsconfig.json
+@sage/tokens:build: CLI tsup v8.5.1
+@sage/tokens:build: CLI Target: es2020
+@sage/tokens:build: ESM Build start
+@sage/tokens:build: CJS Build start
+@sage/tokens:build: CJS dist/index.js 57.45 KB
+@sage/tokens:build: CJS ⚡️ Build success in 74ms
+@sage/tokens:build: ESM dist/index.mjs 54.54 KB
+@sage/tokens:build: ESM ⚡️ Build success in 75ms
+@sage/tokens:build: DTS Build start
+@sage/tokens:build: DTS ⚡️ Build success in 998ms
+@sage/tokens:build: DTS dist/index.d.mts 52.29 KB
+@sage/tokens:build: DTS dist/index.d.ts  52.29 KB
+@sage/core:build: cache hit, replaying logs 9b8d2676ea6f52a5
+@sage/core:build: 
+@sage/core:build: > @sage/core@0.0.1 build /Users/shalomormsby/Developer/work/ecosystem/packages/core
+@sage/core:build: > tsup src/index.ts --format esm,cjs --dts
+@sage/core:build: 
+@sage/core:build: CLI Building entry: src/index.ts
+@sage/core:build: CLI Using tsconfig: tsconfig.json
+@sage/core:build: CLI tsup v8.5.1
+@sage/core:build: CLI Using tsup config: /Users/shalomormsby/Developer/work/ecosystem/packages/core/tsup.config.ts
+@sage/core:build: CLI Target: es2020
+@sage/core:build: CLI Cleaning output folder
+@sage/core:build: ESM Build start
+@sage/core:build: CJS Build start
+@sage/core:build: CJS dist/index.js     33.64 KB
+@sage/core:build: CJS dist/index.js.map 86.65 KB
+@sage/core:build: CJS ⚡️ Build success in 68ms
+@sage/core:build: ESM dist/index.mjs     32.43 KB
+@sage/core:build: ESM dist/index.mjs.map 86.43 KB
+@sage/core:build: ESM ⚡️ Build success in 68ms
+@sage/core:build: DTS Build start
+@sage/core:build: DTS ⚡️ Build success in 1602ms
+@sage/core:build: DTS dist/index.d.mts 1.67 KB
+@sage/core:build: DTS dist/index.d.ts  1.67 KB
+@sage/ui:build: cache hit, replaying logs dd5693c1a3bb6706
+@sage/ui:build: 
+@sage/ui:build: > @sage/ui@0.0.5 build /Users/shalomormsby/Developer/work/ecosystem/packages/ui
+@sage/ui:build: > tsup src/index.ts src/tokens.ts src/hooks.ts src/utils.ts src/providers.ts --format esm,cjs --dts
+@sage/ui:build: 
+@sage/ui:build: CLI Building entry: src/hooks.ts, src/index.ts, src/providers.ts, src/tokens.ts, src/utils.ts
+@sage/ui:build: CLI Using tsconfig: tsconfig.json
+@sage/ui:build: CLI tsup v8.5.1
+@sage/ui:build: CLI Using tsup config: /Users/shalomormsby/Developer/work/ecosystem/packages/ui/tsup.config.ts
+@sage/ui:build: CLI Target: es2020
+@sage/ui:build: CLI Cleaning output folder
+@sage/ui:build: ESM Build start
+@sage/ui:build: CJS Build start
+@sage/ui:build: ESM dist/utils.mjs         20.68 KB
+@sage/ui:build: ESM dist/providers.mjs     22.81 KB
+@sage/ui:build: ESM dist/hooks.mjs         17.80 KB
+@sage/ui:build: ESM dist/index.mjs         343.75 KB
+@sage/ui:build: ESM dist/tokens.mjs        97.00 B
+@sage/ui:build: ESM dist/hooks.mjs.map     52.33 KB
+@sage/ui:build: ESM dist/utils.mjs.map     50.44 KB
+@sage/ui:build: ESM dist/tokens.mjs.map    266.00 B
+@sage/ui:build: ESM dist/providers.mjs.map 50.92 KB
+@sage/ui:build: ESM dist/index.mjs.map     649.27 KB
+@sage/ui:build: ESM ⚡️ Build success in 236ms
+@sage/ui:build: CJS dist/providers.js     24.63 KB
+@sage/ui:build: CJS dist/hooks.js         19.33 KB
+@sage/ui:build: CJS dist/index.js         377.75 KB
+@sage/ui:build: CJS dist/utils.js         23.27 KB
+@sage/ui:build: CJS dist/tokens.js        1.12 KB
+@sage/ui:build: CJS dist/providers.js.map 51.16 KB
+@sage/ui:build: CJS dist/hooks.js.map     52.62 KB
+@sage/ui:build: CJS dist/index.js.map     645.80 KB
+@sage/ui:build: CJS dist/utils.js.map     51.02 KB
+@sage/ui:build: CJS dist/tokens.js.map    298.00 B
+@sage/ui:build: CJS ⚡️ Build success in 242ms
+@sage/ui:build: DTS Build start
+@sage/ui:build: DTS ⚡️ Build success in 5127ms
+@sage/ui:build: DTS dist/tokens.d.mts              30.00 B
+@sage/ui:build: DTS dist/index.d.mts               131.23 KB
+@sage/ui:build: DTS dist/providers.d.mts           91.00 B
+@sage/ui:build: DTS dist/hooks.d.mts               233.00 B
+@sage/ui:build: DTS dist/utils.d.mts               1.10 KB
+@sage/ui:build: DTS dist/validation-Bj1ye-v_.d.mts 2.91 KB
+@sage/ui:build: DTS dist/providers-CNe9iqRi.d.mts  463.00 B
+@sage/ui:build: DTS dist/hooks-JwoY_LtZ.d.mts      6.06 KB
+@sage/ui:build: DTS dist/utils-NA3gGYtZ.d.mts      27.36 KB
+@sage/ui:build: DTS dist/tokens.d.ts               30.00 B
+@sage/ui:build: DTS dist/index.d.ts                131.22 KB
+@sage/ui:build: DTS dist/providers.d.ts            90.00 B
+@sage/ui:build: DTS dist/hooks.d.ts                231.00 B
+@sage/ui:build: DTS dist/utils.d.ts                1.10 KB
+@sage/ui:build: DTS dist/validation-Bj1ye-v_.d.ts  2.91 KB
+@sage/ui:build: DTS dist/providers-CNe9iqRi.d.ts   463.00 B
+@sage/ui:build: DTS dist/hooks-BQi3Ia-W.d.ts       6.06 KB
+@sage/ui:build: DTS dist/utils-Bi4ypre8.d.ts       27.36 KB
+@ecosystem/sage-design-studio:build: cache miss, executing 9fdf2a56e3144202
+@ecosystem/sage-design-studio:build: 
+@ecosystem/sage-design-studio:build: > @ecosystem/sage-design-studio@0.1.0 build /Users/shalomormsby/Developer/work/ecosystem/apps/sage-design-studio
+@ecosystem/sage-design-studio:build: > next build
+@ecosystem/sage-design-studio:build: 
+@ecosystem/sage-design-studio:build:    ▲ Next.js 15.5.9
+@ecosystem/sage-design-studio:build: 
+@ecosystem/sage-design-studio:build:    Creating an optimized production build ...
+@ecosystem/sage-design-studio:build:  ✓ Compiled successfully in 5.0s
+@ecosystem/sage-design-studio:build:    Linting and checking validity of types ...
+@ecosystem/sage-design-studio:build: Failed to compile.
+@ecosystem/sage-design-studio:build: 
+@ecosystem/sage-design-studio:build: ./app/components/studio/TokensSection/ColorsTab.tsx:115:34
+@ecosystem/sage-design-studio:build: Type error: Property 'name' does not exist on type 'ColorPalette'.
+@ecosystem/sage-design-studio:build: 
+@ecosystem/sage-design-studio:build: [0m [90m 113 |[39m               {activePalette [33m?[39m (
+@ecosystem/sage-design-studio:build:  [90m 114 |[39m                 [33m<[39m[33m>[39m
+@ecosystem/sage-design-studio:build: [31m[1m>[22m[39m[90m 115 |[39m                   {activePalette[33m.[39mname}
+@ecosystem/sage-design-studio:build:  [90m     |[39m                                  [31m[1m^[22m[39m
+@ecosystem/sage-design-studio:build:  [90m 116 |[39m                   [33m<[39m[33mBadge[39m variant[33m=[39m[32m"secondary"[39m className[33m=[39m[32m"text-sm font-normal"[39m[33m>[39m[33mCustom[39m[33m<[39m[33m/[39m[33mBadge[39m[33m>[39m
+@ecosystem/sage-design-studio:build:  [90m 117 |[39m                 [33m<[39m[33m/[39m[33m>[39m
+@ecosystem/sage-design-studio:build:  [90m 118 |[39m               ) [33m:[39m ([0m
+@ecosystem/sage-design-studio:build: Next.js build worker exited with code: 1 and signal: null
+@ecosystem/sage-design-studio:build:  ELIFECYCLE  Command failed with exit code 1.
+@ecosystem/sage-design-studio:build: ERROR: command finished with error: command (/Users/shalomormsby/Developer/work/ecosystem/apps/sage-design-studio) /opt/homebrew/bin/pnpm run build exited (1)
+@ecosystem/sage-design-studio#build: command (/Users/shalomormsby/Developer/work/ecosystem/apps/sage-design-studio) /opt/homebrew/bin/pnpm run build exited (1)
+
+ Tasks:    5 successful, 6 total
+Cached:    5 cached, 6 total
+  Time:    15.721s 
+Failed:    @ecosystem/sage-design-studio#build
+
+ ERROR  run failed: command  exited (1)
+ ELIFECYCLE  Command failed with exit code 1.

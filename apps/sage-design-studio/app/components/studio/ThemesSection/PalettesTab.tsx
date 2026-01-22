@@ -89,9 +89,6 @@ export function PalettesTab() {
   // Subscribe to entire customColors object to ensure reactivity, then derive current palette
   const customColors = useCustomizer(state => state.customColors);
 
-  if (!mounted) {
-    return null;
-  }
   const currentPalette = customColors?.[theme]?.[mode] || null;
 
   // Combine curated and saved palettes
@@ -100,7 +97,19 @@ export function PalettesTab() {
     ...savedPalettes,
   ];
 
-  const filteredPalettes = allPalettes
+  // Initialize local palette order on mount or when source data changes
+  useEffect(() => {
+    setLocalPaletteOrder(allPalettes);
+  }, [savedPalettes.length]); // Only re-sync when saved palettes count changes
+
+  if (!mounted) {
+    return null;
+  }
+
+  // Use local order if available, otherwise use allPalettes
+  const displayPalettes = localPaletteOrder.length > 0 ? localPaletteOrder : allPalettes;
+
+  const filteredPalettes = displayPalettes
     .filter(p => selectedCategory === 'all' || p.category === selectedCategory)
     .filter(p => !accessibleOnly || p.wcagAA);
 
@@ -113,6 +122,8 @@ export function PalettesTab() {
       primary: palette.primary,
       secondary: palette.secondary,
       accent: palette.accent,
+      name: palette.name,
+      description: palette.description,
     });
   };
 
@@ -177,6 +188,170 @@ export function PalettesTab() {
 
   const resetColors = () => {
     resetCustomColors(theme, mode);
+  };
+
+  const renderPaletteCard = (palette: any, isDragging = false) => {
+    const isActive = currentPalette?.primary === palette.primary;
+    const isCustom = palette.category === 'custom';
+
+    return (
+      <Card
+        key={palette.id}
+        className={`
+          p-4 transition-all flex flex-col h-full
+          ${!isDragging ? 'hover:shadow-lg hover:border-[var(--color-primary)]' : 'shadow-xl'}
+          ${isActive ? 'ring-2 ring-[var(--color-primary)]' : ''}
+        `}
+      >
+        {/* Title and Menu */}
+        <div className="flex items-start justify-between mb-2">
+          {/* Drag Handle */}
+          <div className="mr-2 mt-1">
+            <DragDropHandle />
+          </div>
+          <div className="flex-1 pr-2">
+            <div className="flex items-center gap-2 mb-1">
+              <h4 className="font-medium">{palette.name}</h4>
+              {isActive && (
+                <Badge variant="default" className="text-xs">
+                  <Check className="w-3 h-3 mr-1" />
+                  Active
+                </Badge>
+              )}
+            </div>
+            <p className="text-xs text-[var(--color-text-secondary)]">
+              {palette.description}
+            </p>
+          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-8 w-8 p-0 shrink-0"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <MoreVertical className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={(e) => {
+                e.stopPropagation();
+                setEditingPalette(palette);
+                setNewPaletteName(palette.name);
+                setEditedPrimaryColor(palette.primary);
+                setEditedSecondaryColor(palette.secondary || palette.primary);
+                setEditedAccentColor(palette.accent);
+              }}>
+                <Edit className="mr-2 h-4 w-4" />
+                {isCustom ? 'Edit' : 'Edit (creates copy)'}
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                className="text-red-600"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setDeletingPalette(palette);
+                }}
+              >
+                <Trash2 className="mr-2 h-4 w-4" />
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+
+        {/* Color Preview */}
+        <div className="flex gap-2 mb-3">
+          {/* Primary Color */}
+          <div className="flex-1">
+            <div
+              className="h-16 rounded mb-1"
+              style={{ backgroundColor: palette.primary }}
+              title={`Primary: ${palette.primary}`}
+            />
+            <div className="text-xs text-center text-[var(--color-text-secondary)] font-medium">
+              Primary
+            </div>
+          </div>
+          {/* Secondary Color */}
+          <div className="flex-1">
+            <div
+              className="h-16 rounded mb-1"
+              style={{ backgroundColor: palette.secondary || palette.primary }}
+              title={`Secondary: ${palette.secondary || palette.primary}`}
+            />
+            <div className="text-xs text-center text-[var(--color-text-secondary)] font-medium">
+              Secondary
+            </div>
+          </div>
+          {/* Accent Color */}
+          <div className="flex-1">
+            <div
+              className="h-16 rounded mb-1"
+              style={{ backgroundColor: palette.accent }}
+              title={`Accent: ${palette.accent}`}
+            />
+            <div className="text-xs text-center text-[var(--color-text-secondary)] font-medium">
+              Accent
+            </div>
+          </div>
+        </div>
+
+        {/* Palette Info */}
+        <div className="space-y-2 mb-4">
+          {/* Mood Tags */}
+          <div className="flex flex-wrap gap-1">
+            {palette.mood?.map((mood: string) => (
+              <Badge key={mood} variant="secondary" className="text-xs">
+                {mood}
+              </Badge>
+            ))}
+          </div>
+
+          {/* Accessibility Badge */}
+          <div className="flex gap-2 items-center">
+            {palette.wcagAAA && (
+              <Badge variant="default" className="text-xs bg-green-700 text-white hover:bg-green-800 border-none">AAA</Badge>
+            )}
+            {palette.wcagAA && !palette.wcagAAA && (
+              <Badge variant="default" className="text-xs bg-green-500 text-white hover:bg-green-600 border-none">AA</Badge>
+            )}
+            {palette.harmony && (
+              <Badge variant="outline" className="text-xs text-[var(--color-text-secondary)]">{palette.harmony}</Badge>
+            )}
+          </div>
+
+          {/* Rationale & Best For */}
+          {palette.rationale && (
+            <p className="text-xs text-[var(--color-text-tertiary)] mt-2">
+              {palette.rationale}
+            </p>
+          )}
+
+          {palette.bestFor && (
+            <p className="text-xs text-[var(--color-text-secondary)]">
+              <span className="font-semibold">Best for:</span> {palette.bestFor.join(', ')}
+            </p>
+          )}
+        </div>
+
+        {/* Apply Button */}
+        <Button
+          onClick={() => applyPalette(palette.id)}
+          variant="default"
+          size="sm"
+          className={`
+            w-full mt-auto transition-all border-none justify-center
+            ${isActive
+              ? 'bg-[var(--color-accent)] text-[var(--color-accent-foreground)] ring-1 ring-[var(--color-accent)]'
+              : ''}
+          `}
+        >
+          {isActive ? 'Currently Active' : 'Apply Palette'}
+        </Button>
+      </Card>
+    );
   };
 
   return (
@@ -289,209 +464,56 @@ export function PalettesTab() {
       </div>
 
       {/* Palette Grid with Drag & Drop */}
-      {(() => {
-        const renderPaletteCard = (palette: any, isDragging = false) => {
-          const isActive = currentPalette?.primary === palette.primary;
-          const isCustom = palette.category === 'custom';
+      <div className="space-y-4">
+        <DragDropList
+          items={filteredPalettes as any}
+          onReorder={(reordered) => {
+            // Create a map of reordered items by ID
+            const reorderedMap = new Map(reordered.map((p: any, index) => [p.id, { item: p, newIndex: index }]));
 
-          return (
-            <Card
-              key={palette.id}
-              className={`
-                p-4 transition-all flex flex-col h-full
-                ${!isDragging ? 'hover:shadow-lg hover:border-[var(--color-primary)]' : 'shadow-xl'}
-                ${isActive ? 'ring-2 ring-[var(--color-primary)]' : ''}
-              `}
-            >
-              {/* Title and Menu */}
-              <div className="flex items-start justify-between mb-2">
-                {/* Drag Handle */}
-                <div className="mr-2 mt-1">
-                  <DragDropHandle />
-                </div>
-                <div className="flex-1 pr-2">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h4 className="font-medium">{palette.name}</h4>
-                    {isActive && (
-                      <Badge variant="default" className="text-xs">
-                        <Check className="w-3 h-3 mr-1" />
-                        Active
-                      </Badge>
-                    )}
-                  </div>
-                  <p className="text-xs text-[var(--color-text-secondary)]">
-                    {palette.description}
-                  </p>
-                </div>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-8 w-8 p-0 shrink-0"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <MoreVertical className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={(e) => {
-                      e.stopPropagation();
-                      setEditingPalette(palette);
-                      setNewPaletteName(palette.name);
-                      setEditedPrimaryColor(palette.primary);
-                      setEditedSecondaryColor(palette.secondary || palette.primary);
-                      setEditedAccentColor(palette.accent);
-                    }}>
-                      <Edit className="mr-2 h-4 w-4" />
-                      {isCustom ? 'Edit' : 'Edit (creates copy)'}
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      className="text-red-600"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setDeletingPalette(palette);
-                      }}
-                    >
-                      <Trash2 className="mr-2 h-4 w-4" />
-                      Delete
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
+            // Build new order by replacing reordered items in their new positions
+            const newOrder = [...displayPalettes];
+            const itemsToReorder = newOrder.filter(p => reorderedMap.has(p.id));
 
-              {/* Color Preview */}
-              <div className="flex gap-2 mb-3">
-                {/* Primary Color */}
-                <div className="flex-1">
-                  <div
-                    className="h-16 rounded mb-1"
-                    style={{ backgroundColor: palette.primary }}
-                    title={`Primary: ${palette.primary}`}
-                  />
-                  <div className="text-xs text-center text-[var(--color-text-secondary)] font-medium">
-                    Primary
-                  </div>
-                </div>
-                {/* Secondary Color */}
-                <div className="flex-1">
-                  <div
-                    className="h-16 rounded mb-1"
-                    style={{ backgroundColor: palette.secondary || palette.primary }}
-                    title={`Secondary: ${palette.secondary || palette.primary}`}
-                  />
-                  <div className="text-xs text-center text-[var(--color-text-secondary)] font-medium">
-                    Secondary
-                  </div>
-                </div>
-                {/* Accent Color */}
-                <div className="flex-1">
-                  <div
-                    className="h-16 rounded mb-1"
-                    style={{ backgroundColor: palette.accent }}
-                    title={`Accent: ${palette.accent}`}
-                  />
-                  <div className="text-xs text-center text-[var(--color-text-secondary)] font-medium">
-                    Accent
-                  </div>
-                </div>
-              </div>
+            // Remove reordered items from their current positions
+            const filteredOut = newOrder.filter(p => !reorderedMap.has(p.id));
 
-              {/* Palette Info */}
-              <div className="space-y-2 mb-4">
-                {/* Mood Tags */}
-                <div className="flex flex-wrap gap-1">
-                  {palette.mood?.map((mood: string) => (
-                    <Badge key={mood} variant="secondary" className="text-xs">
-                      {mood}
-                    </Badge>
-                  ))}
-                </div>
+            // Insert reordered items at the start (since they're the visible filtered items)
+            const finalOrder = [...reordered, ...filteredOut];
 
-                {/* Accessibility Badge */}
-                <div className="flex gap-2 items-center">
-                  {palette.wcagAAA && (
-                    <Badge variant="default" className="text-xs bg-green-700 text-white hover:bg-green-800 border-none">AAA</Badge>
-                  )}
-                  {palette.wcagAA && !palette.wcagAAA && (
-                    <Badge variant="default" className="text-xs bg-green-500 text-white hover:bg-green-600 border-none">AA</Badge>
-                  )}
-                  {palette.harmony && (
-                    <Badge variant="outline" className="text-xs text-[var(--color-text-secondary)]">{palette.harmony}</Badge>
-                  )}
-                </div>
+            setLocalPaletteOrder(finalOrder);
 
-                {/* Rationale & Best For */}
-                {palette.rationale && (
-                  <p className="text-xs text-[var(--color-text-tertiary)] mt-2">
-                    {palette.rationale}
-                  </p>
-                )}
+            // Also update saved palettes in store for persistence
+            const reorderedSaved = reordered.filter((p: any) => p.category === 'custom');
+            if (reorderedSaved.length > 0) {
+              reorderPalettes(reorderedSaved as any);
+            }
+          }}
+          renderItem={(palette, isDragging) => renderPaletteCard(palette, isDragging)}
+          withHandle={true}
+          strategy={rectSortingStrategy}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+        />
 
-                {palette.bestFor && (
-                  <p className="text-xs text-[var(--color-text-secondary)]">
-                    <span className="font-semibold">Best for:</span> {palette.bestFor.join(', ')}
-                  </p>
-                )}
-              </div>
-
-              {/* Apply Button */}
-              <Button
-                onClick={() => applyPalette(palette.id)}
-                variant="default"
-                size="sm"
-                className={`
-                  w-full mt-auto transition-all border-none justify-center
-                  ${isActive
-                    ? 'bg-[var(--color-accent)] text-[var(--color-accent-foreground)] ring-1 ring-[var(--color-accent)]'
-                    : ''}
-                `}
-              >
-                {isActive ? 'Currently Active' : 'Apply Palette'}
-              </Button>
-            </Card>
-          );
-        };
-
-        return (
-          <div className="space-y-4">
-            <DragDropList
-              items={filteredPalettes as any}
-              onReorder={(reordered) => {
-                // Update saved palettes with new order
-                const reorderedSaved = reordered.filter((p: any) => p.category === 'custom');
-                if (reorderedSaved.length > 0) {
-                  reorderPalettes(reorderedSaved as any);
-                }
-              }}
-              renderItem={(palette, isDragging) => renderPaletteCard(palette, isDragging)}
-              withHandle={true}
-              strategy={rectSortingStrategy}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-            />
-
-            {/* Create New Palette Card */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <Card
-                className="p-4 cursor-pointer transition-all border-dashed border-2 hover:shadow-lg hover:border-[var(--color-primary)] flex flex-col items-center justify-center min-h-[300px]"
-                onClick={() => {
-                  setCreatingPalette(true);
-                  setEditedPrimaryColor('#0066cc');
-                  setEditedSecondaryColor('#5a67d8');
-                  setEditedAccentColor('#ff6b35');
-                }}
-              >
-                <Plus className="h-12 w-12 mb-3 text-[var(--color-text-secondary)]" />
-                <p className="text-lg font-medium text-[var(--color-text-secondary)]">Create New Palette</p>
-                <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
-                  Design your own color scheme
-                </p>
-              </Card>
-            </div>
-          </div>
-        );
-      })()}
+        {/* Create New Palette Card */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Card
+            className="p-4 cursor-pointer transition-all border-dashed border-2 hover:shadow-lg hover:border-[var(--color-primary)] flex flex-col items-center justify-center min-h-[300px]"
+            onClick={() => {
+              setCreatingPalette(true);
+              setEditedPrimaryColor('#0066cc');
+              setEditedSecondaryColor('#5a67d8');
+              setEditedAccentColor('#ff6b35');
+            }}
+          >
+            <Plus className="h-12 w-12 mb-3 text-[var(--color-text-secondary)]" />
+            <p className="text-lg font-medium text-[var(--color-text-secondary)]">Create New Palette</p>
+            <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
+              Design your own color scheme
+            </p>
+          </Card>
+        </div>
+      </div>
 
       {filteredPalettes.length === 0 && (
         <div className="text-center py-12 text-[var(--color-text-secondary)]">

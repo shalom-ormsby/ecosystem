@@ -12,6 +12,7 @@ import { AddingComponentsSection } from './components/studio/AddingComponentsSec
 import { CommonPatternsSection } from './components/studio/CommonPatternsSection';
 import { ContributingSection } from './components/studio/ContributingSection';
 import { TokensSection } from './components/studio/TokensSection';
+import { ThemesSection } from './components/studio/ThemesSection';
 import { ComponentsSection } from './components/studio/ComponentsSection';
 import { BlocksSection } from './components/studio/BlocksSection';
 import { HooksSection } from './components/studio/HooksSection';
@@ -29,6 +30,7 @@ type Section =
   | 'contributing'
   | 'mcp-server'
   | 'tokens'
+  | 'themes'
   | 'actions'
   | 'forms'
   | 'navigation'
@@ -74,6 +76,13 @@ const routeConfig: RouteConfig = {
       spacing: { label: 'Spacing' },
       syntax: { label: 'Syntax' },
       motion: { label: 'Motion' },
+    }
+  },
+  themes: {
+    label: 'Themes',
+    children: {
+      palettes: { label: 'Palettes' },
+      customizer: { label: 'Customizer' },
     }
   },
   // Functional Categories (formerly Atoms)
@@ -213,9 +222,9 @@ export default function StudioPage() {
     const [section, itemId] = hash.split('/');
     const validSections: Section[] = [
       'overview', 'architecture', 'adding-components', 'common-patterns',
-      'contributing', 'mcp-server', 'tokens', 'actions', 'forms', 'navigation',
+      'contributing', 'mcp-server', 'tokens', 'themes', 'actions', 'forms', 'navigation',
       'overlays', 'feedback', 'data-display', 'layout', 'blocks',
-      'hooks', 'templates', 'motion'
+      'hooks', 'templates', 'charts', 'motion'
     ];
 
     if (validSections.includes(section as Section)) {
@@ -248,7 +257,7 @@ export default function StudioPage() {
       const [section, itemId] = hash.split('/');
       const validSections: Section[] = [
         'overview', 'architecture', 'adding-components', 'common-patterns',
-        'contributing', 'mcp-server', 'tokens', 'actions', 'forms', 'navigation',
+        'contributing', 'mcp-server', 'tokens', 'themes', 'actions', 'forms', 'navigation',
         'overlays', 'feedback', 'data-display', 'layout', 'blocks',
         'hooks', 'templates', 'charts', 'motion'
       ];
@@ -300,9 +309,9 @@ export default function StudioPage() {
       const [section, itemId] = hashPath.split('/');
       const validSections: Section[] = [
         'overview', 'architecture', 'adding-components', 'common-patterns',
-        'contributing', 'mcp-server', 'tokens', 'actions', 'forms', 'navigation',
+        'contributing', 'mcp-server', 'tokens', 'themes', 'actions', 'forms', 'navigation',
         'overlays', 'feedback', 'data-display', 'layout', 'blocks',
-        'hooks', 'templates', 'motion'
+        'hooks', 'templates', 'charts', 'motion'
       ];
 
       if (validSections.includes(section as Section)) {
@@ -320,9 +329,9 @@ export default function StudioPage() {
     // Check if first part matches a known top-level section
     const validSections: Section[] = [
       'overview', 'architecture', 'adding-components', 'common-patterns',
-      'contributing', 'mcp-server', 'tokens', 'actions', 'forms', 'navigation',
+      'contributing', 'mcp-server', 'tokens', 'themes', 'actions', 'forms', 'navigation',
       'overlays', 'feedback', 'data-display', 'layout', 'blocks',
-      'hooks', 'templates', 'motion'
+      'hooks', 'templates', 'charts', 'motion'
     ];
 
     if (validSections.includes(potentialSection)) {
@@ -418,6 +427,15 @@ export default function StudioPage() {
             )}
             {activeSection === 'tokens' && (
               <TokensSection
+                activeItemId={activeItemId}
+                breadcrumbs={breadcrumbs}
+                onItemChange={(itemId) => setActiveItemId(itemId)}
+              />
+            )}
+
+            {/* Themes Section */}
+            {activeSection === 'themes' && (
+              <ThemesSection
                 activeItemId={activeItemId}
                 breadcrumbs={breadcrumbs}
                 onItemChange={(itemId) => setActiveItemId(itemId)}

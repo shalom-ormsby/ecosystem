@@ -3,14 +3,13 @@
 import { useState, useEffect } from 'react';
 import { TertiaryNav, Breadcrumbs, type BreadcrumbItemLegacy } from '@sage/ui';
 import { ColorsTab } from './ColorsTab';
-import { PalettesTab } from './PalettesTab';
 import { TypographyTab } from './TypographyTab';
 import { SpacingTab } from './SpacingTab';
 import { MotionTab } from './MotionTab';
 import { SyntaxTab } from './SyntaxTab';
 import { InteractionsTab } from './InteractionsTab';
 
-type TokenTab = 'colors' | 'palettes' | 'typography' | 'spacing' | 'syntax' | 'motion' | 'interactions';
+type TokenTab = 'colors' | 'typography' | 'spacing' | 'syntax' | 'motion' | 'interactions';
 
 interface TokensSectionProps {
   activeItemId?: string;
@@ -23,7 +22,7 @@ export function TokensSection({ activeItemId, breadcrumbs, onItemChange }: Token
 
   // Update active tab when activeItemId changes
   useEffect(() => {
-    if (activeItemId && ['colors', 'palettes', 'typography', 'spacing', 'syntax', 'motion', 'interactions'].includes(activeItemId)) {
+    if (activeItemId && ['colors', 'typography', 'spacing', 'syntax', 'motion', 'interactions'].includes(activeItemId)) {
       setActiveTab(activeItemId as TokenTab);
     }
   }, [activeItemId]);
@@ -37,7 +36,6 @@ export function TokensSection({ activeItemId, breadcrumbs, onItemChange }: Token
   // Available tabs for TertiaryNav
   const availableTabs = [
     { id: 'colors', label: 'Colors' },
-    { id: 'palettes', label: 'Palettes' },
     { id: 'typography', label: 'Typography' },
     { id: 'spacing', label: 'Spacing' },
     { id: 'interactions', label: 'Interactions' },
@@ -59,7 +57,6 @@ export function TokensSection({ activeItemId, breadcrumbs, onItemChange }: Token
       {/* Tab Content with spacing for sticky nav */}
       <div className="mt-4">
         {activeTab === 'colors' && <ColorsTab />}
-        {activeTab === 'palettes' && <PalettesTab />}
         {activeTab === 'typography' && <TypographyTab />}
         {activeTab === 'spacing' && <SpacingTab />}
         {activeTab === 'interactions' && <InteractionsTab />}

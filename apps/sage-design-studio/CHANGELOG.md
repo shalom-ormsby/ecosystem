@@ -7,6 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed - Themes & Navigation Architecture (2026-01-21)
+
+#### Major Architectural Elevation: "Themes"
+- **New Top-Level Section**: Elevated "Themes" to a primary navigation item in the Studio sidebar.
+  - **Why**: Creates a clear separation between **Design Tokens** (Definitions/Vocabulary) and **Themes** (Configuration/Dialect).
+  - **Structure**:
+    - **Design Tokens**: Colors, Typography, Spacing, Shadows, etc.
+    - **Themes**: Palettes, Customizer.
+    - **Motion**: Primitives, Foundations, etc.
+    - **Components**: Functional categories.
+
+#### Navigation & Routing
+- **New `ThemesSection`**: Created a dedicated routing container (`#themes`) to house theme-related tools.
+- **Route Updates**:
+  - `#themes/palettes`: Moved from Design Tokens section.
+  - `#themes/customizer`: Moved from Blocks section and expanded into a full-page experience.
+- **Updated `navigation-tree.tsx`**: Reflected the new hierarchy in the sidebar configuration.
+
+#### Component Relocations
+- **Palettes**: Moved `PalettesTab` from `TokensSection` to `ThemesSection`.
+- **Customizer**: 
+  - Moved from a nested "block" example in `BlocksSection` to a first-class tool in `ThemesSection`.
+  - Refactored from a floating panel demo to a full-page `CustomizerTab` dashboard.
+  - Removed deprecated demo components (`CustomizerDemoFull`, `CustomizerDemoLightweight`) to clean up the codebase.
+
+### Changed - Colors Tab Overhaul (2026-01-21)
+
+#### Unified Color Experience
+- **Inspector Mode**: Transformed the Colors tab (`#tokens/colors`) into a context-aware inspector for the active palette.
+- **Active Palette Context**: Now displays the name and description of the currently applied palette (e.g., "Midnight Sapphire") instead of generic controls.
+- **Generated Scale Visualization**: Added a new section showing the automatically generated 50-900 color scale for the primary color, revealing how the Color Engine derives shades.
+- **Improved Token Grid**: Refined the variable grid with better copy-to-clipboard interactions and visual polish.
+- **Store Updates**: Extended `ColorPalette` interface in `@sage/ui` to persist palette metadata (name, description) to the global store.
+
 ### Added - Interaction System & Token Refactor (2026-01-21)
 
 #### Systematic Interaction Layer ("State Layers")

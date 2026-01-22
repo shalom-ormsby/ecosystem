@@ -68,11 +68,6 @@ export const navigationTree: NavigationItem[] = [
         section: 'tokens',
       },
       {
-        id: 'palettes',
-        label: 'Palettes',
-        section: 'tokens',
-      },
-      {
         id: 'typography',
         label: 'Typography',
         section: 'tokens',
@@ -95,9 +90,26 @@ export const navigationTree: NavigationItem[] = [
     ],
   },
   {
+    id: 'themes',
+    label: 'Themes',
+    icon: <Sparkles className="w-4 h-4" />, // Using Sparkles temporarily or another icon
+    children: [
+      {
+        id: 'palettes',
+        label: 'Palettes',
+        section: 'themes',
+      },
+      {
+        id: 'customizer',
+        label: 'Customizer',
+        section: 'themes',
+      },
+    ],
+  },
+  {
     id: 'motion',
     label: 'Motion',
-    icon: <Sparkles className="w-4 h-4" />,
+    icon: <div className="w-4 h-4 flex items-center justify-center font-bold text-xs" style={{ fontFamily: 'serif', fontStyle: 'italic' }}>ƒ</div>,
     children: [
       {
         id: 'primitives',
@@ -259,8 +271,7 @@ export const navigationTree: NavigationItem[] = [
         id: 'customization',
         label: 'Customization',
         children: [
-          { id: 'customizer', label: 'Customizer', section: 'blocks' },
-          { id: 'theme-toggle', label: 'Theme Toggle', section: 'forms' }, // Moved to forms
+          { id: 'theme-toggle', label: 'Theme Toggle', section: 'forms' },
         ],
       },
       {

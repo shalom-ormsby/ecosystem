@@ -9,6 +9,11 @@ import {
 export type CustomizationMode = 'simple' | 'advanced';
 
 export interface ColorPalette {
+  /* Metadata */
+  name?: string;                            // Name of the source palette
+  description?: string;                     // Description of the source palette
+
+  /* Colors */
   primary: string;                          // Base hex
   primaryForeground: string;                // Calculated contrast
   secondary?: string;                       // Optional secondary color
@@ -88,7 +93,13 @@ interface CustomizerState {
   applyColorPalette: (
     theme: ThemeName,
     mode: ColorMode,
-    colors: { primary: string; secondary?: string; accent?: string }
+    colors: {
+      primary: string;
+      secondary?: string;
+      accent?: string;
+      name?: string;
+      description?: string;
+    }
   ) => void;
 
   resetCustomColors: (theme: ThemeName, mode?: ColorMode) => void;
@@ -209,7 +220,13 @@ export const useCustomizer = create<CustomizerState>()(
         }));
       },
 
-      applyColorPalette: (theme, mode, colors: { primary: string; secondary?: string; accent?: string }) => {
+      applyColorPalette: (theme, mode, colors: {
+        primary: string;
+        secondary?: string;
+        accent?: string;
+        name?: string;
+        description?: string;
+      }) => {
         // Generate complete color palette with all three colors in a single atomic update
         const scale = generateColorScale(colors.primary);
         const primaryForeground = getOptimalForeground(colors.primary);
@@ -234,6 +251,8 @@ export const useCustomizer = create<CustomizerState>()(
         }
 
         const palette: ColorPalette = {
+          name: colors.name,
+          description: colors.description,
           primary: colors.primary,
           primaryForeground,
           secondary,
