@@ -28,13 +28,15 @@ import {
   Label,
   ColorPicker,
   DragDropList,
+  DragDropHandle,
 } from '@sage/ui';
+import { rectSortingStrategy } from '@dnd-kit/sortable';
 import { useTheme } from '@sage/ui';
 import { useCustomizer } from '@sage/ui';
 import { SecondaryNav, type SecondaryNavItem } from '@sage/ui';
 import { colorPalettes, type PaletteCategory } from '@sage/tokens';
 import {
-  Check, MoreVertical, Edit, Trash2, Plus, GripVertical,
+  Check, MoreVertical, Edit, Trash2, Plus,
   Briefcase, Palette, Leaf, Zap, Minimize,
   Crown, Smile, Eye, Star, LayoutGrid
 } from 'lucide-react';
@@ -63,6 +65,7 @@ export function PalettesTab() {
   const [editedPrimaryColor, setEditedPrimaryColor] = useState('');
   const [editedSecondaryColor, setEditedSecondaryColor] = useState('');
   const [editedAccentColor, setEditedAccentColor] = useState('');
+  const [localPaletteOrder, setLocalPaletteOrder] = useState<any[]>([]);
 
   const { theme, mode } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -100,10 +103,6 @@ export function PalettesTab() {
   const filteredPalettes = allPalettes
     .filter(p => selectedCategory === 'all' || p.category === selectedCategory)
     .filter(p => !accessibleOnly || p.wcagAA);
-
-  // Separate custom palettes from curated palettes for drag & drop
-  const curatedPalettes = filteredPalettes.filter(p => p.category !== 'custom');
-  const customPalettes = filteredPalettes.filter(p => p.category === 'custom');
 
   const applyPalette = (paletteId: string) => {
     const palette = allPalettes.find(p => p.id === paletteId);
@@ -289,7 +288,7 @@ export function PalettesTab() {
         </label>
       </div>
 
-      {/* Render Palette Card Helper */}
+      {/* Palette Grid with Drag & Drop */}
       {(() => {
         const renderPaletteCard = (palette: any, isDragging = false) => {
           const isActive = currentPalette?.primary === palette.primary;
@@ -300,18 +299,16 @@ export function PalettesTab() {
               key={palette.id}
               className={`
                 p-4 transition-all flex flex-col h-full
-                ${!isDragging ? 'cursor-pointer hover:shadow-lg hover:border-[var(--color-primary)]' : 'shadow-xl'}
+                ${!isDragging ? 'hover:shadow-lg hover:border-[var(--color-primary)]' : 'shadow-xl'}
                 ${isActive ? 'ring-2 ring-[var(--color-primary)]' : ''}
               `}
             >
               {/* Title and Menu */}
               <div className="flex items-start justify-between mb-2">
-                {/* Drag Handle for Custom Palettes */}
-                {isCustom && (
-                  <div className="cursor-grab active:cursor-grabbing text-[var(--color-text-secondary)] hover:text-[var(--color-foreground)] transition-colors mr-2 mt-1">
-                    <GripVertical className="w-4 h-4" />
-                  </div>
-                )}
+                {/* Drag Handle */}
+                <div className="mr-2 mt-1">
+                  <DragDropHandle />
+                </div>
                 <div className="flex-1 pr-2">
                   <div className="flex items-center gap-2 mb-1">
                     <h4 className="font-medium">{palette.name}</h4>
@@ -458,38 +455,21 @@ export function PalettesTab() {
         };
 
         return (
-          <>
-            {/* Curated Palettes Grid (if any) */}
-            {curatedPalettes.length > 0 && (
-              <div className="space-y-4">
-                {selectedCategory === 'all' && (
-                  <h4 className="text-sm font-semibold text-[var(--color-text-secondary)]">
-                    Curated Palettes
-                  </h4>
-                )}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {curatedPalettes.map(palette => renderPaletteCard(palette))}
-                </div>
-              </div>
-            )}
-
-            {/* Custom Palettes with Drag & Drop */}
-            {customPalettes.length > 0 && (
-              <div className="space-y-4">
-                {selectedCategory === 'all' && (
-                  <h4 className="text-sm font-semibold text-[var(--color-text-secondary)]">
-                    My Custom Palettes
-                  </h4>
-                )}
-                <DragDropList
-                  items={customPalettes as any}
-                  onReorder={(reordered) => reorderPalettes(reordered as any)}
-                  renderItem={(palette, isDragging) => renderPaletteCard(palette, isDragging)}
-                  withHandle={true}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-                />
-              </div>
-            )}
+          <div className="space-y-4">
+            <DragDropList
+              items={filteredPalettes as any}
+              onReorder={(reordered) => {
+                // Update saved palettes with new order
+                const reorderedSaved = reordered.filter((p: any) => p.category === 'custom');
+                if (reorderedSaved.length > 0) {
+                  reorderPalettes(reorderedSaved as any);
+                }
+              }}
+              renderItem={(palette, isDragging) => renderPaletteCard(palette, isDragging)}
+              withHandle={true}
+              strategy={rectSortingStrategy}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+            />
 
             {/* Create New Palette Card */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -509,7 +489,7 @@ export function PalettesTab() {
                 </p>
               </Card>
             </div>
-          </>
+          </div>
         );
       })()}
 

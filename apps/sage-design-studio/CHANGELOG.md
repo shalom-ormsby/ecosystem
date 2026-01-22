@@ -7,6 +7,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added - Interaction System & Token Refactor (2026-01-21)
+
+#### Systematic Interaction Layer ("State Layers")
+- **New Interaction Tokens**: Added to `@sage/tokens` and `globals.css`
+  - `hover`: Overlay color and opacity (0.08)
+  - `active`: Scale transform (0.98)
+  - `focus`: Ring color, width (2px), and offset (2px)
+  - `disabled`: Opacity (0.5)
+- **`.sage-interactive` Utility**: A global utility class that standardizes interaction physics:
+  - Applies `position: relative` and `isolation: isolate`
+  - Creates an `::after` pseudo-element for the overlay (tint)
+  - Handles `transform: scale(0.98)` on active state
+  - Manages `z-index` to ensure content stays above the overlay
+  - Supports `prefers-reduced-motion`
+
+#### Component Updates
+- **Button**: Refactored to use `.sage-interactive`, removing bespoke hover styles.
+- **Sidebar**: Updated `SidebarItem` to use the standardized interaction layer.
+- **PalettesTab**: Refactored `Reset` and `Apply` feature buttons to use the new system.
+
+#### Documentation
+- **New `InteractionsTab`**: Added to Design Tokens section (`#tokens/interactions`)
+  - Application methodology for "State Layers"
+  - Live demos for Button states, Custom Elements, Active Scale, Focus Rings, and Disabled states
+  - Full Interaction Token reference
+  - Code examples using `CollapsibleCodeBlock`
+- **Navigation & Search**:
+  - Added "Interactions" to the sidebar navigation
+  - Indexed "Code Block" and "Interactions" in the command palette
+
+#### Fixes
+- **CollapsibleCodeBlock**:
+  - Registered component in `search-index.ts` (now searchable as "Code Block")
+  - Fixed documentation to use this component for high-contrast code display
+- **Search Index**: Added missing entries for code blocks and interaction tokens
+- **Theme Restoration**: Restored dark mode variables in `globals.css`
+
 ### Added - Drag & Drop Component (2026-01-21)
 
 #### DragDropList Component

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 import {
   DndContext,
   closestCenter,
@@ -18,6 +18,8 @@ import {
   sortableKeyboardCoordinates,
   useSortable,
   verticalListSortingStrategy,
+  rectSortingStrategy,
+  SortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { GripVertical } from 'lucide-react';
@@ -30,6 +32,17 @@ export interface DragDropItem {
   id: string;
   [key: string]: any;
 }
+
+/**
+ * Context for sharing drag handle listeners
+ */
+interface DragHandleContextValue {
+  attributes: any;
+  listeners: any;
+  setActivatorNodeRef?: (element: HTMLElement | null) => void;
+}
+
+const DragHandleContext = createContext<DragHandleContextValue | null>(null);
 
 /**
  * Props for DragDropList component
@@ -60,6 +73,13 @@ export interface DragDropListProps<T extends DragDropItem> {
    * Custom class name for list items
    */
   itemClassName?: string;
+  /**
+   * Sorting strategy for the drag & drop behavior
+   * - verticalListSortingStrategy: For vertical lists (default)
+   * - rectSortingStrategy: For grid layouts
+   * @default verticalListSortingStrategy
+   */
+  strategy?: SortingStrategy;
 }
 
 /**
@@ -80,6 +100,7 @@ function SortableItem({ id, children, withHandle, className }: SortableItemProps
     attributes,
     listeners,
     setNodeRef,
+    setActivatorNodeRef,
     transform,
     transition,
     isDragging,
@@ -94,6 +115,14 @@ function SortableItem({ id, children, withHandle, className }: SortableItemProps
   // If using handle, don't attach listeners to the item
   const itemProps = withHandle ? {} : { ...listeners, ...attributes };
 
+  const content = withHandle ? (
+    <DragHandleContext.Provider value={{ attributes, listeners, setActivatorNodeRef }}>
+      {children}
+    </DragHandleContext.Provider>
+  ) : (
+    children
+  );
+
   return (
     <div
       ref={setNodeRef}
@@ -105,13 +134,14 @@ function SortableItem({ id, children, withHandle, className }: SortableItemProps
       )}
       {...itemProps}
     >
-      {children}
+      {content}
     </div>
   );
 }
 
 /**
  * Drag handle component for manual drag control
+ * Must be used within a DragDropList with withHandle={true}
  */
 export interface DragDropHandleProps {
   /**
@@ -125,9 +155,14 @@ export interface DragDropHandleProps {
 }
 
 export function DragDropHandle({ className, icon }: DragDropHandleProps) {
-  const { attributes, listeners, setActivatorNodeRef } = useSortable({
-    id: 'drag-handle',
-  });
+  const context = useContext(DragHandleContext);
+
+  if (!context) {
+    console.warn('DragDropHandle must be used within a DragDropList with withHandle={true}');
+    return null;
+  }
+
+  const { attributes, listeners, setActivatorNodeRef } = context;
 
   return (
     <div
@@ -172,6 +207,7 @@ export function DragDropList<T extends DragDropItem>({
   withHandle = false,
   className,
   itemClassName,
+  strategy = verticalListSortingStrategy,
 }: DragDropListProps<T>) {
   const [activeId, setActiveId] = React.useState<string | null>(null);
 
@@ -212,8 +248,8 @@ export function DragDropList<T extends DragDropItem>({
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <SortableContext items={items} strategy={verticalListSortingStrategy}>
-        <div className={cn('space-y-2', className)}>
+      <SortableContext items={items} strategy={strategy}>
+        <div className={cn(strategy === verticalListSortingStrategy && 'space-y-2', className)}>
           {items.map((item) => (
             <SortableItem
               key={item.id}

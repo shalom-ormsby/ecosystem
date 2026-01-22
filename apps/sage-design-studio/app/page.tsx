@@ -294,7 +294,26 @@ export default function StudioPage() {
       return;
     }
 
-    // Split path to find section and item
+    // Handle hash-based paths (e.g., #forms/drag-drop)
+    if (path.startsWith('#')) {
+      const hashPath = path.slice(1); // Remove '#'
+      const [section, itemId] = hashPath.split('/');
+      const validSections: Section[] = [
+        'overview', 'architecture', 'adding-components', 'common-patterns',
+        'contributing', 'mcp-server', 'tokens', 'actions', 'forms', 'navigation',
+        'overlays', 'feedback', 'data-display', 'layout', 'blocks',
+        'hooks', 'templates', 'motion'
+      ];
+
+      if (validSections.includes(section as Section)) {
+        setActiveSection(section as Section);
+        setActiveItemId(itemId || section);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+    }
+
+    // Split path to find section and item (legacy dash-separated format)
     const parts = path.split('-');
     const potentialSection = parts[0] as Section;
 

@@ -173,6 +173,14 @@ export const sageTokens = {
     active: {
       scale: 'var(--scale-interaction-active)',
     },
+    focus: {
+      ringColor: 'var(--color-interaction-focus-ring)',
+      ringWidth: 'var(--width-interaction-focus-ring)',
+      ringOffset: 'var(--width-interaction-focus-offset)',
+    },
+    disabled: {
+      opacity: 'var(--opacity-interaction-disabled)',
+    },
   },
 
   typography: {

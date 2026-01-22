@@ -63,6 +63,12 @@
     --color-interaction-overlay: #000000;
     --opacity-interaction-hover: 0.08;
     --scale-interaction-active: 0.98;
+
+    --color-interaction-focus-ring: var(--color-ring);
+    --width-interaction-focus-ring: 2px;
+    --width-interaction-focus-offset: 2px;
+
+    --opacity-interaction-disabled: 0.5;
   }
 
   .dark {
@@ -117,6 +123,8 @@
     /* Interaction Tokens - Dark Mode (Brightening) */
     --color-interaction-overlay: #ffffff;
     --opacity-interaction-hover: 0.08;
+
+    --color-interaction-focus-ring: var(--color-ring);
   }
 }
 
@@ -124,28 +132,41 @@ html.dark {
   background-color: black;
 }
 
-/* 
-  Sage Interactive Primitive 
-  Applies a systematic interaction layer (overlay) without affecting text contrast.
-  Don Norman's Principles: Feedback & Consistency.
-*/
+/* ... */
+
 .sage-interactive {
   position: relative;
-  isolation: isolate; /* Create new stacking context */
+  isolation: isolate;
+  /* Create new stacking context */
   transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+}
+
+.sage-interactive:focus-visible {
+  outline: var(--width-interaction-focus-ring) solid var(--color-interaction-focus-ring);
+  outline-offset: var(--width-interaction-focus-offset);
+  border-radius: inherit;
+}
+
+.sage-interactive[disabled],
+.sage-interactive:disabled,
+.sage-interactive[aria-disabled="true"] {
+  opacity: var(--opacity-interaction-disabled);
+  pointer-events: none;
+  cursor: not-allowed;
 }
 
 .sage-interactive::after {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: inherit; /* Matches parent border-radius */
+  border-radius: inherit;
+  /* Matches parent border-radius */
   background-color: var(--color-interaction-overlay);
   opacity: 0;
   transition: opacity 0.2s ease;
   pointer-events: none;
-  z-index: 10; /* Ensure overlay is above background but below text if text is z-indexed? No, z-index 10 might cover text depending on stacking context. */
+  z-index: 10;
 }
 
 /* Ensure content has higher z-index if needed, or use mix-blend-mode if appropriate. 
@@ -153,7 +174,7 @@ html.dark {
    If text is static, z-index 10 on absolute ::after covers it.
    We need the content to be above the overlay.
 */
-.sage-interactive > * {
+.sage-interactive>* {
   position: relative;
   z-index: 20;
 }
@@ -213,6 +234,7 @@ html.dark {
 html {
   scroll-behavior: smooth;
 }
+
 @layer base {
   body {
     font-family: var(--font-nunito), system-ui, sans-serif;

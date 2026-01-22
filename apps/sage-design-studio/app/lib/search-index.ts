@@ -59,6 +59,15 @@ export const searchIndex: SearchResult[] = [
     keywords: ['margin', 'padding', 'gap', 'space', 'layout'],
   },
   {
+    id: 'tokens-interactions',
+    title: 'Interactions',
+    description: 'Systematic hover, active, and focus state layers (Interaction Tokens) for consistent UI feedback',
+    type: 'token',
+    category: 'Design Tokens',
+    path: 'tokens-interactions',
+    keywords: ['hover', 'active', 'focus', 'state', 'layer', 'overlay', 'interactive', 'feedback', 'opacity'],
+  },
+  {
     id: 'tokens-motion',
     title: 'Motion',
     description: 'Animation timing and easing functions',
@@ -772,6 +781,15 @@ export const searchIndex: SearchResult[] = [
   },
 
   // Blocks
+  {
+    id: 'collapsible-code-block',
+    title: 'Code Block',
+    description: 'A collapsible, syntax-highlighted code block component with copy functionality',
+    type: 'component',
+    category: 'Blocks',
+    path: '#blocks/collapsible-code-block',
+    keywords: ['code', 'syntax', 'highlight', 'copy', 'collapsible', 'snippet'],
+  },
   {
     id: 'customizer',
     title: 'Customizer',

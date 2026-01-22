@@ -175,9 +175,7 @@ const [tasks, setTasks] = useState([
                   ${isDragging ? 'shadow-lg ring-2 ring-[var(--color-primary)]' : 'hover:shadow-sm'}
                 `}
               >
-                <div className="cursor-grab active:cursor-grabbing text-[var(--color-text-secondary)] hover:text-[var(--color-foreground)] transition-colors">
-                  <GripVertical className="w-4 h-4" />
-                </div>
+                <DragDropHandle />
                 <div className="flex-1 flex items-center justify-between">
                   <span className="font-medium text-[var(--color-text-primary)]">
                     {item.name}
@@ -203,8 +201,7 @@ const [tasks, setTasks] = useState([
         <CollapsibleCodeBlock
           id="drag-drop-handle"
           title="Code"
-          code={`import { DragDropList } from '@sage/ui';
-import { GripVertical } from 'lucide-react';
+          code={`import { DragDropList, DragDropHandle } from '@sage/ui';
 
 <DragDropList
   items={tasks}
@@ -212,10 +209,8 @@ import { GripVertical } from 'lucide-react';
   withHandle={true}
   renderItem={(item) => (
     <div className="flex items-center gap-3 p-4 bg-surface border rounded-lg">
-      {/* Drag Handle */}
-      <div className="cursor-grab">
-        <GripVertical className="w-4 h-4" />
-      </div>
+      {/* Drag Handle - only this triggers dragging */}
+      <DragDropHandle />
 
       {/* Item Content */}
       <div className="flex-1">
