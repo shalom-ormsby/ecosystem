@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Card, Button, Slider, Switch, Label, SecondaryNav } from '@sage/ui';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { RotateCcw } from 'lucide-react';
 import { baseTokens, motion as motionTokens } from '@sage/ui/tokens';
 
@@ -18,7 +18,20 @@ const PROPERTIES: { id: AnimationProperty; label: string }[] = [
   { id: 'rotate', label: 'Rotate' },
 ];
 
+// Convert CSS cubic-bezier string to framer-motion array format
+function parseCubicBezier(cssString: string): [number, number, number, number] | 'linear' | 'easeOut' {
+  if (cssString === 'linear') return 'linear';
+  const match = cssString.match(/cubic-bezier\(([\d.]+),\s*([\d.]+),\s*([\d.]+),\s*([\d.]+)\)/);
+  if (match) {
+    return [parseFloat(match[1]), parseFloat(match[2]), parseFloat(match[3]), parseFloat(match[4])];
+  }
+  return 'easeOut'; // Fallback
+}
+
 export function PrimitivesSection() {
+  // Client-side only flag to prevent hydration mismatch
+  const [isMounted, setIsMounted] = useState(false);
+
   // Playground State
   const [activeDuration, setActiveDuration] = useState<DurationToken>('normal');
   const [activeEasing, setActiveEasing] = useState<EasingToken>('default');
@@ -33,6 +46,11 @@ export function PrimitivesSection() {
 
   // Guide State
   const [activeTab, setActiveTab] = useState('duration');
+
+  // Only enable animations after hydration
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleReplay = () => {
     setKey(k => k + 1);
@@ -210,7 +228,7 @@ export function PrimitivesSection() {
                 }}
                 transition={{
                   duration: parseInt(safeDurationTokens[activeDuration] || '300ms') / 1000,
-                  ease: activeEasing === 'linear' ? 'linear' : (safeEasingTokens[activeEasing as keyof typeof safeEasingTokens] as any),
+                  ease: activeEasing === 'linear' ? 'linear' : parseCubicBezier(safeEasingTokens[activeEasing as keyof typeof safeEasingTokens]),
                   repeat: isLooping ? Infinity : 0,
                   repeatType: isLooping ? "reverse" : undefined,
                   repeatDelay: isLooping ? loopDelay : 0
@@ -268,33 +286,22 @@ export function PrimitivesSection() {
                         <code className="text-xs bg-[var(--color-surface)] px-2 py-1 rounded border border-[var(--color-border)]">{value}</code>
                       </div>
                       <div className="h-1 w-24 bg-[var(--color-surface)] rounded-full overflow-hidden">
-                        {name === 'instant' ? (
-                          <motion.div
-                            key={`instant-${name}`}
-                            className="h-full bg-[var(--color-primary)]"
-                            animate={{ opacity: [0, 1, 0] }}
-                            transition={{
-                              duration: 1,
-                              times: [0, 0.5, 1],
-                              repeat: Infinity,
-                              repeatDelay: 2
-                            }}
-                            style={{ width: '100%' }}
-                          />
-                        ) : (
-                          <motion.div
-                            key={`duration-${name}`}
-                            className="h-full bg-[var(--color-primary)]"
-                            initial={{ width: "0%" }}
-                            animate={{ width: "100%" }}
-                            transition={{
-                              duration: parseInt(safeDurationTokens[name as DurationToken] || '1000ms') / 1000,
-                              repeat: Infinity,
-                              repeatDelay: 2,
-                              ease: 'linear'
-                            }}
-                          />
-                        )}
+                        <motion.div
+                          className="h-full bg-[var(--color-primary)]"
+                          style={{ width: name === 'instant' ? '100%' : '0%' }}
+                          animate={isMounted ? (name === 'instant'
+                            ? { opacity: [1, 0, 1] }
+                            : { width: ['0%', '100%', '0%'] }
+                          ) : undefined}
+                          transition={{
+                            duration: name === 'instant'
+                              ? 1
+                              : (parseInt(value) / 1000) * 2,
+                            repeat: Infinity,
+                            repeatDelay: 2,
+                            ease: 'linear'
+                          }}
+                        />
                       </div>
                     </div>
                     <p className="text-sm text-[var(--color-text-secondary)]">
@@ -323,15 +330,13 @@ export function PrimitivesSection() {
                       <div className="relative w-full h-12 flex items-center">
                         <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-1 bg-[var(--color-border)] rounded-full"></div>
                         <motion.div
-                          key="easing-default"
                           className="absolute top-0 w-12 h-12 bg-[var(--color-primary)] rounded-full shadow-md"
-                          initial={{ left: '0%' }}
-                          animate={{ left: 'calc(100% - 3rem)' }}
+                          style={{ left: '0%' }}
+                          animate={isMounted ? { left: ['0%', 'calc(100% - 3rem)', '0%'] } : undefined}
                           transition={{
-                            duration: 2,
-                            ease: safeEasingTokens.default as any,
+                            duration: 4,
+                            ease: parseCubicBezier(safeEasingTokens.default),
                             repeat: Infinity,
-                            repeatType: 'reverse',
                             repeatDelay: 2
                           }}
                         />
@@ -353,12 +358,12 @@ export function PrimitivesSection() {
                     <div className="p-8 flex items-center justify-center bg-[var(--color-surface)] border-r border-[var(--color-border)]">
                       <div className="relative w-32 h-32 flex items-center justify-center">
                         <motion.div
-                          key="easing-spring"
                           className="w-16 h-16 bg-[var(--color-primary)] rounded-xl shadow-md"
-                          animate={{ scale: [1, 1.4, 1], rotate: [0, 10, 0] }}
+                          style={{ scale: 1, rotate: 0 }}
+                          animate={isMounted ? { scale: [1, 1.4, 1], rotate: [0, 10, 0] } : undefined}
                           transition={{
                             duration: 1.5,
-                            ease: safeEasingTokens.spring as any,
+                            ease: parseCubicBezier(safeEasingTokens.spring),
                             repeat: Infinity,
                             repeatDelay: 2
                           }}
@@ -379,19 +384,17 @@ export function PrimitivesSection() {
                 <Card className="p-0 overflow-hidden">
                   <div className="grid md:grid-cols-2 h-full">
                     <div className="p-8 flex items-center justify-center bg-[var(--color-surface)] border-r border-[var(--color-border)]">
-                      <div className="p-8 flex items-center justify-center bg-[var(--color-surface)] border-r border-[var(--color-border)]">
-                        <motion.div
-                          key="easing-linear"
-                          className="w-16 h-16 border-4 border-[var(--color-border)] border-t-[var(--color-primary)] rounded-full"
-                          animate={{ rotate: 360 }}
-                          transition={{
-                            duration: 1.5,
-                            ease: "linear",
-                            repeat: Infinity,
-                            repeatDelay: 2
-                          }}
-                        />
-                      </div>
+                      <motion.div
+                        className="w-16 h-16 border-4 border-[var(--color-border)] border-t-[var(--color-primary)] rounded-full"
+                        style={{ rotate: 0 }}
+                        animate={isMounted ? { rotate: 360 } : undefined}
+                        transition={{
+                          duration: 1.5,
+                          ease: "linear",
+                          repeat: Infinity,
+                          repeatDelay: 2
+                        }}
+                      />
                     </div>
                     <div className="p-8 flex flex-col justify-center">
                       <h3 className="text-lg font-bold mb-2">Linear</h3>

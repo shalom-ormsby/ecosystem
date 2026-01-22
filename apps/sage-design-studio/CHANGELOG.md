@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed - Motion Primitives Animations (2026-01-22)
+
+#### Root Cause
+- **Framer Motion animations were not auto-playing** on the Motion Primitives page (`#motion/primitives`)
+- Three critical issues prevented animations from running:
+  1. **Hydration Mismatch**: Animations attempted to run during server-side rendering, causing React hydration errors
+  2. **Invalid Easing Format**: CSS cubic-bezier strings (e.g., `cubic-bezier(0, 0, 0.2, 1)`) were passed directly to framer-motion, which requires array format `[0, 0, 0.2, 1]`
+  3. **Content Security Policy**: CSP blocked framer-motion's internal code evaluation with `'unsafe-eval'` restriction
+
+#### Solution
+- **Client-Side Animation Guard**: Added `isMounted` state flag to prevent animations during SSR
+  - Animations only activate after `useEffect` confirms client-side hydration
+  - All `animate` props wrapped with `isMounted ? { ... } : undefined` check
+- **Easing Token Converter**: Created `parseCubicBezier()` utility function
+  - Converts CSS `cubic-bezier(x, y, z, w)` strings to framer-motion array format `[x, y, z, w]`
+  - Applied to all easing token usage (playground, duration showcases, easing showcases)
+- **CSP Configuration**: Updated `next.config.mjs` to allow framer-motion's animation engine
+  - Added `'unsafe-eval'` to `script-src` CSP directive
+  - Added `'unsafe-inline'` for inline scripts and styles
+- **Hydration Warning Suppression**: Added `suppressHydrationWarning` to `<body>` tag in `layout.tsx`
+  - Browser extensions (like Feedly) inject attributes that cause false-positive hydration warnings
+  - Suppression is safe as these attributes don't affect app functionality
+
+#### Result
+- ✅ All showcase animations now auto-play on page load
+- ✅ Progress bars animate at correct durations (instant, fast, normal, slow, slower)
+- ✅ Easing demonstrations loop continuously with 2-second pauses
+- ✅ Interactive playground responds to user controls
+- ✅ No console errors or hydration warnings
+
 ### Changed - Themes & Navigation Architecture (2026-01-21)
 
 #### Major Architectural Elevation: "Themes"
