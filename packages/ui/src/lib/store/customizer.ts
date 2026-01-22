@@ -32,6 +32,8 @@ export interface SavedPalette {
   createdAt: number;                        // Timestamp
   mood: string[];                           // Mood tags
   bestFor?: string[];                       // Best use cases
+  harmony?: string;
+  rationale?: string;
 }
 
 export interface ColorCustomization {

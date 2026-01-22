@@ -6,6 +6,7 @@ import { Button } from '../actions/Button';
 export interface SecondaryNavItem {
     id: string;
     label: string;
+    icon?: React.ReactNode;
 }
 
 export interface SecondaryNavProps {
@@ -77,6 +78,7 @@ export const SecondaryNav = React.forwardRef<HTMLElement, SecondaryNavProps>(
                                     }`}
                                 aria-current={activeId === item.id ? 'page' : undefined}
                             >
+                                {item.icon && <span className="mr-2 flex items-center">{item.icon}</span>}
                                 {item.label}
                             </Button>
                         ))}

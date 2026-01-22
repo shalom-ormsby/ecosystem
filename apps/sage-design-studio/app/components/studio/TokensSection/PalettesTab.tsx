@@ -30,19 +30,25 @@ import {
 } from '@sage/ui';
 import { useTheme } from '@sage/ui';
 import { useCustomizer } from '@sage/ui';
-import { colorPalettes, type PaletteCategory } from '@sage/tokens';
-import { Check, MoreVertical, Edit, Trash2, Plus } from 'lucide-react';
+import { SecondaryNav, type SecondaryNavItem } from '@sage/ui';
+import { colorPalettes, type PaletteCategory, type ColorPalette } from '@sage/tokens';
+import {
+  Check, MoreVertical, Edit, Trash2, Plus,
+  Briefcase, Palette, Leaf, Zap, Minimize,
+  Crown, Smile, Eye, Star, LayoutGrid
+} from 'lucide-react';
 
-const CATEGORIES: { value: PaletteCategory | 'all' | 'custom'; label: string; icon: string }[] = [
-  { value: 'all', label: 'All', icon: '✨' },
-  { value: 'custom', label: 'My Palettes', icon: '⭐' },
-  { value: 'professional', label: 'Professional', icon: '💼' },
-  { value: 'creative', label: 'Creative', icon: '🎨' },
-  { value: 'nature', label: 'Nature', icon: '🌿' },
-  { value: 'vibrant', label: 'Vibrant', icon: '⚡' },
-  { value: 'minimal', label: 'Minimal', icon: '◻️' },
-  { value: 'luxury', label: 'Luxury', icon: '👑' },
-  { value: 'playful', label: 'Playful', icon: '🎈' },
+const NAV_ITEMS: SecondaryNavItem[] = [
+  { id: 'all', label: 'All', icon: <LayoutGrid className="w-4 h-4" /> },
+  { id: 'custom', label: 'My Palettes', icon: <Star className="w-4 h-4" /> },
+  { id: 'professional', label: 'Professional', icon: <Briefcase className="w-4 h-4" /> },
+  { id: 'creative', label: 'Creative', icon: <Palette className="w-4 h-4" /> },
+  { id: 'nature', label: 'Nature', icon: <Leaf className="w-4 h-4" /> },
+  { id: 'vibrant', label: 'Vibrant', icon: <Zap className="w-4 h-4" /> },
+  { id: 'minimal', label: 'Minimal', icon: <Minimize className="w-4 h-4" /> },
+  { id: 'luxury', label: 'Luxury', icon: <Crown className="w-4 h-4" /> },
+  { id: 'playful', label: 'Playful', icon: <Smile className="w-4 h-4" /> },
+  { id: 'accessible', label: 'Accessible', icon: <Eye className="w-4 h-4" /> },
 ];
 
 export function PalettesTab() {
@@ -196,64 +202,86 @@ export function PalettesTab() {
 
       {/* Current Status */}
       {currentPalette && (
-        <Card className="p-4 border-[var(--color-primary)]">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div
-                className="w-8 h-8 rounded border border-[var(--color-border)]"
-                style={{ backgroundColor: currentPalette.primary }}
-              />
-              <div>
-                <p className="text-sm font-medium">Custom colors active</p>
-                <p className="text-xs text-[var(--color-text-secondary)] font-mono">
-                  Primary: {currentPalette.primary.toUpperCase()}
-                </p>
+        <Card className="p-4 border-[var(--color-primary)] bg-[var(--color-primary)]/5 relative overflow-hidden">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-[var(--color-primary)]" />
+                <span className="text-sm font-semibold">Active Theme Colors</span>
+              </div>
+
+              <div className="flex flex-wrap gap-x-6 gap-y-3">
+                {/* Primary */}
+                <div className="flex items-center gap-2">
+                  <div
+                    className="w-8 h-8 rounded-full border shadow-sm ring-1 ring-[var(--color-border)]"
+                    style={{ backgroundColor: currentPalette.primary }}
+                  />
+                  <div className="flex flex-col">
+                    <span className="text-[10px] uppercase text-[var(--color-text-secondary)] tracking-wider font-semibold">Primary</span>
+                    <span className="text-xs font-mono">{currentPalette.primary}</span>
+                  </div>
+                </div>
+
+                {/* Secondary */}
+                <div className="flex items-center gap-2">
+                  <div
+                    className="w-8 h-8 rounded-full border shadow-sm ring-1 ring-[var(--color-border)]"
+                    style={{ backgroundColor: currentPalette.secondary || currentPalette.primary }}
+                  />
+                  <div className="flex flex-col">
+                    <span className="text-[10px] uppercase text-[var(--color-text-secondary)] tracking-wider font-semibold">Secondary</span>
+                    <span className="text-xs font-mono">{currentPalette.secondary || currentPalette.primary}</span>
+                  </div>
+                </div>
+
+                {/* Accent */}
+                <div className="flex items-center gap-2">
+                  <div
+                    className="w-8 h-8 rounded-full border shadow-sm ring-1 ring-[var(--color-border)]"
+                    style={{ backgroundColor: currentPalette.accent || currentPalette.primary }}
+                  />
+                  <div className="flex flex-col">
+                    <span className="text-[10px] uppercase text-[var(--color-text-secondary)] tracking-wider font-semibold">Accent</span>
+                    <span className="text-xs font-mono">{currentPalette.accent || currentPalette.primary}</span>
+                  </div>
+                </div>
               </div>
             </div>
+
             <Button
-              variant="outline"
+              variant="default"
               size="sm"
               onClick={resetColors}
+              className="relative w-full lg:w-auto whitespace-nowrap shrink-0 overflow-hidden group border-none"
             >
-              Reset to Theme Default
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-200" />
+              <span className="relative z-10">Reset to Default</span>
             </Button>
           </div>
         </Card>
       )}
 
-      {/* Filters */}
-      <div className="space-y-4">
-        {/* Category Filter */}
-        <div>
-          <label className="text-sm font-medium mb-2 block">Category</label>
-          <div className="flex flex-wrap gap-2">
-            {CATEGORIES.map(cat => (
-              <Button
-                key={cat.value}
-                variant={selectedCategory === cat.value ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setSelectedCategory(cat.value)}
-              >
-                <span className="mr-1">{cat.icon}</span>
-                {cat.label}
-              </Button>
-            ))}
-          </div>
-        </div>
+      {/* Filters Header (Sticky) */}
+      <SecondaryNav
+        items={NAV_ITEMS}
+        activeId={selectedCategory}
+        onItemChange={(id) => setSelectedCategory(id as PaletteCategory | 'all' | 'custom')}
+        mode="standalone"
+      />
 
-        {/* Accessibility Filter */}
-        <div className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            id="accessible-only"
-            checked={accessibleOnly}
-            onChange={(e) => setAccessibleOnly(e.target.checked)}
-            className="rounded"
-          />
-          <label htmlFor="accessible-only" className="text-sm">
-            Show only WCAG AA compliant palettes
-          </label>
-        </div>
+      {/* Additional Filters */}
+      <div className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          id="accessible-only"
+          checked={accessibleOnly}
+          onChange={(e) => setAccessibleOnly(e.target.checked)}
+          className="rounded"
+        />
+        <label htmlFor="accessible-only" className="text-sm">
+          Show only WCAG AA compliant palettes
+        </label>
       </div>
 
       {/* Palette Grid */}
@@ -267,7 +295,7 @@ export function PalettesTab() {
             <Card
               key={palette.id}
               className={`
-                p-4 cursor-pointer transition-all
+                p-4 cursor-pointer transition-all flex flex-col h-full
                 hover:shadow-lg hover:border-[var(--color-primary)]
                 ${isActive ? 'ring-2 ring-[var(--color-primary)]' : ''}
               `}
@@ -364,10 +392,10 @@ export function PalettesTab() {
               </div>
 
               {/* Palette Info */}
-              <div className="space-y-2">
+              <div className="space-y-2 mb-4">
                 {/* Mood Tags */}
                 <div className="flex flex-wrap gap-1">
-                  {palette.mood.map(mood => (
+                  {palette.mood?.map(mood => (
                     <Badge key={mood} variant="secondary" className="text-xs">
                       {mood}
                     </Badge>
@@ -375,20 +403,28 @@ export function PalettesTab() {
                 </div>
 
                 {/* Accessibility Badge */}
-                {palette.wcagAAA && (
-                  <Badge variant="default" className="text-xs bg-green-600">AAA</Badge>
-                )}
-                {palette.wcagAA && !palette.wcagAAA && (
-                  <Badge variant="default" className="text-xs">AA</Badge>
-                )}
-                {!palette.wcagAA && (
-                  <Badge variant="outline" className="text-xs">Vibrant</Badge>
+                <div className="flex gap-2 items-center">
+                  {palette.wcagAAA && (
+                    <Badge variant="default" className="text-xs bg-green-700 text-white hover:bg-green-800 border-none">AAA</Badge>
+                  )}
+                  {palette.wcagAA && !palette.wcagAAA && (
+                    <Badge variant="default" className="text-xs bg-green-500 text-white hover:bg-green-600 border-none">AA</Badge>
+                  )}
+                  {palette.harmony && (
+                    <Badge variant="outline" className="text-xs text-[var(--color-text-secondary)]">{palette.harmony}</Badge>
+                  )}
+                </div>
+
+                {/* Rationale & Best For */}
+                {palette.rationale && (
+                  <p className="text-xs text-[var(--color-text-tertiary)] mt-2">
+                    {palette.rationale}
+                  </p>
                 )}
 
-                {/* Best For */}
                 {palette.bestFor && (
                   <p className="text-xs text-[var(--color-text-secondary)]">
-                    Best for: {palette.bestFor.join(', ')}
+                    <span className="font-semibold">Best for:</span> {palette.bestFor.join(', ')}
                   </p>
                 )}
               </div>
@@ -396,11 +432,19 @@ export function PalettesTab() {
               {/* Apply Button */}
               <Button
                 onClick={() => applyPalette(palette.id)}
-                variant={isActive ? 'outline' : 'default'}
+                variant="default"
                 size="sm"
-                className="w-full mt-3"
+                className={`
+                  w-full mt-auto transition-all relative overflow-hidden group border-none justify-center
+                  ${isActive
+                    ? 'bg-[var(--color-accent)] text-[var(--color-accent-foreground)] ring-1 ring-[var(--color-accent)]'
+                    : ''}
+                `}
               >
-                {isActive ? 'Currently Active' : 'Apply Palette'}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-200" />
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  {isActive ? 'Currently Active' : 'Apply Palette'}
+                </span>
               </Button>
             </Card>
           );

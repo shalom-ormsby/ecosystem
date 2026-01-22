@@ -609,8 +609,8 @@ export const searchIndex: SearchResult[] = [
     title: 'SecondaryNav',
     description: 'Secondary navigation with tabs',
     type: 'component',
-    category: 'Organisms',
-    path: 'organisms-secondarynav',
+    category: 'Blocks',
+    path: 'blocks-secondary-nav',
     keywords: ['navigation', 'tabs', 'menu', 'secondary'],
   },
   {
