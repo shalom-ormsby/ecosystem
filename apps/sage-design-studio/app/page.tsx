@@ -19,6 +19,7 @@ import { TemplatesSection } from './components/studio/TemplatesSection';
 import { ChartsSections } from './components/studio/ChartsSections';
 import { MotionSections } from './components/studio/MotionSections';
 import { McpSection } from './components/studio/McpSection';
+import { DragDropPage } from './components/studio/pages/forms/DragDropPage';
 
 type Section =
   | 'overview'
@@ -89,6 +90,7 @@ const routeConfig: RouteConfig = {
     children: {
       checkbox: { label: 'Checkbox' },
       combobox: { label: 'Combobox' },
+      'drag-drop': { label: 'Drag & Drop' },
       form: { label: 'Form' },
       input: { label: 'Input' },
       'input-otp': { label: 'Input OTP' },
@@ -405,15 +407,22 @@ export default function StudioPage() {
 
             {/* Functional Component Sections */}
             {isComponentSection(activeSection) && (
-              <ComponentsSection
-                activeItemId={activeItemId}
-                category={activeSection}
-                breadcrumbs={breadcrumbs}
-                onItemChange={(itemId) => {
-                  setActiveItemId(itemId);
-                  window.history.replaceState(null, '', `#${activeSection}/${itemId}`);
-                }}
-              />
+              <>
+                {/* Special case: Drag & Drop has custom page */}
+                {activeSection === 'forms' && activeItemId === 'drag-drop' ? (
+                  <DragDropPage />
+                ) : (
+                  <ComponentsSection
+                    activeItemId={activeItemId}
+                    category={activeSection}
+                    breadcrumbs={breadcrumbs}
+                    onItemChange={(itemId) => {
+                      setActiveItemId(itemId);
+                      window.history.replaceState(null, '', `#${activeSection}/${itemId}`);
+                    }}
+                  />
+                )}
+              </>
             )}
 
             {/* Blocks Section */}

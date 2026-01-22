@@ -100,6 +100,7 @@ interface CustomizerState {
   updatePalette: (id: string, updates: Partial<SavedPalette>) => void;
   renamePalette: (id: string, newName: string) => void;
   deletePalette: (id: string) => void;
+  reorderPalettes: (palettes: SavedPalette[]) => void;
   getSavedPalettes: () => SavedPalette[];
 }
 
@@ -314,6 +315,10 @@ export const useCustomizer = create<CustomizerState>()(
         set((state) => ({
           savedPalettes: state.savedPalettes.filter((p) => p.id !== id),
         }));
+      },
+
+      reorderPalettes: (palettes) => {
+        set({ savedPalettes: palettes });
       },
 
       getSavedPalettes: () => {

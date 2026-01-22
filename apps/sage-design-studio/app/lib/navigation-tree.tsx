@@ -156,6 +156,7 @@ export const navigationTree: NavigationItem[] = [
         children: [
           { id: 'checkbox', label: 'Checkbox', section: 'forms' },
           { id: 'combobox', label: 'Combobox', section: 'forms' },
+          { id: 'drag-drop', label: 'Drag & Drop', section: 'forms' },
           { id: 'form', label: 'Form', section: 'forms' },
           { id: 'input', label: 'Input', section: 'forms' },
           { id: 'input-otp', label: 'Input OTP', section: 'forms' },

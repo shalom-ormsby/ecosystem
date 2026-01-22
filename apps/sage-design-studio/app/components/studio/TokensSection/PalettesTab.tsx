@@ -27,13 +27,14 @@ import {
   Input,
   Label,
   ColorPicker,
+  DragDropList,
 } from '@sage/ui';
 import { useTheme } from '@sage/ui';
 import { useCustomizer } from '@sage/ui';
 import { SecondaryNav, type SecondaryNavItem } from '@sage/ui';
-import { colorPalettes, type PaletteCategory, type ColorPalette } from '@sage/tokens';
+import { colorPalettes, type PaletteCategory } from '@sage/tokens';
 import {
-  Check, MoreVertical, Edit, Trash2, Plus,
+  Check, MoreVertical, Edit, Trash2, Plus, GripVertical,
   Briefcase, Palette, Leaf, Zap, Minimize,
   Crown, Smile, Eye, Star, LayoutGrid
 } from 'lucide-react';
@@ -79,6 +80,7 @@ export function PalettesTab() {
   const deletePalette = useCustomizer(state => state.deletePalette);
   const updatePalette = useCustomizer(state => state.updatePalette);
   const savePalette = useCustomizer(state => state.savePalette);
+  const reorderPalettes = useCustomizer(state => state.reorderPalettes);
   const savedPalettes = useCustomizer(state => state.savedPalettes);
 
   // Subscribe to entire customColors object to ensure reactivity, then derive current palette
@@ -98,6 +100,10 @@ export function PalettesTab() {
   const filteredPalettes = allPalettes
     .filter(p => selectedCategory === 'all' || p.category === selectedCategory)
     .filter(p => !accessibleOnly || p.wcagAA);
+
+  // Separate custom palettes from curated palettes for drag & drop
+  const curatedPalettes = filteredPalettes.filter(p => p.category !== 'custom');
+  const customPalettes = filteredPalettes.filter(p => p.category === 'custom');
 
   const applyPalette = (paletteId: string) => {
     const palette = allPalettes.find(p => p.id === paletteId);
@@ -283,10 +289,9 @@ export function PalettesTab() {
         </label>
       </div>
 
-      {/* Palette Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* Existing Palettes */}
-        {filteredPalettes.map(palette => {
+      {/* Render Palette Card Helper */}
+      {(() => {
+        const renderPaletteCard = (palette: any, isDragging = false) => {
           const isActive = currentPalette?.primary === palette.primary;
           const isCustom = palette.category === 'custom';
 
@@ -294,13 +299,19 @@ export function PalettesTab() {
             <Card
               key={palette.id}
               className={`
-                p-4 cursor-pointer transition-all flex flex-col h-full
-                hover:shadow-lg hover:border-[var(--color-primary)]
+                p-4 transition-all flex flex-col h-full
+                ${!isDragging ? 'cursor-pointer hover:shadow-lg hover:border-[var(--color-primary)]' : 'shadow-xl'}
                 ${isActive ? 'ring-2 ring-[var(--color-primary)]' : ''}
               `}
             >
               {/* Title and Menu */}
               <div className="flex items-start justify-between mb-2">
+                {/* Drag Handle for Custom Palettes */}
+                {isCustom && (
+                  <div className="cursor-grab active:cursor-grabbing text-[var(--color-text-secondary)] hover:text-[var(--color-foreground)] transition-colors mr-2 mt-1">
+                    <GripVertical className="w-4 h-4" />
+                  </div>
+                )}
                 <div className="flex-1 pr-2">
                   <div className="flex items-center gap-2 mb-1">
                     <h4 className="font-medium">{palette.name}</h4>
@@ -394,7 +405,7 @@ export function PalettesTab() {
               <div className="space-y-2 mb-4">
                 {/* Mood Tags */}
                 <div className="flex flex-wrap gap-1">
-                  {palette.mood?.map(mood => (
+                  {palette.mood?.map((mood: string) => (
                     <Badge key={mood} variant="secondary" className="text-xs">
                       {mood}
                     </Badge>
@@ -444,25 +455,63 @@ export function PalettesTab() {
               </Button>
             </Card>
           );
-        })}
+        };
 
-        {/* Create New Palette Card */}
-        <Card
-          className="p-4 cursor-pointer transition-all border-dashed border-2 hover:shadow-lg hover:border-[var(--color-primary)] flex flex-col items-center justify-center min-h-[300px]"
-          onClick={() => {
-            setCreatingPalette(true);
-            setEditedPrimaryColor('#0066cc');
-            setEditedSecondaryColor('#5a67d8');
-            setEditedAccentColor('#ff6b35');
-          }}
-        >
-          <Plus className="h-12 w-12 mb-3 text-[var(--color-text-secondary)]" />
-          <p className="text-lg font-medium text-[var(--color-text-secondary)]">Create New Palette</p>
-          <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
-            Design your own color scheme
-          </p>
-        </Card>
-      </div>
+        return (
+          <>
+            {/* Curated Palettes Grid (if any) */}
+            {curatedPalettes.length > 0 && (
+              <div className="space-y-4">
+                {selectedCategory === 'all' && (
+                  <h4 className="text-sm font-semibold text-[var(--color-text-secondary)]">
+                    Curated Palettes
+                  </h4>
+                )}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {curatedPalettes.map(palette => renderPaletteCard(palette))}
+                </div>
+              </div>
+            )}
+
+            {/* Custom Palettes with Drag & Drop */}
+            {customPalettes.length > 0 && (
+              <div className="space-y-4">
+                {selectedCategory === 'all' && (
+                  <h4 className="text-sm font-semibold text-[var(--color-text-secondary)]">
+                    My Custom Palettes
+                  </h4>
+                )}
+                <DragDropList
+                  items={customPalettes as any}
+                  onReorder={(reordered) => reorderPalettes(reordered as any)}
+                  renderItem={(palette, isDragging) => renderPaletteCard(palette, isDragging)}
+                  withHandle={true}
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                />
+              </div>
+            )}
+
+            {/* Create New Palette Card */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <Card
+                className="p-4 cursor-pointer transition-all border-dashed border-2 hover:shadow-lg hover:border-[var(--color-primary)] flex flex-col items-center justify-center min-h-[300px]"
+                onClick={() => {
+                  setCreatingPalette(true);
+                  setEditedPrimaryColor('#0066cc');
+                  setEditedSecondaryColor('#5a67d8');
+                  setEditedAccentColor('#ff6b35');
+                }}
+              >
+                <Plus className="h-12 w-12 mb-3 text-[var(--color-text-secondary)]" />
+                <p className="text-lg font-medium text-[var(--color-text-secondary)]">Create New Palette</p>
+                <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
+                  Design your own color scheme
+                </p>
+              </Card>
+            </div>
+          </>
+        );
+      })()}
 
       {filteredPalettes.length === 0 && (
         <div className="text-center py-12 text-[var(--color-text-secondary)]">

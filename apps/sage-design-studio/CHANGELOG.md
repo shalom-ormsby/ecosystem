@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added - Drag & Drop Component (2026-01-21)
+
+#### DragDropList Component
+- **New `@sage/ui/components/forms/DragDrop.tsx`**: Full-featured drag-and-drop functionality
+  - **DragDropList**: Sortable list with drag-and-drop reordering
+  - **DragDropTable**: Sortable table rows with drag handles
+  - **DragDropHandle**: Optional drag handle component for precise control
+  - **Features**:
+    - Touch/mobile support with PointerSensor (5px activation threshold)
+    - Keyboard accessibility (arrow keys + Space for reordering)
+    - Smooth animations powered by @dnd-kit
+    - Visual feedback (shadows, rings, drag overlay)
+    - Collision detection with closestCenter algorithm
+  - **TypeScript Support**: Full generic types for type-safe item rendering
+  - **Dependencies**: Added `@dnd-kit/core`, `@dnd-kit/sortable`, `@dnd-kit/utilities`
+
+#### Interactive Documentation
+- **New `apps/sage-design-studio/app/components/studio/pages/forms/DragDropPage.tsx`**: Comprehensive examples
+  - **Example 1**: Simple drag & drop list with status badges
+  - **Example 2**: List with drag handle + interactive delete buttons
+  - **Example 3**: Sortable table with custom column renderers
+  - Collapsible code blocks for each example
+  - Complete API reference with props documentation
+- **Navigation**: Added to Forms section in sidebar
+- **Search**: Indexed with keywords: drag, drop, sortable, reorder, dnd, draggable
+- **Path**: Accessible at `#forms/drag-drop`
+
 ### Added - Dynamic Color Customization System (2026-01-20)
 
 #### Curated Color Palette Library

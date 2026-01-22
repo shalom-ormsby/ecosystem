@@ -214,6 +214,15 @@ export const searchIndex: SearchResult[] = [
     keywords: ['autocomplete', 'select', 'search', 'input'],
   },
   {
+    id: 'drag-drop',
+    title: 'Drag & Drop',
+    description: 'Sortable lists and tables with drag-and-drop reordering functionality',
+    type: 'component',
+    category: 'Forms',
+    path: '#forms/drag-drop',
+    keywords: ['drag', 'drop', 'sortable', 'reorder', 'dnd', 'draggable', 'sort', 'list', 'table'],
+  },
+  {
     id: 'command',
     title: 'Command',
     description: 'Fast, composable, unstyled command menu',

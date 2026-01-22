@@ -15,6 +15,7 @@ export * from './components/actions/Magnetic';
 export * from './components/forms/Checkbox';
 export * from './components/forms/ColorPicker';
 export * from './components/forms/Combobox';
+export * from './components/forms/DragDrop';
 export * from './components/forms/FilterButton';
 export * from './components/forms/Form';
 export * from './components/forms/Input';

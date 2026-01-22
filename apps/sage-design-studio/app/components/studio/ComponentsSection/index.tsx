@@ -22,7 +22,7 @@ const COMPONENT_CATEGORIES = {
   forms: {
     label: 'Forms',
     description: 'Input controls for data collection',
-    components: ['Checkbox', 'Combobox', 'Form', 'Input', 'InputOTP', 'Label', 'RadioGroup', 'Select', 'Slider', 'Switch', 'Textarea'],
+    components: ['Checkbox', 'Combobox', 'DragDrop', 'Form', 'Input', 'InputOTP', 'Label', 'RadioGroup', 'Select', 'Slider', 'Switch', 'Textarea'],
   },
   navigation: {
     label: 'Navigation',
