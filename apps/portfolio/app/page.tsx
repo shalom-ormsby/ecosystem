@@ -100,7 +100,7 @@ export default function Home() {
               </h2>
               <nav className="space-y-3">
                 <Link
-                  href="https://studio.shalomormsby.com"
+                  href="https://ui.shalomormsby.com"
                   className="block"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -145,7 +145,7 @@ export default function Home() {
           {
             title: 'Tools',
             links: [
-              { label: 'Sage Design Studio', href: 'https://studio.shalomormsby.com', external: true },
+              { label: 'Sage Design Studio', href: 'https://ui.shalomormsby.com', external: true },
               { label: 'Cosmograph', href: '/cosmograph' },
               { label: 'Sage Stocks', href: 'https://stocks.shalomormsby.com/', external: true },
               { label: 'SageOS', href: '/sageos' },

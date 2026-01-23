@@ -59,7 +59,7 @@ export function generateFullDocumentation(
     "name": "Sage UI",
     "applicationCategory": "DeveloperApplication",
     "description": "A comprehensive design system built with React and TypeScript, organized by functional purpose for optimal developer experience.",
-    "url": "https://studio.shalomormsby.com",
+    url: "https://ui.shalomormsby.com",
     "version": "1.0.0",
     "programmingLanguage": "TypeScript",
     "runtimePlatform": "React",

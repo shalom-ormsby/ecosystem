@@ -515,7 +515,7 @@ Code blocks throughout Sage Design Studio lacked multi-color syntax highlighting
 ### Results
 - ✅ All code blocks in Sage Design Studio now have multi-color syntax highlighting
 - ✅ Comprehensive documentation across all README files
-- ✅ Live examples visible at https://studio.shalomormsby.com/ (Design Tokens > Syntax)
+- **Live examples visible at https://ui.shalomormsby.com/ (Design Tokens > Syntax)**
 - ✅ Build verified successfully (sage-design-studio compiled in 6.5s)
 - ✅ Zero external dependencies added
 - ✅ WCAG AA contrast maintained in both light and dark modes

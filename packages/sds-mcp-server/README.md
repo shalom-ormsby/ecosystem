@@ -204,7 +204,7 @@ The server runs in stdio mode, communicating via stdin/stdout per the MCP specif
 
 ## Documentation
 
-- **Full Documentation**: https://studio.shalomormsby.com/
+- **Full Documentation**: https://ui.shalomormsby.com/
 - **GitHub**: https://github.com/shalomormsby/ecosystem
 - **MCP Specification**: https://modelcontextprotocol.io/
 
@@ -212,7 +212,7 @@ The server runs in stdio mode, communicating via stdin/stdout per the MCP specif
 
 For issues or questions:
 - GitHub Issues: https://github.com/shalomormsby/ecosystem/issues
-- Documentation: https://studio.shalomormsby.com/#mcp-server
+- Documentation: https://ui.shalomormsby.com/#mcp-server
 
 ## License
 
@@ -220,4 +220,4 @@ MIT © Shalom Ormsby
 
 ---
 
-**Part of the [Sage UI](https://studio.shalomormsby.com/) - Build lovable products at AI speed.**
+**Part of the [Sage UI](https://ui.shalomormsby.com/) - Build lovable products at AI speed.**

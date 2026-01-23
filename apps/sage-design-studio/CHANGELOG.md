@@ -623,7 +623,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Testing Required
 
 **Manual browser testing required before production deployment:**
-- [ ] Test Input component on live site (https://studio.shalomormsby.com/)
+- [ ] Test Input component on live site (https://ui.shalomormsby.com/)
 - [ ] Test Label component on live site
 - [ ] Systematic testing of all 48 components
 - [ ] MCP server integration testing with Claude Desktop

@@ -21,7 +21,7 @@ export const ecosystemNavigation: HeaderNavLink[] = [
     label: 'Tools',
     active: true, // Studio is active
     children: [
-      { label: 'Sage Design Studio', href: 'https://studio.shalomormsby.com', active: true },
+      { label: 'Sage Design Studio', href: 'https://ui.shalomormsby.com', active: true },
       { label: 'Cosmograph', href: 'https://www.shalomormsby.com/cosmograph' },
       { label: 'Sage Stocks', href: 'https://www.shalomormsby.com/sage-stocks' },
       { label: 'SageOS', href: 'https://www.shalomormsby.com/sageos' },

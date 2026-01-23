@@ -58,7 +58,7 @@ export default function CaseStudiesPage() {
                     Cosmograph
                   </Link>
                   {' '}or{' '}
-                  <Link variant="inline" href="https://studio.shalomormsby.com">
+                  <Link variant="inline" href="https://ui.shalomormsby.com">
                     Sage Design Studio
                   </Link>
                   .
@@ -91,7 +91,7 @@ export default function CaseStudiesPage() {
           {
             title: 'Tools',
             links: [
-              { label: 'Sage Design Studio', href: 'https://studio.shalomormsby.com', external: true },
+              { label: 'Sage Design Studio', href: 'https://ui.shalomormsby.com', external: true },
               { label: 'Cosmograph', href: '/cosmograph' },
               { label: 'Sage Stocks', href: 'https://stocks.shalomormsby.com/', external: true },
               { label: 'SageOS', href: '/sageos' },

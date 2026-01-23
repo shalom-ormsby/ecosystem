@@ -15,7 +15,7 @@ The purpose of this open source monorepo isn't just to answer this question; it'
 This ecosystem expresses one unified vision through multiple products:
 
 - **[Portfolio](https://www.shalomormsby.com/)** — My design philosophy in action. Currently being built from the ground-up entirely with Sage UI components.
-- **[Sage Design Studio](https://studio.shalomormsby.com/)** — Interactive documentation platform for the Sage UI. A comprehensive suite of functional components, patterns, and templates that optimize human and AI-assisted creativity. Purpose-built for solopreneurs who want to build digital products not only with speed but also with precise creative control. 
+- **[Sage Design Studio](https://ui.shalomormsby.com/)** — Interactive documentation platform for the Sage UI. A comprehensive suite of functional components, patterns, and templates that optimize human and AI-assisted creativity. Purpose-built for solopreneurs who want to build digital products not only with speed but also with precise creative control. 
 - **[Creative Powerup](https://ecosystem-creative-powerup.vercel.app/)** — Community platform and experiment gallery for purpose-driven innovators *(in development)*
 - **[Sage Stocks](https://stocks.shalomormsby.com/)** — AI-powered investment intelligence that respects user agency *(migration pending)*
 - **SageOS** — Personal operating system for creative work *(Currently a WiP. To apply as a beta tester, email Shalom.)*
@@ -185,7 +185,7 @@ The **Sage Design Studio** app ([apps/sage-design-studio](apps/sage-design-studi
 - **Accessibility notes** for every component
 - **GitHub source links** for transparency
 
-Visit the live documentation at [https://studio.shalomormsby.com/](https://studio.shalomormsby.com/)
+Visit the live documentation at [https://ui.shalomormsby.com/](https://ui.shalomormsby.com/)
 
 [Full Design System Documentation →](apps/sage-design-studio/docs/SAGE_DESIGN_SYSTEM_STRATEGY.md)
 

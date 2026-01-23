@@ -320,7 +320,7 @@ Example:
 
 ### 🆘 Troubleshooting Guide
 
-If you encounter errors, **STOP and refer to** [The Studio Troubleshooting Guide](https://studio.shalomormsby.com/#adding-components/troubleshooting).
+If you encounter errors, **STOP and refer to** [The Studio Troubleshooting Guide](https://ui.shalomormsby.com/#adding-components/troubleshooting).
 
 **Common Motion Issues:**
 *   **Black Shader Previews (The "Unified Path" Fix):** If varying props (like `pageLoadAnimation={false}`) cause a shader to turn black, **avoid branching logic in GLSL** (e.g., `if (uUseAnimation > 0.5)`). Instead, **unify the code path**: always run the animation logic in the shader, but control the valid state from JavaScript (e.g., set `uProgress` to `1.0` immediately to skip the effect). This ensures the shader always executes a proven, active code path.

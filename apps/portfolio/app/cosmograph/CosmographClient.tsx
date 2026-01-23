@@ -60,7 +60,7 @@ export function CosmographClient({ nodes }: CosmographClientProps) {
             {
               title: 'Tools',
               links: [
-                { label: 'Sage Design Studio', href: 'https://studio.shalomormsby.com', external: true },
+                { label: 'Sage Design Studio', href: 'https://ui.shalomormsby.com', external: true },
                 { label: 'Cosmograph', href: '/cosmograph' },
                 { label: 'Sage Stocks', href: '/sage-stocks' },
               ],
