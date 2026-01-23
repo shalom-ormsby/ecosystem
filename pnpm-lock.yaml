@@ -248,6 +248,9 @@ importers:
       '@vercel/analytics':
         specifier: ^1.6.1
         version: 1.6.1(next@15.5.9(babel-plugin-react-compiler@1.0.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+      '@vercel/edge-config':
+        specifier: ^1.4.3
+        version: 1.4.3(next@15.5.9(babel-plugin-react-compiler@1.0.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -3560,6 +3563,7 @@ packages:
   '@vercel/kv@1.0.1':
     resolution: {integrity: sha512-uTKddsqVYS2GRAM/QMNNXCTuw9N742mLoGRXoNDcyECaxEXvIHG0dEY+ZnYISV4Vz534VwJO+64fd9XeSggSKw==}
     engines: {node: '>=14.6'}
+    deprecated: 'Vercel KV is deprecated. If you had an existing KV store, it should have moved to Upstash Redis which you will see under Vercel Integrations. For new projects, install a Redis integration from Vercel Marketplace: https://vercel.com/marketplace?category=storage&search=redis'
 
   '@vercel/nestjs@0.2.16':
     resolution: {integrity: sha512-VIpqtGsKy/TJi8VzUfJq+GB/jZ63MWYhUAOzM5kRU82E0+6PApxf3fj3C9xNg8OpeK5tHjx8QckS3wd4GHV8eg==}
@@ -11347,6 +11351,12 @@ snapshots:
   '@vercel/detect-agent@1.0.0': {}
 
   '@vercel/edge-config-fs@0.1.0': {}
+
+  '@vercel/edge-config@1.4.3(next@15.5.9(babel-plugin-react-compiler@1.0.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
+    dependencies:
+      '@vercel/edge-config-fs': 0.1.0
+    optionalDependencies:
+      next: 15.5.9(babel-plugin-react-compiler@1.0.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   '@vercel/edge-config@1.4.3(next@16.1.0(@babel/core@7.28.5)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))':
     dependencies:

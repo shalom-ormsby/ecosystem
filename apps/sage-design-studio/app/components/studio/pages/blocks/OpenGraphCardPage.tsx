@@ -107,7 +107,9 @@ export function OpenGraphCardPage() {
     };
 
     // Set active design (to be used by opengraph-image.tsx)
-    const setActiveDesign = (id: string) => {
+    const [isSyncing, setIsSyncing] = useState(false);
+
+    const setActiveDesign = async (id: string) => {
         const updated = savedDesigns.map(d => ({
             ...d,
             isActive: d.id === id
@@ -115,6 +117,51 @@ export function OpenGraphCardPage() {
         setSavedDesigns(updated);
         localStorage.setItem('sage-og-designs', JSON.stringify(updated));
         localStorage.setItem('sage-og-active', id);
+
+        // Sync to Vercel Edge Config
+        const activeDesign = updated.find(d => d.id === id);
+        if (activeDesign) {
+            setIsSyncing(true);
+            try {
+                // Format config for storage
+                const configForStorage = {
+                    title: activeDesign.title,
+                    description: activeDesign.description,
+                    variant: 'gradient',
+                    gradient: {
+                        type: activeDesign.gradientType,
+                        // Handle angle vs position based on type
+                        ...(activeDesign.gradientType === 'linear'
+                            ? { angle: activeDesign.gradientAngle }
+                            : { position: 'circle at 50% 0%' }),
+                        colors: [activeDesign.gradientColor1, activeDesign.gradientColor2],
+                    },
+                    titleFontSize: activeDesign.titleFontSize,
+                    descriptionFontSize: activeDesign.descriptionFontSize,
+                };
+
+                const response = await fetch('/api/edge-config', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        key: 'og_card_config',
+                        value: configForStorage
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to sync to Edge Config');
+                }
+
+                // Success feedback could go here (toast, etc)
+                console.log('Successfully synced to Edge Config');
+            } catch (err) {
+                console.error('Failed to sync active design:', err);
+                alert('Saved locally, but failed to sync to Edge Config. Check your Vercel credentials.');
+            } finally {
+                setIsSyncing(false);
+            }
+        }
     };
 
     const activeDesign = savedDesigns.find(d => d.isActive);
@@ -439,8 +486,17 @@ export default function OGImage() {
                                                         onClick={() => setActiveDesign(design.id)}
                                                         className="flex-1 gap-2 text-xs"
                                                     >
-                                                        <Check className="w-3 h-3" />
-                                                        {design.isActive ? 'Active' : 'Set Active'}
+                                                        {isSyncing && design.isActive ? (
+                                                            <>
+                                                                <RefreshCw className="w-3 h-3 animate-spin" />
+                                                                Syncing...
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                <Check className="w-3 h-3" />
+                                                                {design.isActive ? 'Active' : 'Set Active'}
+                                                            </>
+                                                        )}
                                                     </Button>
                                                 </div>
                                             </div>

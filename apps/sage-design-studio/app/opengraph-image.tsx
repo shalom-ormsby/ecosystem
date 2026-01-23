@@ -22,21 +22,33 @@ export const contentType = 'image/png';
  * Alternatively, copy the generated code from the "Code" tab and paste it here.
  */
 
+import { createClient } from '@vercel/edge-config';
+
 export default async function Image() {
-    // CUSTOMIZE YOUR OG IMAGE HERE
-    // Replace these values with your saved design configuration
-    const config = {
+    let config = {
         title: 'Sage UI',
-        description: "The Solopreneur's Development Stack",
+        description: 'Lovable by Design',
         variant: 'gradient' as const,
         gradient: {
-            type: 'linear' as const,
-            angle: 135,
-            colors: ['#171717', '#0a0a0a'],
+            type: 'radial' as const,
+            position: 'circle at 50% 0%',
+            colors: ['#a855f7', '#3b0764'], // Purple gradient
         },
         titleFontSize: 96,
         descriptionFontSize: 42,
     };
+
+    try {
+        const edgeConfig = createClient(process.env.EDGE_CONFIG);
+        const dynamicConfig = await edgeConfig.get('og_card_config');
+
+        if (dynamicConfig) {
+            config = { ...config, ...(dynamicConfig as any) };
+        }
+    } catch (e) {
+        console.error('Failed to load Edge Config:', e);
+        // Fallback to default/hardcoded config
+    }
 
     return new ImageResponse(
         (
@@ -47,6 +59,7 @@ export default async function Image() {
                 gradient={config.gradient}
                 titleFontSize={config.titleFontSize}
                 descriptionFontSize={config.descriptionFontSize}
+                icon={null} // Keep icon null for now or make it dynamic if we store icon preferences
             />
         ),
         {
