@@ -29,7 +29,7 @@ To achieve parity with Mantine effectively, Sage UI should **not** copy Mantine 
 
 | Category | Mantine UI | Sage UI Current | Recommendation |
 | :--- | :--- | :--- | :--- |
-| **Hooks** | **70+ Hooks** (`@mantine/hooks`)<br>*(useHover, useMove, useOs, etc.)* | **3 Hooks**<br>*(useTheme, useMotion, useForm)* | 🚨 **CRITICAL GAP**<br>Build `@sds/hooks` |
+| **Hooks** | **70+ Hooks** (`@mantine/hooks`)<br>*(useHover, useMove, useOs, etc.)* | **3 Hooks**<br>*(useTheme, useMotionPreference, useForm)* | 🚨 **CRITICAL GAP**<br>Build `@sds/hooks` |
 | **Forms** | `@mantine/form`<br>*(Custom state management)* | `react-hook-form` + `zod` | ⛔ **Do Not Copy**<br>Stick to RHF standard |
 | **Dates** | `@mantine/dates`<br>*(Custom implementation)* | `date-fns` + `react-day-picker` | 🤝 Parity Achieved (via Layout/Calendar) |
 | **Notifications** | `@mantine/notifications` | `sonner` | ✅ **SDS is Superior** (Sonner is better) |

@@ -23,16 +23,16 @@ const fontFamilies = {
   studio: {
     heading: 'var(--font-studio-heading)',
     body: 'var(--font-studio-body)',
-    mono: 'var(--font-studio-mono)',
+    mono: 'var(--font-mono)',
   },
   sage: {
-    sans: 'var(--font-sage-sans)',
-    serif: 'var(--font-sage-serif)',
-    mono: 'var(--font-sage-mono)',
+    sans: 'var(--font-sage-body)',
+    serif: 'var(--font-sage-heading)',
+    mono: 'var(--font-mono)',
   },
   volt: {
-    sans: 'var(--font-volt-sans)',
-    mono: 'var(--font-volt-mono)',
+    sans: 'var(--font-volt-heading)',
+    mono: 'var(--font-mono)',
   },
 };
 

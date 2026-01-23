@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Card, Button } from '@sage/ui';
+import { Card, Button, useMotionPreference } from '@sage/ui';
 import { Code, CollapsibleCodeBlock } from '@sage/ui';
 import { baseTokens, motion } from '@sage/ui/tokens';
 import { VariableWeightText } from '@sage/ui';
@@ -18,9 +18,13 @@ function MotionExample({
     easing: string;
     label: string;
 }) {
+    const { shouldAnimate, scale } = useMotionPreference();
     const [isAnimating, setIsAnimating] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
     const [maxDistance, setMaxDistance] = useState(0);
+
+    const durationMs = parseInt(duration);
+    const scaledDurationMs = shouldAnimate && scale > 0 ? durationMs * (5 / scale) : 0;
 
     useEffect(() => {
         const updateMaxDistance = () => {
@@ -40,7 +44,7 @@ function MotionExample({
 
     const handleAnimate = () => {
         setIsAnimating(true);
-        setTimeout(() => setIsAnimating(false), parseInt(duration) + 100);
+        setTimeout(() => setIsAnimating(false), scaledDurationMs + 100);
     };
 
     return (
@@ -50,7 +54,7 @@ function MotionExample({
                     className="w-12 h-12 bg-[var(--color-primary)] rounded-lg"
                     style={{
                         transform: isAnimating ? `translateX(${maxDistance}px)` : 'translateX(0)',
-                        transition: `transform ${duration} ${easing}`,
+                        transition: shouldAnimate ? `transform ${scaledDurationMs}ms ${easing}` : 'none',
                     }}
                 />
             </div>
@@ -493,13 +497,19 @@ tl.to('.hero', { opacity: 1, duration: 0.5 })
 import { useMotionPreference } from '@sage/ui';
 
 function MyComponent() {
-  const { shouldAnimate } = useMotionPreference();
+  const { shouldAnimate, scale } = useMotionPreference();
+
+  // Scale 5 (default) = 1x duration
+  // Duration: 0.3 is base duration for this animation
+  const duration = shouldAnimate && scale > 0 
+    ? 0.3 * (5 / scale) 
+    : 0;
 
   return (
     <motion.div
       initial={shouldAnimate ? { opacity: 0, y: 20 } : false}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: shouldAnimate ? 0.3 : 0 }}
+      transition={{ duration }}
     >
       Content
     </motion.div>

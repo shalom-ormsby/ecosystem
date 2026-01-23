@@ -2,7 +2,7 @@
 
 import { Card, Backgrounds } from '@sage/ui';
 import { useRouter } from 'next/navigation';
-const { WarpBackground, FaultyTerminal } = Backgrounds;
+const { WarpBackground, FaultyTerminal, OrbBackground } = Backgrounds;
 
 export function BackgroundsSection() {
     const router = useRouter();
@@ -68,6 +68,27 @@ export function BackgroundsSection() {
                             flickerAmount={0.5}
                             tint="#3b82f6"
                             pageLoadAnimation={false}
+                        />
+                    </div>
+                </Card>
+
+                {/* Orb Background Card */}
+                <Card
+                    className="p-6 cursor-pointer group"
+                    hoverEffect={true}
+                    onClick={() => {
+                        window.location.hash = '#motion/orb-background';
+                    }}
+                >
+                    <div className="flex items-center justify-between mb-2">
+                        <h2 className="text-xl font-bold group-hover:text-[var(--color-primary)] transition-colors">Orb Background</h2>
+                        <span className="text-xs font-mono px-2 py-1 bg-[var(--color-surface)] rounded text-[var(--color-text-secondary)]">WebGL</span>
+                    </div>
+                    <p className="text-[var(--color-text-secondary)] mb-4">Glowing orb animation with organic noise.</p>
+                    <div className="aspect-video bg-black rounded-lg mb-4 overflow-hidden relative pointer-events-none">
+                        <OrbBackground
+                            hue={314}
+                            hoverIntensity={0.8}
                         />
                     </div>
                 </Card>

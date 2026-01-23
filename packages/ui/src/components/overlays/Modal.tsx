@@ -96,7 +96,9 @@ export const Modal: React.FC<ModalProps> = ({
   closeOnEscape = true,
   className = '',
 }) => {
-  const { shouldAnimate } = useMotionPreference();
+  const { shouldAnimate, scale } = useMotionPreference();
+
+  const animationDuration = shouldAnimate && scale > 0 ? `${0.2 * (5 / scale)}s` : '0s';
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -147,6 +149,7 @@ export const Modal: React.FC<ModalProps> = ({
         bg-black/50 backdrop-blur-sm
         ${shouldAnimate ? 'animate-fade-in' : ''}
       `}
+      style={{ animationDuration }}
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
@@ -165,6 +168,7 @@ export const Modal: React.FC<ModalProps> = ({
           ${shouldAnimate ? 'animate-scale-in' : ''}
           ${className}
         `}
+        style={{ animationDuration }}
       >
         {/* Header */}
         {title && (

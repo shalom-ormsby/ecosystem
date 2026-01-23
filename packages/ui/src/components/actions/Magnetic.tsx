@@ -22,7 +22,10 @@ export interface MagneticProps {
 /**
  * Wraps an element to give it a magnetic attraction to the cursor.
  */
+import { useMotionPreference } from '../../hooks/useMotionPreference';
+
 export function Magnetic({ children, strength = 0.2, range = 100, className }: MagneticProps) {
+    const { shouldAnimate, scale } = useMotionPreference();
     const ref = useRef<HTMLDivElement>(null);
     const position = { x: useMotionValue(0), y: useMotionValue(0) };
 
@@ -31,14 +34,19 @@ export function Magnetic({ children, strength = 0.2, range = 100, className }: M
     const smoothY = useSpring(position.y, springOptions);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!shouldAnimate) return;
+
         const { clientX, clientY } = e;
         const { height, width, left, top } = ref.current?.getBoundingClientRect() || { height: 0, width: 0, left: 0, top: 0 };
 
         const middleX = clientX - (left + width / 2);
         const middleY = clientY - (top + height / 2);
 
-        position.x.set(middleX * strength);
-        position.y.set(middleY * strength);
+        // Scale strength based on motion intensity (baseline 5)
+        const effectiveStrength = strength * (scale / 5);
+
+        position.x.set(middleX * effectiveStrength);
+        position.y.set(middleY * effectiveStrength);
     };
 
     const handleMouseLeave = () => {

@@ -475,17 +475,15 @@ const tokens = parseCode(code, 'typescript');
               <div>
                 <CollapsibleCodeBlock
                   id="motion-control-demo"
-                  code={`import { useMotion } from '@sage/ui';
+                  code={`import { useMotionPreference } from '@sage/ui';
 
-export function MyComponent() {
-  const { motionLevel, setMotionLevel } = useMotion();
+export function MotionAwareComponent() {
+  const { scale, shouldAnimate } = useMotionPreference();
 
   return (
     <div>
-      <p>Current motion: {motionLevel}</p>
-      <button onClick={() => setMotionLevel(5)}>
-        Set to moderate
-      </button>
+      <p>Motion Scale: {scale} (0-10)</p>
+      <p>Animations Enabled: {shouldAnimate ? 'Yes' : 'No'}</p>
     </div>
   );
 }`}

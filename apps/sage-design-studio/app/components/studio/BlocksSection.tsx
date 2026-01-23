@@ -5,8 +5,9 @@ import { Card, Button } from '@sage/ui';
 import { Header, SecondaryNav, TertiaryNav, Footer, Modal, ToastProvider, useToast, CollapsibleCodeBlock, Code, CustomizerPanel, Breadcrumbs, PageLayout, type BreadcrumbItemLegacy } from '@sage/ui';
 import { SlidersHorizontal, Sun, Moon, SunMoon, Building2, Leaf, Zap, X } from 'lucide-react';
 import type { SyntaxToken } from '@sage/ui';
+import { HeroBlockPage } from './pages/blocks/HeroBlockPage';
 
-type BlockType = 'PageLayout' | 'PrimaryNav' | 'SecondaryNav' | 'TertiaryNav' | 'FirstStack' | 'SecondStack' | 'Footer' | 'Toast' | 'Modal' | 'CollapsibleCodeBlock';
+type BlockType = 'PageLayout' | 'PrimaryNav' | 'SecondaryNav' | 'TertiaryNav' | 'FirstStack' | 'SecondStack' | 'Footer' | 'Toast' | 'Modal' | 'CollapsibleCodeBlock' | 'HeroBlock';
 
 interface BlocksSectionProps {
   activeItemId?: string;
@@ -110,7 +111,7 @@ export function BlocksSection({ activeItemId, breadcrumbs, onItemChange }: Block
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join('') as BlockType;
 
-      if (['PageLayout', 'PrimaryNav', 'SecondaryNav', 'TertiaryNav', 'FirstStack', 'SecondStack', 'Footer', 'Toast', 'Modal', 'CollapsibleCodeBlock'].includes(patternName)) {
+      if (['PageLayout', 'PrimaryNav', 'SecondaryNav', 'TertiaryNav', 'FirstStack', 'SecondStack', 'Footer', 'Toast', 'Modal', 'CollapsibleCodeBlock', 'HeroBlock'].includes(patternName)) {
         setSelectedPattern(patternName);
       }
     }
@@ -138,6 +139,7 @@ export function BlocksSection({ activeItemId, breadcrumbs, onItemChange }: Block
     { id: 'Toast', label: 'Toast' },
     { id: 'Modal', label: 'Modal' },
     { id: 'CollapsibleCodeBlock', label: 'Code Block' },
+    { id: 'HeroBlock', label: 'Hero Block' },
   ];
 
   return (
@@ -785,6 +787,9 @@ const sections = [
             </div>
           </section>
         )}
+
+        {/* Hero Block Component */}
+        {selectedPattern === 'HeroBlock' && <HeroBlockPage />}
 
         {/* 2nd Stacking Row Component */}
         {selectedPattern === 'SecondStack' && (

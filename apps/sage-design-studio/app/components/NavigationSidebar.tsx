@@ -112,9 +112,11 @@ export function NavigationSidebar({
       <Sidebar isOpen={isOpen}>
         <SidebarHeader>
           <div className="w-full flex items-center justify-between">
-            <h2 className="text-lg font-bold text-foreground">
-              Sage UI
-            </h2>
+            <a href="/" className="hover:opacity-80 transition-opacity">
+              <h2 className="text-lg font-bold text-foreground">
+                Sage UI
+              </h2>
+            </a>
             <button
               onClick={onToggle}
               className="lg:hidden p-2 text-muted-foreground hover:bg-muted rounded-lg transition-colors"

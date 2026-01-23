@@ -69,6 +69,11 @@ export interface HeaderProps {
      */
     maxWidth?: 'max-w-7xl' | 'max-w-[1440px]' | 'max-w-4xl';
     /**
+     * Alignment of the navigation links
+     * @default 'center'
+     */
+    navAlignment?: 'center' | 'left' | 'right';
+    /**
      * Additional className for customization
      */
     className?: string;
@@ -84,6 +89,7 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
             scrollThreshold = 10,
             sticky = true,
             navLinkSize = 'text-sm',
+            navAlignment = 'center',
             fontFamily = 'var(--font-header-nav)',
             maxWidth = 'max-w-7xl',
             className = '',
@@ -94,7 +100,11 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
         const [hasScrolled, setHasScrolled] = useState(false);
         const [openDropdown, setOpenDropdown] = useState<string | null>(null);
         const [expandedMobileSection, setExpandedMobileSection] = useState<string | null>(null);
-        const { shouldAnimate } = useMotionPreference();
+        const { shouldAnimate, scale } = useMotionPreference();
+
+        // Calculate motion factors
+        const motionFactor = shouldAnimate && scale > 0 ? (5 / scale) : 0;
+        const transitionDuration = `${300 * motionFactor}ms`;
 
         // Handle scroll detection
         useEffect(() => {
@@ -122,20 +132,34 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
 
         const baseStyles = 'top-0 left-0 right-0 z-50';
         const positionStyles = sticky ? 'fixed' : 'relative';
-        const transitionStyles = shouldAnimate
-            ? 'transition-all duration-300'
-            : '';
+        const transitionStyles = shouldAnimate ? 'transition-all' : '';
 
-        // Glass morphism effect using design system colors
+        // Liquid Glass Effect
+        // Unscrolled: Transparent & Borderless (looks printed on background), but with blur for "liquid" feel over Orb
+        // Scrolled: Wetter glass, more opaque, shadow for depth, no harsh borders
         const backgroundStyles = hasScrolled && glassOnScroll
-            ? 'backdrop-blur-xl bg-[var(--color-surface)]/80 border-b border-[var(--color-border)]'
-            : 'bg-[var(--color-surface)] border-b border-[var(--color-border)]';
+            ? 'backdrop-blur-3xl bg-[var(--color-surface)]/60 border-b border-transparent shadow-sm supports-[backdrop-filter]:bg-[var(--color-surface)]/50'
+            : 'bg-transparent border-b border-transparent backdrop-blur-xl';
+
+        // Nav Alignment Classes
+        const getNavClasses = () => {
+            switch (navAlignment) {
+                case 'left':
+                    return 'ml-8 mr-auto';
+                case 'right':
+                    return 'ml-auto mr-8';
+                case 'center':
+                default:
+                    return 'absolute left-1/2 -translate-x-1/2';
+            }
+        };
 
         return (
             <>
                 <header
                     ref={ref}
                     className={`${baseStyles} ${positionStyles} ${transitionStyles} ${backgroundStyles} ${className}`}
+                    style={{ transitionDuration }}
                 >
                     <div className={`${maxWidth} mx-auto px-4 sm:px-6 lg:px-8`}>
                         <div className="flex items-center justify-between h-16 lg:h-20 relative">
@@ -146,9 +170,12 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                                 </div>
                             )}
 
-                            {/* Desktop Navigation - Centered */}
+                            {/* Desktop Navigation */}
                             {navLinks.length > 0 && (
-                                <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2" aria-label="Main navigation">
+                                <nav
+                                    className={`hidden lg:flex items-center gap-8 ${getNavClasses()}`}
+                                    aria-label="Main navigation"
+                                >
                                     {navLinks.map((link) => {
                                         const hasDropdown = link.children && link.children.length > 0;
                                         const isOpen = openDropdown === link.label;
@@ -172,18 +199,18 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                                                             focus-visible:outline-offset-4
                                                             focus-visible:outline-[var(--color-focus)]
                                                             rounded-sm
-                                                            ${shouldAnimate ? 'transition-colors duration-200' : ''}
+                                                            ${shouldAnimate ? 'transition-colors' : ''}
                                                             ${link.active
                                                                 ? 'text-[var(--color-text-primary)] font-medium after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[var(--color-primary)] after:rounded-full'
-                                                                : 'text-[var(--color-text-secondary)] hover:text-[var(--color-primary)]'
+                                                                : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
                                                             }
                                                         `}
-                                                        style={{ fontFamily }}
+                                                        style={{ fontFamily, transitionDuration }}
                                                         aria-expanded={isOpen}
                                                         aria-haspopup="true"
                                                     >
                                                         {link.label}
-                                                        <ChevronDown className={`w-3 h-3 ${shouldAnimate ? 'transition-transform duration-200' : ''} ${isOpen ? 'rotate-180' : ''}`} />
+                                                        <ChevronDown className={`w-3 h-3 ${shouldAnimate ? 'transition-transform' : ''} ${isOpen ? 'rotate-180' : ''}`} style={{ transitionDuration }} />
                                                     </button>
                                                     {/* Invisible bridge to prevent dropdown from closing */}
                                                     {isOpen && <div className="absolute top-full left-1/2 -translate-x-1/2 w-[200px] h-2" />}
@@ -191,9 +218,10 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                                                         <div className={`
                                                             absolute top-full left-1/2 -translate-x-1/2 mt-2 min-w-[200px] z-50
                                                             bg-[var(--color-surface)] border border-[var(--color-border)]
-                                                            rounded-lg shadow-lg py-1 p-1
+                                                            rounded-lg shadow-xl py-1 p-1
+                                                            backdrop-blur-3xl bg-[var(--color-surface)]/95
                                                             ${shouldAnimate ? 'animate-fade-in' : ''}
-                                                        `}>
+                                                        `} style={{ animationDuration: `${0.2 * motionFactor}s` }}>
                                                             {link.children?.map((child) => (
                                                                 <NavLink
                                                                     key={child.label}
@@ -247,8 +275,9 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                                     focus-visible:outline-2
                                     focus-visible:outline-offset-2
                                     focus-visible:outline-[var(--color-focus)]
-                                    ${shouldAnimate ? 'transition-colors duration-200' : ''}
+                                    ${shouldAnimate ? 'transition-colors' : ''}
                                 `}
+                                style={{ transitionDuration }}
                                 aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                                 aria-expanded={isMenuOpen}
                             >
@@ -266,12 +295,13 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                 <div
                     className={`
                         fixed inset-0 z-[100] lg:hidden
-                        ${shouldAnimate ? 'transition-all duration-300' : ''}
+                        ${shouldAnimate ? 'transition-all' : ''}
                         ${isMenuOpen
                             ? 'opacity-100 pointer-events-auto'
                             : 'opacity-0 pointer-events-none'
                         }
                     `}
+                    style={{ transitionDuration }}
                     aria-hidden={!isMenuOpen}
                 >
                     <div className="absolute inset-0 bg-[var(--color-background)]">
@@ -293,7 +323,7 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                                                     focus-visible:outline-offset-4
                                                     focus-visible:outline-[var(--color-focus)]
                                                     rounded-sm
-                                                    ${shouldAnimate ? 'transition-all duration-200' : ''}
+                                                    ${shouldAnimate ? 'transition-all' : ''}
                                                     ${link.active
                                                         ? 'text-[var(--color-primary)] font-semibold'
                                                         : 'text-[var(--color-text-primary)] hover:text-[var(--color-text-secondary)]'
@@ -302,9 +332,10 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                                                 style={
                                                     shouldAnimate && isMenuOpen
                                                         ? {
-                                                            animation: `fadeInUp 0.5s ease-out ${index * 0.1}s forwards`,
+                                                            animation: `fadeInUp ${0.5 * motionFactor}s ease-out ${index * 0.1 * motionFactor}s forwards`,
                                                             opacity: 0,
                                                             fontFamily,
+                                                            transitionDuration
                                                         }
                                                         : { opacity: 1, fontFamily }
                                                 }
@@ -326,12 +357,13 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                                                                 focus-visible:outline-offset-4
                                                                 focus-visible:outline-[var(--color-focus)]
                                                                 rounded-sm
-                                                                ${shouldAnimate ? 'transition-colors duration-200' : ''}
+                                                                ${shouldAnimate ? 'transition-colors' : ''}
                                                                 ${child.active
                                                                     ? 'text-[var(--color-primary)] font-medium'
                                                                     : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
                                                                 }
                                                             `}
+                                                            style={{ transitionDuration }}
                                                             aria-current={child.active ? 'page' : undefined}
                                                         >
                                                             {child.label}
@@ -356,7 +388,7 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                                             focus-visible:outline-offset-4
                                             focus-visible:outline-[var(--color-focus)]
                                             rounded-sm
-                                            ${shouldAnimate ? 'transition-all duration-200' : ''}
+                                            ${shouldAnimate ? 'transition-all' : ''}
                                             ${link.active
                                                 ? 'text-[var(--color-primary)] font-semibold'
                                                 : 'text-[var(--color-text-primary)] hover:text-[var(--color-text-secondary)]'
@@ -365,9 +397,10 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                                         style={
                                             shouldAnimate && isMenuOpen
                                                 ? {
-                                                    animation: `fadeInUp 0.5s ease-out ${index * 0.1}s forwards`,
+                                                    animation: `fadeInUp ${0.5 * motionFactor}s ease-out ${index * 0.1 * motionFactor}s forwards`,
                                                     opacity: 0,
                                                     fontFamily,
+                                                    transitionDuration
                                                 }
                                                 : { opacity: 1, fontFamily }
                                         }
@@ -384,7 +417,7 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
                                     style={
                                         shouldAnimate && isMenuOpen
                                             ? {
-                                                animation: `fadeInUp 0.5s ease-out ${navLinks.length * 0.1}s forwards`,
+                                                animation: `fadeInUp ${0.5 * motionFactor}s ease-out ${navLinks.length * 0.1 * motionFactor}s forwards`,
                                                 opacity: 0,
                                             }
                                             : { opacity: 1 }

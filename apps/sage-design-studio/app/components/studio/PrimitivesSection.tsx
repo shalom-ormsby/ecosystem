@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, Button, Slider, Switch, Label, SecondaryNav } from '@sage/ui';
+import { Card, Button, Slider, Switch, Label, SecondaryNav, useMotionPreference } from '@sage/ui';
 import { motion } from 'framer-motion';
 import { RotateCcw } from 'lucide-react';
 import { baseTokens, motion as motionTokens } from '@sage/ui/tokens';
@@ -18,7 +18,7 @@ const PROPERTIES: { id: AnimationProperty; label: string }[] = [
   { id: 'rotate', label: 'Rotate' },
 ];
 
-// Convert CSS cubic-bezier string to framer-motion array format
+// ... (parseCubicBezier stays the same) ...
 function parseCubicBezier(cssString: string): [number, number, number, number] | 'linear' | 'easeOut' {
   if (cssString === 'linear') return 'linear';
   const match = cssString.match(/cubic-bezier\(([\d.]+),\s*([\d.]+),\s*([\d.]+),\s*([\d.]+)\)/);
@@ -29,6 +29,7 @@ function parseCubicBezier(cssString: string): [number, number, number, number] |
 }
 
 export function PrimitivesSection() {
+  const { shouldAnimate, scale: motionScale } = useMotionPreference();
   // Client-side only flag to prevent hydration mismatch
   const [isMounted, setIsMounted] = useState(false);
 
@@ -65,15 +66,23 @@ export function PrimitivesSection() {
     default: 'ease-out', spring: 'spring', linear: 'linear'
   };
 
+  // Calculate scaled duration
+  const getScaledDuration = (token: DurationToken) => {
+    const rawMs = parseInt(safeDurationTokens[token] || '300ms');
+    return shouldAnimate && motionScale > 0 ? (rawMs * (5 / motionScale)) / 1000 : 0;
+  };
+
+  // ... (handleReplay and other side logic)
+
   // Auto-reset playing state after animation (if not looping)
   useEffect(() => {
     if (isPlaying && !isLooping) {
       const durationStr = safeDurationTokens[activeDuration] || '300ms';
       const durationMs = parseInt(durationStr);
-      const timer = setTimeout(() => setIsPlaying(false), durationMs + 500); // Buffer
+      const timer = setTimeout(() => setIsPlaying(false), (durationMs * (shouldAnimate ? (5 / motionScale) : 0)) + 500);
       return () => clearTimeout(timer);
     }
-  }, [isPlaying, activeDuration, isLooping, safeDurationTokens]);
+  }, [isPlaying, activeDuration, isLooping, safeDurationTokens, shouldAnimate, motionScale]);
 
   const navItems = [
     { id: 'duration', label: 'Duration Scale' },
@@ -226,13 +235,13 @@ export function PrimitivesSection() {
                   x: activeProperty === 'x' ? 50 : 0,
                   rotate: activeProperty === 'rotate' ? 180 : 0,
                 }}
-                transition={{
-                  duration: parseInt(safeDurationTokens[activeDuration] || '300ms') / 1000,
+                transition={shouldAnimate ? {
+                  duration: getScaledDuration(activeDuration),
                   ease: activeEasing === 'linear' ? 'linear' : parseCubicBezier(safeEasingTokens[activeEasing as keyof typeof safeEasingTokens]),
                   repeat: isLooping ? Infinity : 0,
                   repeatType: isLooping ? "reverse" : undefined,
                   repeatDelay: isLooping ? loopDelay : 0
-                }}
+                } : { duration: 0 }}
               >
                 <span className="text-white sr-only">Box</span>
               </motion.div>
@@ -293,14 +302,12 @@ export function PrimitivesSection() {
                             ? { opacity: [1, 0, 1] }
                             : { width: ['0%', '100%', '0%'] }
                           ) : undefined}
-                          transition={{
-                            duration: name === 'instant'
-                              ? 1
-                              : (parseInt(value) / 1000) * 2,
+                          transition={shouldAnimate ? {
+                            duration: (name === 'instant' ? 1 : (parseInt(value) / 1000) * 2) * (motionScale > 0 ? 5 / motionScale : 1),
                             repeat: Infinity,
                             repeatDelay: 2,
                             ease: 'linear'
-                          }}
+                          } : { duration: 0 }}
                         />
                       </div>
                     </div>
@@ -333,12 +340,12 @@ export function PrimitivesSection() {
                           className="absolute top-0 w-12 h-12 bg-[var(--color-primary)] rounded-full shadow-md"
                           style={{ left: '0%' }}
                           animate={isMounted ? { left: ['0%', 'calc(100% - 3rem)', '0%'] } : undefined}
-                          transition={{
-                            duration: 4,
+                          transition={shouldAnimate ? {
+                            duration: 4 * (motionScale > 0 ? 5 / motionScale : 1),
                             ease: parseCubicBezier(safeEasingTokens.default),
                             repeat: Infinity,
                             repeatDelay: 2
-                          }}
+                          } : { duration: 0 }}
                         />
                       </div>
                     </div>
@@ -361,12 +368,12 @@ export function PrimitivesSection() {
                           className="w-16 h-16 bg-[var(--color-primary)] rounded-xl shadow-md"
                           style={{ scale: 1, rotate: 0 }}
                           animate={isMounted ? { scale: [1, 1.4, 1], rotate: [0, 10, 0] } : undefined}
-                          transition={{
-                            duration: 1.5,
+                          transition={shouldAnimate ? {
+                            duration: 1.5 * (motionScale > 0 ? 5 / motionScale : 1),
                             ease: parseCubicBezier(safeEasingTokens.spring),
                             repeat: Infinity,
                             repeatDelay: 2
-                          }}
+                          } : { duration: 0 }}
                         />
                       </div>
                     </div>
@@ -388,12 +395,12 @@ export function PrimitivesSection() {
                         className="w-16 h-16 border-4 border-[var(--color-border)] border-t-[var(--color-primary)] rounded-full"
                         style={{ rotate: 0 }}
                         animate={isMounted ? { rotate: 360 } : undefined}
-                        transition={{
-                          duration: 1.5,
+                        transition={shouldAnimate ? {
+                          duration: 1.5 * (motionScale > 0 ? 5 / motionScale : 1),
                           ease: "linear",
                           repeat: Infinity,
                           repeatDelay: 2
-                        }}
+                        } : { duration: 0 }}
                       />
                     </div>
                     <div className="p-8 flex flex-col justify-center">

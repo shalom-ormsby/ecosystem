@@ -333,7 +333,7 @@ The `useMotionPreference` hook provides:
 1. Audit all components using `motion.` from framer-motion
 2. Add `useMotionPreference` hook to each animated component
 3. Wrap animations in `shouldAnimate` conditionals
-4. Scale duration using: `duration * (scale / 10)`
+4. Scale duration using: `duration * (5 / scale)` (where 5 is normal)
 5. Provide static fallbacks when `shouldAnimate === false`
 
 **Example transformation:**
@@ -350,7 +350,7 @@ const { shouldAnimate, scale } = useMotionPreference();
 {shouldAnimate ? (
   <motion.div
     animate={{ opacity: 1 }}
-    transition={{ duration: 0.3 * (scale / 10) }}
+    transition={{ duration: 0.3 * (scale > 0 ? 5 / scale : 0) }}
   >
 ) : (
   <div style={{ opacity: 1 }}>
@@ -455,6 +455,12 @@ Each layer builds upon the previous, creating a systematic approach where change
 
 ### Implementation Requirements
 
+1) Must be built with existing Sage UI design token, components, blocks, and templates that are imported directly from '@sage/ui'. We should "dog-food" everything. We must not write custom CSS or create custom components that aren't in the Sage UI library. Where there are key missing elements, components, or blocks, we should build them and add them to Sage UI. This includes dynamic Motion elements, of couse. 
+2) Should visualize and present the Sage UI system in a beautiful, dynamic, and engaging way, including the thoughful use of animations. [Should not rely on static text and demand lots of reading.]
+3) Must be clear, concise, and action-oriented, i.e., able to help the website visitor get up and running as quickly as possible. 
+4) Should be stylistically cutting-edge, on par or excelling the quality of the inspirations on line 459 - 462 (and other relevant offerings).
+5) Must not use http://localhost:3001/landing (as that's currently occupied with an early version that's sub-par, which you can review for reference, but which does not meet any of the above requirements). 
+
 **Visual Design Inspiration:**
 - https://ui.mantine.dev/ - Clean hierarchy, interactive demos
 - https://chakra-ui.com/ - Component showcase, clear structure
@@ -467,6 +473,9 @@ Each layer builds upon the previous, creating a systematic approach where change
    - Visual diagram showing the 4-layer hierarchy
    - Primary CTA ("Get Started" / "Explore Components")
    - Secondary CTA ("View Templates" / "See Examples")
+   Shalom's brainstorm on the animation for this section:
+    - The idea of seeing design tokens assemble into compnents, which snap into blocks, which form into templates feels magical and novel.
+    - Show an animation of nodes with clean Bezier curves that pipe into components. Colored dots traveling along these curves represent design token data that's informing the appearance of the components. Then, an animation to the right can show Components, once they're informed by the tokens, moving into shape into the shape of Blocks. Fitting almost Tetris-like. Then, to the right of that, the blocks group into Templates. And that would successfully visualize the 4-layer hierarchy. [And on mobile breakpoints, this shifts from a right-to-left layout to a top-to-bottom one.]
 
 2. **The Four Layers Section**
    - Visual cards for each layer (Tokens → Components → Blocks → Templates)
@@ -513,6 +522,9 @@ Each layer builds upon the previous, creating a systematic approach where change
 - Must be accessible (WCAG AA minimum)
 - Must include meta tags for social sharing
 - Must have clear navigation to docs/components/templates
+
+**Aesthetics:** 
+- Glassmorphism (backdrop-blur), subtle borders, and hover lift effects.
 
 **Content Goals:**
 - Inspiring but not overwhelming

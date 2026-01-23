@@ -7,6 +7,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+### Fixed - Motion System & Visuals (2026-01-22)
+
+#### Motion System Standardization
+- **Root Cause**: Inconsistent application of `useMotionPreference` scaling logic led to varying animation speeds across components.
+- **Solution**: Standardized all components (SageHero, Typewriter, Magnetic, etc.) to use the inverse scaling formula `duration * (5 / scale)`, ensuring that higher scale values consistently result in faster animations.
+- **Impact**: Uniform motion across the entire application, respecting user accessibility preferences.
+
+#### OrbBackground Overhaul
+- **Visual Upgrade**: Replaced the original noise-based blob implementation with a high-fidelity "Reactbits" style Orb.
+  - **Features**: Realistic 3D transparent bubble look, multi-color gradient mixing, and dynamic hue rotation.
+- **Interaction Logic**:
+  - **Window-Level Tracking**: Implemented robust mouse tracking that works even when the mouse is over top-level content (like CTA buttons), solving "dead zone" issues.
+  - **Full-Area Trigger**: Expanded the hover trigger zone to the full 1.0 radius of the orb.
+- **Controls**:
+  - **Back-End Driven**: Removed visible front-end sliders; control is now handled purely via props for clean integration.
+  - **Hero Integration**: Increased `HeroBlock` height to `90vh` to fully showcase the new visual.
+
+#### Typewriter Stability
+- **Fix**: Resolved an issue where the `Typewriter` component would fail to start typing due to a stale valid check on the initial delay.
+- **Refactor**: Rewrote the component to use a robust `useEffect` loop with clear state phases (waiting, typing, deleting) instead of a fragile `useRef` state machine.
+
+### Fixed - Motion System Standardization (2026-01-22)
+
+#### Root Cause
+- **Inconsistent Animation Scaling**: The `useMotionPreference` hook's scaling logic was incorrectly implemented in some documentation examples and components.
+  - Previous logic: `duration * (scale / 10)` (Faster scale resulted in slower/longer duration)
+  - Correct logic: `duration * (5 / scale)` (Faster scale results in shorter duration)
+- **Broken Documentation Examples**: Several documentation components (`MotionFoundationsSection`, `MotionTab`, `LayerVisualization`) were using hardcoded logic or ignoring the `scale` preference entirely.
+
+#### Solution
+- **Standardized Scaling Formula**: Updated all instances of duration calculation to use the inverse scaling formula: `duration * (5 / scale)`.
+  - Scale 5 (Default) → 1x duration
+  - Scale 10 (Fastest) → 0.5x duration
+  - Scale 1 (Slowest) → 5x duration
+- **Updated Documentation Components**:
+  - `MotionFoundationsSection.tsx`: Updated interactive examples and code snippets.
+  - `MotionTab.tsx`: Corrected the "Accessibilty" code block example.
+  - `CommonPatternsSection.tsx`: Fixed the `useMotionPreference` usage example.
+  - `LayerVisualization.tsx`: Updated the landing page demo to respect the global motion scale.
+- **Cleanup**: Deleted legacy file `PrimitivesSectionOld.tsx` to prevent confusion.
+
+#### Result
+- ✅ Motion scaling now works intuitively: Higher scale = Faster animation.
+- ✅ All documentation examples match the actual implementation.
+- ✅ Landing page visualizations respect user preferences.
+
 ### Fixed - Motion Primitives Animations (2026-01-22)
 
 #### Root Cause

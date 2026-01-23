@@ -237,7 +237,7 @@ html {
 
 @layer base {
   body {
-    font-family: var(--font-nunito), system-ui, sans-serif;
+    font-family: var(--font-body), system-ui, sans-serif;
     @apply bg-background text-foreground;
   }
 
@@ -248,7 +248,7 @@ html {
   h5,
   h6,
   strong {
-    font-family: var(--font-sage-body), system-ui, sans-serif;
+    font-family: var(--font-heading), system-ui, sans-serif;
   }
 
   /* Apply border color globally */

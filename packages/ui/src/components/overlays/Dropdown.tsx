@@ -77,7 +77,9 @@ export const Dropdown: React.FC<DropdownProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { shouldAnimate } = useMotionPreference();
+  const { shouldAnimate, scale } = useMotionPreference();
+
+  const animationDuration = shouldAnimate && scale > 0 ? `${0.15 * (5 / scale)}s` : '0s';
 
   // Close on click outside
   useEffect(() => {
@@ -174,6 +176,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
             ${shouldAnimate ? 'animate-dropdown-in' : ''}
             ${className}
           `}
+          style={{ animationDuration }}
           role="menu"
           aria-orientation="vertical"
         >

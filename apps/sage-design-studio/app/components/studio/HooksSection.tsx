@@ -328,19 +328,28 @@ function UseMotionPreferenceSection() {
             code={`import { useMotionPreference } from '@sage/ui';
  import { motion } from 'framer-motion';
  
- function AnimatedComponent() {
-   const { shouldAnimate, scale } = useMotionPreference();
- 
-   return (
-     <motion.div
-       initial={shouldAnimate ? { opacity: 0 } : false}
-       animate={{ opacity: 1 }}
-       transition={{ duration: 0.3 * (scale / 10) }}
-     >
-       Content
-     </motion.div>
-   );
- }`} defaultCollapsed={false} showCopy={true} />
+   function AnimatedComponent() {
+     const { shouldAnimate, scale } = useMotionPreference();
+   
+     // Calculate duration adjustment:
+     // - scale 5 (default) -> 1x duration
+     // - scale 1 (slow) -> 5x duration
+     // - scale 10 (fast) -> 0.5x duration
+     const initialDuration = 0.3;
+     const duration = shouldAnimate && scale > 0 
+       ? initialDuration * (5 / scale)
+       : 0;
+   
+     return (
+       <motion.div
+         initial={shouldAnimate ? { opacity: 0 } : false}
+         animate={{ opacity: 1 }}
+         transition={{ duration }}
+       >
+         Content
+       </motion.div>
+     );
+   }`} defaultCollapsed={false} showCopy={true} />
         </Card>
       </div>
     </section>

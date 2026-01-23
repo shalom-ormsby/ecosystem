@@ -108,6 +108,9 @@ export * from './components/backgrounds/WarpBackground';
 export * from './components/backgrounds/FaultyTerminal';
 
 // Motion
+export * from "./components/motion/AnimatedBeam";
+export * from "./components/backgrounds/OrbBackground";
+export * from "./components/blocks/Hero";
 export * from './components/cursor/SplashCursor';
 export * from './components/cursor/TargetCursor';
 

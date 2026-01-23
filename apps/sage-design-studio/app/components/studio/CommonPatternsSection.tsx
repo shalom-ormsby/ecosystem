@@ -196,16 +196,19 @@ export function ThemedCard() {
 import { useMotionPreference } from '@sage/ui';
 
 export function AnimatedCard() {
-  const shouldReduceMotion = useMotionPreference();
+  const { shouldAnimate, scale } = useMotionPreference();
+
+  // Scale 5 (default) = 1x duration
+  // Duration: 0.3 is base duration for this animation
+  const duration = shouldAnimate && scale > 0 
+    ? 0.3 * (5 / scale) 
+    : 0;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+      initial={shouldAnimate ? { opacity: 0, y: 20 } : false}
       animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: shouldReduceMotion ? 0 : 0.3,
-        ease: 'easeOut',
-      }}
+      transition={{ duration, ease: 'easeOut' }}
       className="p-6 bg-[var(--color-surface)] rounded-lg"
     >
       <p>This card respects motion preferences</p>
@@ -214,7 +217,7 @@ export function AnimatedCard() {
 }`} defaultCollapsed={false} showCopy={true} />
           <div className="mt-4 p-4 bg-[var(--color-surface)] rounded-md border border-[var(--color-border)]">
             <p className="text-sm text-[var(--color-text-primary)]">
-              <strong>Accessibility first:</strong> When <Code syntax="plain">shouldReduceMotion</Code> is true,
+              <strong>Accessibility first:</strong> When <Code syntax="plain">shouldAnimate</Code> is false,
               set duration to 0 and disable position/scale animations. This respects user preferences and system settings.
             </p>
           </div>
