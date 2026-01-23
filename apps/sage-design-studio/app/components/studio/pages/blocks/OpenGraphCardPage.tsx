@@ -138,6 +138,7 @@ export function OpenGraphCardPage() {
                     },
                     titleFontSize: activeDesign.titleFontSize,
                     descriptionFontSize: activeDesign.descriptionFontSize,
+                    showIcon: activeDesign.showIcon, // ✅ Include icon preference
                 };
 
                 const response = await fetch('/api/edge-config', {
@@ -151,11 +152,13 @@ export function OpenGraphCardPage() {
 
                 if (!response.ok) {
                     const errorData = await response.json();
+                    console.error('Edge Config sync failed:', errorData);
                     throw new Error(errorData.error || 'Failed to sync to Edge Config');
                 }
 
-                // Success feedback could go here (toast, etc)
-                console.log('Successfully synced to Edge Config');
+                const result = await response.json();
+                console.log('✅ Successfully synced to Edge Config:', result);
+                console.log('⏱️  Changes may take up to 5 seconds to propagate globally');
             } catch (err: any) {
                 console.error('Failed to sync active design:', err);
                 alert(`Saved locally, but failed to sync to Edge Config: ${err.message}`);
@@ -511,14 +514,13 @@ export default function OGImage() {
                                                 ✓ Active Design: {activeDesign.name}
                                             </p>
                                             <p className="text-xs text-[var(--color-text-muted)]">
-                                                To use this design for your site's OG images:
+                                                Your design is automatically synced to the edge. If you are developing locally without Edge Config, follow these steps:
                                             </p>
                                         </div>
                                         <ol className="text-xs text-[var(--color-text-secondary)] space-y-1 list-decimal list-inside">
                                             <li>Copy the config below</li>
                                             <li>Open <code className="text-[var(--color-primary)] bg-[var(--color-surface)] px-1 py-0.5 rounded text-xs">app/opengraph-image.tsx</code></li>
                                             <li>Replace the <code className="text-[var(--color-primary)] bg-[var(--color-surface)] px-1 py-0.5 rounded text-xs">config</code> object</li>
-                                            <li>Rebuild your app to see changes</li>
                                         </ol>
                                         <Button
                                             variant="outline"

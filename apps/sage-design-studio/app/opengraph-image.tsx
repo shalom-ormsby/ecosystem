@@ -24,8 +24,24 @@ export const contentType = 'image/png';
 
 import { createClient } from '@vercel/edge-config';
 
+interface OGCardConfig {
+    title: string;
+    description: string;
+    variant: 'gradient';
+    gradient: {
+        type: 'linear' | 'radial';
+        angle?: number;
+        position?: string;
+        colors: string[];
+    };
+    titleFontSize: number;
+    descriptionFontSize: number;
+    showIcon?: boolean;
+}
+
 export default async function Image() {
-    let config = {
+    // Default fallback config
+    const defaultConfig: OGCardConfig = {
         title: 'Sage UI',
         description: 'Lovable by Design',
         variant: 'gradient' as const,
@@ -36,19 +52,34 @@ export default async function Image() {
         },
         titleFontSize: 96,
         descriptionFontSize: 42,
+        showIcon: false,
     };
 
-    try {
-        const edgeConfig = createClient(process.env.EDGE_CONFIG);
-        const dynamicConfig = await edgeConfig.get('og_card_config');
+    let config = defaultConfig;
 
-        if (dynamicConfig) {
-            config = { ...config, ...(dynamicConfig as any) };
+    // Attempt to load dynamic config from Edge Config
+    try {
+        if (process.env.EDGE_CONFIG) {
+            const edgeConfig = createClient(process.env.EDGE_CONFIG);
+            const dynamicConfig = await edgeConfig.get<OGCardConfig>('og_card_config');
+
+            if (dynamicConfig) {
+                console.log('[OG Image] Loaded config from Edge Config:', JSON.stringify(dynamicConfig));
+                config = { ...defaultConfig, ...dynamicConfig };
+            } else {
+                console.log('[OG Image] No custom config found in Edge Config, using default');
+            }
+        } else {
+            console.warn('[OG Image] EDGE_CONFIG environment variable not set, using default config');
         }
     } catch (e) {
-        console.error('Failed to load Edge Config:', e);
-        // Fallback to default/hardcoded config
+        console.error('[OG Image] Failed to load Edge Config:', e);
+        console.log('[OG Image] Falling back to default config');
+        // Fallback to default config
     }
+
+    // Determine icon value: undefined (default icon) or null (no icon)
+    const iconValue = config.showIcon === false ? null : undefined;
 
     return new ImageResponse(
         (
@@ -59,7 +90,7 @@ export default async function Image() {
                 gradient={config.gradient}
                 titleFontSize={config.titleFontSize}
                 descriptionFontSize={config.descriptionFontSize}
-                icon={null} // Keep icon null for now or make it dynamic if we store icon preferences
+                icon={iconValue}
             />
         ),
         {
