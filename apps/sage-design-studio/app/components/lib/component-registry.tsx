@@ -3271,7 +3271,7 @@ const [date, setDate] = useState<Date | undefined>(new Date())
 
   OpenGraphCard: {
     component: OpenGraphCard,
-    description: 'A specialized component designed for generating Open Graph images (1200x630px), featuring the Sage branding with ethereal gradients.',
+    description: 'A specialized component designed for generating Open Graph images (1200x630px). Supports custom icons, gradients, and theme color overrides for brand-aligned social media cards.',
     props: {
       title: {
         type: 'text',
@@ -3283,11 +3283,79 @@ const [date, setDate] = useState<Date | undefined>(new Date())
         default: "The Solopreneur's Development Stack",
         description: 'Subtitle or description text',
       },
+      variant: {
+        type: 'select',
+        options: ['primary', 'secondary', 'accent', 'sage', 'emerald', 'gradient'] as const,
+        default: 'sage',
+        description: 'Visual style variant',
+      },
+      icon: {
+        type: 'custom',
+        default: null,
+        description: 'Custom logo, icon, or image element (ReactNode)',
+      },
+      gradient: {
+        type: 'object',
+        default: null,
+        description: 'Custom gradient configuration: { type: "linear" | "radial", angle?: number, position?: string, colors: string[], stops?: number[] }',
+        typeDefinition: 'GradientConfig',
+      },
+      primaryColor: {
+        type: 'text',
+        default: '',
+        description: 'Override primary color (hex value, e.g., "#0066ff")',
+      },
+      secondaryColor: {
+        type: 'text',
+        default: '',
+        description: 'Override secondary color (hex value)',
+      },
+      accentColor: {
+        type: 'text',
+        default: '',
+        description: 'Override accent color (hex value)',
+      },
     },
     examples: [
       {
-        label: 'Default',
-        props: {},
+        label: 'Default (Sage)',
+        props: { variant: 'sage' },
+        children: null,
+      },
+      {
+        label: 'Primary (Black)',
+        props: { variant: 'primary' },
+        children: null,
+      },
+      {
+        label: 'Secondary (Light)',
+        props: { variant: 'secondary' },
+        children: null,
+      },
+      {
+        label: 'Accent (Blue)',
+        props: { variant: 'accent' },
+        children: null,
+      },
+      {
+        label: 'Custom Colors',
+        props: {
+          variant: 'primary',
+          primaryColor: '#6366f1',
+          accentColor: '#ec4899',
+        },
+        children: null,
+      },
+      {
+        label: 'Custom Gradient',
+        props: {
+          variant: 'gradient',
+          gradient: {
+            type: 'linear',
+            angle: 135,
+            colors: ['#667eea', '#764ba2', '#f093fb'],
+          },
+        },
         children: null,
       },
     ],
@@ -3300,6 +3368,70 @@ export default function MyOGImage() {
   return <OpenGraphCard title="My Page" description="A description" />;
 }`,
         description: 'Using the component in an opengraph-image.tsx file',
+      },
+      {
+        title: 'With Custom Icon',
+        code: `import { OpenGraphCard } from '@sage/ui';
+
+export default function MyOGImage() {
+  return (
+    <OpenGraphCard
+      title="My Brand"
+      description="Tagline here"
+      icon={
+        <img
+          src="/logo.png"
+          width={80}
+          height={80}
+          alt="Logo"
+        />
+      }
+    />
+  );
+}`,
+        description: 'Add your custom logo or icon',
+      },
+      {
+        title: 'Custom Gradient',
+        code: `import { OpenGraphCard } from '@sage/ui';
+
+export default function MyOGImage() {
+  return (
+    <OpenGraphCard
+      title="My Page"
+      description="Beautiful gradients"
+      variant="gradient"
+      gradient={{
+        type: 'linear',
+        angle: 135,
+        colors: ['#667eea', '#764ba2', '#f093fb'],
+        stops: [0, 50, 100],
+      }}
+    />
+  );
+}`,
+        description: 'Create custom multi-color gradients',
+      },
+      {
+        title: 'Theme-Aware Colors',
+        code: `import { OpenGraphCard } from '@sage/ui';
+
+// In your app, get theme colors from customizer or theme store
+const themeColors = getActiveThemeColors(); // Your helper function
+
+export default function MyOGImage() {
+  return (
+    <OpenGraphCard
+      title="My Page"
+      description="Uses your active theme colors"
+      variant="primary"
+      primaryColor={themeColors.primary}
+      secondaryColor={themeColors.secondary}
+      accentColor={themeColors.accent}
+    />
+  );
+}`,
+        description: 'Pass theme colors explicitly for brand consistency',
       },
     ],
     sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/blocks/social/OpenGraphCard.tsx',

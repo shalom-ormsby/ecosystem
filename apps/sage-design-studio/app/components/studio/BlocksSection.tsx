@@ -6,6 +6,7 @@ import { Header, SecondaryNav, TertiaryNav, Footer, Modal, ToastProvider, useToa
 import { SlidersHorizontal, Sun, Moon, SunMoon, Building2, Leaf, Zap, X } from 'lucide-react';
 import type { SyntaxToken } from '@sage/ui';
 import { HeroBlockPage } from './pages/blocks/HeroBlockPage';
+import { OpenGraphCardPage } from './pages/blocks/OpenGraphCardPage';
 import { EnhancedComponentPlayground } from './ComponentsSection/EnhancedComponentPlayground';
 import { componentRegistry } from '../lib/component-registry';
 
@@ -794,12 +795,7 @@ const sections = [
         {selectedPattern === 'HeroBlock' && <HeroBlockPage />}
 
         {/* OpenGraphCard Component */}
-        {selectedPattern === 'OpenGraphCard' && componentRegistry['OpenGraphCard'] && (
-          <EnhancedComponentPlayground
-            componentName="OpenGraphCard"
-            config={componentRegistry['OpenGraphCard']}
-          />
-        )}
+        {selectedPattern === 'OpenGraphCard' && <OpenGraphCardPage />}
 
         {/* 2nd Stacking Row Component */}
         {selectedPattern === 'SecondStack' && (
