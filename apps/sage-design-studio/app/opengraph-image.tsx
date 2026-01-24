@@ -111,8 +111,86 @@ function isLightColor(hex: string): boolean {
 export default async function Image() {
     console.log('[OG Image] Starting image generation...');
 
+    // Default fallback config
+    const defaultConfig: OGCardConfig = {
+        title: 'Sage UI',
+        description: 'Lovable by Design',
+        variant: 'gradient' as const,
+        gradient: {
+            type: 'radial' as const,
+            position: 'circle at 50% 0%',
+            colors: ['#a855f7', '#3b0764'], // Purple gradient
+        },
+        titleFontSize: 96,
+        descriptionFontSize: 42,
+        showIcon: false,
+        fontFamily: 'Space Grotesk',
+    };
+
+    let config = defaultConfig;
+
+    // Attempt to load dynamic config from Edge Config
     try {
-        // Simplified test - hardcoded values first to verify rendering works
+        if (process.env.EDGE_CONFIG) {
+            const edgeConfig = createClient(process.env.EDGE_CONFIG);
+            const dynamicConfig = await edgeConfig.get<OGCardConfig>('og_card_config');
+
+            if (dynamicConfig) {
+                console.log('[OG Image] Loaded config from Edge Config:', JSON.stringify(dynamicConfig));
+                config = { ...defaultConfig, ...dynamicConfig };
+            } else {
+                console.log('[OG Image] No custom config found in Edge Config, using default');
+            }
+        } else {
+            console.warn('[OG Image] EDGE_CONFIG environment variable not set, using default config');
+        }
+    } catch (e) {
+        console.error('[OG Image] Failed to load Edge Config:', e);
+        console.log('[OG Image] Falling back to default config');
+    }
+
+    // Load font (with error handling to prevent crashes)
+    const fontFamily = config.fontFamily || 'Space Grotesk';
+    let fontData: ArrayBuffer | null = null;
+    try {
+        fontData = await loadFont(fontFamily);
+        if (fontData) {
+            console.log(`[OG Image] Successfully loaded font: ${fontFamily}`);
+        }
+    } catch (error) {
+        console.error(`[OG Image] Font loading failed for ${fontFamily}, using fallback:`, error);
+    }
+
+    // IMPORTANT: Satori doesn't support CSS gradients
+    // Use solid background color (first color from gradient config)
+    const backgroundColor = config.gradient.colors[0] || '#a855f7';
+
+    // Determine text color based on background luminosity
+    const isLight = isLightColor(backgroundColor);
+    const textColor = isLight ? '#0a0a0a' : '#ffffff';
+
+    // Build fonts array (Satori requires this format)
+    const fonts = fontData
+        ? [
+              {
+                  name: fontFamily,
+                  data: fontData,
+                  style: 'normal' as const,
+                  weight: 400 as const,
+              },
+          ]
+        : [];
+
+    console.log('[OG Image] Rendering with config:', {
+        title: config.title,
+        description: config.description,
+        backgroundColor,
+        textColor,
+        fontFamily,
+        hasFont: !!fontData,
+    });
+
+    try {
         return new ImageResponse(
             (
                 <div
@@ -120,9 +198,11 @@ export default async function Image() {
                         display: 'flex',
                         width: '100%',
                         height: '100%',
-                        backgroundColor: '#a855f7',
+                        backgroundColor,
                         alignItems: 'center',
                         justifyContent: 'center',
+                        padding: '80px',
+                        fontFamily: fontData ? fontFamily : 'sans-serif',
                     }}
                 >
                     <div
@@ -130,26 +210,33 @@ export default async function Image() {
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
+                            textAlign: 'center',
+                            maxWidth: '1000px',
                         }}
                     >
                         <div
                             style={{
-                                fontSize: 96,
+                                fontSize: config.titleFontSize,
                                 fontWeight: 900,
-                                color: 'white',
+                                color: textColor,
+                                marginBottom: 24,
+                                letterSpacing: '-0.04em',
+                                lineHeight: 1.1,
                             }}
                         >
-                            Sage UI
+                            {config.title}
                         </div>
                         <div
                             style={{
-                                fontSize: 42,
+                                fontSize: config.descriptionFontSize,
                                 fontWeight: 500,
-                                color: 'white',
-                                marginTop: 24,
+                                color: textColor,
+                                opacity: 0.9,
+                                letterSpacing: '-0.01em',
+                                lineHeight: 1.4,
                             }}
                         >
-                            Lovable by Design
+                            {config.description}
                         </div>
                     </div>
                 </div>
@@ -157,6 +244,7 @@ export default async function Image() {
             {
                 width: 1200,
                 height: 630,
+                fonts,
             }
         );
     } catch (error) {
