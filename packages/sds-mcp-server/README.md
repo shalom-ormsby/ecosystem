@@ -6,7 +6,7 @@ Enable AI assistants like Claude Desktop, Cursor, and VS Code to browse, search,
 
 ## Features
 
-- 🔍 **Browse all 48 components** across 7 functional categories
+- 🔍 **Browse all 89 components** across 7 core functional categories
 - 🔎 **Semantic search** by keywords, use cases, or functionality
 - 📖 **Detailed component info** including props, dependencies, and examples
 - 📦 **Installation instructions** with all required dependencies
@@ -145,7 +145,7 @@ Once configured, you can interact with the server through your AI assistant:
 
 > "Show me all components in the Sage UI"
 
-The AI will use `list_components` to display all 48 components organized by category.
+The AI will use `list_components` to display all 89 components organized by category.
 
 ### Search for Specific Functionality
 
@@ -180,7 +180,7 @@ The AI will use `install_component` to provide:
 
 The MCP server consists of:
 
-1. **Component Registry** (`src/registry.ts`) - Metadata for all 48 @thesage/ui components
+1. **Component Registry** (`src/registry.ts`) - Metadata for all 89 @thesage/ui components
 2. **MCP Server** (`src/index.ts`) - Model Context Protocol implementation
 3. **Tool Handlers** - Four tools for listing, searching, viewing, and installing
 
@@ -204,7 +204,7 @@ The server runs in stdio mode, communicating via stdin/stdout per the MCP specif
 
 ## Documentation
 
-- **Full Documentation**: https://ui.shalomormsby.com/
+- **Full Documentation**: https://thesage.dev/
 - **GitHub**: https://github.com/shalomormsby/ecosystem
 - **MCP Specification**: https://modelcontextprotocol.io/
 
@@ -212,7 +212,7 @@ The server runs in stdio mode, communicating via stdin/stdout per the MCP specif
 
 For issues or questions:
 - GitHub Issues: https://github.com/shalomormsby/ecosystem/issues
-- Documentation: https://ui.shalomormsby.com/#mcp-server
+- Documentation: https://thesage.dev/#mcp-server
 
 ## License
 
@@ -220,4 +220,4 @@ MIT © Shalom Ormsby
 
 ---
 
-**Part of the [Sage UI](https://ui.shalomormsby.com/) - Build lovable products at AI speed.**
+**Part of the [Sage UI](https://thesage.dev/) - Build lovable products at AI speed.**

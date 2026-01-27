@@ -475,7 +475,7 @@ pnpm typecheck
 pnpm build --filter @thesage/ui  # Regenerate type definitions
 ```
 
-**Full troubleshooting guide:** [The Studio Troubleshooting Guide](https://ui.shalomormsby.com/#adding-components/troubleshooting)
+**Full troubleshooting guide:** [The Studio Troubleshooting Guide](https://thesage.dev/#adding-components/troubleshooting)
 
 ---
 
@@ -494,7 +494,7 @@ pnpm build --filter @thesage/ui  # Regenerate type definitions
 
 **Live Sites:**
 - Portfolio: https://www.shalomormsby.com/
-- Sage Studio: https://ui.shalomormsby.com/
+- Sage Studio: https://thesage.dev/
 - Creative Powerup: https://ecosystem-creative-powerup.vercel.app/
 
 **Development:**

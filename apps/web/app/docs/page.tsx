@@ -22,6 +22,7 @@ import { ChartsSections } from '../components/studio/ChartsSections';
 import { MotionSections } from '../components/studio/MotionSections';
 import { McpSection } from '../components/studio/McpSection';
 import { DragDropPage } from '../components/studio/pages/forms/DragDropPage';
+import { ComponentsDashboard } from '../components/studio/ComponentsDashboard';
 
 type Section =
     | 'overview'
@@ -32,6 +33,7 @@ type Section =
     | 'mcp-server'
     | 'tokens'
     | 'themes'
+    | 'components'
     | 'actions'
     | 'forms'
     | 'navigation'
@@ -86,6 +88,7 @@ const routeConfig: RouteConfig = {
             customizer: { label: 'Customizer' },
         }
     },
+    components: { label: 'Components' },
     // Functional Categories (formerly Atoms)
     actions: {
         label: 'Actions',
@@ -244,7 +247,7 @@ export default function StudioPage() {
 
         const validSections: Section[] = [
             'overview', 'architecture', 'adding-components', 'common-patterns',
-            'contributing', 'mcp-server', 'tokens', 'themes', 'actions', 'forms', 'navigation',
+            'contributing', 'mcp-server', 'tokens', 'themes', 'components', 'actions', 'forms', 'navigation',
             'overlays', 'feedback', 'data-display', 'layout', 'blocks',
             'hooks', 'templates', 'charts', 'motion'
         ];
@@ -390,7 +393,7 @@ export default function StudioPage() {
         // Check if first part matches a known top-level section
         const validSections: Section[] = [
             'overview', 'architecture', 'adding-components', 'common-patterns',
-            'contributing', 'mcp-server', 'tokens', 'themes', 'actions', 'forms', 'navigation',
+            'contributing', 'mcp-server', 'tokens', 'themes', 'components', 'actions', 'forms', 'navigation',
             'overlays', 'feedback', 'data-display', 'layout', 'blocks',
             'hooks', 'templates', 'charts', 'motion'
         ];
@@ -504,6 +507,18 @@ export default function StudioPage() {
                                 activeItemId={activeItemId}
                                 breadcrumbs={breadcrumbs}
                                 onItemChange={(itemId) => setActiveItemId(itemId)}
+                            />
+                        )}
+
+                        {/* Components Dashboard */}
+                        {activeSection === 'components' && (
+                            <ComponentsDashboard
+                                onNavigate={(section, itemId) => {
+                                    setActiveSection(section as Section);
+                                    setActiveItemId(itemId || section);
+                                    setIsNotFound(false);
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }}
                             />
                         )}
 

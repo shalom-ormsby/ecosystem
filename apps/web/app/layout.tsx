@@ -7,11 +7,11 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Sage UI',
   description: 'The Solopreneur\'s Development Stack. AI-Native components for velocity.',
-  metadataBase: new URL('https://ui.shalomormsby.com'),
+  metadataBase: new URL('https://thesage.dev'),
   openGraph: {
     title: 'Sage UI',
     description: 'The Solopreneur\'s Development Stack. AI-Native components for velocity.',
-    url: 'https://ui.shalomormsby.com',
+    url: 'https://thesage.dev',
     siteName: 'Sage UI',
     locale: 'en_US',
     type: 'website',

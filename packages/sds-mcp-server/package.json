@@ -8,7 +8,7 @@
     "url": "https://github.com/shalomormsby/ecosystem.git",
     "directory": "packages/sds-mcp-server"
   },
-  "homepage": "https://ui.shalomormsby.com/#mcp-server",
+  "homepage": "https://thesage.dev/#mcp-server",
   "bugs": "https://github.com/shalomormsby/ecosystem/issues",
   "publishConfig": {
     "access": "public"

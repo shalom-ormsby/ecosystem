@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Breadcrumbs, type BreadcrumbItemLegacy } from '@thesage/ui';
 import { EnhancedComponentPlayground } from './EnhancedComponentPlayground';
+import { CategoryOverview } from './CategoryOverview';
 import { componentRegistry } from '../../lib/component-registry';
 
 interface ComponentsSectionProps {
@@ -127,14 +128,18 @@ export function ComponentsSection({ activeItemId, category, breadcrumbs, onItemC
         )}
       </div>
 
-      {/* Component Playground */}
-
-      {/* Component Playground */}
+      {/* Category Overview or Component Playground */}
       <div className="mt-4">
-        {selectedComponent && componentRegistry[selectedComponent] && (
+        {selectedComponent && componentRegistry[selectedComponent] ? (
           <EnhancedComponentPlayground
             componentName={selectedComponent}
             config={componentRegistry[selectedComponent]}
+          />
+        ) : (
+          <CategoryOverview
+            category={selectedCategory}
+            components={availableComponents}
+            onComponentSelect={handleComponentChange}
           />
         )}
       </div>

@@ -1,6 +1,6 @@
 # Sage Studio
 
-> **Interactive documentation for the Sage UI.** Makes design tokens, components, and design decisions publicly explorable at [ui.shalomormsby.com](https://ui.shalomormsby.com).
+> **Interactive documentation for the Sage UI.** Makes design tokens, components, and design decisions publicly explorable at [thesage.dev](https://thesage.dev).
 
 ## Purpose & Scope
 

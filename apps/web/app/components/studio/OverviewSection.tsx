@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, Button } from '@thesage/ui';
+import { Card, Button, Heading, Text, Badge } from '@thesage/ui';
 import { Code, CollapsibleCodeBlock } from '@thesage/ui';
+import { COMPONENT_COUNTS, COMPONENT_REGISTRY, MARKETING_COPY } from '@thesage/ui';
 import { useTheme } from '@thesage/ui/hooks';
 import {
   Sliders, Building2, Leaf, Zap, Sun, Moon, Laptop, Palette, Bot, BookOpen,
-  Construction, XCircle, CheckCircle, Heart, Search, Sprout, Check
+  Construction, XCircle, CheckCircle, Heart, Search, Sprout, Check, Package,
+  Sparkles, Layers, Code2
 } from 'lucide-react';
 
 // Mini Customizer Demo for Overview
@@ -221,7 +223,135 @@ export function OverviewSection() {
         </div>
       </section>
 
-      {/* 3. PHILOSOPHY IN ACTION */}
+      {/* 3. WHAT'S INCLUDED - HIGH-LEVEL OVERVIEW */}
+      <section id="whats-included" className="border-t border-[var(--color-border)] pt-12">
+        <Heading level={2} className="mb-6 text-center">
+          What's Included
+        </Heading>
+
+        <Text variant="secondary" size="lg" className="max-w-3xl mx-auto text-center mb-12">
+          Everything you need to build beautiful, accessible, user-controlled interfaces
+        </Text>
+
+        {/* Offerings Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Components */}
+          <a href="#components" className="block group">
+            <Card className="p-6 h-full transition-all duration-200 hover:border-[var(--color-primary)] hover:shadow-md">
+              <div className="flex items-center gap-3 mb-3">
+                <Package className="w-6 h-6 text-[var(--color-primary)]" />
+                <Badge variant="secondary">{COMPONENT_COUNTS.total} Components</Badge>
+              </div>
+              <Heading level={3} className="text-lg mb-2 group-hover:text-[var(--color-primary)] transition-colors">
+                Component Library
+              </Heading>
+              <Text variant="secondary" size="sm" className="mb-4">
+                {Object.keys(COMPONENT_REGISTRY.coreCategories).length} functional categories covering actions, forms, navigation, overlays, feedback, data display, and layout.
+              </Text>
+              <Text variant="primary" size="sm" className="font-medium">
+                Explore Components →
+              </Text>
+            </Card>
+          </a>
+
+          {/* Themes */}
+          <a href="#themes" className="block group">
+            <Card className="p-6 h-full transition-all duration-200 hover:border-[var(--color-primary)] hover:shadow-md">
+              <div className="flex items-center gap-3 mb-3">
+                <Sparkles className="w-6 h-6 text-[var(--color-primary)]" />
+                <Badge variant="secondary">3 Themes</Badge>
+              </div>
+              <Heading level={3} className="text-lg mb-2 group-hover:text-[var(--color-primary)] transition-colors">
+                Themes
+              </Heading>
+              <Text variant="secondary" size="sm" className="mb-4">
+                Studio, Sage, and Volt themes with light and dark modes. Each with unique personality and complete token systems.
+              </Text>
+              <Text variant="primary" size="sm" className="font-medium">
+                Explore Themes →
+              </Text>
+            </Card>
+          </a>
+
+          {/* Motion System */}
+          <a href="#motion" className="block group">
+            <Card className="p-6 h-full transition-all duration-200 hover:border-[var(--color-primary)] hover:shadow-md">
+              <div className="flex items-center gap-3 mb-3">
+                <Zap className="w-6 h-6 text-[var(--color-primary)]" />
+                <Badge variant="secondary">Motion System</Badge>
+              </div>
+              <Heading level={3} className="text-lg mb-2 group-hover:text-[var(--color-primary)] transition-colors">
+                User-Controlled Motion
+              </Heading>
+              <Text variant="secondary" size="sm" className="mb-4">
+                0-10 intensity scale respecting prefers-reduced-motion. Text effects, backgrounds, cursors, and micro-interactions.
+              </Text>
+              <Text variant="primary" size="sm" className="font-medium">
+                Explore Motion →
+              </Text>
+            </Card>
+          </a>
+
+          {/* Blocks */}
+          <a href="#blocks" className="block group">
+            <Card className="p-6 h-full transition-all duration-200 hover:border-[var(--color-primary)] hover:shadow-md">
+              <div className="flex items-center gap-3 mb-3">
+                <Layers className="w-6 h-6 text-[var(--color-primary)]" />
+                <Badge variant="secondary">Blocks</Badge>
+              </div>
+              <Heading level={3} className="text-lg mb-2 group-hover:text-[var(--color-primary)] transition-colors">
+                Composed Blocks
+              </Heading>
+              <Text variant="secondary" size="sm" className="mb-4">
+                Pre-built page sections like Hero, OpenGraph cards, code blocks, and navigation patterns.
+              </Text>
+              <Text variant="primary" size="sm" className="font-medium">
+                View Blocks →
+              </Text>
+            </Card>
+          </a>
+
+          {/* Hooks */}
+          <a href="#hooks" className="block group">
+            <Card className="p-6 h-full transition-all duration-200 hover:border-[var(--color-primary)] hover:shadow-md">
+              <div className="flex items-center gap-3 mb-3">
+                <Code2 className="w-6 h-6 text-[var(--color-primary)]" />
+                <Badge variant="secondary">React Hooks</Badge>
+              </div>
+              <Heading level={3} className="text-lg mb-2 group-hover:text-[var(--color-primary)] transition-colors">
+                Hooks & Utilities
+              </Heading>
+              <Text variant="secondary" size="sm" className="mb-4">
+                useTheme, useMotionPreference, useForm, and more. Complete utilities for theme and motion control.
+              </Text>
+              <Text variant="primary" size="sm" className="font-medium">
+                View Hooks →
+              </Text>
+            </Card>
+          </a>
+
+          {/* MCP Server */}
+          <a href="#mcp-server" className="block group">
+            <Card className="p-6 h-full transition-all duration-200 hover:border-[var(--color-primary)] hover:shadow-md">
+              <div className="flex items-center gap-3 mb-3">
+                <Bot className="w-6 h-6 text-[var(--color-primary)]" />
+                <Badge variant="secondary">AI-Native</Badge>
+              </div>
+              <Heading level={3} className="text-lg mb-2 group-hover:text-[var(--color-primary)] transition-colors">
+                MCP Server
+              </Heading>
+              <Text variant="secondary" size="sm" className="mb-4">
+                AI-powered component discovery and code generation for Claude Desktop, Cursor, and compatible editors.
+              </Text>
+              <Text variant="primary" size="sm" className="font-medium">
+                Setup MCP →
+              </Text>
+            </Card>
+          </a>
+        </div>
+      </section>
+
+      {/* 4. PHILOSOPHY IN ACTION */}
       <section id="philosophy" className="border-t border-[var(--color-border)] pt-12">
         <h2 className="text-3xl font-bold mb-6 text-[var(--color-text-primary)] text-center">
           Philosophy in Action
@@ -877,6 +1007,40 @@ import { Button, Text } from '@thesage/ui';
           Get Started in 5 Minutes
         </h2>
 
+        {/* Prerequisites */}
+        <Card className="p-6 mb-6 bg-[var(--color-surface)]/50">
+          <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
+            <CheckCircle className="w-5 h-5 text-[var(--color-primary)]" />
+            Prerequisites
+          </h3>
+          <div className="space-y-4 text-sm text-[var(--color-text-secondary)]">
+            <div>
+              <h4 className="font-semibold text-[var(--color-text-primary)] mb-2">System Requirements</h4>
+              <ul className="list-disc list-inside space-y-1 ml-2">
+                <li>Node.js 18.0.0 or later</li>
+                <li>Package Manager: pnpm 8.15.0+ (or npm 9+, yarn 3+)</li>
+                <li>React 18.0.0 or later (React 19 supported)</li>
+                <li>Tailwind CSS 3.0.0 or later</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-[var(--color-text-primary)] mb-2">Compatible Frameworks</h4>
+              <p className="mb-2">Sage UI works with:</p>
+              <ul className="list-disc list-inside space-y-1 ml-2">
+                <li>Next.js 14+ (App Router or Pages Router)</li>
+                <li>Vite 5+</li>
+                <li>Remix 2+</li>
+                <li>Create React App (with Tailwind)</li>
+                <li>Any React framework with Tailwind CSS support</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-[var(--color-text-primary)] mb-2">TypeScript (Optional)</h4>
+              <p>TypeScript 5.0+ for full type support. All components include TypeScript definitions.</p>
+            </div>
+          </div>
+        </Card>
+
         <div className="space-y-6">
           {/* Step 1: Installation */}
           <Card className="p-6">
@@ -886,15 +1050,18 @@ import { Button, Text } from '@thesage/ui';
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">
-                  Install the package
+                  Install dependencies
                 </h3>
+                <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                  Sage UI requires React and Framer Motion as peer dependencies:
+                </p>
                 <CollapsibleCodeBlock
                   id="installation"
-                  code={`pnpm add @thesage/ui
+                  code={`pnpm add react framer-motion @thesage/ui
 # or
-npm install @thesage/ui
+npm install react framer-motion @thesage/ui
 # or
-yarn add @thesage/ui`}
+yarn add react framer-motion @thesage/ui`}
                   defaultCollapsed={false}
                   showCopy={true}
                 />
@@ -902,11 +1069,48 @@ yarn add @thesage/ui`}
             </div>
           </Card>
 
-          {/* Step 2: Basic Usage */}
+          {/* Step 2: Configure Tailwind CSS */}
           <Card className="p-6">
             <div className="flex items-start gap-4 mb-3">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] font-bold flex-shrink-0">
                 2
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">
+                  Configure Tailwind CSS
+                </h3>
+                <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                  Add Sage UI to your Tailwind content paths:
+                </p>
+                <CollapsibleCodeBlock
+                  id="tailwind-config"
+                  code={`// tailwind.config.ts
+import type { Config } from 'tailwindcss';
+
+export default {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@thesage/ui/**/*.{js,ts,jsx,tsx}', // Add this line
+  ],
+  // ... rest of your config
+} satisfies Config;`}
+                  defaultCollapsed={false}
+                  showCopy={true}
+                />
+                <p className="text-xs text-[var(--color-text-muted)] mt-3">
+                  <strong>Note:</strong> Sage UI uses CSS custom properties for theming. No additional Tailwind configuration required—themes are injected at runtime by the ThemeProvider.
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          {/* Step 3: Import and use components */}
+          <Card className="p-6">
+            <div className="flex items-start gap-4 mb-3">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] font-bold flex-shrink-0">
+                3
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">
@@ -934,11 +1138,11 @@ export function MyComponent() {
             </div>
           </Card>
 
-          {/* Step 3: Add Theme Provider */}
+          {/* Step 4: Add Theme Provider */}
           <Card className="p-6">
             <div className="flex items-start gap-4 mb-3">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] font-bold flex-shrink-0">
-                3
+                4
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">
@@ -962,11 +1166,11 @@ export default function App({ children }) {
             </div>
           </Card>
 
-          {/* Step 4: Use Hooks */}
+          {/* Step 5: Use Hooks */}
           <Card className="p-6">
             <div className="flex items-start gap-4 mb-3">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] font-bold flex-shrink-0">
-                4
+                5
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">

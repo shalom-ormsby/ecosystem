@@ -202,7 +202,7 @@ function formatComponentDetails(component: ComponentMetadata): string {
   output += `\`\`\`typescript\nimport { ${component.name} } from '@thesage/ui';\n\`\`\`\n\n`;
 
   output += `## Documentation\n`;
-  output += `View full documentation at: https://ui.shalomormsby.com/#${component.category}/${component.name.toLowerCase().replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}\n`;
+  output += `View full documentation at: https://thesage.dev/#${component.category}/${component.name.toLowerCase().replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}\n`;
 
   return output;
 }
@@ -243,7 +243,7 @@ function formatInstallationInstructions(component: ComponentMetadata): string {
   output += `\`\`\`\n\n`;
 
   output += `## Additional Resources\n\n`;
-  output += `- **Documentation:** https://ui.shalomormsby.com/#${component.category}/${component.name.toLowerCase().replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}\n`;
+  output += `- **Documentation:** https://thesage.dev/#${component.category}/${component.name.toLowerCase().replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}\n`;
   output += `- **GitHub:** https://github.com/shalomormsby/ecosystem/tree/main/packages/ui/src/components/${component.category}\n`;
 
   return output;

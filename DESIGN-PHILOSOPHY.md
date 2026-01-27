@@ -63,6 +63,9 @@ These are tactical tests, practical checkpoints to verify you're honoring the pr
     
 2. **No vaporware**
     If a feature is mentioned, it must function. Honesty over hype. Always.
+
+3. **Iconography Consistency**
+    Use **Lucide React** icons for all UI elements. Do not use emojis for functional or decorative UI elements unless it's user-generated content or specifically illustrative text. Emojis break the visual design system and feel unprofessional in a tool context.
     
 ### Transparency Practices
 

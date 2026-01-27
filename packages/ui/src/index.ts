@@ -137,6 +137,9 @@ export * from './lib/syntax-parser';
 // Tokens (selective re-exports)
 export { typographySystem } from '@thesage/tokens';
 
+// Component Registry (metadata)
+export * from './component-registry';
+
 // ============================================================================
 // OPTIONAL CATEGORY-BASED EXPORTS (Future Use)
 // ============================================================================

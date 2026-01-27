@@ -12,7 +12,7 @@
         "url": "https://github.com/shalomormsby/ecosystem.git",
         "directory": "packages/ui"
     },
-    "homepage": "https://ui.shalomormsby.com",
+    "homepage": "https://thesage.dev",
     "bugs": "https://github.com/shalomormsby/ecosystem/issues",
     "publishConfig": {
         "access": "public"

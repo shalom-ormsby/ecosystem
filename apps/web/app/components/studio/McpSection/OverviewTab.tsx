@@ -45,7 +45,7 @@ export function OverviewTab() {
                             <div>
                                 <h3 className="font-semibold text-[var(--color-text-primary)] mb-1">Instant Access</h3>
                                 <p className="text-sm text-[var(--color-text-secondary)]">
-                                    All 48 components across 7 categories instantly accessible to your AI coding assistant
+                                    All 89 components across 7 core categories instantly accessible to your AI coding assistant
                                 </p>
                             </div>
                         </div>

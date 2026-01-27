@@ -93,10 +93,12 @@ export const navigationTree: NavigationItem[] = [
     id: 'components',
     label: 'Components',
     icon: <Component className="w-4 h-4" />,
+    section: 'components',
     children: [
       {
         id: 'actions',
         label: 'Actions',
+        section: 'actions',
         children: [
           { id: 'button', label: 'Button', section: 'actions' },
           { id: 'toggle', label: 'Toggle', section: 'actions' },
@@ -106,6 +108,7 @@ export const navigationTree: NavigationItem[] = [
       {
         id: 'forms',
         label: 'Forms',
+        section: 'forms',
         children: [
           { id: 'checkbox', label: 'Checkbox', section: 'forms' },
           { id: 'combobox', label: 'Combobox', section: 'forms' },
@@ -124,6 +127,7 @@ export const navigationTree: NavigationItem[] = [
       {
         id: 'navigation',
         label: 'Navigation',
+        section: 'navigation',
         children: [
           { id: 'breadcrumb', label: 'Breadcrumb', section: 'navigation' },
           { id: 'command', label: 'Command', section: 'navigation' },
@@ -136,6 +140,7 @@ export const navigationTree: NavigationItem[] = [
       {
         id: 'overlays',
         label: 'Overlays',
+        section: 'overlays',
         children: [
           { id: 'alert-dialog', label: 'Alert Dialog', section: 'overlays' },
           { id: 'context-menu', label: 'Context Menu', section: 'overlays' },
@@ -151,6 +156,7 @@ export const navigationTree: NavigationItem[] = [
       {
         id: 'feedback',
         label: 'Feedback',
+        section: 'feedback',
         children: [
           { id: 'alert', label: 'Alert', section: 'feedback' },
           { id: 'progress', label: 'Progress', section: 'feedback' },
@@ -162,6 +168,7 @@ export const navigationTree: NavigationItem[] = [
       {
         id: 'data-display',
         label: 'Data Display',
+        section: 'data-display',
         children: [
           { id: 'avatar', label: 'Avatar', section: 'data-display' },
           { id: 'badge', label: 'Badge', section: 'data-display' },
@@ -175,6 +182,7 @@ export const navigationTree: NavigationItem[] = [
       {
         id: 'layout',
         label: 'Layout',
+        section: 'layout',
         children: [
           { id: 'accordion', label: 'Accordion', section: 'layout' },
           { id: 'aspect-ratio', label: 'Aspect Ratio', section: 'layout' },
