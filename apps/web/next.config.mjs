@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@ecosystem/design-system', '@thesage/ui'],
+  transpilePackages: ['@thesage/ui'],
   async headers() {
     return [
       {
