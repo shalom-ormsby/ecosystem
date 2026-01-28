@@ -1225,3 +1225,45 @@ This approach minimizes risk, maximizes learning, and aligns with agile principl
 ## ✅ Completed Projects
 
 *(No top-level projects fully completed yet. See components within active projects above.)*
+
+---
+
+## 🛠️ Performance Optimization & Dependency Reduction
+**Date Added:** 2026-01-28
+**Priority:** High
+**Status:** Planned
+
+### Objective
+Reduce the installation footprint of `@thesage/ui` by moving heavy libraries to `peerDependencies` and exploring specialized "batteries-included" replacements for external dependencies.
+
+### Motivation
+With 47 dependencies, `@thesage/ui` is risking "dependency hell" for consumers and slow install times. We want to align with industry best practices (like Shadcn/UI, Mantine, Chakra) where the core package is lightweight and consumers control their own versions of heavy libraries (React, Framer Motion, etc.).
+
+### Task Checklist
+
+#### 1. Move to Peer Dependencies
+Move the following heavy libraries from `dependencies` to `peerDependencies` + `devDependencies`:
+- [ ] `lucide-react` (Icons)
+- [ ] `date-fns` (Date logic)
+- [ ] `react-day-picker` (Calendar)
+- [ ] `zod` (Validation)
+- [ ] `react-hook-form` (Forms)
+- [ ] `@tanstack/react-table` (Tables)
+- [ ] `embla-carousel-react` (Carousel)
+- [ ] `ogl` (WebGL)
+- [ ] `sonner` (Toast)
+- [ ] `vaul` (Drawer)
+- [ ] `cmdk` (Command)
+
+#### 2. Documentation Updates
+- [ ] Update README to list required peer dependencies.
+- [ ] Create a "Getting Started" guide that includes the installation command for peers.
+
+#### 3. "Batteries Included" Strategy (Brainstorming)
+*Prompt: Think about how to reduce dependencies by replacing external dependencies with a "Batteries included" offering for @thesage.*
+
+**Ideas to Explore:**
+- **Zero-Dep Icons**: Can we ship a trimmed `@thesage/icons` package instead of requiring full `lucide-react`?
+- **Native Date Handling**: Can we replace simple `date-fns` usage with native `Intl.DateTimeFormat` for 90% of cases?
+- **Lightweight Carousel**: Can we build a CSS-scroll-snap based carousel instead of wrapping Embla?
+- **Internal Primitives**: Should we fork/internalize small utilities like `vaul` or `sonner` if we only use 10% of their features?

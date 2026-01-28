@@ -224,7 +224,7 @@ export function McpOverview({ onNavigate }: McpOverviewProps) {
               View the complete README and API documentation
             </Text>
             <a
-              href="https://github.com/shalomormsby/ecosystem/tree/main/packages/sds-mcp-server"
+              href="https://github.com/shalomormsby/ecosystem/tree/main/packages/mcp"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-[var(--color-primary)] hover:underline"

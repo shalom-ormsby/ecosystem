@@ -47,7 +47,8 @@
             "types": "./dist/providers.d.ts",
             "import": "./dist/providers.mjs",
             "require": "./dist/providers.js"
-        }
+        },
+        "./globals.css": "./src/globals.css"
     },
     "scripts": {
         "build": "tsup src/index.ts src/tokens.ts src/hooks.ts src/utils.ts src/providers.ts --format esm,cjs --dts",
