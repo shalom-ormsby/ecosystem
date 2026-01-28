@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.1
+
+### Patch Changes
+
+- Updated dependencies [76a383b]
+  - @thesage/ui@0.0.10
+  - @thesage/tokens@0.0.2
+  - @thesage/hooks@0.1.1
+  - @thesage/charts@0.1.1
+  - @thesage/core@0.0.1
+
 All notable changes to Sage UI will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
@@ -7,19 +18,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-
 ### Added - Open Graph System (2026-01-23)
+
 - **OpenGraphCard** component (`@thesage/ui`) designed for generating consistent, high-quality social preview images via `next/og`.
 - **Dynamic OG Image**: Implemented `apps/web/app/opengraph-image.tsx` using the new component.
 
 ### Fixed - Motion System & Visuals (2026-01-22)
 
 #### Motion System Standardization
+
 - **Root Cause**: Inconsistent application of `useMotionPreference` scaling logic led to varying animation speeds across components.
 - **Solution**: Standardized all components (SageHero, Typewriter, Magnetic, etc.) to use the inverse scaling formula `duration * (5 / scale)`, ensuring that higher scale values consistently result in faster animations.
 - **Impact**: Uniform motion across the entire application, respecting user accessibility preferences.
 
 #### OrbBackground Overhaul
+
 - **Visual Upgrade**: Replaced the original noise-based blob implementation with a high-fidelity "Reactbits" style Orb.
   - **Features**: Realistic 3D transparent bubble look, multi-color gradient mixing, and dynamic hue rotation.
 - **Interaction Logic**:
@@ -30,18 +43,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Hero Integration**: Increased `HeroBlock` height to `90vh` to fully showcase the new visual.
 
 #### Typewriter Stability
+
 - **Fix**: Resolved an issue where the `Typewriter` component would fail to start typing due to a stale valid check on the initial delay.
 - **Refactor**: Rewrote the component to use a robust `useEffect` loop with clear state phases (waiting, typing, deleting) instead of a fragile `useRef` state machine.
 
 ### Fixed - Motion System Standardization (2026-01-22)
 
 #### Root Cause
+
 - **Inconsistent Animation Scaling**: The `useMotionPreference` hook's scaling logic was incorrectly implemented in some documentation examples and components.
   - Previous logic: `duration * (scale / 10)` (Faster scale resulted in slower/longer duration)
   - Correct logic: `duration * (5 / scale)` (Faster scale results in shorter duration)
 - **Broken Documentation Examples**: Several documentation components (`MotionFoundationsSection`, `MotionTab`, `LayerVisualization`) were using hardcoded logic or ignoring the `scale` preference entirely.
 
 #### Solution
+
 - **Standardized Scaling Formula**: Updated all instances of duration calculation to use the inverse scaling formula: `duration * (5 / scale)`.
   - Scale 5 (Default) → 1x duration
   - Scale 10 (Fastest) → 0.5x duration
@@ -54,6 +70,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Cleanup**: Deleted legacy file `PrimitivesSectionOld.tsx` to prevent confusion.
 
 #### Result
+
 - ✅ Motion scaling now works intuitively: Higher scale = Faster animation.
 - ✅ All documentation examples match the actual implementation.
 - ✅ Landing page visualizations respect user preferences.
@@ -61,6 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed - Motion Primitives Animations (2026-01-22)
 
 #### Root Cause
+
 - **Framer Motion animations were not auto-playing** on the Motion Primitives page (`#motion/primitives`)
 - Three critical issues prevented animations from running:
   1. **Hydration Mismatch**: Animations attempted to run during server-side rendering, causing React hydration errors
@@ -68,6 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   3. **Content Security Policy**: CSP blocked framer-motion's internal code evaluation with `'unsafe-eval'` restriction
 
 #### Solution
+
 - **Client-Side Animation Guard**: Added `isMounted` state flag to prevent animations during SSR
   - Animations only activate after `useEffect` confirms client-side hydration
   - All `animate` props wrapped with `isMounted ? { ... } : undefined` check
@@ -82,6 +101,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Suppression is safe as these attributes don't affect app functionality
 
 #### Result
+
 - ✅ All showcase animations now auto-play on page load
 - ✅ Progress bars animate at correct durations (instant, fast, normal, slow, slower)
 - ✅ Easing demonstrations loop continuously with 2-second pauses
@@ -91,6 +111,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed - Themes & Navigation Architecture (2026-01-21)
 
 #### Major Architectural Elevation: "Themes"
+
 - **New Top-Level Section**: Elevated "Themes" to a primary navigation item in the Studio sidebar.
   - **Why**: Creates a clear separation between **Design Tokens** (Definitions/Vocabulary) and **Themes** (Configuration/Dialect).
   - **Structure**:
@@ -100,6 +121,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - **Components**: Functional categories.
 
 #### Navigation & Routing
+
 - **New `ThemesSection`**: Created a dedicated routing container (`#themes`) to house theme-related tools.
 - **Route Updates**:
   - `#themes/palettes`: Moved from Design Tokens section.
@@ -107,8 +129,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Updated `navigation-tree.tsx`**: Reflected the new hierarchy in the sidebar configuration.
 
 #### Component Relocations
+
 - **Palettes**: Moved `PalettesTab` from `TokensSection` to `ThemesSection`.
-- **Customizer**: 
+- **Customizer**:
   - Moved from a nested "block" example in `BlocksSection` to a first-class tool in `ThemesSection`.
   - Refactored from a floating panel demo to a full-page `CustomizerTab` dashboard.
   - Removed deprecated demo components (`CustomizerDemoFull`, `CustomizerDemoLightweight`) to clean up the codebase.
@@ -116,6 +139,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed - Colors Tab Overhaul (2026-01-21)
 
 #### Unified Color Experience
+
 - **Inspector Mode**: Transformed the Colors tab (`#tokens/colors`) into a context-aware inspector for the active palette.
 - **Active Palette Context**: Now displays the name and description of the currently applied palette (e.g., "Midnight Sapphire") instead of generic controls.
 - **Generated Scale Visualization**: Added a new section showing the automatically generated 50-900 color scale for the primary color, revealing how the Color Engine derives shades.
@@ -125,6 +149,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added - Interaction System & Token Refactor (2026-01-21)
 
 #### Systematic Interaction Layer ("State Layers")
+
 - **New Interaction Tokens**: Added to `@thesage/tokens` and `globals.css`
   - `hover`: Overlay color and opacity (0.08)
   - `active`: Scale transform (0.98)
@@ -138,11 +163,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Supports `prefers-reduced-motion`
 
 #### Component Updates
+
 - **Button**: Refactored to use `.sage-interactive`, removing bespoke hover styles.
 - **Sidebar**: Updated `SidebarItem` to use the standardized interaction layer.
 - **PalettesTab**: Refactored `Reset` and `Apply` feature buttons to use the new system.
 
 #### Documentation
+
 - **New `InteractionsTab`**: Added to Design Tokens section (`#tokens/interactions`)
   - Application methodology for "State Layers"
   - Live demos for Button states, Custom Elements, Active Scale, Focus Rings, and Disabled states
@@ -153,6 +180,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Indexed "Code Block" and "Interactions" in the command palette
 
 #### Fixes
+
 - **CollapsibleCodeBlock**:
   - Registered component in `search-index.ts` (now searchable as "Code Block")
   - Fixed documentation to use this component for high-contrast code display
@@ -162,6 +190,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added - Drag & Drop Component (2026-01-21)
 
 #### DragDropList Component
+
 - **New `@thesage/ui/components/forms/DragDrop.tsx`**: Full-featured drag-and-drop functionality
   - **DragDropList**: Sortable list with drag-and-drop reordering
   - **DragDropTable**: Sortable table rows with drag handles
@@ -176,6 +205,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Dependencies**: Added `@dnd-kit/core`, `@dnd-kit/sortable`, `@dnd-kit/utilities`
 
 #### Interactive Documentation
+
 - **New `apps/web/app/components/studio/pages/forms/DragDropPage.tsx`**: Comprehensive examples
   - **Example 1**: Simple drag & drop list with status badges
   - **Example 2**: List with drag handle + interactive delete buttons
@@ -189,6 +219,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added - Dynamic Color Customization System (2026-01-20)
 
 #### Curated Color Palette Library
+
 - **New `@thesage/tokens/color-palettes.ts`**: Created 21 professionally curated color palettes across 7 categories
   - **Professional** (5 palettes): Midnight Sapphire, Forest Executive, Burgundy Trust, Slate Corporate, Navy Prestige
   - **Creative** (3 palettes): Coral Sunset, Teal Wave, Purple Dream
@@ -205,6 +236,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Semantic categorization for easy discovery
 
 #### Advanced Color Engine
+
 - **New `@thesage/tokens/color-utils.ts`**: Standalone color transformation utilities
   - `hexToHSL()` / `hslToHex()`: Bidirectional color space conversion
   - `adjustLightness()`: Perceptually uniform tint/shade generation
@@ -218,6 +250,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Integrated with existing color utilities for seamless token generation
 
 #### Token Dependency Graph ("Change Once, Ripple Everywhere")
+
 - **New `@thesage/tokens/token-graph.ts`**: Explicit dependency mapping system
   - Maps 15+ CSS variables that automatically derive from `--color-primary`
   - **UI Tokens**: `--color-link`, `--color-link-hover`, `--color-ring`, `--color-accent`
@@ -232,6 +265,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Architecture Benefit**: Single source of truth ensures design consistency
 
 #### Enhanced Customizer System
+
 - **Completely Rewritten `@thesage/ui/lib/store/customizer.ts`**: Extended Zustand store
   - **Per-Theme, Per-Mode Storage**: `customColors[theme][mode]` nested structure
   - **ColorPalette Interface**: Complete palette object with:
@@ -253,6 +287,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `getActiveColorPalette(theme, mode)`: Retrieves current custom palette
 
 #### Smart Theme Provider Integration
+
 - **Enhanced `@thesage/ui/providers/ThemeProvider.tsx`**: Non-destructive token merging
   - `mergeCustomColorTokens()`: Overlays custom palette onto base theme tokens
   - **Merge Strategy**:
@@ -266,6 +301,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Reactive**: Automatically responds to theme/mode/palette changes
 
 #### New ColorPicker Component
+
 - **New `@thesage/ui/components/forms/ColorPicker.tsx`**: Interactive color selection UI
   - **Dual Input Methods**:
     - Visual color picker (native `<input type="color">`)
@@ -280,6 +316,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Exported from `@thesage/ui`**: Available as `import { ColorPicker } from '@thesage/ui'`
 
 #### PalettesTab in Design Tokens
+
 - **New `apps/web/app/components/studio/TokensSection/PalettesTab.tsx`**: Interactive palette browser
   - **Category Filter Buttons**: 7 categories with icons (Briefcase, Palette, Leaf, Zap, Minimize, Code, Flame)
   - **Accessibility Toggle**: "Show only WCAG AA compliant" filter
@@ -296,6 +333,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Registered in TokensSection**: Added to tab navigation alongside Colors, Typography, Spacing, etc.
 
 #### Customizer Panel Enhancements
+
 - **Updated `@thesage/ui/components/layout/CustomizerPanel.tsx`**: Added primary color customization
   - **New Section**: "Primary Color" with Palette icon
   - **ColorPicker Integration**: Visual picker + hex input
@@ -311,6 +349,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     5. Reset button restores default theme colors
 
 #### Package Dependencies
+
 - **Fixed `apps/web/package.json`**: Added missing `@thesage/tokens` dependency
   - **Error**: Vercel build failing with "Cannot find module '@thesage/tokens'"
   - **Root Cause**: PalettesTab imports from @thesage/tokens but dependency wasn't declared
@@ -320,18 +359,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 #### Token Architecture
+
 - **Separated Color Utilities**: Moved color transformation functions from @thesage/ui to @thesage/tokens
   - **Why**: Prevents circular dependency (@thesage/tokens depends on @thesage/ui for utils, @thesage/ui depends on @thesage/tokens for tokens)
   - **Solution**: Created standalone `color-utils.ts` in @thesage/tokens package
   - **Impact**: Clean dependency graph, faster builds, better code organization
 
 #### Customizer Store Schema
+
 - **Version Migration**: Bumped Zustand persist version from v1 to v2
   - **New Fields**: `customizationMode`, `customColors` nested structure
   - **Backward Compatibility**: Old localStorage data automatically migrated
   - **Storage Key**: `ecosystem-customizer` (shared across themes)
 
 #### ThemeProvider Behavior
+
 - **Non-Destructive Theming**: Custom colors overlay base theme without replacement
   - **Before**: Would need to replace entire theme object
   - **After**: Merges only changed tokens, preserves theme personality
@@ -340,7 +382,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 #### Build Errors
+
 - **Circular Dependency Resolution**:
+
   - **Error**: `@thesage/tokens` build failing when importing from `@thesage/ui/utils`
   - **Fix**: Created `@thesage/tokens/color-utils.ts` with standalone utilities
   - **Verification**: `pnpm build --filter @thesage/tokens` successful (47.46 KB)
@@ -353,17 +397,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Technical Details
 
 #### Architecture Decisions
+
 1. **HSL Color Space**: Chosen over RGB for perceptually uniform transformations
+
    - Lightness adjustments produce consistent visual weight changes
    - Saturation control enables harmonic color variations
    - Hue rotation enables complementary/analogous color generation
 
 2. **Token Dependency Graph**: Explicit over implicit derivations
+
    - Each derived token has documented transform function
    - Enables future UI for "which tokens will change if I change primary?"
    - Supports different derivation rules for light vs dark mode
 
 3. **Zustand Over Context**: State management choice
+
    - Built-in persistence middleware (localStorage)
    - Better performance (selective re-renders)
    - DevTools integration
@@ -375,6 +423,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
    - Supports partial customization (only primary, or primary + secondary)
 
 #### Files Created
+
 - `packages/tokens/src/color-palettes.ts` (428 lines) - 21 curated palettes
 - `packages/tokens/src/color-utils.ts` (187 lines) - Standalone color utilities
 - `packages/tokens/src/token-graph.ts` (156 lines) - Dependency graph system
@@ -382,6 +431,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `apps/web/app/components/studio/TokensSection/PalettesTab.tsx` (267 lines) - Palette browser
 
 #### Files Modified
+
 - `packages/ui/src/lib/colors.ts` - Added HSL transformation functions
 - `packages/ui/src/lib/store/customizer.ts` - Completely rewritten for color customization
 - `packages/ui/src/providers/ThemeProvider.tsx` - Added smart token merging
@@ -392,6 +442,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `apps/web/package.json` - Added @thesage/tokens dependency
 
 #### Commits
+
 - `e6a5d98` - fix(web): Add missing @thesage/tokens dependency for Vercel build
 
 ### Benefits
@@ -442,6 +493,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added - Charts Experience (2026-01-20)
 
 #### Interactive Chart Previews
+
 - **New `ChartPreview` Component**: Encapsulated all chart examples (Bar, Line, Area, Pie) in a standardized preview container.
 - **"View Code" Functionality**:
   - Users can now toggle source code visibility for each chart.
@@ -449,6 +501,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Provides copy-paste ready code snippets for quick implementation.
 
 #### Visual Enhancements
+
 - **Charts Overview**: Added mini, non-interactive chart visualizations to the category cards for better "glanceability".
 - **Pie Chart**: Corrected animation direction to open clockwise (`endAngle={-270}`).
 - **Line Chart**: Fixed visibility issue by correcting CSS variable resolution in `chartConfig` (removed invalid `hsl()` wrapper around hex variables).
@@ -456,6 +509,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added - Motion Component Migration (2026-01-17)
 
 #### Motion Library Integration (@thesage/ui)
+
 - **Migrated Motion Components** from Studio examples to `@thesage/ui` package:
   - `SplashCursor`: WebGL fluid simulation cursor
   - `TargetCursor`: Precise custom cursor with hover states
@@ -466,6 +520,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - This dual strategy supports both convenient direct imports and semantic grouping.
 
 #### Studio Updates
+
 - **Refactored Motion Pages**:
   - `CursorsSection.tsx`: Updated to use library components
   - `SplashCursorPage.tsx`: Updated to use library components
@@ -473,6 +528,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Preserved existing functionality while leveraging the shared library source of truth.
 
 ### Changed - Motion Primitives Revamp (2026-01-18)
+
 - **Unified Motion Primitives Dashboard**:
   - Replaced separate Duration and Easing pages with a single, interactive **Primitives** playground.
   - **Interactive Controls**: Added real-time controls for Duration, Easing, Animation Property (Fade, Scale, Slide, Rotate), Looping, and Scale Factor.
@@ -484,6 +540,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Mobile Responsiveness**: Optimized layout for mobile devices with stacked controls and preview.
 
 ### Added - Motion Components (2026-01-18)
+
 - **Typewriter Component**:
   - Implementation of character-by-character text reveal effect using `framer-motion` staggering.
   - Supports configurable speed, start delay, cursor character, and blinking cursor animation.
@@ -494,6 +551,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added documentation playground page demonstrating button and icon interaction patterns.
 
 ### Fixed - Variable Weight Animation
+
 - **Fixed `VariableWeightText` animation**:
   - Updated globally imported Clash Display font to use the variable weight version (`ClashDisplay-Variable.woff2`).
   - Corrected `fontVariationSettings` implementation to ensure smooth weight interpolation.
@@ -502,7 +560,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added - Quality Verification (2026-01-14)
 
 #### Component Registry Completion
+
 - **Added Input component** to Studio component registry
+
   - Comprehensive documentation with 7 input types (text, email, password, number, tel, url, search)
   - 5 interactive examples (default, email, password, disabled, with label)
   - 3 code examples (basic usage, with label, form integration)
@@ -517,6 +577,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - shadcn/ui source URL reference
 
 #### Quality Verification Documentation
+
 - **NEW: `QUALITY_VERIFICATION_REPORT.md`** - Comprehensive 500+ line verification report
   - Complete inventory of all 48 components across 7 categories
   - Detailed findings of missing components (Input and Label)
@@ -527,6 +588,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Files modified documentation
 
 #### Strategy Document Updates
+
 - Updated Phase 3.75 status from "In Progress" to "Complete"
 - Added quality verification completion details
 - Updated decision log with Jan 14 quality verification entry
@@ -536,13 +598,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 #### Critical Registry Issues
+
 - **Input component missing** from Studio registry
+
   - Component was exported from `@thesage/ui` ✓
   - Component was in navigation list ✓
   - Component was NOT in component registry ✗
   - Impact: HIGH - Input is a fundamental form component
   - Resolution: Added comprehensive 99-line registry entry
-
 
 - **Label component missing** from Studio registry
   - Component was exported from `@thesage/ui` ✓
@@ -552,6 +615,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Resolution: Added comprehensive 86-line registry entry
 
 #### Build & Infrastructure Fixes
+
 - **Functional Organization Build Repairs**
   - **Issue:** `@thesage/ui` build failing after massive refactor due to import path and prop errors.
   - **Resolution:**
@@ -569,6 +633,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 #### Component Updates
+
 - **Card Component**
   - Changed default `hoverEffect` from `true` to `false`.
   - Effect: Cards no longer elevate on hover by default, removing false interaction affordance.
@@ -578,6 +643,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Verified
 
 #### Package Build Status
+
 - ✅ @thesage/ui package builds successfully (112.71 KB ESM, 131.28 KB CJS)
 - ✅ @thesage/mcp package builds successfully (32.22 KB ESM, 32.24 KB CJS)
 - ✅ @ecosystem/web builds successfully (Next.js 15.5.9)
@@ -585,6 +651,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ✅ All type declarations generated correctly
 
 #### MCP Server Verification
+
 - ✅ **48/48 components registered** (100% coverage)
 - ✅ All 4 MCP tools functional:
   - `list_components` - Lists all/filtered components by category
@@ -608,7 +675,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Technical Details
 
 #### Files Modified
+
 - `apps/web/app/components/lib/component-registry.tsx`
+
   - Added `Input` import to registry imports (line 4)
   - Added complete Input registry entry (lines 1613-1711, 99 lines)
   - Added complete Label registry entry (lines 1712-1797, 86 lines)
@@ -621,12 +690,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Updated roadmap with verification completion status
 
 #### Files Created
+
 - `apps/web/docs/QUALITY_VERIFICATION_REPORT.md` (500+ lines)
 - Comprehensive verification summary in scratchpad
 
 ### Testing Required
 
 **Manual browser testing required before production deployment:**
+
 - [ ] Test Input component on live site (https://thesage.dev/)
 - [ ] Test Label component on live site
 - [ ] Systematic testing of all 48 components
@@ -655,6 +726,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 **Major architectural restructure of the Sage UI from atomic design to functional organization.**
 
 #### Component Library Restructure (@thesage/ui)
+
 - **48 components reorganized** into 7 functional categories
   - Actions (3): Button, Toggle, ToggleGroup
   - Forms (11): Checkbox, Combobox, Form, Input, InputOTP, Label, RadioGroup, Select, Slider, Switch, Textarea
@@ -665,6 +737,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
   - Layout (8): Accordion, AspectRatio, Carousel, Collapsible, DatePicker, Resizable, ScrollArea, Separator
 
 #### File Structure Changes
+
 - Moved all component files to category subdirectories
   - `packages/ui/src/components/Button.tsx` → `packages/ui/src/components/actions/Button.tsx`
   - Applied to all 48 components
@@ -674,6 +747,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 - Updated main barrel exports for backward compatibility
 
 #### Studio Navigation Updates
+
 - **Two-level navigation system**: Category selector → Component selector
 - Category descriptions for improved discoverability
 - Replaced "Atoms" terminology with "Functional Organization"
@@ -681,7 +755,9 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 - Automatic category detection from URL/component name
 
 #### Documentation
+
 - **NEW: `SAGE_DESIGN_SYSTEM_STRATEGY.md`** - Comprehensive strategy document consolidating:
+
   - Vision & philosophy (solopreneur stack, code ownership model)
   - Current status and recent achievements
   - Architecture (three-tier model: Primitives → Assemblies → Templates)
@@ -693,6 +769,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
   - Decision log and lessons learned
 
 - **Archived legacy documentation**:
+
   - Moved `SDS_MASTER_PLAN.md` to archive (superseded by new strategy doc)
   - Moved `SDS_SHADCN_STRATEGY.md` to archive (integrated into strategy doc)
   - Moved `Evolving the Sage UI from Atomic to functional organization.md` to archive (implemented)
@@ -706,12 +783,14 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 ### Changed
 
 #### Backward Compatibility Maintained
+
 - **Zero breaking changes** - all existing imports continue to work
 - `import { Button } from '@thesage/ui'` still works exactly as before
 - Added optional category-based imports for future use
 - TypeScript compilation verified successful
 
 #### Build System
+
 - All packages build successfully after restructure
 - Import path resolution verified
 - Type declarations generated correctly
@@ -719,17 +798,20 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 ### Fixed
 
 #### TypeScript Compilation
+
 - Added type assertions for category lookup to resolve index signature errors
 - Fixed `COMPONENT_CATEGORIES[selectedCategory]` type safety issues
 
 ### Technical Details
 
 #### Commits
+
 - `77c39eb` - refactor(@thesage/ui): Restructure components from flat to functional organization
 - `51f4747` - feat(studio): Implement functional category navigation
 - `78b7001` - fix(studio): Add TypeScript type assertion for category lookup
 
 #### Files Modified
+
 - **48 component files** moved to category subdirectories
 - **7 category index.ts files** created
 - `packages/ui/src/index.ts` - Updated with category-organized exports
@@ -748,11 +830,13 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 ### Migration Notes
 
 **For Consumers:**
+
 - No action required - all imports work as before
 - Optional: Start using category-based imports when convenient
 - Example: `import { Button } from '@thesage/ui/actions'` (future enhancement)
 
 **For Contributors:**
+
 - New components go in appropriate category directory
 - Follow updated development workflow in SAGE_DESIGN_SYSTEM_STRATEGY.md
 - Update category index.ts when adding components
@@ -760,18 +844,21 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 ## [2.1.0] - 2026-01-07
 
 ### Added - Sage UI Cross-Platform Architecture (Phase 1)
+
 - **New Monorepo Strategy (The "Sage Stack")**
   - **`@thesage/tokens`**: New dedicated workspace for universal design tokens. Extracted from `design-system` to serve as the single source of truth for Web and Mobile.
   - **`@thesage/config`**: New shared configuration workspace (Tailwind, etc.).
   - **`SDS_MASTER_PLAN.md`**: Comprehensive roadmap and migration strategy documentation.
 
 ### Changed
+
 - **`design-system` Refactor**:
   - Now consumes tokens from `@thesage/tokens` instead of local files.
   - Removed legacy token files (`base.ts`, `colors.json`, etc.) to enforce the new architecture.
   - Updated `package.json` to use workspace protocol: `"@thesage/tokens": "workspace:*"`.
 
 ### Added - Universal UI (Phase 2)
+
 - **`@thesage/ui` Workspace**:
   - Initialized with `nativewind` v4, `react-native-web`, and `@rn-primitives`.
   - Configured tailwind preset to consume `@thesage/tokens`.
@@ -779,6 +866,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
   - **Universal Test Page**: Added `/universal` route in Sage Studio to verify the button.
 
 ### Added - Mobile Entry (Phase 3)
+
 - **`apps/mobile`**:
   - Initialized Expo (Managed) project with TypeScript.
   - Configured **Metro** for monorepo resolution (handling workspace packages).
@@ -789,6 +877,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 ## [2.0.1] - 2026-01-05
 
 ### Changed
+
 - **Icon System Migration**
   - Replaced all direct emoji usage with `lucide-react` icons for consistency and accessibility.
   - **Sidebar:** Updated navigation icons (BookOpen, Palette, Component, Webhook, LayoutTemplate).
@@ -799,6 +888,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
   - **Sections Updated:** `OverviewSection`, `ContributingSection`, `TemplatesSection`, `TypographyTab`, `OrganismsSection`, `TextEffectsSection`, `MotionFoundationsSection`.
 
 ### Fixed
+
 - **Mobile Responsive Layout**
   - **Issue:** Severe horizontal scrolling and content overflow on mobile viewports due to unconstrained flex containers and code blocks.
   - **Root Cause:** Deeply nested flex containers in section components (`AddingComponentsSection`, `OrganismsSection`, etc.) were missing `min-w-0` and `w-full` constraints. Specifically, `flex-1` containers within list items (`li`) would refuse to shrink below the intrinsic width of their children (code blocks with long paths), forcing the parent card to expand beyond the viewport.
@@ -830,13 +920,16 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 ### Added - Phase 7: LLM Optimization & Accessibility
 
 #### LLM-Friendly Metadata System
+
 - **JSON-LD Metadata Generation** ([app/lib/metadata-generator.ts](app/lib/metadata-generator.ts))
+
   - `generateComponentMetadata()` - Converts ComponentConfig to Schema.org SoftwareSourceCode format
   - `generateFullDocumentation()` - Creates complete API documentation object for all components
   - Supports atoms, molecules, organisms, tokens, and hooks
   - Uses Schema.org vocabulary for semantic web standards
 
 - **Dynamic Metadata Injection** ([app/components/JsonLdMetadata.tsx](app/components/JsonLdMetadata.tsx))
+
   - Client-side component that dynamically injects `<script type="application/ld+json">` tags
   - Updates metadata when component selection changes
   - Automatic cleanup on unmount
@@ -848,7 +941,9 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
   - Metadata includes: component name, description, props (with types, defaults, requirements), code examples, accessibility notes, source URLs
 
 #### Accessibility Documentation
+
 - **Component Registry Enhancements**
+
   - Added `accessibilityNotes` field to ComponentConfig interface
   - Breadcrumbs: 6 comprehensive accessibility notes ([molecule-registry.tsx:140-145](app/components/lib/molecule-registry.tsx#L140-L145))
   - Button: 6 detailed accessibility notes ([component-registry.tsx:162-169](app/components/lib/component-registry.tsx#L162-L169))
@@ -860,7 +955,9 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
   - Consistent visual design: border-left accent, bullet points, proper spacing
 
 #### Enhanced Type System
+
 - **PropConfig Extended** ([component-registry.tsx](app/components/lib/component-registry.tsx))
+
   - New prop types: `'array' | 'object' | 'interface' | 'custom'` (in addition to existing `'select' | 'boolean' | 'text'`)
   - `typeDefinition?: string` - Display complex TypeScript types (e.g., `"BreadcrumbItem[]"`)
   - `required?: boolean` - Mark required props with visual indicator
@@ -872,6 +969,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
   - `accessibilityNotes?: string[]` - Accessibility documentation
 
 #### PageLayout Organism Integration
+
 - **OrganismsSection.tsx Updates** ([OrganismsSection.tsx](app/components/studio/OrganismsSection.tsx))
   - PageLayout imported from `@ecosystem/design-system` (line 4)
   - Added to organisms navigation list (lines 366-367)
@@ -884,6 +982,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 ### Changed
 
 #### Component Documentation Enhancement
+
 - **Breadcrumbs Registry** ([molecule-registry.tsx](app/components/lib/molecule-registry.tsx))
   - Added missing `items` prop with proper type definition
   - Complete prop documentation with descriptions
@@ -892,6 +991,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
   - Accessibility notes
 
 #### UI Improvements
+
 - **Accessibility Section Styling**
   - Consistent ♿ wheelchair emoji header
   - Border-left-4 accent with primary color
@@ -899,13 +999,16 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
   - Responsive spacing and typography
 
 ### Fixed
+
 - **API Endpoint Removed**
   - Initial plan included `/api/components` REST endpoint
   - Removed due to Next.js App Router constraints (API routes cannot import client components)
   - JSON-LD metadata embedded in pages serves the same purpose for LLM consumption
 
 ### Documentation
+
 - **README.md Updates** ([README.md](README.md))
+
   - Added "LLM-Optimized Documentation" feature
   - Added "Accessibility-First" feature
   - New "LLM Optimization" section explaining JSON-LD metadata system
@@ -923,6 +1026,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 ## Technical Details
 
 ### Metadata Structure (Schema.org)
+
 ```json
 {
   "@context": "https://schema.org",
@@ -957,6 +1061,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 ```
 
 ### Benefits for LLMs
+
 1. **Structured API Documentation**: LLMs can parse component props, types, defaults, and requirements
 2. **Code Examples**: Practical usage examples in standardized format
 3. **Source Navigation**: Direct links to GitHub source code
@@ -964,12 +1069,14 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 5. **Search Optimization**: Search engines can index and display rich component information
 
 ### Files Created
+
 - `app/lib/metadata-generator.ts` - Metadata generation utilities (103 lines)
 - `app/components/JsonLdMetadata.tsx` - JSON-LD injection component (32 lines)
 - `PHASE-7-COMPLETION.md` - Comprehensive completion documentation
 - `CHANGELOG.md` - This file
 
 ### Files Modified
+
 - `app/components/studio/ComponentsSection/ComponentPlayground.tsx` - Added metadata and accessibility sections
 - `app/components/studio/MoleculesSection.tsx` - Added metadata and accessibility sections
 - `app/components/studio/OrganismsSection.tsx` - Added PageLayout documentation
@@ -978,6 +1085,7 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 - `README.md` - Comprehensive updates for Phase 7 features
 
 ## Contributors
+
 - **Primary Development**: Claude Code (Anthropic) & Shalom Ormsby
 - **Additional Work**: Antigravity (Accessibility patterns, PageLayout integration)
 

@@ -1,6 +1,6 @@
 {
     "name": "@thesage/ui",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "description": "The core components and design engine for the Sage ecosystem.",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
