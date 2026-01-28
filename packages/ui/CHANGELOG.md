@@ -1,6 +1,6 @@
 # @thesage/ui
 
-## 0.0.10
+## 0.0.10 - 2026-01-28
 
 ### Patch Changes
 

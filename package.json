@@ -7,7 +7,7 @@
         "build": "turbo run build",
         "lint": "turbo run lint",
         "changeset": "changeset",
-        "version-packages": "changeset version",
+        "version-packages": "changeset version && node scripts/append-changelog-date.js",
         "release": "turbo run build && changeset publish"
     },
     "devDependencies": {
