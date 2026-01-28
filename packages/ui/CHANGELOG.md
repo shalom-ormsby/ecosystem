@@ -1,5 +1,11 @@
 # @thesage/ui
 
+## 0.0.11 - 2026-01-28
+
+### Patch Changes
+
+- 802b59e: docs: Added README.md to @thesage/ui for better npm presentation.
+
 ## 0.0.10 - 2026-01-28
 
 ### Patch Changes
