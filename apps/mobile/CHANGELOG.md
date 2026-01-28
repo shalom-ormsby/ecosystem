@@ -1,5 +1,16 @@
 # mobile
 
+## 1.0.3 - 2026-01-28
+
+### Patch Changes
+
+- Updated dependencies [90e78f4]
+- Updated dependencies [90e78f4]
+- Updated dependencies [90e78f4]
+  - @thesage/tokens@0.0.3
+  - @thesage/config@0.0.3
+  - @thesage/ui@0.0.12
+
 ## 1.0.2 - 2026-01-28
 
 ### Patch Changes

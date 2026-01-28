@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.3 - 2026-01-28
+
+### Patch Changes
+
+- Updated dependencies [90e78f4]
+- Updated dependencies [90e78f4]
+- Updated dependencies [90e78f4]
+  - @thesage/tokens@0.0.3
+  - @thesage/hooks@0.1.2
+  - @thesage/charts@0.1.2
+  - @thesage/ui@0.0.12
+  - @thesage/core@0.0.1
+
 ## 0.1.2 - 2026-01-28
 
 ### Patch Changes

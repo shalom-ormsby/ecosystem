@@ -1,6 +1,6 @@
 {
   "name": "@thesage/mcp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Model Context Protocol server for Sage UI - discover and integrate components with AI assistants",
   "author": "Shalom Ormsby",
   "repository": {
