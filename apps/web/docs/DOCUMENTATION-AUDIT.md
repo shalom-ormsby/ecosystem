@@ -340,7 +340,7 @@ Category overview pages are rendered by `CategoryOverview` component, which pull
 
 **Files Modified:**
 - `packages/ui/package.json` → `@shalomormsby/ui@0.0.5`
-- `packages/sds-mcp-server/package.json` → `@shalomormsby/mcp@0.1.0`
+- `packages/sds-mcp-server/package.json` → `@thesage/mcp@0.1.0`
 - `apps/web/app/components/studio/OverviewSection.tsx`
 - `apps/web/app/components/studio/McpSection/InstallationTab.tsx`
 - `packages/sds-mcp-server/README.md`

@@ -1,4 +1,4 @@
-# @shalomormsby/mcp
+# @thesage/mcp
 
 **Model Context Protocol server for Sage UI**
 
@@ -17,11 +17,11 @@ Enable AI assistants like Claude Desktop, Cursor, and VS Code to browse, search,
 ### Quick Start
 
 ```bash
-pnpm add -D @shalomormsby/mcp
+pnpm add -D @thesage/mcp
 # or
-npm install --save-dev @shalomormsby/mcp
+npm install --save-dev @thesage/mcp
 # or
-yarn add -D @shalomormsby/mcp
+yarn add -D @thesage/mcp
 ```
 
 ### MCP Client Configuration
@@ -35,7 +35,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
   "mcpServers": {
     "sds": {
       "command": "npx",
-      "args": ["@shalomormsby/mcp"]
+      "args": ["@thesage/mcp"]
     }
   }
 }
@@ -52,7 +52,7 @@ Add to `.cursor/mcp.json` in your project:
   "mcpServers": {
     "sds": {
       "command": "npx",
-      "args": ["@shalomormsby/mcp"]
+      "args": ["@thesage/mcp"]
     }
   }
 }
@@ -67,7 +67,7 @@ Add to `.vscode/mcp.json`:
   "servers": {
     "sds": {
       "command": "npx",
-      "args": ["@shalomormsby/mcp"]
+      "args": ["@thesage/mcp"]
     }
   }
 }
