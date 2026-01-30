@@ -24,6 +24,8 @@ export function InstallationTab() {
                     </p>
                     <CollapsibleCodeBlock
                         id="mcp-install"
+                        title="Install Command"
+                        language="bash"
                         code={`pnpm add -D @thesage/mcp
 # or
 npm install --save-dev @thesage/mcp
@@ -43,7 +45,7 @@ yarn add -D @thesage/mcp`}
                     <Card className="p-6 lg:col-span-2">
                         <div className="flex items-center gap-2 mb-3">
                             <h3 className="font-semibold text-[var(--color-text-primary)]">Claude Desktop</h3>
-                            <Badge variant="default">Recommended</Badge>
+                            <Badge variant="default" size="md" className="" dot={false}>Recommended</Badge>
                         </div>
                         <p className="text-sm text-[var(--color-text-secondary)] mb-4">
                             Add to your Claude Desktop config file:
@@ -54,6 +56,8 @@ yarn add -D @thesage/mcp`}
                             </p>
                             <CollapsibleCodeBlock
                                 id="claude-config"
+                                title="Claude Config"
+                                language="json"
                                 code={`{
   "mcpServers": {
     "sds": {
@@ -83,6 +87,8 @@ yarn add -D @thesage/mcp`}
                             </p>
                             <CollapsibleCodeBlock
                                 id="cursor-config"
+                                title="Cursor Config"
+                                language="json"
                                 code={`{
   "mcpServers": {
     "sds": {
@@ -109,6 +115,8 @@ yarn add -D @thesage/mcp`}
                             </p>
                             <CollapsibleCodeBlock
                                 id="vscode-config"
+                                title="VS Code Config"
+                                language="json"
                                 code={`{
   "servers": {
     "sds": {
@@ -131,7 +139,7 @@ yarn add -D @thesage/mcp`}
                     Local Development Setup
                 </h2>
                 <p className="text-sm text-[var(--color-text-secondary)] mb-6">
-                    If you're contributing to Sage UI or want to use the latest unreleased MCP server, follow these steps:
+                    If you're contributing to the Sage Design Engine or want to use the latest unreleased MCP server, follow these steps:
                 </p>
 
                 {/* Step 1: Clone */}
@@ -141,6 +149,8 @@ yarn add -D @thesage/mcp`}
                     </h3>
                     <CollapsibleCodeBlock
                         id="local-clone"
+                        title="Clone Repository"
+                        language="bash"
                         code={`git clone https://github.com/shalomormsby/ecosystem.git
 cd ecosystem`}
                         defaultCollapsed={false}
@@ -155,6 +165,8 @@ cd ecosystem`}
                     </h3>
                     <CollapsibleCodeBlock
                         id="local-install"
+                        title="Install Dependencies"
+                        language="bash"
                         code={`pnpm install`}
                         defaultCollapsed={false}
                         showCopy={true}
@@ -168,6 +180,8 @@ cd ecosystem`}
                     </h3>
                     <CollapsibleCodeBlock
                         id="local-build"
+                        title="Build Server"
+                        language="bash"
                         code={`pnpm build --filter @thesage/mcp`}
                         defaultCollapsed={false}
                         showCopy={true}
@@ -194,6 +208,8 @@ cd ecosystem`}
                             </p>
                             <CollapsibleCodeBlock
                                 id="claude-local-config"
+                                title="Claude Local Config"
+                                language="json"
                                 code={`{
   "mcpServers": {
     "sds-local": {
@@ -218,6 +234,8 @@ cd ecosystem`}
                             </p>
                             <CollapsibleCodeBlock
                                 id="cursor-local-config"
+                                title="Cursor Local Config"
+                                language="json"
                                 code={`{
   "mcpServers": {
     "sds-local": {
@@ -270,6 +288,8 @@ cd ecosystem`}
                     </p>
                     <CollapsibleCodeBlock
                         id="local-rebuild"
+                        title="Rebuild Command"
+                        language="bash"
                         code={`# Rebuild
 pnpm build --filter @thesage/mcp
 
@@ -282,6 +302,8 @@ pnpm build --filter @thesage/mcp
                     </p>
                     <CollapsibleCodeBlock
                         id="local-watch"
+                        title="Watch Command"
+                        language="bash"
                         code={`pnpm dev --filter @thesage/mcp  # Rebuilds on file changes`}
                         defaultCollapsed={true}
                         showCopy={true}

@@ -21,13 +21,13 @@ export function McpOverview({ onNavigate }: McpOverviewProps) {
               MCP Server
             </Heading>
             <div className="flex items-center gap-2">
-              <Badge variant="secondary">AI-Native</Badge>
-              <Badge variant="outline">89 components</Badge>
+              <Badge variant="secondary" size="md" className="" dot={false}>AI-Native</Badge>
+              <Badge variant="outline" size="md" className="" dot={false}>89 components</Badge>
             </div>
           </div>
         </div>
         <Text variant="secondary" size="lg" className="max-w-3xl">
-          Enable AI assistants to browse, search, and install Sage UI components through natural language
+          Enable AI assistants to browse, search, and install Sage Design Engine components through natural language
         </Text>
       </div>
 
@@ -38,7 +38,7 @@ export function McpOverview({ onNavigate }: McpOverviewProps) {
         </Heading>
         <Card className="p-6">
           <Text variant="secondary" className="mb-4">
-            The Model Context Protocol (MCP) Server connects AI assistants like Claude Desktop, Cursor, and VS Code to the Sage UI.
+            The Model Context Protocol (MCP) Server connects AI assistants like Claude Desktop, Cursor, and VS Code to the Sage Design Engine.
             It enables LLMs to discover, search, and install components directly through natural conversation.
           </Text>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

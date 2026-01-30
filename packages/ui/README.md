@@ -1,4 +1,4 @@
-# Sage UI (@thesage/ui)
+# Sage Design Engine (@thesage/ui)
 
 <div align="center">
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Sage UI** is not just a component library—it's a systematic design engine built for speed, consistency, and beauty. Built on top of **Radix UI** for headless accessibility and **Tailwind CSS** for styling, it provides a comprehensive suite of 45+ polished components that work together seamlessly.
+**Sage Design Engine** is not just a component library—it's a systematic design engine built for speed, consistency, and beauty. Built on top of **Radix UI** for headless accessibility and **Tailwind CSS** for styling, it provides a comprehensive suite of 45+ polished components that work together seamlessly.
 
 ## ✨ Features
 
@@ -27,7 +27,7 @@
 ## 🚀 Installation
 
 ### 1. Install Dependencies
-Sage UI is built on Tailwind CSS. You need to install the package and its peer dependencies.
+Sage Design Engine is built on Tailwind CSS. You need to install the package and its peer dependencies.
 
 ```bash
 pnpm add @thesage/ui @thesage/tokens @thesage/hooks lucide-react clsx tailwind-merge
@@ -61,7 +61,7 @@ import '@thesage/ui/globals.css';
 
 ## 💻 Usage
 
-Sage UI components are designed to be dropped into any React application.
+Sage Design Engine components are designed to be dropped into any React application.
 
 ```tsx
 import { Button, Card, Text, Heading } from '@thesage/ui';
@@ -84,7 +84,7 @@ export default function WelcomeCard() {
 
 ## 🖌️ Theming
 
-Sage UI uses a 4-layer token system. Changing a single primary color automatically updates buttons, focus rings, and chart colors across your entire application.
+Sage Design Engine uses a 4-layer token system. Changing a single primary color automatically updates buttons, focus rings, and chart colors across your entire application.
 
 ```tsx
 // Example: Customizing the theme

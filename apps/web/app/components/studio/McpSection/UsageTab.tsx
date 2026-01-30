@@ -22,7 +22,7 @@ export function UsageTab() {
                 <div className="space-y-6">
                     <div className="border-l-4 border-[var(--color-primary)] pl-4">
                         <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-2">
-                            You: "Show me all components in the Sage UI"
+                            You: "Show me all components in the Sage Design Engine"
                         </p>
                         <p className="text-xs text-[var(--color-text-muted)]">
                             The AI uses <code className="text-xs px-1 py-0.5 bg-[var(--color-surface)] rounded">list_components</code> to display all 89 components organized by category

@@ -1,8 +1,8 @@
 # @thesage/mcp
 
-**Model Context Protocol server for Sage UI**
+**Model Context Protocol server for Sage Design Engine**
 
-Enable AI assistants like Claude Desktop, Cursor, and VS Code to browse, search, and install Sage UI components directly through natural language.
+Enable AI assistants like Claude Desktop, Cursor, and VS Code to browse, search, and install Sage Design Engine components directly through natural language.
 
 ## Features
 
@@ -85,7 +85,7 @@ List all available components, optionally filtered by category.
 - `category` (optional): Filter by `actions`, `forms`, `navigation`, `overlays`, `feedback`, `data-display`, or `layout`
 
 **Example AI prompts:**
-- "Show me all Sage UI components"
+- "Show me all Sage Design Engine components"
 - "List all form components"
 - "What overlay components are available?"
 
@@ -127,7 +127,7 @@ Get installation instructions for a component.
 
 ## Component Categories
 
-The Sage UI organizes components functionally (not atomically):
+The Sage Design Engine organizes components functionally (not atomically):
 
 - **Actions** (3) - Interactive elements that trigger behaviors
 - **Forms** (11) - Input controls for data collection
@@ -143,7 +143,7 @@ Once configured, you can interact with the server through your AI assistant:
 
 ### Browse Components
 
-> "Show me all components in the Sage UI"
+> "Show me all components in the Sage Design Engine"
 
 The AI will use `list_components` to display all 89 components organized by category.
 
@@ -220,4 +220,4 @@ MIT © Shalom Ormsby
 
 ---
 
-**Part of the [Sage UI](https://thesage.dev/) - Build lovable products at AI speed.**
+**Part of the [Sage Design Engine](https://thesage.dev/) - Build lovable products at AI speed.**
