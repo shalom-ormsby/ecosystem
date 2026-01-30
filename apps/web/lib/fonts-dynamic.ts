@@ -28,8 +28,8 @@ const FONT_VARIABLE_MAP: Record<string, string> = {
   'Nunito Sans': '--font-nunito-sans',
   'Outfit': '--font-studio-heading',
   'Manrope': '--font-studio-body',
-  'Lora': '--font-sage-heading',
-  'Instrument Sans': '--font-sage-body',
+  'Lora': '--font-terra-heading',
+  'Instrument Sans': '--font-terra-body',
   'Space Grotesk': '--font-volt-heading',
   'Fira Code': '--font-mono',
   // Typography system fonts

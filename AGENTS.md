@@ -300,8 +300,8 @@ Example:
 
 1. **SDS Components First:** ALWAYS search for and use existing `@thesage/ui` components (Card, Button, Badge, etc.) before writing any custom JSX or CSS.
 2. **Prop-Based Styling:** Use component props (e.g., `hoverEffect`, `variant`, `size`) to achieve desired styles. DO NOT reimplement built-in behaviors with custom utility classes (e.g., don't write `hover:shadow-lg` if `hoverEffect={true}` exists).
-3. **No Ad-Hoc CSS:** Avoid generating arbitrary Tailwind classes if an Sage UI component can handle the use case.
-4. **Demand New Components:** If a Sage UI component does not exist to meet a web dev need, **mention this to the user** and offer to create a new Sage UI component to meet this need. Do not hack together a one-off solution in the app layer.
+3. **No Ad-Hoc CSS:** Avoid generating arbitrary Tailwind classes if an Sage Design Engine component can handle the use case.
+4. **Demand New Components:** If a Sage Design Engine component does not exist to meet a web dev need, **mention this to the user** and offer to create a new Sage Design Engine component to meet this need. Do not hack together a one-off solution in the app layer.
 
 ---
 
@@ -772,7 +772,7 @@ spacing.xl    // 32px
 
 // Typography
 typography.fonts.sans      // Theme-specific sans-serif
-typography.fonts.serif     // Theme-specific serif (Sage theme)
+typography.fonts.serif     // Theme-specific serif (Terra theme)
 typography.fonts.mono      // Theme-specific monospace
 typography.sizes.base      // 16px
 typography.weights.semibold // 600
@@ -800,7 +800,7 @@ Three features embody the philosophy. Here's their current status:
    - Import: `import { CustomizerPanel } from '@thesage/ui'`
    - Features:
      - Motion intensity slider (0-10 scale, respects `prefers-reduced-motion`)
-     - Theme selector (Studio, Sage, Volt)
+     - Theme selector (Studio, Terra, Volt)
      - Color mode toggle (light/dark)
    - Persists to localStorage
    - **Usage:** Add `<CustomizerPanel />` to your app layout
@@ -850,8 +850,8 @@ function ThemeSelector() {
   const { theme, mode, setTheme, setMode, toggleMode } = useTheme()
 
   return (
-    <button onClick={() => setTheme('sage')}>
-      Switch to Sage theme
+    <button onClick={() => setTheme('terra')}>
+      Switch to Terra theme
     </button>
   )
 }

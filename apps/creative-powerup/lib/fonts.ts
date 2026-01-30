@@ -7,7 +7,7 @@ import { Inter, Manrope, Instrument_Sans, Lora, JetBrains_Mono, Space_Grotesk, F
 
 /**
  * Studio Theme Fonts
- * Variable names from @ecosystem/design-system/fonts
+ * Variable names from @thesage/ui
  */
 export const studioHeading = Inter({
   subsets: ['latin'],
@@ -31,26 +31,26 @@ export const studioMono = JetBrains_Mono({
 });
 
 /**
- * Sage Theme Fonts
+ * Terra Theme Fonts
  */
-export const sageSans = Instrument_Sans({
+export const terraSans = Instrument_Sans({
   subsets: ['latin'],
-  variable: '--font-sage-sans',
+  variable: '--font-terra-sans',
   display: 'swap',
   weight: ['400', '500', '600', '700'],
 });
 
-export const sageSerif = Lora({
+export const terraSerif = Lora({
   subsets: ['latin'],
-  variable: '--font-sage-serif',
+  variable: '--font-terra-serif',
   display: 'swap',
   weight: ['400', '500', '600', '700'],
   style: ['normal', 'italic'],
 });
 
-export const sageMono = JetBrains_Mono({
+export const terraMono = JetBrains_Mono({
   subsets: ['latin'],
-  variable: '--font-sage-mono',
+  variable: '--font-terra-mono',
   display: 'swap',
   weight: ['400', '500', '600'],
 });
@@ -80,9 +80,9 @@ export const allFontVariables = [
   studioHeading.variable,
   studioBody.variable,
   studioMono.variable,
-  sageSans.variable,
-  sageSerif.variable,
-  sageMono.variable,
+  terraSans.variable,
+  terraSerif.variable,
+  terraMono.variable,
   voltSans.variable,
   voltMono.variable,
 ].join(' ');

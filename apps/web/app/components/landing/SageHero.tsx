@@ -9,6 +9,10 @@ export function SageHero() {
     const { theme, mode } = useTheme();
 
     const [hue, setHue] = useState(260); // Start with purple/blue
+    const [orbColor1, setOrbColor1] = useState('#9c43fe'); // Purple (original)
+    const [orbColor2, setOrbColor2] = useState('#4cc2e9'); // Cyan (original)
+    const [orbColor3, setOrbColor3] = useState('#101499'); // Deep blue (original)
+    const [showControls, setShowControls] = useState(false);
 
     return (
         <HeroBlock
@@ -34,6 +38,9 @@ export function SageHero() {
                     hoverIntensity={0.5}
                     rotateOnHover={true}
                     forceHoverState={false}
+                    orbColor1={orbColor1}
+                    orbColor2={orbColor2}
+                    orbColor3={orbColor3}
                 />
             }
         >
@@ -50,7 +57,88 @@ export function SageHero() {
                 </span>
             </div>
 
-            {/* Controls removed as requested: "I do NOT want the customization panel to be exposed on the front-end at all." */}
+            {/* Color Controls - Toggle with Cmd/Ctrl + K */}
+            <button
+                onClick={() => setShowControls(!showControls)}
+                className="fixed bottom-4 right-4 px-3 py-2 text-xs bg-[var(--color-background)] border border-[var(--color-border)] rounded-md hover:bg-[var(--color-muted)] transition-colors opacity-50 hover:opacity-100"
+            >
+                🎨 Orb Colors
+            </button>
+
+            {showControls && (
+                <div className="fixed bottom-16 right-4 p-4 bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg shadow-lg space-y-3 z-50">
+                    <div className="text-sm font-semibold text-[var(--color-foreground)]">Orb Colors</div>
+
+                    <div className="space-y-2">
+                        <label className="flex items-center gap-2 text-xs text-[var(--color-text-secondary)]">
+                            <span className="w-20">Primary:</span>
+                            <input
+                                type="color"
+                                value={orbColor1}
+                                onChange={(e) => setOrbColor1(e.target.value)}
+                                className="w-12 h-8 rounded cursor-pointer"
+                            />
+                            <input
+                                type="text"
+                                value={orbColor1}
+                                onChange={(e) => setOrbColor1(e.target.value)}
+                                className="flex-1 px-2 py-1 text-xs bg-[var(--color-muted)] border border-[var(--color-border)] rounded"
+                            />
+                        </label>
+
+                        <label className="flex items-center gap-2 text-xs text-[var(--color-text-secondary)]">
+                            <span className="w-20">Secondary:</span>
+                            <input
+                                type="color"
+                                value={orbColor2}
+                                onChange={(e) => setOrbColor2(e.target.value)}
+                                className="w-12 h-8 rounded cursor-pointer"
+                            />
+                            <input
+                                type="text"
+                                value={orbColor2}
+                                onChange={(e) => setOrbColor2(e.target.value)}
+                                className="flex-1 px-2 py-1 text-xs bg-[var(--color-muted)] border border-[var(--color-border)] rounded"
+                            />
+                        </label>
+
+                        <label className="flex items-center gap-2 text-xs text-[var(--color-text-secondary)]">
+                            <span className="w-20">Tertiary:</span>
+                            <input
+                                type="color"
+                                value={orbColor3}
+                                onChange={(e) => setOrbColor3(e.target.value)}
+                                className="w-12 h-8 rounded cursor-pointer"
+                            />
+                            <input
+                                type="text"
+                                value={orbColor3}
+                                onChange={(e) => setOrbColor3(e.target.value)}
+                                className="flex-1 px-2 py-1 text-xs bg-[var(--color-muted)] border border-[var(--color-border)] rounded"
+                            />
+                        </label>
+                    </div>
+
+                    <div className="flex gap-2 pt-2 border-t border-[var(--color-border)]">
+                        <button
+                            onClick={() => {
+                                setOrbColor1('#9c43fe');
+                                setOrbColor2('#4cc2e9');
+                                setOrbColor3('#101499');
+                            }}
+                            className="flex-1 px-2 py-1 text-xs bg-[var(--color-muted)] hover:bg-[var(--color-accent)] rounded transition-colors"
+                        >
+                            Reset
+                        </button>
+                        <button
+                            onClick={() => setShowControls(false)}
+                            className="flex-1 px-2 py-1 text-xs bg-[var(--color-primary)] text-white hover:opacity-80 rounded transition-opacity"
+                        >
+                            Done
+                        </button>
+                    </div>
+                </div>
+            )}
         </HeroBlock>
     );
 }

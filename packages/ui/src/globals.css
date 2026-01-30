@@ -3,6 +3,16 @@
 @tailwind utilities;
 
 @layer base {
+  /**
+   * Default CSS Variables - Studio Theme (Light Mode)
+   *
+   * These values serve as fallback defaults and are overridden at runtime by ThemeProvider
+   * when a different theme is selected. The ThemeProvider injects CSS variables dynamically
+   * based on the active theme (Studio, Terra, or Volt) and color mode (light or dark).
+   *
+   * See: packages/ui/src/providers/ThemeProvider.tsx
+   * See: packages/tokens/src/studio.ts, terra.ts, volt.ts
+   */
   :root {
     --color-background: #ffffff;
     --color-background-secondary: #fafafa;

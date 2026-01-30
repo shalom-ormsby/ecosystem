@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    transpilePackages: ['@ecosystem/design-system', '@thesage/tokens'],
+    transpilePackages: ['@thesage/ui', '@thesage/tokens'],
 };
 
 module.exports = nextConfig;

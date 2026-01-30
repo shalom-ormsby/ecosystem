@@ -4,13 +4,54 @@ import { Mesh, Program, Renderer, Triangle, Vec3 } from 'ogl';
 import { useEffect, useRef } from 'react';
 import { cn } from '../../lib/utils';
 
+/**
+ * Convert hex color to RGB vec3 (0-1 range) for shaders
+ */
+function hexToRgb(hex: string): [number, number, number] {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  if (!result) return [0, 0, 0];
+  return [
+    parseInt(result[1], 16) / 255,
+    parseInt(result[2], 16) / 255,
+    parseInt(result[3], 16) / 255,
+  ];
+}
+
+/**
+ * Get CSS variable value from document root
+ */
+function getCSSVariable(name: string, fallback: string): string {
+  if (typeof window === 'undefined') return fallback;
+  const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  return value || fallback;
+}
+
 export interface OrbBackgroundProps {
   className?: string;
   hue?: number;
   hoverIntensity?: number;
   rotateOnHover?: boolean;
   forceHoverState?: boolean;
+  /**
+   * Background color (hex). If not provided, uses CSS variable --color-background.
+   * @default undefined (reads from theme)
+   */
   backgroundColor?: string;
+  /**
+   * Primary orb color (hex). Creates the main vibrant tone.
+   * @default '#9c43fe' (purple)
+   */
+  orbColor1?: string;
+  /**
+   * Secondary orb color (hex). Adds cool cyan tones.
+   * @default '#4cc2e9' (cyan)
+   */
+  orbColor2?: string;
+  /**
+   * Tertiary orb color (hex). Provides deep blue accent tones.
+   * @default '#101499' (deep blue)
+   */
+  orbColor3?: string;
 }
 
 export function OrbBackground({
@@ -19,7 +60,10 @@ export function OrbBackground({
   hoverIntensity = 0.2,
   rotateOnHover = true,
   forceHoverState = false,
-  backgroundColor = '#000000'
+  backgroundColor,
+  orbColor1,
+  orbColor2,
+  orbColor3,
 }: OrbBackgroundProps) {
   const ctnDom = useRef<HTMLDivElement>(null);
 
@@ -44,6 +88,10 @@ export function OrbBackground({
     uniform float rot;
     uniform float hoverIntensity;
     uniform vec3 backgroundColor;
+    // THEME-AWARE: Orb colors from theme (to revert: change back to const)
+    uniform vec3 orbColor1;
+    uniform vec3 orbColor2;
+    uniform vec3 orbColor3;
     varying vec2 vUv;
 
     vec3 rgb2yiq(vec3 c) {
@@ -112,10 +160,12 @@ export function OrbBackground({
       float a = max(max(colorIn.r, colorIn.g), colorIn.b);
       return vec4(colorIn.rgb / (a + 1e-5), a);
     }
-    
-    const vec3 baseColor1 = vec3(0.611765, 0.262745, 0.996078);
-    const vec3 baseColor2 = vec3(0.298039, 0.760784, 0.913725);
-    const vec3 baseColor3 = vec3(0.062745, 0.078431, 0.600000);
+
+    // THEME-AWARE: Colors now come from uniforms (orbColor1, orbColor2, orbColor3)
+    // To revert to hardcoded: uncomment these and remove uniforms above
+    // const vec3 baseColor1 = vec3(0.611765, 0.262745, 0.996078);
+    // const vec3 baseColor2 = vec3(0.298039, 0.760784, 0.913725);
+    // const vec3 baseColor3 = vec3(0.062745, 0.078431, 0.600000);
     const float innerRadius = 0.6;
     const float noiseScale = 0.65;
     
@@ -128,9 +178,10 @@ export function OrbBackground({
     }
     
     vec4 draw(vec2 uv) {
-      vec3 color1 = adjustHue(baseColor1, hue);
-      vec3 color2 = adjustHue(baseColor2, hue);
-      vec3 color3 = adjustHue(baseColor3, hue);
+      // THEME-AWARE: Use uniform colors instead of hardcoded consts
+      vec3 color1 = adjustHue(orbColor1, hue);
+      vec3 color2 = adjustHue(orbColor2, hue);
+      vec3 color3 = adjustHue(orbColor3, hue);
       
       float ang = atan(uv.y, uv.x);
       float len = length(uv);
@@ -200,6 +251,19 @@ export function OrbBackground({
     const container = ctnDom.current;
     if (!container) return;
 
+    // ORIGINAL COLORS: Restored from original implementation
+    // Classic gradient: purple → cyan → deep blue
+    const bgColor = backgroundColor || getCSSVariable('--color-background', '#000000');
+    const color1 = orbColor1 || '#9c43fe'; // Purple (vec3(0.611765, 0.262745, 0.996078))
+    const color2 = orbColor2 || '#4cc2e9'; // Cyan (vec3(0.298039, 0.760784, 0.913725))
+    const color3 = orbColor3 || '#101499'; // Deep blue (vec3(0.062745, 0.078431, 0.600000))
+
+    // Convert hex to RGB vec3 for shader
+    const bgRgb = hexToRgb(bgColor);
+    const color1Rgb = hexToRgb(color1);
+    const color2Rgb = hexToRgb(color2);
+    const color3Rgb = hexToRgb(color3);
+
     const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
@@ -218,7 +282,11 @@ export function OrbBackground({
         hover: { value: 0 },
         rot: { value: 0 },
         hoverIntensity: { value: hoverIntensity },
-        backgroundColor: { value: hexToVec3(backgroundColor) }
+        // THEME-AWARE: Pass theme colors to shader
+        backgroundColor: { value: new Vec3(...bgRgb) },
+        orbColor1: { value: new Vec3(...color1Rgb) },
+        orbColor2: { value: new Vec3(...color2Rgb) },
+        orbColor3: { value: new Vec3(...color3Rgb) }
       }
     });
 
@@ -285,7 +353,6 @@ export function OrbBackground({
         currentRot += dt * rotationSpeed;
       }
       program.uniforms.rot.value = currentRot;
-      program.uniforms.backgroundColor.value = hexToVec3(backgroundColor);
 
       renderer.render({ scene: mesh });
     };

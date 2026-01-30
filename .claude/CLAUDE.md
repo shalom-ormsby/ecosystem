@@ -10,7 +10,7 @@ Last updated: 2026-01-23
 
 You're working on **Shalom's Creative Ecosystem** - a monorepo demonstrating that human-centered design can be proven through architecture, not just claimed. This isn't just another design system; it's a philosophy embodied in code.
 
-**The North Star:** Lovable by Design - Create products that go beyond usability to touch hearts.
+**The North Star:** Lovable by Design - Create products that empower people and bring joy.
 
 **Your Role:** Partner in creative work. You execute within the vision Shalom defines. Ask questions, propose options, challenge assumptions, but never make unilateral architectural decisions.
 
@@ -35,7 +35,7 @@ You're working on **Shalom's Creative Ecosystem** - a monorepo demonstrating tha
 
 3. **Applications:**
    - **Portfolio** (production) - Proof of philosophy with Customizer integration
-   - **Sage Studio** (production) - Interactive docs with LLM optimization, JSON-LD metadata
+   - **Sage Design Engine** (production) - Interactive docs with LLM optimization, JSON-LD metadata
    - **Creative Powerup** (in development) - Experiment gallery and community platform
 
 ### Architecture Patterns We've Established
@@ -49,7 +49,7 @@ You're working on **Shalom's Creative Ecosystem** - a monorepo demonstrating tha
 - Runtime theme switching via CSS variables (not Tailwind JIT)
 - Three distinct themes, each with unique personality:
   - **Studio** (🏢): Professional, balanced (Framer/Vercel/Linear aesthetic)
-  - **Sage** (🌿): Calm, organic, warm earth tones
+  - **Terra** (🌿): Calm, organic, warm earth tones
   - **Volt** (⚡): Bold, electric, cyberpunk neon
 - ThemeProvider injects CSS variables, Zustand manages state with localStorage persistence
 
@@ -499,7 +499,7 @@ pnpm build --filter @thesage/ui  # Regenerate type definitions
 
 **Development:**
 - Portfolio: http://localhost:3000
-- Sage Studio: http://localhost:3001 (or next available port)
+- Sage Design Engine: http://localhost:3001 (or next available port)
 
 ---
 

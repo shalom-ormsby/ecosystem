@@ -14,8 +14,8 @@ The purpose of this open source monorepo isn't just to answer this question; it'
 
 This ecosystem expresses one unified vision through multiple products:
 
-- **[Portfolio](https://www.shalomormsby.com/)** — My design philosophy in action. Currently being built from the ground-up entirely with Sage UI components.
-- **[Sage Studio](https://thesage.dev/)** — Interactive documentation platform for the Sage UI. A comprehensive suite of functional components, patterns, and templates that optimize human and AI-assisted creativity. Purpose-built for solopreneurs who want to build digital products not only with speed but also with precise creative control. 
+- **[Portfolio](https://www.shalomormsby.com/)** — My design philosophy in action. Currently being built from the ground-up entirely with Sage Design Engine components.
+- **[Sage Studio](https://thesage.dev/)** — Interactive documentation platform for the Sage Design Engine. A comprehensive suite of functional components, patterns, and templates that optimize human and AI-assisted creativity. Purpose-built for solopreneurs who want to build digital products not only with speed but also with precise creative control. 
 - **[Creative Powerup](https://ecosystem-creative-powerup.vercel.app/)** — Community platform and experiment gallery for purpose-driven innovators *(in development)*
 - **[Sage Stocks](https://stocks.shalomormsby.com/)** — AI-powered investment intelligence that respects user agency *(migration pending)*
 - **SageOS** — Personal operating system for creative work *(Currently a WiP. To apply as a beta tester, email Shalom.)*
@@ -57,7 +57,7 @@ This ecosystem is built on four principles:
 
 ---
 
-## The Sage UI
+## The Sage Design Engine
 
 The heart of this ecosystem. Every app imports from it. **Version 1.0 — Production Ready**
 
@@ -96,7 +96,7 @@ Each theme has a unique personality and embodies different design values:
   - Cool blues and grays, clean sans-serif typography (Outfit, Manrope, Fira Code)
   - Smooth, professional motion curves
 
-- **Sage** — Calm, organic, thoughtful
+- **Terra** — Calm, organic, thoughtful
   - Warm earth tones, muted sage greens, terracotta accents
   - Serif headings (Lora), clean body text (Instrument Sans)
   - Slower, flowing motion curves
@@ -130,7 +130,7 @@ Every animation respects user preference:
 
 User control made tangible. A floating panel that gives users ownership of their experience:
 - **Motion intensity** — 0-10 scale with system preference sync
-- **Theme switching** — Studio, Sage, or Volt with distinct personalities
+- **Theme switching** — Studio, Terra, or Volt with distinct personalities
 - **Color mode** — Light or dark mode
 
 All preferences persist to localStorage and survive page reloads.

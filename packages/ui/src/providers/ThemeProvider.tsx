@@ -179,6 +179,67 @@ function mergeCustomColorTokens(
   };
 }
 
+/**
+ * Validate theme tokens in development mode
+ * Checks that all expected CSS variables are defined and have valid values
+ */
+function validateThemeTokens(theme: ThemeName, mode: ColorMode): void {
+  // Only run in development (Next.js/Vite inject this at build time)
+  // @ts-ignore - process.env is injected by bundler
+  if (typeof process !== 'undefined' && process.env?.NODE_ENV === 'production') return;
+
+  const root = document.documentElement;
+  const style = getComputedStyle(root);
+
+  // Core required tokens that must be defined
+  const requiredTokens = [
+    '--color-background',
+    '--color-foreground',
+    '--color-primary',
+    '--color-primary-foreground',
+    '--color-border',
+    '--color-ring',
+    '--font-heading',
+    '--font-body',
+    '--font-mono',
+  ];
+
+  const missingTokens: string[] = [];
+  const invalidTokens: string[] = [];
+
+  requiredTokens.forEach((token) => {
+    const value = style.getPropertyValue(token).trim();
+
+    if (!value) {
+      missingTokens.push(token);
+    } else if (token.startsWith('--color-') && !value.match(/^(#|rgb|hsl|var\()/)) {
+      // Color tokens should be hex, rgb, hsl, or CSS variable references
+      invalidTokens.push(`${token} = "${value}"`);
+    } else if (token.startsWith('--font-') && value === '') {
+      invalidTokens.push(`${token} = empty`);
+    }
+  });
+
+  if (missingTokens.length > 0) {
+    console.warn(
+      `[ThemeProvider] Missing CSS variables for theme "${theme}" (${mode} mode):`,
+      missingTokens
+    );
+  }
+
+  if (invalidTokens.length > 0) {
+    console.warn(
+      `[ThemeProvider] Invalid CSS variable values for theme "${theme}" (${mode} mode):`,
+      invalidTokens
+    );
+  }
+
+  // Log success in development
+  if (missingTokens.length === 0 && invalidTokens.length === 0) {
+    console.log(`[ThemeProvider] ✓ Theme validation passed for "${theme}" (${mode} mode)`);
+  }
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const { theme, mode } = useThemeStore();
   // Use specific selector to get the exact palette for current theme/mode
@@ -241,6 +302,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } else {
       root.classList.remove('dark');
     }
+
+    // Validate theme tokens in development mode
+    validateThemeTokens(theme, mode);
 
     // End transition after animation completes
     const timeout = setTimeout(() => {
