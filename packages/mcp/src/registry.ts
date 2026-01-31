@@ -1,8 +1,23 @@
 /**
  * Component Registry for Sage UI
  *
- * This registry contains metadata for all 89 components in @thesage/ui,
- * organized into 7 core functional categories plus specialty components.
+ * This registry contains metadata for all 92 components in @thesage/ui,
+ * organized into 7 core functional categories plus 4 specialty categories.
+ *
+ * Core Categories (7):
+ * - actions: Interactive elements that trigger behaviors
+ * - forms: Input controls for data collection
+ * - navigation: Moving through content and hierarchy
+ * - overlays: Contextual content above main UI
+ * - feedback: Communicating system state
+ * - data-display: Presenting information in structured formats
+ * - layout: Spatial organization and structural elements
+ *
+ * Specialty Categories (4):
+ * - backgrounds: Animated background effects
+ * - cursor: Custom cursor effects
+ * - motion: Animation components
+ * - blocks: Composed page sections
  */
 
 export interface ComponentMetadata {
@@ -19,37 +34,57 @@ export const COMPONENT_CATEGORIES = {
   actions: {
     label: 'Actions',
     description: 'Interactive elements that trigger behaviors',
-    count: 3,
+    count: 5,
   },
   forms: {
     label: 'Forms',
     description: 'Input controls for data collection',
-    count: 11,
+    count: 18,
   },
   navigation: {
     label: 'Navigation',
     description: 'Moving through content and hierarchy',
-    count: 6,
+    count: 10,
   },
   overlays: {
     label: 'Overlays',
     description: 'Contextual content that appears above the main UI',
-    count: 9,
+    count: 11,
   },
   feedback: {
     label: 'Feedback',
     description: 'Communicating system state and user action results',
-    count: 5,
+    count: 7,
   },
   'data-display': {
     label: 'Data Display',
     description: 'Presenting information in structured formats',
-    count: 6,
+    count: 16,
   },
   layout: {
     label: 'Layout',
     description: 'Spatial organization and structural elements',
-    count: 8,
+    count: 17,
+  },
+  backgrounds: {
+    label: 'Backgrounds',
+    description: 'Animated background effects and decorative elements',
+    count: 3,
+  },
+  cursor: {
+    label: 'Cursor',
+    description: 'Custom cursor effects and interactions',
+    count: 2,
+  },
+  motion: {
+    label: 'Motion',
+    description: 'Animation components and motion effects',
+    count: 1,
+  },
+  blocks: {
+    label: 'Blocks',
+    description: 'Composed page sections and layouts',
+    count: 2,
   },
 } as const;
 
@@ -620,6 +655,71 @@ export const COMPONENT_REGISTRY: Record<string, ComponentMetadata> = {
     ],
     dependencies: [],
   },
+  heading: {
+    name: 'Heading',
+    category: 'data-display',
+    description: 'Semantic heading with automatic token-based styling and responsive sizes',
+    keywords: ['heading', 'title', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'typography'],
+    useCases: [
+      'Page titles',
+      'Section headings',
+      'Content hierarchy',
+      'Semantic HTML structure',
+    ],
+    dependencies: [],
+  },
+  text: {
+    name: 'Text',
+    category: 'data-display',
+    description: 'Semantic text component with variants for primary, secondary, and muted styles',
+    keywords: ['text', 'paragraph', 'body', 'typography', 'content', 'p', 'span'],
+    useCases: [
+      'Body text',
+      'Descriptions',
+      'Helper text',
+      'Labels and captions',
+    ],
+    dependencies: [],
+  },
+  code: {
+    name: 'Code',
+    category: 'data-display',
+    description: 'Code display with syntax highlighting for inline and block code',
+    keywords: ['code', 'syntax', 'highlighting', 'programming', 'snippet', 'pre'],
+    useCases: [
+      'Code snippets',
+      'API documentation',
+      'Technical content',
+      'Inline code references',
+    ],
+    dependencies: [],
+  },
+  'collapsible-code-block': {
+    name: 'CollapsibleCodeBlock',
+    category: 'data-display',
+    description: 'Expandable code block with syntax highlighting, preview mode, and copy functionality',
+    keywords: ['code', 'collapsible', 'expandable', 'syntax', 'copy', 'preview'],
+    useCases: [
+      'Long code examples',
+      'Documentation code blocks',
+      'Tutorial code snippets',
+      'API examples',
+    ],
+    dependencies: ['@thesage/tokens'],
+  },
+  'description-list': {
+    name: 'DescriptionList',
+    category: 'data-display',
+    description: 'Key-value pair list for displaying labeled data in row or column layout',
+    keywords: ['description', 'list', 'key-value', 'definition', 'dl', 'dt', 'dd'],
+    useCases: [
+      'Product specifications',
+      'User profile details',
+      'Metadata display',
+      'Settings summaries',
+    ],
+    dependencies: [],
+  },
 
   // ============================================================================
   // LAYOUT (8)
@@ -732,6 +832,556 @@ export const COMPONENT_REGISTRY: Record<string, ComponentMetadata> = {
     ],
     dependencies: ['@radix-ui/react-separator'],
     radixPrimitive: '@radix-ui/react-separator',
+  },
+  grid: {
+    name: 'Grid',
+    category: 'layout',
+    description: 'Responsive CSS grid with column and gap configuration',
+    keywords: ['grid', 'layout', 'columns', 'responsive', 'css-grid'],
+    useCases: [
+      'Card grids',
+      'Gallery layouts',
+      'Dashboard layouts',
+      'Responsive content grids',
+    ],
+    dependencies: [],
+  },
+  container: {
+    name: 'Container',
+    category: 'layout',
+    description: 'Content wrapper with consistent max-width and padding variants',
+    keywords: ['container', 'wrapper', 'max-width', 'centered', 'layout'],
+    useCases: [
+      'Page content wrapper',
+      'Centered layouts',
+      'Responsive widths',
+      'Content alignment',
+    ],
+    dependencies: [],
+  },
+  stack: {
+    name: 'Stack',
+    category: 'layout',
+    description: 'Flexbox layout for vertical or horizontal stacking with gap control',
+    keywords: ['stack', 'flex', 'vertical', 'horizontal', 'spacing', 'layout'],
+    useCases: [
+      'Vertical layouts',
+      'Horizontal layouts',
+      'Form layouts',
+      'Button groups',
+    ],
+    dependencies: [],
+  },
+  sidebar: {
+    name: 'Sidebar',
+    category: 'layout',
+    description: 'Navigation sidebar with header, content, footer sections and mobile overlay',
+    keywords: ['sidebar', 'navigation', 'panel', 'drawer', 'menu'],
+    useCases: [
+      'App navigation',
+      'Dashboard sidebars',
+      'Settings panels',
+      'Mobile menus',
+    ],
+    dependencies: ['@radix-ui/react-slot'],
+    radixPrimitive: '@radix-ui/react-slot',
+  },
+  header: {
+    name: 'Header',
+    category: 'layout',
+    description: 'Page header with sticky positioning, glass morphism, and mobile menu',
+    keywords: ['header', 'navbar', 'navigation', 'sticky', 'mobile-menu'],
+    useCases: [
+      'Site headers',
+      'App navigation bars',
+      'Sticky headers',
+      'Mobile-friendly navigation',
+    ],
+    dependencies: ['lucide-react'],
+  },
+  footer: {
+    name: 'Footer',
+    category: 'layout',
+    description: 'Page footer with multi-column layout, social links, and copyright',
+    keywords: ['footer', 'navigation', 'links', 'copyright', 'social'],
+    useCases: [
+      'Site footers',
+      'Navigation sections',
+      'Contact information',
+      'Copyright notices',
+    ],
+    dependencies: [],
+  },
+  'customizer-panel': {
+    name: 'CustomizerPanel',
+    category: 'layout',
+    description: 'Floating panel for theme, mode, and motion customization',
+    keywords: ['customizer', 'theme', 'settings', 'preferences', 'dark-mode'],
+    useCases: [
+      'Theme selection',
+      'Dark mode toggle',
+      'Motion preferences',
+      'User experience customization',
+    ],
+    dependencies: ['lucide-react', '@thesage/tokens'],
+  },
+  'page-layout': {
+    name: 'PageLayout',
+    category: 'layout',
+    description: 'Flexible page layout with header, nav stacks, breadcrumbs, and footer',
+    keywords: ['layout', 'page', 'template', 'structure', 'swiss-grid'],
+    useCases: [
+      'Page structure',
+      'Content layouts',
+      'Documentation pages',
+      'Dashboard layouts',
+    ],
+    dependencies: [],
+  },
+  'page-template': {
+    name: 'PageTemplate',
+    category: 'layout',
+    description: 'Opinionated page template with Swiss Grid design and customizer',
+    keywords: ['template', 'page', 'swiss-grid', 'layout', 'documentation'],
+    useCases: [
+      'Blog pages',
+      'Documentation pages',
+      'Standard app pages',
+      'Content-focused layouts',
+    ],
+    dependencies: [],
+  },
+
+  // ============================================================================
+  // ACTIONS - Additional (2 more)
+  // ============================================================================
+  link: {
+    name: 'Link',
+    category: 'actions',
+    description: 'Styled anchor element with theme-aware colors and hover states',
+    keywords: ['link', 'anchor', 'href', 'navigation', 'a', 'url'],
+    useCases: [
+      'Text links',
+      'Navigation links',
+      'External references',
+      'Inline actions',
+    ],
+    dependencies: [],
+  },
+  magnetic: {
+    name: 'Magnetic',
+    category: 'actions',
+    description: 'Magnetic hover effect that attracts elements toward cursor',
+    keywords: ['magnetic', 'hover', 'effect', 'cursor', 'animation', 'interactive'],
+    useCases: [
+      'Interactive buttons',
+      'Hover effects',
+      'Playful interactions',
+      'Cursor attraction',
+    ],
+    dependencies: ['framer-motion'],
+  },
+
+  // ============================================================================
+  // FORMS - Additional (7 more)
+  // ============================================================================
+  'search-bar': {
+    name: 'SearchBar',
+    category: 'forms',
+    description: 'Search input with icon, clear button, and keyboard shortcuts',
+    keywords: ['search', 'input', 'find', 'query', 'filter', 'bar'],
+    useCases: [
+      'Site search',
+      'Content filtering',
+      'Command palette trigger',
+      'Data filtering',
+    ],
+    dependencies: ['lucide-react'],
+  },
+  'filter-button': {
+    name: 'FilterButton',
+    category: 'forms',
+    description: 'Button for filtering content with active/inactive states',
+    keywords: ['filter', 'button', 'toggle', 'category', 'selection'],
+    useCases: [
+      'Category filters',
+      'Tag selection',
+      'Content filtering',
+      'Quick filters',
+    ],
+    dependencies: [],
+  },
+  'theme-switcher': {
+    name: 'ThemeSwitcher',
+    category: 'forms',
+    description: 'Multi-theme selector for switching between Studio, Terra, and Volt',
+    keywords: ['theme', 'switcher', 'selector', 'studio', 'terra', 'volt'],
+    useCases: [
+      'Theme selection',
+      'Brand customization',
+      'User preferences',
+      'Design switching',
+    ],
+    dependencies: [],
+  },
+  'theme-toggle': {
+    name: 'ThemeToggle',
+    category: 'forms',
+    description: 'Light/dark mode toggle with smooth transitions',
+    keywords: ['theme', 'toggle', 'dark-mode', 'light-mode', 'mode'],
+    useCases: [
+      'Dark mode switch',
+      'Light mode switch',
+      'Theme mode control',
+      'Accessibility preference',
+    ],
+    dependencies: ['lucide-react'],
+  },
+  'color-picker': {
+    name: 'ColorPicker',
+    category: 'forms',
+    description: 'Color selection input with preset swatches and custom color support',
+    keywords: ['color', 'picker', 'palette', 'swatch', 'hex', 'customization'],
+    useCases: [
+      'Brand color selection',
+      'Theme customization',
+      'Design tools',
+      'User preferences',
+    ],
+    dependencies: [],
+  },
+  'drag-drop': {
+    name: 'DragDrop',
+    category: 'forms',
+    description: 'Drag and drop file upload zone with preview support',
+    keywords: ['drag', 'drop', 'upload', 'file', 'dropzone', 'input'],
+    useCases: [
+      'File uploads',
+      'Image uploads',
+      'Document uploads',
+      'Bulk imports',
+    ],
+    dependencies: [],
+  },
+  'text-field': {
+    name: 'TextField',
+    category: 'forms',
+    description: 'Complete text input with label, helper text, and error states',
+    keywords: ['text', 'field', 'input', 'label', 'form', 'validation'],
+    useCases: [
+      'Form fields',
+      'Labeled inputs',
+      'Validated inputs',
+      'Complete form controls',
+    ],
+    dependencies: [],
+  },
+
+  // ============================================================================
+  // NAVIGATION - Additional (4 more)
+  // ============================================================================
+  'nav-link': {
+    name: 'NavLink',
+    category: 'navigation',
+    description: 'Navigation link with active state indicators and variants',
+    keywords: ['nav', 'link', 'navigation', 'active', 'menu', 'item'],
+    useCases: [
+      'Navigation menus',
+      'Sidebar links',
+      'Header navigation',
+      'Active page indicators',
+    ],
+    dependencies: [],
+  },
+  'secondary-nav': {
+    name: 'SecondaryNav',
+    category: 'navigation',
+    description: 'Horizontal secondary navigation bar for section switching',
+    keywords: ['secondary', 'navigation', 'tabs', 'sections', 'subnav'],
+    useCases: [
+      'Section navigation',
+      'Page subsections',
+      'Tab-like navigation',
+      'Category switching',
+    ],
+    dependencies: [],
+  },
+  'tertiary-nav': {
+    name: 'TertiaryNav',
+    category: 'navigation',
+    description: 'Third-level navigation for deep content hierarchies',
+    keywords: ['tertiary', 'navigation', 'deep', 'hierarchy', 'subnav'],
+    useCases: [
+      'Deep navigation',
+      'Documentation sections',
+      'Multi-level content',
+      'Nested categories',
+    ],
+    dependencies: [],
+  },
+  breadcrumbs: {
+    name: 'Breadcrumbs',
+    category: 'navigation',
+    description: 'Breadcrumb navigation with home icon and variants',
+    keywords: ['breadcrumbs', 'navigation', 'path', 'trail', 'hierarchy'],
+    useCases: [
+      'Page location',
+      'Navigation trail',
+      'Hierarchical navigation',
+      'Back navigation',
+    ],
+    dependencies: ['lucide-react'],
+  },
+
+  // ============================================================================
+  // OVERLAYS - Additional (2 more)
+  // ============================================================================
+  modal: {
+    name: 'Modal',
+    category: 'overlays',
+    description: 'Simple modal wrapper around Dialog with common patterns',
+    keywords: ['modal', 'dialog', 'popup', 'overlay', 'window'],
+    useCases: [
+      'Simple modals',
+      'Confirmation dialogs',
+      'Form modals',
+      'Content overlays',
+    ],
+    dependencies: ['@radix-ui/react-dialog'],
+    radixPrimitive: '@radix-ui/react-dialog',
+  },
+  dropdown: {
+    name: 'Dropdown',
+    category: 'overlays',
+    description: 'Simple dropdown wrapper for common dropdown patterns',
+    keywords: ['dropdown', 'menu', 'select', 'options', 'popover'],
+    useCases: [
+      'Action menus',
+      'User menus',
+      'Quick selections',
+      'Option lists',
+    ],
+    dependencies: ['@radix-ui/react-dropdown-menu'],
+    radixPrimitive: '@radix-ui/react-dropdown-menu',
+  },
+
+  // ============================================================================
+  // FEEDBACK - Additional (2 more)
+  // ============================================================================
+  spinner: {
+    name: 'Spinner',
+    category: 'feedback',
+    description: 'Animated loading spinner with size variants',
+    keywords: ['spinner', 'loading', 'loader', 'progress', 'waiting'],
+    useCases: [
+      'Loading states',
+      'Button loading',
+      'Data fetching',
+      'Async operations',
+    ],
+    dependencies: [],
+  },
+  'progress-bar': {
+    name: 'ProgressBar',
+    category: 'feedback',
+    description: 'Horizontal progress bar with percentage display',
+    keywords: ['progress', 'bar', 'loading', 'percentage', 'completion'],
+    useCases: [
+      'File uploads',
+      'Task progress',
+      'Loading indicators',
+      'Step completion',
+    ],
+    dependencies: [],
+  },
+
+  // ============================================================================
+  // DATA DISPLAY - Additional (5 more)
+  // ============================================================================
+  brand: {
+    name: 'Brand',
+    category: 'data-display',
+    description: 'Theme-aware brand/logo component with size variants and link support',
+    keywords: ['brand', 'logo', 'identity', 'header', 'company'],
+    useCases: [
+      'Site logos',
+      'Header branding',
+      'Footer branding',
+      'App identity',
+    ],
+    dependencies: [],
+  },
+  'aspect-image': {
+    name: 'AspectImage',
+    category: 'data-display',
+    description: 'Image with configurable aspect ratio, rounded corners, and captions',
+    keywords: ['image', 'aspect', 'ratio', 'figure', 'caption', 'media'],
+    useCases: [
+      'Gallery images',
+      'Article images',
+      'Product images',
+      'Thumbnails with captions',
+    ],
+    dependencies: [],
+  },
+  'variable-weight-text': {
+    name: 'VariableWeightText',
+    category: 'data-display',
+    description: 'Animated text with breathing font-weight effect using variable fonts',
+    keywords: ['variable', 'font', 'weight', 'animation', 'breathing', 'motion'],
+    useCases: [
+      'Hero text',
+      'Emphasis text',
+      'Attention grabbing',
+      'Variable font showcase',
+    ],
+    dependencies: ['framer-motion'],
+  },
+  typewriter: {
+    name: 'Typewriter',
+    category: 'data-display',
+    description: 'Typewriter text animation with cursor and loop support',
+    keywords: ['typewriter', 'typing', 'animation', 'cursor', 'text', 'effect'],
+    useCases: [
+      'Hero taglines',
+      'Terminal effects',
+      'Dynamic headings',
+      'Attention text',
+    ],
+    dependencies: ['framer-motion'],
+  },
+  'github-icon': {
+    name: 'GitHubIcon',
+    category: 'data-display',
+    description: 'GitHub logo icon that inherits text color for theme support',
+    keywords: ['github', 'icon', 'social', 'logo', 'svg'],
+    useCases: [
+      'Social links',
+      'Footer icons',
+      'Repository links',
+      'Open source badges',
+    ],
+    dependencies: [],
+  },
+
+  // ============================================================================
+  // SPECIALTY - Backgrounds (3)
+  // ============================================================================
+  'warp-background': {
+    name: 'WarpBackground',
+    category: 'backgrounds',
+    description: 'Animated warp speed star field background effect',
+    keywords: ['warp', 'stars', 'background', 'animation', 'space', 'effect'],
+    useCases: [
+      'Hero backgrounds',
+      'Landing pages',
+      'Loading screens',
+      'Sci-fi themes',
+    ],
+    dependencies: ['framer-motion'],
+  },
+  'faulty-terminal': {
+    name: 'FaultyTerminal',
+    category: 'backgrounds',
+    description: 'Glitchy terminal background with flickering and scan lines',
+    keywords: ['terminal', 'glitch', 'background', 'retro', 'crt', 'effect'],
+    useCases: [
+      'Retro themes',
+      'Hacker aesthetics',
+      'Error pages',
+      'Terminal UIs',
+    ],
+    dependencies: [],
+  },
+  'orb-background': {
+    name: 'OrbBackground',
+    category: 'backgrounds',
+    description: 'Animated floating orb with gradient blur effect',
+    keywords: ['orb', 'gradient', 'background', 'animation', 'blur', 'ambient'],
+    useCases: [
+      'Landing pages',
+      'Hero sections',
+      'Ambient backgrounds',
+      'Modern aesthetics',
+    ],
+    dependencies: ['framer-motion'],
+  },
+
+  // ============================================================================
+  // SPECIALTY - Cursor (2)
+  // ============================================================================
+  'splash-cursor': {
+    name: 'SplashCursor',
+    category: 'cursor',
+    description: 'Custom cursor with splash/ripple effect on click',
+    keywords: ['cursor', 'splash', 'ripple', 'click', 'effect', 'interactive'],
+    useCases: [
+      'Interactive experiences',
+      'Creative portfolios',
+      'Playful interfaces',
+      'Click feedback',
+    ],
+    dependencies: [],
+  },
+  'target-cursor': {
+    name: 'TargetCursor',
+    category: 'cursor',
+    description: 'Custom cursor with target/crosshair appearance',
+    keywords: ['cursor', 'target', 'crosshair', 'pointer', 'custom'],
+    useCases: [
+      'Gaming interfaces',
+      'Precision tools',
+      'Interactive elements',
+      'Custom pointers',
+    ],
+    dependencies: [],
+  },
+
+  // ============================================================================
+  // SPECIALTY - Motion (1)
+  // ============================================================================
+  'animated-beam': {
+    name: 'AnimatedBeam',
+    category: 'motion',
+    description: 'Animated beam/line connecting two elements',
+    keywords: ['beam', 'animation', 'connection', 'line', 'flow', 'motion'],
+    useCases: [
+      'Connecting elements',
+      'Data flow visualization',
+      'Architecture diagrams',
+      'Interactive connections',
+    ],
+    dependencies: ['framer-motion'],
+  },
+
+  // ============================================================================
+  // SPECIALTY - Blocks (2)
+  // ============================================================================
+  hero: {
+    name: 'Hero',
+    category: 'blocks',
+    description: 'Full-width hero section with title, subtitle, and CTA',
+    keywords: ['hero', 'banner', 'header', 'landing', 'cta', 'section'],
+    useCases: [
+      'Landing pages',
+      'Page headers',
+      'Marketing sections',
+      'Feature highlights',
+    ],
+    dependencies: [],
+  },
+  'open-graph-card': {
+    name: 'OpenGraphCard',
+    category: 'blocks',
+    description: 'Social media preview card for Open Graph metadata',
+    keywords: ['open-graph', 'social', 'preview', 'card', 'meta', 'share'],
+    useCases: [
+      'Social sharing previews',
+      'Link previews',
+      'Meta card generation',
+      'Marketing previews',
+    ],
+    dependencies: [],
   },
 };
 

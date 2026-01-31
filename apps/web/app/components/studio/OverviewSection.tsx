@@ -1657,6 +1657,35 @@ export function Dashboard() {
               </a>
             </div>
           </div>
+
+          {/* Pro Tip: Navigation Shortcuts */}
+          <div className="mt-6 p-4 bg-[var(--color-primary)]/5 rounded-lg border border-[var(--color-primary)]/20">
+            <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-2 flex items-center gap-2">
+              <span>💡</span>
+              <span>Pro Tip: Navigation Shortcuts</span>
+            </p>
+            <p className="text-xs text-[var(--color-text-secondary)] mb-2">
+              You can use these quick shortcuts to navigate the documentation:
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <div>
+                <code className="text-[var(--color-primary)]">#quick-start</code>
+                <span className="text-[var(--color-text-muted)]"> → Quick Start Guide</span>
+              </div>
+              <div>
+                <code className="text-[var(--color-primary)]">#getting-started</code>
+                <span className="text-[var(--color-text-muted)]"> → Overview</span>
+              </div>
+              <div>
+                <code className="text-[var(--color-primary)]">#components</code>
+                <span className="text-[var(--color-text-muted)]"> → Component Dashboard</span>
+              </div>
+              <div>
+                <code className="text-[var(--color-primary)]">#resources</code>
+                <span className="text-[var(--color-text-muted)]"> → Templates</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1719,6 +1748,14 @@ export function Dashboard() {
                 className="block text-[var(--color-primary)] hover:underline"
               >
                 → Architecture Guide
+              </a>
+              <a
+                href="https://github.com/shalomormsby/ecosystem/blob/main/apps/web/docs/CLI_COMMANDS.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-[var(--color-primary)] hover:underline"
+              >
+                → CLI Commands Reference
               </a>
             </div>
           </Card>

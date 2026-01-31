@@ -62,14 +62,14 @@ const TOOLS: Tool[] = [
   {
     name: 'list_components',
     description:
-      'List all available Sage UI components. Optionally filter by category (actions, forms, navigation, overlays, feedback, data-display, layout).',
+      'List all available Sage UI components. Optionally filter by category (core: actions, forms, navigation, overlays, feedback, data-display, layout; specialty: backgrounds, cursor, motion, blocks).',
     inputSchema: {
       type: 'object',
       properties: {
         category: {
           type: 'string',
           description:
-            'Filter by category: actions, forms, navigation, overlays, feedback, data-display, or layout',
+            'Filter by category. Core: actions, forms, navigation, overlays, feedback, data-display, layout. Specialty: backgrounds, cursor, motion, blocks.',
           enum: [
             'actions',
             'forms',
@@ -78,6 +78,10 @@ const TOOLS: Tool[] = [
             'feedback',
             'data-display',
             'layout',
+            'backgrounds',
+            'cursor',
+            'motion',
+            'blocks',
           ],
         },
       },

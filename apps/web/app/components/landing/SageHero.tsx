@@ -16,7 +16,7 @@ export function SageHero() {
 
     return (
         <HeroBlock
-            className="min-h-[90vh]" /* Increased height */
+            className="min-h-[90vh] dark bg-background" /* Increased height, force dark mode */
             headline={
                 <span>
                     The Solopreneur's <br />
@@ -41,6 +41,7 @@ export function SageHero() {
                     orbColor1={orbColor1}
                     orbColor2={orbColor2}
                     orbColor3={orbColor3}
+                    backgroundColor="#000000"
                 />
             }
         >
