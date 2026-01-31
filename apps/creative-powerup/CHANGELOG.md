@@ -1,5 +1,12 @@
 # creative-powerup
 
+## 0.1.5 - 2026-01-31
+
+### Patch Changes
+
+- Updated dependencies [9595ced]
+  - @thesage/ui@0.0.14
+
 ## 0.1.4 - 2026-01-30
 
 ### Patch Changes
