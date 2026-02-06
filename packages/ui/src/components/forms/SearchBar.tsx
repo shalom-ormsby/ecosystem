@@ -1,5 +1,4 @@
-'use client';
-
+'use client';;
 import React, { useState, useCallback, useEffect } from 'react';
 import { TextField, type TextFieldProps } from './TextField';
 
@@ -60,158 +59,157 @@ export interface SearchBarProps extends Omit<TextFieldProps, 'variant'> {
  * />
  * ```
  */
-export const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
-  (
-    {
-      onSearch,
-      debounceMs = 300,
-      showClearButton = true,
-      onClear,
-      value: controlledValue,
-      onChange,
-      placeholder = 'Search',
-      className = '',
-      shortcut = '⌘K',
-      ...props
+export const SearchBar = (
+  {
+    ref,
+    onSearch,
+    debounceMs = 300,
+    showClearButton = true,
+    onClear,
+    value: controlledValue,
+    onChange,
+    placeholder = 'Search',
+    className = '',
+    shortcut = '⌘K',
+    ...props
+  }: SearchBarProps & {
+    ref?: React.Ref<HTMLInputElement>;
+  }
+) => {
+  const [internalValue, setInternalValue] = useState(controlledValue || '');
+
+  // Update internal value when controlled value changes
+  useEffect(() => {
+    if (controlledValue !== undefined) {
+      setInternalValue(controlledValue);
+    }
+  }, [controlledValue]);
+
+  // Debounced search callback
+  useEffect(() => {
+    if (!onSearch) return;
+
+    const timer = setTimeout(() => {
+      onSearch(String(internalValue));
+    }, debounceMs);
+
+    return () => clearTimeout(timer);
+  }, [internalValue, debounceMs, onSearch]);
+
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
+      setInternalValue(newValue);
+      onChange?.(e);
     },
-    ref
-  ) => {
-    const [internalValue, setInternalValue] = useState(controlledValue || '');
+    [onChange]
+  );
 
-    // Update internal value when controlled value changes
-    useEffect(() => {
-      if (controlledValue !== undefined) {
-        setInternalValue(controlledValue);
+  const handleClear = useCallback(() => {
+    setInternalValue('');
+    onClear?.();
+    // Create synthetic event for controlled components
+    if (onChange) {
+      const syntheticEvent = {
+        target: { value: '' },
+      } as React.ChangeEvent<HTMLInputElement>;
+      onChange(syntheticEvent);
+    }
+  }, [onChange, onClear]);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Escape' && internalValue) {
+        handleClear();
       }
-    }, [controlledValue]);
+      props.onKeyDown?.(e);
+    },
+    [internalValue, handleClear, props]
+  );
 
-    // Debounced search callback
-    useEffect(() => {
-      if (!onSearch) return;
+  const value = controlledValue !== undefined ? controlledValue : internalValue;
+  const showClear = showClearButton && value;
+  const showShortcut = !value && shortcut;
 
-      const timer = setTimeout(() => {
-        onSearch(String(internalValue));
-      }, debounceMs);
+  return (
+    <div className={`relative w-full ${className}`}>
+      {/* Search Icon */}
+      <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-[var(--color-text-muted)]"
+          aria-hidden="true"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+      </div>
 
-      return () => clearTimeout(timer);
-    }, [internalValue, debounceMs, onSearch]);
+      <TextField
+        ref={ref}
+        value={value}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        placeholder={placeholder}
+        variant="outlined"
+        className="pl-10 !bg-[var(--color-surface)] !border !border-[var(--color-border)]"
+        style={{ paddingRight: (showClear || showShortcut) ? '3rem' : undefined }}
+        {...props}
+      />
 
-    const handleChange = useCallback(
-      (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue = e.target.value;
-        setInternalValue(newValue);
-        onChange?.(e);
-      },
-      [onChange]
-    );
+      {/* Shortcut Badge */}
+      {showShortcut && (
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+          <kbd className="px-2 py-0.5 text-xs font-mono text-[var(--color-text-primary)] bg-[var(--color-background)] border border-[var(--color-border)] rounded shadow-sm">
+            {shortcut}
+          </kbd>
+        </div>
+      )}
 
-    const handleClear = useCallback(() => {
-      setInternalValue('');
-      onClear?.();
-      // Create synthetic event for controlled components
-      if (onChange) {
-        const syntheticEvent = {
-          target: { value: '' },
-        } as React.ChangeEvent<HTMLInputElement>;
-        onChange(syntheticEvent);
-      }
-    }, [onChange, onClear]);
-
-    const handleKeyDown = useCallback(
-      (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Escape' && internalValue) {
-          handleClear();
-        }
-        props.onKeyDown?.(e);
-      },
-      [internalValue, handleClear, props]
-    );
-
-    const value = controlledValue !== undefined ? controlledValue : internalValue;
-    const showClear = showClearButton && value;
-    const showShortcut = !value && shortcut;
-
-    return (
-      <div className={`relative w-full ${className}`}>
-        {/* Search Icon */}
-        <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+      {/* Clear Button */}
+      {showClear && (
+        <button
+          type="button"
+          onClick={handleClear}
+          className="
+            absolute right-3 top-1/2 -translate-y-1/2
+            p-1 rounded-full
+            text-[var(--color-text-muted)]
+            hover:text-[var(--color-text-primary)]
+            hover:bg-[var(--color-hover)]
+            transition-colors
+            focus:outline-none
+            focus:ring-2
+            focus:ring-[var(--color-focus)]
+            focus:ring-opacity-50
+          "
+          aria-label="Clear search"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
+            width="16"
+            height="16"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="text-[var(--color-text-muted)]"
             aria-hidden="true"
           >
-            <circle cx="11" cy="11" r="8" />
-            <path d="m21 21-4.35-4.35" />
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
-        </div>
-
-        <TextField
-          ref={ref}
-          value={value}
-          onChange={handleChange}
-          onKeyDown={handleKeyDown}
-          placeholder={placeholder}
-          variant="outlined"
-          className="pl-10 !bg-[var(--color-surface)] !border !border-[var(--color-border)]"
-          style={{ paddingRight: (showClear || showShortcut) ? '3rem' : undefined }}
-          {...props}
-        />
-
-        {/* Shortcut Badge */}
-        {showShortcut && (
-          <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-            <kbd className="px-2 py-0.5 text-xs font-mono text-[var(--color-text-primary)] bg-[var(--color-background)] border border-[var(--color-border)] rounded shadow-sm">
-              {shortcut}
-            </kbd>
-          </div>
-        )}
-
-        {/* Clear Button */}
-        {showClear && (
-          <button
-            type="button"
-            onClick={handleClear}
-            className="
-              absolute right-3 top-1/2 -translate-y-1/2
-              p-1 rounded-full
-              text-[var(--color-text-muted)]
-              hover:text-[var(--color-text-primary)]
-              hover:bg-[var(--color-hover)]
-              transition-colors
-              focus:outline-none
-              focus:ring-2
-              focus:ring-[var(--color-focus)]
-              focus:ring-opacity-50
-            "
-            aria-label="Clear search"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
-        )}
-      </div>
-    );
-  }
-);
-
-SearchBar.displayName = 'SearchBar';
+        </button>
+      )}
+    </div>
+  );
+};

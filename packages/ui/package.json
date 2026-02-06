@@ -48,22 +48,137 @@
             "import": "./dist/providers.mjs",
             "require": "./dist/providers.js"
         },
+        "./webgl": {
+            "types": "./dist/webgl.d.ts",
+            "import": "./dist/webgl.mjs",
+            "require": "./dist/webgl.js"
+        },
+        "./forms": {
+            "types": "./dist/forms.d.ts",
+            "import": "./dist/forms.mjs",
+            "require": "./dist/forms.js"
+        },
+        "./dates": {
+            "types": "./dist/dates.d.ts",
+            "import": "./dist/dates.mjs",
+            "require": "./dist/dates.js"
+        },
+        "./tables": {
+            "types": "./dist/tables.d.ts",
+            "import": "./dist/tables.mjs",
+            "require": "./dist/tables.js"
+        },
+        "./dnd": {
+            "types": "./dist/dnd.d.ts",
+            "import": "./dist/dnd.mjs",
+            "require": "./dist/dnd.js"
+        },
         "./globals.css": "./src/globals.css"
     },
     "scripts": {
-        "build": "tsup src/index.ts src/tokens.ts src/hooks.ts src/utils.ts src/providers.ts --format esm,cjs --dts",
-        "dev": "tsup src/index.ts src/tokens.ts src/hooks.ts src/utils.ts src/providers.ts --format esm,cjs --dts --watch",
-        "lint": "eslint src/"
+        "build": "tsup",
+        "dev": "tsup --watch",
+        "lint": "eslint src/",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "size": "size-limit",
+        "size:check": "size-limit --limit"
     },
+    "size-limit": [
+        {
+            "name": "Core (index)",
+            "path": "dist/index.mjs",
+            "limit": "450 KB"
+        },
+        {
+            "name": "WebGL",
+            "path": "dist/webgl.mjs",
+            "limit": "10 KB"
+        },
+        {
+            "name": "Forms",
+            "path": "dist/forms.mjs",
+            "limit": "10 KB"
+        },
+        {
+            "name": "Dates",
+            "path": "dist/dates.mjs",
+            "limit": "30 KB"
+        },
+        {
+            "name": "Tables",
+            "path": "dist/tables.mjs",
+            "limit": "10 KB"
+        },
+        {
+            "name": "DnD",
+            "path": "dist/dnd.mjs",
+            "limit": "10 KB"
+        },
+        {
+            "name": "Hooks",
+            "path": "dist/hooks.mjs",
+            "limit": "40 KB"
+        },
+        {
+            "name": "Providers",
+            "path": "dist/providers.mjs",
+            "limit": "60 KB"
+        },
+        {
+            "name": "Tokens",
+            "path": "dist/tokens.mjs",
+            "limit": "70 KB"
+        },
+        {
+            "name": "Utils",
+            "path": "dist/utils.mjs",
+            "limit": "25 KB"
+        }
+    ],
     "peerDependencies": {
-        "framer-motion": "*",
-        "react": "*"
-    },
-    "dependencies": {
         "@dnd-kit/core": "^6.3.1",
         "@dnd-kit/sortable": "^10.0.0",
         "@dnd-kit/utilities": "^3.2.2",
         "@hookform/resolvers": "^3.10.0",
+        "@tanstack/react-table": "^8.21.3",
+        "date-fns": "^4.1.0",
+        "framer-motion": "*",
+        "react": "*",
+        "react-day-picker": "^9.13.0",
+        "react-hook-form": "^7.70.0",
+        "zod": "^3.24.1"
+    },
+    "peerDependenciesMeta": {
+        "@dnd-kit/core": {
+            "optional": true
+        },
+        "@dnd-kit/sortable": {
+            "optional": true
+        },
+        "@dnd-kit/utilities": {
+            "optional": true
+        },
+        "@hookform/resolvers": {
+            "optional": true
+        },
+        "@tanstack/react-table": {
+            "optional": true
+        },
+        "date-fns": {
+            "optional": true
+        },
+        "react-day-picker": {
+            "optional": true
+        },
+        "react-hook-form": {
+            "optional": true
+        },
+        "zod": {
+            "optional": true
+        }
+    },
+    "dependencies": {
         "@radix-ui/react-accordion": "^1.2.12",
         "@radix-ui/react-alert-dialog": "^1.1.15",
         "@radix-ui/react-aspect-ratio": "^1.1.8",
@@ -90,30 +205,40 @@
         "@radix-ui/react-toggle": "^1.1.10",
         "@radix-ui/react-toggle-group": "^1.1.11",
         "@radix-ui/react-tooltip": "^1.2.8",
-        "@tanstack/react-table": "^8.21.3",
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.0",
         "cmdk": "^1.1.1",
-        "date-fns": "^4.1.0",
         "embla-carousel-react": "^8.6.0",
         "input-otp": "^1.4.2",
         "lucide-react": "^0.562.0",
-        "ogl": "^1.0.11",
-        "react-day-picker": "^9.13.0",
-        "react-hook-form": "^7.70.0",
         "react-resizable-panels": "^4.4.0",
         "sonner": "^2.0.7",
         "tailwind-merge": "^2.2.0",
         "vaul": "^1.1.2",
-        "zod": "^3.24.1",
         "zustand": "^5.0.9"
     },
     "devDependencies": {
+        "@dnd-kit/core": "^6.3.1",
+        "@dnd-kit/sortable": "^10.0.0",
+        "@dnd-kit/utilities": "^3.2.2",
+        "@hookform/resolvers": "^3.10.0",
+        "@size-limit/preset-small-lib": "^12.0.0",
+        "@tanstack/react-table": "^8.21.3",
+        "@testing-library/jest-dom": "^6.9.1",
+        "@testing-library/react": "^16.3.2",
+        "@testing-library/user-event": "^14.6.1",
         "@thesage/config": "workspace:*",
-        "@types/react": "^18.3.3",
+        "@types/react": "^19",
+        "date-fns": "^4.1.0",
         "framer-motion": "^12.26.2",
+        "jsdom": "^28.0.0",
+        "react-day-picker": "^9.13.0",
+        "react-hook-form": "^7.70.0",
+        "size-limit": "^12.0.0",
         "tailwindcss": "^3.4.0",
         "tsup": "^8.0.0",
-        "typescript": "^5.0.0"
+        "typescript": "^5.0.0",
+        "vitest": "^4.0.18",
+        "zod": "^3.24.1"
     }
 }

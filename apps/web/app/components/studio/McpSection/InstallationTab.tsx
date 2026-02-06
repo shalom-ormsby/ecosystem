@@ -271,7 +271,7 @@ cd ecosystem`}
                         Try asking your AI assistant:
                     </p>
                     <div className="p-3 bg-[var(--color-surface)] rounded border border-[var(--color-border)] text-sm">
-                        <code className="text-[var(--color-text-primary)]">"Show me all Sage UI components"</code>
+                        <code className="text-[var(--color-text-primary)]">"Show me all Sage Design Engine components"</code>
                     </div>
                     <p className="text-xs text-[var(--color-text-muted)] mt-2">
                         If it lists components, you're connected!

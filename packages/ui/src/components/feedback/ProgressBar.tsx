@@ -64,78 +64,76 @@ export interface ProgressBarProps extends React.HTMLAttributes<HTMLDivElement> {
  * <ProgressBar indeterminate variant="primary" />
  * ```
  */
-export const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
-  (
-    {
-      value,
-      max = 100,
-      size = 'md',
-      variant = 'primary',
-      showLabel = false,
-      animated = true,
-      indeterminate = false,
-      className = '',
-      ...props
-    },
-    ref
-  ) => {
-    const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
+export const ProgressBar = (
+  {
+    ref,
+    value,
+    max = 100,
+    size = 'md',
+    variant = 'primary',
+    showLabel = false,
+    animated = true,
+    indeterminate = false,
+    className = '',
+    ...props
+  }: ProgressBarProps & {
+    ref?: React.Ref<HTMLDivElement>;
+  }
+) => {
+  const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
 
-    const sizes = {
-      sm: 'h-1',
-      md: 'h-2',
-      lg: 'h-3',
-    };
+  const sizes = {
+    sm: 'h-1',
+    md: 'h-2',
+    lg: 'h-3',
+  };
 
-    const variants = {
-      primary: 'bg-[var(--color-primary)]',
-      success: 'bg-[var(--color-success)]',
-      warning: 'bg-[var(--color-warning)]',
-      error: 'bg-[var(--color-error)]',
-      info: 'bg-[var(--color-info)]',
-    };
+  const variants = {
+    primary: 'bg-[var(--color-primary)]',
+    success: 'bg-[var(--color-success)]',
+    warning: 'bg-[var(--color-warning)]',
+    error: 'bg-[var(--color-error)]',
+    info: 'bg-[var(--color-info)]',
+  };
 
-    return (
-      <div ref={ref} className={`w-full ${className}`} {...props}>
-        {showLabel && !indeterminate && (
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-medium text-[var(--color-text-primary)]">
-              {Math.round(percentage)}%
-            </span>
-          </div>
-        )}
+  return (
+    <div ref={ref} className={`w-full ${className}`} {...props}>
+      {showLabel && !indeterminate && (
+        <div className="flex justify-between items-center mb-2">
+          <span className="text-sm font-medium text-[var(--color-text-primary)]">
+            {Math.round(percentage)}%
+          </span>
+        </div>
+      )}
+      <div
+        className={`
+          w-full ${sizes[size]}
+          bg-[var(--color-surface)]
+          rounded-full
+          overflow-hidden
+          border border-[var(--color-border)]
+        `}
+        role="progressbar"
+        aria-valuenow={indeterminate ? undefined : Math.round(percentage)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={indeterminate ? 'Loading' : `${Math.round(percentage)}% complete`}
+      >
         <div
           className={`
-            w-full ${sizes[size]}
-            bg-[var(--color-surface)]
-            rounded-full
-            overflow-hidden
-            border border-[var(--color-border)]
+            h-full
+            ${variants[variant]}
+            ${animated ? 'transition-all duration-300 ease-out' : ''}
+            ${indeterminate ? 'animate-progress-indeterminate w-1/3' : ''}
           `}
-          role="progressbar"
-          aria-valuenow={indeterminate ? undefined : Math.round(percentage)}
-          aria-valuemin={0}
-          aria-valuemax={100}
-          aria-label={indeterminate ? 'Loading' : `${Math.round(percentage)}% complete`}
-        >
-          <div
-            className={`
-              h-full
-              ${variants[variant]}
-              ${animated ? 'transition-all duration-300 ease-out' : ''}
-              ${indeterminate ? 'animate-progress-indeterminate w-1/3' : ''}
-            `}
-            style={{
-              width: indeterminate ? undefined : `${percentage}%`,
-            }}
-          />
-        </div>
+          style={{
+            width: indeterminate ? undefined : `${percentage}%`,
+          }}
+        />
       </div>
-    );
-  }
-);
-
-ProgressBar.displayName = 'ProgressBar';
+    </div>
+  );
+};
 
 // Add indeterminate animation
 if (typeof document !== 'undefined') {

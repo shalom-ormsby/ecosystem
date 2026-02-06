@@ -45,34 +45,39 @@ export interface HeadingProps {
  * <Heading level={3}>Subsection</Heading>
  * ```
  */
-export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({ children, level, className = '' }, ref) => {
-    const levelStyles = {
-      1: 'text-4xl lg:text-5xl',  // 36px → 48px
-      2: 'text-3xl lg:text-4xl',  // 30px → 36px
-      3: 'text-2xl lg:text-3xl',  // 24px → 30px
-      4: 'text-xl lg:text-2xl',   // 20px → 24px
-      5: 'text-lg lg:text-xl',    // 18px → 20px
-      6: 'text-base lg:text-lg',  // 16px → 18px
-    };
-
-    const baseStyles = `
-      font-bold
-      text-[var(--color-text-primary)]
-      ${levelStyles[level]}
-    `;
-
-    const Component = `h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-
-    return React.createElement(
-      Component,
-      {
-        ref,
-        className: `${baseStyles} ${className}`,
-      },
-      children
-    );
+export const Heading = (
+  {
+    ref,
+    children,
+    level,
+    className = ''
+  }: HeadingProps & {
+    ref?: React.Ref<HTMLHeadingElement>;
   }
-);
+) => {
+  const levelStyles = {
+    1: 'text-4xl lg:text-5xl',  // 36px → 48px
+    2: 'text-3xl lg:text-4xl',  // 30px → 36px
+    3: 'text-2xl lg:text-3xl',  // 24px → 30px
+    4: 'text-xl lg:text-2xl',   // 20px → 24px
+    5: 'text-lg lg:text-xl',    // 18px → 20px
+    6: 'text-base lg:text-lg',  // 16px → 18px
+  };
 
-Heading.displayName = 'Heading';
+  const baseStyles = `
+    font-bold
+    text-[var(--color-text-primary)]
+    ${levelStyles[level]}
+  `;
+
+  const Component = `h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
+  return React.createElement(
+    Component,
+    {
+      ref,
+      className: `${baseStyles} ${className}`,
+    },
+    children
+  );
+};

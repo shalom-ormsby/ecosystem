@@ -1,7 +1,7 @@
-# Sage UI - To Do
+# Sage Design Engine - To Do
 
 
-This document tracks planned improvements and enhancements to the Sage UI.
+This document tracks planned improvements and enhancements to the Sage Design Engine.
 
 ## 📋 Projects Overview
 

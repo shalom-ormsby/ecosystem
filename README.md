@@ -168,7 +168,7 @@ Three custom React hooks for common patterns:
 
 ### Technologies
 
-- React 18/19 (peerDependency supports both)
+- React 19.2.1 (peerDependency supports 18+)
 - TypeScript 5 (strict mode)
 - Tailwind CSS 3 (via CSS variables)
 - Framer Motion 12 (all animations respect preferences)
@@ -219,7 +219,7 @@ ecosystem/
 │   │       └── index.ts       # Main export barrel
 │   ├── tokens/                # @thesage/tokens - Design decisions as code
 │   │   ├── studio/            # Studio theme tokens
-│   │   ├── sage/              # Sage theme tokens
+│   │   ├── terra/             # Terra theme tokens
 │   │   ├── volt/              # Volt theme tokens
 │   │   ├── base.ts            # Shared scales
 │   │   └── index.ts           # Unified export
@@ -274,7 +274,7 @@ If you're building here (human or AI):
 
 User control made tangible. A floating panel that lets users customize:
 - **Motion intensity** (0-10, syncs with system preferences)
-- **Theme** (Studio, Sage, or Volt)
+- **Theme** (Studio, Terra, or Volt)
 - **Color mode** (Light or dark)
 
 All preferences persist to localStorage. This isn't a settings panel hidden in a menu—it's a hero feature.
@@ -337,19 +337,22 @@ The work is the proof. Every component, every interaction, every line of code de
 
 ## Status & Roadmap
 
-**Production Ready (v1.0):**
-- **Design system** — Complete with 27 components, 3 themes, comprehensive token system
-- **Sage Studio** — Interactive documentation with LLM optimization (Phase 7 complete)
+**Enterprise-Ready (v1.0.0-rc.1):**
+- **Design system** — 48+ components across 7 functional categories, 3 themes, comprehensive token system
+- **Sage Studio** — Interactive documentation with LLM optimization, JSON-LD metadata
 - **Portfolio app** — Living showcase with Customizer integration
+- **Test suite** — Vitest + Testing Library with 63 tests across 10 files, CI-enforced
+- **Bundle optimization** — Optional subpath exports (`/forms`, `/dates`, `/tables`, `/dnd`, `/webgl`), vendored WebGL (93% size reduction)
+- **React 19** — Full migration to React 19 ref-as-prop pattern across 56 files
 
 **In Active Development:**
 - **Creative Powerup** — Experiment gallery (9 live experiments: games, visualizations, animations, tools)
 - **AI Notes component** — Transparency feature for documenting AI collaboration
+- **Phase 5** — Assemblies & Templates (composed components and full-page layouts)
 
 **Planned:**
 - **Sage Stocks migration** — Existing 15k LOC app to be integrated into monorepo
 - **SageOS** — Personal operating system for creative work
-- **Testing suite** — Vitest + Testing Library for comprehensive test coverage
 - **Additional components** — Advanced layout patterns and compositions
 
 [Full implementation status →](AGENTS.md#current-implementation-state)

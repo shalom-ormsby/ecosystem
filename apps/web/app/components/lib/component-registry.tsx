@@ -307,7 +307,7 @@ export const componentRegistry: Record<string, ComponentConfig> = {
       'Loading spinner has aria-hidden="true" to prevent screen reader announcement',
       'disabled state properly conveyed to assistive technologies',
       'Extends native HTMLButtonElement, inheriting all standard ARIA attributes',
-      'Supports focus management with React.forwardRef',
+      'Supports focus management via React 19 ref-as-prop pattern',
     ],
   },
 
@@ -1774,7 +1774,7 @@ export function PaymentsTable() {
 
   Textarea: {
     component: Textarea,
-    description: 'Multi-line text input field. Styled with Sage UI tokens.',
+    description: 'Multi-line text input field. Styled with Sage Design Engine tokens.',
     props: {
       placeholder: {
         type: 'text',
@@ -3360,7 +3360,7 @@ const [date, setDate] = useState<Date | undefined>(new Date())
     props: {
       title: {
         type: 'text',
-        default: 'Sage UI',
+        default: 'Sage Design Engine',
         description: 'Main title text',
       },
       description: {

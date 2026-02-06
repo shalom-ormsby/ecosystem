@@ -14,7 +14,7 @@ export function WelcomeCard() {
         Hello World
       </Text>
       <Text className="mb-4 text-muted-foreground">
-        Built with Sage UI components.
+        Built with Sage Design Engine components.
       </Text>
       <Button variant="default" className="w-full">
         Click Me
@@ -94,7 +94,7 @@ export function WelcomeCard() {
                             <Card className="p-6 bg-[var(--color-surface)] border-[var(--color-border)] relative overflow-hidden backdrop-blur-xl bg-opacity-90">
                                 <Heading level={3} className="mb-2">Hello World</Heading>
                                 <Text className="mb-4 text-[var(--color-text-secondary)]">
-                                    Built with Sage UI components.
+                                    Built with Sage Design Engine components.
                                 </Text>
                                 <Button variant="default" size="default" className="w-full">
                                     Click Me

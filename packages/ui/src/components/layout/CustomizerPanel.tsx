@@ -98,14 +98,22 @@ export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: 
             }
         };
 
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                setIsOpen(false);
+            }
+        };
+
         // Add small delay to prevent immediate closing when opening
         const timeoutId = setTimeout(() => {
             document.addEventListener('mousedown', handleClickOutside);
         }, 100);
+        document.addEventListener('keydown', handleKeyDown);
 
         return () => {
             clearTimeout(timeoutId);
             document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('keydown', handleKeyDown);
         };
     }, [isOpen]);
 
@@ -115,6 +123,7 @@ export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: 
         return (
             <button
                 onClick={() => setIsOpen(true)}
+                aria-label={mode === 'lightweight' ? 'Open theme settings' : 'Open experience customizer'}
                 className="fixed bottom-4 right-4 bg-background text-foreground px-4 py-2 rounded-full shadow-lg border border-[var(--color-glass-border)] font-medium hover:opacity-80 transition-all z-50 flex items-center gap-2"
                 style={{ backdropFilter: 'var(--effect-blur-sm)' }}
             >
@@ -146,9 +155,10 @@ export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: 
                 <h3 className="font-bold text-lg">{mode === 'lightweight' ? 'Theme Settings' : 'Experience Customizer'}</h3>
                 <button
                     onClick={() => setIsOpen(false)}
+                    aria-label="Close customizer"
                     className="text-foreground opacity-60 hover:opacity-100 transition-opacity p-1"
                 >
-                    <X className="w-5 h-5" />
+                    <X className="w-5 h-5" aria-hidden="true" />
                 </button>
             </div>
 
@@ -166,6 +176,10 @@ export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: 
                             max="10"
                             value={motion}
                             onChange={(e) => setMotion(Number(e.target.value))}
+                            aria-label="Motion intensity"
+                            aria-valuemin={0}
+                            aria-valuemax={10}
+                            aria-valuenow={motion}
                             className="w-full h-2 bg-[var(--color-surface)] rounded-lg appearance-none cursor-pointer accent-primary"
                         />
                     </div>
@@ -184,6 +198,7 @@ export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: 
                                 <button
                                     key={t.id}
                                     onClick={() => setTheme(t.id as any)}
+                                    aria-pressed={theme === t.id}
                                     className={`
                                         px-3 py-2.5 rounded-lg text-sm font-medium transition-all flex flex-col items-center gap-1 border
                                         ${theme === t.id
@@ -233,6 +248,7 @@ export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: 
                             <button
                                 key={m.id}
                                 onClick={() => setMode(m.id as any)}
+                                aria-pressed={colorMode === m.id}
                                 className={`
                                     px-3 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 border
                                     ${colorMode === m.id
@@ -265,6 +281,7 @@ export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: 
                             <div className="flex gap-1 bg-[var(--color-surface)] rounded-md p-0.5">
                                 <button
                                     onClick={() => setCustomizationMode('simple')}
+                                    aria-pressed={customizationMode === 'simple'}
                                     className={`
                                         px-2 py-1 text-xs rounded transition-all
                                         ${customizationMode === 'simple'
@@ -277,6 +294,7 @@ export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: 
                                 </button>
                                 <button
                                     onClick={() => setCustomizationMode('advanced')}
+                                    aria-pressed={customizationMode === 'advanced'}
                                     className={`
                                         px-2 py-1 text-xs rounded transition-all
                                         ${customizationMode === 'advanced'

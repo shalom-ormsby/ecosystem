@@ -355,7 +355,7 @@ Format:
 | Build | tsup 8.5.1 | For @thesage/ui package (ESM + CJS) |
 | Deployment | Vercel | Next.js optimized |
 
-**Testing:** Not yet configured. Consider Vitest + Testing Library when needed.
+**Testing:** Vitest + Testing Library configured in `packages/ui`. 63 tests across 10 test files. Tests run in CI on every PR via `.github/workflows/ci.yml`.
 
 ---
 

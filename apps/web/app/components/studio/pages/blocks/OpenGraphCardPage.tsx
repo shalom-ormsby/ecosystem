@@ -72,7 +72,7 @@ const AVAILABLE_FONTS = [
 
 export function OpenGraphCardPage() {
     // State for all customizable properties
-    const [title, setTitle] = useState('Sage UI');
+    const [title, setTitle] = useState('Sage Design Engine');
     const [description, setDescription] = useState("The Solopreneur's Development Stack");
     const [showIcon, setShowIcon] = useState(true);
     const [titleFontSize, setTitleFontSize] = useState(96);

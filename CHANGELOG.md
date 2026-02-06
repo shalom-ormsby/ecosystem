@@ -2,7 +2,89 @@
 
 All notable changes to this project will be documented in this file.
 
-**Last updated:** 2026-01-30 21:30 PST
+**Last updated:** 2026-02-06
+
+## 2026-02-06
+
+### Brand Refresh: "Sage — Make it Lovable"
+
+We stepped back and asked: *what does this project actually say to someone landing on thesage.dev for the first time?*
+
+The old hero — "The Solopreneur's Development Stack" — was honest, but it was playing small. An enterprise was already evaluating Sage for production use. Solopreneurs were building with it. The positioning didn't match the ambition.
+
+So we rethought the entire top-fold messaging. Not a cosmetic refresh — a strategic one.
+
+**The insight:** Sage isn't defined by who uses it. It's defined by what it stands for. "Lovable by Design" isn't a tagline — it's the philosophy that already runs through every component, every motion preference check, every theme personality. We just hadn't said it out loud yet.
+
+**What changed:**
+
+- **Hero headline** — Replaced "The Solopreneur's Development Stack" with a two-line treatment: "Sage" (enormous, gradient) + "Make it Lovable" (bold, white). Brand-first, promise-second.
+- **Badge** — "Human Touch x AI Power" → "Lovable by Design". Anchors the philosophy without being preachy.
+- **Sub copy** — "Ship stunning, full-stack web applications faster..." → "Components that feel alive. Themes with real personality. Motion your users control. Designed for humans. Fluent with AI." Five punchy fragments that earn credibility through specificity.
+- **Typewriter** — "Build smarter with Sage Design Engine" → "Build beautifully with Sage Design Engine" + cycling through the four-layer hierarchy: Tokens. Components. Blocks. Templates.
+- **Metadata** — Updated page title, OpenGraph, and Twitter cards to "Sage — Make it Lovable" across all social sharing surfaces.
+
+**Why it matters:** The old copy described a category ("development stack"). The new copy describes an outcome ("make it lovable"). That's a fundamentally different conversation — one that resonates whether you're a solo builder, a startup team, or an enterprise design org.
+
+**Technical details:**
+- Fixed "g" descender clipping in oversized headline (`leading-none pb-2` for `bg-clip-text` compatibility)
+- Added `pt-24` to hero container to clear sticky nav without breaking vertical centering
+- All changes in `SageHero.tsx`, `landing/layout.tsx` metadata
+- Build verified: 8/8 static pages, zero errors
+
+---
+
+### Documentation Audit & v1.0.0-rc.1 Content Update
+
+Comprehensive sweep of all user-facing content on thesage.dev and linked documentation files to align with v1.0.0-rc.1.
+
+**Branding fixes (20+ files):**
+- "Sage UI" → "Sage Design Engine" across all web app pages, metadata, JSON-LD, search index, MCP docs, error/404 pages
+- Theme "Sage" → "Terra" in all documentation and UI (reflecting the Jan 2026 rename to avoid product/theme name collision)
+- Copyright dates updated to 2026
+
+**Technical accuracy fixes:**
+- React 18 → React 19 references in OverviewSection, ArchitectureSection
+- `forwardRef` → ref-as-prop guidance in AddingComponentsSection, component-registry
+- Next.js 14+ → 15+ in prerequisites
+- Testing status updated from "not yet configured" to "Vitest + Testing Library, 63 tests, CI-enforced" in CLAUDE.md
+
+**Documentation files updated:**
+- README.md — Theme name, React version, Status & Roadmap section rewritten for v1.0.0-rc.1
+- SAGE_DESIGN_SYSTEM_STRATEGY.md — Title, vision, testing section, timestamps
+- SageUI_ToDo.md, DOCUMENTATION-AUDIT.md — Title and description alignment
+
+---
+
+### @thesage/ui v1.0.0-rc.1 — Enterprise Readiness Complete
+
+**Phase 1: React 19 Migration**
+- Migrated 146 `forwardRef` usages across 56 files to React 19 ref-as-prop pattern
+- Updated all 26 Radix UI packages to latest versions
+- All 11 packages/apps building on React 19.2.1
+
+**Phase 2: Test Foundation**
+- Added Vitest + Testing Library with 63 tests across 10 test files
+- Components tested: Button, Dialog, Input, Select, Tabs, Accordion, Card, Progress, Switch, useMotionPreference
+- Tests and bundle size checks run in CI on every PR
+
+**Phase 3: Dependency Optimization**
+- Vendored OGL WebGL library with clean-room TypeScript implementations (80 KB → 1.1 KB, 93% reduction)
+- Created 5 optional subpath exports: `@thesage/ui/forms`, `/dates`, `/tables`, `/dnd`, `/webgl`
+- Moved 9 heavy deps to optional peer dependencies — consumers install only what they use
+- Added size-limit tracking for 10 entry points, all enforced in CI
+- Bundle sizes (brotli): Core 146 KB, WebGL 1.1 KB, Forms 9.4 KB, Dates 29 KB, Tables 8.3 KB, DnD 8.3 KB
+
+**Phase 4: Enterprise Polish**
+- Created `docs/ENTERPRISE-INTEGRATION-GUIDE.md` with full setup, providers, imports, styling, and troubleshooting
+- Security audit: 0 vulnerabilities in @thesage/ui; patched Next.js CVEs (15.5.12, 16.1.6)
+- Accessibility audit: 15 issues found, all critical/major fixed (BreadcrumbPage, CustomizerPanel, CollapsibleCodeBlock, SearchBar, Code)
+- Version bumped to `1.0.0-rc.1`
+- Archived implementation plan to `docs/archive/ENTERPRISE-READINESS-PLAN.md`
+
+**Files changed:** 20+ files across packages/ui, apps/web, apps/creative-powerup, .github/workflows, docs/
+
+---
 
 ## 2026-01-30T21:30:00Z
 

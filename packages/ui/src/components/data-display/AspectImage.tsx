@@ -31,8 +31,9 @@ export interface AspectImageProps extends React.ImgHTMLAttributes<HTMLImageEleme
     caption?: React.ReactNode;
 }
 
-export const AspectImage = React.forwardRef<HTMLImageElement, AspectImageProps>(
-    ({
+export const AspectImage = (
+    {
+        ref,
         ratio = 16 / 9,
         src,
         alt,
@@ -42,31 +43,31 @@ export const AspectImage = React.forwardRef<HTMLImageElement, AspectImageProps>(
         className = '',
         style,
         ...props
-    }, ref) => {
-        return (
-            <figure className={`w-full ${className}`}>
-                <div
-                    className={`relative overflow-hidden w-full bg-[var(--color-surface)] border border-[var(--color-border)]
-                    ${rounded ? 'rounded-xl' : ''}
-                    ${shadow ? 'shadow-md' : ''}`}
-                    style={{ aspectRatio: ratio }}
-                >
-                    <img
-                        ref={ref}
-                        src={src}
-                        alt={alt}
-                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                        {...props}
-                    />
-                </div>
-                {caption && (
-                    <figcaption className="mt-2 text-sm text-[var(--color-text-muted)] text-center">
-                        {caption}
-                    </figcaption>
-                )}
-            </figure>
-        );
+    }: AspectImageProps & {
+        ref?: React.Ref<HTMLImageElement>;
     }
-);
-
-AspectImage.displayName = 'AspectImage';
+) => {
+    return (
+        <figure className={`w-full ${className}`}>
+            <div
+                className={`relative overflow-hidden w-full bg-[var(--color-surface)] border border-[var(--color-border)]
+                ${rounded ? 'rounded-xl' : ''}
+                ${shadow ? 'shadow-md' : ''}`}
+                style={{ aspectRatio: ratio }}
+            >
+                <img
+                    ref={ref}
+                    src={src}
+                    alt={alt}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    {...props}
+                />
+            </div>
+            {caption && (
+                <figcaption className="mt-2 text-sm text-[var(--color-text-muted)] text-center">
+                    {caption}
+                </figcaption>
+            )}
+        </figure>
+    );
+};

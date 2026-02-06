@@ -68,34 +68,32 @@ export interface ContainerProps {
  * <Container as="main">Main content</Container>
  * ```
  */
-export const Container = React.forwardRef<HTMLElement, ContainerProps>(
-  (
-    {
-      children,
-      variant = 'standard',
-      padding = true,
-      className = '',
-      as: Component = 'div',
-    },
-    ref
-  ) => {
-    const maxWidthClasses = {
-      standard: 'max-w-7xl',      // 1280px - default for most content
-      wide: 'max-w-[1440px]',     // 1440px - for data-heavy layouts
-      narrow: 'max-w-4xl',        // 896px - for reading comfort
-    };
-
-    const paddingClasses = padding ? 'px-4 sm:px-6 lg:px-8' : '';
-
-    return React.createElement(
-      Component,
-      {
-        ref,
-        className: `${maxWidthClasses[variant]} mx-auto ${paddingClasses} ${className}`,
-      },
-      children
-    );
+export const Container = (
+  {
+    ref,
+    children,
+    variant = 'standard',
+    padding = true,
+    className = '',
+    as: Component = 'div'
+  }: ContainerProps & {
+    ref?: React.Ref<HTMLElement>;
   }
-);
+) => {
+  const maxWidthClasses = {
+    standard: 'max-w-7xl',      // 1280px - default for most content
+    wide: 'max-w-[1440px]',     // 1440px - for data-heavy layouts
+    narrow: 'max-w-4xl',        // 896px - for reading comfort
+  };
 
-Container.displayName = 'Container';
+  const paddingClasses = padding ? 'px-4 sm:px-6 lg:px-8' : '';
+
+  return React.createElement(
+    Component,
+    {
+      ref,
+      className: `${maxWidthClasses[variant]} mx-auto ${paddingClasses} ${className}`,
+    },
+    children
+  );
+};

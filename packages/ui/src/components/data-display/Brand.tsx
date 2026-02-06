@@ -66,51 +66,58 @@ export interface BrandProps {
  * <Brand size="lg">Brand</Brand>
  * ```
  */
-export const Brand = React.forwardRef<HTMLElement, BrandProps>(
-  ({ children, size = 'md', href, className = '', onClick }, ref) => {
-    // Size mappings following Swiss Grid typography scale
-    const sizeStyles = {
-      sm: 'text-base',      // 16px
-      md: 'text-lg',        // 18px
-      lg: 'text-2xl',       // 24px
-    };
+export const Brand = (
+  {
+    ref,
+    children,
+    size = 'md',
+    href,
+    className = '',
+    onClick
+  }: BrandProps & {
+    ref?: React.Ref<HTMLElement>;
+  }
+) => {
+  // Size mappings following Swiss Grid typography scale
+  const sizeStyles = {
+    sm: 'text-base',      // 16px
+    md: 'text-lg',        // 18px
+    lg: 'text-2xl',       // 24px
+  };
 
-    // Base styles with design system tokens
-    const baseStyles = `
-      font-bold
-      text-[var(--color-text-primary)]
-      transition-colors duration-200
-      focus-visible:outline-none
-      focus-visible:ring-2
-      focus-visible:ring-[var(--color-focus)]
-      focus-visible:ring-offset-2
-      ${sizeStyles[size]}
-    `;
+  // Base styles with design system tokens
+  const baseStyles = `
+    font-bold
+    text-[var(--color-text-primary)]
+    transition-colors duration-200
+    focus-visible:outline-none
+    focus-visible:ring-2
+    focus-visible:ring-[var(--color-focus)]
+    focus-visible:ring-offset-2
+    ${sizeStyles[size]}
+  `;
 
-    // If href is provided, render as link
-    if (href) {
-      return (
-        <a
-          ref={ref as React.Ref<HTMLAnchorElement>}
-          href={href}
-          onClick={onClick}
-          className={`${baseStyles} hover:opacity-80 ${className}`}
-        >
-          {children}
-        </a>
-      );
-    }
-
-    // Otherwise render as span
+  // If href is provided, render as link
+  if (href) {
     return (
-      <span
-        ref={ref as React.Ref<HTMLSpanElement>}
-        className={`${baseStyles} ${className}`}
+      <a
+        ref={ref as React.Ref<HTMLAnchorElement>}
+        href={href}
+        onClick={onClick}
+        className={`${baseStyles} hover:opacity-80 ${className}`}
       >
         {children}
-      </span>
+      </a>
     );
   }
-);
 
-Brand.displayName = 'Brand';
+  // Otherwise render as span
+  return (
+    <span
+      ref={ref as React.Ref<HTMLSpanElement>}
+      className={`${baseStyles} ${className}`}
+    >
+      {children}
+    </span>
+  );
+};

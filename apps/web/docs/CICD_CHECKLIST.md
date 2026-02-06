@@ -9,10 +9,10 @@ This workflow tracks the full release process from code changes to npm publicati
 ## 1. Preparation
 - [x] **Verify Current State:** Checked `CHANGELOG.md` and confirmed v1.0.0-rc.1 enterprise readiness.
 - [x] **Review Changes:** Confirmed all codebase changes (React 19, WebGL optimization, Tests) are present.
-- [ ] **Create Changeset:** Generate the changeset file to trigger the versioning process.
+- [x] **Create Changeset:** Generate the changeset file to trigger the versioning process.
 
 ## 2. CI Automation (Pull Request)
-- [ ] **Push Changes:** Commit and push the changeset to the feature branch.
+- [x] **Push Changes:** Commit and push the feature branch (v1.0.0-rc.1 code + changeset).
 - [ ] **Create PR:** Open a Pull Request to `main`.
 - [ ] **CI Checks:**
     - [ ] `build` job succeeds (all packages).

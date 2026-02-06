@@ -38,7 +38,7 @@ export default function LandingPage() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-2">
               <Sparkles className="w-6 h-6 text-primary" />
-              <span className="text-xl font-heading font-bold">Sage UI</span>
+              <span className="text-xl font-heading font-bold">Sage Design Engine</span>
             </div>
             <div className="flex items-center gap-6">
               <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
@@ -283,7 +283,7 @@ export default function LandingPage() {
                 <Zap className="w-8 h-8 text-primary" />
                 <h4 className="font-semibold">3 Built-in Themes</h4>
                 <p className="text-sm text-muted-foreground">
-                  Studio, Sage, and Volt themes ready to use out of the box.
+                  Studio, Terra, and Volt themes ready to use out of the box.
                 </p>
               </Card>
               <Card className="p-6 space-y-4">
@@ -370,10 +370,10 @@ export default function LandingPage() {
           <div className="max-w-6xl mx-auto space-y-12">
             <div className="text-center space-y-4">
               <h2 className="text-4xl lg:text-5xl font-heading font-bold">
-                Who Is Sage UI For?
+                Who Is Sage Design Engine For?
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                From startups to enterprises, Sage UI scales with your needs.
+                From startups to enterprises, Sage Design Engine scales with your needs.
               </p>
             </div>
 
@@ -439,7 +439,7 @@ export default function LandingPage() {
                 Get Started in Minutes
               </h2>
               <p className="text-lg text-muted-foreground">
-                Install Sage UI and start building with systematic design.
+                Install Sage Design Engine and start building with systematic design.
               </p>
             </div>
 
@@ -531,7 +531,7 @@ export default function LandingPage() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-primary" />
-              <span className="font-heading font-bold">Sage UI</span>
+              <span className="font-heading font-bold">Sage Design Engine</span>
             </div>
             <div className="flex items-center gap-6 text-sm text-muted-foreground">
               <Link href="/" className="hover:text-foreground transition-colors">
@@ -551,7 +551,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="text-center text-sm text-muted-foreground mt-8">
-            Built with Sage UI. Open source and MIT licensed.
+            Built with Sage Design Engine. Open source and MIT licensed.
           </div>
         </Container>
       </footer>
