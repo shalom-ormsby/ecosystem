@@ -3,7 +3,7 @@ import { createClient } from '@vercel/edge-config';
 
 export const runtime = 'edge';
 
-export const alt = 'Sage UI - The Solopreneur\'s Development Stack';
+export const alt = 'Sage Design Engine - The Solopreneur\'s Development Stack';
 export const size = {
     width: 1200,
     height: 630,
@@ -128,7 +128,7 @@ export default async function Image() {
 
     // Default fallback config
     const defaultConfig: OGCardConfig = {
-        title: 'Sage UI',
+        title: 'Sage Design Engine',
         description: 'Lovable by Design',
         variant: 'gradient' as const,
         gradient: {

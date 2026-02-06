@@ -87,7 +87,7 @@ export function AddingComponentsSection({ breadcrumbs, activeItemId }: AddingCom
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">Create the Component</h3>
                     <p className="text-sm text-[var(--color-text-secondary)] mb-2">
-                      Build the component in <Code syntax="plain">packages/ui/src/components/[category]/</Code> where [category] is one of: actions, forms, navigation, overlays, feedback, data-display, or layout. Ensure it uses <Code syntax="plain">React.forwardRef</Code> and properly types its props.
+                      Build the component in <Code syntax="plain">packages/ui/src/components/[category]/</Code> where [category] is one of: actions, forms, navigation, overlays, feedback, data-display, or layout. Use the React 19 ref-as-prop pattern (no <Code syntax="plain">forwardRef</Code> needed) and properly type its props.
                     </p>
                   </div>
                 </li>

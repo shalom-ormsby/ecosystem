@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden bg-black dark">
       <Header
-        logo={<span className="text-xl font-bold tracking-tight">Sage UI</span>}
+        logo={<span className="text-xl font-bold tracking-tight">Sage Design Engine</span>}
         navAlignment="right"
         navLinks={[
           { label: 'Documentation', href: '/docs' },
@@ -106,7 +106,7 @@ export default function NotFound() {
       <div className="relative z-10 w-full pointer-events-auto">
         <Footer
           className="bg-black/50 backdrop-blur-sm border-white/10"
-          copyright="© 2024 Sage UI. All rights reserved."
+          copyright="© 2026 Sage Design Engine. All rights reserved."
           sections={[
             {
               title: "Docs",

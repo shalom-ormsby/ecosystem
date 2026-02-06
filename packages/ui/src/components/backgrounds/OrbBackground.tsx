@@ -1,6 +1,6 @@
 'use client';
 
-import { Mesh, Program, Renderer, Triangle, Vec3 } from 'ogl';
+import { Mesh, Program, Renderer, Triangle, Vec3 } from '../../lib/webgl';
 import { useEffect, useRef } from 'react';
 import { cn } from '../../lib/utils';
 

@@ -56,7 +56,7 @@ export function generateFullDocumentation(
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Sage UI",
+    "name": "Sage Design Engine",
     "applicationCategory": "DeveloperApplication",
     "description": "A comprehensive design system built with React and TypeScript, organized by functional purpose for optimal developer experience.",
     url: "https://thesage.dev",

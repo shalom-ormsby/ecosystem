@@ -15,7 +15,7 @@ export const searchIndex: SearchResult[] = [
   {
     id: 'overview',
     title: 'Overview',
-    description: 'Introduction to the Sage UI',
+    description: 'Introduction to the Sage Design Engine',
     type: 'page',
     category: 'Getting Started',
     path: 'overview',

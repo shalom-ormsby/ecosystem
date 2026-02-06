@@ -9,7 +9,7 @@ export function FeatureBento() {
         <section className="py-24 px-4 bg-[var(--color-surface)]/30">
             <div className="container mx-auto max-w-6xl">
                 <div className="text-center mb-16">
-                    <Badge variant="outline" className="mb-4">Why Sage UI?</Badge>
+                    <Badge variant="outline" className="mb-4">Why Sage Design Engine?</Badge>
                     <Heading level={2} className="mb-4">Everything You Need to Ship</Heading>
                     <Text className="text-lg text-[var(--color-text-secondary)]">
                         A complete toolkit designed for modern web development.

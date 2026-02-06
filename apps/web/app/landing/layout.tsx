@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Sage UI - A Systematic Design Language',
-  description: 'A four-layer design system that brings systematic thinking to your UI—from atomic tokens to production-ready templates. Build with purpose, design with system.',
+  title: 'Sage — Make it Lovable',
+  description: 'Components that feel alive. Themes with real personality. Motion your users control. Designed for humans. Fluent with AI.',
   keywords: [
     'design system',
     'design tokens',
@@ -17,20 +17,20 @@ export const metadata: Metadata = {
     'ui library',
     'component library',
   ],
-  authors: [{ name: 'Sage UI Team' }],
-  creator: 'Sage UI',
-  publisher: 'Sage UI',
+  authors: [{ name: 'Sage Design Engine Team' }],
+  creator: 'Sage Design Engine',
+  publisher: 'Sage Design Engine',
   openGraph: {
-    title: 'Sage UI - A Systematic Design Language',
-    description: 'Build with purpose, design with system. A four-layer design system from tokens to templates.',
-    url: 'https://sage-ui.com',
-    siteName: 'Sage UI',
+    title: 'Sage — Make it Lovable',
+    description: 'Components that feel alive. Themes with real personality. Motion your users control. Designed for humans. Fluent with AI.',
+    url: 'https://thesage.dev',
+    siteName: 'Sage',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Sage UI - Systematic Design Language',
+        alt: 'Sage — Make it Lovable',
       },
     ],
     locale: 'en_US',
@@ -38,8 +38,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sage UI - A Systematic Design Language',
-    description: 'Build with purpose, design with system. A four-layer design system from tokens to templates.',
+    title: 'Sage — Make it Lovable',
+    description: 'Components that feel alive. Themes with real personality. Motion your users control. Designed for humans. Fluent with AI.',
     images: ['/og-image.png'],
     creator: '@sageui',
   },

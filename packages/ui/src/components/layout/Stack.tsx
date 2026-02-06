@@ -35,8 +35,9 @@ export interface StackProps extends React.HTMLAttributes<HTMLDivElement> {
     as?: any;
 }
 
-export const Stack = React.forwardRef<HTMLDivElement, StackProps>(
-    ({
+export const Stack = (
+    {
+        ref,
         children,
         direction = 'column',
         gap = 4,
@@ -46,43 +47,43 @@ export const Stack = React.forwardRef<HTMLDivElement, StackProps>(
         as: Component = 'div',
         className = '',
         ...props
-    }, ref) => {
-
-        const styles = {
-            direction: {
-                row: 'flex-row',
-                column: 'flex-col',
-                'row-reverse': 'flex-row-reverse',
-                'column-reverse': 'flex-col-reverse',
-            },
-            align: {
-                start: 'items-start',
-                end: 'items-end',
-                center: 'items-center',
-                baseline: 'items-baseline',
-                stretch: 'items-stretch',
-            },
-            justify: {
-                start: 'justify-start',
-                end: 'justify-end',
-                center: 'justify-center',
-                between: 'justify-between',
-                around: 'justify-around',
-                evenly: 'justify-evenly',
-            }
-        };
-
-        return (
-            <Component
-                ref={ref}
-                className={`flex ${styles.direction[direction]} ${styles.align[align]} ${styles.justify[justify]} ${wrap ? 'flex-wrap' : 'flex-nowrap'
-                    } gap-${gap} ${className}`}
-                {...props}
-            >
-                {children}
-            </Component>
-        );
+    }: StackProps & {
+        ref?: React.Ref<HTMLDivElement>;
     }
-);
+) => {
 
-Stack.displayName = 'Stack';
+    const styles = {
+        direction: {
+            row: 'flex-row',
+            column: 'flex-col',
+            'row-reverse': 'flex-row-reverse',
+            'column-reverse': 'flex-col-reverse',
+        },
+        align: {
+            start: 'items-start',
+            end: 'items-end',
+            center: 'items-center',
+            baseline: 'items-baseline',
+            stretch: 'items-stretch',
+        },
+        justify: {
+            start: 'justify-start',
+            end: 'justify-end',
+            center: 'justify-center',
+            between: 'justify-between',
+            around: 'justify-around',
+            evenly: 'justify-evenly',
+        }
+    };
+
+    return (
+        <Component
+            ref={ref}
+            className={`flex ${styles.direction[direction]} ${styles.align[align]} ${styles.justify[justify]} ${wrap ? 'flex-wrap' : 'flex-nowrap'
+                } gap-${gap} ${className}`}
+            {...props}
+        >
+            {children}
+        </Component>
+    );
+};

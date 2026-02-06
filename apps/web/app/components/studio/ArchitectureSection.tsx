@@ -234,7 +234,7 @@ export function ArchitectureSection({ breadcrumbs }: ArchitectureSectionProps) {
             <h3 className="font-semibold mb-3 text-[var(--color-text-primary)]">Core Framework</h3>
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2">
-                <span className="font-mono text-[var(--color-primary)]">React 18</span>
+                <span className="font-mono text-[var(--color-primary)]">React 19</span>
                 <span className="text-[var(--color-text-secondary)]">— UI library with hooks and concurrent features</span>
               </div>
               <div className="flex items-center gap-2">

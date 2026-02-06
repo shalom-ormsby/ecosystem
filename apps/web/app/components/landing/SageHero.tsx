@@ -16,17 +16,19 @@ export function SageHero() {
 
     return (
         <HeroBlock
-            className="min-h-[90vh] dark bg-background" /* Increased height, force dark mode */
+            className="min-h-[90vh] pt-24 dark bg-background" /* Increased height, force dark mode, clear sticky nav */
             headline={
-                <span>
-                    The Solopreneur's <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] animate-gradient-x">
-                        Development Stack
+                <span className="block">
+                    <span className="block text-8xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter leading-none pb-2 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] animate-gradient-x">
+                        Sage
+                    </span>
+                    <span className="block text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mt-3">
+                        Make it Lovable
                     </span>
                 </span>
             }
-            description="Ship stunning, full-stack web applications faster with a systematic collection of tokens, components, and templates."
-            badge="Human Touch x AI Power"
+            description="Components that feel alive. Themes with real personality. Motion your users control. Designed for humans. Fluent with AI."
+            badge="Lovable by Design"
             primaryCta={{
                 label: "Get Started",
                 onClick: () => router.push('/docs#getting-started'),
@@ -46,7 +48,7 @@ export function SageHero() {
             }
         >
             <div className="mt-8 h-8 flex items-center justify-center text-[var(--color-text-secondary)] font-medium">
-                <span className="mr-2">Build smarter with {BRAND.productName}</span>
+                <span className="mr-2">Build beautifully with {BRAND.productName}</span>
                 <span className="text-[var(--color-primary)]">
                     <Typewriter
                         text={['Tokens.', 'Components.', 'Blocks.', 'Templates.']}

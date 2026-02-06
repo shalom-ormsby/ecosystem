@@ -36,36 +36,43 @@ export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>
  * <Link href="https://example.com" target="_blank">External</Link>
  * ```
  */
-export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
-    ({ children, className = '', variant = 'default', hoverEffect = true, ...props }, ref) => {
-        const variantStyles = {
-            default: `
-                px-2 py-1 -mx-2 -my-1 rounded
-                text-[var(--color-text-primary)]
-                ${hoverEffect ? 'hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)]' : ''}
-            `,
-            inline: `
-                text-[var(--color-primary)]
-                underline decoration-[var(--color-primary)]/40 decoration-1 underline-offset-2
-                hover:decoration-[var(--color-primary)] hover:decoration-2
-            `,
-        };
-
-        return (
-            <a
-                ref={ref}
-                className={`
-                    transition-all duration-200
-                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2
-                    ${variantStyles[variant]}
-                    ${className}
-                `}
-                {...props}
-            >
-                {children}
-            </a>
-        );
+export const Link = (
+    {
+        ref,
+        children,
+        className = '',
+        variant = 'default',
+        hoverEffect = true,
+        ...props
+    }: LinkProps & {
+        ref?: React.Ref<HTMLAnchorElement>;
     }
-);
+) => {
+    const variantStyles = {
+        default: `
+            px-2 py-1 -mx-2 -my-1 rounded
+            text-[var(--color-text-primary)]
+            ${hoverEffect ? 'hover:bg-[var(--color-link-hover)] hover:text-[var(--color-link-hover-foreground)]' : ''}
+        `,
+        inline: `
+            text-[var(--color-primary)]
+            underline decoration-[var(--color-primary)]/40 decoration-1 underline-offset-2
+            hover:decoration-[var(--color-primary)] hover:decoration-2
+        `,
+    };
 
-Link.displayName = 'Link';
+    return (
+        <a
+            ref={ref}
+            className={`
+                transition-all duration-200
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2
+                ${variantStyles[variant]}
+                ${className}
+            `}
+            {...props}
+        >
+            {children}
+        </a>
+    );
+};

@@ -73,48 +73,46 @@ export interface TextProps {
  * <Text as="label">Form label</Text>
  * ```
  */
-export const Text = React.forwardRef<HTMLElement, TextProps>(
-  (
-    {
-      children,
-      variant = 'primary',
-      size = 'base',
-      weight = 'normal',
-      as: Component = 'p',
-      className = '',
-    },
-    ref
-  ) => {
-    const variantStyles = {
-      primary: 'text-[var(--color-text-primary)]',
-      secondary: 'text-[var(--color-text-secondary)]',
-      muted: 'text-[var(--color-text-muted)]',
-    };
-
-    const sizeStyles = {
-      xs: 'text-xs',    // 12px
-      sm: 'text-sm',    // 14px
-      base: 'text-base', // 16px
-      lg: 'text-lg',    // 18px
-      xl: 'text-xl',    // 20px
-    };
-
-    const weightStyles = {
-      normal: 'font-normal',
-      medium: 'font-medium',
-      semibold: 'font-semibold',
-      bold: 'font-bold',
-    };
-
-    return React.createElement(
-      Component,
-      {
-        ref,
-        className: `${variantStyles[variant]} ${sizeStyles[size]} ${weightStyles[weight]} ${className}`,
-      },
-      children
-    );
+export const Text = (
+  {
+    ref,
+    children,
+    variant = 'primary',
+    size = 'base',
+    weight = 'normal',
+    as: Component = 'p',
+    className = ''
+  }: TextProps & {
+    ref?: React.Ref<HTMLElement>;
   }
-);
+) => {
+  const variantStyles = {
+    primary: 'text-[var(--color-text-primary)]',
+    secondary: 'text-[var(--color-text-secondary)]',
+    muted: 'text-[var(--color-text-muted)]',
+  };
 
-Text.displayName = 'Text';
+  const sizeStyles = {
+    xs: 'text-xs',    // 12px
+    sm: 'text-sm',    // 14px
+    base: 'text-base', // 16px
+    lg: 'text-lg',    // 18px
+    xl: 'text-xl',    // 20px
+  };
+
+  const weightStyles = {
+    normal: 'font-normal',
+    medium: 'font-medium',
+    semibold: 'font-semibold',
+    bold: 'font-bold',
+  };
+
+  return React.createElement(
+    Component,
+    {
+      ref,
+      className: `${variantStyles[variant]} ${sizeStyles[size]} ${weightStyles[weight]} ${className}`,
+    },
+    children
+  );
+};

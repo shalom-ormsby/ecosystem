@@ -371,7 +371,7 @@ export function OverviewSection() {
                 Component-First Architecture
               </h3>
               <p className="text-sm text-[var(--color-text-secondary)] mb-4">
-                Sage UI encapsulates design tokens inside components rather than exposing them as CSS classes. This approach is the foundation of the entire system and provides several key advantages:
+                Sage Design Engine encapsulates design tokens inside components rather than exposing them as CSS classes. This approach is the foundation of the entire system and provides several key advantages:
               </p>
 
               {/* Benefits List */}
@@ -1042,15 +1042,15 @@ import { Button, Text } from '@thesage/ui';
               <ul className="list-disc list-inside space-y-1 ml-2">
                 <li>Node.js 18.0.0 or later</li>
                 <li>Package Manager: pnpm 8.15.0+ (or npm 9+, yarn 3+)</li>
-                <li>React 18.0.0 or later (React 19 supported)</li>
+                <li>React 18+ or React 19+ (React 19 recommended)</li>
                 <li>Tailwind CSS 3.0.0 or later</li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold text-[var(--color-text-primary)] mb-2">Compatible Frameworks</h4>
-              <p className="mb-2">Sage UI works with:</p>
+              <p className="mb-2">Sage Design Engine works with:</p>
               <ul className="list-disc list-inside space-y-1 ml-2">
-                <li>Next.js 14+ (App Router or Pages Router)</li>
+                <li>Next.js 15+ (App Router or Pages Router)</li>
                 <li>Vite 5+</li>
                 <li>Remix 2+</li>
                 <li>Create React App (with Tailwind)</li>
@@ -1076,7 +1076,7 @@ import { Button, Text } from '@thesage/ui';
                   Install dependencies
                 </h3>
                 <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-                  Sage UI requires React and Framer Motion as peer dependencies:
+                  Sage Design Engine requires React and Framer Motion as peer dependencies:
                 </p>
                 <CollapsibleCodeBlock
                   id="installation"
@@ -1103,7 +1103,7 @@ yarn add react framer-motion @thesage/ui`}
                   Configure Tailwind CSS
                 </h3>
                 <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-                  Add Sage UI to your Tailwind content paths:
+                  Add Sage Design Engine to your Tailwind content paths:
                 </p>
                 <CollapsibleCodeBlock
                   id="tailwind-config"
@@ -1123,7 +1123,7 @@ export default {
                   showCopy={true}
                 />
                 <p className="text-xs text-[var(--color-text-muted)] mt-3">
-                  <strong>Note:</strong> Sage UI uses CSS custom properties for theming. No additional Tailwind configuration required—themes are injected at runtime by the ThemeProvider.
+                  <strong>Note:</strong> Sage Design Engine uses CSS custom properties for theming. No additional Tailwind configuration required—themes are injected at runtime by the ThemeProvider.
                 </p>
               </div>
             </div>
@@ -1264,7 +1264,7 @@ export function MyApp() {
                         Available Options
                       </h5>
                       <ul className="text-xs text-[var(--color-text-secondary)] space-y-1 list-disc list-inside">
-                        <li><strong>Themes:</strong> <Code className="text-xs">"studio"</Code>, <Code className="text-xs">"sage"</Code>, <Code className="text-xs">"volt"</Code></li>
+                        <li><strong>Themes:</strong> <Code className="text-xs">"studio"</Code>, <Code className="text-xs">"terra"</Code>, <Code className="text-xs">"volt"</Code></li>
                         <li><strong>Modes:</strong> <Code className="text-xs">"light"</Code>, <Code className="text-xs">"dark"</Code></li>
                         <li><strong>Storage:</strong> Automatically persists to localStorage key <Code className="text-xs">"ecosystem-theme"</Code></li>
                       </ul>
@@ -1312,7 +1312,7 @@ export function Controls() {
                   </h4>
 
                   <p className="text-sm text-[var(--color-text-secondary)]">
-                    Sage UI uses a <strong>0-10 motion scale</strong> that gives users fine-grained control over animation intensity. This respects accessibility needs while allowing users who enjoy motion to customize their experience.
+                    Sage Design Engine uses a <strong>0-10 motion scale</strong> that gives users fine-grained control over animation intensity. This respects accessibility needs while allowing users who enjoy motion to customize their experience.
                   </p>
 
                   <div className="p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
@@ -1495,7 +1495,7 @@ export function MotionControls() {
             Next Steps
           </h3>
           <p className="text-center text-[var(--color-text-secondary)] mb-8 max-w-2xl mx-auto">
-            You're all set up! Here's how to continue building with Sage UI:
+            You're all set up! Here's how to continue building with Sage Design Engine:
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1783,7 +1783,7 @@ export function Dashboard() {
                   <strong>Common Causes:</strong>
                 </p>
                 <ul className="text-xs text-[var(--color-text-secondary)] list-disc list-inside space-y-1 ml-2 mb-2">
-                  <li>Tailwind CSS not configured to include Sage UI paths</li>
+                  <li>Tailwind CSS not configured to include Sage Design Engine paths</li>
                   <li>ThemeProvider not wrapping your app</li>
                   <li>CSS not loaded in your bundler</li>
                 </ul>

@@ -79,7 +79,7 @@ function UseClipboardSection() {
   const { toast } = useToast();
 
   const handleCopy = () => {
-    copy('Hello from Sage UI!');
+    copy('Hello from Sage Design Engine!');
     toast('Copied to clipboard!', 'success');
   }
 
@@ -100,7 +100,7 @@ function UseClipboardSection() {
 
             <div>
               <h5 className="font-medium text-[var(--color-text-primary)] mb-2">Live Demo</h5>
-              <Button onClick={handleCopy}>Copy "Hello from Sage UI!"</Button>
+              <Button onClick={handleCopy}>Copy "Hello from Sage Design Engine!"</Button>
             </div>
           </div>
         </Card>

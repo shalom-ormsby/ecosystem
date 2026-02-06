@@ -9,7 +9,7 @@ export function InteractionsTab() {
             <div className="space-y-4">
                 <h3 className="text-xl font-semibold text-[var(--color-text-primary)]">Interaction System</h3>
                 <p className="text-[var(--color-text-secondary)]">
-                    Sage UI uses a standardized <strong>State Layer</strong> system for interactions.
+                    Sage Design Engine uses a standardized <strong>State Layer</strong> system for interactions.
                     Instead of manually darkening or lightening specific colors for hover/active states,
                     we apply a semi-transparent overlay (black or white) on top of the interactive element.
                 </p>
