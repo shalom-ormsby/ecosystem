@@ -1,6 +1,5 @@
 ---
 "@thesage/ui": minor
-"@thesage/web": minor
 "@thesage/charts": minor
 "@thesage/mcp": minor
 ---
