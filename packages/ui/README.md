@@ -6,36 +6,58 @@
 [![License](https://img.shields.io/npm/l/@thesage/ui?color=blue&style=flat-square)](https://github.com/shalomormsby/ecosystem/blob/main/LICENSE)
 [![Downloads](https://img.shields.io/npm/dt/@thesage/ui?color=teal&style=flat-square)](https://www.npmjs.com/package/@thesage/ui)
 
-**The Design Engine for the Solopreneur.**
+**Sage — Make it Lovable.**
 
-[Documentation](https://thesage.dev) • [Components](https://thesage.dev/components) • [GitHub](https://github.com/shalomormsby/ecosystem)
+Components that feel alive. Themes with real personality. Motion your users control. Designed for humans. Fluent with AI.
+
+[Documentation](https://thesage.dev) | [Components](https://thesage.dev/components) | [GitHub](https://github.com/shalomormsby/ecosystem)
 
 </div>
 
 ---
 
-**Sage Design Engine** is not just a component library—it's a systematic design engine built for speed, consistency, and beauty. Built on top of **Radix UI** for headless accessibility and **Tailwind CSS** for styling, it provides a comprehensive suite of 45+ polished components that work together seamlessly.
+**Sage Design Engine** is a component library and design system built on **Radix UI** primitives and **Tailwind CSS**. 48+ accessible components, three distinct themes with runtime switching, and a user-controlled motion system — all wired through a 4-layer design token architecture.
 
-## ✨ Features
+## Features
 
-- **🎨 Systematic Design**: Powered by a robust design token system (colors, typography, spacing).
-- **♿ Fully Accessible**: Built on WAI-ARIA standards via Radix UI primitives.
-- **🌗 Mode Aware**: First-class support for light and dark modes with automatic color harmonization.
-- **🧩 Composable**: Components designed to fit together like LEGO blocks.
-- **🛠️ Type Safe**: Written in TypeScript with full type inference.
+- **Accessible by default** — Built on WAI-ARIA standards via Radix UI. Keyboard navigable, screen reader compatible, WCAG AA contrast.
+- **Three themes, real personality** — Studio (professional), Terra (organic), Volt (electric). Runtime switching via CSS variables, light and dark modes each.
+- **User-controlled motion** — A 0–10 intensity scale that respects `prefers-reduced-motion`. Intensity 0 works perfectly — no degraded experience.
+- **Modular imports** — Core stays lean. Heavy features (forms, dates, tables, drag-and-drop, WebGL) ship as optional subpath exports — install only what you use.
+- **Type safe** — Written in TypeScript with full type inference. React 19 ref-as-prop pattern throughout.
+- **Design token system** — Colors, typography, spacing, motion, and syntax tokens. Change one primary color, everything updates.
 
-## 🚀 Installation
-
-### 1. Install Dependencies
-Sage Design Engine is built on Tailwind CSS. You need to install the package and its peer dependencies.
+## Installation
 
 ```bash
-pnpm add @thesage/ui @thesage/tokens @thesage/hooks lucide-react clsx tailwind-merge
+pnpm add @thesage/ui
+```
+
+Sage requires **Tailwind CSS** as a styling engine:
+
+```bash
 pnpm add -D tailwindcss@^3.4 postcss autoprefixer
 ```
 
-### 2. Configure Tailwind
-Update your `tailwind.config.js` contents to use the preset and scan the component definitions.
+### Optional subpath exports
+
+Install peer dependencies only for the features you need:
+
+```bash
+# Forms (react-hook-form + zod validation)
+pnpm add react-hook-form @hookform/resolvers zod
+
+# Date picker
+pnpm add react-day-picker date-fns
+
+# Data tables
+pnpm add @tanstack/react-table
+
+# Drag and drop
+pnpm add @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
+```
+
+### Configure Tailwind
 
 ```js
 /** @type {import('tailwindcss').Config} */
@@ -45,69 +67,82 @@ module.exports = {
     "./src/**/*.{ts,tsx}",
     "./node_modules/@thesage/ui/dist/**/*.{js,ts,jsx,tsx}"
   ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
 }
 ```
 
-### 3. Import Styles
-Import the global CSS file (which contains the theme variables) in your root entry file (e.g., `main.tsx` or `App.tsx`).
+### Import styles
 
 ```tsx
 import '@thesage/ui/globals.css';
 ```
 
-## 💻 Usage
-
-Sage Design Engine components are designed to be dropped into any React application.
+## Usage
 
 ```tsx
-import { Button, Card, Text, Heading } from '@thesage/ui';
+import { Button, Card, ThemeProvider } from '@thesage/ui';
 
-export default function WelcomeCard() {
+export default function App() {
   return (
-    <Card className="max-w-md p-6">
-      <Heading level={3} className="mb-2">Welcome to Sage</Heading>
-      <Text variant="muted" className="mb-4">
-        Build faster with components that look premium out of the box.
-      </Text>
-      <div className="flex gap-2">
-        <Button variant="primary">Get Started</Button>
-        <Button variant="ghost">Documentation</Button>
-      </div>
-    </Card>
-  );
-}
-```
-
-## 🖌️ Theming
-
-Sage Design Engine uses a 4-layer token system. Changing a single primary color automatically updates buttons, focus rings, and chart colors across your entire application.
-
-```tsx
-// Example: Customizing the theme
-import { ThemeProvider } from '@thesage/ui';
-
-export default function App({ children }) {
-  return (
-    <ThemeProvider theme="sage" defaultMode="system">
-      {children}
+    <ThemeProvider theme="studio" defaultMode="system">
+      <Card className="max-w-md p-6">
+        <h3 className="mb-2 text-lg font-semibold">Welcome to Sage</h3>
+        <p className="mb-4 text-muted-foreground">
+          Build beautifully with components that feel premium out of the box.
+        </p>
+        <div className="flex gap-2">
+          <Button>Get Started</Button>
+          <Button variant="ghost">Documentation</Button>
+        </div>
+      </Card>
     </ThemeProvider>
   );
 }
 ```
 
-## 📦 Component Categories
+### Subpath imports
 
-- **Actions**: Button, Toggle, ToggleGroup
-- **Forms**: Input, Select, Checkbox, Switch, Slider, Form
-- **Navigation**: Tabs, Menubar, Breadcrumb, Pagination
-- **Overlays**: Dialog, Sheet, Popover, Tooltip, Toast
-- **Data Display**: Card, Avatar, Badge, Table, ScrollArea
-- **Feedback**: Alert, Progress, Skeleton, Sonner
+```tsx
+import { useMotionPreference, useTheme } from '@thesage/ui/hooks'
+import { ThemeProvider } from '@thesage/ui/providers'
+import { cn } from '@thesage/ui/utils'
 
-## 📄 License
+// Optional feature imports
+import { Form, FormField } from '@thesage/ui/forms'
+import { DatePicker } from '@thesage/ui/dates'
+import { DataTable } from '@thesage/ui/tables'
+import { SortableList } from '@thesage/ui/dnd'
+```
 
-MIT © [Shalom Ormsby](https://github.com/shalomormsby)
+## Component categories
+
+| Category | Examples |
+|----------|----------|
+| **Actions** | Button, Toggle, ToggleGroup |
+| **Forms** | Input, Select, Checkbox, Switch, Slider, SearchBar |
+| **Navigation** | Tabs, Menubar, Breadcrumb, Pagination, NavigationMenu |
+| **Overlays** | Dialog, Sheet, Popover, Tooltip, ContextMenu, HoverCard |
+| **Data Display** | Card, Avatar, Badge, Table, ScrollArea, Carousel |
+| **Feedback** | Alert, Progress, Skeleton, Toast (Sonner) |
+| **Layout** | Accordion, Separator, ResizablePanels, Collapsible |
+| **Features** | Customizer, ThemeSwitcher |
+
+## Bundle size
+
+Core and optional entry points are independently tracked via [size-limit](https://github.com/ai/size-limit):
+
+| Entry point | Brotli size |
+|-------------|-------------|
+| Core | ~146 KB |
+| Hooks | ~40 KB |
+| Providers | ~60 KB |
+| Tokens | ~70 KB |
+| Utils | ~25 KB |
+| Forms | ~9.4 KB |
+| Dates | ~29 KB |
+| Tables | ~8.3 KB |
+| DnD | ~8.3 KB |
+| WebGL | ~1.1 KB |
+
+## License
+
+MIT &copy; [Shalom Ormsby](https://github.com/shalomormsby)

@@ -235,7 +235,7 @@ export function WarpBackground({
       gl.clearColor(0, 0, 0, 1);
     }
 
-    let program: Program;
+    let program: Program; // eslint-disable-line prefer-const -- reassigned after conditional init below
 
     function resize() {
       const scale = 1;

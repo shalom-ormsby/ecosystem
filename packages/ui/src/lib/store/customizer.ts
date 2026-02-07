@@ -272,16 +272,16 @@ export const useCustomizer = create<CustomizerState>()(
         let derivedTokens = computeDerivedTokens('--color-primary', colors.primary, mode);
 
         // Add secondary color if provided
-        let secondary = colors.secondary;
-        let secondaryForeground = secondary ? getOptimalForeground(secondary) : undefined;
+        const secondary = colors.secondary;
+        const secondaryForeground = secondary ? getOptimalForeground(secondary) : undefined;
         if (secondary) {
           const secondaryDerived = computeDerivedTokens('--color-secondary', secondary, mode);
           derivedTokens = { ...derivedTokens, ...secondaryDerived };
         }
 
         // Add accent color if provided
-        let accent = colors.accent;
-        let accentForeground = accent ? getOptimalForeground(accent) : undefined;
+        const accent = colors.accent;
+        const accentForeground = accent ? getOptimalForeground(accent) : undefined;
         if (accent) {
           const accentDerived = computeDerivedTokens('--color-accent', accent, mode);
           derivedTokens = { ...derivedTokens, ...accentDerived };

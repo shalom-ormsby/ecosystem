@@ -331,7 +331,6 @@ export function FaultyTerminal({
                 uBrightness: { value: brightness }
             }
         });
-        // @ts-ignore
         programRef.current = program;
 
         const mesh = new Mesh(gl, { geometry, program });
@@ -390,13 +389,11 @@ export function FaultyTerminal({
         rafRef.current = requestAnimationFrame(update);
         ctn.appendChild(gl.canvas);
 
-        // @ts-ignore
         if (mouseReact) ctn.addEventListener('mousemove', handleMouseMove);
 
         return () => {
             cancelAnimationFrame(rafRef.current);
             resizeObserver.disconnect();
-            // @ts-ignore
             if (mouseReact) ctn.removeEventListener('mousemove', handleMouseMove);
             if (gl.canvas.parentElement === ctn) ctn.removeChild(gl.canvas);
             gl.getExtension('WEBGL_lose_context')?.loseContext();

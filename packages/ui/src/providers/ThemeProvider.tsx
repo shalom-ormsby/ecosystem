@@ -185,7 +185,7 @@ function mergeCustomColorTokens(
  */
 function validateThemeTokens(theme: ThemeName, mode: ColorMode): void {
   // Only run in development (Next.js/Vite inject this at build time)
-  // @ts-ignore - process.env is injected by bundler
+  // @ts-expect-error - process.env is injected by bundler
   if (typeof process !== 'undefined' && process.env?.NODE_ENV === 'production') return;
 
   const root = document.documentElement;

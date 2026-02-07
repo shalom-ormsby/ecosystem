@@ -96,7 +96,7 @@ export function CollapsibleCodeBlock({
         preview.classList.add('hidden');
         codeBlock.classList.remove('hidden');
         codeBlock.style.maxHeight = '6.6rem'; // Match preview height (3 lines)
-        codeBlock.offsetHeight; // Force reflow
+        void codeBlock.offsetHeight; // Force reflow
         codeBlock.style.maxHeight = codeBlock.scrollHeight + 'px';
       } else {
         // Closing: collapse to preview height, then swap
